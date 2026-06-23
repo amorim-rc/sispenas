@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>algo-pen | Dosimetria Penal Brasil</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><span class="logo">algo-pen</span></h1>
+            <p class="subtitle">Catálogo de Tipos Penais e Dosimetria — Brasil</p>
+            <nav>
+                <a href="#catalogo" class="nav-link active" data-tab="catalogo">Catálogo</a>
+                <a href="#dosimetria" class="nav-link" data-tab="dosimetria">Dosimetria</a>
+                <a href="#estatisticas" class="nav-link" data-tab="estatisticas">Estatísticas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- CATÁLOGO -->
+        <section id="catalogo" class="tab-content active">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar por crime, artigo ou lei..." autocomplete="off">
+                <span id="result-count" class="result-count"></span>
+            </div>
+
+            <div class="filters">
+                <select id="filter-lei">
+                    <option value="">Todas as leis</option>
+                </select>
+                <select id="filter-hediondo">
+                    <option value="">Hediondo?</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+                <select id="filter-elemento">
+                    <option value="">Elemento subjetivo</option>
+                    <option value="Doloso">Doloso</option>
+                    <option value="Culposo">Culposo</option>
+                    <option value="Preterdoloso">Preterdoloso</option>
+                </select>
+                <select id="filter-violencia">
+                    <option value="">Violência/Ameaça</option>
+                    <option value="violencia">Com violência</option>
+                    <option value="grave_ameaca">Com grave ameaça</option>
+                    <option value="ambos">Ambos</option>
+                </select>
+                <select id="filter-pena">
+                    <option value="">Tipo de pena</option>
+                    <option value="Reclusão">Reclusão</option>
+                    <option value="Detenção">Detenção</option>
+                </select>
+                <button id="btn-clear-filters" class="btn-secondary">Limpar filtros</button>
+            </div>
+
+            <div id="crimes-table-wrapper">
+                <table id="crimes-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="lei">Lei</th>
+                            <th class="sortable" data-sort="artigo">Artigo</th>
+                            <th class="sortable" data-sort="crime">Crime</th>
+                            <th class="sortable" data-sort="pena_min">Pena Mín</th>
+                            <th class="sortable" data-sort="pena_max">Pena Máx</th>
+                            <th class="sortable" data-sort="tipo_pena">Tipo</th>
+                            <th class="sortable" data-sort="hediondo">Hed.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="crimes-tbody"></tbody>
+                </table>
+            </div>
+
+            <div id="pagination" class="pagination"></div>
+        </section>
+
+        <!-- DOSIMETRIA -->
+        <section id="dosimetria" class="tab-content">
+            <h2>Calculadora de Dosimetria Trifásica (Art. 68 CP)</h2>
+
+            <div class="dosimetria-grid">
+                <div class="dosimetria-card">
+                    <h3>Seleção do Crime</h3>
+                    <input type="text" id="dosi-crime-search" placeholder="Buscar crime para calcular...">
+                    <div id="dosi-crime-results" class="dosi-results"></div>
+                    <div id="dosi-crime-selected" class="dosi-selected"></div>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>1ª Fase — Pena-Base (Art. 59 CP)</h3>
+                    <p class="phase-desc">Circunstâncias judiciais (0 a 8 desfavoráveis)</p>
+                    <div class="circunstancias">
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Culpabilidade</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Antecedentes</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Conduta social</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Personalidade</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Motivos</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Circunstâncias do crime</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Consequências</label>
+                        <label><input type="checkbox" class="circ-judicial" value="1"> Comportamento da vítima</label>
+                    </div>
+                    <div class="phase-result">
+                        <span>Pena-base:</span> <strong id="pena-base-result">—</strong>
+                    </div>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>2ª Fase — Agravantes e Atenuantes</h3>
+                    <div class="two-cols">
+                        <div>
+                            <label>Agravantes (nº):</label>
+                            <input type="number" id="agravantes" min="0" max="20" value="0">
+                        </div>
+                        <div>
+                            <label>Atenuantes (nº):</label>
+                            <input type="number" id="atenuantes" min="0" max="20" value="0">
+                        </div>
+                    </div>
+                    <div class="phase-result">
+                        <span>Pena intermediária:</span> <strong id="pena-inter-result">—</strong>
+                    </div>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>3ª Fase — Causas de Aumento e Diminuição</h3>
+                    <div class="two-cols">
+                        <div>
+                            <label>Aumento (fração, ex: 0.333):</label>
+                            <input type="number" id="aumento" min="0" max="3" step="0.01" value="0">
+                        </div>
+                        <div>
+                            <label>Diminuição (fração, ex: 0.333):</label>
+                            <input type="number" id="diminuicao" min="0" max="1" step="0.01" value="0">
+                        </div>
+                    </div>
+                    <div class="phase-result">
+                        <span>Pena definitiva:</span> <strong id="pena-def-result">—</strong>
+                    </div>
+                </div>
+
+                <div class="dosimetria-card resultado-final">
+                    <h3>Resultado</h3>
+                    <div id="resultado-dosimetria"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTATÍSTICAS -->
+        <section id="estatisticas" class="tab-content">
+            <h2>Estatísticas do Catálogo</h2>
+            <div id="stats-grid" class="stats-grid"></div>
+            <h3>Distribuição por Lei</h3>
+            <div id="stats-leis" class="stats-leis"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>algo-pen &mdash; Catálogo de 1.061 tipos penais de 65 diplomas legislativos</p>
+            <p>Licença MIT &mdash; <a href="https://github.com/amorim-rc/sispenas">GitHub</a></p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
