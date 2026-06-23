@@ -9,10 +9,10 @@ Site estático com catálogo interativo e calculadora dosimétrica.
 - [x] Estatísticas do catálogo
 - [x] Responsivo (mobile-first)
 - [x] Zero dependências externas
+- [x] Calculadora de progressão de regime (Art. 112 LEP) + livramento condicional (Art. 83 CP)
+- [x] Calculadora de prescrição (Arts. 109-119 CP) — abstrata, retroativa, executória
+- [x] Concurso de crimes (material, formal próprio/impróprio, continuado, continuado específico)
 - [ ] Expandir catálogo para ~1.688 tipos (cobertura SISPENAS completa)
-- [ ] Calculadora de progressão de regime (Art. 112 LEP)
-- [ ] Calculadora de prescrição (Arts. 109-119 CP)
-- [ ] Concurso de crimes (material, formal, continuado)
 - [ ] Geração de texto jurídico fundamentado (minutas)
 
 ---
