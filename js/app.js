@@ -20,6 +20,9 @@
     renderTable();
     renderStats();
     bindEvents();
+    bindProgressao();
+    bindPrescricao();
+    bindConcurso();
     updateResultCount();
   }
 
@@ -269,6 +272,239 @@
       ${substituicao ? 'Cabe substituição por pena restritiva de direitos (Art. 44 CP)<br>' : ''}
       ${penaDef <= 24 ? 'Cabe <em>sursis</em> da pena (Art. 77 CP)<br>' : ''}
       ${penaMin <= 48 && selectedCrime.violencia !== 'Sim' ? 'Pode caber ANPP (Art. 28-A CPP) — pena mínima inferior a 4 anos<br>' : ''}
+    `;
+  }
+
+  // ─── Progressão ─────────────────────────────────────────────────────────
+  function bindProgressao() {
+    document.getElementById('btn-calc-progressao').addEventListener('click', calcProgressao);
+  }
+
+  function calcProgressao() {
+    const penaTotal = +document.getElementById('prog-pena-total').value;
+    const tempoCumprido = +document.getElementById('prog-tempo-cumprido').value;
+    const regimeAtual = document.getElementById('prog-regime-atual').value;
+    const classificacao = document.getElementById('prog-classificacao').value;
+    const primario = document.getElementById('prog-primario').checked;
+    const bomComportamento = document.getElementById('prog-bom-comportamento').checked;
+
+    // Frações do Art. 112 LEP (Lei 13.964/2019 - Pacote Anticrime)
+    const fracoes = {
+      'comum': primario ? 1/6 : 1/6,
+      'hediondo-primario': 2/5,
+      'hediondo-reincidente': 3/5,
+      'hediondo-reincidente-especifico': 7/10,
+      'comando-org-criminosa': 1/2,
+      'milicia': 1/2
+    };
+
+    // Frações específicas por regime (Art. 112 LEP atualizado)
+    let fracao;
+    if (classificacao === 'comum') {
+      fracao = primario ? 1/6 : 1/6; // 16% comum
+    } else if (classificacao === 'hediondo-primario') {
+      fracao = 2/5; // 40%
+    } else if (classificacao === 'hediondo-reincidente') {
+      fracao = 3/5; // 60%
+    } else if (classificacao === 'hediondo-reincidente-especifico') {
+      fracao = 7/10; // 70% (com resultado morte, vedada progressão ao aberto em algumas hipóteses)
+    } else {
+      fracao = 1/2; // 50% para comandante de org. criminosa e milícia
+    }
+
+    const tempoNecessario = Math.ceil(penaTotal * fracao);
+    const tempoRestante = Math.max(0, tempoNecessario - tempoCumprido);
+
+    // Livramento condicional (Art. 83 CP)
+    let fracaoLivramento;
+    if (classificacao.startsWith('hediondo')) {
+      fracaoLivramento = primario ? 2/3 : null; // Reincidente específico: vedado
+    } else {
+      fracaoLivramento = primario ? 1/3 : 1/2;
+    }
+
+    const tempoLivramento = fracaoLivramento ? Math.ceil(penaTotal * fracaoLivramento) : null;
+    const restanteLivramento = tempoLivramento ? Math.max(0, tempoLivramento - tempoCumprido) : null;
+
+    // Regime progressão destino
+    const proximoRegime = regimeAtual === 'fechado' ? 'Semiaberto' :
+                          regimeAtual === 'semiaberto' ? 'Aberto' : '—';
+
+    const resultado = document.getElementById('resultado-progressao');
+    resultado.innerHTML = `
+      <strong>Fração aplicável:</strong> ${formatFracao(fracao)} (${(fracao * 100).toFixed(1)}%)<br>
+      <strong>Tempo necessário:</strong> ${formatPena(tempoNecessario)}<br>
+      <strong>Tempo já cumprido:</strong> ${formatPena(tempoCumprido)}<br>
+      <strong>Tempo restante:</strong> ${tempoRestante > 0 ? formatPena(tempoRestante) : 'Já cumpriu!'}<br>
+      <strong>Próximo regime:</strong> ${proximoRegime}<br>
+      ${!bomComportamento ? '<br><em>Atenção: Bom comportamento carcerário é requisito subjetivo (Art. 112, §1º LEP)</em>' : ''}
+      ${classificacao.startsWith('hediondo') ? '<br><em>Crime hediondo: regime inicial fechado (Art. 2º, §1º, Lei 8.072/90)</em>' : ''}
+    `;
+
+    // Livramento
+    const resLivramento = document.getElementById('resultado-livramento');
+    if (fracaoLivramento === null) {
+      resLivramento.innerHTML = '<strong>Vedado</strong> — Reincidente específico em crime hediondo (Art. 83, V, CP)';
+    } else {
+      resLivramento.innerHTML = `
+        <strong>Fração:</strong> ${formatFracao(fracaoLivramento)} (${(fracaoLivramento * 100).toFixed(1)}%)<br>
+        <strong>Tempo necessário:</strong> ${formatPena(tempoLivramento)}<br>
+        <strong>Tempo restante:</strong> ${restanteLivramento > 0 ? formatPena(restanteLivramento) : 'Já cumpriu!'}<br>
+        <em>Requisitos adicionais: bom comportamento, aptidão para trabalho, reparação do dano (Art. 83 CP)</em>
+      `;
+    }
+  }
+
+  function formatFracao(f) {
+    const map = { '0.167': '1/6', '0.25': '1/4', '0.333': '1/3', '0.4': '2/5', '0.5': '1/2', '0.6': '3/5', '0.667': '2/3', '0.7': '7/10' };
+    const key = f.toFixed(3);
+    return map[key] || f.toFixed(3);
+  }
+
+  // ─── Prescrição ─────────────────────────────────────────────────────────
+  function bindPrescricao() {
+    document.getElementById('btn-calc-prescricao').addEventListener('click', calcPrescricao);
+  }
+
+  function calcPrescricao() {
+    const penaMax = +document.getElementById('presc-pena-max').value;
+    const penaConcreta = +document.getElementById('presc-pena-concreta').value;
+    const idadeFato = +document.getElementById('presc-idade-fato').value;
+    const idadeSentenca = +document.getElementById('presc-idade-sentenca').value;
+    const reincidente = document.getElementById('presc-reincidente').checked;
+    const tipo = document.getElementById('presc-tipo').value;
+
+    // Tabela Art. 109 CP (pena em meses → prazo prescricional em meses)
+    function prazoPrescricional(penaMeses) {
+      if (penaMeses > 144) return 240;      // > 12 anos → 20 anos
+      if (penaMeses > 96) return 192;        // > 8 anos → 16 anos
+      if (penaMeses > 48) return 144;        // > 4 anos → 12 anos
+      if (penaMeses > 24) return 96;         // > 2 anos → 8 anos
+      if (penaMeses >= 12) return 48;        // >= 1 ano → 4 anos
+      return 36;                             // < 1 ano → 3 anos
+    }
+
+    let penaReferencia;
+    if (tipo === 'abstrata') {
+      penaReferencia = penaMax;
+    } else {
+      penaReferencia = penaConcreta || penaMax;
+    }
+
+    let prazo = prazoPrescricional(penaReferencia);
+
+    // Redução pela metade para menor de 21 na data do fato ou maior de 70 na sentença (Art. 115 CP)
+    let reducao = false;
+    if (idadeFato < 21 || idadeSentenca >= 70) {
+      prazo = Math.floor(prazo / 2);
+      reducao = true;
+    }
+
+    // Aumento de 1/3 para reincidente (somente prescrição executória, Art. 110 CP)
+    let aumentoReinc = false;
+    if (reincidente && tipo === 'executoria') {
+      prazo = Math.ceil(prazo * 4 / 3);
+      aumentoReinc = true;
+    }
+
+    const resultado = document.getElementById('resultado-prescricao');
+    resultado.innerHTML = `
+      <strong>Tipo:</strong> ${tipo === 'abstrata' ? 'Prescrição da pretensão punitiva (em abstrato)' :
+                              tipo === 'retroativa' ? 'Prescrição retroativa (pena concreta)' :
+                              'Prescrição da pretensão executória'}<br>
+      <strong>Pena de referência:</strong> ${formatPena(penaReferencia)}<br>
+      <strong>Prazo prescricional:</strong> ${formatPena(prazo)} (${Math.floor(prazo/12)} anos${prazo%12 ? ' e ' + prazo%12 + ' meses' : ''})<br>
+      ${reducao ? '<br><em>Redução de 1/2 aplicada (Art. 115 CP — menor de 21 na data do fato ou maior de 70 na sentença)</em>' : ''}
+      ${aumentoReinc ? '<br><em>Aumento de 1/3 aplicado (reincidência — prescrição executória)</em>' : ''}
+      <br><br>
+      <strong>Marcos interruptivos (Art. 117 CP):</strong><br>
+      I — Recebimento da denúncia/queixa<br>
+      II — Pronúncia (crimes dolosos contra a vida)<br>
+      III — Decisão confirmatória da pronúncia<br>
+      IV — Publicação da sentença/acórdão condenatório recorrível<br>
+      V — Início/continuação do cumprimento da pena<br>
+      VI — Reincidência
+    `;
+  }
+
+  // ─── Concurso ───────────────────────────────────────────────────────────
+  function bindConcurso() {
+    document.getElementById('btn-calc-concurso').addEventListener('click', calcConcurso);
+    document.getElementById('btn-add-crime').addEventListener('click', () => {
+      const list = document.getElementById('conc-penas-list');
+      const count = list.children.length + 1;
+      const row = document.createElement('div');
+      row.className = 'conc-pena-row';
+      row.innerHTML = `<input type="number" class="conc-pena-input" min="1" max="1200" value="12" placeholder="Pena em meses"><span class="conc-pena-label">Crime ${count}</span>`;
+      list.appendChild(row);
+      document.getElementById('conc-num-crimes').value = count;
+    });
+    document.getElementById('btn-remove-crime').addEventListener('click', () => {
+      const list = document.getElementById('conc-penas-list');
+      if (list.children.length > 2) {
+        list.removeChild(list.lastChild);
+        document.getElementById('conc-num-crimes').value = list.children.length;
+      }
+    });
+  }
+
+  function calcConcurso() {
+    const tipo = document.getElementById('conc-tipo').value;
+    const inputs = document.querySelectorAll('.conc-pena-input');
+    const penas = Array.from(inputs).map(i => +i.value).filter(v => v > 0);
+    const fracao = +document.getElementById('conc-fracao').value;
+
+    if (penas.length < 2) {
+      document.getElementById('resultado-concurso').innerHTML = '<em>Informe ao menos 2 crimes</em>';
+      return;
+    }
+
+    const soma = penas.reduce((a, b) => a + b, 0);
+    const maior = Math.max(...penas);
+    let resultado, metodo, penafinal;
+
+    switch (tipo) {
+      case 'material':
+      case 'formal-improprio':
+        penafinal = soma;
+        metodo = 'Cúmulo material — soma das penas';
+        break;
+      case 'formal-proprio':
+        penafinal = maior + Math.ceil(maior * fracao);
+        metodo = `Exasperação — maior pena (${formatPena(maior)}) + fração de ${(fracao * 100).toFixed(1)}%`;
+        break;
+      case 'continuado':
+        penafinal = maior + Math.ceil(maior * fracao);
+        metodo = `Exasperação — maior pena (${formatPena(maior)}) + fração de ${(fracao * 100).toFixed(1)}%`;
+        break;
+      case 'continuado-especifico':
+        penafinal = maior + Math.ceil(maior * fracao);
+        metodo = `Exasperação — maior pena (${formatPena(maior)}) × fração (máx. triplo)`;
+        break;
+    }
+
+    // Concurso formal: se exasperação > soma, aplica cúmulo (Art. 70, §único)
+    let concursoBeneficio = '';
+    if ((tipo === 'formal-proprio' || tipo === 'continuado') && penafinal > soma) {
+      concursoBeneficio = `<br><em>Atenção: resultado da exasperação (${formatPena(penafinal)}) supera o cúmulo material (${formatPena(soma)}). Aplica-se o cúmulo material como limite (Art. 70, §único CP).</em>`;
+      penafinal = soma;
+    }
+
+    const regimeFinal = penafinal > 96 ? 'Fechado' : penafinal > 48 ? 'Semiaberto' : 'Aberto';
+
+    document.getElementById('resultado-concurso').innerHTML = `
+      <strong>Método:</strong> ${metodo}<br>
+      <strong>Penas individuais:</strong> ${penas.map(p => formatPena(p)).join(' + ')} = ${formatPena(soma)}<br>
+      <strong>Pena final do concurso:</strong> ${formatPena(penafinal)}<br>
+      <strong>Regime inicial:</strong> ${regimeFinal}<br>
+      ${concursoBeneficio}
+      <br><br>
+      <strong>Referência:</strong><br>
+      Art. 69 — Concurso material: soma das penas<br>
+      Art. 70 — Concurso formal próprio: maior pena + 1/6 a 1/2<br>
+      Art. 70, 2ª parte — Formal impróprio: soma (desígnios autônomos)<br>
+      Art. 71 — Continuado: maior pena + 1/6 a 2/3<br>
+      Art. 71, §único — Continuado específico (vítimas diferentes, violência): até o triplo
     `;
   }
 
