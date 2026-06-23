@@ -14,6 +14,9 @@
             <nav>
                 <a href="#catalogo" class="nav-link active" data-tab="catalogo">Catálogo</a>
                 <a href="#dosimetria" class="nav-link" data-tab="dosimetria">Dosimetria</a>
+                <a href="#progressao" class="nav-link" data-tab="progressao">Progressão</a>
+                <a href="#prescricao" class="nav-link" data-tab="prescricao">Prescrição</a>
+                <a href="#concurso" class="nav-link" data-tab="concurso">Concurso</a>
                 <a href="#estatisticas" class="nav-link" data-tab="estatisticas">Estatísticas</a>
             </nav>
         </div>
@@ -143,6 +146,187 @@
                 <div class="dosimetria-card resultado-final">
                     <h3>Resultado</h3>
                     <div id="resultado-dosimetria"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRESSÃO -->
+        <section id="progressao" class="tab-content">
+            <h2>Progressão de Regime (Art. 112 LEP)</h2>
+            <div class="dosimetria-grid">
+                <div class="dosimetria-card">
+                    <h3>Dados do Condenado</h3>
+                    <div class="two-cols">
+                        <div>
+                            <label>Pena total (meses):</label>
+                            <input type="number" id="prog-pena-total" min="1" max="1200" value="96">
+                        </div>
+                        <div>
+                            <label>Tempo já cumprido (meses):</label>
+                            <input type="number" id="prog-tempo-cumprido" min="0" max="1200" value="0">
+                        </div>
+                    </div>
+                    <div class="two-cols">
+                        <div>
+                            <label>Regime atual:</label>
+                            <select id="prog-regime-atual">
+                                <option value="fechado">Fechado</option>
+                                <option value="semiaberto">Semiaberto</option>
+                                <option value="aberto">Aberto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Classificação:</label>
+                            <select id="prog-classificacao">
+                                <option value="comum">Crime comum</option>
+                                <option value="hediondo-primario">Crime hediondo (primário)</option>
+                                <option value="hediondo-reincidente">Crime hediondo (reincidente)</option>
+                                <option value="hediondo-reincidente-especifico">Hediondo (reincidente específico)</option>
+                                <option value="comando-org-criminosa">Comando de organização criminosa</option>
+                                <option value="milicia">Milícia privada armada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="two-cols">
+                        <div>
+                            <label><input type="checkbox" id="prog-primario" checked> Primário</label>
+                        </div>
+                        <div>
+                            <label><input type="checkbox" id="prog-bom-comportamento" checked> Bom comportamento carcerário</label>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="btn-calc-progressao">Calcular Progressão</button>
+                </div>
+
+                <div class="dosimetria-card resultado-final">
+                    <h3>Resultado — Progressão</h3>
+                    <div id="resultado-progressao"><em>Preencha os dados acima</em></div>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>Livramento Condicional (Art. 83 CP)</h3>
+                    <div id="resultado-livramento"><em>Calculado automaticamente</em></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESCRIÇÃO -->
+        <section id="prescricao" class="tab-content">
+            <h2>Prescrição Penal (Arts. 109-119 CP)</h2>
+            <div class="dosimetria-grid">
+                <div class="dosimetria-card">
+                    <h3>Dados para Cálculo</h3>
+                    <div class="two-cols">
+                        <div>
+                            <label>Pena máxima em abstrato (meses):</label>
+                            <input type="number" id="presc-pena-max" min="1" max="1200" value="48">
+                        </div>
+                        <div>
+                            <label>Pena concreta aplicada (meses, se houver):</label>
+                            <input type="number" id="presc-pena-concreta" min="0" max="1200" value="0">
+                        </div>
+                    </div>
+                    <div class="two-cols">
+                        <div>
+                            <label>Idade do agente na data do fato:</label>
+                            <input type="number" id="presc-idade-fato" min="12" max="100" value="30">
+                        </div>
+                        <div>
+                            <label>Idade do agente na sentença:</label>
+                            <input type="number" id="presc-idade-sentenca" min="12" max="100" value="35">
+                        </div>
+                    </div>
+                    <div class="two-cols">
+                        <div>
+                            <label><input type="checkbox" id="presc-reincidente"> Reincidente (aumento de 1/3)</label>
+                        </div>
+                        <div>
+                            <label>Tipo:</label>
+                            <select id="presc-tipo">
+                                <option value="abstrata">Prescrição da pretensão punitiva (abstrata)</option>
+                                <option value="retroativa">Prescrição retroativa (pena concreta)</option>
+                                <option value="executoria">Prescrição da pretensão executória</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="btn-calc-prescricao">Calcular Prescrição</button>
+                </div>
+
+                <div class="dosimetria-card resultado-final">
+                    <h3>Resultado — Prescrição</h3>
+                    <div id="resultado-prescricao"><em>Preencha os dados acima</em></div>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>Tabela de Prescrição (Art. 109 CP)</h3>
+                    <table class="tabela-prescricao">
+                        <thead><tr><th>Pena máxima</th><th>Prazo prescricional</th></tr></thead>
+                        <tbody>
+                            <tr><td>Superior a 12 anos</td><td>20 anos</td></tr>
+                            <tr><td>Superior a 8 e não excede 12 anos</td><td>16 anos</td></tr>
+                            <tr><td>Superior a 4 e não excede 8 anos</td><td>12 anos</td></tr>
+                            <tr><td>Superior a 2 e não excede 4 anos</td><td>8 anos</td></tr>
+                            <tr><td>Igual a 1 e não excede 2 anos</td><td>4 anos</td></tr>
+                            <tr><td>Inferior a 1 ano</td><td>3 anos</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCURSO -->
+        <section id="concurso" class="tab-content">
+            <h2>Concurso de Crimes (Arts. 69-71 CP)</h2>
+            <div class="dosimetria-grid">
+                <div class="dosimetria-card">
+                    <h3>Tipo de Concurso</h3>
+                    <select id="conc-tipo">
+                        <option value="material">Concurso Material (Art. 69) — cúmulo material</option>
+                        <option value="formal-proprio">Concurso Formal Próprio (Art. 70, caput) — exasperação 1/6 a 1/2</option>
+                        <option value="formal-improprio">Concurso Formal Impróprio (Art. 70, 2ª parte) — cúmulo material</option>
+                        <option value="continuado">Crime Continuado (Art. 71, caput) — exasperação 1/6 a 2/3</option>
+                        <option value="continuado-especifico">Crime Continuado Específico (Art. 71, §único) — exasperação até o triplo</option>
+                    </select>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>Penas dos Crimes</h3>
+                    <p class="phase-desc">Informe a pena definitiva de cada crime (em meses). Adicione quantos crimes forem necessários.</p>
+                    <div id="conc-penas-list">
+                        <div class="conc-pena-row">
+                            <input type="number" class="conc-pena-input" min="1" max="1200" value="24" placeholder="Pena em meses">
+                            <span class="conc-pena-label">Crime 1</span>
+                        </div>
+                        <div class="conc-pena-row">
+                            <input type="number" class="conc-pena-input" min="1" max="1200" value="12" placeholder="Pena em meses">
+                            <span class="conc-pena-label">Crime 2</span>
+                        </div>
+                    </div>
+                    <div class="conc-buttons">
+                        <button class="btn-secondary" id="btn-add-crime">+ Adicionar crime</button>
+                        <button class="btn-secondary" id="btn-remove-crime">- Remover último</button>
+                    </div>
+                </div>
+
+                <div class="dosimetria-card">
+                    <h3>Fração de Exasperação</h3>
+                    <p class="phase-desc">Para concurso formal próprio e crime continuado:</p>
+                    <div class="two-cols">
+                        <div>
+                            <label>Fração (ex: 0.167 = 1/6, 0.5 = 1/2, 0.667 = 2/3):</label>
+                            <input type="number" id="conc-fracao" min="0" max="3" step="0.01" value="0.167">
+                        </div>
+                        <div>
+                            <label>Nº de crimes (para referência):</label>
+                            <input type="number" id="conc-num-crimes" min="2" max="100" value="2" disabled>
+                        </div>
+                    </div>
+                    <button class="btn-primary" id="btn-calc-concurso">Calcular Concurso</button>
+                </div>
+
+                <div class="dosimetria-card resultado-final">
+                    <h3>Resultado — Concurso</h3>
+                    <div id="resultado-concurso"><em>Preencha os dados acima</em></div>
                 </div>
             </div>
         </section>
