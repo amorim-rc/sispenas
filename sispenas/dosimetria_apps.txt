@@ -1,0 +1,1549 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * DOSIMETRIA PENAL — Google Apps Script
+ * Automações para planilha de cálculo de pena, progressão e benefícios
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 
+ * COMO USAR:
+ * 1. Abra a planilha no Google Sheets
+ * 2. Vá em Extensões → Apps Script
+ * 3. Apague o conteúdo padrão e cole este código inteiro
+ * 4. Clique em Salvar (Ctrl+S)
+ * 5. Volte à planilha e atualize a página (F5)
+ * 6. Um novo menu "Dosimetria Penal" aparecerá na barra de menus
+ * 
+ * FUNÇÕES DISPONÍVEIS NO MENU:
+ * - Gerar Justificativa de Dosimetria
+ * - Gerar Pedido de Progressão
+ * - Gerar Pedido de Livramento Condicional
+ * - Gerar Alegação de Prescrição
+ * - Gerar Pedido por Excesso de Prazo
+ * - Verificar ANPP / Sursis
+ * - Calcular Timeline Completa
+ * - Resetar Planilha (limpar campos de entrada)
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MENU PERSONALIZADO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu('Dosimetria Penal')
+    .addItem('Gerar Justificativa de Dosimetria', 'gerarJustificativaDosimetria')
+    .addItem('Gerar Pedido de Progressão', 'gerarPedidoProgressao')
+    .addItem('Gerar Pedido de Livramento Condicional', 'gerarPedidoLivramento')
+    .addItem('Gerar Alegação de Prescrição', 'gerarAlegacaoPrescricao')
+    .addItem('Gerar Pedido por Excesso de Prazo', 'gerarExcessoPrazo')
+    .addSeparator()
+    .addItem('Verificar ANPP / Sursis / Benefícios', 'verificarBeneficios')
+    .addItem('Calcular Timeline Completa', 'calcularTimeline')
+    .addSeparator()
+    .addSubMenu(ui.createMenu('Catálogo de Crimes')
+      .addItem('Buscar Crime por Nome ou Artigo', 'buscarCrime')
+      .addItem('Preencher Dosimetria a partir do Catálogo', 'preencherDoCatalogo')
+      .addItem('Listar Crimes Hediondos', 'listarHediondos')
+      .addItem('Listar Crimes que Cabem ANPP', 'listarCabeANPP')
+      .addItem('Listar Crimes que Cabem Sursis Processual', 'listarCabeSursis')
+      .addItem('Estatísticas do Catálogo', 'estatisticasCatalogo'))
+    .addSubMenu(ui.createMenu('Catálogo Granularizado')
+      .addItem('Buscar no Catálogo Granularizado', 'buscarGranularizado')
+      .addItem('Preencher Dosimetria (Granularizado)', 'preencherDoGranularizado')
+      .addItem('Listar Hediondos (Granularizado)', 'listarHediondosGranularizado')
+      .addItem('Listar Crimes com Violência', 'listarComViolencia')
+      .addItem('Listar Crimes com Grave Ameaça', 'listarComGraveAmeaca')
+      .addItem('Filtrar por Lei', 'filtrarPorLei')
+      .addItem('Comparar Catálogo vs Granularizado', 'compararCatalogos')
+      .addItem('Estatísticas Granularizado', 'estatisticasGranularizado'))
+    .addSeparator()
+    .addItem('Resetar Campos de Entrada', 'resetarPlanilha')
+    .addToUi();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// UTILITÁRIOS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function mesesParaAnosMeses(meses) {
+  if (!meses || meses <= 0) return "0 meses";
+  var anos = Math.floor(meses / 12);
+  var m = Math.round(meses % 12);
+  if (anos === 0) return m + " meses";
+  if (m === 0) return anos + (anos === 1 ? " ano" : " anos");
+  return anos + (anos === 1 ? " ano" : " anos") + " e " + m + (m === 1 ? " mês" : " meses");
+}
+
+function formatarData(data) {
+  if (!data) return "[data não informada]";
+  if (data instanceof Date) {
+    return Utilities.formatDate(data, "America/Sao_Paulo", "dd/MM/yyyy");
+  }
+  return String(data);
+}
+
+function getSheetByName(name) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    SpreadsheetApp.getUi().alert('Aba "' + name + '" não encontrada. Verifique a planilha.');
+    return null;
+  }
+  return sheet;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GERAR JUSTIFICATIVA DE DOSIMETRIA
+// ═══════════════════════════════════════════════════════════════════════════
+
+function gerarJustificativaDosimetria() {
+  var sheet = getSheetByName("Dosimetria");
+  if (!sheet) return;
+  
+  var crime = sheet.getRange("B4").getValue() || "[crime/artigo]";
+  var penaMin = sheet.getRange("B5").getValue() || 0;
+  var penaMax = sheet.getRange("B6").getValue() || 0;
+  var penaBase = sheet.getRange("B20").getValue() || 0;
+  
+  // Circunstâncias judiciais desfavoráveis
+  var desfavoraveis = [];
+  var circunstancias = [
+    "culpabilidade", "antecedentes", "conduta social", 
+    "personalidade do agente", "motivos do crime", 
+    "circunstâncias do crime", "consequências do crime",
+    "comportamento da vítima"
+  ];
+  
+  for (var i = 0; i < 8; i++) {
+    var val = sheet.getRange(11 + i, 2).getValue();
+    if (val === "Desfavorável") {
+      desfavoraveis.push(circunstancias[i]);
+    }
+  }
+  
+  // Pena intermediária (2ª fase)
+  var penaIntermediaria = sheet.getRange("B35").getValue() || penaBase;
+  
+  // Pena definitiva (buscar a célula correta - última da 3ª fase)
+  // Buscar na coluna A por "PENA DEFINITIVA"
+  var penaDefinitiva = 0;
+  var lastRow = sheet.getLastRow();
+  for (var r = 1; r <= lastRow; r++) {
+    var cellVal = sheet.getRange(r, 1).getValue();
+    if (String(cellVal).indexOf("PENA DEFINITIVA") !== -1) {
+      penaDefinitiva = sheet.getRange(r, 2).getValue();
+      break;
+    }
+  }
+  
+  // Montar texto
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "FUNDAMENTAÇÃO DA DOSIMETRIA DA PENA\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  texto += "Crime: " + crime + "\n";
+  texto += "Pena em abstrato: " + mesesParaAnosMeses(penaMin) + " a " + mesesParaAnosMeses(penaMax) + "\n\n";
+  
+  texto += "I — 1ª FASE: PENA-BASE (Art. 59, CP)\n\n";
+  
+  if (desfavoraveis.length === 0) {
+    texto += "Todas as circunstâncias judiciais do Art. 59 do Código Penal são ";
+    texto += "FAVORÁVEIS ao réu, razão pela qual a pena-base deve ser fixada no ";
+    texto += "mínimo legal de " + mesesParaAnosMeses(penaMin) + ".\n\n";
+  } else {
+    texto += "Das oito circunstâncias judiciais do Art. 59 do Código Penal, ";
+    texto += desfavoraveis.length + " " + (desfavoraveis.length === 1 ? "é" : "são") + " ";
+    texto += "desfavorável(is) ao réu: " + desfavoraveis.join(", ") + ".\n\n";
+    texto += "Considerando o método da fração (intervalo de " + mesesParaAnosMeses(penaMax - penaMin);
+    texto += " dividido por 8 circunstâncias = " + ((penaMax - penaMin) / 8).toFixed(1);
+    texto += " meses por circunstância desfavorável), a pena-base é fixada em ";
+    texto += mesesParaAnosMeses(penaBase) + ".\n\n";
+  }
+  
+  texto += "Pena-base: " + mesesParaAnosMeses(penaBase) + "\n\n";
+  
+  texto += "II — 2ª FASE: AGRAVANTES E ATENUANTES (Arts. 61-66, CP)\n\n";
+  
+  // Verificar agravantes/atenuantes presentes
+  var agravantes = [];
+  var atenuantes = [];
+  for (var i = 0; i < 11; i++) {
+    var presente = sheet.getRange(24 + i, 5).getValue();
+    if (presente === "Sim") {
+      var nome = sheet.getRange(24 + i, 1).getValue();
+      var tipo = sheet.getRange(24 + i, 2).getValue();
+      if (tipo === "Agravante") {
+        agravantes.push(nome);
+      } else {
+        atenuantes.push(nome);
+      }
+    }
+  }
+  
+  if (agravantes.length === 0 && atenuantes.length === 0) {
+    texto += "Não incidem agravantes nem atenuantes na espécie.\n\n";
+  } else {
+    if (agravantes.length > 0) {
+      texto += "Agravante(s) reconhecida(s): " + agravantes.join("; ") + ".\n";
+      texto += "Cada agravante eleva a pena em 1/6 (fração majoritária na jurisprudência).\n\n";
+    }
+    if (atenuantes.length > 0) {
+      texto += "Atenuante(s) reconhecida(s): " + atenuantes.join("; ") + ".\n";
+      texto += "Cada atenuante reduz a pena em 1/6.\n";
+      texto += "IMPORTANTE: Nos termos da Súmula 231 do STJ, a pena não pode ficar ";
+      texto += "abaixo do mínimo legal na 2ª fase.\n\n";
+    }
+  }
+  
+  texto += "Pena intermediária: " + mesesParaAnosMeses(penaIntermediaria) + "\n\n";
+  
+  texto += "III — 3ª FASE: CAUSAS DE AUMENTO E DIMINUIÇÃO\n\n";
+  texto += "Pena definitiva: " + mesesParaAnosMeses(penaDefinitiva) + "\n";
+  texto += "(Nota: Na 3ª fase, a pena PODE ficar abaixo do mínimo ou acima do máximo legal.)\n\n";
+  
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "DISPOSITIVO SUGERIDO:\n";
+  texto += "Condeno o réu à pena de " + mesesParaAnosMeses(penaDefinitiva);
+  texto += " de reclusão, em regime inicial ";
+  if (penaDefinitiva > 96) texto += "FECHADO";
+  else if (penaDefinitiva > 48) texto += "SEMIABERTO";
+  else texto += "ABERTO";
+  texto += " (Art. 33, CP).\n";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  
+  // Mostrar resultado
+  var ui = SpreadsheetApp.getUi();
+  
+  // Criar nova aba ou atualizar aba "Resultado"
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var resultado = ss.getSheetByName("Resultado");
+  if (!resultado) {
+    resultado = ss.insertSheet("Resultado");
+  }
+  resultado.clear();
+  resultado.getRange("A1").setValue("JUSTIFICATIVA DE DOSIMETRIA — Gerada em " + new Date().toLocaleString("pt-BR"));
+  resultado.getRange("A1").setFontWeight("bold");
+  
+  var linhas = texto.split("\n");
+  for (var i = 0; i < linhas.length; i++) {
+    resultado.getRange(i + 3, 1).setValue(linhas[i]);
+  }
+  resultado.setColumnWidth(1, 700);
+  
+  ss.setActiveSheet(resultado);
+  ui.alert("Justificativa gerada na aba 'Resultado'.");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GERAR PEDIDO DE PROGRESSÃO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function gerarPedidoProgressao() {
+  var sheet = getSheetByName("Progressão");
+  if (!sheet) return;
+  
+  var penaMeses = sheet.getRange("B4").getValue() || 0;
+  var dataInicio = sheet.getRange("B5").getValue();
+  var detracaoDias = sheet.getRange("B6").getValue() || 0;
+  var remicaoDias = sheet.getRange("B7").getValue() || 0;
+  var penaRestante = sheet.getRange("B8").getValue() || penaMeses;
+  
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "PEDIDO DE PROGRESSÃO DE REGIME\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  texto += "EXCELENTÍSSIMO(A) SENHOR(A) DOUTOR(A) JUIZ(A) DE DIREITO\n";
+  texto += "DA VARA DE EXECUÇÕES PENAIS DA COMARCA DE [__________]\n\n";
+  texto += "Processo de Execução nº [__________]\n\n";
+  
+  texto += "[NOME DO EXECUTADO], já qualificado nos autos em epígrafe, por ";
+  texto += "intermédio de seu advogado infra-assinado, vem respeitosamente à ";
+  texto += "presença de Vossa Excelência requerer a\n\n";
+  texto += "              PROGRESSÃO DE REGIME\n\n";
+  texto += "com fundamento no Art. 112 da Lei de Execução Penal (Lei nº 7.210/84), ";
+  texto += "conforme os fundamentos a seguir expostos.\n\n";
+  
+  texto += "I — DOS FATOS\n\n";
+  texto += "O executado foi condenado à pena total de " + mesesParaAnosMeses(penaMeses) + " de reclusão.\n";
+  if (dataInicio) {
+    texto += "Iniciou o cumprimento da pena em " + formatarData(dataInicio) + ".\n";
+  }
+  texto += "\n";
+  
+  texto += "II — DO REQUISITO OBJETIVO (TEMPORAL)\n\n";
+  
+  if (detracaoDias > 0 || remicaoDias > 0) {
+    texto += "Considerando:\n";
+    if (detracaoDias > 0) {
+      texto += "  - Detração (Art. 42, CP): " + detracaoDias + " dias de prisão provisória;\n";
+    }
+    if (remicaoDias > 0) {
+      texto += "  - Remição (Art. 126, LEP): " + remicaoDias + " dias remidos por trabalho/estudo;\n";
+    }
+    texto += "\nA pena restante a ser considerada é de " + mesesParaAnosMeses(penaRestante) + ".\n\n";
+  }
+  
+  // Calcular frações para cada tipo
+  var fracoes = [
+    {nome: "crime comum, réu primário", fracao: 0.16, inciso: "I"},
+    {nome: "crime comum, réu reincidente", fracao: 0.20, inciso: "II"},
+    {nome: "crime com violência contra mulher", fracao: 0.25, inciso: "III"},
+    {nome: "crime contra Administração Pública", fracao: 0.25, inciso: "IV"},
+    {nome: "crime hediondo, réu primário", fracao: 0.40, inciso: "V"},
+    {nome: "crime hediondo, réu reincidente", fracao: 0.60, inciso: "VI"},
+    {nome: "crime hediondo com morte, réu primário", fracao: 0.50, inciso: "VI-A"},
+    {nome: "crime hediondo com morte, réu reincidente", fracao: 0.70, inciso: "VII"},
+  ];
+  
+  texto += "Frações aplicáveis (Art. 112, LEP — redação dada pela Lei 13.964/2019):\n\n";
+  
+  for (var i = 0; i < fracoes.length; i++) {
+    var f = fracoes[i];
+    var tempo = Math.round(penaRestante * f.fracao * 10) / 10;
+    texto += "  • " + f.nome.charAt(0).toUpperCase() + f.nome.slice(1) + " (inciso " + f.inciso + "): ";
+    texto += (f.fracao * 100) + "% = " + mesesParaAnosMeses(tempo) + "\n";
+  }
+  
+  texto += "\nAssim, tratando-se de [ESPECIFICAR TIPO], o requisito objetivo exige o ";
+  texto += "cumprimento de [X%] da pena, o que corresponde a [Y meses].\n\n";
+  
+  texto += "III — DO REQUISITO SUBJETIVO\n\n";
+  texto += "O executado ostenta bom comportamento carcerário, conforme atestado ";
+  texto += "expedido pela direção do estabelecimento prisional (doc. anexo), ";
+  texto += "preenchendo integralmente o requisito subjetivo do Art. 112, §1º, da LEP.\n\n";
+  
+  texto += "IV — DO PEDIDO\n\n";
+  texto += "Ante o exposto, requer a Vossa Excelência:\n";
+  texto += "a) A progressão do regime [FECHADO/SEMIABERTO] para o regime [SEMIABERTO/ABERTO];\n";
+  texto += "b) A expedição de guia de transferência/alvará, conforme o caso;\n";
+  texto += "c) A intimação do Ministério Público para manifestação.\n\n";
+  texto += "Termos em que pede deferimento.\n\n";
+  texto += "[Cidade], [data].\n";
+  texto += "[Nome do Advogado]\n";
+  texto += "OAB/[UF] nº [número]\n";
+  
+  // Output
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var resultado = ss.getSheetByName("Resultado");
+  if (!resultado) resultado = ss.insertSheet("Resultado");
+  resultado.clear();
+  resultado.getRange("A1").setValue("PEDIDO DE PROGRESSÃO — Gerado em " + new Date().toLocaleString("pt-BR"));
+  resultado.getRange("A1").setFontWeight("bold");
+  
+  var linhas = texto.split("\n");
+  for (var i = 0; i < linhas.length; i++) {
+    resultado.getRange(i + 3, 1).setValue(linhas[i]);
+  }
+  resultado.setColumnWidth(1, 700);
+  ss.setActiveSheet(resultado);
+  SpreadsheetApp.getUi().alert("Pedido de progressão gerado na aba 'Resultado'.");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GERAR PEDIDO DE LIVRAMENTO CONDICIONAL
+// ═══════════════════════════════════════════════════════════════════════════
+
+function gerarPedidoLivramento() {
+  var sheet = getSheetByName("Progressão");
+  if (!sheet) return;
+  
+  var penaMeses = sheet.getRange("B4").getValue() || 0;
+  var dataInicio = sheet.getRange("B5").getValue();
+  var penaRestante = sheet.getRange("B8").getValue() || penaMeses;
+  
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "PEDIDO DE LIVRAMENTO CONDICIONAL\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  texto += "EXCELENTÍSSIMO(A) SENHOR(A) DOUTOR(A) JUIZ(A) DE DIREITO\n";
+  texto += "DA VARA DE EXECUÇÕES PENAIS DA COMARCA DE [__________]\n\n";
+  
+  texto += "[NOME], por seu advogado, vem requerer LIVRAMENTO CONDICIONAL, ";
+  texto += "com fundamento no Art. 83 do Código Penal e Arts. 131 a 146 da LEP.\n\n";
+  
+  texto += "I — REQUISITO OBJETIVO\n\n";
+  texto += "Pena total: " + mesesParaAnosMeses(penaMeses) + "\n";
+  texto += "Pena restante (após detração/remição): " + mesesParaAnosMeses(penaRestante) + "\n\n";
+  
+  texto += "Frações do Art. 83, CP:\n";
+  texto += "  • Réu primário + bons antecedentes: 1/3 = " + mesesParaAnosMeses(penaRestante / 3) + "\n";
+  texto += "  • Reincidente em crime doloso: 1/2 = " + mesesParaAnosMeses(penaRestante / 2) + "\n";
+  texto += "  • Crime hediondo (réu primário): 2/3 = " + mesesParaAnosMeses(penaRestante * 2 / 3) + "\n";
+  texto += "  • Reincidente específico em hediondo: VEDADO (Art. 83, V)\n\n";
+  
+  texto += "O executado [PREENCHER SITUAÇÃO], tendo cumprido o requisito temporal ";
+  texto += "em [DATA] (mais de [FRAÇÃO] da pena).\n\n";
+  
+  texto += "II — REQUISITOS SUBJETIVOS (Art. 83, III, CP)\n\n";
+  texto += "  a) Comportamento satisfatório durante a execução — doc. anexo;\n";
+  texto += "  b) Bom desempenho no trabalho — certidão anexa;\n";
+  texto += "  c) Aptidão para prover a própria subsistência — comprovante anexo;\n";
+  texto += "  d) Reparação do dano (se possível) ou impossibilidade — doc. anexo.\n\n";
+  
+  texto += "III — DO PEDIDO\n\n";
+  texto += "Requer a concessão do livramento condicional, com fixação das condições ";
+  texto += "do Art. 132 da LEP, determinando-se a expedição de carta de livramento.\n\n";
+  texto += "Termos em que pede deferimento.\n";
+  texto += "[Cidade], [data].\n";
+  texto += "[Advogado — OAB/UF nº]\n";
+  
+  outputResultado("PEDIDO DE LIVRAMENTO CONDICIONAL", texto);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GERAR ALEGAÇÃO DE PRESCRIÇÃO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function gerarAlegacaoPrescricao() {
+  var sheet = getSheetByName("Prescrição");
+  if (!sheet) return;
+  
+  var penaAbstrato = sheet.getRange("B13").getValue() || 0;
+  var penaAplicada = sheet.getRange("B14").getValue() || 0;
+  var menoridade = sheet.getRange("B15").getValue();
+  var senilidade = sheet.getRange("B16").getValue();
+  var prazoAbstrato = sheet.getRange("B19").getValue() || 0;
+  var prazoReduzido = sheet.getRange("B20").getValue() || prazoAbstrato;
+  
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "ALEGAÇÃO DE PRESCRIÇÃO\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  texto += "I — DA PRESCRIÇÃO DA PRETENSÃO PUNITIVA (EM ABSTRATO)\n\n";
+  texto += "O crime imputado ao réu tem pena máxima em abstrato de " + mesesParaAnosMeses(penaAbstrato) + ".\n";
+  texto += "Nos termos do Art. 109 do Código Penal, o prazo prescricional correspondente é de ";
+  texto += prazoAbstrato + " anos.\n\n";
+  
+  if (menoridade === "Sim" || senilidade === "Sim") {
+    texto += "Incide a redução do Art. 115, CP ";
+    if (menoridade === "Sim") texto += "(réu menor de 21 anos na data do fato)";
+    if (senilidade === "Sim") texto += "(réu maior de 70 anos na data da sentença)";
+    texto += ", de modo que o prazo prescricional é REDUZIDO PELA METADE: ";
+    texto += prazoReduzido + " anos.\n\n";
+  }
+  
+  if (penaAplicada > 0) {
+    texto += "II — DA PRESCRIÇÃO RETROATIVA (Art. 110, §1º, CP)\n\n";
+    texto += "Havendo trânsito em julgado para a acusação (ou sendo improvido seu recurso), ";
+    texto += "a prescrição é regulada pela pena APLICADA: " + mesesParaAnosMeses(penaAplicada) + ".\n";
+    
+    var prazoRetro = 3;
+    if (penaAplicada > 144) prazoRetro = 20;
+    else if (penaAplicada > 96) prazoRetro = 16;
+    else if (penaAplicada > 48) prazoRetro = 12;
+    else if (penaAplicada > 24) prazoRetro = 8;
+    else if (penaAplicada > 12) prazoRetro = 4;
+    
+    if (menoridade === "Sim" || senilidade === "Sim") prazoRetro = prazoRetro / 2;
+    
+    texto += "O prazo prescricional correspondente é de " + prazoRetro + " anos.\n\n";
+    texto += "Deve-se verificar se, entre a data do FATO e o RECEBIMENTO DA DENÚNCIA, ";
+    texto += "ou entre o recebimento da denúncia e a SENTENÇA, transcorreu prazo superior ";
+    texto += "a " + prazoRetro + " anos — caso em que estará extinta a punibilidade.\n\n";
+  }
+  
+  texto += "III — MARCOS INTERRUPTIVOS (Art. 117, CP)\n\n";
+  texto += "A prescrição é interrompida por:\n";
+  texto += "  I — recebimento da denúncia ou queixa;\n";
+  texto += "  II — pronúncia;\n";
+  texto += "  III — decisão confirmatória da pronúncia;\n";
+  texto += "  IV — publicação da sentença ou acórdão condenatório recorríveis;\n";
+  texto += "  V — início ou continuação do cumprimento da pena;\n";
+  texto += "  VI — reincidência.\n\n";
+  
+  texto += "Verificar datas na aba 'Prescrição' para conferir se entre marcos ";
+  texto += "consecutivos transcorreu prazo superior ao prescricional.\n\n";
+  
+  texto += "IV — DO PEDIDO\n\n";
+  texto += "Requer seja declarada EXTINTA A PUNIBILIDADE do réu pela ocorrência ";
+  texto += "da prescrição [da pretensão punitiva / retroativa / intercorrente], ";
+  texto += "nos termos do Art. 107, IV, do Código Penal.\n\n";
+  texto += "Termos em que pede deferimento.\n";
+  texto += "[Cidade], [data].\n";
+  texto += "[Advogado — OAB/UF nº]\n";
+  
+  outputResultado("ALEGAÇÃO DE PRESCRIÇÃO", texto);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GERAR PEDIDO POR EXCESSO DE PRAZO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function gerarExcessoPrazo() {
+  var sheet = getSheetByName("Prazos Processuais");
+  if (!sheet) return;
+  
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "HABEAS CORPUS — EXCESSO DE PRAZO NA PRISÃO PREVENTIVA\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  texto += "EXCELENTÍSSIMO(A) SENHOR(A) DESEMBARGADOR(A) RELATOR(A)\n";
+  texto += "DO TRIBUNAL DE JUSTIÇA DO ESTADO DE [__________]\n\n";
+  
+  texto += "HABEAS CORPUS COM PEDIDO DE LIMINAR\n\n";
+  texto += "Paciente: [__________]\n";
+  texto += "Autoridade Coatora: MM. Juiz(a) de Direito da [__] Vara Criminal de [__]\n";
+  texto += "Processo originário nº: [__________]\n\n";
+  
+  texto += "I — DOS FATOS\n\n";
+  texto += "O paciente encontra-se PRESO PREVENTIVAMENTE desde [DATA], ";
+  texto += "sem que tenha sido proferida sentença condenatória.\n\n";
+  
+  texto += "II — DO EXCESSO DE PRAZO\n\n";
+  texto += "Conforme a soma dos prazos processuais para réu preso:\n";
+  texto += "  • Inquérito: 10 dias (Art. 10, CPP)\n";
+  texto += "  • Denúncia: 5 dias (Art. 46, CPP)\n";
+  texto += "  • Defesa prévia: 10 dias (Art. 396, CPP)\n";
+  texto += "  • AIJ: 60 dias (Art. 400, CPP)\n";
+  texto += "  • TOTAL REFERENCIAL: 85 dias\n\n";
+  
+  texto += "O paciente está preso há [___] dias, configurando excesso de prazo ";
+  texto += "que torna a prisão ILEGAL por violação ao Art. 5º, LXXVIII, da CF ";
+  texto += "(razoável duração do processo) e à Súmula 21 do STJ.\n\n";
+  
+  texto += "Ressalte-se que:\n";
+  texto += "  • O excesso de prazo não decorre da complexidade do feito ou de ";
+  texto += "diligências requeridas pela defesa (Súmula 64, STJ);\n";
+  texto += "  • Não houve encerramento da instrução criminal (Súmula 52, STJ);\n";
+  texto += "  • A demora é imputável exclusivamente ao Juízo.\n\n";
+  
+  texto += "III — DO PEDIDO LIMINAR\n\n";
+  texto += "Requer a concessão de LIMINAR para determinar a imediata expedição de ";
+  texto += "alvará de soltura em favor do paciente, ou, subsidiariamente, a ";
+  texto += "aplicação de medidas cautelares alternativas (Art. 319, CPP).\n\n";
+  
+  texto += "IV — DO PEDIDO FINAL\n\n";
+  texto += "Requer seja concedida a ordem de habeas corpus para revogar a prisão ";
+  texto += "preventiva do paciente por excesso de prazo, determinando-se sua ";
+  texto += "imediata soltura.\n\n";
+  texto += "Termos em que pede deferimento.\n";
+  texto += "[Cidade], [data].\n";
+  texto += "[Advogado — OAB/UF nº]\n";
+  
+  outputResultado("HC — EXCESSO DE PRAZO", texto);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// VERIFICAR BENEFÍCIOS (ANPP, SURSIS PROCESSUAL, SURSIS DA PENA)
+// ═══════════════════════════════════════════════════════════════════════════
+
+function verificarBeneficios() {
+  var sheet = getSheetByName("ANPP e Sursis");
+  if (!sheet) return;
+  
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "ANÁLISE DE BENEFÍCIOS DESPENALIZADORES\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  // ANPP
+  var anppCabivel = true;
+  var anppMotivos = [];
+  var requisitosANPP = [
+    "Pena mínima < 4 anos",
+    "Sem violência ou grave ameaça",
+    "Não reincidente específico",
+    "Sem ANPP anterior em 5 anos",
+    "Não é violência doméstica",
+    "Confissão formal",
+    "Necessidade e suficiência"
+  ];
+  
+  for (var i = 0; i < 7; i++) {
+    var val = sheet.getRange(5 + i, 2).getValue();
+    if (val === "Não") {
+      anppCabivel = false;
+      anppMotivos.push(requisitosANPP[i]);
+    }
+  }
+  
+  texto += "1. ACORDO DE NÃO PERSECUÇÃO PENAL (Art. 28-A, CPP)\n\n";
+  if (anppCabivel) {
+    texto += "   ✓ CABÍVEL — Todos os requisitos preenchidos.\n";
+    texto += "   → Requerer ao MP a celebração de ANPP.\n";
+    texto += "   → Condições possíveis: reparação do dano, prestação de serviço,\n";
+    texto += "     prestação pecuniária, renúncia a bens/direitos.\n\n";
+  } else {
+    texto += "   ✗ NÃO CABÍVEL — Requisito(s) ausente(s):\n";
+    for (var i = 0; i < anppMotivos.length; i++) {
+      texto += "     • " + anppMotivos[i] + "\n";
+    }
+    texto += "\n";
+  }
+  
+  // Sursis Processual
+  texto += "2. SUSPENSÃO CONDICIONAL DO PROCESSO (Art. 89, Lei 9.099/95)\n\n";
+  var sursisProcRow = 0;
+  var lastRow = sheet.getLastRow();
+  for (var r = 1; r <= lastRow; r++) {
+    if (String(sheet.getRange(r, 1).getValue()).indexOf("SURSIS PROCESSUAL CABÍVEL") !== -1) {
+      sursisProcRow = r;
+      break;
+    }
+  }
+  if (sursisProcRow > 0) {
+    var resultado = sheet.getRange(sursisProcRow, 2).getValue();
+    texto += "   " + (resultado === "SIM" ? "✓ CABÍVEL" : "✗ NÃO CABÍVEL") + "\n";
+    texto += "   → Período de prova: 2 a 4 anos.\n";
+    texto += "   → Condições: reparação do dano, não frequentar lugares, comparecimento mensal.\n\n";
+  }
+  
+  texto += "3. SURSIS DA PENA (Art. 77, CP)\n\n";
+  texto += "   → Verificar na aba 'ANPP e Sursis' os campos de pena aplicada.\n";
+  texto += "   → Simples: pena ≤ 2 anos + primário (prova de 2-4 anos)\n";
+  texto += "   → Etário/humanitário: pena ≤ 4 anos + >70 ou doença grave (prova de 4-6 anos)\n\n";
+  
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "ORDEM DE PREFERÊNCIA (mais vantajoso para o réu):\n";
+  texto += "  1º ANPP (sem processo, sem condenação)\n";
+  texto += "  2º Sursis processual (suspensão do processo)\n";
+  texto += "  3º Sursis da pena (condenado, mas sem preso)\n";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  
+  outputResultado("ANÁLISE DE BENEFÍCIOS", texto);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CALCULAR TIMELINE COMPLETA
+// ═══════════════════════════════════════════════════════════════════════════
+
+function calcularTimeline() {
+  var sheetProg = getSheetByName("Progressão");
+  if (!sheetProg) return;
+  
+  var penaMeses = sheetProg.getRange("B4").getValue() || 0;
+  var dataInicio = sheetProg.getRange("B5").getValue();
+  var penaRestante = sheetProg.getRange("B8").getValue() || penaMeses;
+  
+  if (!dataInicio || penaMeses <= 0) {
+    SpreadsheetApp.getUi().alert("Preencha a pena total e a data de início na aba 'Progressão'.");
+    return;
+  }
+  
+  var texto = "";
+  texto += "═══════════════════════════════════════════════════════════════\n";
+  texto += "TIMELINE DE EXECUÇÃO PENAL\n";
+  texto += "═══════════════════════════════════════════════════════════════\n\n";
+  texto += "Pena total: " + mesesParaAnosMeses(penaMeses) + "\n";
+  texto += "Pena restante (c/ detração/remição): " + mesesParaAnosMeses(penaRestante) + "\n";
+  texto += "Início do cumprimento: " + formatarData(dataInicio) + "\n\n";
+  
+  var d = new Date(dataInicio);
+  
+  // Término da pena
+  var termino = new Date(d);
+  termino.setMonth(termino.getMonth() + Math.round(penaRestante));
+  texto += "Término da pena: " + formatarData(termino) + "\n\n";
+  
+  texto += "────────────────────────────────────────────────────────────\n";
+  texto += "MARCOS TEMPORAIS:\n";
+  texto += "────────────────────────────────────────────────────────────\n\n";
+  
+  var eventos = [
+    {nome: "Progressão (crime comum, primário — 16%)", fracao: 0.16},
+    {nome: "Progressão (crime comum, reincidente — 20%)", fracao: 0.20},
+    {nome: "Progressão (violência/adm. pública — 25%)", fracao: 0.25},
+    {nome: "Saída temporária (regime semiaberto — 1/6)", fracao: 1/6},
+    {nome: "Livramento condicional (primário — 1/3)", fracao: 1/3},
+    {nome: "Progressão (hediondo, primário — 40%)", fracao: 0.40},
+    {nome: "Livramento condicional (reincidente — 1/2)", fracao: 0.50},
+    {nome: "Progressão (hediondo c/ morte, primário — 50%)", fracao: 0.50},
+    {nome: "Progressão (hediondo, reincidente — 60%)", fracao: 0.60},
+    {nome: "Livramento condicional (hediondo, primário — 2/3)", fracao: 2/3},
+    {nome: "Progressão (hediondo c/ morte, reincidente — 70%)", fracao: 0.70},
+  ];
+  
+  eventos.sort(function(a, b) { return a.fracao - b.fracao; });
+  
+  for (var i = 0; i < eventos.length; i++) {
+    var ev = eventos[i];
+    var mesesNecessarios = Math.round(penaRestante * ev.fracao);
+    var dataEvento = new Date(d);
+    dataEvento.setMonth(dataEvento.getMonth() + mesesNecessarios);
+    
+    var hoje = new Date();
+    var status = dataEvento <= hoje ? " ◀ JÁ CUMPRIDO" : "";
+    
+    texto += "  " + formatarData(dataEvento) + " — " + ev.nome + status + "\n";
+  }
+  
+  texto += "\n  " + formatarData(termino) + " — TÉRMINO DA PENA (100%)\n";
+  
+  texto += "\n────────────────────────────────────────────────────────────\n";
+  texto += "Nota: Datas são estimativas baseadas nos dados inseridos.\n";
+  texto += "Considere feriados, dias não úteis e eventuais incidentes.\n";
+  
+  outputResultado("TIMELINE DE EXECUÇÃO", texto);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RESETAR PLANILHA
+// ═══════════════════════════════════════════════════════════════════════════
+
+function resetarPlanilha() {
+  var ui = SpreadsheetApp.getUi();
+  var resposta = ui.alert(
+    'Confirmação',
+    'Deseja limpar todos os campos de entrada (células amarelas)? As fórmulas serão preservadas.',
+    ui.ButtonSet.YES_NO
+  );
+  
+  if (resposta !== ui.Button.YES) return;
+  
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = ss.getSheets();
+  
+  for (var s = 0; s < sheets.length; s++) {
+    var sheet = sheets[s];
+    if (sheet.getName() === "Resultado" || sheet.getName() === "Referência de Crimes") continue;
+    
+    var range = sheet.getDataRange();
+    var backgrounds = range.getBackgrounds();
+    
+    for (var r = 0; r < backgrounds.length; r++) {
+      for (var c = 0; c < backgrounds[r].length; c++) {
+        // Amarelo claro = campo de entrada
+        if (backgrounds[r][c] === "#ffffcc" || backgrounds[r][c] === "#FFFFCC") {
+          var cell = sheet.getRange(r + 1, c + 1);
+          // Só limpar se não tiver fórmula
+          if (!cell.getFormula()) {
+            cell.clearContent();
+          }
+        }
+      }
+    }
+  }
+  
+  ui.alert("Campos de entrada limpos com sucesso.");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FUNÇÃO AUXILIAR — OUTPUT RESULTADO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function outputResultado(titulo, texto) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var resultado = ss.getSheetByName("Resultado");
+  if (!resultado) resultado = ss.insertSheet("Resultado");
+  resultado.clear();
+  resultado.getRange("A1").setValue(titulo + " — Gerado em " + new Date().toLocaleString("pt-BR"));
+  resultado.getRange("A1").setFontWeight("bold");
+  
+  var linhas = texto.split("\n");
+  for (var i = 0; i < linhas.length; i++) {
+    resultado.getRange(i + 3, 1).setValue(linhas[i]);
+  }
+  resultado.setColumnWidth(1, 700);
+  ss.setActiveSheet(resultado);
+  SpreadsheetApp.getUi().alert(titulo + " gerado na aba 'Resultado'.");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FUNÇÕES DO CATÁLOGO DE CRIMES
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Lê todos os dados da aba "Catálogo de Crimes" e retorna como array de objetos
+ */
+function lerCatalogo() {
+  var sheet = getSheetByName("Catálogo de Crimes");
+  if (!sheet) return [];
+  
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 4) return [];
+  
+  var data = sheet.getRange(4, 1, lastRow - 3, 14).getValues();
+  var crimes = [];
+  
+  for (var i = 0; i < data.length; i++) {
+    var row = data[i];
+    if (!row[0] && !row[1] && !row[2]) continue;
+    crimes.push({
+      lei: row[0] || "",
+      artigo: row[1] || "",
+      crime: row[2] || "",
+      penaMin: row[3],
+      penaMax: row[4],
+      tipoPena: row[5] || "",
+      acaoPenal: row[6] || "",
+      hediondo: row[7] || "",
+      elemento: row[8] || "",
+      tentativa: row[9] || "",
+      qualificadoras: row[10] || "",
+      obs: row[11] || "",
+      cabeANPP: row[12] || "",
+      cabeSursis: row[13] || "",
+      linha: i + 4
+    });
+  }
+  return crimes;
+}
+
+/**
+ * Buscar crime por nome ou artigo
+ */
+function buscarCrime() {
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt(
+    'Buscar no Catálogo de Crimes',
+    'Digite o nome do crime, artigo (ex: "Art. 121") ou palavra-chave (ex: "furto", "drogas", "hediondo"):',
+    ui.ButtonSet.OK_CANCEL
+  );
+  
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+  var termo = response.getResponseText().toLowerCase().trim();
+  if (!termo) { ui.alert("Digite um termo de busca."); return; }
+  
+  var crimes = lerCatalogo();
+  var resultados = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    var c = crimes[i];
+    var texto = (c.lei + " " + c.artigo + " " + c.crime + " " + c.qualificadoras + " " + c.obs).toLowerCase();
+    if (texto.indexOf(termo) !== -1) {
+      resultados.push(c);
+    }
+  }
+  
+  if (resultados.length === 0) {
+    ui.alert("Nenhum crime encontrado para: '" + termo + "'");
+    return;
+  }
+  
+  var output = "";
+  output += "RESULTADOS DA BUSCA: '" + termo.toUpperCase() + "'\n";
+  output += "Encontrados: " + resultados.length + " crime(s)\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  for (var i = 0; i < resultados.length; i++) {
+    var c = resultados[i];
+    output += (i + 1) + ". " + c.crime + "\n";
+    output += "   Lei: " + c.lei + " | Artigo: " + c.artigo + "\n";
+    if (c.penaMin && c.penaMin !== "—") {
+      output += "   Pena: " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax) + " (" + c.tipoPena + ")\n";
+    }
+    output += "   Ação Penal: " + c.acaoPenal + " | Hediondo: " + c.hediondo + " | Elemento: " + c.elemento + "\n";
+    if (c.cabeANPP && c.cabeANPP !== "—") output += "   Cabe ANPP: " + c.cabeANPP + " | Cabe Sursis Proc.: " + c.cabeSursis + "\n";
+    if (c.qualificadoras && c.qualificadoras !== "—") output += "   Qualificadoras/Majorantes: " + c.qualificadoras + "\n";
+    if (c.obs) output += "   Obs: " + c.obs + "\n";
+    output += "\n";
+  }
+  
+  outputResultado("BUSCA NO CATÁLOGO", output);
+}
+
+/**
+ * Preencher aba Dosimetria a partir de crime selecionado no catálogo
+ */
+function preencherDoCatalogo() {
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt(
+    'Preencher Dosimetria a partir do Catálogo',
+    'Digite o nome do crime ou artigo (ex: "homicídio qualificado", "Art. 157"):',
+    ui.ButtonSet.OK_CANCEL
+  );
+  
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+  var termo = response.getResponseText().toLowerCase().trim();
+  if (!termo) { ui.alert("Digite um termo de busca."); return; }
+  
+  var crimes = lerCatalogo();
+  var resultados = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    var c = crimes[i];
+    var texto = (c.lei + " " + c.artigo + " " + c.crime).toLowerCase();
+    if (texto.indexOf(termo) !== -1 && c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      resultados.push(c);
+    }
+  }
+  
+  if (resultados.length === 0) {
+    ui.alert("Nenhum crime com pena encontrado para: '" + termo + "'.\nTente outro termo.");
+    return;
+  }
+  
+  var crimeEscolhido;
+  if (resultados.length === 1) {
+    crimeEscolhido = resultados[0];
+  } else {
+    var lista = "Múltiplos resultados encontrados. Digite o NÚMERO:\n\n";
+    for (var i = 0; i < Math.min(resultados.length, 15); i++) {
+      lista += (i + 1) + ". " + resultados[i].crime + " (" + resultados[i].artigo + ") — " + mesesParaAnosMeses(resultados[i].penaMin) + " a " + mesesParaAnosMeses(resultados[i].penaMax) + "\n";
+    }
+    if (resultados.length > 15) lista += "\n(mostrando 15 de " + resultados.length + " resultados)";
+    
+    var escolha = ui.prompt('Selecione o crime', lista, ui.ButtonSet.OK_CANCEL);
+    if (escolha.getSelectedButton() !== ui.Button.OK) return;
+    var idx = parseInt(escolha.getResponseText()) - 1;
+    if (isNaN(idx) || idx < 0 || idx >= resultados.length) {
+      ui.alert("Número inválido.");
+      return;
+    }
+    crimeEscolhido = resultados[idx];
+  }
+  
+  var dosiSheet = getSheetByName("Dosimetria");
+  if (!dosiSheet) return;
+  
+  dosiSheet.getRange("B4").setValue(crimeEscolhido.crime + " (" + crimeEscolhido.artigo + ", " + crimeEscolhido.lei + ")");
+  dosiSheet.getRange("B5").setValue(crimeEscolhido.penaMin);
+  dosiSheet.getRange("B6").setValue(crimeEscolhido.penaMax);
+  
+  ui.alert(
+    "Dosimetria preenchida!\n\n" +
+    "Crime: " + crimeEscolhido.crime + "\n" +
+    "Artigo: " + crimeEscolhido.artigo + " — " + crimeEscolhido.lei + "\n" +
+    "Pena: " + mesesParaAnosMeses(crimeEscolhido.penaMin) + " a " + mesesParaAnosMeses(crimeEscolhido.penaMax) + "\n" +
+    "Tipo: " + crimeEscolhido.tipoPena + "\n" +
+    "Hediondo: " + crimeEscolhido.hediondo + "\n" +
+    "Ação Penal: " + crimeEscolhido.acaoPenal + "\n\n" +
+    "Agora preencha as circunstâncias judiciais na aba Dosimetria."
+  );
+}
+
+/**
+ * Listar todos os crimes hediondos do catálogo
+ */
+function listarHediondos() {
+  var crimes = lerCatalogo();
+  var hediondos = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].hediondo === "Sim") hediondos.push(crimes[i]);
+  }
+  
+  var output = "CRIMES HEDIONDOS E EQUIPARADOS\n";
+  output += "(Lei 8.072/90 + Art. 5º, XLIII CF)\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total: " + hediondos.length + " tipos penais hediondos ou equiparados\n\n";
+  output += "CONSEQUÊNCIAS:\n";
+  output += "• Inafiançável\n";
+  output += "• Insuscetível de graça, anistia e indulto\n";
+  output += "• Progressão: 40% (primário), 50% (reincidente/comandante), 60% (reincidente específico), 70% (reincidente específico + resultado morte)\n";
+  output += "• Regime inicial: fechado para reincidentes específicos\n";
+  output += "• Livramento condicional: 2/3 (primário); vedado para reincidente específico\n";
+  output += "• Prisão temporária: 30 + 30 dias\n\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  for (var i = 0; i < hediondos.length; i++) {
+    var c = hediondos[i];
+    output += (i + 1) + ". " + c.crime + "\n";
+    output += "   " + c.lei + " — " + c.artigo + "\n";
+    if (c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      output += "   Pena: " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax) + "\n";
+    }
+    if (c.obs) output += "   " + c.obs + "\n";
+    output += "\n";
+  }
+  
+  outputResultado("CRIMES HEDIONDOS", output);
+}
+
+/**
+ * Listar crimes que cabem ANPP (Art. 28-A CPP)
+ */
+function listarCabeANPP() {
+  var crimes = lerCatalogo();
+  var cabeANPP = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].cabeANPP === "Sim") cabeANPP.push(crimes[i]);
+  }
+  
+  var output = "CRIMES QUE ADMITEM ANPP\n";
+  output += "(Acordo de Não Persecução Penal — Art. 28-A, CPP)\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Requisitos do ANPP:\n";
+  output += "• Pena mínima < 4 anos (48 meses)\n";
+  output += "• Sem violência ou grave ameaça\n";
+  output += "• Não ser caso de arquivamento\n";
+  output += "• Confissão formal e circunstanciada\n";
+  output += "• Não ter sido beneficiado por ANPP nos últimos 5 anos\n";
+  output += "• Não ser reincidente\n\n";
+  output += "Total de crimes elegíveis: " + cabeANPP.length + "\n\n";
+  
+  for (var i = 0; i < cabeANPP.length; i++) {
+    var c = cabeANPP[i];
+    output += (i + 1) + ". " + c.crime + " (" + c.artigo + ", " + c.lei + ")";
+    if (c.penaMin && c.penaMin !== "—") {
+      output += " — Pena mín: " + mesesParaAnosMeses(c.penaMin);
+    }
+    output += "\n";
+  }
+  
+  outputResultado("CRIMES ELEGÍVEIS PARA ANPP", output);
+}
+
+/**
+ * Listar crimes que cabem Sursis Processual (Art. 89, Lei 9.099)
+ */
+function listarCabeSursis() {
+  var crimes = lerCatalogo();
+  var cabeSursis = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].cabeSursis === "Sim") cabeSursis.push(crimes[i]);
+  }
+  
+  var output = "CRIMES QUE ADMITEM SURSIS PROCESSUAL\n";
+  output += "(Suspensão Condicional do Processo — Art. 89, Lei 9.099/95)\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Requisitos:\n";
+  output += "• Pena mínima ≤ 1 ano (12 meses)\n";
+  output += "• Réu primário (não reincidente)\n";
+  output += "• Não estar respondendo a outro processo criminal\n";
+  output += "• Circunstâncias pessoais favoráveis (Art. 77, §2º, CP)\n\n";
+  output += "Consequência: suspensão do processo por 2 a 4 anos + condições\n";
+  output += "Se cumprir: extinção da punibilidade\n\n";
+  output += "Total de crimes elegíveis: " + cabeSursis.length + "\n\n";
+  
+  for (var i = 0; i < cabeSursis.length; i++) {
+    var c = cabeSursis[i];
+    output += (i + 1) + ". " + c.crime + " (" + c.artigo + ", " + c.lei + ")";
+    if (c.penaMin && c.penaMin !== "—") {
+      output += " — Pena mín: " + mesesParaAnosMeses(c.penaMin);
+    }
+    output += "\n";
+  }
+  
+  outputResultado("CRIMES ELEGÍVEIS PARA SURSIS PROCESSUAL", output);
+}
+
+/**
+ * Estatísticas do catálogo
+ */
+function estatisticasCatalogo() {
+  var crimes = lerCatalogo();
+  
+  var totalCrimes = 0;
+  var totalHediondos = 0;
+  var totalANPP = 0;
+  var totalSursis = 0;
+  var leisMap = {};
+  var tiposPena = { "Reclusão": 0, "Detenção": 0 };
+  var acoes = { "Pública Incondicionada": 0, "Pública Condicionada": 0, "Privada": 0 };
+  var elementos = { "Doloso": 0, "Culposo": 0, "Doloso e Culposo": 0, "Preterdoloso": 0 };
+  
+  for (var i = 0; i < crimes.length; i++) {
+    var c = crimes[i];
+    if (c.penaMin === "—" || (!c.penaMin && c.penaMin !== 0)) continue;
+    totalCrimes++;
+    
+    if (c.hediondo === "Sim") totalHediondos++;
+    if (c.cabeANPP === "Sim") totalANPP++;
+    if (c.cabeSursis === "Sim") totalSursis++;
+    
+    if (!leisMap[c.lei]) leisMap[c.lei] = 0;
+    leisMap[c.lei]++;
+    
+    if (c.tipoPena.indexOf("Reclusão") !== -1) tiposPena["Reclusão"]++;
+    if (c.tipoPena.indexOf("Detenção") !== -1) tiposPena["Detenção"]++;
+    
+    for (var a in acoes) { if (c.acaoPenal === a) acoes[a]++; }
+    for (var e in elementos) { if (c.elemento === e) elementos[e]++; }
+  }
+  
+  var output = "ESTATÍSTICAS DO CATÁLOGO DE CRIMES\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total de entradas: " + crimes.length + "\n";
+  output += "Tipos penais com pena: " + totalCrimes + "\n\n";
+  
+  output += "CLASSIFICAÇÃO:\n";
+  output += "  Hediondos: " + totalHediondos + "\n";
+  output += "  Cabem ANPP: " + totalANPP + "\n";
+  output += "  Cabem Sursis Processual: " + totalSursis + "\n\n";
+  
+  output += "TIPO DE PENA:\n";
+  output += "  Reclusão: " + tiposPena["Reclusão"] + "\n";
+  output += "  Detenção: " + tiposPena["Detenção"] + "\n\n";
+  
+  output += "AÇÃO PENAL:\n";
+  output += "  Pública Incondicionada: " + acoes["Pública Incondicionada"] + "\n";
+  output += "  Pública Condicionada: " + acoes["Pública Condicionada"] + "\n";
+  output += "  Privada: " + acoes["Privada"] + "\n\n";
+  
+  output += "ELEMENTO SUBJETIVO:\n";
+  output += "  Doloso: " + elementos["Doloso"] + "\n";
+  output += "  Culposo: " + elementos["Culposo"] + "\n";
+  output += "  Doloso e Culposo: " + elementos["Doloso e Culposo"] + "\n";
+  output += "  Preterdoloso: " + elementos["Preterdoloso"] + "\n\n";
+  
+  output += "POR LEGISLAÇÃO:\n";
+  var leis = Object.keys(leisMap).sort(function(a, b) { return leisMap[b] - leisMap[a]; });
+  for (var i = 0; i < leis.length; i++) {
+    output += "  " + leis[i] + ": " + leisMap[leis[i]] + " tipo(s)\n";
+  }
+  
+  outputResultado("ESTATÍSTICAS DO CATÁLOGO", output);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CATÁLOGO GRANULARIZADO — FUNÇÕES
+// (Cada variante de tipo penal é um registro separado, metodologia SISPENAS)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Lê a aba "Catálogo Granularizado" e retorna array de objetos
+ * Colunas: A=Lei, B=Artigo, C=Crime, D=PenaMin, E=PenaMax, F=TipoPena,
+ *   G=AçãoPenal, H=Hediondo, I=Elemento, J=Tentativa, K=Violência,
+ *   L=GraveAmeaça, M=CabeANPP, N=CabeSursisProc, O=CabeSursisPena, P=Obs
+ */
+function lerGranularizado() {
+  var sheet = getSheetByName("Catálogo Granularizado");
+  if (!sheet) return [];
+  
+  var lastRow = sheet.getLastRow();
+  if (lastRow < 4) return [];
+  
+  var data = sheet.getRange(4, 1, lastRow - 3, 16).getValues();
+  var crimes = [];
+  
+  for (var i = 0; i < data.length; i++) {
+    var row = data[i];
+    if (!row[0] && !row[1] && !row[2]) continue;
+    crimes.push({
+      lei: row[0] || "",
+      artigo: row[1] || "",
+      crime: row[2] || "",
+      penaMin: row[3],
+      penaMax: row[4],
+      tipoPena: row[5] || "",
+      acaoPenal: row[6] || "",
+      hediondo: row[7] || "",
+      elemento: row[8] || "",
+      tentativa: row[9] || "",
+      violencia: row[10] || "",
+      graveAmeaca: row[11] || "",
+      cabeANPP: row[12] || "",
+      cabeSursisProc: row[13] || "",
+      cabeSursisPena: row[14] || "",
+      obs: row[15] || "",
+      linha: i + 4
+    });
+  }
+  return crimes;
+}
+
+/**
+ * Buscar crime no catálogo granularizado
+ */
+function buscarGranularizado() {
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt(
+    'Buscar no Catálogo Granularizado',
+    'Digite o nome, artigo ou lei (ex: "homicídio qualificado", "Art. 121", "Lei 11.343"):',
+    ui.ButtonSet.OK_CANCEL
+  );
+  
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+  var termo = response.getResponseText().toLowerCase().trim();
+  if (!termo) { ui.alert("Digite um termo de busca."); return; }
+  
+  var crimes = lerGranularizado();
+  var resultados = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    var c = crimes[i];
+    var texto = (c.lei + " " + c.artigo + " " + c.crime + " " + c.obs).toLowerCase();
+    if (texto.indexOf(termo) !== -1) resultados.push(c);
+  }
+  
+  if (resultados.length === 0) {
+    ui.alert("Nenhum tipo penal encontrado para: '" + termo + "'");
+    return;
+  }
+  
+  var output = "BUSCA NO CATÁLOGO GRANULARIZADO: '" + termo.toUpperCase() + "'\n";
+  output += "Encontrados: " + resultados.length + " tipo(s) penal(is)\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  
+  for (var i = 0; i < resultados.length; i++) {
+    var c = resultados[i];
+    output += (i + 1) + ". " + c.crime + "\n";
+    output += "   Lei: " + c.lei + " | Artigo: " + c.artigo + "\n";
+    if (c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      output += "   Pena: " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax) + " (" + c.tipoPena + ")\n";
+    }
+    output += "   Ação: " + c.acaoPenal + " | Hediondo: " + c.hediondo + " | Elemento: " + c.elemento + "\n";
+    output += "   Violência: " + c.violencia + " | Grave Ameaça: " + c.graveAmeaca + " | Tentativa: " + c.tentativa + "\n";
+    if (c.cabeANPP && c.cabeANPP !== "—") output += "   ANPP: " + c.cabeANPP + " | Sursis Proc.: " + c.cabeSursisProc + " | Sursis Pena: " + c.cabeSursisPena + "\n";
+    if (c.obs) output += "   Obs: " + c.obs + "\n";
+    output += "\n";
+  }
+  
+  outputResultado("BUSCA GRANULARIZADA", output);
+}
+
+/**
+ * Preencher dosimetria a partir do catálogo granularizado
+ */
+function preencherDoGranularizado() {
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt(
+    'Preencher Dosimetria (Catálogo Granularizado)',
+    'Digite o nome do tipo penal (ex: "homicídio qualificado por motivo fútil", "tráfico de drogas"):\n\nO catálogo granularizado tem cada VARIANTE como entrada separada.',
+    ui.ButtonSet.OK_CANCEL
+  );
+  
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+  var termo = response.getResponseText().toLowerCase().trim();
+  if (!termo) { ui.alert("Digite um termo de busca."); return; }
+  
+  var crimes = lerGranularizado();
+  var resultados = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    var c = crimes[i];
+    var texto = (c.lei + " " + c.artigo + " " + c.crime).toLowerCase();
+    if (texto.indexOf(termo) !== -1 && c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      resultados.push(c);
+    }
+  }
+  
+  if (resultados.length === 0) {
+    ui.alert("Nenhum tipo penal com pena encontrado para: '" + termo + "'.\nTente outro termo (ex: nome do crime, artigo ou lei).");
+    return;
+  }
+  
+  var crimeEscolhido;
+  if (resultados.length === 1) {
+    crimeEscolhido = resultados[0];
+  } else {
+    var lista = "Múltiplos tipos encontrados. Digite o NÚMERO:\n\n";
+    for (var i = 0; i < Math.min(resultados.length, 20); i++) {
+      lista += (i + 1) + ". " + resultados[i].crime + " (" + resultados[i].artigo + ") — " +
+        mesesParaAnosMeses(resultados[i].penaMin) + " a " + mesesParaAnosMeses(resultados[i].penaMax) + "\n";
+    }
+    if (resultados.length > 20) lista += "\n(mostrando 20 de " + resultados.length + " resultados)";
+    
+    var escolha = ui.prompt('Selecione o tipo penal', lista, ui.ButtonSet.OK_CANCEL);
+    if (escolha.getSelectedButton() !== ui.Button.OK) return;
+    var idx = parseInt(escolha.getResponseText()) - 1;
+    if (isNaN(idx) || idx < 0 || idx >= resultados.length) {
+      ui.alert("Número inválido.");
+      return;
+    }
+    crimeEscolhido = resultados[idx];
+  }
+  
+  var dosiSheet = getSheetByName("Dosimetria");
+  if (!dosiSheet) return;
+  
+  dosiSheet.getRange("B4").setValue(crimeEscolhido.crime + " (" + crimeEscolhido.artigo + ", " + crimeEscolhido.lei + ")");
+  dosiSheet.getRange("B5").setValue(crimeEscolhido.penaMin);
+  dosiSheet.getRange("B6").setValue(crimeEscolhido.penaMax);
+  
+  ui.alert(
+    "Dosimetria preenchida com tipo granularizado!\n\n" +
+    "Crime: " + crimeEscolhido.crime + "\n" +
+    "Artigo: " + crimeEscolhido.artigo + " — " + crimeEscolhido.lei + "\n" +
+    "Pena: " + mesesParaAnosMeses(crimeEscolhido.penaMin) + " a " + mesesParaAnosMeses(crimeEscolhido.penaMax) + "\n" +
+    "Tipo: " + crimeEscolhido.tipoPena + "\n" +
+    "Hediondo: " + crimeEscolhido.hediondo + "\n" +
+    "Violência: " + crimeEscolhido.violencia + " | Grave Ameaça: " + crimeEscolhido.graveAmeaca + "\n" +
+    "Ação Penal: " + crimeEscolhido.acaoPenal + "\n\n" +
+    "Agora preencha as circunstâncias judiciais na aba Dosimetria."
+  );
+}
+
+/**
+ * Listar crimes hediondos do catálogo granularizado
+ */
+function listarHediondosGranularizado() {
+  var crimes = lerGranularizado();
+  var hediondos = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].hediondo === "Sim") hediondos.push(crimes[i]);
+  }
+  
+  var output = "CRIMES HEDIONDOS E EQUIPARADOS (CATÁLOGO GRANULARIZADO)\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total: " + hediondos.length + " tipos penais hediondos/equiparados (granularizados)\n\n";
+  
+  var leisHediondas = {};
+  for (var i = 0; i < hediondos.length; i++) {
+    var lei = hediondos[i].lei;
+    if (!leisHediondas[lei]) leisHediondas[lei] = [];
+    leisHediondas[lei].push(hediondos[i]);
+  }
+  
+  var leis = Object.keys(leisHediondas).sort();
+  for (var l = 0; l < leis.length; l++) {
+    output += "━━━ " + leis[l] + " (" + leisHediondas[leis[l]].length + " tipos) ━━━\n";
+    var crimesLei = leisHediondas[leis[l]];
+    for (var i = 0; i < crimesLei.length; i++) {
+      var c = crimesLei[i];
+      output += "  • " + c.crime + " (" + c.artigo + ")";
+      if (c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+        output += " — " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax);
+      }
+      output += "\n";
+    }
+    output += "\n";
+  }
+  
+  outputResultado("HEDIONDOS GRANULARIZADOS", output);
+}
+
+/**
+ * Listar crimes com violência
+ */
+function listarComViolencia() {
+  var crimes = lerGranularizado();
+  var comViolencia = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].violencia === "Sim") comViolencia.push(crimes[i]);
+  }
+  
+  var output = "CRIMES QUE ENVOLVEM VIOLÊNCIA\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total: " + comViolencia.length + " tipos penais com violência como elementar ou circunstância\n\n";
+  output += "CONSEQUÊNCIAS JURÍDICAS DA VIOLÊNCIA:\n";
+  output += "• Impede ANPP (Art. 28-A, caput, CPP)\n";
+  output += "• Pode impedir substituição por restritiva de direitos (Art. 44, I, CP)\n";
+  output += "• Afasta arrependimento posterior (Art. 16, CP)\n";
+  output += "• Crime continuado específico (Art. 71, §ún., CP): aumento até o triplo\n\n";
+  
+  for (var i = 0; i < comViolencia.length; i++) {
+    var c = comViolencia[i];
+    output += (i + 1) + ". " + c.crime + " (" + c.artigo + ", " + c.lei + ")";
+    if (c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      output += " — " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax);
+    }
+    output += "\n";
+  }
+  
+  outputResultado("CRIMES COM VIOLÊNCIA", output);
+}
+
+/**
+ * Listar crimes com grave ameaça
+ */
+function listarComGraveAmeaca() {
+  var crimes = lerGranularizado();
+  var comAmeaca = [];
+  
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].graveAmeaca === "Sim") comAmeaca.push(crimes[i]);
+  }
+  
+  var output = "CRIMES QUE ENVOLVEM GRAVE AMEAÇA\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total: " + comAmeaca.length + " tipos penais com grave ameaça como elementar ou circunstância\n\n";
+  output += "CONSEQUÊNCIAS JURÍDICAS DA GRAVE AMEAÇA:\n";
+  output += "• Mesmas consequências da violência (ANPP, substituição, arrependimento posterior)\n";
+  output += "• Pode configurar roubo (Art. 157) em vez de furto (Art. 155)\n";
+  output += "• Pode configurar extorsão (Art. 158) em vez de estelionato (Art. 171)\n\n";
+  
+  for (var i = 0; i < comAmeaca.length; i++) {
+    var c = comAmeaca[i];
+    output += (i + 1) + ". " + c.crime + " (" + c.artigo + ", " + c.lei + ")";
+    if (c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      output += " — " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax);
+    }
+    output += "\n";
+  }
+  
+  outputResultado("CRIMES COM GRAVE AMEAÇA", output);
+}
+
+/**
+ * Filtrar crimes por legislação
+ */
+function filtrarPorLei() {
+  var ui = SpreadsheetApp.getUi();
+  var crimes = lerGranularizado();
+  
+  // Listar todas as leis disponíveis
+  var leisMap = {};
+  for (var i = 0; i < crimes.length; i++) {
+    var lei = crimes[i].lei;
+    if (!leisMap[lei]) leisMap[lei] = 0;
+    leisMap[lei]++;
+  }
+  
+  var leis = Object.keys(leisMap).sort();
+  var listaLeis = "Leis disponíveis:\n\n";
+  for (var i = 0; i < leis.length; i++) {
+    listaLeis += (i + 1) + ". " + leis[i] + " (" + leisMap[leis[i]] + " tipos)\n";
+  }
+  listaLeis += "\nDigite o NÚMERO da lei:";
+  
+  var response = ui.prompt('Filtrar por Lei', listaLeis, ui.ButtonSet.OK_CANCEL);
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+  
+  var idx = parseInt(response.getResponseText()) - 1;
+  if (isNaN(idx) || idx < 0 || idx >= leis.length) {
+    ui.alert("Número inválido.");
+    return;
+  }
+  
+  var leiEscolhida = leis[idx];
+  var crimesLei = [];
+  for (var i = 0; i < crimes.length; i++) {
+    if (crimes[i].lei === leiEscolhida) crimesLei.push(crimes[i]);
+  }
+  
+  var output = "TIPOS PENAIS — " + leiEscolhida + "\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total: " + crimesLei.length + " tipos penais granularizados\n\n";
+  
+  for (var i = 0; i < crimesLei.length; i++) {
+    var c = crimesLei[i];
+    output += (i + 1) + ". " + c.crime + "\n";
+    output += "   Artigo: " + c.artigo + "\n";
+    if (c.penaMin && c.penaMin !== "—" && c.penaMin > 0) {
+      output += "   Pena: " + mesesParaAnosMeses(c.penaMin) + " a " + mesesParaAnosMeses(c.penaMax) + " (" + c.tipoPena + ")\n";
+    }
+    output += "   Hediondo: " + c.hediondo + " | Violência: " + c.violencia + " | Grave Ameaça: " + c.graveAmeaca + "\n";
+    output += "   Elemento: " + c.elemento + " | Tentativa: " + c.tentativa + " | Ação: " + c.acaoPenal + "\n";
+    if (c.cabeANPP && c.cabeANPP !== "—") output += "   ANPP: " + c.cabeANPP + " | Sursis Proc.: " + c.cabeSursisProc + " | Sursis Pena: " + c.cabeSursisPena + "\n";
+    if (c.obs) output += "   Obs: " + c.obs + "\n";
+    output += "\n";
+  }
+  
+  outputResultado("FILTRO POR LEI: " + leiEscolhida, output);
+}
+
+/**
+ * Comparar catálogo unitário vs granularizado
+ */
+function compararCatalogos() {
+  var catalogoUnit = lerCatalogo();
+  var catalogoGran = lerGranularizado();
+  
+  var leisUnit = {};
+  var leisGran = {};
+  
+  for (var i = 0; i < catalogoUnit.length; i++) {
+    var lei = catalogoUnit[i].lei;
+    if (!leisUnit[lei]) leisUnit[lei] = 0;
+    leisUnit[lei]++;
+  }
+  
+  for (var i = 0; i < catalogoGran.length; i++) {
+    var lei = catalogoGran[i].lei;
+    if (!leisGran[lei]) leisGran[lei] = 0;
+    leisGran[lei]++;
+  }
+  
+  var output = "COMPARAÇÃO: CATÁLOGO UNITÁRIO VS GRANULARIZADO\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Catálogo Unitário (aba 'Catálogo de Crimes'): " + catalogoUnit.length + " entradas\n";
+  output += "Catálogo Granularizado (aba 'Catálogo Granularizado'): " + catalogoGran.length + " entradas\n";
+  output += "Fator de granularização: " + (catalogoGran.length / Math.max(catalogoUnit.length, 1)).toFixed(1) + "×\n\n";
+  
+  output += "O catálogo unitário lista cada crime uma vez (ex: 'Homicídio, Art. 121').\n";
+  output += "O catálogo granularizado desmembra cada variante (simples, qualificado, privilegiado, culposo, etc.).\n\n";
+  
+  output += "POR LEI:\n";
+  output += String("Lei").padEnd(30) + String("Unitário").padEnd(12) + String("Granularizado").padEnd(15) + "Fator\n";
+  output += "─".repeat(65) + "\n";
+  
+  var todasLeis = {};
+  for (var l in leisUnit) todasLeis[l] = true;
+  for (var l in leisGran) todasLeis[l] = true;
+  var leis = Object.keys(todasLeis).sort();
+  
+  for (var i = 0; i < leis.length; i++) {
+    var u = leisUnit[leis[i]] || 0;
+    var g = leisGran[leis[i]] || 0;
+    var fator = u > 0 ? (g / u).toFixed(1) + "×" : "novo";
+    output += String(leis[i]).padEnd(30) + String(u).padEnd(12) + String(g).padEnd(15) + fator + "\n";
+  }
+  
+  output += "\n═══════════════════════════════════════════════════════════════\n";
+  output += "\nCOLUNAS EXCLUSIVAS DO GRANULARIZADO:\n";
+  output += "• Violência (Sim/Não) — elementar ou circunstância do tipo\n";
+  output += "• Grave Ameaça (Sim/Não) — elementar ou circunstância do tipo\n";
+  output += "• Cabe Sursis da Pena (Sim/Verificar) — com base na pena mínima\n";
+  output += "\nEstas colunas permitem filtragem rápida para análise de política pública.\n";
+  
+  outputResultado("COMPARAÇÃO CATÁLOGOS", output);
+}
+
+/**
+ * Estatísticas do catálogo granularizado
+ */
+function estatisticasGranularizado() {
+  var crimes = lerGranularizado();
+  
+  var total = 0;
+  var totalHediondos = 0;
+  var totalViolencia = 0;
+  var totalGraveAmeaca = 0;
+  var totalANPP = 0;
+  var totalSursisProc = 0;
+  var totalSursisPena = 0;
+  var leisMap = {};
+  var tiposPena = {};
+  var acoes = {};
+  var elementos = {};
+  
+  for (var i = 0; i < crimes.length; i++) {
+    var c = crimes[i];
+    if (c.penaMin === "—" || c.penaMin === "" || c.penaMin === 0 && c.penaMax === 0 && c.tipoPena === "—") continue;
+    total++;
+    
+    if (c.hediondo === "Sim") totalHediondos++;
+    if (c.violencia === "Sim") totalViolencia++;
+    if (c.graveAmeaca === "Sim") totalGraveAmeaca++;
+    if (c.cabeANPP === "Sim") totalANPP++;
+    if (c.cabeSursisProc === "Sim") totalSursisProc++;
+    if (c.cabeSursisPena === "Sim") totalSursisPena++;
+    
+    if (!leisMap[c.lei]) leisMap[c.lei] = 0;
+    leisMap[c.lei]++;
+    
+    if (!tiposPena[c.tipoPena]) tiposPena[c.tipoPena] = 0;
+    tiposPena[c.tipoPena]++;
+    
+    if (!acoes[c.acaoPenal]) acoes[c.acaoPenal] = 0;
+    acoes[c.acaoPenal]++;
+    
+    if (!elementos[c.elemento]) elementos[c.elemento] = 0;
+    elementos[c.elemento]++;
+  }
+  
+  var output = "ESTATÍSTICAS DO CATÁLOGO GRANULARIZADO\n";
+  output += "═══════════════════════════════════════════════════════════════\n\n";
+  output += "Total de entradas: " + crimes.length + "\n";
+  output += "Tipos penais com pena: " + total + "\n\n";
+  
+  output += "CLASSIFICAÇÃO PENAL:\n";
+  output += "  Hediondos/equiparados: " + totalHediondos + "\n";
+  output += "  Com violência: " + totalViolencia + "\n";
+  output += "  Com grave ameaça: " + totalGraveAmeaca + "\n\n";
+  
+  output += "BENEFÍCIOS CABÍVEIS:\n";
+  output += "  Cabem ANPP (Art. 28-A CPP): " + totalANPP + "\n";
+  output += "  Cabem Sursis Processual (Art. 89): " + totalSursisProc + "\n";
+  output += "  Cabem Sursis da Pena (Art. 77 CP): " + totalSursisPena + "\n\n";
+  
+  output += "TIPO DE PENA:\n";
+  for (var t in tiposPena) output += "  " + t + ": " + tiposPena[t] + "\n";
+  output += "\n";
+  
+  output += "AÇÃO PENAL:\n";
+  for (var a in acoes) output += "  " + a + ": " + acoes[a] + "\n";
+  output += "\n";
+  
+  output += "ELEMENTO SUBJETIVO:\n";
+  for (var e in elementos) output += "  " + e + ": " + elementos[e] + "\n";
+  output += "\n";
+  
+  output += "POR LEGISLAÇÃO (ordem decrescente):\n";
+  var leis = Object.keys(leisMap).sort(function(a, b) { return leisMap[b] - leisMap[a]; });
+  for (var i = 0; i < leis.length; i++) {
+    output += "  " + leis[i] + ": " + leisMap[leis[i]] + " tipo(s)\n";
+  }
+  
+  outputResultado("ESTATÍSTICAS GRANULARIZADO", output);
+}
