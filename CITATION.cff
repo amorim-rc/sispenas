@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "Se você usar o SISPENAS em pesquisa ou publicação, por favor cite conforme abaixo."
+title: "SISPENAS — Sistema de Pesquisa de Tipos Penais e Benefícios"
+abstract: >-
+  Ferramenta aberta de pesquisa de políticas públicas para estudar o impacto dos
+  benefícios penais sobre os tipos penais brasileiros. Reimplementação digital e
+  interativa do SISPENAS originalmente concebido por Maíra Rocha Machado e Marta
+  Rodriguez de Assis Machado (Direito GV/FGV, 2008).
+type: software
+authors:
+  - name: "Equipe SISPENAS"
+license: MIT
+repository-code: "https://github.com/amorim-rc/sispenas"
+url: "https://amorim-rc.github.io/sispenas/"
+keywords:
+  - direito penal
+  - políticas públicas
+  - benefícios penais
+  - tipos penais
+  - dados abertos
+references:
+  - type: article
+    title: "SISPENAS: Sistema de Consulta sobre Crimes, Penas e Alternativas à Prisão"
+    authors:
+      - family-names: "Machado"
+        given-names: "Maíra Rocha"
+      - family-names: "Machado"
+        given-names: "Marta Rodriguez de Assis"
+    journal: "Revista Jurídica"
+    volume: 10
+    issue: 90
+    year: 2008
+    start: 1
+    end: 26
+    notes: "Brasília, edição especial, abr./maio 2008."
