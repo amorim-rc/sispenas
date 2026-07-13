@@ -1,0 +1,46 @@
+name: Regenerar dados derivados
+
+# Quando data/crimes.json muda (inclusive via edição pela interface web do GitHub),
+# roda scripts/transform_data.py e commita o static/data/crimes.json regenerado.
+# Assim não é preciso rodar Python localmente para atualizar o catálogo.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/crimes.json'
+      - 'scripts/transform_data.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: regen-data
+  cancel-in-progress: false
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Regenerar catálogo derivado
+        run: python3 scripts/transform_data.py
+
+      - name: Commitar mudanças (se houver)
+        run: |
+          if [ -n "$(git status --porcelain static/data/crimes.json)" ]; then
+            git config user.name "sispenas-bot"
+            git config user.email "sispenas-bot@users.noreply.github.com"
+            git add static/data/crimes.json
+            git commit -m "chore(data): regenera static/data/crimes.json [skip ci]"
+            git push
+          else
+            echo "Nenhuma mudança no catálogo derivado."
+          fi
