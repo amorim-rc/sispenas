@@ -1,0 +1,26 @@
+/**
+ * Estilos globais SISPENAS. Paleta sóbria (institucional/jurídica).
+ */
+
+:root {
+  --ifm-color-primary: #1e40af;
+  --ifm-color-primary-dark: #1b3a9e;
+  --ifm-color-primary-darker: #193795;
+  --ifm-color-primary-darkest: #152d7b;
+  --ifm-color-primary-light: #2148c0;
+  --ifm-color-primary-lighter: #234bc9;
+  --ifm-color-primary-lightest: #3861e0;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #7ea2ff;
+  --ifm-color-primary-dark: #5c88ff;
+  --ifm-color-primary-darker: #4a7aff;
+  --ifm-color-primary-darkest: #1e40af;
+  --ifm-color-primary-light: #a0bcff;
+  --ifm-color-primary-lighter: #b2c8ff;
+  --ifm-color-primary-lightest: #d6e1ff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
