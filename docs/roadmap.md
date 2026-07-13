@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # Roadmap
 
-## v3 (atual) — SISPENAS sobre Docusaurus
+## v1.0.0 (atual) — SISPENAS sobre Docusaurus
 
 Plataforma de pesquisa com ferramenta interativa e documentação integrada.
 
@@ -22,7 +22,7 @@ Plataforma de pesquisa com ferramenta interativa e documentação integrada.
 
 ---
 
-## v3.5 — Atualização automática da legislação (crawler do DOU)
+## v1.1.0 — Atualização automática da legislação (crawler do DOU)
 
 Manter o catálogo atualizado com segurança jurídica, a partir do **Diário Oficial da
 União (DOU)**.
@@ -52,7 +52,7 @@ GitHub Actions (cron semanal)
 
 ---
 
-## v3.6 — Atualizações de Processo Penal
+## v1.2.0 — Atualizações de Processo Penal
 
 Estender o mesmo mecanismo de atualização automática para o **Direito Processual Penal**,
 que rege boa parte dos benefícios (ANPP, transação, suspensão do processo, execução).
@@ -67,7 +67,7 @@ que rege boa parte dos benefícios (ANPP, transação, suspensão do processo, e
 
 ---
 
-## v4 — Plataforma de pesquisa de políticas públicas
+## v2.0.0 — Plataforma de pesquisa de políticas públicas
 
 - [ ] Cruzamento exaustivo tipos × benefícios (matriz de elegibilidade)
 - [ ] Simulação legislativa em lote ("aumentar em 2 anos a pena de todos os crimes contra o patrimônio")
