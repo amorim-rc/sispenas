@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentação do SISPENAS
+    url: https://amorim-rc.github.io/sispenas/docs/sobre
+    about: Consulte a metodologia, os benefícios e o roadmap antes de abrir uma issue.
