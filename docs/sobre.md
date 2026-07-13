@@ -28,6 +28,31 @@ legais dos benefícios (ANPP, transação penal, substituição, sursis, progres
 livramento, prescrição, etc.), a ferramenta apoia o desenho e a crítica de propostas
 legislativas.
 
+## Origem
+
+O SISPENAS tem origem na pesquisa coordenada pelas professoras **Maíra Rocha Machado** e
+**Marta Rodriguez de Assis Machado** (Escola de Direito da Fundação Getúlio Vargas —
+Direito GV), que conceberam o **SISPENAS** como um sistema de consulta sobre crimes,
+penas e alternativas à prisão. A referência seminal do projeto é:
+
+> MACHADO, Maíra Rocha; MACHADO, Marta Rodriguez de Assis (coord.). **SISPENAS: Sistema
+> de Consulta sobre Crimes, Penas e Alternativas à Prisão**. Revista Jurídica, Brasília,
+> v. 10, n. 90, ed. esp., p. 1-26, abr./maio 2008.
+>
+> Íntegra: [artigo original (PDF)](pathname:///sispenas/artigos/machado-machado-2008-sispenas-rev-juridica-90.pdf).
+
+O SISPENAS original foi um projeto de pesquisa vinculado a edital da Secretaria de
+Assuntos Legislativos do Ministério da Justiça, com o objetivo de enfrentar o **déficit de
+informação pública** sobre o sistema penal: tornar visível e pesquisável a relação entre os
+**tipos penais** e os **benefícios/alternativas à prisão**, e permitir **simular** o efeito de
+alterações legislativas.
+
+Esta plataforma é uma **reimplementação digital, aberta e interativa** dessa proposta:
+preserva a intuição original — catalogar exaustivamente os tipos penais e cruzá-los com os
+benefícios — e a atualiza para a legislação vigente, com simulação dinâmica de pena e dados
+abertos. A comparação detalhada entre a proposta de 2008 e esta implementação está no
+`README.md` do repositório.
+
 ## Aviso importante
 
 Esta é uma ferramenta de **pesquisa**. Os cálculos simplificam controvérsias
