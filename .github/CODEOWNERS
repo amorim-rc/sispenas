@@ -1,0 +1,41 @@
+# CODEOWNERS do SISPENAS
+# Quando um PR altera um caminho abaixo, o dono correspondente entra como revisor.
+# A ÚLTIMA regra que casa um arquivo prevalece.
+# Hoje tudo é de @amorim-rc; troque pelos handles/times reais quando houver acesso.
+
+# Fallback: owner geral de tudo que não casar com regra mais específica
+*                          @amorim-rc
+
+# Dados e catálogo penal — revisão JURÍDICA        (futuro: @org/juridico)
+/data/                     @amorim-rc
+/static/data/              @amorim-rc
+
+# Pipeline de transformação dos dados (Python)     (futuro: @org/dados)
+/scripts/                  @amorim-rc
+
+# Motor de benefícios — lógica de cálculo (sensível) (futuro: @org/juridico + @org/engenharia)
+/src/lib/beneficios.ts     @amorim-rc
+/src/lib/                  @amorim-rc
+
+# Front-end (interface, páginas, estilos, tema)     (futuro: @org/engenharia)
+/src/components/           @amorim-rc
+/src/pages/                @amorim-rc
+/src/css/                  @amorim-rc
+/src/theme/                @amorim-rc
+
+# Documentação do site                              (futuro: @org/conteudo)
+/docs/                     @amorim-rc
+*.md                       @amorim-rc
+
+# Configuração de build do Docusaurus               (futuro: @org/engenharia)
+/docusaurus.config.ts      @amorim-rc
+/sidebars.ts               @amorim-rc
+/package.json              @amorim-rc
+/tsconfig.json             @amorim-rc
+
+# Infra, CI/CD e automações                          (futuro: @org/engenharia)
+/.github/                  @amorim-rc
+
+# Licença e citação acadêmica                        (mantido no owner geral)
+/LICENSE                   @amorim-rc
+/CITATION.cff              @amorim-rc
