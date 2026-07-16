@@ -1892,8 +1892,8 @@
   "lei": "CP",
   "artigo": "Art. 161, §1º, I",
   "crime": "Usurpação de águas",
-  "pena_min": 12,
-  "pena_max": 60,
+  "pena_min": 1,
+  "pena_max": 6,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -1901,15 +1901,15 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "Desviar ou represar águas alheias em proveito próprio ou de outrem"
+  "obs": "Detenção de 1 a 6 meses e multa (mesma pena do caput do art. 161). Desviar ou represar águas alheias (§1º, I)"
  },
  {
   "id": 125,
   "lei": "CP",
   "artigo": "Art. 161, §1º, II",
   "crime": "Esbulho possessório",
-  "pena_min": 12,
-  "pena_max": 60,
+  "pena_min": 1,
+  "pena_max": 6,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -1917,7 +1917,7 @@
   "tentativa": "Sim",
   "violencia": "Sim",
   "grave_ameaca": "Sim",
-  "obs": "Invadir terreno/edifício alheio com violência, ameaça ou concurso de 2+ pessoas para o fim de esbulho possessório"
+  "obs": "Detenção de 1 a 6 meses e multa (mesma pena do caput). Invadir terreno/edifício alheio para esbulho possessório (§1º, II)"
  },
  {
   "id": 126,
@@ -2133,7 +2133,7 @@
   "artigo": "Art. 180, §3º",
   "crime": "Receptação culposa",
   "pena_min": 1,
-  "pena_max": 6,
+  "pena_max": 12,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -2141,7 +2141,7 @@
   "tentativa": "Não",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "1-6 meses detenção ou multa. Adquirir/receber coisa que por sua natureza/desproporção de preço/condição de quem oferece deve presumir-se obtida por meio criminoso"
+  "obs": "Detenção de 1 mês a 1 ano, ou multa, ou ambas (art. 180, §3º)"
  },
  {
   "id": 140,
@@ -3076,8 +3076,8 @@
   "lei": "CP",
   "artigo": "Art. 253",
   "crime": "Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxico sem autorização",
-  "pena_min": 12,
-  "pena_max": 36,
+  "pena_min": 6,
+  "pena_max": 24,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -3085,7 +3085,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "1-3 anos detenção + multa"
+  "obs": "Detenção de 6 meses a 2 anos e multa (art. 253)"
  },
  {
   "id": 199,
@@ -4163,9 +4163,9 @@
   "id": 266,
   "lei": "CP",
   "artigo": "Art. 316, §2º",
-  "crime": "Excesso de exação",
-  "pena_min": 36,
-  "pena_max": 96,
+  "crime": "Excesso de exação — desviar em proveito próprio o que recebeu indevidamente",
+  "pena_min": 24,
+  "pena_max": 144,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -4173,7 +4173,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "3-8 anos reclusão + multa. Exigir tributo ou contribuição social indevida ou empregar na cobrança meio vexatório ou gravoso que a lei não autoriza"
+  "obs": "Reclusão de 2 a 12 anos e multa (art. 316, §2º)"
  },
  {
   "id": 267,
@@ -4757,7 +4757,7 @@
   "artigo": "Art. 353",
   "crime": "Arrebatamento de preso",
   "pena_min": 12,
-  "pena_max": 36,
+  "pena_max": 48,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -4765,7 +4765,7 @@
   "tentativa": "Sim",
   "violencia": "Sim",
   "grave_ameaca": "Sim",
-  "obs": "1-3 anos reclusão"
+  "obs": "Reclusão de 1 a 4 anos, além da pena da violência (art. 353)"
  },
  {
   "id": 304,
@@ -4996,7 +4996,7 @@
   "lei": "CP",
   "artigo": "Art. 359-I",
   "crime": "Atentado à soberania",
-  "pena_min": 24,
+  "pena_min": 36,
   "pena_max": 96,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
@@ -5005,7 +5005,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "2-8 anos reclusão. Negociar com governo/grupo estrangeiro submetendo soberania nacional a poder estrangeiro"
+  "obs": "Reclusão de 3 a 8 anos. Negociar com governo estrangeiro para provocar atos de guerra (art. 359-I)"
  },
  {
   "id": 319,
@@ -5013,7 +5013,7 @@
   "artigo": "Art. 359-J",
   "crime": "Atentado à integridade nacional",
   "pena_min": 24,
-  "pena_max": 96,
+  "pena_max": 72,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -5021,7 +5021,7 @@
   "tentativa": "Sim",
   "violencia": "Sim",
   "grave_ameaca": "Sim",
-  "obs": "2-8 anos reclusão. Tentar desmembrar parte do território nacional. +1/3 se com emprego de violência/ameaça"
+  "obs": "Reclusão de 2 a 6 anos, além da pena da violência (art. 359-J)"
  },
  {
   "id": 320,
@@ -5109,7 +5109,7 @@
   "artigo": "Art. 359-R",
   "crime": "Sabotagem",
   "pena_min": 24,
-  "pena_max": 72,
+  "pena_max": 96,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -5117,7 +5117,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "2-6 anos reclusão. Destruir ou inutilizar meios de comunicação/transporte/instalações/serviços destinados à defesa nacional"
+  "obs": "Reclusão de 2 a 8 anos. Destruir/inutilizar meios de comunicação, transporte ou serviços essenciais (art. 359-R)"
  },
  {
   "id": 326,
@@ -5313,9 +5313,9 @@
   "id": 337,
   "lei": "Lei 11.343/06",
   "artigo": "Art. 39",
-  "crime": "Condução de embarcação ou aeronave sob efeito de drogas",
-  "pena_min": 24,
-  "pena_max": 48,
+  "crime": "Conduzir embarcação ou aeronave após consumo de drogas, expondo a dano potencial",
+  "pena_min": 6,
+  "pena_max": 36,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -5323,7 +5323,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "2-4 anos detenção + 200-400 dias-multa"
+  "obs": "Detenção de 6 meses a 3 anos (art. 39, Lei 11.343/06)"
  },
  {
   "id": 338,
@@ -8174,22 +8174,6 @@
   "obs": "10 dias a 2 meses prisão simples ou multa. Deixar em liberdade animal perigoso"
  },
  {
-  "id": 518,
-  "lei": "LCP (DL 3.688/41)",
-  "artigo": "Art. 32",
-  "crime": "Disparar arma de fogo em lugar habitado (subsidiário ao Estatuto do Desarmamento)",
-  "pena_min": 0,
-  "pena_max": 3,
-  "tipo_pena": "Prisão simples",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Não",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "REVOGADA TACITAMENTE pelo Art. 15 da Lei 10.826/03 (Estatuto do Desarmamento). Mantida para referência histórica"
- },
- {
   "id": 519,
   "lei": "LCP (DL 3.688/41)",
   "artigo": "Art. 34",
@@ -8577,9 +8561,9 @@
   "id": 543,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 289",
-  "crime": "Inscrição fraudulenta de eleitor",
+  "crime": "Inscrever-se fraudulentamente como eleitor",
   "pena_min": 0,
-  "pena_max": 5,
+  "pena_max": 60,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -8587,13 +8571,13 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "Até 5 anos detenção + multa"
+  "obs": "Reclusão até 5 anos e 5 a 15 dias-multa (art. 289)"
  },
  {
   "id": 544,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 290",
-  "crime": "Induzir alguém a se inscrever eleitoralmente com infração de qualquer norma",
+  "crime": "Induzir alguém a inscrever-se fraudulentamente como eleitor",
   "pena_min": 0,
   "pena_max": 24,
   "tipo_pena": "Detenção",
@@ -8603,15 +8587,15 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "Até 2 anos detenção + multa"
+  "obs": "Reclusão até 2 anos e 15 a 30 dias-multa (art. 290)"
  },
  {
   "id": 545,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 298",
-  "crime": "Preso que se alistar como eleitor",
-  "pena_min": 6,
-  "pena_max": 36,
+  "crime": "Prender ou deter eleitor, mesário, fiscal ou candidato (art. 236)",
+  "pena_min": 0,
+  "pena_max": 48,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -8619,7 +8603,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "6 meses a 3 anos detenção + multa"
+  "obs": "Reclusão até 4 anos (art. 298)"
  },
  {
   "id": 546,
@@ -8641,9 +8625,9 @@
   "id": 547,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 300",
-  "crime": "Valer-se de empregados na propaganda eleitoral",
+  "crime": "Servidor público valer-se da autoridade para coagir alguém a votar",
   "pena_min": 0,
-  "pena_max": 24,
+  "pena_max": 6,
   "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -8651,13 +8635,13 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "Até 2 anos detenção + multa"
+  "obs": "Detenção até 6 meses e 60 a 100 dias-multa (art. 300)"
  },
  {
   "id": 548,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 301",
-  "crime": "Usar de violência/grave ameaça para coagir alguém a votar ou deixar de votar em determinado candidato",
+  "crime": "Usar de violência ou grave ameaça para coagir alguém a votar",
   "pena_min": 0,
   "pena_max": 48,
   "tipo_pena": "Reclusão",
@@ -8667,13 +8651,13 @@
   "tentativa": "Sim",
   "violencia": "Sim",
   "grave_ameaca": "Sim",
-  "obs": "Até 4 anos reclusão + multa"
+  "obs": "Reclusão até 4 anos e 5 a 15 dias-multa (art. 301)"
  },
  {
   "id": 549,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 309",
-  "crime": "Votar ou tentar votar mais de uma vez, ou em lugar de outrem (falsidade ideológica eleitoral)",
+  "crime": "Votar ou tentar votar mais de uma vez, ou em lugar de outrem",
   "pena_min": 0,
   "pena_max": 36,
   "tipo_pena": "Reclusão",
@@ -8683,15 +8667,15 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "Até 3 anos reclusão + multa"
+  "obs": "Reclusão até 3 anos (art. 309)"
  },
  {
   "id": 550,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 347",
-  "crime": "Violar/adulterar/destruir boletim de apuração ou alterar resultado do pleito",
-  "pena_min": 24,
-  "pena_max": 60,
+  "crime": "Recusar cumprimento ou obediência a diligências, ordens ou instruções da Justiça Eleitoral",
+  "pena_min": 3,
+  "pena_max": 12,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -8699,7 +8683,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "2-5 anos reclusão"
+  "obs": "Detenção de 3 meses a 1 ano e 10 a 20 dias-multa (art. 347)"
  },
  {
   "id": 551,
@@ -9454,22 +9438,6 @@
   "obs": "1-4 anos reclusão + multa. Pena majorada pela Lei 14.155/21 (antes era 3m-1a detenção). §2º: +1/3 a 2/3 se resultar prejuízo econômico. §3º: se obtiver conteúdo privado/dados: 2-5 anos. §4º: se comercializar dados: +1/3 a 2/3"
  },
  {
-  "id": 600,
-  "lei": "CP",
-  "artigo": "Art. 359-N",
-  "crime": "Tentativa de depor por meio de violência ou grave ameaça o governo legitimamente constituído",
-  "pena_min": 48,
-  "pena_max": 144,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Sim",
-  "obs": "4-12 anos reclusão. Lei 14.197/21. Crime contra o Estado Democrático de Direito"
- },
- {
   "id": 601,
   "lei": "CP",
   "artigo": "Art. 359-O",
@@ -9500,22 +9468,6 @@
   "violencia": "Sim",
   "grave_ameaca": "Sim",
   "obs": "3-6 anos reclusão + multa. Lei 14.197/21"
- },
- {
-  "id": 603,
-  "lei": "CP",
-  "artigo": "Art. 359-R",
-  "crime": "Sabotagem (destruir/inutilizar meios de comunicação com o fim de impedir a defesa nacional ou operações militares)",
-  "pena_min": 24,
-  "pena_max": 96,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Não",
-  "obs": "2-8 anos reclusão. Lei 14.197/21. Em tempo de guerra: reclusão 3-15 anos"
  },
  {
   "id": 604,
@@ -10062,22 +10014,6 @@
   "obs": "3-8 anos reclusão + multa"
  },
  {
-  "id": 652,
-  "lei": "CP",
-  "artigo": "Art. 180, §3º",
-  "crime": "Receptação culposa",
-  "pena_min": 1,
-  "pena_max": 12,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Culposo",
-  "tentativa": "Não",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1 mês a 1 ano detenção + multa. Quem deveria presumir obtida por meio criminoso pela natureza/desproporção de preço/condição do ofertante"
- },
- {
   "id": 653,
   "lei": "CP",
   "artigo": "Art. 180, §4º",
@@ -10300,22 +10236,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "2-12 anos reclusão + multa"
- },
- {
-  "id": 667,
-  "lei": "CP",
-  "artigo": "Art. 312, §2º",
-  "crime": "Peculato culposo (concorre culposamente para o crime de outrem)",
-  "pena_min": 3,
-  "pena_max": 36,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Culposo",
-  "tentativa": "Não",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "3 meses a 3 anos detenção. §3º: se reparar o dano antes da sentença irrecorrível, extingue a punibilidade; após: reduz metade"
  },
  {
   "id": 668,
@@ -10958,22 +10878,6 @@
   "obs": "4-8 anos reclusão + multa"
  },
  {
-  "id": 708,
-  "lei": "CP",
-  "artigo": "Art. 151, §1º, I",
-  "crime": "Sonegação ou destruição de correspondência (funcionário público)",
-  "pena_min": 6,
-  "pena_max": 24,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "6 meses a 2 anos detenção + multa. Crime funcional"
- },
- {
   "id": 709,
   "lei": "CP",
   "artigo": "Art. 151, §1º, II",
@@ -11198,54 +11102,6 @@
   "obs": "1-4 anos reclusão. Absorveu a Lei 2.252/54. §1º: se o crime constitui prática de tortura, tráfico de drogas ou crimes hediondos, aplica-se o disposto no Art. 1º da Lei 8.072/90. §2º: aumento de 1/3 se menor de 14 anos"
  },
  {
-  "id": 724,
-  "lei": "CP",
-  "artigo": "Art. 359-I",
-  "crime": "Espionagem — entregar/permitir acesso a documento/informação classificada como sigilosa a governo/agente estrangeiro",
-  "pena_min": 36,
-  "pena_max": 144,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "3-12 anos reclusão. Lei 14.197/21 (revogou Lei 7.170/83). Crime contra a soberania nacional"
- },
- {
-  "id": 725,
-  "lei": "CP",
-  "artigo": "Art. 359-J",
-  "crime": "Espionagem com violência — obter documento/informação sigilosa com emprego de violência ou grave ameaça",
-  "pena_min": 48,
-  "pena_max": 180,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Sim",
-  "obs": "4-15 anos reclusão. Lei 14.197/21"
- },
- {
-  "id": 726,
-  "lei": "CP",
-  "artigo": "Art. 359-K",
-  "crime": "Espionagem — permitir acesso indevido a informação sigilosa (forma culposa do funcionário público)",
-  "pena_min": 12,
-  "pena_max": 48,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Culposo",
-  "tentativa": "Não",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1-4 anos detenção. Lei 14.197/21. Forma culposa de espionagem"
- },
- {
   "id": 727,
   "lei": "Lei 9.504/97",
   "artigo": "Art. 33, §4º",
@@ -11276,22 +11132,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "6 meses a 1 ano detenção + multa"
- },
- {
-  "id": 729,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 309",
-  "crime": "Votar ou tentar votar mais de uma vez ou em lugar de outrem",
-  "pena_min": 12,
-  "pena_max": 36,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1-3 anos reclusão"
  },
  {
   "id": 730,
@@ -11948,22 +11788,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "6 meses a 2 anos detenção + multa. Médico/dentista/farmacêutico que prescreve em desacordo com a lei culposamente"
- },
- {
-  "id": 773,
-  "lei": "Lei 11.343/06",
-  "artigo": "Art. 39",
-  "crime": "Conduzir embarcação ou aeronave após consumo de drogas, expondo risco a terceiros",
-  "pena_min": 6,
-  "pena_max": 36,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "6 meses a 3 anos detenção + multa + suspensão de habilitação"
  },
  {
   "id": 774,
@@ -13102,22 +12926,6 @@
   "obs": "3-8 anos reclusão + multa"
  },
  {
-  "id": 845,
-  "lei": "CP",
-  "artigo": "Art. 316, §2º",
-  "crime": "Excesso de exação — desviar o que recebeu indevidamente em proveito próprio ou alheio",
-  "pena_min": 24,
-  "pena_max": 144,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "2-12 anos reclusão + multa. Desvio do valor exigido indevidamente"
- },
- {
   "id": 846,
   "lei": "CP",
   "artigo": "Art. 299, §único",
@@ -13534,22 +13342,6 @@
   "obs": "6 meses a 2 anos reclusão + multa. Lei 14.188/21. Se não constituir crime mais grave"
  },
  {
-  "id": 877,
-  "lei": "CP",
-  "artigo": "Art. 150, §1º",
-  "crime": "Violação de domicílio com aumento — se durante a noite ou em lugar ermo, com emprego de violência ou arma, ou por duas ou mais pessoas",
-  "pena_min": 12,
-  "pena_max": 24,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Não",
-  "obs": "1-2 anos detenção + multa. Aumento de 1/3"
- },
- {
   "id": 878,
   "lei": "CP",
   "artigo": "Art. 150, §2º",
@@ -13566,38 +13358,6 @@
   "obs": "1-3 anos detenção + multa"
  },
  {
-  "id": 879,
-  "lei": "CP",
-  "artigo": "Art. 161, §1º, I",
-  "crime": "Esbulho possessório (invadir terreno ou edifício alheio com violência à pessoa ou grave ameaça, ou mediante concurso de mais de 2 pessoas)",
-  "pena_min": 12,
-  "pena_max": 24,
-  "tipo_pena": "Detenção",
-  "acao": "Privada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Sim",
-  "obs": "1-2 anos detenção + multa"
- },
- {
-  "id": 880,
-  "lei": "CP",
-  "artigo": "Art. 161, §1º, II",
-  "crime": "Turbação de posse (turbar a posse alheia mediante violência à pessoa ou grave ameaça)",
-  "pena_min": 12,
-  "pena_max": 24,
-  "tipo_pena": "Detenção",
-  "acao": "Privada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Sim",
-  "obs": "1-2 anos detenção + multa"
- },
- {
   "id": 882,
   "lei": "CP",
   "artigo": "Art. 154-A, §3º",
@@ -13612,22 +13372,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "2-5 anos reclusão + multa"
- },
- {
-  "id": 883,
-  "lei": "CP",
-  "artigo": "Art. 154-A, §4º",
-  "crime": "Invasão de dispositivo informático qualificada — se divulgação/comercialização/transmissão do conteúdo obtido",
-  "pena_min": 24,
-  "pena_max": 60,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "2-5 anos reclusão + multa. Aumento de 1/3 a 2/3"
  },
  {
   "id": 884,
@@ -13980,22 +13724,6 @@
   "violencia": "Sim",
   "grave_ameaca": "Não",
   "obs": "1-3 anos reclusão + multa. §único: culposo: 3m-1a detenção"
- },
- {
-  "id": 909,
-  "lei": "CP",
-  "artigo": "Art. 253",
-  "crime": "Fabrico/fornecimento/aquisição/posse/transporte de substância/engenho explosivo/gás tóxico ou asfixiante sem autorização ou em desacordo com determinação legal",
-  "pena_min": 6,
-  "pena_max": 24,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "6 meses a 2 anos detenção + multa"
  },
  {
   "id": 910,
@@ -14782,38 +14510,6 @@
   "obs": "1-6 meses detenção + multa. §1º: se crime punido com detenção: 15d-3m detenção. §2º: isento de pena se ascendente/descendente/cônjuge/irmão"
  },
  {
-  "id": 962,
-  "lei": "CP",
-  "artigo": "Art. 349",
-  "crime": "Favorecimento real (prestar ao criminoso, fora dos casos de co-autoria ou receptação, auxílio destinado a tornar seguro o proveito do crime)",
-  "pena_min": 12,
-  "pena_max": 60,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1-5 anos reclusão + multa"
- },
- {
-  "id": 963,
-  "lei": "CP",
-  "artigo": "Art. 349-A",
-  "crime": "Ingresso de aparelho telefônico/comunicação/componente em estabelecimento prisional (ingressar, promover, intermediar, auxiliar ou facilitar)",
-  "pena_min": 36,
-  "pena_max": 72,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "3-6 meses detenção"
- },
- {
   "id": 964,
   "lei": "CP",
   "artigo": "Art. 350",
@@ -14860,22 +14556,6 @@
   "violencia": "Sim",
   "grave_ameaca": "Não",
   "obs": "3 meses a 1 ano detenção. Sem prejuízo da pena de violência"
- },
- {
-  "id": 967,
-  "lei": "CP",
-  "artigo": "Art. 353",
-  "crime": "Arrebatamento de preso (arrebatar preso a fim de maltratá-lo, do poder de quem o tenha sob custódia ou guarda)",
-  "pena_min": 12,
-  "pena_max": 48,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Não",
-  "obs": "1-4 anos reclusão. Sem prejuízo da pena de violência"
  },
  {
   "id": 968,
@@ -15534,38 +15214,6 @@
   "obs": "15 dias a 3 meses prisão simples + multa"
  },
  {
-  "id": 1009,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 289",
-  "crime": "Inscrever-se fraudulentamente como eleitor",
-  "pena_min": 12,
-  "pena_max": 60,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1-5 anos reclusão + multa"
- },
- {
-  "id": 1010,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 290",
-  "crime": "Induzir alguém a inscrever-se fraudulentamente como eleitor",
-  "pena_min": 12,
-  "pena_max": 60,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1-5 anos reclusão + multa"
- },
- {
   "id": 1011,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 291",
@@ -15614,22 +15262,6 @@
   "obs": "6 meses a 2 anos detenção + multa"
  },
  {
-  "id": 1014,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 298",
-  "crime": "Prender ou deter eleitor no período do dia da eleição até 48h após encerramento (sem flagrante/sentença penal condenatória)",
-  "pena_min": 1,
-  "pena_max": 6,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Não",
-  "obs": "1-6 meses detenção + multa"
- },
- {
   "id": 1015,
   "lei": "CE (Lei 4.737/65)",
   "artigo": "Art. 299",
@@ -15644,38 +15276,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "1-4 anos reclusão + multa. Crime bilateral (corrompido + corruptor)"
- },
- {
-  "id": 1016,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 300",
-  "crime": "Coação eleitoral (valer-se de autoridade de cargo ou emprego para coagir alguém a votar ou não votar em determinado candidato/partido)",
-  "pena_min": 12,
-  "pena_max": 48,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Sim",
-  "obs": "1-4 anos reclusão + multa"
- },
- {
-  "id": 1017,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 301",
-  "crime": "Uso de violência/grave ameaça para coagir alguém a votar ou não votar em determinado candidato/partido",
-  "pena_min": 12,
-  "pena_max": 48,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Sim",
-  "obs": "1-4 anos reclusão + multa + sem prejuízo das penas de violência"
  },
  {
   "id": 1018,
@@ -15852,22 +15452,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "1-6 meses detenção + multa"
- },
- {
-  "id": 1029,
-  "lei": "CE (Lei 4.737/65)",
-  "artigo": "Art. 347",
-  "crime": "Recusar alguém cumprimento/obediência a diligências, ordens ou instruções da Justiça Eleitoral",
-  "pena_min": 3,
-  "pena_max": 12,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "3 meses a 1 ano detenção + multa"
  },
  {
   "id": 1030,
