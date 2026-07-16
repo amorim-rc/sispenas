@@ -45,6 +45,29 @@ Ajustes que a heurística não acerta devem ir em `CORRECOES`, dentro de
 `scripts/transform_data.py` (chaveado por `id`), e **não** no JSON gerado.
 Exemplo presente: Art. 227 do CP (a multa só incide na hipótese do §3º).
 
+## Fluxo de release
+
+Cada versão publica **duas coisas a partir do mesmo arquivo**: a Release no GitHub (para
+colaboradores) e a release note no site em `/release-notes` (para quem acompanha). O fluxo
+garante que as duas sempre saem juntas:
+
+1. **Toda mudança substantiva atualiza a release note da versão corrente** em
+   `release-notes/AAAA-MM-DD-vX.Y.Z.md` — crie o arquivo para a versão em desenvolvimento e
+   vá acrescentando o que cada mudança fez. (Correções de dado, novos tipos/benefícios,
+   fixes e ajustes de interface contam; refactor interno trivial não precisa.)
+
+2. **Versione segundo o [roadmap](docs/roadmap.md#como-este-roadmap-usa-o-versionamento-semântico):**
+   correção → `1.1.Z`; funcionalidade nova compatível → `1.Y.0`; quebra de contrato → `X.0.0`.
+
+3. **O PR que fecha a versão sobe `version` em `package.json` e `CITATION.cff`.** Ao mergear
+   na `main`, o workflow `.github/workflows/release.yml` detecta a versão nova, **cria a tag
+   `vX.Y.Z` e publica a Release** com o texto da release note — automaticamente. **Não faça
+   `git push` de tag manual**; a tag é criada pelo workflow.
+
+Resumo: *escreveu a release note + subiu a versão + mergeou → release publicada, no GitHub e
+no site.* Para republicar uma Release malformada, apague-a e rode o workflow "Publicar
+Release" à mão (Actions → Run workflow).
+
 ## Convenções do catálogo
 
 **Estas regras valem para qualquer origem de atualização — IA, scraper do DOU ou

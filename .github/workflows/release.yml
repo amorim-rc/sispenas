@@ -1,17 +1,20 @@
 name: Publicar Release
 
-# Ao empurrar uma tag vX.Y.Z, cria (ou atualiza) a Release do GitHub usando o
-# texto autoral de release-notes/*-vX.Y.Z.md — em vez das notas automáticas do
-# GitHub, que só resumem títulos de PR. Assim `git push --tags` já publica a
-# release rica, sem passo manual.
+# Publicação AUTOMÁTICA: quando um push na main traz uma versão nova em
+# package.json (para a qual ainda não há Release), cria a Release do GitHub e a
+# tag vX.Y.Z usando o texto de release-notes/*-vX.Y.Z.md.
 #
-# Requer, para o push da tag disparar isto, que o autor tenha permissão de
-# workflow no token (mesmo caso do ci.yml).
+# Assim, fechar uma versão é só: subir a versão no package.json + escrever a
+# release note, e mergear. Sem `git push origin vX.Y.Z` manual (que já bagunçou
+# uma vez). É idempotente: se a Release da versão corrente já existe, não faz nada.
+#
+# `workflow_dispatch` permite re-rodar à mão (ex.: depois de apagar uma Release
+# malformada) sem precisar de um novo commit.
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,22 +22,32 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Montar corpo e título a partir de release-notes/
+      - name: Versão, release note e título
         id: rn
         run: |
-          TAG="${GITHUB_REF_NAME}"                     # ex.: v1.1.1
-          # Os arquivos usam a versão com PONTOS (release-notes/2026-07-16-v1.1.1.md),
-          # não o slug com traços do frontmatter — casar pela tag como está.
+          VERSION="$(node -p "require('./package.json').version")"
+          TAG="v${VERSION}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "existe=1" >> "$GITHUB_OUTPUT"
+            echo "Release $TAG já existe — nada a publicar."
+            exit 0
+          fi
+          echo "existe=0" >> "$GITHUB_OUTPUT"
+          # Os arquivos usam a versão com PONTOS (release-notes/...-v1.1.1.md).
           FILE="$(ls release-notes/*-"${TAG}".md 2>/dev/null | head -1)"
           if [ -z "$FILE" ]; then
-            echo "Sem release note para $TAG (procurado *-$TAG.md). Usando corpo mínimo."
-            printf 'Release %s.\n' "$TAG" > corpo.md
             echo "titulo=$TAG" >> "$GITHUB_OUTPUT"
+            printf 'Release %s.\n' "$TAG" > corpo.md
+            echo "::warning::Sem release note para $TAG (release-notes/*-$TAG.md) — corpo mínimo."
           else
-            # Título: campo `title:` do frontmatter (removidas aspas, se houver).
             TITULO="$(sed -n 's/^title:[[:space:]]*//p' "$FILE" | head -1 | sed 's/^"//; s/"$//')"
             echo "titulo=${TITULO:-$TAG}" >> "$GITHUB_OUTPUT"
             # Corpo: tudo após o frontmatter (2º `---`), sem o marcador de truncamento.
@@ -42,14 +55,10 @@ jobs:
               | sed '/{\/\* truncate \*\/}/d' > corpo.md
           fi
 
-      - name: Criar/atualizar a Release
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Criar a Release (cria também a tag no commit atual)
+        if: steps.rn.outputs.existe == '0'
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          TITULO="${{ steps.rn.outputs.titulo }}"
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release edit "$TAG" --title "$TITULO" --notes-file corpo.md
-          else
-            gh release create "$TAG" --title "$TITULO" --notes-file corpo.md
-          fi
+          gh release create "${{ steps.rn.outputs.tag }}" \
+            --target "${GITHUB_SHA}" \
+            --title "${{ steps.rn.outputs.titulo }}" \
+            --notes-file corpo.md
