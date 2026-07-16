@@ -26,10 +26,11 @@ jobs:
         id: rn
         run: |
           TAG="${GITHUB_REF_NAME}"                     # ex.: v1.1.1
-          SLUG="${TAG//./-}"                           # ex.: v1-1-1
-          FILE="$(ls release-notes/*-"${SLUG}".md 2>/dev/null | head -1)"
+          # Os arquivos usam a versão com PONTOS (release-notes/2026-07-16-v1.1.1.md),
+          # não o slug com traços do frontmatter — casar pela tag como está.
+          FILE="$(ls release-notes/*-"${TAG}".md 2>/dev/null | head -1)"
           if [ -z "$FILE" ]; then
-            echo "Sem release note para $TAG (procurado *-$SLUG.md). Usando corpo mínimo."
+            echo "Sem release note para $TAG (procurado *-$TAG.md). Usando corpo mínimo."
             printf 'Release %s.\n' "$TAG" > corpo.md
             echo "titulo=$TAG" >> "$GITHUB_OUTPUT"
           else
