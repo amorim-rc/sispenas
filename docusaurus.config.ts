@@ -39,6 +39,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
+          admonitions: true,
         },
         // O plugin de blog serve de changelog: cada release é um post datado em
         // release-notes/. É a mesma abordagem que o próprio Docusaurus usa para

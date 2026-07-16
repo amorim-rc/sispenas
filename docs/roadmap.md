@@ -24,14 +24,14 @@ O SISPENAS tem dois públicos que dependem de estabilidade, e são eles que defi
 | **MENOR** (`1.Y.0`) | Funcionalidade nova mantendo compatibilidade: **acrescentar** campo ao JSON, nova tela, novo benefício, nova rota. | A v1.1.0 acrescentou `resultado_morte` e a Busca por benefício sem remover nada. |
 | **CORREÇÃO** (`1.1.Z`) | Correção sem funcionalidade nova: erro de dosimetria, dado errado no catálogo, defeito de interface. | Corrigir a pena de um artigo; ajustar contraste. |
 
-:::note Correção de dado é `CORREÇÃO`, não `MENOR`
+:::note[Correção de dado é `CORREÇÃO`, não `MENOR`]
 Resolver uma das 42 contradições do catálogo muda o resultado de uma consulta — mas
 corrige um erro, não acrescenta capacidade. Vai em `1.1.Z`. Já **acrescentar um campo**
 que não existia (`resultado_morte`) é `MENOR`, ainda que motivado por um erro: consumidores
 do JSON ganham informação sem perder nenhuma.
 :::
 
-:::info Quebra de *invariante* também é MAIOR
+:::info[Quebra de *invariante* também é MAIOR]
 O que quebra compatibilidade não é só remover campo — é **desmentir uma premissa** de quem
 consome os dados. Hoje vale um invariante não escrito: *todo registro do catálogo é
 direito vigente*. Quem calcula estatísticas conta com isso.
@@ -66,8 +66,8 @@ SISPENAS de ser citável como referência.
       conflitantes. Enquanto não resolvidas, ambas as versões são exibidas e sinalizadas.
       O bloco `Art. 154-A` mostra o padrão do problema: os registros 881-884 duplicam
       os 88-91 com penas do caput. Uma delas (o §2º) já foi resolvida.
-- [ ] **Deduplicar os 355 registros repetidos** (862 dispositivos distintos em 1.040
-      registros) — decidir entre fundir ou distinguir por incisos.
+- [ ] **Deduplicar os 353 registros repetidos** (862 dispositivos distintos em 1.039
+      tipos) — decidir entre fundir ou distinguir por incisos.
 - [ ] Revisão jurídica individual dos campos `derivado_auto` (multa, menor potencial)
 - [ ] Revisar `resultado_morte` nos casos ambíguos (ex.: `CP, Art. 158, §3º`, que remete a
       lesão grave **e** morte no mesmo registro)
@@ -91,7 +91,7 @@ está no catálogo** (cobertura). Hoje não sabemos nem uma nem outra — sabemo
 | Indicador | Valor |
 |---|---|
 | Tipos penais catalogados | 1.039 |
-| Dispositivos distintos | 861 |
+| Dispositivos distintos | 862 |
 | Diplomas cobertos | 58 |
 | Contradições internas | 42 |
 | Campos ainda `derivado_auto` | maioria |
@@ -107,7 +107,7 @@ Amostragem de cobertura, para dimensionar a lacuna:
 | CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
 | Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
 
-:::warning O número 1.040 não é uma medida de cobertura
+:::warning[O número 1.039 não é uma medida de cobertura]
 Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
 sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
 a primeira tarefa — sem ele, "cobertura" é opinião.
@@ -187,7 +187,7 @@ acervo, e lá o fluxo diário. **Construir esta conferência é o que torna o cr
 possível**: sem uma linha de base conferida, não há como saber se o que ele propõe é
 novidade ou erro.
 
-:::note Ordem de execução
+:::note[Ordem de execução]
 As fases 1 e 2 vêm **antes** do crawler (v2.0.0). Automatizar a atualização de um catálogo
 que não se sabe correto multiplica o erro em vez de corrigi-lo.
 :::
@@ -260,6 +260,43 @@ GitHub Actions (cron semanal)
       direito vigente, e um crawler que acompanha o DOU **precisa** representar revogações
       sem apagar o registro (senão a URL `?tipo=N` morre)
 - [ ] `fonte` e `atualizado_em` por registro, para rastrear a origem da informação
+
+### Acervo histórico — tipos penais revogados
+
+O mesmo mecanismo que permite ao crawler registrar revogações permite algo maior:
+**preservar o que já foi crime no Brasil**. É um acervo grande e de valor próprio para a
+pesquisa — a pergunta "o que deixou de ser crime, e quando?" é tão relevante quanto "o
+que é crime hoje", e hoje nenhuma ferramenta a responde de forma estruturada.
+
+Casos que o catálogo já encontra: o adultério (art. 240, revogado pela Lei 11.106/2005),
+a sedução (art. 217) e o rapto (arts. 219 a 222), revogados pela Lei 12.015/2009; a Lei de
+Imprensa (5.250/67), não recepcionada (ADPF 130); a Lei de Segurança Nacional (7.170/83),
+substituída pela Lei 14.197/21; o ECA art. 233, revogado pela Lei de Tortura — removido na
+v1.1.0 justamente por não haver onde registrá-lo.
+
+- [ ] Aba própria: **Pesquisa ▸ Acervo histórico**, separada da busca vigente para que
+      nenhum tipo revogado contamine estatística de direito vigente
+- [ ] Campos `revogado_em`, `revogado_por` (norma) e `vigente_desde`; um tipo revogado
+      **nunca é apagado** — muda de estado, preserva o `id` e a URL
+- [ ] Padrão de exibição: aviso de revogação no topo, com a norma revogadora e o link
+      para o tipo que a sucedeu, quando houver
+- [ ] Linha do tempo da descriminalização: o que saiu do Código, quando e por qual norma
+- [ ] **Ultratividade da lei penal mais benéfica** (art. 5º, XL, CF; art. 2º, par. único,
+      CP): a lei revogada continua a reger o fato praticado sob sua vigência quando for
+      mais benéfica — daí o acervo não ser mera curiosidade, e sim direito aplicável
+- [ ] Fonte: textos revogados do Planalto (que mantém as redações anteriores) — a mesma
+      extração da [Conferência integral](#conferência-integral-do-catálogo)
+
+:::note[Por que o acervo é v2.0.0, e não antes]
+Registrar revogados exige `revogado_em` e a separação vigente × revogado no consumo dos
+dados. É exatamente a quebra de invariante que já move o crawler para MAIOR — fazer as
+duas coisas na mesma versão é o desenho certo: uma paga o custo de compatibilidade da
+outra.
+
+Antes disso, na v1.1.Z, a [Conferência integral](#conferência-integral-do-catálogo) tem
+de distinguir *ausente por lacuna* de *ausente por revogação* — dos 54 artigos faltantes
+na Parte Especial do CP, boa parte é revogada, e essa triagem é a matéria-prima do acervo.
+:::
 
 ---
 

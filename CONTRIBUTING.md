@@ -130,6 +130,15 @@ Escreva a faixa em `obs` na unidade natural ("15 dias a 6 meses", "1-5 anos"); o
 transformador converte para meses e preserva o rótulo. `pena_min`/`pena_max` (em meses)
 são o fallback. Regra: `pena_min_meses <= pena_max_meses`.
 
+**Tipo sem pena mínima.** Nem todo tipo comina os dois extremos. Vários só têm teto —
+"detenção **até** 3 meses" (art. 32 da LCP; arts. 289, 290, 300, 301 e 309 do Código
+Eleitoral). Nesses casos `pena_min` é `0` e o rótulo sai como "até 3 meses". **Zero na
+mínima não é "sem pena"**: o tipo é punível, apenas não tem piso cominado — e, por isso,
+os benefícios que dependem da pena mínima (ANPP, suspensão condicional do processo)
+são-lhe os mais favoráveis possíveis. Não preencha a mínima com um chute.
+
+Não confunda com o **tipo sem pena privativa** (C2), que não tem prisão alguma.
+
 ### C8. Perdão judicial é lista curada, não inferência
 
 Não existe perdão judicial genérico e ele não se estende por analogia (art. 107, IX, CP).

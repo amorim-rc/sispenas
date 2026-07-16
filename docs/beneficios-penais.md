@@ -35,7 +35,7 @@ exata ou presumida:
 | **Pena concreta** | Depende da pena fixada na sentença | Exige **pena concreta presumida** |
 | **Independe da pena** | Não há patamar (detração, remição) | Alcança todo o catálogo |
 
-:::note Pressuposto metodológico da busca reversa
+:::note[Pressuposto metodológico da busca reversa]
 A pena concreta **não é atributo do tipo penal**. Para varrer o catálogo, o sistema presume
 uma pena concreta — por padrão, a **pena mínima cominada** (hipótese do réu condenado no
 mínimo legal, a mais favorável e a de uso corrente na pesquisa empírica). A base pode ser

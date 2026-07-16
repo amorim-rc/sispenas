@@ -197,6 +197,27 @@ console.log('\n3. Casos-âncora de direito penal');
     ok(status('perdao-judicial', furto) === 'incabivel', 'furto simples: perdão judicial incabível');
   }
 
+  // Tipo penal SEM PENA MÍNIMA cominada (só teto): "detenção até 3 meses".
+  // Zero na mínima não é "sem pena" — o tipo é punível e os benefícios que
+  // dependem da mínima lhe são os mais favoráveis possíveis.
+  const semMinima = crimes.filter((c) => c.pena_max_meses > 0 && c.pena_min_meses === 0);
+  ok(semMinima.length > 0, `${semMinima.length} tipos sem pena mínima cominada (só teto) no catálogo`);
+  if (semMinima.length > 0) {
+    ok(
+      semMinima.every((c) => status('sursis-processual', c) !== 'incabivel'),
+      'tipos sem pena mínima: suspensão condicional do processo nunca incabível por quantum',
+    );
+    ok(
+      semMinima.every((c) => /^até /.test(c.pena_faixa_rotulo)),
+      'tipos sem pena mínima exibem a faixa como "até X", não como "0 a X"',
+    );
+  }
+  // A pena mínima nunca supera a máxima — inconsistência que inverteria os limiares.
+  ok(
+    crimes.every((c) => c.pena_min_meses <= c.pena_max_meses),
+    'pena mínima <= pena máxima em todo o catálogo',
+  );
+
   // Resultado morte vem do catálogo, não de um interruptor global.
   const latrocinio = crimes.find((c) => /latroc[íi]nio/i.test(c.crime));
   if (latrocinio) {

@@ -84,7 +84,7 @@ prestação de serviços e medida educativa. Ele é tipo penal, fica no catálog
 `sancoes_nao_privativas` e recebe `tem_pena_privativa: false`, que o mantém fora das
 estatísticas de alcance (que se medem por patamar de pena) sem excluí-lo da consulta.
 
-:::note Causas de aumento voltarão
+:::note[Causas de aumento voltarão]
 As majorantes removidas não são lixo — são parte da 3ª fase da dosimetria (art. 68, CP).
 Elas voltam como **entidade própria** na v3.0.0, não como tipos penais.
 :::
@@ -119,11 +119,11 @@ A cada regeneração, o script emite `static/data/qualidade.json` com o estado d
 | Tipos penais | 1.039 | Total no arquivo |
 | Com pena privativa | 1.038 | Entram nas estatísticas de alcance |
 | Sem pena privativa | 1 | Art. 28 da Lei 11.343/06 (sanções próprias) |
-| **Dispositivos distintos** | **861** | O catálogo tem menos dispositivos do que registros |
+| **Dispositivos distintos** | **862** | O catálogo tem menos dispositivos do que registros |
 | Registros duplicados | 353 | Mesmo `lei + artigo` em mais de um registro |
 | **Duplicatas divergentes** | **42** | Cópias do mesmo dispositivo **com penas ou hediondez diferentes** |
 
-:::danger Contradições internas
+:::danger[Contradições internas]
 42 dispositivos aparecem duas vezes **com dados conflitantes**. Exemplos:
 
 - `CP, Art. 127` — 16 a 64 meses **vs.** 24 a 120 meses

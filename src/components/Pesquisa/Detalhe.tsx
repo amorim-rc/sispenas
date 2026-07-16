@@ -11,8 +11,16 @@ const STATUS_LABEL: Record<string, string> = {
   incabivel: 'Incabível',
 };
 
-function meses(v: number): string {
-  if (v <= 0) return '0 meses (sem pena)';
+/**
+ * Rótulo de um valor de pena em meses.
+ *
+ * `rotuloZero` existe porque zero significa coisas diferentes em cada controle:
+ * na pena MÍNIMA quer dizer "sem mínimo cominado" — vários tipos só têm teto
+ * ("detenção até 3 meses", art. 32 da LCP; arts. 289 e 309 do Código Eleitoral)
+ * e continuam sendo puníveis. Chamá-los de "sem pena" seria falso.
+ */
+function meses(v: number, rotuloZero = 'sem pena'): string {
+  if (v <= 0) return `0 meses (${rotuloZero})`;
   if (v < 1) return `${Math.round(v * 30)} dias`;
   const m = Math.round(v);
   const base = `${m} ${m === 1 ? 'mês' : 'meses'}`;
@@ -140,7 +148,7 @@ export default function Detalhe({
           </p>
           <label className={styles.sliderRow}>
             <span>
-              Pena mínima: <strong>{meses(cen.penaMin)}</strong>
+              Pena mínima: <strong>{meses(cen.penaMin, 'sem mínimo cominado')}</strong>
               <Ajuda texto="Limite MÍNIMO de pena previsto na lei (pena em abstrato). Reduzi-lo até 0 permite testar a tese da ausência de pena mínima e ver quais benefícios processuais passam a caber (ex.: suspensão condicional do processo, ANPP)." />
             </span>
             <input type="range" min={0} max={480} step={1} value={cen.penaMin}
@@ -148,7 +156,7 @@ export default function Detalhe({
           </label>
           <label className={styles.sliderRow}>
             <span>
-              Pena máxima: <strong>{meses(cen.penaMax)}</strong>
+              Pena máxima: <strong>{meses(cen.penaMax, 'sem teto cominado')}</strong>
               <Ajuda texto="Limite MÁXIMO de pena previsto na lei (pena em abstrato). Define, por exemplo, se o crime é de menor potencial ofensivo (até 2 anos) e o prazo de prescrição." />
             </span>
             <input type="range" min={0} max={600} step={1} value={cen.penaMax}
