@@ -6,9 +6,10 @@ import type {Cenario, Crime} from './types';
  * Cenário inicial de um tipo penal: penas cominadas + características objetivas
  * lidas do catálogo, com o réu presumido primário e de bons antecedentes.
  *
- * `resultadoMorte` inicia em `false` porque o catálogo ainda não registra, tipo a
- * tipo, a presença do resultado morte — é uma escolha do usuário na simulação
- * (ver docs/roadmap.md, v1.1.0).
+ * Tudo o que é atributo do TIPO (hediondez, violência, culpa, resultado morte,
+ * previsão de perdão judicial) vem do catálogo; o que é atributo do RÉU ou do
+ * caso concreto (primariedade, confissão, reparação) recebe um padrão neutro e
+ * é ajustável na simulação.
  */
 export function cenarioFromCrime(c: Crime): Cenario {
   return {
@@ -18,7 +19,7 @@ export function cenarioFromCrime(c: Crime): Cenario {
     primario: true,
     reincidenteEspecifico: false,
     hediondo: c.hediondo === 'Sim',
-    resultadoMorte: false,
+    resultadoMorte: c.resultado_morte === true,
     violencia: c.violencia === 'Sim',
     graveAmeaca: c.grave_ameaca === 'Sim',
     confessou: false,
@@ -26,5 +27,6 @@ export function cenarioFromCrime(c: Crime): Cenario {
     bonsAntecedentes: true,
     culposo: c.elemento === 'Culposo',
     admiteTentativa: c.tentativa === 'Sim',
+    perdaoJudicialPrevisto: c.perdao_judicial_previsto === true,
   };
 }

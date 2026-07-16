@@ -41,7 +41,13 @@ export const BASE_AJUDA: Record<BasePenaConcreta, string> = {
     'de um patamar de pena específico sobre o catálogo inteiro.',
 };
 
-/** Circunstâncias do réu aplicadas a TODO o catálogo durante a varredura. */
+/**
+ * Circunstâncias do RÉU aplicadas a todo o catálogo durante a varredura.
+ *
+ * Só entram aqui atributos que não pertencem ao tipo penal. Hediondez,
+ * violência, culpa, resultado morte e previsão de perdão judicial são lidos do
+ * catálogo, tipo a tipo — não são alavancas globais.
+ */
 export interface CenarioReverso {
   base: BasePenaConcreta;
   /** Pena concreta em meses, usada quando `base === 'fixa'`. */
@@ -50,11 +56,6 @@ export interface CenarioReverso {
   confessou: boolean;
   reparouDano: boolean;
   bonsAntecedentes: boolean;
-  /**
-   * O catálogo não registra, tipo a tipo, a presença do resultado morte — daí ser
-   * um controle explícito da simulação, e não um dado lido do tipo penal.
-   */
-  resultadoMorte: boolean;
 }
 
 export function cenarioReversoPadrao(): CenarioReverso {
@@ -65,8 +66,19 @@ export function cenarioReversoPadrao(): CenarioReverso {
     confessou: false,
     reparouDano: false,
     bonsAntecedentes: true,
-    resultadoMorte: false,
   };
+}
+
+/**
+ * Tipos penais que entram nas estatísticas de alcance.
+ *
+ * O catálogo carrega 22 registros sem pena própria (notas de referência,
+ * agravantes, causas de aumento). Com pena zero eles satisfariam todo teto de
+ * pena e seriam contados como "cabíveis" — inflando o alcance de benefícios
+ * como a transação penal.
+ */
+export function crimesAvaliaveis(crimes: Crime[]): Crime[] {
+  return crimes.filter((c) => c.avaliavel !== false);
 }
 
 function penaConcretaPresumida(c: Crime, rev: CenarioReverso): number {
@@ -80,7 +92,13 @@ function penaConcretaPresumida(c: Crime, rev: CenarioReverso): number {
   }
 }
 
-/** Cenário de um tipo penal sob as circunstâncias globais da busca reversa. */
+/**
+ * Cenário de um tipo penal sob as circunstâncias globais da busca reversa.
+ *
+ * `cenarioFromCrime` já traz os atributos do tipo (inclusive `resultadoMorte` e
+ * `perdaoJudicialPrevisto`, lidos do catálogo); aqui só se sobrepõem a pena
+ * concreta presumida e as circunstâncias do réu.
+ */
 export function cenarioParaCrime(c: Crime, rev: CenarioReverso): Cenario {
   return {
     ...cenarioFromCrime(c),
@@ -90,7 +108,6 @@ export function cenarioParaCrime(c: Crime, rev: CenarioReverso): Cenario {
     confessou: rev.confessou,
     reparouDano: rev.reparouDano,
     bonsAntecedentes: rev.bonsAntecedentes,
-    resultadoMorte: rev.resultadoMorte,
   };
 }
 

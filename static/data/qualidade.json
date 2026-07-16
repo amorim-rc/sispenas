@@ -1,0 +1,745 @@
+{
+ "total_registros": 1061,
+ "avaliaveis": 1039,
+ "nao_avaliaveis": 22,
+ "dispositivos_distintos": 878,
+ "registros_duplicados": 365,
+ "duplicatas_divergentes": 48,
+ "resultado_morte": 74,
+ "perdao_judicial_previsto": 13,
+ "multa_ambigua": 0,
+ "perdao_judicial_sem_tipo": [
+  "CP, Art. 140, §1º — injúria (retorsão imediata / provocação reprovável)",
+  "CP, Art. 176, par. único — outras fraudes",
+  "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente)",
+  "CTB, Art. 291 c/c CP 121, §5º — homicídio culposo na direção (perdão admitido pelo STJ)"
+ ],
+ "contradicoes": [
+  {
+   "chave": "cp|art. 127",
+   "ids": [
+    33,
+    34
+   ],
+   "crime": "Aborto qualificado — resultado lesão grave na gestante",
+   "penas_meses": [
+    "16.0-64.0",
+    "24.0-120.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 141, iii",
+   "ids": [
+    69,
+    851
+   ],
+   "crime": "Crimes contra honra com aumento de 1/3 (meios que facilitam divulgação)",
+   "penas_meses": [
+    "0.0-0.0",
+    "1.0-8.0"
+   ],
+   "hediondo": [
+    "Não",
+    "—"
+   ]
+  },
+  {
+   "chave": "cp|art. 141, §2º",
+   "ids": [
+    70,
+    853
+   ],
+   "crime": "Crimes contra honra de funcionário público (aumento de 1/3, ação pública condici",
+   "penas_meses": [
+    "0.0-0.0",
+    "1.0-8.0"
+   ],
+   "hediondo": [
+    "Não",
+    "—"
+   ]
+  },
+  {
+   "chave": "cp|art. 150, §1º",
+   "ids": [
+    81,
+    877
+   ],
+   "crime": "Violação de domicílio qualificada (noturna/com violência/armas/2+ pessoas)",
+   "penas_meses": [
+    "12.0-24.0",
+    "6.0-24.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 151, §1º, i",
+   "ids": [
+    83,
+    708
+   ],
+   "crime": "Sonegação ou destruição de correspondência",
+   "penas_meses": [
+    "1.0-6.0",
+    "6.0-24.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 154-a, §2º",
+   "ids": [
+    89,
+    881
+   ],
+   "crime": "Invasão de dispositivo informático com aumento de 1/3 a 2/3 (prejuízo econômico)",
+   "penas_meses": [
+    "12.0-48.0",
+    "16.0-80.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 154-a, §4º",
+   "ids": [
+    91,
+    883
+   ],
+   "crime": "Invasão de dispositivo com divulgação/comercialização/transmissão de dados obtid",
+   "penas_meses": [
+    "24.0-60.0",
+    "36.0-96.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 155, §4º-b",
+   "ids": [
+    98,
+    630
+   ],
+   "crime": "Furto mediante fraude eletrônica",
+   "penas_meses": [
+    "48.0-120.0",
+    "48.0-96.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, i",
+   "ids": [
+    102,
+    634
+   ],
+   "crime": "Roubo majorado por arma de fogo (aumento de 2/3)",
+   "penas_meses": [
+    "48.0-120.0",
+    "80.0-200.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, ii",
+   "ids": [
+    103,
+    635
+   ],
+   "crime": "Roubo majorado por concurso de 2+ pessoas (aumento de 1/3 a 1/2)",
+   "penas_meses": [
+    "48.0-120.0",
+    "64.0-180.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, iii",
+   "ids": [
+    104,
+    636
+   ],
+   "crime": "Roubo majorado — vítima em serviço de transporte de valores (aumento de 1/3 a 1/",
+   "penas_meses": [
+    "48.0-120.0",
+    "64.0-180.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, iv",
+   "ids": [
+    105,
+    637
+   ],
+   "crime": "Roubo majorado por veículo automotor levado para outro estado/exterior (aumento ",
+   "penas_meses": [
+    "48.0-120.0",
+    "64.0-180.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, v",
+   "ids": [
+    106,
+    638
+   ],
+   "crime": "Roubo majorado com restrição de liberdade da vítima (aumento de 1/3 a 1/2)",
+   "penas_meses": [
+    "48.0-120.0",
+    "64.0-180.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, vi",
+   "ids": [
+    107,
+    639
+   ],
+   "crime": "Roubo majorado com emprego de arma branca (aumento de 1/3 a 1/2)",
+   "penas_meses": [
+    "48.0-120.0",
+    "64.0-180.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º, vii",
+   "ids": [
+    108,
+    640
+   ],
+   "crime": "Roubo majorado com emprego de explosivo/artefato análogo (aumento de 1/3 a 1/2)",
+   "penas_meses": [
+    "48.0-120.0",
+    "64.0-180.0"
+   ],
+   "hediondo": [
+    "Não",
+    "Sim"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º-a, i",
+   "ids": [
+    109,
+    641
+   ],
+   "crime": "Roubo com emprego de arma de fogo de uso restrito/proibido (aumento de 2/3)",
+   "penas_meses": [
+    "48.0-120.0",
+    "80.0-200.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 157, §2º-b",
+   "ids": [
+    110,
+    643
+   ],
+   "crime": "Roubo majorado contra sistema bancário/transporte coletivo (aumento de 2/3)",
+   "penas_meses": [
+    "48.0-120.0",
+    "80.0-200.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 161, §1º, i",
+   "ids": [
+    124,
+    879
+   ],
+   "crime": "Usurpação de águas",
+   "penas_meses": [
+    "12.0-24.0",
+    "12.0-60.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 161, §1º, ii",
+   "ids": [
+    125,
+    880
+   ],
+   "crime": "Esbulho possessório",
+   "penas_meses": [
+    "12.0-24.0",
+    "12.0-60.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 171, §5º",
+   "ids": [
+    136,
+    887
+   ],
+   "crime": "Estelionato contra idoso ou vulnerável (aumento de 1/3 ao dobro)",
+   "penas_meses": [
+    "0.0-0.0",
+    "16.0-120.0"
+   ],
+   "hediondo": [
+    "Não",
+    "—"
+   ]
+  },
+  {
+   "chave": "cp|art. 180, §3º",
+   "ids": [
+    139,
+    652
+   ],
+   "crime": "Receptação culposa",
+   "penas_meses": [
+    "1.0-12.0",
+    "1.0-6.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 218",
+   "ids": [
+    151,
+    895
+   ],
+   "crime": "Corrupção de menores (para atos sexuais)",
+   "penas_meses": [
+    "24.0-60.0"
+   ],
+   "hediondo": [
+    "Não",
+    "Sim"
+   ]
+  },
+  {
+   "chave": "cp|art. 218-a",
+   "ids": [
+    152,
+    896
+   ],
+   "crime": "Satisfação de lascívia mediante presença de criança ou adolescente",
+   "penas_meses": [
+    "24.0-48.0"
+   ],
+   "hediondo": [
+    "Não",
+    "Sim"
+   ]
+  },
+  {
+   "chave": "cp|art. 253",
+   "ids": [
+    198,
+    909
+   ],
+   "crime": "Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxic",
+   "penas_meses": [
+    "12.0-36.0",
+    "6.0-24.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 258",
+   "ids": [
+    203,
+    912
+   ],
+   "crime": "Formas qualificadas de crimes de perigo comum (resultado lesão grave ou morte)",
+   "penas_meses": [
+    "0.0-0.0",
+    "48.0-180.0"
+   ],
+   "hediondo": [
+    "Não",
+    "—"
+   ]
+  },
+  {
+   "chave": "cp|art. 267",
+   "ids": [
+    212,
+    914
+   ],
+   "crime": "Epidemia (dolosa)",
+   "penas_meses": [
+    "120.0-180.0"
+   ],
+   "hediondo": [
+    "Não",
+    "Sim"
+   ]
+  },
+  {
+   "chave": "cp|art. 270",
+   "ids": [
+    216,
+    918
+   ],
+   "crime": "Envenenamento de água potável ou de substância alimentícia ou medicinal",
+   "penas_meses": [
+    "120.0-180.0"
+   ],
+   "hediondo": [
+    "Não",
+    "Sim"
+   ]
+  },
+  {
+   "chave": "cp|art. 312, §2º",
+   "ids": [
+    259,
+    667
+   ],
+   "crime": "Peculato culposo",
+   "penas_meses": [
+    "3.0-12.0",
+    "3.0-36.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 316, §2º",
+   "ids": [
+    266,
+    845
+   ],
+   "crime": "Excesso de exação",
+   "penas_meses": [
+    "24.0-144.0",
+    "36.0-96.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 349",
+   "ids": [
+    299,
+    962
+   ],
+   "crime": "Favorecimento real",
+   "penas_meses": [
+    "1.0-6.0",
+    "12.0-60.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 349-a",
+   "ids": [
+    300,
+    963
+   ],
+   "crime": "Ingresso de aparelho telefônico de comunicação móvel em estabelecimento prisiona",
+   "penas_meses": [
+    "3.0-12.0",
+    "3.0-6.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 353",
+   "ids": [
+    303,
+    967
+   ],
+   "crime": "Arrebatamento de preso",
+   "penas_meses": [
+    "12.0-36.0",
+    "12.0-48.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 359-i",
+   "ids": [
+    318,
+    724
+   ],
+   "crime": "Atentado à soberania",
+   "penas_meses": [
+    "24.0-96.0",
+    "36.0-144.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 359-j",
+   "ids": [
+    319,
+    725
+   ],
+   "crime": "Atentado à integridade nacional",
+   "penas_meses": [
+    "24.0-96.0",
+    "48.0-180.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 359-k",
+   "ids": [
+    320,
+    726
+   ],
+   "crime": "Espionagem",
+   "penas_meses": [
+    "12.0-48.0",
+    "36.0-144.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 359-n",
+   "ids": [
+    323,
+    600
+   ],
+   "crime": "Interrupção do processo eleitoral",
+   "penas_meses": [
+    "36.0-72.0",
+    "48.0-144.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "cp|art. 359-r",
+   "ids": [
+    325,
+    603
+   ],
+   "crime": "Sabotagem",
+   "penas_meses": [
+    "24.0-72.0",
+    "24.0-96.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "lei 11.343/06|art. 39",
+   "ids": [
+    337,
+    773
+   ],
+   "crime": "Condução de embarcação ou aeronave sob efeito de drogas",
+   "penas_meses": [
+    "24.0-48.0",
+    "6.0-36.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "lei 9.455/97|art. 1º, §3º",
+   "ids": [
+    399,
+    400
+   ],
+   "crime": "Tortura qualificada pelo resultado lesão grave",
+   "penas_meses": [
+    "48.0-120.0",
+    "96.0-192.0"
+   ],
+   "hediondo": [
+    "Sim"
+   ]
+  },
+  {
+   "chave": "eca|art. 233",
+   "ids": [
+    463,
+    742
+   ],
+   "crime": "Submeter criança/adolescente sob sua guarda a tortura (revogado — aplicar Lei 9.",
+   "penas_meses": [
+    "0.0-0.0",
+    "12.0-60.0"
+   ],
+   "hediondo": [
+    "Sim",
+    "—"
+   ]
+  },
+  {
+   "chave": "lcp (dl 3.688/41)|art. 32",
+   "ids": [
+    518,
+    996
+   ],
+   "crime": "Disparar arma de fogo em lugar habitado (subsidiário ao Estatuto do Desarmamento",
+   "penas_meses": [
+    "0.0-3.0",
+    "0.5-3.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 289",
+   "ids": [
+    543,
+    1009
+   ],
+   "crime": "Inscrição fraudulenta de eleitor",
+   "penas_meses": [
+    "0.0-5.0",
+    "12.0-60.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 290",
+   "ids": [
+    544,
+    1010
+   ],
+   "crime": "Induzir alguém a se inscrever eleitoralmente com infração de qualquer norma",
+   "penas_meses": [
+    "0.0-24.0",
+    "12.0-60.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 298",
+   "ids": [
+    545,
+    1014
+   ],
+   "crime": "Preso que se alistar como eleitor",
+   "penas_meses": [
+    "1.0-6.0",
+    "6.0-36.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 300",
+   "ids": [
+    547,
+    1016
+   ],
+   "crime": "Valer-se de empregados na propaganda eleitoral",
+   "penas_meses": [
+    "0.0-24.0",
+    "12.0-48.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 301",
+   "ids": [
+    548,
+    1017
+   ],
+   "crime": "Usar de violência/grave ameaça para coagir alguém a votar ou deixar de votar em ",
+   "penas_meses": [
+    "0.0-48.0",
+    "12.0-48.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 309",
+   "ids": [
+    549,
+    729
+   ],
+   "crime": "Votar ou tentar votar mais de uma vez, ou em lugar de outrem (falsidade ideológi",
+   "penas_meses": [
+    "0.0-36.0",
+    "12.0-36.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  },
+  {
+   "chave": "ce (lei 4.737/65)|art. 347",
+   "ids": [
+    550,
+    1029
+   ],
+   "crime": "Violar/adulterar/destruir boletim de apuração ou alterar resultado do pleito",
+   "penas_meses": [
+    "24.0-60.0",
+    "3.0-12.0"
+   ],
+   "hediondo": [
+    "Não"
+   ]
+  }
+ ]
+}

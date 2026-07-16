@@ -11,16 +11,23 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type {Crime} from '../src/lib/types';
 import {CATALOGO, avaliarBeneficio, valoresPadrao} from '../src/lib/beneficios';
-import {avaliarCatalogo, cenarioReversoPadrao, contar} from '../src/lib/beneficios/reverso';
+import {
+  avaliarCatalogo,
+  cenarioReversoPadrao,
+  contar,
+  crimesAvaliaveis,
+} from '../src/lib/beneficios/reverso';
 import {cenarioFromCrime} from '../src/lib/cenario';
 
 // Lê o MESMO arquivo servido à aplicação (static/data/crimes.json), e não a fonte
 // bruta em data/crimes.json: os campos derivados (pena_min_meses, pena_privativa,
 // infracao_menor_potencial…) só existem após scripts/transform_data.py.
 // Executado a partir da raiz do projeto (ver script "verificar" no package.json).
-const crimes: Crime[] = JSON.parse(
+const todos: Crime[] = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), 'static', 'data', 'crimes.json'), 'utf-8'),
 );
+// Estatísticas de alcance só sobre tipos penais com pena própria.
+const crimes = crimesAvaliaveis(todos);
 
 let falhas = 0;
 const ok = (cond: boolean, msg: string) => {
@@ -39,7 +46,46 @@ function achar(lei: RegExp, artigo: RegExp, nome?: RegExp): Crime | undefined {
   );
 }
 
-console.log(`\nCatálogo: ${crimes.length} tipos penais, ${CATALOGO.length} benefícios.\n`);
+console.log(
+  `\nCatálogo: ${crimes.length} tipos penais avaliáveis de ${todos.length} registros ` +
+    `(${todos.length - crimes.length} sem pena própria), ${CATALOGO.length} benefícios.\n`,
+);
+
+// ── 0. Integridade dos campos que o motor lê do catálogo ────────────────
+console.log('0. Integração catálogo → motor de benefícios');
+{
+  const campos: (keyof Crime)[] = [
+    'avaliavel',
+    'resultado_morte',
+    'perdao_judicial_previsto',
+    'pena_min_meses',
+    'pena_max_meses',
+  ];
+  for (const campo of campos) {
+    ok(
+      todos.every((c) => c[campo] !== undefined),
+      `todo registro tem o campo "${String(campo)}" (rode scripts/transform_data.py se falhar)`,
+    );
+  }
+  ok(
+    crimes.every((c) => c.pena_max_meses > 0 || c.pena_min_meses > 0),
+    'todo tipo avaliável tem pena cominada > 0',
+  );
+  ok(
+    todos.filter((c) => !c.avaliavel).every((c) => !!c.motivo_nao_avaliavel),
+    'todo registro não avaliável declara o motivo da exclusão',
+  );
+  // O perdão judicial não se estende por analogia: o campo é curado, não inferido.
+  ok(
+    todos.some((c) => c.perdao_judicial_previsto) &&
+      todos.filter((c) => c.perdao_judicial_previsto).length < todos.length * 0.1,
+    `perdão judicial previsto em ${todos.filter((c) => c.perdao_judicial_previsto).length} tipos (lista curada, não inferida do elemento culposo)`,
+  );
+  ok(
+    !todos.some((c) => c.perdao_judicial_previsto && /^CPM/.test(c.lei)),
+    'nenhum tipo do CPM recebeu perdão judicial por casamento indevido de "^CP"',
+  );
+}
 
 // ── 1. Invariantes estruturais do registro ──────────────────────────────
 console.log('1. Integridade do registro de benefícios');
@@ -120,6 +166,39 @@ console.log('\n3. Casos-âncora de direito penal');
     );
   } else {
     console.log('  — furto simples não localizado no catálogo (verificação pulada)');
+  }
+
+  // Perdão judicial: só onde a lei prevê expressamente (art. 107, IX, CP).
+  const homCulposo = achar(/^CP$/i, /^Art\. 121, §3º/, /homic[íi]dio culposo/i);
+  if (homCulposo) {
+    ok(
+      homCulposo.perdao_judicial_previsto === true,
+      'homicídio culposo (art. 121, §3º): perdão judicial previsto (art. 121, §5º)',
+    );
+    ok(
+      status('perdao-judicial', homCulposo) === 'condicional',
+      'homicídio culposo: perdão judicial condicional',
+    );
+  }
+  if (furto) {
+    ok(
+      furto.perdao_judicial_previsto === false,
+      'furto simples: SEM previsão de perdão judicial (não se estende por analogia)',
+    );
+    ok(status('perdao-judicial', furto) === 'incabivel', 'furto simples: perdão judicial incabível');
+  }
+
+  // Resultado morte vem do catálogo, não de um interruptor global.
+  const latrocinio = crimes.find((c) => /latroc[íi]nio/i.test(c.crime));
+  if (latrocinio) {
+    ok(latrocinio.resultado_morte === true, 'latrocínio: resultado_morte marcado no catálogo');
+  }
+  const omissaoSocorro = achar(/^CP$/i, /^Art\. 135$/, /omiss[ãa]o de socorro/i);
+  if (omissaoSocorro) {
+    ok(
+      omissaoSocorro.resultado_morte === false,
+      'omissão de socorro (caput): resultado_morte NÃO marcado (obs cita a morte de outro parágrafo)',
+    );
   }
 
   // Vedações por hediondez atingem apenas hediondos.

@@ -284,31 +284,34 @@ export const perdaoJudicial: BeneficioDef = {
   ],
   parametros: [
     {
-      id: 'somenteCulposos',
-      rotulo: 'Restringir às hipóteses culposas',
+      id: 'exigePrevisaoExpressa',
+      rotulo: 'Exigir previsão legal expressa para o tipo',
       tipo: 'booleano',
       padrao: true,
       ajuda:
-        'As hipóteses típicas de perdão judicial concentram-se em crimes culposos ' +
-        '(homicídio culposo, art. 121, §5º; lesão culposa, art. 129, §8º; receptação ' +
-        'culposa, art. 180, §5º). Desmarcar considera também as hipóteses dolosas previstas ' +
-        'em lei (ex.: art. 168-A, §3º; art. 4º, Lei 12.850/13).',
-      fundamento: 'Art. 121, §5º; art. 129, §8º; art. 180, §5º, CP',
+        'O perdão judicial não é genérico e não se estende por analogia: só incide onde a ' +
+        'lei o prevê. O catálogo marca esses dispositivos um a um (campo ' +
+        '`perdao_judicial_previsto`). Desmarcar simula uma reforma que o generalizasse aos ' +
+        'crimes culposos.',
+      fundamento: 'Art. 107, IX, CP',
     },
   ],
   avaliar: (c, p) => {
-    const restrito = bool(p, 'somenteCulposos');
-    const compativel = !restrito || c.culposo;
+    // Sem previsão expressa não há perdão judicial. Com a exigência desativada,
+    // a simulação o estende aos culposos — a hipótese de generalização mais
+    // discutida na doutrina.
+    const compativel = bool(p, 'exigePrevisaoExpressa') ? c.perdaoJudicialPrevisto : c.culposo;
     return {
       status: compativel ? 'condicional' : 'incabivel',
       resumo: compativel
-        ? 'Depende de previsão legal expressa para o tipo penal.'
-        : 'Restrito às hipóteses culposas previstas em lei.',
+        ? 'Há previsão legal expressa; depende da circunstância eleita pela lei.'
+        : bool(p, 'exigePrevisaoExpressa')
+          ? 'Sem previsão legal expressa de perdão judicial para o tipo.'
+          : 'Crime doloso — fora da hipótese de generalização simulada.',
       detalhes: [
         'Só é cabível nas hipóteses expressamente previstas em lei — não existe perdão judicial genérico.',
-        'Hipóteses clássicas: homicídio culposo (art. 121, §5º), lesão corporal culposa (art. 129, §8º) e receptação culposa (art. 180, §5º).',
+        'Hipóteses catalogadas: homicídio culposo (art. 121, §5º), lesão corporal culposa (art. 129), receptação culposa (art. 180, §5º), apropriação indébita previdenciária (art. 168-A, §3º), sonegação de contribuição previdenciária (art. 337-A, §2º), parto suposto (art. 242), subtração de incapazes (art. 249), colaboração premiada (art. 4º, Lei 12.850/13) e proteção a testemunhas (art. 13, Lei 9.807/99).',
         'Súmula 18, STJ: a sentença concessiva é declaratória da extinção da punibilidade e não subsiste qualquer efeito condenatório.',
-        'O catálogo ainda não registra, tipo a tipo, a previsão expressa de perdão judicial — ver roadmap (v1.1.0).',
       ],
     };
   },

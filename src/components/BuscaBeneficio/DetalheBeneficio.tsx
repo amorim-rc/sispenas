@@ -17,6 +17,7 @@ import {
   avaliarCatalogo,
   cenarioReversoPadrao,
   contar,
+  crimesAvaliaveis,
   type BasePenaConcreta,
   type CenarioReverso,
 } from '@site/src/lib/beneficios/reverso';
@@ -105,7 +106,11 @@ function ControleParametro({
   );
 }
 
-export default function DetalheBeneficio({def, crimes}: {def: BeneficioDef; crimes: Crime[]}) {
+export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDef; crimes: Crime[]}) {
+  // Estatísticas de alcance só sobre tipos penais com pena própria.
+  const crimes = useMemo(() => crimesAvaliaveis(todos), [todos]);
+  const excluidos = todos.length - crimes.length;
+
   const [params, setParams] = useState<Parametros>(() => valoresPadrao(def));
   const [rev, setRev] = useState<CenarioReverso>(cenarioReversoPadrao);
   const [filtroStatus, setFiltroStatus] = useState<Status | 'todos'>('cabivel');
@@ -344,16 +349,12 @@ export default function DetalheBeneficio({def, crimes}: {def: BeneficioDef; crim
               />{' '}
               Bons antecedentes
             </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={rev.resultadoMorte}
-                onChange={(e) => setRevCampo('resultadoMorte', e.target.checked)}
-              />{' '}
-              Resultado morte
-              <Ajuda texto="O catálogo ainda não registra, tipo a tipo, a presença do resultado morte. Marcar trata TODOS os tipos hediondos como qualificados pelo resultado morte — útil para medir o efeito das frações mais severas do art. 112 da LEP." />
-            </label>
           </div>
+          <p className={styles.secaoDica}>
+            Hediondez, violência, grave ameaça, culpa, resultado morte e previsão de perdão
+            judicial <strong>não aparecem aqui</strong>: são atributos de cada tipo penal, lidos
+            do catálogo dispositivo a dispositivo.
+          </p>
         </div>
       </div>
 
@@ -361,7 +362,17 @@ export default function DetalheBeneficio({def, crimes}: {def: BeneficioDef; crim
       <div className={styles.secao}>
         <h3 className={styles.secaoTitulo}>
           Tipos penais afetados
-          <span className={styles.totalTipos}>{crimes.length} tipos no catálogo</span>
+          <span className={styles.totalTipos}>
+            {crimes.length} tipos avaliáveis
+            {excluidos > 0 && (
+              <>
+                {' '}
+                <Ajuda
+                  texto={`${excluidos} dos ${todos.length} registros do catálogo não são tipos penais com pena própria (notas de referência, agravantes e causas de aumento) e ficam fora das estatísticas: com pena zero, satisfariam qualquer teto de pena e seriam contados como cabíveis.`}
+                />
+              </>
+            )}
+          </span>
         </h3>
 
         <div className={styles.resumoGrid}>

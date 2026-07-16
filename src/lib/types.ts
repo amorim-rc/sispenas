@@ -39,6 +39,27 @@ export interface Crime {
   pena_faixa_rotulo: string;
   /** True se a unidade veio do parser do texto (senão, fallback em meses). */
   pena_unidade_derivada: boolean;
+  // ── Qualidade e integração com o motor de benefícios ──
+  /**
+   * O registro é um tipo penal com pena própria? O catálogo também carrega
+   * notas de referência e causas de aumento sem pena, que não podem entrar no
+   * denominador das estatísticas de alcance dos benefícios.
+   */
+  avaliavel: boolean;
+  motivo_nao_avaliavel: string;
+  /** Qualificado pelo resultado morte (art. 112, VI e VIII, LEP). */
+  resultado_morte: boolean;
+  /** True se `resultado_morte` veio da heurística, não de revisão manual. */
+  resultado_morte_derivado: boolean;
+  /** Há previsão legal expressa de perdão judicial para o tipo (art. 107, IX, CP). */
+  perdao_judicial_previsto: boolean;
+  /** Identidade do dispositivo (lei + artigo), para detectar repetições. */
+  chave_dispositivo: string;
+  /** O mesmo dispositivo aparece em mais de um registro. */
+  duplicata: boolean;
+  /** As cópias do dispositivo divergem em pena ou hediondez — contradição a revisar. */
+  duplicata_divergente: boolean;
+  duplicata_ids: number[];
 }
 
 /** Parâmetros do caso concreto usados no cálculo dinâmico de benefícios. */
@@ -62,4 +83,10 @@ export interface Cenario {
   culposo: boolean;
   /** Tipo admite tentativa: pressuposto da desistência voluntária/arrependimento eficaz. */
   admiteTentativa: boolean;
+  /**
+   * Há previsão legal expressa de perdão judicial para o tipo. Não se infere do
+   * elemento culposo: o perdão só existe onde a lei o prevê e não se estende por
+   * analogia (art. 107, IX, CP).
+   */
+  perdaoJudicialPrevisto: boolean;
 }

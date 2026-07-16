@@ -33,14 +33,6 @@ function Hero() {
           Ferramenta aberta para estudar o impacto dos benefícios penais sobre os tipos
           penais brasileiros — e o efeito de alterações de pena sobre o acesso a eles.
         </p>
-        <div className={styles.heroCtas}>
-          <Link className={styles.ctaPrimary} to="/pesquisa/tipos">
-            Busca por tipo penal
-          </Link>
-          <Link className={styles.ctaSecondary} to="/pesquisa/beneficios">
-            Busca por benefício
-          </Link>
-        </div>
       </div>
     </header>
   );
@@ -49,25 +41,25 @@ function Hero() {
 function Caminhos() {
   return (
     <section className={styles.caminhos}>
-      <div className={`container ${styles.caminhosGrid}`}>
-        <Link className={styles.caminhoCard} to="/pesquisa/tipos">
-          <span className={styles.caminhoTag}>Fluxo direto</span>
-          <h3>Busca por tipo penal</h3>
-          <p>
-            Parte de um crime e mostra a dosimetria padrão e todos os benefícios penais
-            cabíveis. Ajuste a pena cominada ou a pena concreta e veja, em tempo real,
-            quais benefícios entram ou saem.
-          </p>
-        </Link>
-        <Link className={styles.caminhoCard} to="/pesquisa/beneficios">
-          <span className={styles.caminhoTag}>Fluxo inverso</span>
-          <h3>Busca por benefício</h3>
-          <p>
-            Parte de um benefício, expõe seus requisitos, vedações e patamares legais — e
-            lista os tipos penais que ele alcança. Altere qualquer atributo do benefício e
-            veja o catálogo inteiro se reorganizar.
-          </p>
-        </Link>
+      <div className="container">
+        <div className={styles.caminhosGrid}>
+          <Link className={styles.caminhoCard} to="/pesquisa/tipos">
+            <h3>Busca por tipo penal</h3>
+            <p>
+              Parte de um crime e mostra a dosimetria padrão e todos os benefícios penais
+              cabíveis. Ajuste a pena cominada ou a pena concreta e veja, em tempo real,
+              quais benefícios entram ou saem.
+            </p>
+          </Link>
+          <Link className={styles.caminhoCard} to="/pesquisa/beneficios">
+            <h3>Busca por benefício</h3>
+            <p>
+              Parte de um benefício, expõe seus requisitos, vedações e patamares legais — e
+              lista os tipos penais que ele alcança. Altere qualquer atributo do benefício e
+              veja o catálogo inteiro se reorganizar.
+            </p>
+          </Link>
+        </div>
       </div>
     </section>
   );

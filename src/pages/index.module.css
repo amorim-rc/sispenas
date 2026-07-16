@@ -22,54 +22,19 @@
   opacity: 0.85;
 }
 
-.heroCtas {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 1.75rem;
-}
-.ctaPrimary,
-.ctaSecondary {
-  display: inline-block;
-  padding: 0.7rem 1.4rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.98rem;
-  transition: transform 0.12s ease, background 0.12s ease;
-}
-.ctaPrimary {
-  background: #fff;
-  color: var(--ifm-color-primary-darkest);
-}
-.ctaSecondary {
-  background: rgba(255, 255, 255, 0.14);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-}
-.ctaPrimary:hover,
-.ctaSecondary:hover {
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-.ctaPrimary:hover {
-  background: #f0f4ff;
-  color: var(--ifm-color-primary-darkest);
-}
-.ctaSecondary:hover {
-  background: rgba(255, 255, 255, 0.24);
-  color: #fff;
-}
-
 /* ── Cartões dos dois fluxos de pesquisa ── */
 
 .caminhos {
   padding: 2.5rem 0 0.5rem;
 }
+/* Mesma largura do texto "Sobre o SISPENAS" (.sobreCorpo), para que os cartões
+   fiquem alinhados com o conteúdo que vem logo abaixo. */
 .caminhosGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
+  max-width: 820px;
+  margin: 0 auto;
 }
 .caminhoCard {
   display: block;
@@ -88,7 +53,7 @@
   box-shadow: 0 6px 18px var(--ifm-color-emphasis-200);
 }
 .caminhoCard h3 {
-  margin: 0.5rem 0 0.5rem;
+  margin: 0 0 0.5rem;
   font-size: 1.25rem;
   color: var(--ifm-color-primary);
 }
@@ -97,17 +62,6 @@
   font-size: 0.92rem;
   color: var(--ifm-color-emphasis-700);
   line-height: 1.6;
-}
-.caminhoTag {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  background: var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-800);
 }
 
 /* ── Texto "Sobre o SISPENAS" ── */
