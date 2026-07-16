@@ -1762,10 +1762,10 @@
  {
   "id": 116,
   "lei": "CP",
-  "artigo": "Art. 158, §3º",
+  "artigo": "Art. 158, §3º (restrição da liberdade)",
   "crime": "Extorsão qualificada pela restrição da liberdade (sequestro relâmpago)",
   "pena_min": 72,
-  "pena_max": 240,
+  "pena_max": 144,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Sim",
@@ -1773,7 +1773,7 @@
   "tentativa": "Sim",
   "violencia": "Sim",
   "grave_ameaca": "Sim",
-  "obs": "6-12a. Se lesão grave: 16-24a. Se morte: 24-30a. Hediondo. Incluída pela Lei 11.923/2009"
+  "obs": "Reclusão de 6 a 12 anos e multa. Restrição da liberdade necessária à obtenção da vantagem (art. 158, §3º)"
  },
  {
   "id": 117,
@@ -16060,5 +16060,53 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "2 a 8 anos + multa (aplicável o §2º)"
+ },
+ {
+  "id": 1068,
+  "lei": "CP",
+  "artigo": "Art. 158, §3º (lesão grave)",
+  "crime": "Extorsão qualificada — resultado lesão corporal grave",
+  "pena_min": 192,
+  "pena_max": 288,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Sim",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Sim",
+  "obs": "Reclusão de 16 a 24 anos (penas do art. 159, §2º)"
+ },
+ {
+  "id": 1069,
+  "lei": "CP",
+  "artigo": "Art. 158, §3º (morte)",
+  "crime": "Extorsão qualificada — resultado morte",
+  "pena_min": 288,
+  "pena_max": 360,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Sim",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Sim",
+  "obs": "Reclusão de 24 a 30 anos (penas do art. 159, §3º)"
+ },
+ {
+  "id": 1070,
+  "lei": "CP",
+  "artigo": "Art. 176",
+  "crime": "Outras fraudes (tomar refeição/hospedar-se/transportar-se sem recursos)",
+  "pena_min": 0.5,
+  "pena_max": 2,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Condicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Detenção de 15 dias a 2 meses, ou multa. Somente mediante representação; juiz pode deixar de aplicar a pena (perdão judicial, par. único)"
  }
 ]

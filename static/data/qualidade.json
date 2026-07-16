@@ -1,18 +1,16 @@
 {
- "total_tipos_penais": 1003,
- "com_pena_privativa": 1002,
+ "total_tipos_penais": 1006,
+ "com_pena_privativa": 1005,
  "sem_pena_privativa": 1,
- "dispositivos_distintos": 869,
+ "dispositivos_distintos": 872,
  "registros_duplicados": 267,
  "duplicatas_divergentes": 0,
- "resultado_morte": 74,
- "perdao_judicial_previsto": 12,
+ "resultado_morte": 75,
+ "perdao_judicial_previsto": 14,
  "multa_ambigua": 0,
  "perdao_judicial_sem_tipo": [
-  "CP, Art. 140, §1º — injúria (retorsão imediata / provocação reprovável)",
-  "CP, Art. 176, par. único — outras fraudes",
-  "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente)",
-  "CTB, Art. 291 c/c CP 121, §5º — homicídio culposo na direção (perdão admitido pelo STJ)"
+  "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente): hipótese sem tipo próprio no catálogo",
+  "CTB, Art. 302/303 — homicídio/lesão culposa na direção: perdão admitido pelo STJ por ANALOGIA ao CP 121, §5º, não por previsão expressa; por isso não é marcado no campo"
  ],
  "contradicoes": []
 }

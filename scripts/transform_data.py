@@ -109,17 +109,19 @@ PERDAO_JUDICIAL = [
     (_CP, r"^Art\. 337-A", False),            # sonegação de contribuição previdenciária (§2º)
     (_CP, r"^Art\. 242", False),              # parto suposto (par. único — motivo de nobreza)
     (_CP, r"^Art\. 249", False),              # subtração de incapazes (§2º)
+    (_CP, r"^Art\. 140, caput", False),       # injúria simples (§1º: provocação reprovável / retorsão) — não alcança a injúria racial do §3º
+    (_CP, r"^Art\. 176$", False),             # outras fraudes (par. único)
     (r"9\.807", r"^Art\. 13", False),         # proteção a vítimas e testemunhas — colaborador
     (r"12\.850", r"^Art\. 4º", False),        # colaboração premiada
 ]
 
 # Hipóteses legais de perdão judicial AUSENTES do catálogo de tipos penais.
 # Não são inventadas aqui: entram no relatório de qualidade como lacuna.
+# Perdão judicial de base JURISPRUDENCIAL (não expresso em lei) — fica de fora da lista
+# curada, que é só de hipóteses legais expressas, mas registrado como nota.
 PERDAO_JUDICIAL_SEM_TIPO = [
-    "CP, Art. 140, §1º — injúria (retorsão imediata / provocação reprovável)",
-    "CP, Art. 176, par. único — outras fraudes",
-    "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente)",
-    "CTB, Art. 291 c/c CP 121, §5º — homicídio culposo na direção (perdão admitido pelo STJ)",
+    "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente): hipótese sem tipo próprio no catálogo",
+    "CTB, Art. 302/303 — homicídio/lesão culposa na direção: perdão admitido pelo STJ por ANALOGIA ao CP 121, §5º, não por previsão expressa; por isso não é marcado no campo",
 ]
 
 
