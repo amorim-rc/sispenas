@@ -122,10 +122,10 @@ e a CI o valida antes de qualquer publicação.
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais | 1.006 |
+| Tipos penais | 1.007 |
 | Com pena privativa | 1.005 |
-| Sem pena privativa | 1 (art. 28 da Lei 11.343/06, sanções próprias) |
-| Dispositivos distintos | 872 |
+| Sem pena privativa | 2 (art. 28 da Lei 11.343/06; art. 146-A caput, bullying) |
+| Dispositivos distintos | 873 |
 | **Contradições internas** | **0** |
 
 ### Contradições: zeradas e travadas

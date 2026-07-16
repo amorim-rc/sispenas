@@ -88,8 +88,8 @@ foram todas conferidas contra o Planalto e resolvidas —; a segunda ainda é o 
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | 1.006 |
-| Dispositivos distintos | 872 |
+| Tipos penais catalogados | 1.007 |
+| Dispositivos distintos | 873 |
 | Diplomas cobertos | 58 |
 | Contradições internas | **0** |
 | Campos ainda `derivado_auto` | maioria |
@@ -105,7 +105,7 @@ Amostragem de cobertura, para dimensionar a lacuna:
 | CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
 | Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
 
-:::warning[O número 1.006 não é uma medida de cobertura]
+:::warning[O número 1.007 não é uma medida de cobertura]
 Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
 sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
 a primeira tarefa — sem ele, "cobertura" é opinião.
@@ -139,7 +139,7 @@ Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
       elemento, tentativa, violência/grave ameaça, resultado morte.
 - [ ] **Diff automático** contra o catálogo, classificando cada dispositivo em:
       `confere` · `diverge` · `ausente no catálogo` · `no catálogo mas não na lei`.
-- [x] Contradições internas resolvidas (v1.1.Z) — passo já concluído para os 872
+- [x] Contradições internas resolvidas (v1.1.Z) — passo já concluído para os 873
       dispositivos com registro divergente.
 - [ ] Registrar a conferência por dispositivo: `conferido_em`, `fonte_url`, `conferido_por`
       — substituindo `derivado_auto` por procedência rastreável.
