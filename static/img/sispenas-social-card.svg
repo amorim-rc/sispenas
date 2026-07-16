@@ -1,0 +1,35 @@
+<!--
+  Social card (og:image) do SISPENAS — 1200×630, o tamanho padrão de open graph.
+  Mesma marca da navbar (balança cuja travessa é uma régua graduada: pesar a
+  justiça sobre medir a pena), agora com o nome e a tagline.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="SISPENAS">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#152d7b"/>
+      <stop offset="1" stop-color="#1e40af"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Marca (balança), à esquerda -->
+  <g transform="translate(120 210) scale(6.2)" fill="none" stroke="#fff" stroke-width="1.6"
+     stroke-linecap="round" stroke-linejoin="round" opacity="0.96">
+    <path d="M16 8v18"/>
+    <path d="M11.5 26h9"/>
+    <path d="M5 11h22"/>
+    <path d="M5 9.4v3.2M10.5 10.2v2M16 9.4v3.2M21.5 10.2v2M27 9.4v3.2"/>
+    <path d="M5 11l-3 6M5 11l3 6"/>
+    <path d="M27 11l-3 6M27 11l3 6"/>
+    <path d="M1 17h8a4 4 0 0 1-8 0Z"/>
+    <path d="M23 17h8a4 4 0 0 1-8 0Z"/>
+    <circle cx="16" cy="6.4" r="1.6"/>
+  </g>
+
+  <!-- Texto -->
+  <g fill="#fff" font-family="Georgia, 'Times New Roman', serif">
+    <text x="470" y="285" font-size="104" font-weight="700" letter-spacing="6">SISPENAS</text>
+    <text x="474" y="345" font-size="34" fill="#d6e1ff" font-family="Arial, sans-serif">Sistema de Pesquisa de Tipos Penais e Benefícios</text>
+    <text x="474" y="405" font-size="26" fill="#a0bcff" font-family="Arial, sans-serif">Dosimetria e benefícios penais no direito brasileiro · dados abertos</text>
+  </g>
+</svg>

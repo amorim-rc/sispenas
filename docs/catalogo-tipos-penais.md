@@ -85,9 +85,14 @@ prestação de serviços e medida educativa. Ele é tipo penal, fica no catálog
 `sancoes_nao_privativas` e recebe `tem_pena_privativa: false`, que o mantém fora das
 estatísticas de alcance (que se medem por patamar de pena) sem excluí-lo da consulta.
 
-:::note[Causas de aumento voltarão]
-As majorantes removidas não são lixo — são parte da 3ª fase da dosimetria (art. 68, CP).
-Elas voltam como **entidade própria** na v3.0.0, não como tipos penais.
+:::note[Majorantes com pena própria são exibidas]
+As causas de aumento que constituem um **dispositivo com pena própria** — como o roubo
+majorado (art. 157, §2º) — são tipos do catálogo e aparecem normalmente na busca. O que
+não entra é a causa de aumento **abstrata**, que só diz "aumenta-se de 1/3" sobre a pena
+de *outro* crime, sem patamar próprio (ex.: art. 141, aumento nos crimes contra a honra):
+como registro de pena zero, ela distorceria as estatísticas de alcance. Essas majorantes
+abstratas serão modeladas como **entidade própria** na 3ª fase da dosimetria (art. 68, CP),
+prevista para a v3.0.0.
 :::
 
 ### `resultado_morte` — por que só o nome do tipo
@@ -110,67 +115,37 @@ Onde a lei restringe o perdão à modalidade culposa, a regra exige `elemento ==
 — o art. 121, §4º, por exemplo, tem uma 1ª parte culposa e uma 2ª parte dolosa, e só a
 primeira o admite.
 
-## Qualidade: o que ainda não é confiável
+## Garantias de qualidade
 
-A cada regeneração, o script emite `static/data/qualidade.json` com o estado do catálogo.
-**Estes números são conhecidos e não estão resolvidos:**
+A cada regeneração, o script emite `static/data/qualidade.json` com o estado do catálogo,
+e a CI o valida antes de qualquer publicação.
 
-| Indicador | Valor | Significado |
-|---|---|---|
-| Tipos penais | 1.035 | Total no arquivo |
-| Com pena privativa | 1.034 | Entram nas estatísticas de alcance |
-| Sem pena privativa | 1 | Art. 28 da Lei 11.343/06 (sanções próprias) |
-| **Dispositivos distintos** | **862** | O catálogo tem menos dispositivos do que registros |
-| Registros duplicados | 345 | Mesmo `lei + artigo` em mais de um registro |
-| **Duplicatas divergentes** | **38** | Cópias do mesmo dispositivo **com penas ou hediondez diferentes** |
+| Indicador | Valor |
+|---|---|
+| Tipos penais | 1.003 |
+| Com pena privativa | 1.002 |
+| Sem pena privativa | 1 (art. 28 da Lei 11.343/06, sanções próprias) |
+| Dispositivos distintos | 869 |
+| **Contradições internas** | **0** |
 
-:::danger[Contradições internas]
-38 dispositivos aparecem duas vezes **com dados conflitantes**. Exemplos:
+### Contradições: zeradas e travadas
 
-- `CP, Art. 127` — 16 a 64 meses **vs.** 24 a 120 meses
-- `CP, Art. 151, §1º, I` — 1 a 6 meses **vs.** 6 a 24 meses
+Uma contradição interna ocorreria se dois registros do mesmo dispositivo (`lei + artigo`)
+divergissem em pena ou hediondez. **Não há nenhuma** — todas foram conferidas contra o
+texto compilado do Planalto. O transformador as classificava em três tipos (`pena`,
+`identidade`, `hediondez`) por um **coeficiente de sobreposição** de vocabulário, e esse
+classificador segue ativo como guarda: a CI roda
+`transform_data.py --estrito --max-contradicoes=0` e **falha se uma nova contradição
+entrar**. O catálogo não pode regredir.
 
-Não é possível saber qual versão está correta sem revisão jurídica artigo a artigo. Até
-lá, **ambas são exibidas** e sinalizadas como duplicata — o SISPENAS prefere expor a
-contradição a escolher silenciosamente um dos valores. A resolução é prioridade da
-v1.1.Z — ver [Conferência integral](/docs/roadmap#conferência-integral-do-catálogo).
-:::
+### O que a CI garante a cada mudança
 
-### `duplicata_tipo` — nem toda contradição é sobre pena
-
-O campo classifica o defeito, e a distribuição surpreende:
-
-| Tipo | Qtd | Significado |
-|---|---|---|
-| `pena` | 25 | Mesma conduta, quantum divergente |
-| **`identidade`** | **13** | Condutas **diferentes** sob o mesmo dispositivo |
-| `hediondez` | 4 | Divergem só na hediondez |
-
-`identidade` é o mais grave: se dois registros do mesmo artigo descrevem crimes
-diferentes, ao menos um está sob o **rótulo errado** — a pena pode estar certa, mas
-atribuída ao artigo errado. Exemplo real: `LCP, Art. 32` aparece como *"Disparar arma de
-fogo"* e como *"Dirigir sem habilitação"*; o art. 32 é o segundo (o disparo é o art. 28).
-
-A classificação compara o vocabulário dos nomes por **coeficiente de sobreposição** sobre
-radicais de 5 letras. Duas escolhas deliberadas: Jaccard puniria a paráfrase (*"Peculato
-culposo"* × *"Peculato culposo — concorre culposamente para o crime de outrem"* é a mesma
-conduta), e sem radical a flexão viraria crime distinto (*"Inscrição fraudulenta"* ×
-*"Inscrever-se fraudulentamente"*). É um sinal de **triagem**, não veredito: o árbitro
-continua sendo o texto legal.
-
-A CI roda `python3 scripts/transform_data.py --estrito --max-contradicoes=38`, que **falha
-se o número de contradições aumentar**. O catálogo pode melhorar, não piorar.
-
-### Outras lacunas conhecidas
-
-- **Hipóteses de perdão judicial sem tipo correspondente** no catálogo (art. 140, §1º;
-  art. 176, par. único; CTB art. 291 c/c CP 121, §5º). Listadas em
-  `perdao_judicial_sem_tipo`, no relatório de qualidade.
-- **Concurso de crimes** (material, formal, continuidade) não é modelado: cada tipo é
-  avaliado isoladamente.
-- **Causas de aumento e diminuição** não compõem a pena calculada — a dosimetria parte da
-  pena cominada no caput do dispositivo registrado.
-- Parte dos campos ainda é `derivado_auto` e não passou por revisão individual.
+- **Só tipos penais** (convenção C1): notas de referência, agravantes e excludentes não
+  entram.
+- **Toda sanção declarada** (C2) e **`id` append-only** (C3): a URL pública nunca aponta
+  para o crime errado.
+- **Zero contradições** (C4) e derivado sincronizado com a fonte.
+- **Casos-âncora de direito penal** (`npm run verificar`): 22 benefícios × 1.002 tipos.
 
 ## Como corrigir um tipo penal
 

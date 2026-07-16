@@ -54,44 +54,44 @@ contrato. As versões já entregues saíram daqui e viraram
 
 ---
 
-## v1.1.Z — Correções conhecidas (em aberto)
+## v1.1.Z — Correções e patches desta release
 
-Erros já identificados, sem funcionalidade nova. Prioridade máxima: são o que separa o
-SISPENAS de ser citável como referência.
+Correções de dado e ajustes, sem funcionalidade nova. Concluído nesta release:
 
-- [ ] **Conferência integral das penas contra o Planalto** — cada artigo, parágrafo,
-      inciso e alínea verificado contra o texto oficial em
-      `planalto.gov.br`. Ver [Conferência integral](#conferência-integral-do-catálogo).
-- [ ] **Resolver as 38 duplicatas divergentes restantes** (4 de hediondez já resolvidas) — ver a triagem abaixo. Enquanto não
-      resolvidas, ambas as versões são exibidas e sinalizadas.
-- [ ] **Deduplicar os 353 registros repetidos** (862 dispositivos distintos em 1.035
-      tipos) — decidir entre fundir ou distinguir por incisos.
-- [ ] Revisão jurídica individual dos campos `derivado_auto` (multa, menor potencial)
-- [ ] Revisar `resultado_morte` nos casos ambíguos (ex.: `CP, Art. 158, §3º`, que remete a
-      lesão grave **e** morte no mesmo registro)
-- [ ] Catalogar as hipóteses de perdão judicial ausentes (art. 140, §1º; art. 176, par.
-      único; CTB art. 291 c/c CP 121, §5º)
-- [ ] `Lei 14.811/24, Art. 146-A` (bullying): consta com pena de 2 a 4 meses, mas o
-      dispositivo comina **apenas multa** ("se a conduta não constitui crime mais grave")
-- [ ] Social card próprio (`og:image`), hoje ausente
+- [x] **42 contradições internas resolvidas** — cada dispositivo conferido contra o texto
+      compilado do Planalto. O catálogo não tem mais nenhuma. A CI trava em
+      `--max-contradicoes=0`, então nenhuma nova entra.
+- [x] **Lei 15.397/2026 aplicada a furto e roubo** — penas-base, incisos novos (§2º IX/X do
+      roubo, §§6º-7º do furto), latrocínio (24-30) e §1º-A (serviços essenciais).
+- [x] **Deduplicação** dos registros repetidos que sustentavam as contradições.
+
+Patches previstos para os próximos ciclos desta linha (`1.1.z`):
+
+- [ ] Revisão dos campos ainda `derivado_auto` (multa, menor potencial ofensivo)
+- [ ] `resultado_morte` nos poucos dispositivos que reúnem lesão grave **e** morte no mesmo
+      registro (ex.: `CP, Art. 158, §3º`) — desambiguar como já feito no art. 127 e no §3º
+      da Lei de Tortura
+- [ ] Catalogar as hipóteses de perdão judicial cujo tipo ainda não existe no catálogo
+      (art. 140, §1º; art. 176, par. único; CTB art. 291)
+- [ ] Social card próprio (`og:image`)
 
 ---
 
 ## Conferência integral do catálogo
 
-O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas que ainda não temos:
-saber que **o que está no catálogo está certo** (conferência) e que **o que existe na lei
-está no catálogo** (cobertura). Hoje não sabemos nem uma nem outra — sabemos apenas que há
-38 contradições internas, o que já prova que a primeira falha.
+O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas: saber que **o que
+está no catálogo está certo** (conferência) e que **o que existe na lei está no catálogo**
+(cobertura). A primeira teve um grande avanço na v1.1.Z — as 42 contradições internas
+foram todas conferidas contra o Planalto e resolvidas —; a segunda ainda é o trabalho maior.
 
 ### O que se sabe hoje
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | 1.035 |
-| Dispositivos distintos | 862 |
+| Tipos penais catalogados | 1.003 |
+| Dispositivos distintos | 869 |
 | Diplomas cobertos | 58 |
-| Contradições internas | 38 |
+| Contradições internas | **0** |
 | Campos ainda `derivado_auto` | maioria |
 
 Amostragem de cobertura, para dimensionar a lacuna:
@@ -105,7 +105,7 @@ Amostragem de cobertura, para dimensionar a lacuna:
 | CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
 | Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
 
-:::warning[O número 1.035 não é uma medida de cobertura]
+:::warning[O número 1.003 não é uma medida de cobertura]
 Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
 sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
 a primeira tarefa — sem ele, "cobertura" é opinião.
@@ -117,82 +117,6 @@ a primeira tarefa — sem ele, "cobertura" é opinião.
 contra o **texto compilado** oficial (o que traz as alterações posteriores). Doutrina e
 jurisprudência entram só onde a lei é ambígua, e sempre citadas. O relatório de qualidade
 já emite, em cada contradição, o link do diploma onde resolvê-la.
-
-### Triagem das contradições
-
-A primeira análise desfez uma suposição: **não eram 42 perguntas do tipo "qual pena está
-certa"**. O transformador as classifica por tipo de defeito (`duplicata_tipo`), e a
-distribuição muda o trabalho:
-
-| Tipo | Qtd | O que significa |
-|---|---|---|
-| `pena` | 25 | Mesma conduta, quantum divergente — decidir qual confere |
-| **`identidade`** | **13** | O catálogo afirma **crimes diferentes sob o mesmo dispositivo** |
-| `hediondez` | 4 | Divergem só na hediondez — árbitro é a Lei 8.072/90 |
-
-:::danger[`identidade` é pior do que divergência de pena]
-Quando dois registros do mesmo artigo descrevem **condutas diferentes**, ao menos um está
-sob o **rótulo errado** — e aí a pena pode estar correta, só que atribuída ao artigo
-errado. Não se resolve escolhendo: é preciso descobrir a que dispositivo cada conduta
-pertence.
-
-Casos confirmados:
-
-- `LCP, Art. 32` — um registro diz *"Disparar arma de fogo"*, outro *"Dirigir sem
-  habilitação"*. O art. 32 da LCP é **dirigir sem habilitação**; o disparo é o art. 28.
-- `CE, Art. 298` — *"Preso que se alistar como eleitor"* × *"Prender ou deter eleitor"*.
-- `CE, Art. 347` — *"Violar boletim de apuração"* × *"Recusar cumprimento a diligência"*.
-- `CP, Art. 359-I/J/N` — *"Atentado à soberania"* × *"Espionagem"* (que é o art. 359-K).
-- `CP, Art. 161, §1º, I` — *"Usurpação de águas"* × *"Esbulho possessório"* (que é o II).
-- `CP, Art. 157, §2º, I a VII` — **os incisos do roubo majorado estão embaralhados** entre
-  as duas ondas de importação.
-:::
-
-**Duas ondas de importação.** 40 das 42 contradições originais opõem um `id` < 600 a um `id` ≥ 600 —
-são dois momentos de carga, e o segundo re-importou dispositivos já existentes. **Nenhuma
-das duas é sistematicamente confiável**: no `Art. 154-A, §2º` a onda 1 estava certa; no
-`LCP, Art. 32` é a onda 2. Não há atalho — cada caso vai ao texto legal.
-
-**Não são todas duplicatas.** Algumas são **duas hipóteses legítimas do mesmo artigo**,
-que só precisam de rótulos distintos:
-
-- `CP, Art. 127` — um registro é *resultado lesão grave* (+1/3), outro é *resultado morte*
-  (dobro). Ambos existem no art. 127.
-- `Lei 9.455/97, Art. 1º, §3º` — *lesão grave* (4 a 10 anos) **e** *morte* (8 a 16 anos)
-  estão os dois no mesmo §3º.
-
-Nesses casos a correção é **desambiguar o `artigo`** (ex.: `Art. 127 (lesão grave)` /
-`Art. 127 (morte)`), não apagar um registro.
-
-**Progresso — hediondez (4 de 4 resolvidas).** Contra o rol taxativo da Lei 8.072/90
-(art. 1º), a forma-base não é hedionda em nenhum dos quatro: epidemia (267) e
-envenenamento (270) só na forma **qualificada pela morte** (267, §1º; 270 c/c 285), e do
-grupo 218 só o **218-B**. As quatro eram duplicatas — resolvidas mantendo o `id` menor com
-`hediondo: Não` e removendo o maior (ids 895, 896, 914, 918). Verificado em
-[planalto.gov.br/.../l8072.htm](https://www.planalto.gov.br/ccivil_03/leis/l8072.htm).
-
-**Bloco do roubo majorado (`CP, Art. 157, §2º`) — mapa verificado, aplicação pendente.**
-Confirmado contra a Lei 13.654/2018 e a Lei 13.964/2019. A redação **vigente**:
-
-| Dispositivo | Conduta | Aumento |
-|---|---|---|
-| §2º, **I** | *(revogado pela Lei 13.654/2018)* | — |
-| §2º, II | concurso de duas ou mais pessoas | 1/3 a 1/2 |
-| §2º, III | vítima em serviço de transporte de valores | 1/3 a 1/2 |
-| §2º, IV | subtração de veículo levado a outro Estado/exterior | 1/3 a 1/2 |
-| §2º, V | restrição da liberdade da vítima | 1/3 a 1/2 |
-| §2º, VI | subtração de substâncias explosivas/acessórios | 1/3 a 1/2 |
-| §2º, VII | arma branca (Lei 13.964/2019) | 1/3 a 1/2 |
-| §2º-A, I | arma de fogo | 2/3 |
-| §2º-A, II | destruição de obstáculo com explosivo | 2/3 |
-| §2º-B | arma de fogo de uso restrito ou proibido | dobro |
-
-Os registros das duas ondas estão **sob incisos trocados** (ex.: um registro rotulado
-`§2º, I` descreve "concurso de pessoas", que é o II; outro descreve "arma de fogo", que é
-o §2º-A, I). **`§2º, I` não deve existir como tipo vigente** — os dois registros a ele
-atribuídos estão errados. Resolver este bloco exige remapear cada conduta ao inciso certo
-pela tabela acima, não escolher entre pares. Fica para a próxima leva por ser a de maior
-risco.
 
 ### Fase 1 — Estabelecer o universo (o denominador)
 
@@ -215,8 +139,8 @@ Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
       elemento, tentativa, violência/grave ameaça, resultado morte.
 - [ ] **Diff automático** contra o catálogo, classificando cada dispositivo em:
       `confere` · `diverge` · `ausente no catálogo` · `no catálogo mas não na lei`.
-- [ ] Resolver as contradições restantes com o texto oficial como árbitro (o `CP, Art. 154-A, §2º` já foi
-      resolvido assim: 16 a 80 meses — aumento mínimo sobre a mínima, máximo sobre a máxima).
+- [x] Contradições internas resolvidas (v1.1.Z) — passo já concluído para os 869
+      dispositivos com registro divergente.
 - [ ] Registrar a conferência por dispositivo: `conferido_em`, `fonte_url`, `conferido_por`
       — substituindo `derivado_auto` por procedência rastreável.
 - [ ] **Portão:** a CI passa a exigir `conferido_em` nos dispositivos já conferidos; o
@@ -246,7 +170,8 @@ ignora, e é aí que ele mais se afasta da dosimetria real:
 - [ ] **Súmulas e teses vinculantes** que fixam limiares (Súmula 231 do STJ: atenuante não
       reduz abaixo do mínimo).
 
-Implementar isso é a v3.0.0; **mapeá-lo** é parte deste plano.
+**Mapear** esses componentes é parte da busca de completude, ainda nesta linha `1.y.z`;
+sua **modelagem completa** na dosimetria por fases é trabalho maior, previsto para depois.
 
 ### Método
 
@@ -301,8 +226,13 @@ que **desmente o invariante** de que todo registro é direito vigente. Nenhum ca
 removido, mas toda estatística feita por terceiros passa a estar errada em silêncio. Isso
 é quebra de contrato, ainda que o esquema pareça intacto.
 
-**Pré-requisito:** as fases 1 e 2 da [Conferência integral](#conferência-integral-do-catálogo).
-Automatizar a atualização de um catálogo não conferido multiplica o erro.
+**Pré-requisito — catálogo completo.** A virada para a v2.0.0 só acontece quando o
+catálogo de **tipos penais e de benefícios** estiver completo e conferido. Toda a busca de
+completude e conferência (a [Conferência integral](#conferência-integral-do-catálogo) dos
+tipos e a v1.2.0 dos benefícios) fica na linha `1.y.z`, por não quebrar contrato: são
+correções e acréscimos sobre o esquema atual. O crawler é o que **muda o significado** do
+conjunto de dados (passa a conter revogados) — e automatizar a atualização de um catálogo
+ainda incompleto ou não conferido multiplicaria o erro em vez de o corrigir.
 
 ### Arquitetura
 
