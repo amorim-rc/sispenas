@@ -117,15 +117,15 @@ A cada regeneração, o script emite `static/data/qualidade.json` com o estado d
 
 | Indicador | Valor | Significado |
 |---|---|---|
-| Tipos penais | 1.039 | Total no arquivo |
-| Com pena privativa | 1.038 | Entram nas estatísticas de alcance |
+| Tipos penais | 1.035 | Total no arquivo |
+| Com pena privativa | 1.034 | Entram nas estatísticas de alcance |
 | Sem pena privativa | 1 | Art. 28 da Lei 11.343/06 (sanções próprias) |
 | **Dispositivos distintos** | **862** | O catálogo tem menos dispositivos do que registros |
-| Registros duplicados | 353 | Mesmo `lei + artigo` em mais de um registro |
-| **Duplicatas divergentes** | **42** | Cópias do mesmo dispositivo **com penas ou hediondez diferentes** |
+| Registros duplicados | 345 | Mesmo `lei + artigo` em mais de um registro |
+| **Duplicatas divergentes** | **38** | Cópias do mesmo dispositivo **com penas ou hediondez diferentes** |
 
 :::danger[Contradições internas]
-42 dispositivos aparecem duas vezes **com dados conflitantes**. Exemplos:
+38 dispositivos aparecem duas vezes **com dados conflitantes**. Exemplos:
 
 - `CP, Art. 127` — 16 a 64 meses **vs.** 24 a 120 meses
 - `CP, Art. 151, §1º, I` — 1 a 6 meses **vs.** 6 a 24 meses
@@ -158,7 +158,7 @@ conduta), e sem radical a flexão viraria crime distinto (*"Inscrição fraudule
 *"Inscrever-se fraudulentamente"*). É um sinal de **triagem**, não veredito: o árbitro
 continua sendo o texto legal.
 
-A CI roda `python3 scripts/transform_data.py --estrito --max-contradicoes=42`, que **falha
+A CI roda `python3 scripts/transform_data.py --estrito --max-contradicoes=38`, que **falha
 se o número de contradições aumentar**. O catálogo pode melhorar, não piorar.
 
 ### Outras lacunas conhecidas

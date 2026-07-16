@@ -25,7 +25,7 @@ O SISPENAS tem dois públicos que dependem de estabilidade, e são eles que defi
 | **CORREÇÃO** (`1.1.Z`) | Correção sem funcionalidade nova: erro de dosimetria, dado errado no catálogo, defeito de interface. | Corrigir a pena de um artigo; ajustar contraste. |
 
 :::note[Correção de dado é `CORREÇÃO`, não `MENOR`]
-Resolver uma das 42 contradições do catálogo muda o resultado de uma consulta — mas
+Resolver uma das contradições do catálogo muda o resultado de uma consulta — mas
 corrige um erro, não acrescenta capacidade. Vai em `1.1.Z`. Já **acrescentar um campo**
 que não existia (`resultado_morte`) é `MENOR`, ainda que motivado por um erro: consumidores
 do JSON ganham informação sem perder nenhuma.
@@ -62,9 +62,9 @@ SISPENAS de ser citável como referência.
 - [ ] **Conferência integral das penas contra o Planalto** — cada artigo, parágrafo,
       inciso e alínea verificado contra o texto oficial em
       `planalto.gov.br`. Ver [Conferência integral](#conferência-integral-do-catálogo).
-- [ ] **Resolver as 42 duplicatas divergentes** — ver a triagem abaixo. Enquanto não
+- [ ] **Resolver as 38 duplicatas divergentes restantes** (4 de hediondez já resolvidas) — ver a triagem abaixo. Enquanto não
       resolvidas, ambas as versões são exibidas e sinalizadas.
-- [ ] **Deduplicar os 353 registros repetidos** (862 dispositivos distintos em 1.039
+- [ ] **Deduplicar os 353 registros repetidos** (862 dispositivos distintos em 1.035
       tipos) — decidir entre fundir ou distinguir por incisos.
 - [ ] Revisão jurídica individual dos campos `derivado_auto` (multa, menor potencial)
 - [ ] Revisar `resultado_morte` nos casos ambíguos (ex.: `CP, Art. 158, §3º`, que remete a
@@ -82,16 +82,16 @@ SISPENAS de ser citável como referência.
 O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas que ainda não temos:
 saber que **o que está no catálogo está certo** (conferência) e que **o que existe na lei
 está no catálogo** (cobertura). Hoje não sabemos nem uma nem outra — sabemos apenas que há
-42 contradições internas, o que já prova que a primeira falha.
+38 contradições internas, o que já prova que a primeira falha.
 
 ### O que se sabe hoje
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | 1.039 |
+| Tipos penais catalogados | 1.035 |
 | Dispositivos distintos | 862 |
 | Diplomas cobertos | 58 |
-| Contradições internas | 42 |
+| Contradições internas | 38 |
 | Campos ainda `derivado_auto` | maioria |
 
 Amostragem de cobertura, para dimensionar a lacuna:
@@ -105,7 +105,7 @@ Amostragem de cobertura, para dimensionar a lacuna:
 | CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
 | Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
 
-:::warning[O número 1.039 não é uma medida de cobertura]
+:::warning[O número 1.035 não é uma medida de cobertura]
 Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
 sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
 a primeira tarefa — sem ele, "cobertura" é opinião.
@@ -118,9 +118,9 @@ contra o **texto compilado** oficial (o que traz as alterações posteriores). D
 jurisprudência entram só onde a lei é ambígua, e sempre citadas. O relatório de qualidade
 já emite, em cada contradição, o link do diploma onde resolvê-la.
 
-### Triagem das 42 contradições
+### Triagem das contradições
 
-A primeira análise desfez uma suposição: **não são 42 perguntas do tipo "qual pena está
+A primeira análise desfez uma suposição: **não eram 42 perguntas do tipo "qual pena está
 certa"**. O transformador as classifica por tipo de defeito (`duplicata_tipo`), e a
 distribuição muda o trabalho:
 
@@ -148,7 +148,7 @@ Casos confirmados:
   as duas ondas de importação.
 :::
 
-**Duas ondas de importação.** 40 das 42 contradições opõem um `id` < 600 a um `id` ≥ 600 —
+**Duas ondas de importação.** 40 das 42 contradições originais opõem um `id` < 600 a um `id` ≥ 600 —
 são dois momentos de carga, e o segundo re-importou dispositivos já existentes. **Nenhuma
 das duas é sistematicamente confiável**: no `Art. 154-A, §2º` a onda 1 estava certa; no
 `LCP, Art. 32` é a onda 2. Não há atalho — cada caso vai ao texto legal.
@@ -164,9 +164,35 @@ que só precisam de rótulos distintos:
 Nesses casos a correção é **desambiguar o `artigo`** (ex.: `Art. 127 (lesão grave)` /
 `Art. 127 (morte)`), não apagar um registro.
 
-**Suspeita a confirmar:** `CP, Art. 157, §2º, I` foi **revogado** pela Lei 13.654/2018 (o
-emprego de arma virou o §2º-A, I). Se confirmado, os **dois** registros estão errados — o
-catálogo mantém em vigor um inciso revogado.
+**Progresso — hediondez (4 de 4 resolvidas).** Contra o rol taxativo da Lei 8.072/90
+(art. 1º), a forma-base não é hedionda em nenhum dos quatro: epidemia (267) e
+envenenamento (270) só na forma **qualificada pela morte** (267, §1º; 270 c/c 285), e do
+grupo 218 só o **218-B**. As quatro eram duplicatas — resolvidas mantendo o `id` menor com
+`hediondo: Não` e removendo o maior (ids 895, 896, 914, 918). Verificado em
+[planalto.gov.br/.../l8072.htm](https://www.planalto.gov.br/ccivil_03/leis/l8072.htm).
+
+**Bloco do roubo majorado (`CP, Art. 157, §2º`) — mapa verificado, aplicação pendente.**
+Confirmado contra a Lei 13.654/2018 e a Lei 13.964/2019. A redação **vigente**:
+
+| Dispositivo | Conduta | Aumento |
+|---|---|---|
+| §2º, **I** | *(revogado pela Lei 13.654/2018)* | — |
+| §2º, II | concurso de duas ou mais pessoas | 1/3 a 1/2 |
+| §2º, III | vítima em serviço de transporte de valores | 1/3 a 1/2 |
+| §2º, IV | subtração de veículo levado a outro Estado/exterior | 1/3 a 1/2 |
+| §2º, V | restrição da liberdade da vítima | 1/3 a 1/2 |
+| §2º, VI | subtração de substâncias explosivas/acessórios | 1/3 a 1/2 |
+| §2º, VII | arma branca (Lei 13.964/2019) | 1/3 a 1/2 |
+| §2º-A, I | arma de fogo | 2/3 |
+| §2º-A, II | destruição de obstáculo com explosivo | 2/3 |
+| §2º-B | arma de fogo de uso restrito ou proibido | dobro |
+
+Os registros das duas ondas estão **sob incisos trocados** (ex.: um registro rotulado
+`§2º, I` descreve "concurso de pessoas", que é o II; outro descreve "arma de fogo", que é
+o §2º-A, I). **`§2º, I` não deve existir como tipo vigente** — os dois registros a ele
+atribuídos estão errados. Resolver este bloco exige remapear cada conduta ao inciso certo
+pela tabela acima, não escolher entre pares. Fica para a próxima leva por ser a de maior
+risco.
 
 ### Fase 1 — Estabelecer o universo (o denominador)
 
@@ -189,7 +215,7 @@ Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
       elemento, tentativa, violência/grave ameaça, resultado morte.
 - [ ] **Diff automático** contra o catálogo, classificando cada dispositivo em:
       `confere` · `diverge` · `ausente no catálogo` · `no catálogo mas não na lei`.
-- [ ] Resolver as **42 contradições** com o texto oficial como árbitro (o `CP, Art. 154-A, §2º` já foi
+- [ ] Resolver as contradições restantes com o texto oficial como árbitro (o `CP, Art. 154-A, §2º` já foi
       resolvido assim: 16 a 80 meses — aumento mínimo sobre a mínima, máximo sobre a máxima).
 - [ ] Registrar a conferência por dispositivo: `conferido_em`, `fonte_url`, `conferido_por`
       — substituindo `derivado_auto` por procedência rastreável.

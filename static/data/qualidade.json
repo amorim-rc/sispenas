@@ -1,10 +1,10 @@
 {
- "total_tipos_penais": 1039,
- "com_pena_privativa": 1038,
+ "total_tipos_penais": 1035,
+ "com_pena_privativa": 1034,
  "sem_pena_privativa": 1,
  "dispositivos_distintos": 862,
- "registros_duplicados": 353,
- "duplicatas_divergentes": 42,
+ "registros_duplicados": 345,
+ "duplicatas_divergentes": 38,
  "resultado_morte": 74,
  "perdao_judicial_previsto": 13,
  "multa_ambigua": 0,
@@ -374,48 +374,6 @@
    ]
   },
   {
-   "chave": "cp|art. 218",
-   "tipo": "hediondez",
-   "ids": [
-    151,
-    895
-   ],
-   "crimes": [
-    "Corrupção de menores (para atos sexuais)",
-    "Corrupção de menores (induzir alguém menor de 14 anos a satisfazer a lascívia de outrem)"
-   ],
-   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
-   "crime": "Corrupção de menores (para atos sexuais)",
-   "penas_meses": [
-    "24.0-60.0"
-   ],
-   "hediondo": [
-    "Não",
-    "Sim"
-   ]
-  },
-  {
-   "chave": "cp|art. 218-a",
-   "tipo": "hediondez",
-   "ids": [
-    152,
-    896
-   ],
-   "crimes": [
-    "Satisfação de lascívia mediante presença de criança ou adolescente",
-    "Satisfação de lascívia mediante presença de criança ou adolescente (praticar ato de nature"
-   ],
-   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
-   "crime": "Satisfação de lascívia mediante presença de criança ou adolescente",
-   "penas_meses": [
-    "24.0-48.0"
-   ],
-   "hediondo": [
-    "Não",
-    "Sim"
-   ]
-  },
-  {
    "chave": "cp|art. 253",
    "tipo": "pena",
    "ids": [
@@ -434,48 +392,6 @@
    ],
    "hediondo": [
     "Não"
-   ]
-  },
-  {
-   "chave": "cp|art. 267",
-   "tipo": "hediondez",
-   "ids": [
-    212,
-    914
-   ],
-   "crimes": [
-    "Epidemia (dolosa)",
-    "Epidemia (causar epidemia mediante propagação de germes patogênicos)"
-   ],
-   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
-   "crime": "Epidemia (dolosa)",
-   "penas_meses": [
-    "120.0-180.0"
-   ],
-   "hediondo": [
-    "Não",
-    "Sim"
-   ]
-  },
-  {
-   "chave": "cp|art. 270",
-   "tipo": "hediondez",
-   "ids": [
-    216,
-    918
-   ],
-   "crimes": [
-    "Envenenamento de água potável ou de substância alimentícia ou medicinal",
-    "Envenenamento de água potável ou de substância alimentícia ou medicinal"
-   ],
-   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
-   "crime": "Envenenamento de água potável ou de substância alimentícia ou medicinal",
-   "penas_meses": [
-    "120.0-180.0"
-   ],
-   "hediondo": [
-    "Não",
-    "Sim"
    ]
   },
   {

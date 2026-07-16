@@ -5456,12 +5456,9 @@
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
   "chave_dispositivo": "cp|art. 218",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   895
-  ]
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 152,
@@ -5495,12 +5492,9 @@
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
   "chave_dispositivo": "cp|art. 218-a",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   896
-  ]
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 153,
@@ -7687,7 +7681,7 @@
   "pena_max": 180,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
-  "hediondo": "Sim",
+  "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Não",
@@ -7710,12 +7704,9 @@
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
   "chave_dispositivo": "cp|art. 267",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   914
-  ]
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 213,
@@ -7840,7 +7831,7 @@
   "pena_max": 180,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
-  "hediondo": "Sim",
+  "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Não",
@@ -7863,12 +7854,9 @@
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
   "chave_dispositivo": "cp|art. 270",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   918
-  ]
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 217,
@@ -32243,84 +32231,6 @@
   ]
  },
  {
-  "id": 895,
-  "lei": "CP",
-  "artigo": "Art. 218",
-  "crime": "Corrupção de menores (induzir alguém menor de 14 anos a satisfazer a lascívia de outrem)",
-  "pena_min": 24,
-  "pena_max": 60,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Sim",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "2-5 anos reclusão. HEDIONDO",
-  "pena_privativa": "Reclusão",
-  "tem_multa": false,
-  "multa_regime": "nenhuma",
-  "derivado_auto": true,
-  "pena_min_meses": 24.0,
-  "pena_max_meses": 60.0,
-  "pena_min_rotulo": "2 anos",
-  "pena_max_rotulo": "5 anos",
-  "pena_unidade_derivada": true,
-  "pena_faixa_rotulo": "2 a 5 anos",
-  "infracao_menor_potencial": false,
-  "tem_pena_privativa": true,
-  "sancoes_nao_privativas": [],
-  "resultado_morte": false,
-  "resultado_morte_derivado": true,
-  "perdao_judicial_previsto": false,
-  "chave_dispositivo": "cp|art. 218",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   151
-  ]
- },
- {
-  "id": 896,
-  "lei": "CP",
-  "artigo": "Art. 218-A",
-  "crime": "Satisfação de lascívia mediante presença de criança ou adolescente (praticar ato de natureza sexual na presença de menor de 14 anos ou induzi-lo a presenciar)",
-  "pena_min": 24,
-  "pena_max": 48,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Sim",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "2-4 anos reclusão. HEDIONDO",
-  "pena_privativa": "Reclusão",
-  "tem_multa": false,
-  "multa_regime": "nenhuma",
-  "derivado_auto": true,
-  "pena_min_meses": 24.0,
-  "pena_max_meses": 48.0,
-  "pena_min_rotulo": "2 anos",
-  "pena_max_rotulo": "4 anos",
-  "pena_unidade_derivada": true,
-  "pena_faixa_rotulo": "2 a 4 anos",
-  "infracao_menor_potencial": false,
-  "tem_pena_privativa": true,
-  "sancoes_nao_privativas": [],
-  "resultado_morte": false,
-  "resultado_morte_derivado": true,
-  "perdao_judicial_previsto": false,
-  "chave_dispositivo": "cp|art. 218-a",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   152
-  ]
- },
- {
   "id": 897,
   "lei": "CP",
   "artigo": "Art. 218-C",
@@ -32940,45 +32850,6 @@
   ]
  },
  {
-  "id": 914,
-  "lei": "CP",
-  "artigo": "Art. 267",
-  "crime": "Epidemia (causar epidemia mediante propagação de germes patogênicos)",
-  "pena_min": 120,
-  "pena_max": 180,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "10-15 anos reclusão. §1º: se resulta morte: em dobro. §2º: culposa: 1-2 anos detenção",
-  "pena_privativa": "Reclusão",
-  "tem_multa": false,
-  "multa_regime": "nenhuma",
-  "derivado_auto": true,
-  "pena_min_meses": 120.0,
-  "pena_max_meses": 180.0,
-  "pena_min_rotulo": "10 anos",
-  "pena_max_rotulo": "15 anos",
-  "pena_unidade_derivada": true,
-  "pena_faixa_rotulo": "10 a 15 anos",
-  "infracao_menor_potencial": false,
-  "tem_pena_privativa": true,
-  "sancoes_nao_privativas": [],
-  "resultado_morte": false,
-  "resultado_morte_derivado": true,
-  "perdao_judicial_previsto": false,
-  "chave_dispositivo": "cp|art. 267",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   212
-  ]
- },
- {
   "id": 915,
   "lei": "CP",
   "artigo": "Art. 267, §1º",
@@ -33090,45 +32961,6 @@
   "duplicata_tipo": "",
   "duplicata_ids": [
    215
-  ]
- },
- {
-  "id": 918,
-  "lei": "CP",
-  "artigo": "Art. 270",
-  "crime": "Envenenamento de água potável ou de substância alimentícia ou medicinal",
-  "pena_min": 120,
-  "pena_max": 180,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Não",
-  "obs": "10-15 anos reclusão. §1º: culposa: 6m-2a detenção",
-  "pena_privativa": "Reclusão",
-  "tem_multa": false,
-  "multa_regime": "nenhuma",
-  "derivado_auto": true,
-  "pena_min_meses": 120.0,
-  "pena_max_meses": 180.0,
-  "pena_min_rotulo": "10 anos",
-  "pena_max_rotulo": "15 anos",
-  "pena_unidade_derivada": true,
-  "pena_faixa_rotulo": "10 a 15 anos",
-  "infracao_menor_potencial": false,
-  "tem_pena_privativa": true,
-  "sancoes_nao_privativas": [],
-  "resultado_morte": false,
-  "resultado_morte_derivado": true,
-  "perdao_judicial_previsto": false,
-  "chave_dispositivo": "cp|art. 270",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "hediondez",
-  "duplicata_ids": [
-   216
   ]
  },
  {
