@@ -2,9 +2,9 @@
  "total_tipos_penais": 1035,
  "com_pena_privativa": 1034,
  "sem_pena_privativa": 1,
- "dispositivos_distintos": 862,
- "registros_duplicados": 345,
- "duplicatas_divergentes": 38,
+ "dispositivos_distintos": 864,
+ "registros_duplicados": 341,
+ "duplicatas_divergentes": 36,
  "resultado_morte": 74,
  "perdao_judicial_previsto": 13,
  "multa_ambigua": 0,
@@ -15,27 +15,6 @@
   "CTB, Art. 291 c/c CP 121, §5º — homicídio culposo na direção (perdão admitido pelo STJ)"
  ],
  "contradicoes": [
-  {
-   "chave": "cp|art. 127",
-   "tipo": "pena",
-   "ids": [
-    33,
-    34
-   ],
-   "crimes": [
-    "Aborto qualificado — resultado lesão grave na gestante",
-    "Aborto qualificado — resultado morte da gestante"
-   ],
-   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
-   "crime": "Aborto qualificado — resultado lesão grave na gestante",
-   "penas_meses": [
-    "16.0-64.0",
-    "24.0-120.0"
-   ],
-   "hediondo": [
-    "Não"
-   ]
-  },
   {
    "chave": "cp|art. 150, §1º",
    "tipo": "pena",
@@ -623,27 +602,6 @@
    ],
    "hediondo": [
     "Não"
-   ]
-  },
-  {
-   "chave": "lei 9.455/97|art. 1º, §3º",
-   "tipo": "pena",
-   "ids": [
-    399,
-    400
-   ],
-   "crimes": [
-    "Tortura qualificada pelo resultado lesão grave",
-    "Tortura qualificada pelo resultado morte"
-   ],
-   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l9455.htm",
-   "crime": "Tortura qualificada pelo resultado lesão grave",
-   "penas_meses": [
-    "48.0-120.0",
-    "96.0-192.0"
-   ],
-   "hediondo": [
-    "Sim"
    ]
   },
   {

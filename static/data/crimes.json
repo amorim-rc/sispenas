@@ -1151,7 +1151,7 @@
  {
   "id": 33,
   "lei": "CP",
-  "artigo": "Art. 127",
+  "artigo": "Art. 127 (resultado lesão grave)",
   "crime": "Aborto qualificado — resultado lesão grave na gestante",
   "pena_min": 16,
   "pena_max": 64,
@@ -1179,18 +1179,15 @@
   "resultado_morte": false,
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
-  "chave_dispositivo": "cp|art. 127",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "pena",
-  "duplicata_ids": [
-   34
-  ]
+  "chave_dispositivo": "cp|art. 127 (resultado lesão grave)",
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 34,
   "lei": "CP",
-  "artigo": "Art. 127",
+  "artigo": "Art. 127 (resultado morte)",
   "crime": "Aborto qualificado — resultado morte da gestante",
   "pena_min": 24,
   "pena_max": 120,
@@ -1218,13 +1215,10 @@
   "resultado_morte": true,
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
-  "chave_dispositivo": "cp|art. 127",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "pena",
-  "duplicata_ids": [
-   33
-  ]
+  "chave_dispositivo": "cp|art. 127 (resultado morte)",
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 37,
@@ -14627,7 +14621,7 @@
  {
   "id": 399,
   "lei": "Lei 9.455/97",
-  "artigo": "Art. 1º, §3º",
+  "artigo": "Art. 1º, §3º (resultado lesão grave)",
   "crime": "Tortura qualificada pelo resultado lesão grave",
   "pena_min": 48,
   "pena_max": 120,
@@ -14655,18 +14649,15 @@
   "resultado_morte": false,
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
-  "chave_dispositivo": "lei 9.455/97|art. 1º, §3º",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "pena",
-  "duplicata_ids": [
-   400
-  ]
+  "chave_dispositivo": "lei 9.455/97|art. 1º, §3º (resultado lesão grave)",
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 400,
   "lei": "Lei 9.455/97",
-  "artigo": "Art. 1º, §3º",
+  "artigo": "Art. 1º, §3º (resultado morte)",
   "crime": "Tortura qualificada pelo resultado morte",
   "pena_min": 96,
   "pena_max": 192,
@@ -14694,13 +14685,10 @@
   "resultado_morte": true,
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
-  "chave_dispositivo": "lei 9.455/97|art. 1º, §3º",
-  "duplicata": true,
-  "duplicata_divergente": true,
-  "duplicata_tipo": "pena",
-  "duplicata_ids": [
-   399
-  ]
+  "chave_dispositivo": "lei 9.455/97|art. 1º, §3º (resultado morte)",
+  "duplicata": false,
+  "duplicata_divergente": false,
+  "duplicata_ids": []
  },
  {
   "id": 401,
