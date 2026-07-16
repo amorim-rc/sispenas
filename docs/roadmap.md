@@ -62,10 +62,8 @@ SISPENAS de ser citável como referência.
 - [ ] **Conferência integral das penas contra o Planalto** — cada artigo, parágrafo,
       inciso e alínea verificado contra o texto oficial em
       `planalto.gov.br`. Ver [Conferência integral](#conferência-integral-do-catálogo).
-- [ ] **Resolver as 42 duplicatas divergentes** — mesmo dispositivo com penas ou hediondez
-      conflitantes. Enquanto não resolvidas, ambas as versões são exibidas e sinalizadas.
-      O bloco `Art. 154-A` mostra o padrão do problema: os registros 881-884 duplicam
-      os 88-91 com penas do caput. Uma delas (o §2º) já foi resolvida.
+- [ ] **Resolver as 42 duplicatas divergentes** — ver a triagem abaixo. Enquanto não
+      resolvidas, ambas as versões são exibidas e sinalizadas.
 - [ ] **Deduplicar os 353 registros repetidos** (862 dispositivos distintos em 1.039
       tipos) — decidir entre fundir ou distinguir por incisos.
 - [ ] Revisão jurídica individual dos campos `derivado_auto` (multa, menor potencial)
@@ -116,8 +114,59 @@ a primeira tarefa — sem ele, "cobertura" é opinião.
 ### Fonte da verdade
 
 **`planalto.gov.br`** é a fonte normativa; nenhum tipo entra ou se altera sem conferência
-contra o texto compilado oficial. Doutrina e jurisprudência entram só onde a lei é
-ambígua, e sempre citadas.
+contra o **texto compilado** oficial (o que traz as alterações posteriores). Doutrina e
+jurisprudência entram só onde a lei é ambígua, e sempre citadas. O relatório de qualidade
+já emite, em cada contradição, o link do diploma onde resolvê-la.
+
+### Triagem das 42 contradições
+
+A primeira análise desfez uma suposição: **não são 42 perguntas do tipo "qual pena está
+certa"**. O transformador as classifica por tipo de defeito (`duplicata_tipo`), e a
+distribuição muda o trabalho:
+
+| Tipo | Qtd | O que significa |
+|---|---|---|
+| `pena` | 25 | Mesma conduta, quantum divergente — decidir qual confere |
+| **`identidade`** | **13** | O catálogo afirma **crimes diferentes sob o mesmo dispositivo** |
+| `hediondez` | 4 | Divergem só na hediondez — árbitro é a Lei 8.072/90 |
+
+:::danger[`identidade` é pior do que divergência de pena]
+Quando dois registros do mesmo artigo descrevem **condutas diferentes**, ao menos um está
+sob o **rótulo errado** — e aí a pena pode estar correta, só que atribuída ao artigo
+errado. Não se resolve escolhendo: é preciso descobrir a que dispositivo cada conduta
+pertence.
+
+Casos confirmados:
+
+- `LCP, Art. 32` — um registro diz *"Disparar arma de fogo"*, outro *"Dirigir sem
+  habilitação"*. O art. 32 da LCP é **dirigir sem habilitação**; o disparo é o art. 28.
+- `CE, Art. 298` — *"Preso que se alistar como eleitor"* × *"Prender ou deter eleitor"*.
+- `CE, Art. 347` — *"Violar boletim de apuração"* × *"Recusar cumprimento a diligência"*.
+- `CP, Art. 359-I/J/N` — *"Atentado à soberania"* × *"Espionagem"* (que é o art. 359-K).
+- `CP, Art. 161, §1º, I` — *"Usurpação de águas"* × *"Esbulho possessório"* (que é o II).
+- `CP, Art. 157, §2º, I a VII` — **os incisos do roubo majorado estão embaralhados** entre
+  as duas ondas de importação.
+:::
+
+**Duas ondas de importação.** 40 das 42 contradições opõem um `id` < 600 a um `id` ≥ 600 —
+são dois momentos de carga, e o segundo re-importou dispositivos já existentes. **Nenhuma
+das duas é sistematicamente confiável**: no `Art. 154-A, §2º` a onda 1 estava certa; no
+`LCP, Art. 32` é a onda 2. Não há atalho — cada caso vai ao texto legal.
+
+**Não são todas duplicatas.** Algumas são **duas hipóteses legítimas do mesmo artigo**,
+que só precisam de rótulos distintos:
+
+- `CP, Art. 127` — um registro é *resultado lesão grave* (+1/3), outro é *resultado morte*
+  (dobro). Ambos existem no art. 127.
+- `Lei 9.455/97, Art. 1º, §3º` — *lesão grave* (4 a 10 anos) **e** *morte* (8 a 16 anos)
+  estão os dois no mesmo §3º.
+
+Nesses casos a correção é **desambiguar o `artigo`** (ex.: `Art. 127 (lesão grave)` /
+`Art. 127 (morte)`), não apagar um registro.
+
+**Suspeita a confirmar:** `CP, Art. 157, §2º, I` foi **revogado** pela Lei 13.654/2018 (o
+emprego de arma virou o §2º-A, I). Se confirmado, os **dois** registros estão errados — o
+catálogo mantém em vigor um inciso revogado.
 
 ### Fase 1 — Estabelecer o universo (o denominador)
 

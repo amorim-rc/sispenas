@@ -17,10 +17,16 @@
  "contradicoes": [
   {
    "chave": "cp|art. 127",
+   "tipo": "pena",
    "ids": [
     33,
     34
    ],
+   "crimes": [
+    "Aborto qualificado — resultado lesão grave na gestante",
+    "Aborto qualificado — resultado morte da gestante"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Aborto qualificado — resultado lesão grave na gestante",
    "penas_meses": [
     "16.0-64.0",
@@ -32,10 +38,16 @@
   },
   {
    "chave": "cp|art. 150, §1º",
+   "tipo": "pena",
    "ids": [
     81,
     877
    ],
+   "crimes": [
+    "Violação de domicílio qualificada (noturna/com violência/armas/2+ pessoas)",
+    "Violação de domicílio com aumento — se durante a noite ou em lugar ermo, com emprego de vi"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Violação de domicílio qualificada (noturna/com violência/armas/2+ pessoas)",
    "penas_meses": [
     "12.0-24.0",
@@ -47,10 +59,16 @@
   },
   {
    "chave": "cp|art. 151, §1º, i",
+   "tipo": "pena",
    "ids": [
     83,
     708
    ],
+   "crimes": [
+    "Sonegação ou destruição de correspondência",
+    "Sonegação ou destruição de correspondência (funcionário público)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Sonegação ou destruição de correspondência",
    "penas_meses": [
     "1.0-6.0",
@@ -62,10 +80,16 @@
   },
   {
    "chave": "cp|art. 154-a, §4º",
+   "tipo": "pena",
    "ids": [
     91,
     883
    ],
+   "crimes": [
+    "Invasão de dispositivo com divulgação/comercialização/transmissão de dados obtidos",
+    "Invasão de dispositivo informático qualificada — se divulgação/comercialização/transmissão"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Invasão de dispositivo com divulgação/comercialização/transmissão de dados obtid",
    "penas_meses": [
     "24.0-60.0",
@@ -77,10 +101,16 @@
   },
   {
    "chave": "cp|art. 155, §4º-b",
+   "tipo": "identidade",
    "ids": [
     98,
     630
    ],
+   "crimes": [
+    "Furto mediante fraude eletrônica",
+    "Furto qualificado com emprego de explosivo ou artefato análogo"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Furto mediante fraude eletrônica",
    "penas_meses": [
     "48.0-120.0",
@@ -92,10 +122,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, i",
+   "tipo": "identidade",
    "ids": [
     102,
     634
    ],
+   "crimes": [
+    "Roubo majorado por arma de fogo (aumento de 2/3)",
+    "Roubo com aumento — concurso de duas ou mais pessoas"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado por arma de fogo (aumento de 2/3)",
    "penas_meses": [
     "48.0-120.0",
@@ -107,10 +143,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, ii",
+   "tipo": "identidade",
    "ids": [
     103,
     635
    ],
+   "crimes": [
+    "Roubo majorado por concurso de 2+ pessoas (aumento de 1/3 a 1/2)",
+    "Roubo com aumento — emprego de arma branca"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado por concurso de 2+ pessoas (aumento de 1/3 a 1/2)",
    "penas_meses": [
     "48.0-120.0",
@@ -122,10 +164,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, iii",
+   "tipo": "pena",
    "ids": [
     104,
     636
    ],
+   "crimes": [
+    "Roubo majorado — vítima em serviço de transporte de valores (aumento de 1/3 a 1/2)",
+    "Roubo com aumento — vítima em serviço de transporte de valores e o agente conhece tal circ"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado — vítima em serviço de transporte de valores (aumento de 1/3 a 1/",
    "penas_meses": [
     "48.0-120.0",
@@ -137,10 +185,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, iv",
+   "tipo": "pena",
    "ids": [
     105,
     637
    ],
+   "crimes": [
+    "Roubo majorado por veículo automotor levado para outro estado/exterior (aumento de 1/3 a 1",
+    "Roubo com aumento — veículo automotor transportado para outro Estado ou exterior"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado por veículo automotor levado para outro estado/exterior (aumento ",
    "penas_meses": [
     "48.0-120.0",
@@ -152,10 +206,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, v",
+   "tipo": "pena",
    "ids": [
     106,
     638
    ],
+   "crimes": [
+    "Roubo majorado com restrição de liberdade da vítima (aumento de 1/3 a 1/2)",
+    "Roubo com aumento — restrição de liberdade da vítima necessária para a consumação"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado com restrição de liberdade da vítima (aumento de 1/3 a 1/2)",
    "penas_meses": [
     "48.0-120.0",
@@ -167,10 +227,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, vi",
+   "tipo": "identidade",
    "ids": [
     107,
     639
    ],
+   "crimes": [
+    "Roubo majorado com emprego de arma branca (aumento de 1/3 a 1/2)",
+    "Roubo com aumento — subtração de substância explosiva ou acessório"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado com emprego de arma branca (aumento de 1/3 a 1/2)",
    "penas_meses": [
     "48.0-120.0",
@@ -182,10 +248,16 @@
   },
   {
    "chave": "cp|art. 157, §2º, vii",
+   "tipo": "identidade",
    "ids": [
     108,
     640
    ],
+   "crimes": [
+    "Roubo majorado com emprego de explosivo/artefato análogo (aumento de 1/3 a 1/2)",
+    "Roubo com aumento — emprego de arma branca (incluído pela Lei 13.654/18)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado com emprego de explosivo/artefato análogo (aumento de 1/3 a 1/2)",
    "penas_meses": [
     "48.0-120.0",
@@ -198,10 +270,16 @@
   },
   {
    "chave": "cp|art. 157, §2º-a, i",
+   "tipo": "pena",
    "ids": [
     109,
     641
    ],
+   "crimes": [
+    "Roubo com emprego de arma de fogo de uso restrito/proibido (aumento de 2/3)",
+    "Roubo com aumento de 2/3 — emprego de arma de fogo"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo com emprego de arma de fogo de uso restrito/proibido (aumento de 2/3)",
    "penas_meses": [
     "48.0-120.0",
@@ -213,10 +291,16 @@
   },
   {
    "chave": "cp|art. 157, §2º-b",
+   "tipo": "identidade",
    "ids": [
     110,
     643
    ],
+   "crimes": [
+    "Roubo majorado contra sistema bancário/transporte coletivo (aumento de 2/3)",
+    "Roubo com aumento — emprego de arma de fogo de uso restrito ou proibido (dobro da pena)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Roubo majorado contra sistema bancário/transporte coletivo (aumento de 2/3)",
    "penas_meses": [
     "48.0-120.0",
@@ -228,10 +312,16 @@
   },
   {
    "chave": "cp|art. 161, §1º, i",
+   "tipo": "identidade",
    "ids": [
     124,
     879
    ],
+   "crimes": [
+    "Usurpação de águas",
+    "Esbulho possessório (invadir terreno ou edifício alheio com violência à pessoa ou grave am"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Usurpação de águas",
    "penas_meses": [
     "12.0-24.0",
@@ -243,10 +333,16 @@
   },
   {
    "chave": "cp|art. 161, §1º, ii",
+   "tipo": "pena",
    "ids": [
     125,
     880
    ],
+   "crimes": [
+    "Esbulho possessório",
+    "Turbação de posse (turbar a posse alheia mediante violência à pessoa ou grave ameaça)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Esbulho possessório",
    "penas_meses": [
     "12.0-24.0",
@@ -258,10 +354,16 @@
   },
   {
    "chave": "cp|art. 180, §3º",
+   "tipo": "pena",
    "ids": [
     139,
     652
    ],
+   "crimes": [
+    "Receptação culposa",
+    "Receptação culposa"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Receptação culposa",
    "penas_meses": [
     "1.0-12.0",
@@ -273,10 +375,16 @@
   },
   {
    "chave": "cp|art. 218",
+   "tipo": "hediondez",
    "ids": [
     151,
     895
    ],
+   "crimes": [
+    "Corrupção de menores (para atos sexuais)",
+    "Corrupção de menores (induzir alguém menor de 14 anos a satisfazer a lascívia de outrem)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Corrupção de menores (para atos sexuais)",
    "penas_meses": [
     "24.0-60.0"
@@ -288,10 +396,16 @@
   },
   {
    "chave": "cp|art. 218-a",
+   "tipo": "hediondez",
    "ids": [
     152,
     896
    ],
+   "crimes": [
+    "Satisfação de lascívia mediante presença de criança ou adolescente",
+    "Satisfação de lascívia mediante presença de criança ou adolescente (praticar ato de nature"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Satisfação de lascívia mediante presença de criança ou adolescente",
    "penas_meses": [
     "24.0-48.0"
@@ -303,10 +417,16 @@
   },
   {
    "chave": "cp|art. 253",
+   "tipo": "pena",
    "ids": [
     198,
     909
    ],
+   "crimes": [
+    "Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxico sem auto",
+    "Fabrico/fornecimento/aquisição/posse/transporte de substância/engenho explosivo/gás tóxico"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxic",
    "penas_meses": [
     "12.0-36.0",
@@ -318,10 +438,16 @@
   },
   {
    "chave": "cp|art. 267",
+   "tipo": "hediondez",
    "ids": [
     212,
     914
    ],
+   "crimes": [
+    "Epidemia (dolosa)",
+    "Epidemia (causar epidemia mediante propagação de germes patogênicos)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Epidemia (dolosa)",
    "penas_meses": [
     "120.0-180.0"
@@ -333,10 +459,16 @@
   },
   {
    "chave": "cp|art. 270",
+   "tipo": "hediondez",
    "ids": [
     216,
     918
    ],
+   "crimes": [
+    "Envenenamento de água potável ou de substância alimentícia ou medicinal",
+    "Envenenamento de água potável ou de substância alimentícia ou medicinal"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Envenenamento de água potável ou de substância alimentícia ou medicinal",
    "penas_meses": [
     "120.0-180.0"
@@ -348,10 +480,16 @@
   },
   {
    "chave": "cp|art. 312, §2º",
+   "tipo": "pena",
    "ids": [
     259,
     667
    ],
+   "crimes": [
+    "Peculato culposo",
+    "Peculato culposo (concorre culposamente para o crime de outrem)"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Peculato culposo",
    "penas_meses": [
     "3.0-12.0",
@@ -363,10 +501,16 @@
   },
   {
    "chave": "cp|art. 316, §2º",
+   "tipo": "pena",
    "ids": [
     266,
     845
    ],
+   "crimes": [
+    "Excesso de exação",
+    "Excesso de exação — desviar o que recebeu indevidamente em proveito próprio ou alheio"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Excesso de exação",
    "penas_meses": [
     "24.0-144.0",
@@ -378,10 +522,16 @@
   },
   {
    "chave": "cp|art. 349",
+   "tipo": "pena",
    "ids": [
     299,
     962
    ],
+   "crimes": [
+    "Favorecimento real",
+    "Favorecimento real (prestar ao criminoso, fora dos casos de co-autoria ou receptação, auxí"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Favorecimento real",
    "penas_meses": [
     "1.0-6.0",
@@ -393,10 +543,16 @@
   },
   {
    "chave": "cp|art. 349-a",
+   "tipo": "pena",
    "ids": [
     300,
     963
    ],
+   "crimes": [
+    "Ingresso de aparelho telefônico de comunicação móvel em estabelecimento prisional",
+    "Ingresso de aparelho telefônico/comunicação/componente em estabelecimento prisional (ingre"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Ingresso de aparelho telefônico de comunicação móvel em estabelecimento prisiona",
    "penas_meses": [
     "3.0-12.0",
@@ -408,10 +564,16 @@
   },
   {
    "chave": "cp|art. 353",
+   "tipo": "pena",
    "ids": [
     303,
     967
    ],
+   "crimes": [
+    "Arrebatamento de preso",
+    "Arrebatamento de preso (arrebatar preso a fim de maltratá-lo, do poder de quem o tenha sob"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Arrebatamento de preso",
    "penas_meses": [
     "12.0-36.0",
@@ -423,10 +585,16 @@
   },
   {
    "chave": "cp|art. 359-i",
+   "tipo": "identidade",
    "ids": [
     318,
     724
    ],
+   "crimes": [
+    "Atentado à soberania",
+    "Espionagem — entregar/permitir acesso a documento/informação classificada como sigilosa a "
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Atentado à soberania",
    "penas_meses": [
     "24.0-96.0",
@@ -438,10 +606,16 @@
   },
   {
    "chave": "cp|art. 359-j",
+   "tipo": "identidade",
    "ids": [
     319,
     725
    ],
+   "crimes": [
+    "Atentado à integridade nacional",
+    "Espionagem com violência — obter documento/informação sigilosa com emprego de violência ou"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Atentado à integridade nacional",
    "penas_meses": [
     "24.0-96.0",
@@ -453,10 +627,16 @@
   },
   {
    "chave": "cp|art. 359-k",
+   "tipo": "pena",
    "ids": [
     320,
     726
    ],
+   "crimes": [
+    "Espionagem",
+    "Espionagem — permitir acesso indevido a informação sigilosa (forma culposa do funcionário "
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Espionagem",
    "penas_meses": [
     "12.0-48.0",
@@ -468,10 +648,16 @@
   },
   {
    "chave": "cp|art. 359-n",
+   "tipo": "identidade",
    "ids": [
     323,
     600
    ],
+   "crimes": [
+    "Interrupção do processo eleitoral",
+    "Tentativa de depor por meio de violência ou grave ameaça o governo legitimamente constituí"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Interrupção do processo eleitoral",
    "penas_meses": [
     "36.0-72.0",
@@ -483,10 +669,16 @@
   },
   {
    "chave": "cp|art. 359-r",
+   "tipo": "pena",
    "ids": [
     325,
     603
    ],
+   "crimes": [
+    "Sabotagem",
+    "Sabotagem (destruir/inutilizar meios de comunicação com o fim de impedir a defesa nacional"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
    "crime": "Sabotagem",
    "penas_meses": [
     "24.0-72.0",
@@ -498,10 +690,16 @@
   },
   {
    "chave": "lei 11.343/06|art. 39",
+   "tipo": "pena",
    "ids": [
     337,
     773
    ],
+   "crimes": [
+    "Condução de embarcação ou aeronave sob efeito de drogas",
+    "Conduzir embarcação ou aeronave após consumo de drogas, expondo risco a terceiros"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343compilado.htm",
    "crime": "Condução de embarcação ou aeronave sob efeito de drogas",
    "penas_meses": [
     "24.0-48.0",
@@ -513,10 +711,16 @@
   },
   {
    "chave": "lei 9.455/97|art. 1º, §3º",
+   "tipo": "pena",
    "ids": [
     399,
     400
    ],
+   "crimes": [
+    "Tortura qualificada pelo resultado lesão grave",
+    "Tortura qualificada pelo resultado morte"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l9455.htm",
    "crime": "Tortura qualificada pelo resultado lesão grave",
    "penas_meses": [
     "48.0-120.0",
@@ -528,10 +732,16 @@
   },
   {
    "chave": "lcp (dl 3.688/41)|art. 32",
+   "tipo": "identidade",
    "ids": [
     518,
     996
    ],
+   "crimes": [
+    "Disparar arma de fogo em lugar habitado (subsidiário ao Estatuto do Desarmamento)",
+    "Dirigir veículos na via pública ou embarcações em águas públicas pondo em perigo a seguran"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3688.htm",
    "crime": "Disparar arma de fogo em lugar habitado (subsidiário ao Estatuto do Desarmamento",
    "penas_meses": [
     "0.0-3.0",
@@ -543,10 +753,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 289",
+   "tipo": "pena",
    "ids": [
     543,
     1009
    ],
+   "crimes": [
+    "Inscrição fraudulenta de eleitor",
+    "Inscrever-se fraudulentamente como eleitor"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Inscrição fraudulenta de eleitor",
    "penas_meses": [
     "0.0-5.0",
@@ -558,10 +774,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 290",
+   "tipo": "pena",
    "ids": [
     544,
     1010
    ],
+   "crimes": [
+    "Induzir alguém a se inscrever eleitoralmente com infração de qualquer norma",
+    "Induzir alguém a inscrever-se fraudulentamente como eleitor"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Induzir alguém a se inscrever eleitoralmente com infração de qualquer norma",
    "penas_meses": [
     "0.0-24.0",
@@ -573,10 +795,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 298",
+   "tipo": "identidade",
    "ids": [
     545,
     1014
    ],
+   "crimes": [
+    "Preso que se alistar como eleitor",
+    "Prender ou deter eleitor no período do dia da eleição até 48h após encerramento (sem flagr"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Preso que se alistar como eleitor",
    "penas_meses": [
     "1.0-6.0",
@@ -588,10 +816,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 300",
+   "tipo": "pena",
    "ids": [
     547,
     1016
    ],
+   "crimes": [
+    "Valer-se de empregados na propaganda eleitoral",
+    "Coação eleitoral (valer-se de autoridade de cargo ou emprego para coagir alguém a votar ou"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Valer-se de empregados na propaganda eleitoral",
    "penas_meses": [
     "0.0-24.0",
@@ -603,10 +837,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 301",
+   "tipo": "pena",
    "ids": [
     548,
     1017
    ],
+   "crimes": [
+    "Usar de violência/grave ameaça para coagir alguém a votar ou deixar de votar em determinad",
+    "Uso de violência/grave ameaça para coagir alguém a votar ou não votar em determinado candi"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Usar de violência/grave ameaça para coagir alguém a votar ou deixar de votar em ",
    "penas_meses": [
     "0.0-48.0",
@@ -618,10 +858,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 309",
+   "tipo": "pena",
    "ids": [
     549,
     729
    ],
+   "crimes": [
+    "Votar ou tentar votar mais de uma vez, ou em lugar de outrem (falsidade ideológica eleitor",
+    "Votar ou tentar votar mais de uma vez ou em lugar de outrem"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Votar ou tentar votar mais de uma vez, ou em lugar de outrem (falsidade ideológi",
    "penas_meses": [
     "0.0-36.0",
@@ -633,10 +879,16 @@
   },
   {
    "chave": "ce (lei 4.737/65)|art. 347",
+   "tipo": "identidade",
    "ids": [
     550,
     1029
    ],
+   "crimes": [
+    "Violar/adulterar/destruir boletim de apuração ou alterar resultado do pleito",
+    "Recusar alguém cumprimento/obediência a diligências, ordens ou instruções da Justiça Eleit"
+   ],
+   "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
    "crime": "Violar/adulterar/destruir boletim de apuração ou alterar resultado do pleito",
    "penas_meses": [
     "24.0-60.0",

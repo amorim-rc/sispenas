@@ -63,6 +63,7 @@ Gerados por `scripts/transform_data.py`. **Todos são heurísticos** e sujeitos 
 | `resultado_morte` | Regex sobre o **nome** do tipo (art. 112, VI e VIII, LEP). |
 | `perdao_judicial_previsto` | Lista curada de dispositivos (art. 107, IX, CP). |
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente` | Detecção de registros repetidos. |
+| `duplicata_tipo` | `pena` · `identidade` · `hediondez` — o tipo do defeito (ver abaixo). |
 
 ### `tem_pena_privativa` — e por que o catálogo só tem tipos penais
 
@@ -134,6 +135,28 @@ lá, **ambas são exibidas** e sinalizadas como duplicata — o SISPENAS prefere
 contradição a escolher silenciosamente um dos valores. A resolução é prioridade da
 v1.1.Z — ver [Conferência integral](/docs/roadmap#conferência-integral-do-catálogo).
 :::
+
+### `duplicata_tipo` — nem toda contradição é sobre pena
+
+O campo classifica o defeito, e a distribuição surpreende:
+
+| Tipo | Qtd | Significado |
+|---|---|---|
+| `pena` | 25 | Mesma conduta, quantum divergente |
+| **`identidade`** | **13** | Condutas **diferentes** sob o mesmo dispositivo |
+| `hediondez` | 4 | Divergem só na hediondez |
+
+`identidade` é o mais grave: se dois registros do mesmo artigo descrevem crimes
+diferentes, ao menos um está sob o **rótulo errado** — a pena pode estar certa, mas
+atribuída ao artigo errado. Exemplo real: `LCP, Art. 32` aparece como *"Disparar arma de
+fogo"* e como *"Dirigir sem habilitação"*; o art. 32 é o segundo (o disparo é o art. 28).
+
+A classificação compara o vocabulário dos nomes por **coeficiente de sobreposição** sobre
+radicais de 5 letras. Duas escolhas deliberadas: Jaccard puniria a paráfrase (*"Peculato
+culposo"* × *"Peculato culposo — concorre culposamente para o crime de outrem"* é a mesma
+conduta), e sem radical a flexão viraria crime distinto (*"Inscrição fraudulenta"* ×
+*"Inscrever-se fraudulentamente"*). É um sinal de **triagem**, não veredito: o árbitro
+continua sendo o texto legal.
 
 A CI roda `python3 scripts/transform_data.py --estrito --max-contradicoes=42`, que **falha
 se o número de contradições aumentar**. O catálogo pode melhorar, não piorar.
