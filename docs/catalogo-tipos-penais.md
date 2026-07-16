@@ -8,7 +8,7 @@ sidebar_position: 2
 
 O catálogo é a base factual do SISPENAS: é dele que saem as penas cominadas, a hediondez,
 a violência e as demais características que alimentam o cálculo dos benefícios. Esta
-página descreve **como ele é estruturado, como é derivado e o que ainda não é confiável
+página descreve **como ele é estruturado, como é derivado e como sua qualidade é garantida
 nele**.
 
 ## Os dois arquivos
@@ -122,10 +122,10 @@ e a CI o valida antes de qualquer publicação.
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais | 1.003 |
-| Com pena privativa | 1.002 |
+| Tipos penais | 1.006 |
+| Com pena privativa | 1.005 |
 | Sem pena privativa | 1 (art. 28 da Lei 11.343/06, sanções próprias) |
-| Dispositivos distintos | 869 |
+| Dispositivos distintos | 872 |
 | **Contradições internas** | **0** |
 
 ### Contradições: zeradas e travadas
@@ -145,7 +145,7 @@ entrar**. O catálogo não pode regredir.
 - **Toda sanção declarada** (C2) e **`id` append-only** (C3): a URL pública nunca aponta
   para o crime errado.
 - **Zero contradições** (C4) e derivado sincronizado com a fonte.
-- **Casos-âncora de direito penal** (`npm run verificar`): 22 benefícios × 1.002 tipos.
+- **Casos-âncora de direito penal** (`npm run verificar`): 22 benefícios × 1.005 tipos.
 
 ## Como corrigir um tipo penal
 
