@@ -82,11 +82,10 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // `image` (og:image) fica de fora até existir um social card próprio: apontava
-    // para img/sispenas-social-card.jpg, que nunca existiu no repositório — o
-    // arquivo presente era o card padrão do Docusaurus, com outro nome. Uma
-    // referência quebrada é pior que a ausência: o og:image 404 aparece como
-    // imagem falha no compartilhamento. Ver roadmap (melhorias transversais).
+    // Social card próprio (og:image), 1200×630. SVG: renderiza no site e nas
+    // plataformas que o aceitam; onde não, o card é ignorado sem erro (melhor que
+    // a referência quebrada da v1.0.0). Uma versão raster pode substituí-lo depois.
+    image: 'img/sispenas-social-card.svg',
     colorMode: {
       respectPrefersColorScheme: true,
     },

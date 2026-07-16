@@ -25,7 +25,7 @@ O SISPENAS tem dois públicos que dependem de estabilidade, e são eles que defi
 | **CORREÇÃO** (`1.1.Z`) | Correção sem funcionalidade nova: erro de dosimetria, dado errado no catálogo, defeito de interface. | Corrigir a pena de um artigo; ajustar contraste. |
 
 :::note[Correção de dado é `CORREÇÃO`, não `MENOR`]
-Resolver uma das 42 contradições do catálogo muda o resultado de uma consulta — mas
+Resolver uma das contradições do catálogo muda o resultado de uma consulta — mas
 corrige um erro, não acrescenta capacidade. Vai em `1.1.Z`. Já **acrescentar um campo**
 que não existia (`resultado_morte`) é `MENOR`, ainda que motivado por um erro: consumidores
 do JSON ganham informação sem perder nenhuma.
@@ -54,46 +54,44 @@ contrato. As versões já entregues saíram daqui e viraram
 
 ---
 
-## v1.1.Z — Correções conhecidas (em aberto)
+## v1.1.Z — Correções e patches desta release
 
-Erros já identificados, sem funcionalidade nova. Prioridade máxima: são o que separa o
-SISPENAS de ser citável como referência.
+Correções de dado e ajustes, sem funcionalidade nova. Concluído nesta release:
 
-- [ ] **Conferência integral das penas contra o Planalto** — cada artigo, parágrafo,
-      inciso e alínea verificado contra o texto oficial em
-      `planalto.gov.br`. Ver [Conferência integral](#conferência-integral-do-catálogo).
-- [ ] **Resolver as 42 duplicatas divergentes** — mesmo dispositivo com penas ou hediondez
-      conflitantes. Enquanto não resolvidas, ambas as versões são exibidas e sinalizadas.
-      O bloco `Art. 154-A` mostra o padrão do problema: os registros 881-884 duplicam
-      os 88-91 com penas do caput. Uma delas (o §2º) já foi resolvida.
-- [ ] **Deduplicar os 353 registros repetidos** (862 dispositivos distintos em 1.039
-      tipos) — decidir entre fundir ou distinguir por incisos.
-- [ ] Revisão jurídica individual dos campos `derivado_auto` (multa, menor potencial)
-- [ ] Revisar `resultado_morte` nos casos ambíguos (ex.: `CP, Art. 158, §3º`, que remete a
-      lesão grave **e** morte no mesmo registro)
-- [ ] Catalogar as hipóteses de perdão judicial ausentes (art. 140, §1º; art. 176, par.
-      único; CTB art. 291 c/c CP 121, §5º)
-- [ ] `Lei 14.811/24, Art. 146-A` (bullying): consta com pena de 2 a 4 meses, mas o
-      dispositivo comina **apenas multa** ("se a conduta não constitui crime mais grave")
-- [ ] Social card próprio (`og:image`), hoje ausente
+- [x] **42 contradições internas resolvidas** — cada dispositivo conferido contra o texto
+      compilado do Planalto. O catálogo não tem mais nenhuma. A CI trava em
+      `--max-contradicoes=0`, então nenhuma nova entra.
+- [x] **Lei 15.397/2026 aplicada a furto e roubo** — penas-base, incisos novos (§2º IX/X do
+      roubo, §§6º-7º do furto), latrocínio (24-30) e §1º-A (serviços essenciais).
+- [x] **Deduplicação** dos registros repetidos que sustentavam as contradições.
+
+Patches previstos para os próximos ciclos desta linha (`1.1.z`):
+
+- [ ] Revisão dos campos ainda `derivado_auto` (multa, menor potencial ofensivo)
+- [ ] `resultado_morte` nos poucos dispositivos que reúnem lesão grave **e** morte no mesmo
+      registro (ex.: `CP, Art. 158, §3º`) — desambiguar como já feito no art. 127 e no §3º
+      da Lei de Tortura
+- [ ] Catalogar as hipóteses de perdão judicial cujo tipo ainda não existe no catálogo
+      (art. 140, §1º; art. 176, par. único; CTB art. 291)
+- [ ] Social card próprio (`og:image`)
 
 ---
 
 ## Conferência integral do catálogo
 
-O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas que ainda não temos:
-saber que **o que está no catálogo está certo** (conferência) e que **o que existe na lei
-está no catálogo** (cobertura). Hoje não sabemos nem uma nem outra — sabemos apenas que há
-42 contradições internas, o que já prova que a primeira falha.
+O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas: saber que **o que
+está no catálogo está certo** (conferência) e que **o que existe na lei está no catálogo**
+(cobertura). A primeira teve um grande avanço na v1.1.Z — as 42 contradições internas
+foram todas conferidas contra o Planalto e resolvidas —; a segunda ainda é o trabalho maior.
 
 ### O que se sabe hoje
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | 1.039 |
-| Dispositivos distintos | 862 |
+| Tipos penais catalogados | 1.007 |
+| Dispositivos distintos | 873 |
 | Diplomas cobertos | 58 |
-| Contradições internas | 42 |
+| Contradições internas | **0** |
 | Campos ainda `derivado_auto` | maioria |
 
 Amostragem de cobertura, para dimensionar a lacuna:
@@ -107,7 +105,7 @@ Amostragem de cobertura, para dimensionar a lacuna:
 | CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
 | Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
 
-:::warning[O número 1.039 não é uma medida de cobertura]
+:::warning[O número 1.007 não é uma medida de cobertura]
 Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
 sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
 a primeira tarefa — sem ele, "cobertura" é opinião.
@@ -116,8 +114,9 @@ a primeira tarefa — sem ele, "cobertura" é opinião.
 ### Fonte da verdade
 
 **`planalto.gov.br`** é a fonte normativa; nenhum tipo entra ou se altera sem conferência
-contra o texto compilado oficial. Doutrina e jurisprudência entram só onde a lei é
-ambígua, e sempre citadas.
+contra o **texto compilado** oficial (o que traz as alterações posteriores). Doutrina e
+jurisprudência entram só onde a lei é ambígua, e sempre citadas. O relatório de qualidade
+já emite, em cada contradição, o link do diploma onde resolvê-la.
 
 ### Fase 1 — Estabelecer o universo (o denominador)
 
@@ -140,8 +139,8 @@ Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
       elemento, tentativa, violência/grave ameaça, resultado morte.
 - [ ] **Diff automático** contra o catálogo, classificando cada dispositivo em:
       `confere` · `diverge` · `ausente no catálogo` · `no catálogo mas não na lei`.
-- [ ] Resolver as **42 contradições** com o texto oficial como árbitro (o `CP, Art. 154-A, §2º` já foi
-      resolvido assim: 16 a 80 meses — aumento mínimo sobre a mínima, máximo sobre a máxima).
+- [x] Contradições internas resolvidas (v1.1.Z) — passo já concluído para os 873
+      dispositivos com registro divergente.
 - [ ] Registrar a conferência por dispositivo: `conferido_em`, `fonte_url`, `conferido_por`
       — substituindo `derivado_auto` por procedência rastreável.
 - [ ] **Portão:** a CI passa a exigir `conferido_em` nos dispositivos já conferidos; o
@@ -171,7 +170,8 @@ ignora, e é aí que ele mais se afasta da dosimetria real:
 - [ ] **Súmulas e teses vinculantes** que fixam limiares (Súmula 231 do STJ: atenuante não
       reduz abaixo do mínimo).
 
-Implementar isso é a v3.0.0; **mapeá-lo** é parte deste plano.
+**Mapear** esses componentes é parte da busca de completude, ainda nesta linha `1.y.z`;
+sua **modelagem completa** na dosimetria por fases é trabalho maior, previsto para depois.
 
 ### Método
 
@@ -226,8 +226,13 @@ que **desmente o invariante** de que todo registro é direito vigente. Nenhum ca
 removido, mas toda estatística feita por terceiros passa a estar errada em silêncio. Isso
 é quebra de contrato, ainda que o esquema pareça intacto.
 
-**Pré-requisito:** as fases 1 e 2 da [Conferência integral](#conferência-integral-do-catálogo).
-Automatizar a atualização de um catálogo não conferido multiplica o erro.
+**Pré-requisito — catálogo completo.** A virada para a v2.0.0 só acontece quando o
+catálogo de **tipos penais e de benefícios** estiver completo e conferido. Toda a busca de
+completude e conferência (a [Conferência integral](#conferência-integral-do-catálogo) dos
+tipos e a v1.2.0 dos benefícios) fica na linha `1.y.z`, por não quebrar contrato: são
+correções e acréscimos sobre o esquema atual. O crawler é o que **muda o significado** do
+conjunto de dados (passa a conter revogados) — e automatizar a atualização de um catálogo
+ainda incompleto ou não conferido multiplicaria o erro em vez de o corrigir.
 
 ### Arquitetura
 

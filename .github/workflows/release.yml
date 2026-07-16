@@ -1,0 +1,54 @@
+name: Publicar Release
+
+# Ao empurrar uma tag vX.Y.Z, cria (ou atualiza) a Release do GitHub usando o
+# texto autoral de release-notes/*-vX.Y.Z.md — em vez das notas automáticas do
+# GitHub, que só resumem títulos de PR. Assim `git push --tags` já publica a
+# release rica, sem passo manual.
+#
+# Requer, para o push da tag disparar isto, que o autor tenha permissão de
+# workflow no token (mesmo caso do ci.yml).
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Montar corpo e título a partir de release-notes/
+        id: rn
+        run: |
+          TAG="${GITHUB_REF_NAME}"                     # ex.: v1.1.1
+          SLUG="${TAG//./-}"                           # ex.: v1-1-1
+          FILE="$(ls release-notes/*-"${SLUG}".md 2>/dev/null | head -1)"
+          if [ -z "$FILE" ]; then
+            echo "Sem release note para $TAG (procurado *-$SLUG.md). Usando corpo mínimo."
+            printf 'Release %s.\n' "$TAG" > corpo.md
+            echo "titulo=$TAG" >> "$GITHUB_OUTPUT"
+          else
+            # Título: campo `title:` do frontmatter (removidas aspas, se houver).
+            TITULO="$(sed -n 's/^title:[[:space:]]*//p' "$FILE" | head -1 | sed 's/^"//; s/"$//')"
+            echo "titulo=${TITULO:-$TAG}" >> "$GITHUB_OUTPUT"
+            # Corpo: tudo após o frontmatter (2º `---`), sem o marcador de truncamento.
+            awk 'BEGIN{fm=0} /^---[[:space:]]*$/{fm++; next} fm>=2{print}' "$FILE" \
+              | sed '/{\/\* truncate \*\/}/d' > corpo.md
+          fi
+
+      - name: Criar/atualizar a Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          TITULO="${{ steps.rn.outputs.titulo }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$TITULO" --notes-file corpo.md
+          else
+            gh release create "$TAG" --title "$TITULO" --notes-file corpo.md
+          fi

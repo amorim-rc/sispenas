@@ -27,11 +27,11 @@ jobs:
         run: npm ci
 
       # Regenera o derivado e falha se o catálogo tiver MAIS contradições do que o
-      # débito conhecido (42 duplicatas divergentes). O catálogo pode melhorar, não
+      # débito conhecido (0 — todas resolvidas). O catálogo pode melhorar, não
       # piorar. Ao resolver contradições, baixe --max-contradicoes na mesma medida.
       # Também impõe: todo registro é tipo penal, e todo id é único e append-only.
       - name: Validar catálogo de tipos penais
-        run: python3 scripts/transform_data.py --estrito --max-contradicoes=42
+        run: python3 scripts/transform_data.py --estrito --max-contradicoes=0
 
       # O derivado é commitado; se a transformação mudar o resultado, o PR está
       # desatualizado (o workflow regen-data.yml o regenera após o merge).

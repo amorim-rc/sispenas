@@ -109,17 +109,19 @@ PERDAO_JUDICIAL = [
     (_CP, r"^Art\. 337-A", False),            # sonegação de contribuição previdenciária (§2º)
     (_CP, r"^Art\. 242", False),              # parto suposto (par. único — motivo de nobreza)
     (_CP, r"^Art\. 249", False),              # subtração de incapazes (§2º)
+    (_CP, r"^Art\. 140, caput", False),       # injúria simples (§1º: provocação reprovável / retorsão) — não alcança a injúria racial do §3º
+    (_CP, r"^Art\. 176$", False),             # outras fraudes (par. único)
     (r"9\.807", r"^Art\. 13", False),         # proteção a vítimas e testemunhas — colaborador
     (r"12\.850", r"^Art\. 4º", False),        # colaboração premiada
 ]
 
 # Hipóteses legais de perdão judicial AUSENTES do catálogo de tipos penais.
 # Não são inventadas aqui: entram no relatório de qualidade como lacuna.
+# Perdão judicial de base JURISPRUDENCIAL (não expresso em lei) — fica de fora da lista
+# curada, que é só de hipóteses legais expressas, mas registrado como nota.
 PERDAO_JUDICIAL_SEM_TIPO = [
-    "CP, Art. 140, §1º — injúria (retorsão imediata / provocação reprovável)",
-    "CP, Art. 176, par. único — outras fraudes",
-    "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente)",
-    "CTB, Art. 291 c/c CP 121, §5º — homicídio culposo na direção (perdão admitido pelo STJ)",
+    "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente): hipótese sem tipo próprio no catálogo",
+    "CTB, Art. 302/303 — homicídio/lesão culposa na direção: perdão admitido pelo STJ por ANALOGIA ao CP 121, §5º, não por previsão expressa; por isso não é marcado no campo",
 ]
 
 
@@ -155,12 +157,45 @@ def validar_tipos_penais(crimes: list) -> list:
             continue
         tem_pena = bool(c.get("pena_max") or c.get("pena_min"))
         tem_sancao = bool(c.get("sancoes_nao_privativas"))
-        if not tem_pena and not tem_sancao:
+        # Tipo que comina SÓ multa (multa isolada) é sanção válida — ex.: o caput
+        # do art. 146-A (bullying), "Pena: multa, se não constitui crime mais grave".
+        tem_multa_isolada = c.get("tipo_pena") == "Multa"
+        if not tem_pena and not tem_sancao and not tem_multa_isolada:
             problemas.append(
-                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada e sem "
-                f"`sancoes_nao_privativas` — se for tipo penal, declare a sanção; se não for, remova"
+                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada, sem "
+                f"`sancoes_nao_privativas` e sem multa — se for tipo penal, declare a sanção; se não, remova"
             )
     return problemas
+
+
+# ── Fonte oficial por diploma (planalto.gov.br) ─────────────────────────────
+# Texto COMPILADO (com as alterações posteriores), nunca o original: é ele que
+# vale para conferência. Usado no relatório de qualidade, para que cada
+# contradição venha com o link de onde resolvê-la.
+PLANALTO = {
+    r"^CP( \(atualiz\.\))?$": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
+    r"^CPM": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1001compilado.htm",
+    r"^LCP": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3688.htm",
+    r"^CTB|9\.503": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+    r"^CE |4\.737": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
+    r"^ECA|8\.069": "https://www.planalto.gov.br/ccivil_03/leis/l8069compilado.htm",
+    r"11\.343": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343compilado.htm",
+    r"9\.455": "https://www.planalto.gov.br/ccivil_03/leis/l9455.htm",
+    r"8\.072": "https://www.planalto.gov.br/ccivil_03/leis/l8072compilado.htm",
+    r"10\.826": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.826compilado.htm",
+    r"13\.869": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13869.htm",
+    r"9\.605": "https://www.planalto.gov.br/ccivil_03/leis/l9605compilado.htm",
+    r"12\.850": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12850compilado.htm",
+    r"8\.137": "https://www.planalto.gov.br/ccivil_03/leis/l8137compilado.htm",
+}
+
+
+def url_planalto(lei: str) -> str:
+    """Link do texto compilado do diploma, ou busca no Planalto se desconhecido."""
+    for padrao, url in PLANALTO.items():
+        if re.search(padrao, lei or "", re.I):
+            return url
+    return f"https://www.planalto.gov.br/ccivil_03/ (buscar: {lei})"
 
 
 def chave_dispositivo(c: dict) -> str:
@@ -168,6 +203,72 @@ def chave_dispositivo(c: dict) -> str:
     lei = re.sub(r"\s+", " ", (c.get("lei") or "")).strip().lower()
     art = re.sub(r"\s+", " ", (c.get("artigo") or "")).strip().lower()
     return f"{lei}|{art}"
+
+
+# Palavras vazias que não ajudam a decidir se dois registros descrevem a MESMA
+# conduta (aparecem em quase todo nome de tipo penal).
+_VAZIAS = {
+    "a", "ao", "aos", "as", "com", "contra", "da", "das", "de", "do", "dos", "e",
+    "em", "na", "nas", "no", "nos", "o", "os", "ou", "para", "por", "que", "se",
+    "sem", "um", "uma", "aumento", "qualificado", "qualificada", "majorado",
+    "majorada", "art", "pena", "caput",
+}
+
+
+def _radical(p: str) -> str:
+    """Radical grosseiro: os 5 primeiros caracteres, sem acento.
+
+    Basta para casar as flexões que o catálogo usa para a MESMA conduta —
+    "Inscrição fraudulenta de eleitor" × "Inscrever-se fraudulentamente como
+    eleitor" viram {inscr, fraud, eleit} nos dois casos. Sem isso, a diferença
+    entre substantivo e verbo seria lida como crime diferente.
+    """
+    sem_acento = p.translate(str.maketrans("áàâãäéèêëíìîïóòôõöúùûüç", "aaaaaeeeeiiiiooooouuuuc"))
+    return sem_acento[:5]
+
+
+def _termos(nome: str) -> set:
+    palavras = re.findall(r"[a-zà-ú]{3,}", (nome or "").lower())
+    return {_radical(p) for p in palavras if p not in _VAZIAS}
+
+
+def mesma_conduta(a: dict, b: dict) -> bool:
+    """Dois registros do mesmo dispositivo descrevem a mesma conduta?
+
+    Compara o vocabulário dos nomes (Jaccard). Serve para separar dois defeitos
+    de gravidade muito diferente:
+
+    - nomes PARECIDOS + penas diferentes -> divergência de pena: um dos dois erra
+      o quantum do mesmo crime;
+    - nomes DIFERENTES -> divergência de IDENTIDADE: o catálogo afirma dois
+      crimes distintos sob o mesmo dispositivo, ou seja, ao menos um registro
+      está sob o rótulo errado. É o defeito mais grave, porque a pena "certa"
+      pode estar atribuída ao artigo errado.
+
+    Ex.: `LCP, Art. 32` aparece como "Disparar arma de fogo" e como "Dirigir sem
+    habilitação" — não é divergência de pena, é rótulo trocado.
+
+    Usa o coeficiente de SOBREPOSIÇÃO (interseção / menor conjunto), não Jaccard:
+    é comum um registro trazer o nome curto ("Peculato culposo") e o outro uma
+    paráfrase longa ("Peculato culposo — concorre culposamente para o crime de
+    outrem"). Jaccard puniria a paráfrase (a união cresce) e acusaria identidade
+    onde a conduta é a mesma.
+    """
+    ta, tb = _termos(a.get("crime")), _termos(b.get("crime"))
+    if not ta or not tb:
+        return True  # sem vocabulário útil: não afirmar divergência de identidade
+    return (len(ta & tb) / min(len(ta), len(tb))) >= 0.5
+
+
+def classificar_contradicao(grupo: list) -> str:
+    """`identidade` | `hediondez` | `pena` — o tipo do defeito, do pior ao menor."""
+    for i in range(len(grupo)):
+        for j in range(i + 1, len(grupo)):
+            if not mesma_conduta(grupo[i], grupo[j]):
+                return "identidade"
+    if len({g["hediondo"] for g in grupo}) > 1:
+        return "hediondez"
+    return "pena"
 
 
 def validar_ids(crimes: list) -> list:
@@ -239,8 +340,14 @@ def parse_pena_range(obs: str):
 
     Reconhece "15 dias a 6 meses", "1-5 anos", "2 a 5 anos", "3m-1a". Retorna
     None se nada for encontrado. O primeiro match corresponde ao caput.
+
+    Neutraliza antes o "dias-multa" (pena de MULTA em dias-multa, art. 49 do CP):
+    ele nunca é a pena de prisão, mas casaria o padrão "5 a 15 dias" e sobreporia
+    o tempo de reclusão/detenção — o que corromperia, p.ex., os crimes eleitorais
+    ("reclusão até 5 anos e 5 a 15 dias-multa") e os de tráfico ("500 a 1.500
+    dias-multa").
     """
-    text = obs or ""
+    text = re.sub(r"dias?\s*[-\s]?\s*multa", " multa ", obs or "", flags=re.IGNORECASE)
     m = RANGE_2U.search(text)
     if m:
         return int(m.group(1)), _norm_unidade(m.group(2)), int(m.group(3)), _norm_unidade(m.group(4))
@@ -404,15 +511,20 @@ def main():
         penas = {(g["pena_min_meses"], g["pena_max_meses"]) for g in grupo}
         hedis = {g["hediondo"] for g in grupo}
         divergente = len(penas) > 1 or len(hedis) > 1
+        tipo = classificar_contradicao(grupo) if divergente else ""
         for g in grupo:
             g["duplicata"] = True
             g["duplicata_divergente"] = divergente
+            g["duplicata_tipo"] = tipo
             g["duplicata_ids"] = sorted(x["id"] for x in grupo if x["id"] != g["id"])
         if divergente:
             contraditorios.append(
                 {
                     "chave": chave,
+                    "tipo": tipo,
                     "ids": sorted(g["id"] for g in grupo),
+                    "crimes": [g["crime"][:90] for g in grupo],
+                    "fonte": url_planalto(grupo[0].get("lei")),
                     "crime": grupo[0]["crime"][:80],
                     "penas_meses": sorted(f"{a}-{b}" for a, b in penas),
                     "hediondo": sorted(hedis),
