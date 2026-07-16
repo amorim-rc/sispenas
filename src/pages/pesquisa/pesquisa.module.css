@@ -1,0 +1,16 @@
+.cabecalho {
+  padding: 2rem 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--ifm-color-primary-darkest), var(--ifm-color-primary));
+  color: #fff;
+}
+.titulo {
+  font-size: 2rem;
+  margin: 0;
+}
+.subtitulo {
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0;
+  max-width: 820px;
+  opacity: 0.9;
+  line-height: 1.6;
+}

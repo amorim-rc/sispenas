@@ -58,4 +58,8 @@ export interface Cenario {
   confessou: boolean;
   reparouDano: boolean;
   bonsAntecedentes: boolean;
+  /** Crime culposo: afasta o teto de pena da substituição (art. 44, I, parte final, CP). */
+  culposo: boolean;
+  /** Tipo admite tentativa: pressuposto da desistência voluntária/arrependimento eficaz. */
+  admiteTentativa: boolean;
 }

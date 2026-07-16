@@ -48,6 +48,21 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // Até a v1.0.0, "Sobre o SISPENAS" era uma página da documentação e a
+        // pesquisa de tipos penais era servida na raiz. Ambas mudaram de lugar na
+        // v1.1.0; estes redirecionamentos preservam os links já publicados.
+        // O caso `/?tipo=N` depende da query string e é tratado em src/pages/index.tsx.
+        redirects: [
+          {from: '/docs/sobre', to: '/'},
+        ],
+      },
+    ],
+  ],
+
   themeConfig: {
     image: 'img/sispenas-social-card.jpg',
     colorMode: {
@@ -60,12 +75,25 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        {to: '/', label: 'Pesquisa', position: 'left', activeBasePath: '/'},
+        {to: '/', label: 'Sobre o SISPENAS', position: 'left', activeBaseRegex: '^/sispenas/$'},
         {
-          type: 'docSidebar',
-          sidebarId: 'docsSidebar',
+          type: 'dropdown',
+          label: 'Pesquisa',
           position: 'left',
+          items: [
+            {to: '/pesquisa/tipos', label: 'Busca por tipo penal'},
+            {to: '/pesquisa/beneficios', label: 'Busca por benefício'},
+          ],
+        },
+        {
+          type: 'dropdown',
           label: 'Documentação',
+          position: 'left',
+          items: [
+            {to: '/docs/metodologia', label: 'Metodologia'},
+            {to: '/docs/beneficios-penais', label: 'Benefícios penais'},
+            {to: '/docs/dados-abertos', label: 'Dados abertos'},
+          ],
         },
         {to: '/docs/roadmap', label: 'Roadmap', position: 'left'},
         {
@@ -81,7 +109,8 @@ const config: Config = {
         {
           title: 'Ferramenta',
           items: [
-            {label: 'Pesquisa de tipos penais', to: '/'},
+            {label: 'Busca por tipo penal', to: '/pesquisa/tipos'},
+            {label: 'Busca por benefício', to: '/pesquisa/beneficios'},
             {label: 'Metodologia', to: '/docs/metodologia'},
             {label: 'Benefícios penais', to: '/docs/beneficios-penais'},
           ],
@@ -89,7 +118,7 @@ const config: Config = {
         {
           title: 'Projeto',
           items: [
-            {label: 'Sobre', to: '/docs/sobre'},
+            {label: 'Sobre o SISPENAS', to: '/'},
             {label: 'Roadmap', to: '/docs/roadmap'},
             {label: 'Dados abertos', to: '/docs/dados-abertos'},
           ],

@@ -1,25 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import type {Crime, Cenario} from '@site/src/lib/types';
 import {calcularBeneficios, CATEGORIA_LABEL, type Categoria, type BeneficioResultado} from '@site/src/lib/beneficios';
+import {cenarioFromCrime} from '@site/src/lib/cenario';
 import {formatPena} from '@site/src/lib/format';
 import styles from './styles.module.css';
-
-function cenarioFromCrime(c: Crime): Cenario {
-  return {
-    penaMin: c.pena_min_meses,
-    penaMax: c.pena_max_meses,
-    penaConcreta: c.pena_min_meses || c.pena_max_meses || 12,
-    primario: true,
-    reincidenteEspecifico: false,
-    hediondo: c.hediondo === 'Sim',
-    resultadoMorte: false,
-    violencia: c.violencia === 'Sim',
-    graveAmeaca: c.grave_ameaca === 'Sim',
-    confessou: false,
-    reparouDano: false,
-    bonsAntecedentes: true,
-  };
-}
 
 const STATUS_LABEL: Record<string, string> = {
   cabivel: 'Cabível',
@@ -180,6 +164,8 @@ export default function Detalhe({
             <label><input type="checkbox" checked={cen.graveAmeaca} onChange={(e) => set('graveAmeaca', e.target.checked)} /> Grave ameaça</label>
             <label><input type="checkbox" checked={cen.confessou} onChange={(e) => set('confessou', e.target.checked)} /> Confissão formal</label>
             <label><input type="checkbox" checked={cen.bonsAntecedentes} onChange={(e) => set('bonsAntecedentes', e.target.checked)} /> Bons antecedentes</label>
+            <label><input type="checkbox" checked={cen.culposo} onChange={(e) => set('culposo', e.target.checked)} /> Culposo</label>
+            <label><input type="checkbox" checked={cen.reparouDano} onChange={(e) => set('reparouDano', e.target.checked)} /> Reparou o dano</label>
           </div>
         </div>
       </div>

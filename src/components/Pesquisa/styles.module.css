@@ -283,8 +283,11 @@
   border-radius: 6px;
   margin: 0.3rem 0;
 }
-.folgaOk { color: #2e7d32; font-weight: 600; }
-.folgaNo { color: #c62828; font-weight: 600; }
+/* Cores semânticas do Infima: contraste garantido nos temas claro e escuro. */
+.folgaOk { color: var(--ifm-color-success-darkest); font-weight: 600; }
+.folgaNo { color: var(--ifm-color-danger-darkest); font-weight: 600; }
+[data-theme='dark'] .folgaOk { color: var(--ifm-color-success-lightest); }
+[data-theme='dark'] .folgaNo { color: var(--ifm-color-danger-lightest); }
 .benefDet { margin: 0.4rem 0 0; padding-left: 1.1rem; font-size: 0.78rem; color: var(--ifm-color-emphasis-700); }
 .benefDet li { margin-bottom: 0.2rem; }
 
@@ -312,8 +315,9 @@
 .correlatoPena { color: var(--ifm-color-emphasis-700); white-space: nowrap; }
 .correlatoDup {
   font-size: 0.68rem;
-  color: #b26a00;
-  background: #fff3e0;
+  color: var(--ifm-color-warning-contrast-foreground);
+  background: var(--ifm-color-warning-contrast-background);
+  border: 1px solid var(--ifm-color-warning-dark);
   border-radius: 4px;
   padding: 0.05rem 0.35rem;
   white-space: nowrap;

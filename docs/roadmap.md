@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # Roadmap
 
-## v1.0.0 (atual) — SISPENAS sobre Docusaurus
+## v1.0.0 — SISPENAS sobre Docusaurus
 
 Plataforma de pesquisa com ferramenta interativa e documentação integrada.
 
@@ -17,12 +17,60 @@ Plataforma de pesquisa com ferramenta interativa e documentação integrada.
 - [x] **Cálculo dinâmico de benefícios penais** ao selecionar um tipo
 - [x] **Simulação de alteração legislativa** (ajuste de pena → recálculo de benefícios em tempo real)
 - [x] Dados abertos (JSON) + licença MIT com atribuição
+
+---
+
+## v1.1.0 (atual) — Busca por benefício e catálogo declarativo
+
+Inversão do percurso de pesquisa e reescrita do motor de benefícios como **registro
+de dados**, não como regras embutidas no código.
+
+- [x] **Landing page** com o texto institucional "Sobre o SISPENAS"
+- [x] Navbar reorganizada: *Sobre o SISPENAS*, *Pesquisa* ▾, *Documentação* ▾, *Roadmap*
+- [x] **Busca por tipo penal** movida para `/pesquisa/tipos` (fluxo direto, preservado)
+- [x] **Busca por benefício** (`/pesquisa/beneficios`) — fluxo inverso: benefício →
+      requisitos, vedações e patamares → **tipos penais afetados**
+- [x] **Registro declarativo de benefícios** (`BeneficioDef`): metadados, requisitos,
+      vedações, parâmetros editáveis com fundamento legal e função pura de avaliação
+- [x] **Edição de qualquer atributo do benefício** com recálculo imediato do catálogo
+- [x] Indicador de **delta de alcance**: quantos tipos penais a alteração inclui/exclui
+- [x] Catálogo ampliado de **13 para 22 benefícios** (perdão judicial, arrependimento
+      posterior, desistência/arrependimento eficaz, colaboração premiada, prisão
+      domiciliar, monitoração eletrônica, comutação, graça, unificação de penas)
+- [x] Correção: substituição por PRD nos **crimes culposos** independe do quantum da
+      pena (art. 44, I, parte final) — antes documentado, não implementado
+- [x] `npm run verificar` — invariantes do motor + casos-âncora de direito penal
+      contra o catálogo real, integrado à CI
+- [x] Correções de contraste no **modo escuro**; redirecionamento das URLs da v1.0.0
+
+### Lacunas conhecidas desta versão
+
+- [ ] O catálogo não registra, tipo a tipo, o **resultado morte** — hoje é um controle
+      global da simulação, e não um dado do tipo penal
+- [ ] O catálogo não registra a **previsão expressa de perdão judicial** por tipo
 - [ ] Revisão jurídica individual dos campos derivados
 - [ ] Dashboards analíticos (distribuição de penas, hediondos por década)
 
 ---
 
-## v1.1.0 — Atualização automática da legislação (crawler do DOU)
+## v1.2.0 — Catálogo de benefícios versionado em dados
+
+Concluir o caminho aberto pela v1.1.0: tirar os benefícios do código e colocá-los em
+**JSON versionado**, como já ocorre com `crimes.json`.
+
+- [ ] Serializar `BeneficioDef` para `data/beneficios.json` (metadados, requisitos,
+      vedações e parâmetros), mantendo em código apenas as funções de avaliação
+- [ ] Vocabulário de **predicados de avaliação** declarativos (`penaMax <= X`,
+      `semViolencia`, `naoReincidente`) para dispensar código em benefícios simples
+- [ ] Campo `resultado_morte` e `perdao_judicial_previsto` no catálogo de tipos penais
+- [ ] **Vigência temporal**: qual redação de cada benefício vigia em cada data
+      (ex.: art. 112 da LEP antes e depois da Lei 13.964/2019)
+- [ ] CI de validação do catálogo de benefícios (frações em [0,1], fundamentos citados)
+- [ ] Permalink de simulação: URL que carrega os parâmetros editados
+
+---
+
+## v1.3.0 — Atualização automática da legislação (crawler do DOU)
 
 Manter o catálogo atualizado com segurança jurídica, a partir do **Diário Oficial da
 União (DOU)**.
@@ -52,7 +100,7 @@ GitHub Actions (cron semanal)
 
 ---
 
-## v1.2.0 — Atualizações de Processo Penal
+## v1.4.0 — Atualizações de Processo Penal
 
 Estender o mesmo mecanismo de atualização automática para o **Direito Processual Penal**,
 que rege boa parte dos benefícios (ANPP, transação, suspensão do processo, execução).
@@ -60,8 +108,6 @@ que rege boa parte dos benefícios (ANPP, transação, suspensão do processo, e
 - [ ] Monitorar alterações do **CPP**, da **Lei 9.099/95** e da **LEP**
 - [ ] Monitorar **súmulas e teses de repercussão geral** (STF/STJ) que alterem limiares
       ou vedações de benefícios (ex.: Súmula 536 STJ)
-- [ ] Base versionada de **regras de benefícios** (patamares, frações, vedações) separada
-      do código, para atualização sem redeploy
 - [ ] Alertas quando uma decisão vinculante invalidar uma regra implementada
 - [ ] Registro temporal: qual regra de benefício vigia em cada data
 
@@ -74,6 +120,20 @@ que rege boa parte dos benefícios (ANPP, transação, suspensão do processo, e
 - [ ] Séries temporais do endurecimento/abrandamento penal
 - [ ] Exportação para pesquisa (CSV, JSON, API)
 - [ ] Colaboração da comunidade jurídica (propostas de correção via PR)
+
+---
+
+## Melhorias transversais (sem versão fixa)
+
+Itens de menor porte, incorporáveis a qualquer ciclo:
+
+- [ ] **Acessibilidade**: navegação por teclado na tabela de resultados, `aria-live`
+      nos contadores que mudam com a simulação, foco visível consistente
+- [ ] **Busca textual** com tolerância a acentos e erros de digitação
+- [ ] **Exportar resultado** da busca por benefício em CSV
+- [ ] **Comparar dois benefícios** lado a lado sobre o mesmo catálogo
+- [ ] Testes de regressão da dosimetria com casos reais de jurisprudência
+- [ ] Concurso de crimes (material, formal, continuidade delitiva) na simulação
 
 ---
 
