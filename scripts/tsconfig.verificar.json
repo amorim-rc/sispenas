@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "CommonJS",
+    "moduleResolution": "node10",
+    "ignoreDeprecations": "6.0",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "strict": false,
+    "outDir": "../.verificar-build",
+    "rootDir": ".."
+  },
+  "include": ["verificar_beneficios.ts", "../src/lib/**/*.ts"],
+  "exclude": ["../src/lib/useCrimes.ts"]
+}

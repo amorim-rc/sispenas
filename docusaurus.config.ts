@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'SISPENAS',
   tagline: 'Sistema de Pesquisa de Tipos Penais e Benefícios — Brasil',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,
@@ -39,8 +39,26 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
+          admonitions: true,
         },
-        blog: false,
+        // O plugin de blog serve de changelog: cada release é um post datado em
+        // release-notes/. É a mesma abordagem que o próprio Docusaurus usa para
+        // o changelog dele. O roadmap fica só com o que está por vir.
+        blog: {
+          path: 'release-notes',
+          routeBasePath: 'release-notes',
+          blogTitle: 'Release notes',
+          blogDescription: 'Histórico de versões do SISPENAS.',
+          blogSidebarTitle: 'Versões',
+          blogSidebarCount: 'ALL',
+          showReadingTime: false,
+          onUntruncatedBlogPosts: 'ignore',
+          feedOptions: {
+            type: 'all',
+            title: 'SISPENAS — Release notes',
+            copyright: `SISPENAS © ${new Date().getFullYear()} — Equipe SISPENAS.`,
+          },
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -48,8 +66,27 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // Até a v1.0.0, "Sobre o SISPENAS" era uma página da documentação e a
+        // pesquisa de tipos penais era servida na raiz. Ambas mudaram de lugar na
+        // v1.1.0; estes redirecionamentos preservam os links já publicados.
+        // O caso `/?tipo=N` depende da query string e é tratado em src/pages/index.tsx.
+        redirects: [
+          {from: '/docs/sobre', to: '/'},
+        ],
+      },
+    ],
+  ],
+
   themeConfig: {
-    image: 'img/sispenas-social-card.jpg',
+    // `image` (og:image) fica de fora até existir um social card próprio: apontava
+    // para img/sispenas-social-card.jpg, que nunca existiu no repositório — o
+    // arquivo presente era o card padrão do Docusaurus, com outro nome. Uma
+    // referência quebrada é pior que a ausência: o og:image 404 aparece como
+    // imagem falha no compartilhamento. Ver roadmap (melhorias transversais).
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -60,14 +97,29 @@ const config: Config = {
         src: 'img/logo.svg',
       },
       items: [
-        {to: '/', label: 'Pesquisa', position: 'left', activeBasePath: '/'},
+        {to: '/', label: 'Sobre o SISPENAS', position: 'left', activeBaseRegex: '^/sispenas/$'},
         {
-          type: 'docSidebar',
-          sidebarId: 'docsSidebar',
+          type: 'dropdown',
+          label: 'Pesquisa',
           position: 'left',
+          items: [
+            {to: '/pesquisa/tipos', label: 'Busca por tipo penal'},
+            {to: '/pesquisa/beneficios', label: 'Busca por benefício'},
+          ],
+        },
+        {
+          type: 'dropdown',
           label: 'Documentação',
+          position: 'left',
+          items: [
+            {to: '/docs/metodologia', label: 'Metodologia'},
+            {to: '/docs/catalogo-tipos-penais', label: 'Catálogo de tipos penais'},
+            {to: '/docs/beneficios-penais', label: 'Benefícios penais'},
+            {to: '/docs/dados-abertos', label: 'Dados abertos'},
+          ],
         },
         {to: '/docs/roadmap', label: 'Roadmap', position: 'left'},
+        {to: '/release-notes', label: 'Release notes', position: 'left'},
         {
           href: 'https://github.com/amorim-rc/sispenas',
           label: 'GitHub',
@@ -81,7 +133,8 @@ const config: Config = {
         {
           title: 'Ferramenta',
           items: [
-            {label: 'Pesquisa de tipos penais', to: '/'},
+            {label: 'Busca por tipo penal', to: '/pesquisa/tipos'},
+            {label: 'Busca por benefício', to: '/pesquisa/beneficios'},
             {label: 'Metodologia', to: '/docs/metodologia'},
             {label: 'Benefícios penais', to: '/docs/beneficios-penais'},
           ],
@@ -89,7 +142,7 @@ const config: Config = {
         {
           title: 'Projeto',
           items: [
-            {label: 'Sobre', to: '/docs/sobre'},
+            {label: 'Sobre o SISPENAS', to: '/'},
             {label: 'Roadmap', to: '/docs/roadmap'},
             {label: 'Dados abertos', to: '/docs/dados-abertos'},
           ],

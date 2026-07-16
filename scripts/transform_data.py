@@ -9,17 +9,31 @@ combinados por modalidade de pena e cálculo de benefícios penais:
   - tem_multa      : bool  (multa cumulada OU alternativa OU isolada)
   - multa_regime   : cumulativa | alternativa | isolada | nenhuma
   - infracao_menor_potencial : bool (pena máx <= 2 anos -> JECRIM)
+  - tem_pena_privativa : bool (comina prisão? entra nas estatísticas de alcance?)
+  - resultado_morte : bool (qualificado pelo resultado morte -> art. 112, VI/VIII, LEP)
+  - perdao_judicial_previsto : bool (há previsão legal expressa de perdão judicial?)
+  - chave_dispositivo / duplicata : rastreiam registros repetidos
 
-Todos os campos derivados são heurísticos (regex sobre `obs`/`artigo`) e
-serão revisados individualmente. Correções finas ficam em CORRECOES (abaixo).
+Impõe também as convenções do catálogo (ver CONTRIBUTING.md, C1 a C3): só tipos
+penais, toda sanção declarada e `id` append-only. Violá-las falha o build.
+
+Todos os campos derivados são heurísticos (regex sobre `crime`/`obs`/`artigo`) e
+serão revisados individualmente. Correções finas ficam nas tabelas CORRECOES_*.
+
+O arquivo de saída (static/data/crimes.json) é o único consumido pela aplicação;
+data/crimes.json é a FONTE editável à mão (inclusive pela interface web do
+GitHub) e regenerada pelo workflow .github/workflows/regen-data.yml.
 """
 import json
 import re
+import sys
+from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "crimes.json"
 OUT = ROOT / "static" / "data" / "crimes.json"
+RELATORIO = ROOT / "static" / "data" / "qualidade.json"
 
 PENA_PRIVATIVA_MAP = {
     "Reclusão": "Reclusão",
@@ -42,6 +56,149 @@ CORRECOES = {
     176: {"tem_multa": False, "multa_regime": "nenhuma"},
     898: {"tem_multa": False, "multa_regime": "nenhuma"},
 }
+
+# ── O catálogo contém APENAS tipos penais ───────────────────────────────────
+# Regra estrutural: cada registro é um tipo penal. Não entram notas de
+# referência, agravantes, causas de aumento, excludentes de ilicitude nem regras
+# de ação penal — todos foram removidos na v1.1.0. Com pena zero, eles
+# satisfaziam qualquer teto de pena e eram contados como "cabíveis" em transação
+# penal, ANPP e sursis.
+#
+# A regra é IMPOSTA aqui (e não apenas sinalizada) para que as atualizações
+# automáticas da v2.0.0 não a violem: ver docs/catalogo-tipos-penais.md.
+NAO_TIPIFICA = re.compile(r"REFER[ÊE]NCIA|EXCLUDENTE", re.IGNORECASE)
+
+# ── Resultado morte (art. 112, VI e VIII, LEP; art. 122, §2º, LEP) ──────────
+# Casa apenas contra o NOME do tipo, nunca contra `obs`: o campo obs costuma
+# descrever a pena de OUTROS parágrafos do mesmo artigo ("se resulta morte,
+# triplica"), o que produziria falsos positivos — p.ex. Art. 135 (omissão de
+# socorro), Art. 267 (epidemia dolosa) e Art. 270 (envenenamento), cujos caputs
+# não são qualificados pela morte.
+RESULTADO_MORTE = re.compile(
+    r"\bmortes?\b|latroc[íi]nio|homic[íi]dio|feminic[íi]dio|infantic[íi]dio|genoc[íi]dio",
+    re.IGNORECASE,
+)
+
+# Exceções à regra acima, por id. Revisão manual.
+CORRECOES_MORTE = {
+    # Art. 158, §3º, CP: o dispositivo remete às penas do art. 159, §§2º e 3º,
+    # cobrindo TANTO lesão grave QUANTO morte no mesmo registro. Não é possível
+    # afirmar o resultado morte a partir deste registro — fica em revisão.
+    # (mantido False; ver relatório de qualidade)
+}
+
+# ── Perdão judicial (art. 107, IX, CP) ──────────────────────────────────────
+# NÃO existe perdão judicial genérico: só incide onde a lei o prevê
+# expressamente, e não se estende por analogia (daí a lista ser curada, e não
+# inferida do elemento culposo). O benefício é atribuído ao CRIME que o admite,
+# não apenas ao parágrafo que o institui: o perdão do art. 121, §5º alcança o
+# homicídio culposo do §3º.
+#
+# `^CP$` é ancorado de propósito: `^CP` casaria também "CPM (DL 1.001/69)",
+# atribuindo perdão judicial à ofensa aviltante a inferior (art. 176 do CPM).
+# Cada regra é (regex da lei, regex do artigo, exige_culposo). `exige_culposo`
+# filtra os dispositivos cujo perdão a lei restringe à modalidade culposa: o
+# art. 121, §4º tem uma 1ª parte culposa e uma 2ª parte DOLOSA (aumento contra
+# menor de 14), e só a primeira admite o perdão do §5º.
+_CP = r"^CP( \(atualiz\.\))?$"
+PERDAO_JUDICIAL = [
+    (_CP, r"^Art\. 121, §[345]º", True),      # homicídio culposo (§3º/§4º) e o perdão (§5º)
+    (_CP, r"^Art\. 129, §(5|6|7|11)º?", True),  # lesão corporal culposa e o perdão
+    (_CP, r"^Art\. 180, §3º", True),          # receptação culposa (perdão no §5º)
+    (_CP, r"^Art\. 168-A", False),            # apropriação indébita previdenciária (§3º)
+    (_CP, r"^Art\. 337-A", False),            # sonegação de contribuição previdenciária (§2º)
+    (_CP, r"^Art\. 242", False),              # parto suposto (par. único — motivo de nobreza)
+    (_CP, r"^Art\. 249", False),              # subtração de incapazes (§2º)
+    (r"9\.807", r"^Art\. 13", False),         # proteção a vítimas e testemunhas — colaborador
+    (r"12\.850", r"^Art\. 4º", False),        # colaboração premiada
+]
+
+# Hipóteses legais de perdão judicial AUSENTES do catálogo de tipos penais.
+# Não são inventadas aqui: entram no relatório de qualidade como lacuna.
+PERDAO_JUDICIAL_SEM_TIPO = [
+    "CP, Art. 140, §1º — injúria (retorsão imediata / provocação reprovável)",
+    "CP, Art. 176, par. único — outras fraudes",
+    "CP, Art. 218-B, §2º, II — favorecimento da prostituição (cliente)",
+    "CTB, Art. 291 c/c CP 121, §5º — homicídio culposo na direção (perdão admitido pelo STJ)",
+]
+
+
+def _casa(regra, c: dict) -> bool:
+    lei_re, art_re, exige_culposo = regra
+    if not re.search(lei_re, c.get("lei") or "", re.I):
+        return False
+    if not re.search(art_re, c.get("artigo") or "", re.I):
+        return False
+    if exige_culposo and c.get("elemento") != "Culposo":
+        return False
+    return True
+
+
+def validar_tipos_penais(crimes: list) -> list:
+    """Invariante DURO: todo registro é um tipo penal com sanção cominada.
+
+    Um registro sem pena privativa E sem sanções próprias (ex.: uma nota de
+    referência) não é um tipo penal: com pena zero ele satisfaria qualquer teto e
+    contaminaria as estatísticas de alcance dos benefícios.
+
+    A exceção legítima é o tipo penal cujas sanções não são privativas de
+    liberdade — art. 28 da Lei 11.343/06 —, que declara `sancoes_nao_privativas`.
+    """
+    problemas = []
+    for c in crimes:
+        nome = c.get("crime") or ""
+        if NAO_TIPIFICA.search(nome):
+            problemas.append(
+                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): "
+                f"não é tipo penal — {nome[:60]}"
+            )
+            continue
+        tem_pena = bool(c.get("pena_max") or c.get("pena_min"))
+        tem_sancao = bool(c.get("sancoes_nao_privativas"))
+        if not tem_pena and not tem_sancao:
+            problemas.append(
+                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada e sem "
+                f"`sancoes_nao_privativas` — se for tipo penal, declare a sanção; se não for, remova"
+            )
+    return problemas
+
+
+def chave_dispositivo(c: dict) -> str:
+    """Identidade do dispositivo, para detectar registros repetidos."""
+    lei = re.sub(r"\s+", " ", (c.get("lei") or "")).strip().lower()
+    art = re.sub(r"\s+", " ", (c.get("artigo") or "")).strip().lower()
+    return f"{lei}|{art}"
+
+
+def validar_ids(crimes: list) -> list:
+    """Invariantes DUROS do identificador. Nunca são débito tolerável.
+
+    O `id` é a URL pública de cada tipo penal (`/pesquisa/tipos?tipo=N`) e o site
+    está publicado. Ele é APPEND-ONLY: um id novo vai para o fim (max + 1) e um id
+    existente jamais é reatribuído a outro dispositivo, sob pena de um link antigo
+    passar a apontar para o crime errado — falha silenciosa e difícil de notar.
+
+    Importa sobretudo a partir da v2.0.0, quando o crawler do DOU passa a propor
+    inclusões automáticas no catálogo.
+    """
+    problemas = []
+    ids = [c.get("id") for c in crimes]
+
+    sem_id = [i for i, v in enumerate(ids) if v is None]
+    if sem_id:
+        problemas.append(f"{len(sem_id)} registro(s) sem `id` (posições {sem_id[:5]})")
+
+    repetidos = sorted(i for i, n in Counter(ids).items() if n > 1 and i is not None)
+    if repetidos:
+        problemas.append(
+            f"{len(repetidos)} `id` repetido(s): {repetidos[:10]} — cada id é uma URL pública"
+        )
+
+    nao_inteiros = [v for v in ids if v is not None and not isinstance(v, int)]
+    if nao_inteiros:
+        problemas.append(f"{len(nao_inteiros)} `id` não inteiro(s): {nao_inteiros[:5]}")
+
+    return problemas
 
 
 # ── Unidades de pena (dias / meses / anos) ──────────────────────────────────
@@ -181,6 +338,13 @@ def main():
     crimes = json.loads(SRC.read_text(encoding="utf-8"))
     review_rows = []
 
+    # Invariantes estruturais: falham sempre, independentemente de --estrito.
+    problemas = validar_ids(crimes) + validar_tipos_penais(crimes)
+    if problemas:
+        for p in problemas:
+            print(f"ERRO: {p}", file=sys.stderr)
+        return 1
+
     for c in crimes:
         tipo = c.get("tipo_pena")
         c["pena_privativa"] = PENA_PRIVATIVA_MAP.get(tipo, "Nenhuma")
@@ -199,16 +363,86 @@ def main():
         pmax = c["pena_max_meses"]
         c["infracao_menor_potencial"] = bool(pmax and pmax <= 24)
 
+        # Todo registro é tipo penal (garantido por validar_tipos_penais). O que
+        # varia é ter ou não pena PRIVATIVA: só quem tem entra nas estatísticas de
+        # alcance dos benefícios, que se medem por patamar de pena.
+        c["tem_pena_privativa"] = bool(pmax or c["pena_min_meses"])
+        c.setdefault("sancoes_nao_privativas", [])
+        if not c["tem_pena_privativa"]:
+            c["pena_faixa_rotulo"] = "sem pena privativa"
+
+        # Resultado morte — derivado do nome do tipo, sobreponível por revisão.
+        morte = bool(RESULTADO_MORTE.search(c.get("crime") or ""))
+        if c["id"] in CORRECOES_MORTE:
+            morte = CORRECOES_MORTE[c["id"]]
+            c["resultado_morte_revisado"] = True
+        c["resultado_morte"] = morte
+        c["resultado_morte_derivado"] = c["id"] not in CORRECOES_MORTE
+
+        # Perdão judicial — só onde a lei prevê expressamente.
+        c["perdao_judicial_previsto"] = any(_casa(p, c) for p in PERDAO_JUDICIAL)
+
+        c["chave_dispositivo"] = chave_dispositivo(c)
+
         if ambiguo:
             review_rows.append(
                 (c["id"], c["lei"], c["artigo"], c["crime"], regime, motivo, (c.get("obs") or "")[:120])
             )
 
+    # ── Duplicatas ──────────────────────────────────────────────────────────
+    # Mesmo dispositivo (lei + artigo) registrado mais de uma vez. Quando as
+    # penas divergem entre as cópias, há uma CONTRADIÇÃO factual no catálogo:
+    # não é possível saber qual está correta sem revisão jurídica do artigo.
+    por_chave = defaultdict(list)
+    for c in crimes:
+        por_chave[c["chave_dispositivo"]].append(c)
+
+    contraditorios = []
+    for chave, grupo in por_chave.items():
+        if len(grupo) == 1:
+            continue
+        penas = {(g["pena_min_meses"], g["pena_max_meses"]) for g in grupo}
+        hedis = {g["hediondo"] for g in grupo}
+        divergente = len(penas) > 1 or len(hedis) > 1
+        for g in grupo:
+            g["duplicata"] = True
+            g["duplicata_divergente"] = divergente
+            g["duplicata_ids"] = sorted(x["id"] for x in grupo if x["id"] != g["id"])
+        if divergente:
+            contraditorios.append(
+                {
+                    "chave": chave,
+                    "ids": sorted(g["id"] for g in grupo),
+                    "crime": grupo[0]["crime"][:80],
+                    "penas_meses": sorted(f"{a}-{b}" for a, b in penas),
+                    "hediondo": sorted(hedis),
+                }
+            )
+    for c in crimes:
+        c.setdefault("duplicata", False)
+        c.setdefault("duplicata_divergente", False)
+        c.setdefault("duplicata_ids", [])
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(crimes, ensure_ascii=False, indent=1), encoding="utf-8")
 
-    # Estatísticas
-    from collections import Counter
+    # ── Relatório de qualidade ──────────────────────────────────────────────
+    com_pena = [c for c in crimes if c["tem_pena_privativa"]]
+    relatorio = {
+        "total_tipos_penais": len(crimes),
+        "com_pena_privativa": len(com_pena),
+        "sem_pena_privativa": len(crimes) - len(com_pena),
+        "dispositivos_distintos": len(por_chave),
+        "registros_duplicados": sum(1 for c in crimes if c["duplicata"]),
+        "duplicatas_divergentes": len(contraditorios),
+        "resultado_morte": sum(1 for c in crimes if c["resultado_morte"]),
+        "perdao_judicial_previsto": sum(1 for c in crimes if c["perdao_judicial_previsto"]),
+        "multa_ambigua": len(review_rows),
+        "perdao_judicial_sem_tipo": PERDAO_JUDICIAL_SEM_TIPO,
+        "contradicoes": sorted(contraditorios, key=lambda x: x["ids"][0]),
+    }
+    RELATORIO.write_text(json.dumps(relatorio, ensure_ascii=False, indent=1), encoding="utf-8")
+
     priv = Counter(c["pena_privativa"] for c in crimes)
     multa = Counter(c["multa_regime"] for c in crimes)
     print("pena_privativa:", dict(priv))
@@ -216,8 +450,29 @@ def main():
     print("tem_multa=True:", sum(1 for c in crimes if c["tem_multa"]))
     print("ambiguos remanescentes:", len(review_rows))
     print("correções manuais aplicadas:", sum(1 for c in crimes if c.get("multa_revisado")))
+    print()
+    print(f"tipos penais ............ {relatorio['total_tipos_penais']}")
+    print(f"  com pena privativa .... {relatorio['com_pena_privativa']}")
+    print(f"  sem pena privativa .... {relatorio['sem_pena_privativa']} (fora das estatísticas de alcance)")
+    print(f"dispositivos distintos .. {relatorio['dispositivos_distintos']}")
+    print(f"  registros duplicados .. {relatorio['registros_duplicados']}")
+    print(f"  com dados divergentes . {relatorio['duplicatas_divergentes']}  <-- contradições a revisar")
+    print(f"resultado morte ......... {relatorio['resultado_morte']}")
+    print(f"perdão judicial previsto  {relatorio['perdao_judicial_previsto']}")
     print("escrito em:", OUT)
+    print("relatório em:", RELATORIO)
+
+    # --estrito: usado pela CI para impedir a INTRODUÇÃO de novas contradições.
+    if "--estrito" in sys.argv:
+        limite = int(next((a.split("=")[1] for a in sys.argv if a.startswith("--max-contradicoes=")), 0))
+        if len(contraditorios) > limite:
+            print(
+                f"\nERRO: {len(contraditorios)} duplicatas divergentes (limite: {limite}).",
+                file=sys.stderr,
+            )
+            return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -1,25 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import type {Crime, Cenario} from '@site/src/lib/types';
 import {calcularBeneficios, CATEGORIA_LABEL, type Categoria, type BeneficioResultado} from '@site/src/lib/beneficios';
+import {cenarioFromCrime} from '@site/src/lib/cenario';
 import {formatPena} from '@site/src/lib/format';
 import styles from './styles.module.css';
-
-function cenarioFromCrime(c: Crime): Cenario {
-  return {
-    penaMin: c.pena_min_meses,
-    penaMax: c.pena_max_meses,
-    penaConcreta: c.pena_min_meses || c.pena_max_meses || 12,
-    primario: true,
-    reincidenteEspecifico: false,
-    hediondo: c.hediondo === 'Sim',
-    resultadoMorte: false,
-    violencia: c.violencia === 'Sim',
-    graveAmeaca: c.grave_ameaca === 'Sim',
-    confessou: false,
-    reparouDano: false,
-    bonsAntecedentes: true,
-  };
-}
 
 const STATUS_LABEL: Record<string, string> = {
   cabivel: 'Cabível',
@@ -27,8 +11,16 @@ const STATUS_LABEL: Record<string, string> = {
   incabivel: 'Incabível',
 };
 
-function meses(v: number): string {
-  if (v <= 0) return '0 meses (sem pena)';
+/**
+ * Rótulo de um valor de pena em meses.
+ *
+ * `rotuloZero` existe porque zero significa coisas diferentes em cada controle:
+ * na pena MÍNIMA quer dizer "sem mínimo cominado" — vários tipos só têm teto
+ * ("detenção até 3 meses", art. 32 da LCP; arts. 289 e 309 do Código Eleitoral)
+ * e continuam sendo puníveis. Chamá-los de "sem pena" seria falso.
+ */
+function meses(v: number, rotuloZero = 'sem pena'): string {
+  if (v <= 0) return `0 meses (${rotuloZero})`;
   if (v < 1) return `${Math.round(v * 30)} dias`;
   const m = Math.round(v);
   const base = `${m} ${m === 1 ? 'mês' : 'meses'}`;
@@ -128,6 +120,25 @@ export default function Detalhe({
 
       {crime.obs && <p className={styles.detalheObs}>{crime.obs}</p>}
 
+      {/* Tipos sem pena privativa cominam sanções próprias (art. 28, I a III,
+          da Lei 11.343/06). Sem isto, a tela diria apenas "sem pena privativa"
+          e omitiria a consequência jurídica real do tipo. */}
+      {crime.tem_pena_privativa === false && (crime.sancoes_nao_privativas ?? []).length > 0 && (
+        <div className={styles.sancoes}>
+          <h4 className={styles.sancoesTitulo}>
+            Sanções cominadas
+            <Ajuda texto="Este tipo penal não comina pena privativa de liberdade. Por isso os benefícios que dependem de patamar de pena (transação, ANPP, substituição, progressão) não lhe são aplicáveis, e ele fica fora das estatísticas de alcance da Busca por benefício." />
+          </h4>
+          <ul className={styles.sancoesLista}>
+            {crime.sancoes_nao_privativas.map((s) => (
+              <li key={s.inciso}>
+                <span className={styles.sancaoInciso}>{s.inciso}</span> {s.sancao}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className={styles.simulador}>
         <div className={styles.simColuna}>
           <h4 className={styles.simTitulo}>Pena cominada — simulação legislativa</h4>
@@ -137,7 +148,7 @@ export default function Detalhe({
           </p>
           <label className={styles.sliderRow}>
             <span>
-              Pena mínima: <strong>{meses(cen.penaMin)}</strong>
+              Pena mínima: <strong>{meses(cen.penaMin, 'sem mínimo cominado')}</strong>
               <Ajuda texto="Limite MÍNIMO de pena previsto na lei (pena em abstrato). Reduzi-lo até 0 permite testar a tese da ausência de pena mínima e ver quais benefícios processuais passam a caber (ex.: suspensão condicional do processo, ANPP)." />
             </span>
             <input type="range" min={0} max={480} step={1} value={cen.penaMin}
@@ -145,7 +156,7 @@ export default function Detalhe({
           </label>
           <label className={styles.sliderRow}>
             <span>
-              Pena máxima: <strong>{meses(cen.penaMax)}</strong>
+              Pena máxima: <strong>{meses(cen.penaMax, 'sem teto cominado')}</strong>
               <Ajuda texto="Limite MÁXIMO de pena previsto na lei (pena em abstrato). Define, por exemplo, se o crime é de menor potencial ofensivo (até 2 anos) e o prazo de prescrição." />
             </span>
             <input type="range" min={0} max={600} step={1} value={cen.penaMax}
@@ -180,6 +191,8 @@ export default function Detalhe({
             <label><input type="checkbox" checked={cen.graveAmeaca} onChange={(e) => set('graveAmeaca', e.target.checked)} /> Grave ameaça</label>
             <label><input type="checkbox" checked={cen.confessou} onChange={(e) => set('confessou', e.target.checked)} /> Confissão formal</label>
             <label><input type="checkbox" checked={cen.bonsAntecedentes} onChange={(e) => set('bonsAntecedentes', e.target.checked)} /> Bons antecedentes</label>
+            <label><input type="checkbox" checked={cen.culposo} onChange={(e) => set('culposo', e.target.checked)} /> Culposo</label>
+            <label><input type="checkbox" checked={cen.reparouDano} onChange={(e) => set('reparouDano', e.target.checked)} /> Reparou o dano</label>
           </div>
         </div>
       </div>

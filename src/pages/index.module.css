@@ -1,23 +1,110 @@
 .hero {
-  padding: 2.5rem 1rem 1.5rem;
+  padding: 3rem 1rem 2.5rem;
   text-align: center;
   background: linear-gradient(135deg, var(--ifm-color-primary-darkest), var(--ifm-color-primary));
   color: #fff;
 }
 .heroTitle {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   letter-spacing: 0.08em;
   margin: 0;
 }
 .heroSub {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   margin: 0.6rem auto 0.4rem;
   max-width: 780px;
   opacity: 0.95;
 }
 .heroNote {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   margin: 0 auto;
   max-width: 720px;
   opacity: 0.85;
+}
+
+/* ── Cartões dos dois fluxos de pesquisa ── */
+
+.caminhos {
+  padding: 2.5rem 0 0.5rem;
+}
+/* Mesma largura do texto "Sobre o SISPENAS" (.sobreCorpo), para que os cartões
+   fiquem alinhados com o conteúdo que vem logo abaixo. */
+.caminhosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.caminhoCard {
+  display: block;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 10px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  transition: border-color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+.caminhoCard:hover {
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--ifm-color-emphasis-200);
+}
+.caminhoCard h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: var(--ifm-color-primary);
+}
+.caminhoCard p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+}
+
+/* ── Texto "Sobre o SISPENAS" ── */
+
+.sobre {
+  padding: 2rem 0 3.5rem;
+}
+.sobreCorpo {
+  max-width: 820px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.sobreCorpo h2 {
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+}
+.sobreCorpo h3 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+}
+.sobreCorpo blockquote {
+  font-size: 0.92rem;
+}
+
+.aviso {
+  border-left: 4px solid var(--ifm-color-warning-dark);
+  background: var(--ifm-color-warning-contrast-background);
+  color: var(--ifm-color-warning-contrast-foreground);
+  padding: 0.9rem 1.1rem;
+  border-radius: 0 6px 6px 0;
+}
+.aviso p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.sobreLinks {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--ifm-color-emphasis-600);
 }
