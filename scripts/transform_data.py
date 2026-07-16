@@ -157,10 +157,13 @@ def validar_tipos_penais(crimes: list) -> list:
             continue
         tem_pena = bool(c.get("pena_max") or c.get("pena_min"))
         tem_sancao = bool(c.get("sancoes_nao_privativas"))
-        if not tem_pena and not tem_sancao:
+        # Tipo que comina SÓ multa (multa isolada) é sanção válida — ex.: o caput
+        # do art. 146-A (bullying), "Pena: multa, se não constitui crime mais grave".
+        tem_multa_isolada = c.get("tipo_pena") == "Multa"
+        if not tem_pena and not tem_sancao and not tem_multa_isolada:
             problemas.append(
-                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada e sem "
-                f"`sancoes_nao_privativas` — se for tipo penal, declare a sanção; se não for, remova"
+                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada, sem "
+                f"`sancoes_nao_privativas` e sem multa — se for tipo penal, declare a sanção; se não, remova"
             )
     return problemas
 

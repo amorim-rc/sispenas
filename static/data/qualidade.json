@@ -1,7 +1,7 @@
 {
  "total_tipos_penais": 1006,
- "com_pena_privativa": 1005,
- "sem_pena_privativa": 1,
+ "com_pena_privativa": 1004,
+ "sem_pena_privativa": 2,
  "dispositivos_distintos": 872,
  "registros_duplicados": 267,
  "duplicatas_divergentes": 0,

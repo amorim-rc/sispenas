@@ -7842,8 +7842,8 @@
   "lei": "Lei 14.811/24",
   "artigo": "Art. 146-A, caput (CP)",
   "crime": "Intimidação sistemática (bullying)",
-  "pena_min": 2,
-  "pena_max": 4,
+  "pena_min": 0,
+  "pena_max": 0,
   "tipo_pena": "Multa",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
@@ -7851,7 +7851,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "Multa. Intimidar sistematicamente, individualmente ou em grupo, mediante violência física ou psicológica, uma ou mais pessoas, de modo intencional e repetitivo, sem motivação evidente"
+  "obs": "Pena: MULTA, se a conduta não constitui crime mais grave (art. 146-A, caput, incluído pela Lei 14.811/2024). Sem pena privativa de liberdade"
  },
  {
   "id": 498,
