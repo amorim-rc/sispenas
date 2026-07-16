@@ -335,8 +335,14 @@ def parse_pena_range(obs: str):
 
     Reconhece "15 dias a 6 meses", "1-5 anos", "2 a 5 anos", "3m-1a". Retorna
     None se nada for encontrado. O primeiro match corresponde ao caput.
+
+    Neutraliza antes o "dias-multa" (pena de MULTA em dias-multa, art. 49 do CP):
+    ele nunca é a pena de prisão, mas casaria o padrão "5 a 15 dias" e sobreporia
+    o tempo de reclusão/detenção — o que corromperia, p.ex., os crimes eleitorais
+    ("reclusão até 5 anos e 5 a 15 dias-multa") e os de tráfico ("500 a 1.500
+    dias-multa").
     """
-    text = obs or ""
+    text = re.sub(r"dias?\s*[-\s]?\s*multa", " multa ", obs or "", flags=re.IGNORECASE)
     m = RANGE_2U.search(text)
     if m:
         return int(m.group(1)), _norm_unidade(m.group(2)), int(m.group(3)), _norm_unidade(m.group(4))
