@@ -20,72 +20,37 @@ O SISPENAS tem dois públicos que dependem de estabilidade, e são eles que defi
 
 | Posição | Incrementa quando | Exemplos |
 |---|---|---|
-| **MAIOR** (`X.0.0`) | Quebra de compatibilidade para esses públicos: remoção ou renomeação de campo do JSON, mudança de significado de campo existente, reatribuição de `id`, remoção de rota sem redirecionamento. | Migrar o catálogo para um esquema novo; separar `crimes.json` em vários arquivos. |
+| **MAIOR** (`X.0.0`) | Quebra de compatibilidade para esses públicos: remoção ou renomeação de campo do JSON, **mudança de significado de campo ou do conjunto de dados**, reatribuição de `id`, remoção de rota sem redirecionamento. | Passar a incluir tipos revogados; dosimetria por fases; separar `crimes.json` em vários arquivos. |
 | **MENOR** (`1.Y.0`) | Funcionalidade nova mantendo compatibilidade: **acrescentar** campo ao JSON, nova tela, novo benefício, nova rota. | A v1.1.0 acrescentou `resultado_morte` e a Busca por benefício sem remover nada. |
 | **CORREÇÃO** (`1.1.Z`) | Correção sem funcionalidade nova: erro de dosimetria, dado errado no catálogo, defeito de interface. | Corrigir a pena de um artigo; ajustar contraste. |
 
 :::note Correção de dado é `CORREÇÃO`, não `MENOR`
-Resolver uma das 48 contradições do catálogo muda o resultado de uma consulta — mas
+Resolver uma das 42 contradições do catálogo muda o resultado de uma consulta — mas
 corrige um erro, não acrescenta capacidade. Vai em `1.1.Z`. Já **acrescentar um campo**
 que não existia (`resultado_morte`) é `MENOR`, ainda que motivado por um erro: consumidores
 do JSON ganham informação sem perder nenhuma.
 :::
 
+:::info Quebra de *invariante* também é MAIOR
+O que quebra compatibilidade não é só remover campo — é **desmentir uma premissa** de quem
+consome os dados. Hoje vale um invariante não escrito: *todo registro do catálogo é
+direito vigente*. Quem calcula estatísticas conta com isso.
+
+O crawler do DOU precisa registrar **revogações** (art. 28 da Lei de Drogas, por exemplo,
+pode ser descriminalizado a qualquer momento), e apagar o registro não é opção: a URL
+`?tipo=N` morreria. Ele terá de conviver com tipos revogados no arquivo — e, no instante
+em que o primeiro entrar, toda estatística feita por terceiros passa a estar
+silenciosamente errada, sem que nenhum campo tenha sido removido.
+
+Por isso o crawler é **v2.0.0**, não uma versão menor: ele muda o que o conjunto de dados
+*significa*. É também a razão de `revogado_em` e `vigente_desde` serem pré-requisito dele,
+e não um detalhe posterior.
+:::
+
 **Versões anteriores.** O roadmap original numerava por ordem de intenção, não por
-compatibilidade: o crawler do DOU figurava como "v1.1.0" e a plataforma de pesquisa como
-"v2.0.0" sem que nenhuma das duas quebrasse contrato. A numeração abaixo foi refeita
-segundo a tabela acima.
-
----
-
-## v1.0.0 — SISPENAS sobre Docusaurus
-
-Plataforma de pesquisa com ferramenta interativa e documentação integrada.
-
-- [x] Catálogo de 1.061 registros de 65 diplomas
-- [x] Migração para **Docusaurus** (navegação, docs e SEO)
-- [x] Modelagem de **multa como dimensão independente** (reclusão/detenção + multa)
-- [x] Filtros combinados por modalidade de pena, hediondez, elemento, violência, ação penal
-- [x] **Cálculo dinâmico de benefícios penais** ao selecionar um tipo
-- [x] **Simulação de alteração legislativa** (ajuste de pena → recálculo em tempo real)
-- [x] Dados abertos (JSON) + licença MIT com atribuição
-
----
-
-## v1.1.0 (atual) — Busca por benefício e catálogo declarativo
-
-Inversão do percurso de pesquisa, reescrita do motor de benefícios como **registro de
-dados** e primeira auditoria sistemática da integração catálogo ↔ benefícios.
-
-### Interface
-
-- [x] **Landing page** com o texto institucional "Sobre o SISPENAS"
-- [x] Navbar: *Sobre o SISPENAS*, *Pesquisa* ▾, *Documentação* ▾, *Roadmap*
-- [x] **Busca por tipo penal** em `/pesquisa/tipos` (fluxo direto, preservado)
-- [x] **Busca por benefício** em `/pesquisa/beneficios` — benefício → requisitos, vedações,
-      patamares editáveis → **tipos penais afetados**, com delta de alcance
-- [x] Correções de contraste no modo escuro; redirecionamento das URLs da v1.0.0
-
-### Motor de benefícios
-
-- [x] **Registro declarativo** (`BeneficioDef`): metadados, requisitos, vedações,
-      parâmetros editáveis com fundamento legal e função pura de avaliação
-- [x] Catálogo ampliado de **13 para 22 benefícios**
-- [x] Correção: substituição por PRD nos **crimes culposos** independe do quantum da pena
-      (art. 44, I, parte final) — antes documentado, não implementado
-
-### Integridade dos dados
-
-- [x] `avaliavel` — exclui das estatísticas os **22 registros sem pena própria** (notas de
-      referência, agravantes); com pena zero, satisfaziam qualquer teto e eram contados
-      como "cabíveis"
-- [x] `resultado_morte` no catálogo — antes era um interruptor global da simulação
-- [x] `perdao_judicial_previsto` — lista curada de dispositivos; o perdão não se infere do
-      elemento culposo nem se estende por analogia
-- [x] Detecção de **duplicatas** e de **duplicatas divergentes** (contradições)
-- [x] Relatório `static/data/qualidade.json` a cada regeneração
-- [x] Invariantes duros de `id` (é a URL pública; append-only)
-- [x] `npm run verificar` + validação estrita do catálogo na CI
+compatibilidade — o crawler figurava como "v1.1.0" sem que isso tivesse relação com
+contrato. As versões já entregues saíram daqui e viraram
+[Release notes](/release-notes), com o detalhamento de cada uma.
 
 ---
 
@@ -94,23 +59,145 @@ dados** e primeira auditoria sistemática da integração catálogo ↔ benefíc
 Erros já identificados, sem funcionalidade nova. Prioridade máxima: são o que separa o
 SISPENAS de ser citável como referência.
 
-- [ ] **Resolver as 48 duplicatas divergentes** — mesmo dispositivo com penas ou hediondez
-      conflitantes (ex.: `CP, Art. 127` com 16–64 **vs.** 24–120 meses). Enquanto não
-      resolvidas, ambas as versões são exibidas e sinalizadas.
-- [ ] **Deduplicar os 365 registros repetidos** (878 dispositivos distintos em 1.061
+- [ ] **Conferência integral das penas contra o Planalto** — cada artigo, parágrafo,
+      inciso e alínea verificado contra o texto oficial em
+      `planalto.gov.br`. Ver [Conferência integral](#conferência-integral-do-catálogo).
+- [ ] **Resolver as 42 duplicatas divergentes** — mesmo dispositivo com penas ou hediondez
+      conflitantes. Enquanto não resolvidas, ambas as versões são exibidas e sinalizadas.
+      O bloco `Art. 154-A` mostra o padrão do problema: os registros 881-884 duplicam
+      os 88-91 com penas do caput. Uma delas (o §2º) já foi resolvida.
+- [ ] **Deduplicar os 355 registros repetidos** (862 dispositivos distintos em 1.040
       registros) — decidir entre fundir ou distinguir por incisos.
 - [ ] Revisão jurídica individual dos campos `derivado_auto` (multa, menor potencial)
 - [ ] Revisar `resultado_morte` nos casos ambíguos (ex.: `CP, Art. 158, §3º`, que remete a
       lesão grave **e** morte no mesmo registro)
 - [ ] Catalogar as hipóteses de perdão judicial ausentes (art. 140, §1º; art. 176, par.
       único; CTB art. 291 c/c CP 121, §5º)
+- [ ] `Lei 14.811/24, Art. 146-A` (bullying): consta com pena de 2 a 4 meses, mas o
+      dispositivo comina **apenas multa** ("se a conduta não constitui crime mais grave")
+- [ ] Social card próprio (`og:image`), hoje ausente
+
+---
+
+## Conferência integral do catálogo
+
+O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas que ainda não temos:
+saber que **o que está no catálogo está certo** (conferência) e que **o que existe na lei
+está no catálogo** (cobertura). Hoje não sabemos nem uma nem outra — sabemos apenas que há
+42 contradições internas, o que já prova que a primeira falha.
+
+### O que se sabe hoje
+
+| Indicador | Valor |
+|---|---|
+| Tipos penais catalogados | 1.039 |
+| Dispositivos distintos | 861 |
+| Diplomas cobertos | 58 |
+| Contradições internas | 42 |
+| Campos ainda `derivado_auto` | maioria |
+
+Amostragem de cobertura, para dimensionar a lacuna:
+
+| Bloco | No catálogo | Esperado | Situação |
+|---|---|---|---|
+| CP, Parte Especial (arts. 121–361) | 187 artigos | 241 | 54 ausentes — parte legitimamente (revogados, excludentes), parte não |
+| LCP (DL 3.688/41) | 29 | ~70 | **grande lacuna** |
+| Lei 9.279/96 (propriedade industrial) | 5 | ~30 (arts. 183–195) | **grande lacuna** |
+| CP 359-I a 359-T (Estado Democrático) | 15 | 15 | aparentemente completo |
+| CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
+| Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
+
+:::warning O número 1.040 não é uma medida de cobertura
+Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
+sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
+a primeira tarefa — sem ele, "cobertura" é opinião.
+:::
+
+### Fonte da verdade
+
+**`planalto.gov.br`** é a fonte normativa; nenhum tipo entra ou se altera sem conferência
+contra o texto compilado oficial. Doutrina e jurisprudência entram só onde a lei é
+ambígua, e sempre citadas.
+
+### Fase 1 — Estabelecer o universo (o denominador)
+
+Antes de conferir ou incluir qualquer coisa, saber **o que precisa existir**.
+
+- [ ] Inventário de **diplomas com preceito penal** em vigor: Parte Especial do CP, LCP,
+      CPM e a legislação extravagante. Fonte: índice temático do Planalto + LexML.
+- [ ] Para cada diploma, delimitar o **intervalo de artigos penais** (ex.: CDC, arts.
+      61–80; falência, arts. 168–178).
+- [ ] Produzir `data/diplomas.json`: diploma, intervalo, situação (vigente/revogado),
+      norma revogadora, artigos esperados.
+- [ ] **Meta da fase:** um número defensável para "quantos tipos penais existem".
+
+### Fase 2 — Conferência dispositivo a dispositivo
+
+Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
+
+- [ ] Extrair o texto compilado de cada diploma do universo da Fase 1.
+- [ ] Para cada dispositivo: pena mín./máx., modalidade, multa, ação penal, hediondez,
+      elemento, tentativa, violência/grave ameaça, resultado morte.
+- [ ] **Diff automático** contra o catálogo, classificando cada dispositivo em:
+      `confere` · `diverge` · `ausente no catálogo` · `no catálogo mas não na lei`.
+- [ ] Resolver as **42 contradições** com o texto oficial como árbitro (o `CP, Art. 154-A, §2º` já foi
+      resolvido assim: 16 a 80 meses — aumento mínimo sobre a mínima, máximo sobre a máxima).
+- [ ] Registrar a conferência por dispositivo: `conferido_em`, `fonte_url`, `conferido_por`
+      — substituindo `derivado_auto` por procedência rastreável.
+- [ ] **Portão:** a CI passa a exigir `conferido_em` nos dispositivos já conferidos; o
+      número de não conferidos só pode cair.
+
+### Fase 3 — Incluir o que falta
+
+- [ ] Priorizar por **peso na pesquisa**, não por facilidade: LCP e propriedade industrial
+      primeiro, por serem as maiores lacunas conhecidas.
+- [ ] Cada inclusão segue as convenções C1–C8 do `CONTRIBUTING.md` — nada de nota de
+      referência ou causa de aumento como se fosse tipo (foi o erro corrigido na v1.1.0).
+- [ ] `id` append-only: novos vão para o fim, a partir de 1062.
+
+### Fase 4 — Componentes legislativos além dos tipos penais
+
+Há normas que **mudam o resultado do cálculo sem serem tipos penais**. Hoje o SISPENAS as
+ignora, e é aí que ele mais se afasta da dosimetria real:
+
+- [ ] **Causas de aumento e diminuição** (3ª fase do art. 68) — as removidas na v1.1.0
+      voltam como entidade própria, não como tipos.
+- [ ] **Agravantes e atenuantes** (arts. 61–66) — 2ª fase.
+- [ ] **Qualificadoras** — distinguir da causa de aumento: alteram a moldura, não incidem
+      sobre ela.
+- [ ] **Concurso de crimes** (arts. 69–71).
+- [ ] **Leis que alteram benefícios sem tipificar**: Lei 8.072/90 (hediondos), Lei
+      9.099/95 (JECRIM), LEP, CPP.
+- [ ] **Súmulas e teses vinculantes** que fixam limiares (Súmula 231 do STJ: atenuante não
+      reduz abaixo do mínimo).
+
+Implementar isso é a v3.0.0; **mapeá-lo** é parte deste plano.
+
+### Método
+
+Escala pede automação, mas o domínio não perdoa erro. O arranjo que respeita os dois:
+
+1. **Extração automática** do texto oficial → proposta de diff estruturado.
+2. **Classificação por IA**, obrigada a citar o dispositivo e a URL de origem.
+3. **Revisão humana** com competência jurídica, dispositivo a dispositivo, antes do merge.
+4. **Portões de CI** impedem regressão: convenções C1–C3 impostas, contradições só caem.
+
+É a mesma arquitetura do crawler do DOU (v2.0.0) — a diferença é que aqui se varre o
+acervo, e lá o fluxo diário. **Construir esta conferência é o que torna o crawler
+possível**: sem uma linha de base conferida, não há como saber se o que ele propõe é
+novidade ou erro.
+
+:::note Ordem de execução
+As fases 1 e 2 vêm **antes** do crawler (v2.0.0). Automatizar a atualização de um catálogo
+que não se sabe correto multiplica o erro em vez de corrigi-lo.
+:::
 
 ---
 
 ## v1.2.0 — Catálogo de benefícios versionado em dados
 
 Concluir o caminho aberto pela v1.1.0: tirar os benefícios do código e colocá-los em
-**JSON versionado**, como já ocorre com `crimes.json`. É o pré-requisito do v1.3.0 —
+**JSON versionado**, como já ocorre com `crimes.json`. É pré-requisito da v2.0.0 —
 sem isso, o crawler saberia atualizar tipos penais, mas não benefícios.
 
 - [ ] Serializar `BeneficioDef` para `data/beneficios.json` (metadados, requisitos,
@@ -126,12 +213,21 @@ sem isso, o crawler saberia atualizar tipos penais, mas não benefícios.
 
 ---
 
-## v1.3.0 — Atualização automática da legislação (crawler do DOU)
+## v2.0.0 — Atualização automática da legislação (crawler do DOU)
 
 Manter o catálogo atualizado com segurança jurídica, a partir do **Diário Oficial da
 União**. O pipeline de dados da v1.1.0 já foi desenhado para receber isto: fonte editável
 separada do derivado, invariantes de `id`, validação estrita na CI e relatório de
 qualidade.
+
+**Por que MAIOR e não menor:** o crawler precisa registrar revogações, e apagar o registro
+não é opção (a URL `?tipo=N` morreria). Tipos revogados passam a conviver no arquivo — o
+que **desmente o invariante** de que todo registro é direito vigente. Nenhum campo é
+removido, mas toda estatística feita por terceiros passa a estar errada em silêncio. Isso
+é quebra de contrato, ainda que o esquema pareça intacto.
+
+**Pré-requisito:** as fases 1 e 2 da [Conferência integral](#conferência-integral-do-catálogo).
+Automatizar a atualização de um catálogo não conferido multiplica o erro.
 
 ### Arquitetura
 
@@ -167,7 +263,7 @@ GitHub Actions (cron semanal)
 
 ---
 
-## v1.4.0 — Processo penal e jurisprudência
+## v2.1.0 — Processo penal e jurisprudência
 
 Estender a atualização automática ao **Direito Processual Penal**, que rege boa parte dos
 benefícios. Depende da vigência temporal da v1.2.0.
@@ -179,7 +275,7 @@ benefícios. Depende da vigência temporal da v1.2.0.
 
 ---
 
-## v1.5.0 — Dosimetria completa
+## v3.0.0 — Dosimetria completa
 
 Hoje o sistema parte da pena cominada. Uma referência em dosimetria precisa percorrer as
 três fases do art. 68 do CP.
@@ -192,7 +288,7 @@ três fases do art. 68 do CP.
 
 ---
 
-## v2.0.0 — Plataforma de pesquisa de políticas públicas
+## v3.1.0 — Plataforma de pesquisa de políticas públicas
 
 Reservado para quando houver **quebra de contrato** dos dados abertos — provável ao
 introduzir dosimetria por fases e vigência temporal, que reestruturam o esquema.

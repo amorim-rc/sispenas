@@ -4,6 +4,16 @@ export type PenaPrivativa = 'Reclusão' | 'Detenção' | 'Prisão simples' | 'Ne
 export type MultaRegime = 'cumulativa' | 'alternativa' | 'isolada' | 'nenhuma';
 export type SimNao = 'Sim' | 'Não' | '—';
 
+/**
+ * Sanção de tipo penal que não comina pena privativa de liberdade.
+ * Hoje só o art. 28 da Lei 11.343/06 (porte para consumo pessoal).
+ */
+export interface SancaoNaoPrivativa {
+  /** Inciso do dispositivo que a comina (ex.: "II"). */
+  inciso: string;
+  sancao: string;
+}
+
 export interface Crime {
   id: number;
   lei: string;
@@ -41,12 +51,13 @@ export interface Crime {
   pena_unidade_derivada: boolean;
   // ── Qualidade e integração com o motor de benefícios ──
   /**
-   * O registro é um tipo penal com pena própria? O catálogo também carrega
-   * notas de referência e causas de aumento sem pena, que não podem entrar no
-   * denominador das estatísticas de alcance dos benefícios.
+   * O tipo comina pena privativa de liberdade? Só quem tem entra nas
+   * estatísticas de alcance dos benefícios, que se medem por patamar de pena.
+   * A exceção é o art. 28 da Lei 11.343/06, cujas sanções são não privativas.
    */
-  avaliavel: boolean;
-  motivo_nao_avaliavel: string;
+  tem_pena_privativa: boolean;
+  /** Sanções próprias dos tipos sem pena privativa (art. 28, I a III, Lei 11.343/06). */
+  sancoes_nao_privativas: SancaoNaoPrivativa[];
   /** Qualificado pelo resultado morte (art. 112, VI e VIII, LEP). */
   resultado_morte: boolean;
   /** True se `resultado_morte` veio da heurística, não de revisão manual. */

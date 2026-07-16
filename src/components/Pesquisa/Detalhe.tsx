@@ -112,6 +112,25 @@ export default function Detalhe({
 
       {crime.obs && <p className={styles.detalheObs}>{crime.obs}</p>}
 
+      {/* Tipos sem pena privativa cominam sanções próprias (art. 28, I a III,
+          da Lei 11.343/06). Sem isto, a tela diria apenas "sem pena privativa"
+          e omitiria a consequência jurídica real do tipo. */}
+      {crime.tem_pena_privativa === false && (crime.sancoes_nao_privativas ?? []).length > 0 && (
+        <div className={styles.sancoes}>
+          <h4 className={styles.sancoesTitulo}>
+            Sanções cominadas
+            <Ajuda texto="Este tipo penal não comina pena privativa de liberdade. Por isso os benefícios que dependem de patamar de pena (transação, ANPP, substituição, progressão) não lhe são aplicáveis, e ele fica fora das estatísticas de alcance da Busca por benefício." />
+          </h4>
+          <ul className={styles.sancoesLista}>
+            {crime.sancoes_nao_privativas.map((s) => (
+              <li key={s.inciso}>
+                <span className={styles.sancaoInciso}>{s.inciso}</span> {s.sancao}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className={styles.simulador}>
         <div className={styles.simColuna}>
           <h4 className={styles.simTitulo}>Pena cominada — simulação legislativa</h4>

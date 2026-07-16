@@ -9,10 +9,13 @@ combinados por modalidade de pena e cálculo de benefícios penais:
   - tem_multa      : bool  (multa cumulada OU alternativa OU isolada)
   - multa_regime   : cumulativa | alternativa | isolada | nenhuma
   - infracao_menor_potencial : bool (pena máx <= 2 anos -> JECRIM)
-  - avaliavel      : bool  (é tipo penal com pena própria? entra nas estatísticas?)
+  - tem_pena_privativa : bool (comina prisão? entra nas estatísticas de alcance?)
   - resultado_morte : bool (qualificado pelo resultado morte -> art. 112, VI/VIII, LEP)
   - perdao_judicial_previsto : bool (há previsão legal expressa de perdão judicial?)
   - chave_dispositivo / duplicata : rastreiam registros repetidos
+
+Impõe também as convenções do catálogo (ver CONTRIBUTING.md, C1 a C3): só tipos
+penais, toda sanção declarada e `id` append-only. Violá-las falha o build.
 
 Todos os campos derivados são heurísticos (regex sobre `crime`/`obs`/`artigo`) e
 serão revisados individualmente. Correções finas ficam nas tabelas CORRECOES_*.
@@ -54,13 +57,16 @@ CORRECOES = {
     898: {"tem_multa": False, "multa_regime": "nenhuma"},
 }
 
-# ── Registros que NÃO são tipos penais ──────────────────────────────────────
-# O catálogo carrega notas de referência ("REFERÊNCIA — a LGPD não tipifica…"),
-# agravantes e causas de aumento sem pena própria (ex.: Art. 141, CP). Eles são
-# úteis na consulta, mas NÃO podem entrar no denominador das estatísticas de
-# alcance dos benefícios: com pena zero, seriam contados como "cabíveis" em
-# todo benefício com teto de pena.
-NAO_TIPIFICA = re.compile(r"REFER[ÊE]NCIA", re.IGNORECASE)
+# ── O catálogo contém APENAS tipos penais ───────────────────────────────────
+# Regra estrutural: cada registro é um tipo penal. Não entram notas de
+# referência, agravantes, causas de aumento, excludentes de ilicitude nem regras
+# de ação penal — todos foram removidos na v1.1.0. Com pena zero, eles
+# satisfaziam qualquer teto de pena e eram contados como "cabíveis" em transação
+# penal, ANPP e sursis.
+#
+# A regra é IMPOSTA aqui (e não apenas sinalizada) para que as atualizações
+# automáticas da v2.0.0 não a violem: ver docs/catalogo-tipos-penais.md.
+NAO_TIPIFICA = re.compile(r"REFER[ÊE]NCIA|EXCLUDENTE", re.IGNORECASE)
 
 # ── Resultado morte (art. 112, VI e VIII, LEP; art. 122, §2º, LEP) ──────────
 # Casa apenas contra o NOME do tipo, nunca contra `obs`: o campo obs costuma
@@ -128,13 +134,33 @@ def _casa(regra, c: dict) -> bool:
     return True
 
 
-def classificar_registro(c: dict):
-    """(avaliavel, motivo). Registro sem pena própria não entra nas estatísticas."""
-    if NAO_TIPIFICA.search(c.get("crime") or ""):
-        return False, "nota de referência — não tipifica conduta"
-    if not (c.get("pena_max_meses") or c.get("pena_min_meses")):
-        return False, "sem pena cominada no catálogo"
-    return True, ""
+def validar_tipos_penais(crimes: list) -> list:
+    """Invariante DURO: todo registro é um tipo penal com sanção cominada.
+
+    Um registro sem pena privativa E sem sanções próprias (ex.: uma nota de
+    referência) não é um tipo penal: com pena zero ele satisfaria qualquer teto e
+    contaminaria as estatísticas de alcance dos benefícios.
+
+    A exceção legítima é o tipo penal cujas sanções não são privativas de
+    liberdade — art. 28 da Lei 11.343/06 —, que declara `sancoes_nao_privativas`.
+    """
+    problemas = []
+    for c in crimes:
+        nome = c.get("crime") or ""
+        if NAO_TIPIFICA.search(nome):
+            problemas.append(
+                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): "
+                f"não é tipo penal — {nome[:60]}"
+            )
+            continue
+        tem_pena = bool(c.get("pena_max") or c.get("pena_min"))
+        tem_sancao = bool(c.get("sancoes_nao_privativas"))
+        if not tem_pena and not tem_sancao:
+            problemas.append(
+                f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada e sem "
+                f"`sancoes_nao_privativas` — se for tipo penal, declare a sanção; se não for, remova"
+            )
+    return problemas
 
 
 def chave_dispositivo(c: dict) -> str:
@@ -152,7 +178,7 @@ def validar_ids(crimes: list) -> list:
     existente jamais é reatribuído a outro dispositivo, sob pena de um link antigo
     passar a apontar para o crime errado — falha silenciosa e difícil de notar.
 
-    Importa sobretudo a partir da v1.3.0, quando o crawler do DOU passa a propor
+    Importa sobretudo a partir da v2.0.0, quando o crawler do DOU passa a propor
     inclusões automáticas no catálogo.
     """
     problemas = []
@@ -312,10 +338,10 @@ def main():
     crimes = json.loads(SRC.read_text(encoding="utf-8"))
     review_rows = []
 
-    # Invariantes do identificador: falham sempre, independentemente de --estrito.
-    problemas_id = validar_ids(crimes)
-    if problemas_id:
-        for p in problemas_id:
+    # Invariantes estruturais: falham sempre, independentemente de --estrito.
+    problemas = validar_ids(crimes) + validar_tipos_penais(crimes)
+    if problemas:
+        for p in problemas:
             print(f"ERRO: {p}", file=sys.stderr)
         return 1
 
@@ -337,10 +363,13 @@ def main():
         pmax = c["pena_max_meses"]
         c["infracao_menor_potencial"] = bool(pmax and pmax <= 24)
 
-        # Registro é um tipo penal com pena própria?
-        avaliavel, motivo_na = classificar_registro(c)
-        c["avaliavel"] = avaliavel
-        c["motivo_nao_avaliavel"] = motivo_na
+        # Todo registro é tipo penal (garantido por validar_tipos_penais). O que
+        # varia é ter ou não pena PRIVATIVA: só quem tem entra nas estatísticas de
+        # alcance dos benefícios, que se medem por patamar de pena.
+        c["tem_pena_privativa"] = bool(pmax or c["pena_min_meses"])
+        c.setdefault("sancoes_nao_privativas", [])
+        if not c["tem_pena_privativa"]:
+            c["pena_faixa_rotulo"] = "sem pena privativa"
 
         # Resultado morte — derivado do nome do tipo, sobreponível por revisão.
         morte = bool(RESULTADO_MORTE.search(c.get("crime") or ""))
@@ -398,16 +427,16 @@ def main():
     OUT.write_text(json.dumps(crimes, ensure_ascii=False, indent=1), encoding="utf-8")
 
     # ── Relatório de qualidade ──────────────────────────────────────────────
-    avaliaveis = [c for c in crimes if c["avaliavel"]]
+    com_pena = [c for c in crimes if c["tem_pena_privativa"]]
     relatorio = {
-        "total_registros": len(crimes),
-        "avaliaveis": len(avaliaveis),
-        "nao_avaliaveis": len(crimes) - len(avaliaveis),
+        "total_tipos_penais": len(crimes),
+        "com_pena_privativa": len(com_pena),
+        "sem_pena_privativa": len(crimes) - len(com_pena),
         "dispositivos_distintos": len(por_chave),
         "registros_duplicados": sum(1 for c in crimes if c["duplicata"]),
         "duplicatas_divergentes": len(contraditorios),
-        "resultado_morte": sum(1 for c in avaliaveis if c["resultado_morte"]),
-        "perdao_judicial_previsto": sum(1 for c in avaliaveis if c["perdao_judicial_previsto"]),
+        "resultado_morte": sum(1 for c in crimes if c["resultado_morte"]),
+        "perdao_judicial_previsto": sum(1 for c in crimes if c["perdao_judicial_previsto"]),
         "multa_ambigua": len(review_rows),
         "perdao_judicial_sem_tipo": PERDAO_JUDICIAL_SEM_TIPO,
         "contradicoes": sorted(contraditorios, key=lambda x: x["ids"][0]),
@@ -422,9 +451,9 @@ def main():
     print("ambiguos remanescentes:", len(review_rows))
     print("correções manuais aplicadas:", sum(1 for c in crimes if c.get("multa_revisado")))
     print()
-    print(f"registros ............... {relatorio['total_registros']}")
-    print(f"  avaliáveis ............ {relatorio['avaliaveis']}")
-    print(f"  não avaliáveis ........ {relatorio['nao_avaliaveis']} (fora das estatísticas)")
+    print(f"tipos penais ............ {relatorio['total_tipos_penais']}")
+    print(f"  com pena privativa .... {relatorio['com_pena_privativa']}")
+    print(f"  sem pena privativa .... {relatorio['sem_pena_privativa']} (fora das estatísticas de alcance)")
     print(f"dispositivos distintos .. {relatorio['dispositivos_distintos']}")
     print(f"  registros duplicados .. {relatorio['registros_duplicados']}")
     print(f"  com dados divergentes . {relatorio['duplicatas_divergentes']}  <-- contradições a revisar")

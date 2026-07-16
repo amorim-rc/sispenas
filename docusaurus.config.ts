@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'SISPENAS',
   tagline: 'Sistema de Pesquisa de Tipos Penais e Benefícios — Brasil',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,
@@ -40,7 +40,24 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
         },
-        blog: false,
+        // O plugin de blog serve de changelog: cada release é um post datado em
+        // release-notes/. É a mesma abordagem que o próprio Docusaurus usa para
+        // o changelog dele. O roadmap fica só com o que está por vir.
+        blog: {
+          path: 'release-notes',
+          routeBasePath: 'release-notes',
+          blogTitle: 'Release notes',
+          blogDescription: 'Histórico de versões do SISPENAS.',
+          blogSidebarTitle: 'Versões',
+          blogSidebarCount: 'ALL',
+          showReadingTime: false,
+          onUntruncatedBlogPosts: 'ignore',
+          feedOptions: {
+            type: 'all',
+            title: 'SISPENAS — Release notes',
+            copyright: `SISPENAS © ${new Date().getFullYear()} — Equipe SISPENAS.`,
+          },
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -64,7 +81,11 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/sispenas-social-card.jpg',
+    // `image` (og:image) fica de fora até existir um social card próprio: apontava
+    // para img/sispenas-social-card.jpg, que nunca existiu no repositório — o
+    // arquivo presente era o card padrão do Docusaurus, com outro nome. Uma
+    // referência quebrada é pior que a ausência: o og:image 404 aparece como
+    // imagem falha no compartilhamento. Ver roadmap (melhorias transversais).
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -97,6 +118,7 @@ const config: Config = {
           ],
         },
         {to: '/docs/roadmap', label: 'Roadmap', position: 'left'},
+        {to: '/release-notes', label: 'Release notes', position: 'left'},
         {
           href: 'https://github.com/amorim-rc/sispenas',
           label: 'GitHub',

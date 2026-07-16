@@ -340,3 +340,37 @@
   transition: background 0.15s, border-color 0.15s;
 }
 .voltarBtn:hover { background: var(--ifm-color-emphasis-100); border-color: var(--ifm-color-primary); }
+
+/* ── Sanções de tipos sem pena privativa (art. 28, Lei 11.343/06) ──── */
+.sancoes {
+  margin: 0.75rem 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ifm-color-info-dark);
+  border-left-width: 4px;
+  border-radius: 0 6px 6px 0;
+  background: var(--ifm-color-info-contrast-background);
+  color: var(--ifm-color-info-contrast-foreground);
+}
+.sancoesTitulo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.sancoesLista {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+.sancaoInciso {
+  display: inline-block;
+  min-width: 1.6rem;
+  font-weight: 700;
+  font-family: var(--ifm-font-family-monospace);
+}

@@ -15,7 +15,7 @@ import {
   avaliarCatalogo,
   cenarioReversoPadrao,
   contar,
-  crimesAvaliaveis,
+  crimesComPenaPrivativa,
 } from '../src/lib/beneficios/reverso';
 import {cenarioFromCrime} from '../src/lib/cenario';
 
@@ -26,8 +26,8 @@ import {cenarioFromCrime} from '../src/lib/cenario';
 const todos: Crime[] = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), 'static', 'data', 'crimes.json'), 'utf-8'),
 );
-// Estatísticas de alcance só sobre tipos penais com pena própria.
-const crimes = crimesAvaliaveis(todos);
+// Estatísticas de alcance só sobre tipos penais que cominam pena privativa.
+const crimes = crimesComPenaPrivativa(todos);
 
 let falhas = 0;
 const ok = (cond: boolean, msg: string) => {
@@ -47,15 +47,15 @@ function achar(lei: RegExp, artigo: RegExp, nome?: RegExp): Crime | undefined {
 }
 
 console.log(
-  `\nCatálogo: ${crimes.length} tipos penais avaliáveis de ${todos.length} registros ` +
-    `(${todos.length - crimes.length} sem pena própria), ${CATALOGO.length} benefícios.\n`,
+  `\nCatálogo: ${todos.length} tipos penais (${crimes.length} com pena privativa), ` +
+    `${CATALOGO.length} benefícios.\n`,
 );
 
 // ── 0. Integridade dos campos que o motor lê do catálogo ────────────────
 console.log('0. Integração catálogo → motor de benefícios');
 {
   const campos: (keyof Crime)[] = [
-    'avaliavel',
+    'tem_pena_privativa',
     'resultado_morte',
     'perdao_judicial_previsto',
     'pena_min_meses',
@@ -69,11 +69,20 @@ console.log('0. Integração catálogo → motor de benefícios');
   }
   ok(
     crimes.every((c) => c.pena_max_meses > 0 || c.pena_min_meses > 0),
-    'todo tipo avaliável tem pena cominada > 0',
+    'todo tipo com pena privativa tem pena > 0',
   );
+  // O catálogo contém APENAS tipos penais: notas de referência, agravantes e
+  // excludentes foram removidas na v1.1.0.
   ok(
-    todos.filter((c) => !c.avaliavel).every((c) => !!c.motivo_nao_avaliavel),
-    'todo registro não avaliável declara o motivo da exclusão',
+    !todos.some((c) => /REFER[ÊE]NCIA|EXCLUDENTE/i.test(c.crime)),
+    'nenhuma nota de referência ou excludente sobrou no catálogo',
+  );
+  // Quem não tem pena privativa precisa declarar suas sanções (art. 28, Lei 11.343/06).
+  ok(
+    todos
+      .filter((c) => !c.tem_pena_privativa)
+      .every((c) => (c.sancoes_nao_privativas ?? []).length > 0),
+    'todo tipo sem pena privativa declara `sancoes_nao_privativas`',
   );
   // O perdão judicial não se estende por analogia: o campo é curado, não inferido.
   ok(

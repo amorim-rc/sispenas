@@ -59,25 +59,35 @@ Gerados por `scripts/transform_data.py`. **Todos são heurísticos** e sujeitos 
 | `pena_min_meses`, `pena_max_meses` | Parser de intervalos (`"15 dias a 6 meses"`, `"1-5 anos"`), com fallback para `pena_min`/`pena_max`. O mês vale 30 dias (art. 11, CP). |
 | `pena_*_rotulo`, `pena_faixa_rotulo` | Exibição na unidade natural. |
 | `infracao_menor_potencial` | `pena_max_meses <= 24` **e** pena > 0. |
-| `avaliavel` | O registro é um tipo penal com pena própria? |
+| `tem_pena_privativa` | O tipo comina prisão? Se não, declara `sancoes_nao_privativas`. |
 | `resultado_morte` | Regex sobre o **nome** do tipo (art. 112, VI e VIII, LEP). |
 | `perdao_judicial_previsto` | Lista curada de dispositivos (art. 107, IX, CP). |
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente` | Detecção de registros repetidos. |
 
-### `avaliavel` — por que nem todo registro é um tipo penal
+### `tem_pena_privativa` — e por que o catálogo só tem tipos penais
 
-O catálogo carrega, além dos tipos penais, **notas de referência e dispositivos sem pena
-própria**:
+Até a v1.1.0 o catálogo carregava, além dos tipos penais, **notas de referência e
+dispositivos sem pena própria**: `REFERÊNCIA — A LGPD não tipifica crimes`, `CP, Art. 141,
+I` (causa de aumento), `CP, Art. 171, §5º` (regra de ação penal), `CP, Art. 128` (excludente
+de ilicitude). Eram 21 registros com pena zero.
 
-- `REFERÊNCIA — A LGPD não tipifica crimes específicos`
-- `CP, Art. 141, I` — causa de aumento dos crimes contra a honra
-- `CP, Art. 171, §5º` — regra de ação penal do estelionato
+Com pena zero, eles **satisfaziam qualquer teto de pena** e eram contados como "cabíveis"
+em transação penal, ANPP e sursis — inflando o alcance desses benefícios. A transação
+reportava 325 tipos cabíveis; o correto era 303.
 
-Eles são úteis na consulta, mas têm pena zero. Se entrassem no cálculo, **satisfariam
-qualquer teto de pena** e seriam contados como "cabíveis" em transação penal, ANPP e
-sursis — inflando artificialmente o alcance desses benefícios. Por isso `avaliavel: false`
-os mantém visíveis na *Busca por tipo penal* e fora do denominador da *Busca por
-benefício*.
+Foram removidos, e a regra passou a ser **imposta** pelo transformador: um registro que não
+declare pena nem sanção falha o build (convenção C1, no `CONTRIBUTING.md`).
+
+Sobra uma distinção legítima: **tipo penal que não comina prisão**. Hoje é só o art. 28 da
+Lei 11.343/06 (porte para consumo), cujas sanções são as do art. 28, I a III — advertência,
+prestação de serviços e medida educativa. Ele é tipo penal, fica no catálogo, declara
+`sancoes_nao_privativas` e recebe `tem_pena_privativa: false`, que o mantém fora das
+estatísticas de alcance (que se medem por patamar de pena) sem excluí-lo da consulta.
+
+:::note Causas de aumento voltarão
+As majorantes removidas não são lixo — são parte da 3ª fase da dosimetria (art. 68, CP).
+Elas voltam como **entidade própria** na v3.0.0, não como tipos penais.
+:::
 
 ### `resultado_morte` — por que só o nome do tipo
 
@@ -106,27 +116,26 @@ A cada regeneração, o script emite `static/data/qualidade.json` com o estado d
 
 | Indicador | Valor | Significado |
 |---|---|---|
-| Registros | 1.061 | Total no arquivo |
-| Avaliáveis | 1.039 | Tipos penais com pena própria |
-| Não avaliáveis | 22 | Notas e dispositivos sem pena |
-| **Dispositivos distintos** | **878** | O catálogo tem menos tipos do que registros |
-| Registros duplicados | 365 | Mesmo `lei + artigo` em mais de um registro |
-| **Duplicatas divergentes** | **48** | Cópias do mesmo dispositivo **com penas ou hediondez diferentes** |
+| Tipos penais | 1.039 | Total no arquivo |
+| Com pena privativa | 1.038 | Entram nas estatísticas de alcance |
+| Sem pena privativa | 1 | Art. 28 da Lei 11.343/06 (sanções próprias) |
+| **Dispositivos distintos** | **861** | O catálogo tem menos dispositivos do que registros |
+| Registros duplicados | 353 | Mesmo `lei + artigo` em mais de um registro |
+| **Duplicatas divergentes** | **42** | Cópias do mesmo dispositivo **com penas ou hediondez diferentes** |
 
 :::danger Contradições internas
-48 dispositivos aparecem duas vezes **com dados conflitantes**. Exemplos:
+42 dispositivos aparecem duas vezes **com dados conflitantes**. Exemplos:
 
 - `CP, Art. 127` — 16 a 64 meses **vs.** 24 a 120 meses
-- `CP, Art. 154-A, §2º` — 16 a 80 meses **vs.** 12 a 48 meses
 - `CP, Art. 151, §1º, I` — 1 a 6 meses **vs.** 6 a 24 meses
 
 Não é possível saber qual versão está correta sem revisão jurídica artigo a artigo. Até
 lá, **ambas são exibidas** e sinalizadas como duplicata — o SISPENAS prefere expor a
 contradição a escolher silenciosamente um dos valores. A resolução é prioridade da
-v1.2.0.
+v1.1.Z — ver [Conferência integral](/docs/roadmap#conferência-integral-do-catálogo).
 :::
 
-A CI roda `python3 scripts/transform_data.py --estrito --max-contradicoes=48`, que **falha
+A CI roda `python3 scripts/transform_data.py --estrito --max-contradicoes=42`, que **falha
 se o número de contradições aumentar**. O catálogo pode melhorar, não piorar.
 
 ### Outras lacunas conhecidas

@@ -130,11 +130,11 @@ function Sobre() {
               abr./maio 2008.
             </p>
             <p>
-              Íntegra:{' '}
-              <Link to="pathname:///sispenas/artigos/machado-machado-2008-sispenas-rev-juridica-90.pdf">
-                artigo original (PDF)
-              </Link>
-              .
+              Íntegra na{' '}
+              <Link href="https://revistajuridica.presidencia.gov.br/index.php/saj/article/view/235">
+                Revista Jurídica da Presidência
+              </Link>{' '}
+              (fonte oficial) · <Link to="pathname:///sispenas/artigos/machado-machado-2008-sispenas-rev-juridica-90.pdf">cópia local (PDF)</Link>
             </p>
           </blockquote>
 

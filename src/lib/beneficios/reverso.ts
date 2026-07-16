@@ -70,15 +70,15 @@ export function cenarioReversoPadrao(): CenarioReverso {
 }
 
 /**
- * Tipos penais que entram nas estatísticas de alcance.
+ * Tipos penais que entram nas estatísticas de alcance dos benefícios.
  *
- * O catálogo carrega 22 registros sem pena própria (notas de referência,
- * agravantes, causas de aumento). Com pena zero eles satisfariam todo teto de
- * pena e seriam contados como "cabíveis" — inflando o alcance de benefícios
- * como a transação penal.
+ * Benefícios se medem por patamar de pena, então um tipo sem pena privativa
+ * cominada satisfaria qualquer teto e seria contado como "cabível". Hoje a
+ * única exceção é o art. 28 da Lei 11.343/06, cujas sanções (advertência,
+ * prestação de serviços, medida educativa) não são privativas de liberdade.
  */
-export function crimesAvaliaveis(crimes: Crime[]): Crime[] {
-  return crimes.filter((c) => c.avaliavel !== false);
+export function crimesComPenaPrivativa(crimes: Crime[]): Crime[] {
+  return crimes.filter((c) => c.tem_pena_privativa !== false);
 }
 
 function penaConcretaPresumida(c: Crime, rev: CenarioReverso): number {

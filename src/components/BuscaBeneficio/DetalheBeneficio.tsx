@@ -17,7 +17,7 @@ import {
   avaliarCatalogo,
   cenarioReversoPadrao,
   contar,
-  crimesAvaliaveis,
+  crimesComPenaPrivativa,
   type BasePenaConcreta,
   type CenarioReverso,
 } from '@site/src/lib/beneficios/reverso';
@@ -107,8 +107,9 @@ function ControleParametro({
 }
 
 export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDef; crimes: Crime[]}) {
-  // Estatísticas de alcance só sobre tipos penais com pena própria.
-  const crimes = useMemo(() => crimesAvaliaveis(todos), [todos]);
+  // Benefícios se medem por patamar de pena: um tipo sem pena privativa cominada
+  // satisfaria qualquer teto e apareceria como cabível em tudo.
+  const crimes = useMemo(() => crimesComPenaPrivativa(todos), [todos]);
   const excluidos = todos.length - crimes.length;
 
   const [params, setParams] = useState<Parametros>(() => valoresPadrao(def));
@@ -363,12 +364,12 @@ export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDe
         <h3 className={styles.secaoTitulo}>
           Tipos penais afetados
           <span className={styles.totalTipos}>
-            {crimes.length} tipos avaliáveis
+            {crimes.length} tipos com pena privativa
             {excluidos > 0 && (
               <>
                 {' '}
                 <Ajuda
-                  texto={`${excluidos} dos ${todos.length} registros do catálogo não são tipos penais com pena própria (notas de referência, agravantes e causas de aumento) e ficam fora das estatísticas: com pena zero, satisfariam qualquer teto de pena e seriam contados como cabíveis.`}
+                  texto={`${excluidos} de ${todos.length} tipos penais do catálogo não cominam pena privativa de liberdade e ficam fora destas estatísticas, que se medem por patamar de pena — hoje, o art. 28 da Lei 11.343/06 (porte para consumo), cujas sanções são advertência, prestação de serviços e medida educativa. Eles continuam na Busca por tipo penal.`}
                 />
               </>
             )}
