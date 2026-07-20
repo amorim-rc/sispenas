@@ -489,7 +489,7 @@ META: dict[str, dict] = {
         "norma": "Lei nº 14.597, de 14 de junho de 2023",
         "url": "_ato2023-2026/2023/lei/L14597.htm",
         "faixas": [[165, 171], [198, 201]],
-        "rotulos": [],
+        "rotulos": ["Lei 14.597/23"],
         "obs": "Sucedeu os crimes do Estatuto do Torcedor (Lei nº 10.671/2003, "
                "revogada pelo art. 217, III).",
     },
@@ -498,7 +498,7 @@ META: dict[str, dict] = {
         "norma": "Decreto-Lei nº 201, de 27 de fevereiro de 1967",
         "url": "decreto-lei/del0201.htm",
         "faixas": [[1, 1]],
-        "rotulos": [],
+        "rotulos": ["DL 201/67"],
         "ajuste": {
             "esperados": 2,
             "motivo": "O art. 1º, §1º, comina em linha corrida: reclusão de 2 a "
@@ -511,28 +511,28 @@ META: dict[str, dict] = {
         "norma": "Lei nº 9.263, de 12 de janeiro de 1996",
         "url": "leis/l9263.htm",
         "faixas": [[15, 21]],
-        "rotulos": [],
+        "rotulos": ["Lei 9.263/96"],
     },
     "lei6538": {
         "nome": "Serviços postais (crimes)",
         "norma": "Lei nº 6.538, de 22 de junho de 1978",
         "url": "leis/l6538.htm",
         "faixas": [[36, 45]],
-        "rotulos": [],
+        "rotulos": ["Lei 6.538/78"],
     },
     "lei6453": {
         "nome": "Atividades nucleares (crimes)",
         "norma": "Lei nº 6.453, de 17 de outubro de 1977",
         "url": "leis/l6453.htm",
         "faixas": [[19, 27]],
-        "rotulos": [],
+        "rotulos": ["Lei 6.453/77"],
     },
     "lei7643": {
         "nome": "Pesca de cetáceos",
         "norma": "Lei nº 7.643, de 18 de dezembro de 1987",
         "url": "leis/l7643.htm",
         "faixas": [[2, 2]],
-        "rotulos": [],
+        "rotulos": ["Lei 7.643/87"],
         "ajuste": {
             "esperados": 1,
             "motivo": "O art. 2º comina reclusão em linha corrida.",
@@ -543,14 +543,14 @@ META: dict[str, dict] = {
         "norma": "Lei nº 4.947, de 6 de abril de 1966",
         "url": "leis/l4947.htm",
         "faixas": [[19, 20]],
-        "rotulos": [],
+        "rotulos": ["Lei 4.947/66"],
     },
     "lei5741": {
         "nome": "Crédito habitacional — SFH (crime do art. 9º)",
         "norma": "Lei nº 5.741, de 1º de dezembro de 1971",
         "url": "leis/l5741.htm",
         "faixas": [[9, 9]],
-        "rotulos": [],
+        "rotulos": ["Lei 5.741/71"],
         "ajuste": {
             "esperados": 1,
             "motivo": "O art. 9º comina detenção em linha corrida.",
@@ -561,7 +561,7 @@ META: dict[str, dict] = {
         "norma": "Lei nº 5.478, de 25 de julho de 1968",
         "url": "leis/l5478.htm",
         "faixas": [[22, 22]],
-        "rotulos": [],
+        "rotulos": ["Lei 5.478/68"],
         "obs": "O art. 21 apenas dá redação ao art. 244 do CP (contado lá).",
     },
     "lei7347": {
@@ -569,7 +569,7 @@ META: dict[str, dict] = {
         "norma": "Lei nº 7.347, de 24 de julho de 1985",
         "url": "leis/l7347compilada.htm",
         "faixas": [[10, 10]],
-        "rotulos": [],
+        "rotulos": ["Lei 7.347/85"],
         "ajuste": {
             "esperados": 1,
             "motivo": "O art. 10 comina reclusão em linha corrida.",
@@ -580,21 +580,21 @@ META: dict[str, dict] = {
         "norma": "Lei nº 6.091, de 15 de agosto de 1974",
         "url": "leis/l6091.htm",
         "faixas": [[11, 11]],
-        "rotulos": [],
+        "rotulos": ["Lei 6.091/74"],
     },
     "lc64": {
         "nome": "Lei de Inelegibilidades (crime do art. 25)",
         "norma": "Lei Complementar nº 64, de 18 de maio de 1990",
         "url": "leis/lcp/lcp64.htm",
         "faixas": [[25, 25]],
-        "rotulos": [],
+        "rotulos": ["LC 64/90"],
     },
     "lei12984": {
         "nome": "Discriminação de pessoas com HIV/aids",
         "norma": "Lei nº 12.984, de 2 de junho de 2014",
         "url": "_ato2011-2014/2014/lei/l12984.htm",
         "faixas": [[1, 1]],
-        "rotulos": [],
+        "rotulos": ["Lei 12.984/14"],
         "ajuste": {
             "esperados": 1,
             "motivo": "O art. 1º comina reclusão em linha corrida.",
@@ -605,7 +605,7 @@ META: dict[str, dict] = {
         "norma": "Lei nº 7.437, de 20 de dezembro de 1985",
         "url": "leis/l7437.htm",
         "faixas": [[3, 9]],
-        "rotulos": [],
+        "rotulos": ["Lei 7.437/85"],
         "obs": "Alcance remanescente restrito ao preconceito de sexo e de "
                "estado civil: as hipóteses de raça, cor, etnia, religião e "
                "procedência viraram crime na Lei nº 7.716/1989.",
@@ -615,7 +615,7 @@ META: dict[str, dict] = {
         "norma": "Lei nº 8.906, de 4 de julho de 1994",
         "url": "leis/l8906.htm",
         "faixas": [[7, 7]],
-        "rotulos": [],
+        "rotulos": ["Lei 8.906/94"],
         "obs": "Violação de prerrogativa de advogado (incluído pela Lei nº "
                "13.869/2019; pena da Lei nº 14.365/2022).",
     },

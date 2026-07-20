@@ -66,7 +66,10 @@ def main() -> int:
     historicos = [d for d in inventario["diplomas"] if d["situacao"] != "vigente"]
     total_preceitos = inventario["_meta"]["total_preceitos_esperados"]
     com_coleta = [d for d in vigentes if tipos_por_slug.get(d["id"])]
-    sem_coleta = [d for d in vigentes if not tipos_por_slug.get(d["id"])]
+    # Diploma sem tipos E sem preceitos vigentes não é lacuna — nada há a
+    # coletar (ex.: Lei 9.807/99, cujo único crime foi vetado na origem).
+    sem_coleta = [d for d in vigentes
+                  if not tipos_por_slug.get(d["id"]) and d["preceitos_esperados"] > 0]
 
     def situacao(d: dict) -> str:
         if d["id"] in CONFERIDOS:
