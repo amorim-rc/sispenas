@@ -17,7 +17,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1134** |
+| Tipos penais catalogados | **1162** |
 | Preceitos secundários vigentes (denominador) | **1172** |
 | Diplomas vigentes inventariados | 63 |
 | — com coleta | 62 |
@@ -39,27 +39,27 @@ para dimensionar lacunas, não como percentual exato.
 | [Código Eleitoral](#código-eleitoral) | 61 | 56 | 🔶 em coleta |
 | [Crimes contra o meio ambiente](#crimes-contra-o-meio-ambiente) | 40 | 51 | 🔶 em coleta |
 | [Estatuto da Criança e do Adolescente (crimes)](#estatuto-da-criança-e-do-adolescente-crimes) | 26 | 37 | 🔶 em coleta |
-| [Abuso de autoridade](#abuso-de-autoridade) | 25 | 20 | 🔶 em coleta |
+| [Abuso de autoridade](#abuso-de-autoridade) | 25 | 23 | 🔶 em coleta |
+| [Crimes contra o sistema financeiro nacional](#crimes-contra-o-sistema-financeiro-nacional) | 23 | 23 | 🔶 em coleta |
 | [Lei de Drogas](#lei-de-drogas) | 10 | 19 | 🔶 em coleta |
 | [Crimes de preconceito (racismo)](#crimes-de-preconceito-racismo) | 17 | 16 | 🔶 em coleta |
 | [Código de Trânsito Brasileiro (crimes de trânsito)](#código-de-trânsito-brasileiro-crimes-de-trânsito) | 12 | 16 | 🔶 em coleta |
 | [Crimes contra a ordem tributária, econômica e relações de consumo](#crimes-contra-a-ordem-tributária-econômica-e-relações-de-consumo) | 6 | 16 | 🔶 em coleta |
-| [Crimes contra o sistema financeiro nacional](#crimes-contra-o-sistema-financeiro-nacional) | 23 | 13 | 🔶 em coleta |
+| [Estatuto da Pessoa Idosa (crimes)](#estatuto-da-pessoa-idosa-crimes) | 16 | 14 | 🔶 em coleta |
 | [Loterias (contravenções)](#loterias-contravenções) | 13 | 13 | 🔶 em coleta |
 | [Código de Defesa do Consumidor (infrações penais)](#código-de-defesa-do-consumidor-infrações-penais) | 14 | 12 | 🔶 em coleta |
 | [Propriedade industrial (crimes)](#propriedade-industrial-crimes) | 12 | 12 | ✅ completo (conferido na v1.1.2) |
 | [Estatuto do Desarmamento](#estatuto-do-desarmamento) | 7 | 12 | 🔶 em coleta |
-| [Estatuto da Pessoa Idosa (crimes)](#estatuto-da-pessoa-idosa-crimes) | 16 | 11 | 🔶 em coleta |
+| [Lei de Falências (crimes falimentares)](#lei-de-falências-crimes-falimentares) | 11 | 11 | 🔶 em coleta |
 | [Lei Geral do Esporte (crimes)](#lei-geral-do-esporte-crimes) | 11 | 11 | 🔶 em coleta |
-| [Lei de Falências (crimes falimentares)](#lei-de-falências-crimes-falimentares) | 11 | 9 | 🔶 em coleta |
+| [Lei das Eleições (crimes)](#lei-das-eleições-crimes) | 10 | 11 | 🔶 em coleta |
+| [Transplante de órgãos (crimes)](#transplante-de-órgãos-crimes) | 12 | 10 | 🔶 em coleta |
 | [Organizações criminosas](#organizações-criminosas) | 7 | 9 | 🔶 em coleta |
 | [Genocídio](#genocídio) | 3 | 9 | 🔶 em coleta |
-| [Transplante de órgãos (crimes)](#transplante-de-órgãos-crimes) | 12 | 8 | 🔶 em coleta |
 | [Atividades nucleares (crimes)](#atividades-nucleares-crimes) | 8 | 8 | 🔶 em coleta |
 | [Serviços postais (crimes)](#serviços-postais-crimes) | 7 | 7 | 🔶 em coleta |
 | [Contravenções de preconceito](#contravenções-de-preconceito) | 7 | 7 | 🔶 em coleta |
 | [Lei de Biossegurança (crimes)](#lei-de-biossegurança-crimes) | 6 | 6 | 🔶 em coleta |
-| [Lei das Eleições (crimes)](#lei-das-eleições-crimes) | 10 | 5 | 🔶 em coleta |
 | [Transporte de eleitores (crimes)](#transporte-de-eleitores-crimes) | 5 | 5 | 🔶 em coleta |
 | [Tortura](#tortura) | 4 | 5 | 🔶 em coleta |
 | [Antiterrorismo](#antiterrorismo) | 4 | 5 | 🔶 em coleta |
@@ -69,6 +69,7 @@ para dimensionar lacunas, não como percentual exato.
 | [Crimes contra a economia popular](#crimes-contra-a-economia-popular) | 3 | 3 | 🔶 em coleta |
 | [Mercado de valores mobiliários (crimes)](#mercado-de-valores-mobiliários-crimes) | 3 | 3 | 🔶 em coleta |
 | [Parcelamento do solo urbano (crimes)](#parcelamento-do-solo-urbano-crimes) | 3 | 3 | 🔶 em coleta |
+| [Estatuto do Índio (crimes)](#estatuto-do-índio-crimes) | 3 | 3 | 🔶 em coleta |
 | [Programas de computador (crimes)](#programas-de-computador-crimes) | 2 | 3 | 🔶 em coleta |
 | [Práticas discriminatórias no trabalho](#práticas-discriminatórias-no-trabalho) | 1 | 3 | 🔶 em coleta |
 | [Crimes contra a ordem econômica (combustíveis)](#crimes-contra-a-ordem-econômica-combustíveis) | 2 | 2 | 🔶 em coleta |
@@ -79,7 +80,6 @@ para dimensionar lacunas, não como percentual exato.
 | [Crimes de prefeitos e vereadores](#crimes-de-prefeitos-e-vereadores) | 2 | 2 | 🔶 em coleta |
 | [Direito agrário (crimes)](#direito-agrário-crimes) | 2 | 2 | 🔶 em coleta |
 | [Lei de Migração (crime do art. 232-A)](#lei-de-migração-crime-do-art-232-a) | 1 | 2 | 🔶 em coleta |
-| [Estatuto do Índio (crimes)](#estatuto-do-índio-crimes) | 3 | 1 | 🔶 em coleta |
 | [Interceptação telefônica (crimes)](#interceptação-telefônica-crimes) | 2 | 1 | 🔶 em coleta |
 | [Condomínios e incorporações (crimes)](#condomínios-e-incorporações-crimes) | 2 | 1 | 🔶 em coleta |
 | [Lei Maria da Penha (crime do art. 24-A)](#lei-maria-da-penha-crime-do-art-24-a) | 1 | 1 | 🔶 em coleta |
@@ -996,7 +996,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 
 ### Abuso de autoridade
 
-*Lei nº 13.869, de 5 de setembro de 2019* — 25 preceitos vigentes, 20 tipos coletados. 🔶 em coleta
+*Lei nº 13.869, de 5 de setembro de 2019* — 25 preceitos vigentes, 23 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
@@ -1011,15 +1011,48 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [446](/pesquisa/tipos?tipo=446) | Art. 20 | Impedir/dificultar entrevista do preso com seu advogado |
 | [447](/pesquisa/tipos?tipo=447) | Art. 21 | Manter presos de ambos os sexos na mesma cela ou espaço de confinamento |
 | [448](/pesquisa/tipos?tipo=448) | Art. 22 | Invadir ou adentrar casa alheia ou suas dependências sem determinação judicial ou fora das condições legais |
+| [1214](/pesquisa/tipos?tipo=1214) | Art. 23 | Inovação artificiosa do estado de lugar, coisa ou pessoa no curso de diligência, investigação ou processo, para induzir a erro juiz ou perito |
+| [1215](/pesquisa/tipos?tipo=1215) | Art. 24 | Constrangimento, sob violência ou grave ameaça, de funcionário de instituição hospitalar a admitir preso ou pessoa cuja internação não foi autorizada |
 | [449](/pesquisa/tipos?tipo=449) | Art. 25 | Proceder a obtenção de prova por meio manifestamente ilícito |
 | [450](/pesquisa/tipos?tipo=450) | Art. 27 | Requisitar instauração ou instaurar procedimento investigatório de infração penal sem indícios |
 | [451](/pesquisa/tipos?tipo=451) | Art. 28 | Divulgar gravação ou interceptação telefônica/telemática ilegal ou obtida licitamente mas sem autorização para divulgação |
+| [1216](/pesquisa/tipos?tipo=1216) | Art. 29 | Prestação de informação falsa sobre procedimento judicial, policial, fiscal ou administrativo, para prejudicar interesse de investigado |
 | [452](/pesquisa/tipos?tipo=452) | Art. 30 | Dar início ou proceder a persecução penal/civil/administrativa sem justa causa ou contra quem sabe inocente |
 | [453](/pesquisa/tipos?tipo=453) | Art. 31 | Estender injustificadamente a investigação além do prazo razoável |
 | [454](/pesquisa/tipos?tipo=454) | Art. 33 | Exigir informação ou cumprimento de obrigação sem embasamento legal |
 | [455](/pesquisa/tipos?tipo=455) | Art. 36 | Decretar/executar medida cautelar diversa da prisão ou sanção administrativa sem amparo legal |
 | [456](/pesquisa/tipos?tipo=456) | Art. 37 | Demorar demasiada e injustificadamente no exame de processo/documento/procedimento em que tenha interesse o preso ou tenha sido decretada qualquer medida restritiva de liberdade |
 | [457](/pesquisa/tipos?tipo=457) | Art. 38 | Antecipar o responsável pelas investigações atribuição de culpabilidade ao investigado por meio de comunicação |
+
+### Crimes contra o sistema financeiro nacional
+
+*Lei nº 7.492, de 16 de junho de 1986* — 23 preceitos vigentes, 23 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [412](/pesquisa/tipos?tipo=412) | Art. 2º | Impressão/reprodução de formulário/documento para captação de poupança pública sem autorização |
+| [413](/pesquisa/tipos?tipo=413) | Art. 3º | Divulgar informação falsa ou prejudicialmente incompleta sobre instituição financeira |
+| [414](/pesquisa/tipos?tipo=414) | Art. 4º | Gestão fraudulenta de instituição financeira |
+| [415](/pesquisa/tipos?tipo=415) | Art. 4º, §único | Gestão temerária de instituição financeira |
+| [416](/pesquisa/tipos?tipo=416) | Art. 5º | Apropriar-se/desviar recursos de instituição financeira em proveito próprio ou de terceiro |
+| [417](/pesquisa/tipos?tipo=417) | Art. 6º | Induzir/manter em erro sócio/investidor/repartição pública sobre operação/situação financeira |
+| [418](/pesquisa/tipos?tipo=418) | Art. 7º | Emitir/oferecer/negociar valores mobiliários sem autorização ou em condições divergentes |
+| [419](/pesquisa/tipos?tipo=419) | Art. 8º | Exigir em desacordo com a legislação/aplicar em desacordo juros, comissões ou remuneração |
+| [420](/pesquisa/tipos?tipo=420) | Art. 9º | Fraudar fiscalização/investidor inserindo/omitindo registros contábeis |
+| [421](/pesquisa/tipos?tipo=421) | Art. 10 | Empréstimo/adiantamento vedado ou em condições mais vantajosas que as de mercado |
+| [422](/pesquisa/tipos?tipo=422) | Art. 11 | Manter/movimentar recursos fora do País sem declaração (evasão de divisas) |
+| [1204](/pesquisa/tipos?tipo=1204) | Art. 12 | Omissão do ex-administrador de instituição financeira de apresentar declaração de crédito/bens ao interventor, liquidante ou síndico |
+| [1205](/pesquisa/tipos?tipo=1205) | Art. 13 | Desvio de bem sob indisponibilidade legal por intervenção, liquidação extrajudicial ou falência de instituição financeira |
+| [1206](/pesquisa/tipos?tipo=1206) | Art. 14 | Apresentação de declaração de crédito ou reclamação falsa em liquidação ou falência de instituição financeira |
+| [1207](/pesquisa/tipos?tipo=1207) | Art. 15 | Manifestação falsa do interventor, liquidante ou síndico sobre assunto relativo a intervenção, liquidação ou falência de instituição financeira |
+| [423](/pesquisa/tipos?tipo=423) | Art. 16 | Operação de instituição financeira sem autorização |
+| [1208](/pesquisa/tipos?tipo=1208) | Art. 17 | Empréstimo vedado a administrador ou parente (tomar ou receber crédito, ou deferir operação, nas condições do art. 25) |
+| [1209](/pesquisa/tipos?tipo=1209) | Art. 18 | Violação de sigilo de operação ou serviço de instituição financeira ou do sistema de distribuição de títulos |
+| [1210](/pesquisa/tipos?tipo=1210) | Art. 19 | Obtenção fraudulenta de financiamento em instituição financeira |
+| [1211](/pesquisa/tipos?tipo=1211) | Art. 20 | Aplicação de recursos de financiamento em finalidade diversa da prevista em lei ou contrato |
+| [1212](/pesquisa/tipos?tipo=1212) | Art. 21 | Falsa identidade em operação de câmbio (atribuir-se, ou atribuir a terceiro, para realizá-la) |
+| [424](/pesquisa/tipos?tipo=424) | Art. 22 | Efetuar operação de câmbio não autorizada para promover evasão de divisas |
+| [1213](/pesquisa/tipos?tipo=1213) | Art. 23 | Prevaricação de funcionário público em detrimento do Sistema Financeiro Nacional (omitir, retardar ou praticar ato de ofício contra disposição de lei) |
 
 ### Lei de Drogas
 
@@ -1116,25 +1149,26 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [760](/pesquisa/tipos?tipo=760) | Art. 7º, I | Crime contra relações de consumo — favorecer/preferir comprador sem justa causa |
 | [761](/pesquisa/tipos?tipo=761) | Art. 7º, II | Crime contra relações de consumo — vender/expor mercadoria com peso/medida diferente do indicado |
 
-### Crimes contra o sistema financeiro nacional
+### Estatuto da Pessoa Idosa (crimes)
 
-*Lei nº 7.492, de 16 de junho de 1986* — 23 preceitos vigentes, 13 tipos coletados. 🔶 em coleta
+*Lei nº 10.741, de 1º de outubro de 2003* — 16 preceitos vigentes, 14 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
-| [412](/pesquisa/tipos?tipo=412) | Art. 2º | Impressão/reprodução de formulário/documento para captação de poupança pública sem autorização |
-| [413](/pesquisa/tipos?tipo=413) | Art. 3º | Divulgar informação falsa ou prejudicialmente incompleta sobre instituição financeira |
-| [414](/pesquisa/tipos?tipo=414) | Art. 4º | Gestão fraudulenta de instituição financeira |
-| [415](/pesquisa/tipos?tipo=415) | Art. 4º, §único | Gestão temerária de instituição financeira |
-| [416](/pesquisa/tipos?tipo=416) | Art. 5º | Apropriar-se/desviar recursos de instituição financeira em proveito próprio ou de terceiro |
-| [417](/pesquisa/tipos?tipo=417) | Art. 6º | Induzir/manter em erro sócio/investidor/repartição pública sobre operação/situação financeira |
-| [418](/pesquisa/tipos?tipo=418) | Art. 7º | Emitir/oferecer/negociar valores mobiliários sem autorização ou em condições divergentes |
-| [419](/pesquisa/tipos?tipo=419) | Art. 8º | Exigir em desacordo com a legislação/aplicar em desacordo juros, comissões ou remuneração |
-| [420](/pesquisa/tipos?tipo=420) | Art. 9º | Fraudar fiscalização/investidor inserindo/omitindo registros contábeis |
-| [421](/pesquisa/tipos?tipo=421) | Art. 10 | Empréstimo/adiantamento vedado ou em condições mais vantajosas que as de mercado |
-| [422](/pesquisa/tipos?tipo=422) | Art. 11 | Manter/movimentar recursos fora do País sem declaração (evasão de divisas) |
-| [423](/pesquisa/tipos?tipo=423) | Art. 16 | Operação de instituição financeira sem autorização |
-| [424](/pesquisa/tipos?tipo=424) | Art. 22 | Efetuar operação de câmbio não autorizada para promover evasão de divisas |
+| [484](/pesquisa/tipos?tipo=484) | Art. 96 | Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar, ou por qualquer outro meio |
+| [485](/pesquisa/tipos?tipo=485) | Art. 97 | Deixar de prestar assistência ao idoso quando obrigado por lei ou mandado |
+| [486](/pesquisa/tipos?tipo=486) | Art. 98 | Abandonar idoso em hospitais/casas de saúde/entidades de longa permanência ou não prover suas necessidades básicas |
+| [487](/pesquisa/tipos?tipo=487) | Art. 99 | Expor idoso a perigo à integridade e à saúde, submetendo-o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis |
+| [488](/pesquisa/tipos?tipo=488) | Art. 100 | Obstar acesso de idoso a cargo público por motivo de idade |
+| [489](/pesquisa/tipos?tipo=489) | Art. 101 | Negar/dificultar a qualquer pessoa o acesso a ações e serviços de saúde por motivo de idade |
+| [490](/pesquisa/tipos?tipo=490) | Art. 102 | Apropriar-se de/desviar bens, proventos, pensão ou qualquer outro rendimento do idoso, dando-lhes aplicação diversa de sua finalidade |
+| [1217](/pesquisa/tipos?tipo=1217) | Art. 103 | Negar acolhimento ou permanência da pessoa idosa como abrigada, por recusa desta em outorgar procuração à entidade |
+| [491](/pesquisa/tipos?tipo=491) | Art. 104 | Reter cartão magnético de conta bancária relativa a benefícios/proventos/pensão de idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida |
+| [1218](/pesquisa/tipos?tipo=1218) | Art. 105 | Exibir ou veicular, por qualquer meio, informações ou imagens depreciativas ou injuriosas à pessoa idosa |
+| [492](/pesquisa/tipos?tipo=492) | Art. 106 | Induzir idoso sem discernimento a outorgar procuração para fins de administração de bens ou deles dispor livremente |
+| [493](/pesquisa/tipos?tipo=493) | Art. 107 | Coagir, de qualquer modo, o idoso a doar/contratar/testar/outorgar procuração |
+| [494](/pesquisa/tipos?tipo=494) | Art. 108 | Lavrar ato notarial que envolva pessoa idosa sem discernimento de seus atos, sem a devida representação legal |
+| [1219](/pesquisa/tipos?tipo=1219) | Art. 109 | Impedir ou embaraçar ato do representante do Ministério Público ou de outro agente fiscalizador (Estatuto da Pessoa Idosa) |
 
 ### Loterias (contravenções)
 
@@ -1213,23 +1247,23 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [346](/pesquisa/tipos?tipo=346) | Art. 18 | Tráfico internacional de arma de fogo |
 | [1046](/pesquisa/tipos?tipo=1046) | Art. 18 | Tráfico internacional de arma de fogo (importar/exportar/favorecer entrada ou saída do território nacional, a qualquer título, arma de fogo sem autorização) |
 
-### Estatuto da Pessoa Idosa (crimes)
+### Lei de Falências (crimes falimentares)
 
-*Lei nº 10.741, de 1º de outubro de 2003* — 16 preceitos vigentes, 11 tipos coletados. 🔶 em coleta
+*Lei nº 11.101, de 9 de fevereiro de 2005* — 11 preceitos vigentes, 11 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
-| [484](/pesquisa/tipos?tipo=484) | Art. 96 | Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar, ou por qualquer outro meio |
-| [485](/pesquisa/tipos?tipo=485) | Art. 97 | Deixar de prestar assistência ao idoso quando obrigado por lei ou mandado |
-| [486](/pesquisa/tipos?tipo=486) | Art. 98 | Abandonar idoso em hospitais/casas de saúde/entidades de longa permanência ou não prover suas necessidades básicas |
-| [487](/pesquisa/tipos?tipo=487) | Art. 99 | Expor idoso a perigo à integridade e à saúde, submetendo-o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis |
-| [488](/pesquisa/tipos?tipo=488) | Art. 100 | Obstar acesso de idoso a cargo público por motivo de idade |
-| [489](/pesquisa/tipos?tipo=489) | Art. 101 | Negar/dificultar a qualquer pessoa o acesso a ações e serviços de saúde por motivo de idade |
-| [490](/pesquisa/tipos?tipo=490) | Art. 102 | Apropriar-se de/desviar bens, proventos, pensão ou qualquer outro rendimento do idoso, dando-lhes aplicação diversa de sua finalidade |
-| [491](/pesquisa/tipos?tipo=491) | Art. 104 | Reter cartão magnético de conta bancária relativa a benefícios/proventos/pensão de idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida |
-| [492](/pesquisa/tipos?tipo=492) | Art. 106 | Induzir idoso sem discernimento a outorgar procuração para fins de administração de bens ou deles dispor livremente |
-| [493](/pesquisa/tipos?tipo=493) | Art. 107 | Coagir, de qualquer modo, o idoso a doar/contratar/testar/outorgar procuração |
-| [494](/pesquisa/tipos?tipo=494) | Art. 108 | Lavrar ato notarial que envolva pessoa idosa sem discernimento de seus atos, sem a devida representação legal |
+| [499](/pesquisa/tipos?tipo=499) | Art. 168 | Fraude a credores (praticar ato fraudulento antes ou depois de sentença de falência/recuperação) |
+| [500](/pesquisa/tipos?tipo=500) | Art. 169 | Violação de sigilo empresarial (violar/explorar/divulgar segredo da empresa devedora sem justa causa) |
+| [501](/pesquisa/tipos?tipo=501) | Art. 170 | Divulgação de informações falsas sobre devedor em recuperação judicial |
+| [502](/pesquisa/tipos?tipo=502) | Art. 171 | Sonegação de bens em processo de falência (apropriar-se/desviar/destruir bens do devedor falido) |
+| [503](/pesquisa/tipos?tipo=503) | Art. 172 | Favorecimento de credores (favorecer credor em detrimento dos demais) |
+| [504](/pesquisa/tipos?tipo=504) | Art. 173 | Desvio/destruição/adulteração de documentos referentes à contabilidade do devedor |
+| [1222](/pesquisa/tipos?tipo=1222) | Art. 174 | Aquisição, recebimento ou uso ilícito de bem que sabe pertencer à massa falida, ou influir para que terceiro o adquira de má-fé |
+| [505](/pesquisa/tipos?tipo=505) | Art. 175 | Habilitação ilegal de crédito na falência (apresentar crédito falso ou em valor indevido) |
+| [506](/pesquisa/tipos?tipo=506) | Art. 176 | Exercício ilegal de atividade empresarial por pessoa condenada por crime falimentar durante prazo da inabilitação |
+| [507](/pesquisa/tipos?tipo=507) | Art. 177 | Omissão dos documentos contábeis obrigatórios |
+| [1223](/pesquisa/tipos?tipo=1223) | Art. 178 | Omissão de documentos contábeis obrigatórios (deixar de elaborar, escriturar ou autenticar antes ou depois da sentença) |
 
 ### Lei Geral do Esporte (crimes)
 
@@ -1249,21 +1283,40 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1121](/pesquisa/tipos?tipo=1121) | Art. 200 | Fraude ao resultado esportivo (fraudar, por qualquer meio, ou contribuir para que se fraude o resultado de competição esportiva) |
 | [1122](/pesquisa/tipos?tipo=1122) | Art. 201 | Tumulto ou violência em evento esportivo (promover tumulto, praticar ou incitar violência ou invadir local restrito a competidores e árbitros) |
 
-### Lei de Falências (crimes falimentares)
+### Lei das Eleições (crimes)
 
-*Lei nº 11.101, de 9 de fevereiro de 2005* — 11 preceitos vigentes, 9 tipos coletados. 🔶 em coleta
+*Lei nº 9.504, de 30 de setembro de 1997* — 10 preceitos vigentes, 11 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
-| [499](/pesquisa/tipos?tipo=499) | Art. 168 | Fraude a credores (praticar ato fraudulento antes ou depois de sentença de falência/recuperação) |
-| [500](/pesquisa/tipos?tipo=500) | Art. 169 | Violação de sigilo empresarial (violar/explorar/divulgar segredo da empresa devedora sem justa causa) |
-| [501](/pesquisa/tipos?tipo=501) | Art. 170 | Divulgação de informações falsas sobre devedor em recuperação judicial |
-| [502](/pesquisa/tipos?tipo=502) | Art. 171 | Sonegação de bens em processo de falência (apropriar-se/desviar/destruir bens do devedor falido) |
-| [503](/pesquisa/tipos?tipo=503) | Art. 172 | Favorecimento de credores (favorecer credor em detrimento dos demais) |
-| [504](/pesquisa/tipos?tipo=504) | Art. 173 | Desvio/destruição/adulteração de documentos referentes à contabilidade do devedor |
-| [505](/pesquisa/tipos?tipo=505) | Art. 175 | Habilitação ilegal de crédito na falência (apresentar crédito falso ou em valor indevido) |
-| [506](/pesquisa/tipos?tipo=506) | Art. 176 | Exercício ilegal de atividade empresarial por pessoa condenada por crime falimentar durante prazo da inabilitação |
-| [507](/pesquisa/tipos?tipo=507) | Art. 177 | Omissão dos documentos contábeis obrigatórios |
+| [552](/pesquisa/tipos?tipo=552) | Art. 33, §4º | Pesquisa eleitoral fraudulenta (divulgar resultados de pesquisa fabricada/manipulada) |
+| [1226](/pesquisa/tipos?tipo=1226) | Art. 34, §2º | Obstrução à fiscalização de pesquisa eleitoral (retardar, impedir ou dificultar a ação fiscalizadora dos partidos sobre pesquisas) |
+| [551](/pesquisa/tipos?tipo=551) | Art. 39, §5º | Boca de urna (propaganda de boca de urna no dia da eleição) |
+| [728](/pesquisa/tipos?tipo=728) | Art. 39, §5º, I | Confeccionar/utilizar/distribuir material impresso de propaganda eleitoral desconforme (sem CNPJ, sem responsável) |
+| [1227](/pesquisa/tipos?tipo=1227) | Art. 40 | Uso, na propaganda eleitoral, de símbolos, frases ou imagens associadas ou semelhantes às de órgão de governo, empresa pública ou sociedade de economia mista |
+| [1228](/pesquisa/tipos?tipo=1228) | Art. 57-H, §1º | Contratação direta ou indireta de grupo de pessoas para emitir mensagens ou comentários na internet ofendendo a honra de candidato, partido ou coligação |
+| [1229](/pesquisa/tipos?tipo=1229) | Art. 57-H, §2º | Prestação do serviço de emitir mensagens ou comentários ofensivos na internet (quem é contratado para a conduta do §1º) |
+| [1230](/pesquisa/tipos?tipo=1230) | Art. 68, §2º | Descumprimento das regras do boletim de urna (deixar de entregar cópia aos partidos ou de afixá-la) |
+| [553](/pesquisa/tipos?tipo=553) | Art. 72 | Inserção de dados falsos no sistema eleitoral (inserir/alterar dados no sistema de informações do Cadastro Nacional de Eleitores) |
+| [1231](/pesquisa/tipos?tipo=1231) | Art. 87, §4º | Obstrução à fiscalização da apuração (descumprir o direito de fiscais e delegados de observar a abertura da urna e a apuração) |
+| [1232](/pesquisa/tipos?tipo=1232) | Art. 91, parágrafo único | Retenção de título eleitoral ou de comprovante de alistamento eleitoral |
+
+### Transplante de órgãos (crimes)
+
+*Lei nº 9.434, de 4 de fevereiro de 1997* — 12 preceitos vigentes, 10 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [584](/pesquisa/tipos?tipo=584) | Art. 14 | Remover tecidos/órgãos/partes do corpo de pessoa ou cadáver em desacordo com a lei |
+| [585](/pesquisa/tipos?tipo=585) | Art. 14, §1º | Remoção de órgãos/tecidos mediante paga ou promessa de recompensa |
+| [713](/pesquisa/tipos?tipo=713) | Art. 14, §2º | Remoção de órgãos/tecidos que causa lesão corporal grave ou incapacidade permanente no doador |
+| [714](/pesquisa/tipos?tipo=714) | Art. 14, §3º | Remoção de órgãos/tecidos que resulta em morte do doador |
+| [586](/pesquisa/tipos?tipo=586) | Art. 15 | Comprar ou vender tecidos/órgãos/partes do corpo humano |
+| [587](/pesquisa/tipos?tipo=587) | Art. 16 | Realizar transplante com órgãos/tecidos obtidos em desacordo com a lei |
+| [588](/pesquisa/tipos?tipo=588) | Art. 17 | Recolher tecidos/órgãos/partes de cadáver para transplante, inclusive para tecidos, sem autorização do cônjuge ou parente |
+| [589](/pesquisa/tipos?tipo=589) | Art. 18 | Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial |
+| [1220](/pesquisa/tipos?tipo=1220) | Art. 19 | Deixar de recompor cadáver devolvendo-lhe aspecto condigno para sepultamento, ou deixar de entregá-lo ou retardar sua entrega aos familiares |
+| [1221](/pesquisa/tipos?tipo=1221) | Art. 20 | Publicar anúncio ou apelo público de doação de órgãos em desacordo com o art. 11 |
 
 ### Organizações criminosas
 
@@ -1296,21 +1349,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1031](/pesquisa/tipos?tipo=1031) | Art. 2º | Associação para genocídio (associar-se com mais de 3 pessoas para prática de genocídio) |
 | [578](/pesquisa/tipos?tipo=578) | Art. 3º | Incitação ao genocídio (incitar/induzir direta e publicamente a praticar genocídio) |
 | [1032](/pesquisa/tipos?tipo=1032) | Art. 3º | Incitação ao genocídio (incitar direta e publicamente alguém a cometer genocídio) |
-
-### Transplante de órgãos (crimes)
-
-*Lei nº 9.434, de 4 de fevereiro de 1997* — 12 preceitos vigentes, 8 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [584](/pesquisa/tipos?tipo=584) | Art. 14 | Remover tecidos/órgãos/partes do corpo de pessoa ou cadáver em desacordo com a lei |
-| [585](/pesquisa/tipos?tipo=585) | Art. 14, §1º | Remoção de órgãos/tecidos mediante paga ou promessa de recompensa |
-| [713](/pesquisa/tipos?tipo=713) | Art. 14, §2º | Remoção de órgãos/tecidos que causa lesão corporal grave ou incapacidade permanente no doador |
-| [714](/pesquisa/tipos?tipo=714) | Art. 14, §3º | Remoção de órgãos/tecidos que resulta em morte do doador |
-| [586](/pesquisa/tipos?tipo=586) | Art. 15 | Comprar ou vender tecidos/órgãos/partes do corpo humano |
-| [587](/pesquisa/tipos?tipo=587) | Art. 16 | Realizar transplante com órgãos/tecidos obtidos em desacordo com a lei |
-| [588](/pesquisa/tipos?tipo=588) | Art. 17 | Recolher tecidos/órgãos/partes de cadáver para transplante, inclusive para tecidos, sem autorização do cônjuge ou parente |
-| [589](/pesquisa/tipos?tipo=589) | Art. 18 | Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial |
 
 ### Atividades nucleares (crimes)
 
@@ -1367,18 +1405,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [718](/pesquisa/tipos?tipo=718) | Art. 27 | Liberar ou descartar OGM no meio ambiente em desacordo com normas de biossegurança |
 | [719](/pesquisa/tipos?tipo=719) | Art. 28 | Utilizar/comercializar/registrar/patentear OGM ou derivado sem autorização do CTNBio |
 | [720](/pesquisa/tipos?tipo=720) | Art. 29 | Produzir/armazenar/transportar/comercializar/importar/exportar OGM ou derivado sem autorização |
-
-### Lei das Eleições (crimes)
-
-*Lei nº 9.504, de 30 de setembro de 1997* — 10 preceitos vigentes, 5 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [552](/pesquisa/tipos?tipo=552) | Art. 33, §4º | Pesquisa eleitoral fraudulenta (divulgar resultados de pesquisa fabricada/manipulada) |
-| [727](/pesquisa/tipos?tipo=727) | Art. 33, §4º | Divulgar resultado de pesquisa eleitoral fraudulenta |
-| [551](/pesquisa/tipos?tipo=551) | Art. 39, §5º | Boca de urna (propaganda de boca de urna no dia da eleição) |
-| [728](/pesquisa/tipos?tipo=728) | Art. 39, §5º, I | Confeccionar/utilizar/distribuir material impresso de propaganda eleitoral desconforme (sem CNPJ, sem responsável) |
-| [553](/pesquisa/tipos?tipo=553) | Art. 72 | Inserção de dados falsos no sistema eleitoral (inserir/alterar dados no sistema de informações do Cadastro Nacional de Eleitores) |
 
 ### Transporte de eleitores (crimes)
 
@@ -1479,6 +1505,16 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [737](/pesquisa/tipos?tipo=737) | Art. 50, II | Vender ou prometer vender lote em loteamento não registrado no Registro de Imóveis |
 | [738](/pesquisa/tipos?tipo=738) | Art. 50, III | Fazer ou veicular propaganda de loteamento/desmembramento com informações falsas |
 
+### Estatuto do Índio (crimes)
+
+*Lei nº 6.001, de 19 de dezembro de 1973* — 3 preceitos vigentes, 3 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [580](/pesquisa/tipos?tipo=580) | Art. 58, I | Escarnecer de cerimônia, rito, uso, costume ou tradição culturais indígenas, vilipendiá-los ou perturbar sua prática |
+| [1224](/pesquisa/tipos?tipo=1224) | Art. 58, II | Utilizar o índio ou comunidade indígena como objeto de propaganda turística ou de exibição para fins lucrativos |
+| [1225](/pesquisa/tipos?tipo=1225) | Art. 58, III | Propiciar, por qualquer meio, a aquisição, uso e disseminação de bebidas alcoólicas nos grupos tribais ou entre índios não integrados |
+
 ### Programas de computador (crimes)
 
 *Lei nº 9.609, de 19 de fevereiro de 1998* — 2 preceitos vigentes, 3 tipos coletados. 🔶 em coleta
@@ -1570,14 +1606,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 |---:|---|---|
 | [569](/pesquisa/tipos?tipo=569) | Art. 232 | Promoção de entrada ilegal de estrangeiro em território nacional |
 | [570](/pesquisa/tipos?tipo=570) | Art. 232, §1º | Promoção de saída ilegal de pessoa de território nacional para exercer trabalho no exterior |
-
-### Estatuto do Índio (crimes)
-
-*Lei nº 6.001, de 19 de dezembro de 1973* — 3 preceitos vigentes, 1 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [580](/pesquisa/tipos?tipo=580) | Art. 58 | Crimes contra índios — vilipendiar/atentar contra patrimônio cultural/integridade de povo indígena |
 
 ### Interceptação telefônica (crimes)
 

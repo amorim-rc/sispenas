@@ -135,7 +135,7 @@
       "artigos_penais": "arts. 9–10, 12–13, 15–16, 18–25, 27–33, 36–38",
       "preceitos_medidos": 25,
       "preceitos_esperados": 25,
-      "tipos_catalogados": 20,
+      "tipos_catalogados": 23,
       "rotulos_catalogo": [
         "Lei 13.869/19"
       ]
@@ -182,7 +182,7 @@
       "artigos_penais": "arts. 2–23",
       "preceitos_medidos": 23,
       "preceitos_esperados": 23,
-      "tipos_catalogados": 13,
+      "tipos_catalogados": 23,
       "rotulos_catalogo": [
         "Lei 7.492/86"
       ]
@@ -244,7 +244,7 @@
       "preceitos_medidos": 15,
       "preceitos_esperados": 16,
       "ajuste_motivo": "O art. 100 comina pena em linha corrida ('crime punível com reclusão de 6 meses a 1 ano e multa'); soma-se 1 aos 15 preceitos medidos. Arts. 56–58 são infrações administrativas (fora da conta).",
-      "tipos_catalogados": 11,
+      "tipos_catalogados": 14,
       "rotulos_catalogo": [
         "Lei 10.741/03"
       ]
@@ -274,7 +274,7 @@
       "artigos_penais": "arts. 168–178",
       "preceitos_medidos": 11,
       "preceitos_esperados": 11,
-      "tipos_catalogados": 9,
+      "tipos_catalogados": 11,
       "rotulos_catalogo": [
         "Lei 11.101/05"
       ]
@@ -305,7 +305,7 @@
       "artigos_penais": "arts. 14–20, 23",
       "preceitos_medidos": 12,
       "preceitos_esperados": 12,
-      "tipos_catalogados": 8,
+      "tipos_catalogados": 10,
       "rotulos_catalogo": [
         "Lei 9.434/97"
       ],
@@ -353,7 +353,7 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 10,
       "ajuste_motivo": "Todos os preceitos vêm em linha corrida ('constitui crime, punível com...'): arts. 33 §4º; 34 §2º; 39 §5º; 40; 57-H §§1º e 2º; 68 §2º; 72; 87 §4º; 91 p. único.",
-      "tipos_catalogados": 5,
+      "tipos_catalogados": 11,
       "rotulos_catalogo": [
         "Lei 9.504/97"
       ]
@@ -679,7 +679,7 @@
       "artigos_penais": "arts. 58",
       "preceitos_medidos": 3,
       "preceitos_esperados": 3,
-      "tipos_catalogados": 1,
+      "tipos_catalogados": 3,
       "rotulos_catalogo": [
         "Lei 6.001/73"
       ]
