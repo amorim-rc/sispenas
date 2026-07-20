@@ -17,7 +17,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1095** |
+| Tipos penais catalogados | **1134** |
 | Preceitos secundários vigentes (denominador) | **1172** |
 | Diplomas vigentes inventariados | 63 |
 | — com coleta | 62 |
@@ -36,15 +36,16 @@ para dimensionar lacunas, não como percentual exato.
 | [Código Penal — Parte Especial](#código-penal--parte-especial) | 337 | 551 | 🔶 em coleta |
 | [Código Penal Militar — Parte Especial](#código-penal-militar--parte-especial) | 351 | 69 | 🔶 em coleta |
 | [Lei das Contravenções Penais](#lei-das-contravenções-penais) | 47 | 57 | ✅ completo (conferido na v1.1.2) |
+| [Código Eleitoral](#código-eleitoral) | 61 | 56 | 🔶 em coleta |
 | [Crimes contra o meio ambiente](#crimes-contra-o-meio-ambiente) | 40 | 51 | 🔶 em coleta |
 | [Estatuto da Criança e do Adolescente (crimes)](#estatuto-da-criança-e-do-adolescente-crimes) | 26 | 37 | 🔶 em coleta |
-| [Código Eleitoral](#código-eleitoral) | 61 | 26 | 🔶 em coleta |
 | [Abuso de autoridade](#abuso-de-autoridade) | 25 | 20 | 🔶 em coleta |
 | [Lei de Drogas](#lei-de-drogas) | 10 | 19 | 🔶 em coleta |
 | [Crimes de preconceito (racismo)](#crimes-de-preconceito-racismo) | 17 | 16 | 🔶 em coleta |
 | [Código de Trânsito Brasileiro (crimes de trânsito)](#código-de-trânsito-brasileiro-crimes-de-trânsito) | 12 | 16 | 🔶 em coleta |
 | [Crimes contra a ordem tributária, econômica e relações de consumo](#crimes-contra-a-ordem-tributária-econômica-e-relações-de-consumo) | 6 | 16 | 🔶 em coleta |
 | [Crimes contra o sistema financeiro nacional](#crimes-contra-o-sistema-financeiro-nacional) | 23 | 13 | 🔶 em coleta |
+| [Loterias (contravenções)](#loterias-contravenções) | 13 | 13 | 🔶 em coleta |
 | [Código de Defesa do Consumidor (infrações penais)](#código-de-defesa-do-consumidor-infrações-penais) | 14 | 12 | 🔶 em coleta |
 | [Propriedade industrial (crimes)](#propriedade-industrial-crimes) | 12 | 12 | ✅ completo (conferido na v1.1.2) |
 | [Estatuto do Desarmamento](#estatuto-do-desarmamento) | 7 | 12 | 🔶 em coleta |
@@ -62,7 +63,6 @@ para dimensionar lacunas, não como percentual exato.
 | [Transporte de eleitores (crimes)](#transporte-de-eleitores-crimes) | 5 | 5 | 🔶 em coleta |
 | [Tortura](#tortura) | 4 | 5 | 🔶 em coleta |
 | [Antiterrorismo](#antiterrorismo) | 4 | 5 | 🔶 em coleta |
-| [Loterias (contravenções)](#loterias-contravenções) | 13 | 4 | 🔶 em coleta |
 | [Estatuto da Pessoa com Deficiência (crimes)](#estatuto-da-pessoa-com-deficiência-crimes) | 8 | 4 | 🔶 em coleta |
 | [Planejamento familiar (crimes)](#planejamento-familiar-crimes) | 4 | 4 | 🔶 em coleta |
 | [Lavagem de dinheiro](#lavagem-de-dinheiro) | 1 | 4 | 🔶 em coleta |
@@ -829,6 +829,69 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1008](/pesquisa/tipos?tipo=1008) | Art. 68 | Recusa de dados sobre própria identidade ou qualificação (recusar à autoridade competente informações sobre identidade pessoal, estado ou profissão) |
 | [1104](/pesquisa/tipos?tipo=1104) | Art. 70 | Violação do monopólio postal da União |
 
+### Código Eleitoral
+
+*Lei nº 4.737, de 15 de julho de 1965* — 61 preceitos vigentes, 56 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [543](/pesquisa/tipos?tipo=543) | Art. 289 | Inscrever-se fraudulentamente como eleitor |
+| [544](/pesquisa/tipos?tipo=544) | Art. 290 | Induzir alguém a inscrever-se fraudulentamente como eleitor |
+| [1011](/pesquisa/tipos?tipo=1011) | Art. 291 | Efetuar registro/alistamento/atualização de eleitor com infração das disposições do Código Eleitoral |
+| [1174](/pesquisa/tipos?tipo=1174) | Art. 292 | Negar ou retardar a autoridade judiciária, sem fundamento legal, a inscrição eleitoral requerida |
+| [1012](/pesquisa/tipos?tipo=1012) | Art. 293 | Perturbar ou impedir alistamento eleitoral |
+| [1175](/pesquisa/tipos?tipo=1175) | Art. 295 | Reter título eleitoral contra a vontade do eleitor |
+| [1176](/pesquisa/tipos?tipo=1176) | Art. 296 | Promover desordem que prejudique os trabalhos eleitorais |
+| [1013](/pesquisa/tipos?tipo=1013) | Art. 297 | Impedir/embaraçar exercício do sufrágio (impedir ou embaraçar o exercício do voto) |
+| [545](/pesquisa/tipos?tipo=545) | Art. 298 | Prender ou deter eleitor, mesário, fiscal ou candidato (art. 236) |
+| [546](/pesquisa/tipos?tipo=546) | Art. 299 | Compra de votos (dar/oferecer/prometer dinheiro/dádiva/vantagem para obter voto) |
+| [1015](/pesquisa/tipos?tipo=1015) | Art. 299 | Corrupção eleitoral (dar/oferecer/prometer/solicitar/receber dinheiro ou vantagem para obter/dar voto ou para se abster de votar) |
+| [547](/pesquisa/tipos?tipo=547) | Art. 300 | Servidor público valer-se da autoridade para coagir alguém a votar |
+| [548](/pesquisa/tipos?tipo=548) | Art. 301 | Usar de violência ou grave ameaça para coagir alguém a votar |
+| [1018](/pesquisa/tipos?tipo=1018) | Art. 302 | Promover concentração de eleitores, sob qualquer forma, no dia da eleição, com o objetivo de exercer influência sobre o eleitorado |
+| [1019](/pesquisa/tipos?tipo=1019) | Art. 303 | Usar de meios publicitários no dia da eleição a fim de fazer propaganda de partido ou candidato |
+| [1177](/pesquisa/tipos?tipo=1177) | Art. 304 | Ocultar, sonegar, açambarcar ou recusar, no dia da eleição, o fornecimento normal de utilidades, alimentação e transporte |
+| [1020](/pesquisa/tipos?tipo=1020) | Art. 305 | Interferir o juiz eleitoral na realização da eleição, a pretexto de manter a ordem, para favorecer candidato/partido |
+| [1021](/pesquisa/tipos?tipo=1021) | Art. 306 | Votar ou instigar/solicitar votos em seção eleitoral diversa daquela em que é inscrito o eleitor ou por qualquer forma impedir/perturbar a votação |
+| [1178](/pesquisa/tipos?tipo=1178) | Art. 307 | Fornecer ao eleitor cédula oficial já assinalada ou por qualquer forma marcada |
+| [1179](/pesquisa/tipos?tipo=1179) | Art. 308 | Rubricar e fornecer a cédula oficial em oportunidade diversa da entrega ao eleitor |
+| [549](/pesquisa/tipos?tipo=549) | Art. 309 | Votar ou tentar votar mais de uma vez, ou em lugar de outrem |
+| [1022](/pesquisa/tipos?tipo=1022) | Art. 310 | Violar ou tentar violar o sigilo do voto |
+| [1180](/pesquisa/tipos?tipo=1180) | Art. 311 | Votar em seção eleitoral em que não está inscrito, ou o presidente da mesa permiti-lo, salvo casos previstos |
+| [1023](/pesquisa/tipos?tipo=1023) | Art. 312 | Violar/perturbar/tentar violar ou perturbar os trabalhos da junta eleitoral |
+| [1024](/pesquisa/tipos?tipo=1024) | Art. 313 | Falsificar no todo ou em parte documento público ou alterar documento público verdadeiro para fins eleitorais |
+| [1181](/pesquisa/tipos?tipo=1181) | Art. 314 | Deixar o juiz e os membros da Junta de recolher, fechar e lacrar as cédulas apuradas na urna ao terminar a apuração |
+| [1025](/pesquisa/tipos?tipo=1025) | Art. 315 | Divulgar na propaganda eleitoral fatos inverídicos em relação a partidos ou candidatos, capazes de exercer influência sobre o eleitorado |
+| [1182](/pesquisa/tipos?tipo=1182) | Art. 316 | Não receber ou não mencionar nas atas os protestos formulados, ou deixar de remetê-los à instância superior |
+| [1183](/pesquisa/tipos?tipo=1183) | Art. 317 | Violar ou tentar violar o sigilo da urna ou dos invólucros |
+| [1184](/pesquisa/tipos?tipo=1184) | Art. 318 | Efetuar a mesa receptora a contagem dos votos da urna quando algum eleitor votou sob impugnação (art. 190) |
+| [1185](/pesquisa/tipos?tipo=1185) | Art. 319 | Subscrever o eleitor mais de uma ficha de registro de um ou mais partidos |
+| [1186](/pesquisa/tipos?tipo=1186) | Art. 320 | Inscrever-se o eleitor, simultaneamente, em dois ou mais partidos |
+| [1187](/pesquisa/tipos?tipo=1187) | Art. 321 | Colher a assinatura do eleitor em mais de uma ficha de registro de partido |
+| [1188](/pesquisa/tipos?tipo=1188) | Art. 323 | Divulgar, na propaganda ou durante a campanha, fatos que sabe inverídicos sobre partidos ou candidatos, capazes de influir na eleição |
+| [1026](/pesquisa/tipos?tipo=1026) | Art. 324 | Calúnia eleitoral (caluniar alguém na propaganda eleitoral ou visando fins de propaganda) |
+| [1027](/pesquisa/tipos?tipo=1027) | Art. 325 | Difamação eleitoral (difamar alguém na propaganda eleitoral ou visando fins de propaganda) |
+| [1028](/pesquisa/tipos?tipo=1028) | Art. 326 | Injúria eleitoral (injuriar alguém na propaganda eleitoral ou visando fins de propaganda) |
+| [581](/pesquisa/tipos?tipo=581) | Art. 326-B (CE) | Violência política contra a mulher (assediar/constranger/humilhar/perseguir/ameaçar candidata ou mandatária) |
+| [1189](/pesquisa/tipos?tipo=1189) | Art. 331 | Inutilizar, alterar ou perturbar meio de propaganda devidamente empregado |
+| [1190](/pesquisa/tipos?tipo=1190) | Art. 332 | Impedir o exercício de propaganda eleitoral |
+| [1191](/pesquisa/tipos?tipo=1191) | Art. 334 | Utilizar organização comercial de vendas, distribuição de mercadorias, prêmios ou sorteios para propaganda ou aliciamento de eleitores |
+| [1192](/pesquisa/tipos?tipo=1192) | Art. 335 | Fazer propaganda eleitoral, em qualquer forma, em língua estrangeira |
+| [1193](/pesquisa/tipos?tipo=1193) | Art. 338 | Não assegurar o funcionário postal a prioridade de correspondência eleitoral prevista no art. 239 |
+| [1194](/pesquisa/tipos?tipo=1194) | Art. 339 | Destruir, suprimir ou ocultar urna contendo votos ou documentos relativos à eleição |
+| [1195](/pesquisa/tipos?tipo=1195) | Art. 340 | Fabricar, adquirir, fornecer, subtrair ou guardar urnas, mapas, cédulas ou papéis de uso exclusivo eleitoral, para fim de fraude |
+| [1196](/pesquisa/tipos?tipo=1196) | Art. 341 | Retardar ou não publicar, o funcionário de órgão oficial, as decisões, citações ou intimações da Justiça Eleitoral |
+| [1197](/pesquisa/tipos?tipo=1197) | Art. 342 | Não apresentar o Ministério Público, no prazo legal, denúncia, ou deixar de promover a execução de sentença condenatória eleitoral |
+| [1198](/pesquisa/tipos?tipo=1198) | Art. 343 | Não cumprir o juiz o disposto no §3º do art. 357 (remessa de peças ao órgão competente) |
+| [1199](/pesquisa/tipos?tipo=1199) | Art. 344 | Recusar ou abandonar o serviço eleitoral sem justa causa |
+| [1200](/pesquisa/tipos?tipo=1200) | Art. 345 | Não cumprir a autoridade judiciária ou funcionário da Justiça Eleitoral, nos prazos legais, os deveres impostos pelo Código |
+| [1201](/pesquisa/tipos?tipo=1201) | Art. 346 | Violar o disposto no art. 377 (uso de serviço ou material público em benefício de partido ou candidato) |
+| [550](/pesquisa/tipos?tipo=550) | Art. 347 | Recusar cumprimento ou obediência a diligências, ordens ou instruções da Justiça Eleitoral |
+| [1030](/pesquisa/tipos?tipo=1030) | Art. 348 | Falsificar/fabricar/alterar/suprimir/destruir/ocultar documento eleitoral público ou particular, com o fim de criar obrigação ou alterar a verdade sobre fato juridicamente relevante |
+| [730](/pesquisa/tipos?tipo=730) | Art. 350 | Omitir/retardar/negar dados/informações solicitadas pela justiça eleitoral |
+| [1202](/pesquisa/tipos?tipo=1202) | Art. 353 | Fazer uso de documento eleitoral falsificado ou alterado (arts. 348 a 352) |
+| [1203](/pesquisa/tipos?tipo=1203) | Art. 354 | Obter, para uso próprio ou de outrem, documento público ou particular material ou ideologicamente falso para fins eleitorais |
+
 ### Crimes contra o meio ambiente
 
 *Lei nº 9.605, de 12 de fevereiro de 1998* — 40 preceitos vigentes, 51 tipos coletados. 🔶 em coleta
@@ -930,39 +993,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [740](/pesquisa/tipos?tipo=740) | Art. 244-B, §2º | Corrupção de menor de 14 anos (forma majorada) |
 | [482](/pesquisa/tipos?tipo=482) | Art. 245 | Deixar médico/professor/responsável por estabelecimento de atenção à saúde de comunicar maus-tratos contra criança/adolescente |
 | [483](/pesquisa/tipos?tipo=483) | Art. 246 | Impedir/embaraçar ação de autoridade judiciária destinada ao afastamento de criança/adolescente do convívio familiar ou de instituição |
-
-### Código Eleitoral
-
-*Lei nº 4.737, de 15 de julho de 1965* — 61 preceitos vigentes, 26 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [543](/pesquisa/tipos?tipo=543) | Art. 289 | Inscrever-se fraudulentamente como eleitor |
-| [544](/pesquisa/tipos?tipo=544) | Art. 290 | Induzir alguém a inscrever-se fraudulentamente como eleitor |
-| [1011](/pesquisa/tipos?tipo=1011) | Art. 291 | Efetuar registro/alistamento/atualização de eleitor com infração das disposições do Código Eleitoral |
-| [1012](/pesquisa/tipos?tipo=1012) | Art. 293 | Perturbar ou impedir alistamento eleitoral |
-| [1013](/pesquisa/tipos?tipo=1013) | Art. 297 | Impedir/embaraçar exercício do sufrágio (impedir ou embaraçar o exercício do voto) |
-| [545](/pesquisa/tipos?tipo=545) | Art. 298 | Prender ou deter eleitor, mesário, fiscal ou candidato (art. 236) |
-| [546](/pesquisa/tipos?tipo=546) | Art. 299 | Compra de votos (dar/oferecer/prometer dinheiro/dádiva/vantagem para obter voto) |
-| [1015](/pesquisa/tipos?tipo=1015) | Art. 299 | Corrupção eleitoral (dar/oferecer/prometer/solicitar/receber dinheiro ou vantagem para obter/dar voto ou para se abster de votar) |
-| [547](/pesquisa/tipos?tipo=547) | Art. 300 | Servidor público valer-se da autoridade para coagir alguém a votar |
-| [548](/pesquisa/tipos?tipo=548) | Art. 301 | Usar de violência ou grave ameaça para coagir alguém a votar |
-| [1018](/pesquisa/tipos?tipo=1018) | Art. 302 | Promover concentração de eleitores, sob qualquer forma, no dia da eleição, com o objetivo de exercer influência sobre o eleitorado |
-| [1019](/pesquisa/tipos?tipo=1019) | Art. 303 | Usar de meios publicitários no dia da eleição a fim de fazer propaganda de partido ou candidato |
-| [1020](/pesquisa/tipos?tipo=1020) | Art. 305 | Interferir o juiz eleitoral na realização da eleição, a pretexto de manter a ordem, para favorecer candidato/partido |
-| [1021](/pesquisa/tipos?tipo=1021) | Art. 306 | Votar ou instigar/solicitar votos em seção eleitoral diversa daquela em que é inscrito o eleitor ou por qualquer forma impedir/perturbar a votação |
-| [549](/pesquisa/tipos?tipo=549) | Art. 309 | Votar ou tentar votar mais de uma vez, ou em lugar de outrem |
-| [1022](/pesquisa/tipos?tipo=1022) | Art. 310 | Violar ou tentar violar o sigilo do voto |
-| [1023](/pesquisa/tipos?tipo=1023) | Art. 312 | Violar/perturbar/tentar violar ou perturbar os trabalhos da junta eleitoral |
-| [1024](/pesquisa/tipos?tipo=1024) | Art. 313 | Falsificar no todo ou em parte documento público ou alterar documento público verdadeiro para fins eleitorais |
-| [1025](/pesquisa/tipos?tipo=1025) | Art. 315 | Divulgar na propaganda eleitoral fatos inverídicos em relação a partidos ou candidatos, capazes de exercer influência sobre o eleitorado |
-| [1026](/pesquisa/tipos?tipo=1026) | Art. 324 | Calúnia eleitoral (caluniar alguém na propaganda eleitoral ou visando fins de propaganda) |
-| [1027](/pesquisa/tipos?tipo=1027) | Art. 325 | Difamação eleitoral (difamar alguém na propaganda eleitoral ou visando fins de propaganda) |
-| [1028](/pesquisa/tipos?tipo=1028) | Art. 326 | Injúria eleitoral (injuriar alguém na propaganda eleitoral ou visando fins de propaganda) |
-| [581](/pesquisa/tipos?tipo=581) | Art. 326-B (CE) | Violência política contra a mulher (assediar/constranger/humilhar/perseguir/ameaçar candidata ou mandatária) |
-| [550](/pesquisa/tipos?tipo=550) | Art. 347 | Recusar cumprimento ou obediência a diligências, ordens ou instruções da Justiça Eleitoral |
-| [1030](/pesquisa/tipos?tipo=1030) | Art. 348 | Falsificar/fabricar/alterar/suprimir/destruir/ocultar documento eleitoral público ou particular, com o fim de criar obrigação ou alterar a verdade sobre fato juridicamente relevante |
-| [730](/pesquisa/tipos?tipo=730) | Art. 350 | Omitir/retardar/negar dados/informações solicitadas pela justiça eleitoral |
 
 ### Abuso de autoridade
 
@@ -1105,6 +1135,26 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [422](/pesquisa/tipos?tipo=422) | Art. 11 | Manter/movimentar recursos fora do País sem declaração (evasão de divisas) |
 | [423](/pesquisa/tipos?tipo=423) | Art. 16 | Operação de instituição financeira sem autorização |
 | [424](/pesquisa/tipos?tipo=424) | Art. 22 | Efetuar operação de câmbio não autorizada para promover evasão de divisas |
+
+### Loterias (contravenções)
+
+*Decreto-Lei nº 6.259, de 10 de fevereiro de 1944* — 13 preceitos vigentes, 13 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [593](/pesquisa/tipos?tipo=593) | Art. 45 | Extração de loteria sem concessão regular do poder competente |
+| [594](/pesquisa/tipos?tipo=594) | Art. 46 | Introdução no país de bilhetes de loterias, rifas ou tômbolas estrangeiras, ou de bilhetes de outra loteria estadual |
+| [595](/pesquisa/tipos?tipo=595) | Art. 47 | Posse, guarda, distribuição ou circulação de bilhetes de loteria estrangeira |
+| [596](/pesquisa/tipos?tipo=596) | Art. 48 | Posse ou circulação de bilhetes de loteria estadual fora do território do Estado respectivo |
+| [1165](/pesquisa/tipos?tipo=1165) | Art. 49 | Exibição ou guarda de listas de sorteio de loteria estrangeira ou de loteria estadual fora do território respectivo |
+| [1166](/pesquisa/tipos?tipo=1166) | Art. 50 | Pagamento de prêmio de bilhete de loteria estrangeira ou estadual que não possa circular legalmente no lugar do pagamento |
+| [1167](/pesquisa/tipos?tipo=1167) | Art. 51 | Impressão ou acabamento de bilhetes, listas, avisos ou cartazes de loteria que não possa legalmente circular no lugar |
+| [1168](/pesquisa/tipos?tipo=1168) | Art. 52 | Distribuição ou transporte de cartazes, listas ou avisos de loteria onde não possam legalmente circular |
+| [1169](/pesquisa/tipos?tipo=1169) | Art. 53 | Colocação ou circulação de bilhetes de loteria relativos a extrações já feitas |
+| [1170](/pesquisa/tipos?tipo=1170) | Art. 54 | Falsificação, emenda ou adulteração de bilhetes de loteria |
+| [1171](/pesquisa/tipos?tipo=1171) | Art. 55 | Divulgação de anúncio, aviso ou resultado de extração de loteria que não possa circular (jornal, revista, rádio, cinema ou qualquer forma) |
+| [1172](/pesquisa/tipos?tipo=1172) | Art. 56 | Transmissão, por telégrafo ou qualquer meio, do resultado de extração de loteria que não possa circular no lugar de destino |
+| [1173](/pesquisa/tipos?tipo=1173) | Art. 58 | Jogo do bicho (realizar a loteria em que o comprador aposta em combinação de algarismos ou nome de animais) |
 
 ### Código de Defesa do Consumidor (infrações penais)
 
@@ -1365,17 +1415,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1035](/pesquisa/tipos?tipo=1035) | Art. 3º | Promover/constituir/integrar/prestar auxílio a organização terrorista |
 | [1036](/pesquisa/tipos?tipo=1036) | Art. 5º | Realizar atos preparatórios de terrorismo (oferecer/receber treinamento em País que possa facilitar a prática de terrorismo, reunir pessoas com fins terroristas, adquirir armas/munições/explosivos para fins terroristas) |
 | [1037](/pesquisa/tipos?tipo=1037) | Art. 6º | Financiamento do terrorismo (receber/prover/oferecer/obter/guardar/manter em depósito/solicitar/investir/transportar fundos/ativos financeiros com objetivo de financiar terrorismo) |
-
-### Loterias (contravenções)
-
-*Decreto-Lei nº 6.259, de 10 de fevereiro de 1944* — 13 preceitos vigentes, 4 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [593](/pesquisa/tipos?tipo=593) | Art. 45 | Promover ou explorar loteria não autorizada (jogo de azar) |
-| [594](/pesquisa/tipos?tipo=594) | Art. 46 | Vender, expor à venda, distribuir ou ter em depósito bilhetes de loteria não autorizada |
-| [595](/pesquisa/tipos?tipo=595) | Art. 47 | Introduzir no país bilhetes de loteria estrangeira |
-| [596](/pesquisa/tipos?tipo=596) | Art. 48 | Realizar sorteio, vale-brinde ou concurso não autorizado |
 
 ### Estatuto da Pessoa com Deficiência (crimes)
 

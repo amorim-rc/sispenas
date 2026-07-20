@@ -1,8 +1,8 @@
 {
- "total_tipos_penais": 1095,
- "com_pena_privativa": 1078,
- "sem_pena_privativa": 17,
- "dispositivos_distintos": 962,
+ "total_tipos_penais": 1134,
+ "com_pena_privativa": 1110,
+ "sem_pena_privativa": 24,
+ "dispositivos_distintos": 1001,
  "registros_duplicados": 265,
  "duplicatas_divergentes": 0,
  "resultado_morte": 75,
