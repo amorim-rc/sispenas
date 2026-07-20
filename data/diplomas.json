@@ -1,0 +1,1105 @@
+{
+  "_meta": {
+    "gerado_em": "2026-07-19",
+    "gerado_por": "scripts/inventario_diplomas.py",
+    "unidade": "preceito secundário: cada cominação de pena vigente no texto compilado do Planalto. Tipos do catálogo desdobram incisos e condutas, então tipos_catalogados pode legitimamente exceder preceitos_esperados.",
+    "fonte": "Textos compilados oficiais de planalto.gov.br (ccivil_03), texto vigente (revogações riscadas excluídas), conferidos em 2026-07-19.",
+    "total_preceitos_esperados": 1172
+  },
+  "diplomas": [
+    {
+      "id": "cp",
+      "nome": "Código Penal — Parte Especial",
+      "norma": "Decreto-Lei nº 2.848, de 7 de dezembro de 1940",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 121–126, 129–140, 146–166, 168–169, 171–180, 184, 197–213, 215–218, 227–230, 232–239, 241–257, 259–262, 264–278, 280, 282–284, 286–294, 296–326, 328–349, 351–359",
+      "preceitos_medidos": 337,
+      "preceitos_esperados": 337,
+      "tipos_catalogados": 551,
+      "rotulos_catalogo": [
+        "CP",
+        "CP (atualiz.)",
+        "Lei 14.133/21",
+        "Lei 14.811/24",
+        "Lei 14.478/22"
+      ],
+      "obs": "Inclui os tipos inseridos por leis posteriores (337-E a 337-P, 146-A, 171-A, 359-I a 359-T), rotulados no catálogo pela lei que os criou."
+    },
+    {
+      "id": "cpm",
+      "nome": "Código Penal Militar — Parte Especial",
+      "norma": "Decreto-Lei nº 1.001, de 21 de outubro de 1969",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1001compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 136–152, 154–158, 160–187, 190–217, 219, 222–230, 232, 234–235, 238–246, 248–249, 251–252, 254–255, 257–259, 261–265, 267–276, 278–284, 286–288, 290–408",
+      "preceitos_medidos": 351,
+      "preceitos_esperados": 351,
+      "tipos_catalogados": 69,
+      "rotulos_catalogo": [
+        "CPM (DL 1.001/69)"
+      ],
+      "obs": "Crimes militares em tempo de paz (136–354) e de guerra (355–408)."
+    },
+    {
+      "id": "lcp",
+      "nome": "Lei das Contravenções Penais",
+      "norma": "Decreto-Lei nº 3.688, de 3 de outubro de 1941",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3688.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 18–26, 28–38, 40–59, 62–64, 66–68, 70",
+      "preceitos_medidos": 47,
+      "preceitos_esperados": 47,
+      "tipos_catalogados": 28,
+      "rotulos_catalogo": [
+        "LCP (DL 3.688/41)"
+      ],
+      "obs": "Revogados (fora da conta): arts. 27, 39, 60, 61 e 65; o art. 25 foi declarado não recepcionado pelo STF (RE 583.523), mas segue no texto compilado."
+    },
+    {
+      "id": "ce",
+      "nome": "Código Eleitoral",
+      "norma": "Lei nº 4.737, de 15 de julho de 1965",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 289–293, 295–321, 323–326, 331–332, 334–336, 338–348, 350–351, 353–354",
+      "preceitos_medidos": 61,
+      "preceitos_esperados": 61,
+      "tipos_catalogados": 26,
+      "rotulos_catalogo": [
+        "CE (Lei 4.737/65)",
+        "Lei 14.192/21"
+      ],
+      "obs": "Inclui o art. 326-B (Lei 14.192/2021), rotulado no catálogo pela lei que o criou."
+    },
+    {
+      "id": "ctb",
+      "nome": "Código de Trânsito Brasileiro (crimes de trânsito)",
+      "norma": "Lei nº 9.503, de 23 de setembro de 1997",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 302–312",
+      "preceitos_medidos": 12,
+      "preceitos_esperados": 12,
+      "tipos_catalogados": 16,
+      "rotulos_catalogo": [
+        "CTB",
+        "CTB (atualiz.)"
+      ]
+    },
+    {
+      "id": "eca",
+      "nome": "Estatuto da Criança e do Adolescente (crimes)",
+      "norma": "Lei nº 8.069, de 13 de julho de 1990",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8069compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 228–232, 234–244",
+      "preceitos_medidos": 26,
+      "preceitos_esperados": 26,
+      "tipos_catalogados": 37,
+      "rotulos_catalogo": [
+        "ECA",
+        "ECA (atualiz.)"
+      ],
+      "obs": "Arts. 245–258-C são infrações administrativas (fora da conta)."
+    },
+    {
+      "id": "lei9605",
+      "nome": "Crimes contra o meio ambiente",
+      "norma": "Lei nº 9.605, de 12 de fevereiro de 1998",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9605.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 29–35, 38–42, 44–46, 48–52, 54–56, 60–69",
+      "preceitos_medidos": 40,
+      "preceitos_esperados": 40,
+      "tipos_catalogados": 51,
+      "rotulos_catalogo": [
+        "Lei 9.605/98",
+        "Lei 9.605/98 (atualiz.)"
+      ]
+    },
+    {
+      "id": "lei13869",
+      "nome": "Abuso de autoridade",
+      "norma": "Lei nº 13.869, de 5 de setembro de 2019",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/L13869.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 9–10, 12–13, 15–16, 18–25, 27–33, 36–38",
+      "preceitos_medidos": 25,
+      "preceitos_esperados": 25,
+      "tipos_catalogados": 20,
+      "rotulos_catalogo": [
+        "Lei 13.869/19"
+      ]
+    },
+    {
+      "id": "lei11343",
+      "nome": "Lei de Drogas",
+      "norma": "Lei nº 11.343, de 23 de agosto de 2006",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 33–39",
+      "preceitos_medidos": 9,
+      "preceitos_esperados": 10,
+      "ajuste_motivo": "O art. 28 não comina pena privativa (sanções dos incisos I a III) e por isso não tem linha 'Pena —'; soma-se 1 aos 9 preceitos medidos.",
+      "tipos_catalogados": 19,
+      "rotulos_catalogo": [
+        "Lei 11.343/06"
+      ]
+    },
+    {
+      "id": "lei8137",
+      "nome": "Crimes contra a ordem tributária, econômica e relações de consumo",
+      "norma": "Lei nº 8.137, de 27 de dezembro de 1990",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8137.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1–4, 7",
+      "preceitos_medidos": 6,
+      "preceitos_esperados": 6,
+      "tipos_catalogados": 16,
+      "rotulos_catalogo": [
+        "Lei 8.137/90"
+      ],
+      "obs": "Arts. 5º e 6º revogados pela Lei nº 12.529/2011."
+    },
+    {
+      "id": "lei7492",
+      "nome": "Crimes contra o sistema financeiro nacional",
+      "norma": "Lei nº 7.492, de 16 de junho de 1986",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7492.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2–23",
+      "preceitos_medidos": 23,
+      "preceitos_esperados": 23,
+      "tipos_catalogados": 13,
+      "rotulos_catalogo": [
+        "Lei 7.492/86"
+      ]
+    },
+    {
+      "id": "lei7716",
+      "nome": "Crimes de preconceito (racismo)",
+      "norma": "Lei nº 7.716, de 5 de janeiro de 1989",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7716.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2–14, 20",
+      "preceitos_medidos": 17,
+      "preceitos_esperados": 17,
+      "tipos_catalogados": 16,
+      "rotulos_catalogo": [
+        "Lei 7.716/89",
+        "Lei 7.716/89 (atualiz.)"
+      ]
+    },
+    {
+      "id": "lei10826",
+      "nome": "Estatuto do Desarmamento",
+      "norma": "Lei nº 10.826, de 22 de dezembro de 2003",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.826.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 12–18",
+      "preceitos_medidos": 7,
+      "preceitos_esperados": 7,
+      "tipos_catalogados": 12,
+      "rotulos_catalogo": [
+        "Lei 10.826/03"
+      ]
+    },
+    {
+      "id": "cdc",
+      "nome": "Código de Defesa do Consumidor (infrações penais)",
+      "norma": "Lei nº 8.078, de 11 de setembro de 1990",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 63–74",
+      "preceitos_medidos": 14,
+      "preceitos_esperados": 14,
+      "tipos_catalogados": 12,
+      "rotulos_catalogo": [
+        "CDC (Lei 8.078/90)"
+      ]
+    },
+    {
+      "id": "lei10741",
+      "nome": "Estatuto da Pessoa Idosa (crimes)",
+      "norma": "Lei nº 10.741, de 1º de outubro de 2003",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.741compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 96–99, 101–109",
+      "preceitos_medidos": 15,
+      "preceitos_esperados": 16,
+      "ajuste_motivo": "O art. 100 comina pena em linha corrida ('crime punível com reclusão de 6 meses a 1 ano e multa'); soma-se 1 aos 15 preceitos medidos. Arts. 56–58 são infrações administrativas (fora da conta).",
+      "tipos_catalogados": 11,
+      "rotulos_catalogo": [
+        "Lei 10.741/03"
+      ]
+    },
+    {
+      "id": "lei12850",
+      "nome": "Organizações criminosas",
+      "norma": "Lei nº 12.850, de 2 de agosto de 2013",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12850.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2, 18–21",
+      "preceitos_medidos": 7,
+      "preceitos_esperados": 7,
+      "tipos_catalogados": 9,
+      "rotulos_catalogo": [
+        "Lei 12.850/13"
+      ]
+    },
+    {
+      "id": "lei11101",
+      "nome": "Lei de Falências (crimes falimentares)",
+      "norma": "Lei nº 11.101, de 9 de fevereiro de 2005",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11101.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 168–178",
+      "preceitos_medidos": 11,
+      "preceitos_esperados": 11,
+      "tipos_catalogados": 9,
+      "rotulos_catalogo": [
+        "Lei 11.101/05"
+      ]
+    },
+    {
+      "id": "lei2889",
+      "nome": "Genocídio",
+      "norma": "Lei nº 2.889, de 1º de outubro de 1956",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l2889.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2–3",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 3,
+      "ajuste_motivo": "O art. 1º comina as penas por remissão ao CP ('com as penas do art. 121, §2º...'), sem linha 'Pena —'; soma-se 1 aos 2 preceitos medidos.",
+      "tipos_catalogados": 9,
+      "rotulos_catalogo": [
+        "Lei 2.889/56"
+      ]
+    },
+    {
+      "id": "lei9434",
+      "nome": "Transplante de órgãos (crimes)",
+      "norma": "Lei nº 9.434, de 4 de fevereiro de 1997",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9434.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 14–20, 23",
+      "preceitos_medidos": 12,
+      "preceitos_esperados": 12,
+      "tipos_catalogados": 8,
+      "rotulos_catalogo": [
+        "Lei 9.434/97"
+      ],
+      "obs": "Arts. 21–23-A são sanções administrativas; o art. 23-B (transporte irregular de órgãos, Lei 14.722/2023) é crime e entra na conta."
+    },
+    {
+      "id": "lei11105",
+      "nome": "Lei de Biossegurança (crimes)",
+      "norma": "Lei nº 11.105, de 24 de março de 2005",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11105.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 24–29",
+      "preceitos_medidos": 6,
+      "preceitos_esperados": 6,
+      "tipos_catalogados": 6,
+      "rotulos_catalogo": [
+        "Lei 11.105/05"
+      ]
+    },
+    {
+      "id": "lei9455",
+      "nome": "Tortura",
+      "norma": "Lei nº 9.455, de 7 de abril de 1997",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9455.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 4,
+      "ajuste_motivo": "Só o caput tem linha 'Pena —'; §2º (omissão, detenção 1–4), §3º-lesão grave (reclusão 4–10) e §3º-morte (reclusão 8–16) cominam em linha corrida.",
+      "tipos_catalogados": 5,
+      "rotulos_catalogo": [
+        "Lei 9.455/97"
+      ]
+    },
+    {
+      "id": "lei9504",
+      "nome": "Lei das Eleições (crimes)",
+      "norma": "Lei nº 9.504, de 30 de setembro de 1997",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9504.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 33, 91",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 10,
+      "ajuste_motivo": "Todos os preceitos vêm em linha corrida ('constitui crime, punível com...'): arts. 33 §4º; 34 §2º; 39 §5º; 40; 57-H §§1º e 2º; 68 §2º; 72; 87 §4º; 91 p. único.",
+      "tipos_catalogados": 5,
+      "rotulos_catalogo": [
+        "Lei 9.504/97"
+      ]
+    },
+    {
+      "id": "lei9279",
+      "nome": "Propriedade industrial (crimes)",
+      "norma": "Lei nº 9.279, de 14 de maio de 1996",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9279.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 183–185, 187–195",
+      "preceitos_medidos": 12,
+      "preceitos_esperados": 12,
+      "tipos_catalogados": 5,
+      "rotulos_catalogo": [
+        "Lei 9.279/96"
+      ],
+      "obs": "O art. 186 estende os tipos a hipóteses equivalentes, sem preceito próprio."
+    },
+    {
+      "id": "lei13260",
+      "nome": "Antiterrorismo",
+      "norma": "Lei nº 13.260, de 16 de março de 2016",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/lei/l13260.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2–3, 5–6",
+      "preceitos_medidos": 4,
+      "preceitos_esperados": 4,
+      "tipos_catalogados": 5,
+      "rotulos_catalogo": [
+        "Lei 13.260/16"
+      ]
+    },
+    {
+      "id": "dl6259",
+      "nome": "Loterias (contravenções)",
+      "norma": "Decreto-Lei nº 6.259, de 10 de fevereiro de 1944",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/1937-1946/del6259.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 45–56, 58",
+      "preceitos_medidos": 13,
+      "preceitos_esperados": 13,
+      "tipos_catalogados": 4,
+      "rotulos_catalogo": [
+        "DL 6.259/44"
+      ]
+    },
+    {
+      "id": "lei13146",
+      "nome": "Estatuto da Pessoa com Deficiência (crimes)",
+      "norma": "Lei nº 13.146, de 6 de julho de 2015",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 88–91",
+      "preceitos_medidos": 8,
+      "preceitos_esperados": 8,
+      "tipos_catalogados": 4,
+      "rotulos_catalogo": [
+        "Lei 13.146/15"
+      ],
+      "obs": "A Lei nº 15.163/2025 qualificou o abandono (art. 90, §§)."
+    },
+    {
+      "id": "lei9613",
+      "nome": "Lavagem de dinheiro",
+      "norma": "Lei nº 9.613, de 3 de março de 1998",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9613compilado.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 4,
+      "rotulos_catalogo": [
+        "Lei 9.613/98",
+        "Lei 9.613/98 (atualiz.)"
+      ]
+    },
+    {
+      "id": "lei1521",
+      "nome": "Crimes contra a economia popular",
+      "norma": "Lei nº 1.521, de 26 de dezembro de 1951",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l1521.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2–4",
+      "preceitos_medidos": 3,
+      "preceitos_esperados": 3,
+      "tipos_catalogados": 3,
+      "rotulos_catalogo": [
+        "Lei 1.521/51"
+      ]
+    },
+    {
+      "id": "lei6385",
+      "nome": "Mercado de valores mobiliários (crimes)",
+      "norma": "Lei nº 6.385, de 7 de dezembro de 1976",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6385compilada.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 27",
+      "preceitos_medidos": 3,
+      "preceitos_esperados": 3,
+      "tipos_catalogados": 3,
+      "rotulos_catalogo": [
+        "Lei 6.385/76"
+      ],
+      "obs": "Arts. 27-C, 27-D e 27-E."
+    },
+    {
+      "id": "lei9609",
+      "nome": "Programas de computador (crimes)",
+      "norma": "Lei nº 9.609, de 19 de fevereiro de 1998",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9609.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 12",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 3,
+      "rotulos_catalogo": [
+        "Lei 9.609/98"
+      ]
+    },
+    {
+      "id": "lei9029",
+      "nome": "Práticas discriminatórias no trabalho",
+      "norma": "Lei nº 9.029, de 13 de abril de 1995",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9029.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 3,
+      "rotulos_catalogo": [
+        "Lei 9.029/95"
+      ]
+    },
+    {
+      "id": "lei6766",
+      "nome": "Parcelamento do solo urbano (crimes)",
+      "norma": "Lei nº 6.766, de 19 de dezembro de 1979",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6766.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 50, 52",
+      "preceitos_medidos": 3,
+      "preceitos_esperados": 3,
+      "tipos_catalogados": 3,
+      "rotulos_catalogo": [
+        "Lei 6.766/79"
+      ],
+      "obs": "O art. 51 remete às penas do art. 50, sem preceito próprio."
+    },
+    {
+      "id": "lei8176",
+      "nome": "Crimes contra a ordem econômica (combustíveis)",
+      "norma": "Lei nº 8.176, de 8 de fevereiro de 1991",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8176.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1–2",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 8.176/91"
+      ]
+    },
+    {
+      "id": "lei8245",
+      "nome": "Lei do Inquilinato (disposições penais)",
+      "norma": "Lei nº 8.245, de 18 de outubro de 1991",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8245.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 43–44",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 2,
+      "ajuste_motivo": "Pena em linha corrida: art. 43 (contravenção, prisão simples de 5 dias a 6 meses) e art. 44 (crime, detenção de 3 meses a 1 ano).",
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 8.245/91"
+      ]
+    },
+    {
+      "id": "lei1579",
+      "nome": "Comissões Parlamentares de Inquérito (crimes)",
+      "norma": "Lei nº 1.579, de 18 de março de 1952",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l1579.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 4",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 1.579/52"
+      ]
+    },
+    {
+      "id": "lei13445",
+      "nome": "Lei de Migração (crime do art. 232-A)",
+      "norma": "Lei nº 13.445, de 24 de maio de 2017",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13445.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 232",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 13.445/17"
+      ]
+    },
+    {
+      "id": "lei14344",
+      "nome": "Lei Henry Borel",
+      "norma": "Lei nº 14.344, de 24 de maio de 2022",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/L14344.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 25–26",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 14.344/22"
+      ]
+    },
+    {
+      "id": "lei7802",
+      "nome": "Agrotóxicos (crimes)",
+      "norma": "Lei nº 7.802, de 11 de julho de 1989",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7802.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 15–16",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 2,
+      "ajuste_motivo": "Arts. 15 e 16 cominam reclusão em linha corrida.",
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 7.802/89"
+      ]
+    },
+    {
+      "id": "lei11340",
+      "nome": "Lei Maria da Penha (crime do art. 24-A)",
+      "norma": "Lei nº 11.340, de 7 de agosto de 2006",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 24",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "A página servida a clientes não interativos está desatualizada (texto original de 2006); conferido no navegador em 19/07/2026: único preceito é o art. 24-A, hoje reclusão de 2 a 5 anos e multa (Lei 14.994/2024).",
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 11.340/06"
+      ]
+    },
+    {
+      "id": "lei9296",
+      "nome": "Interceptação telefônica (crimes)",
+      "norma": "Lei nº 9.296, de 24 de julho de 1996",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9296.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 10",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 9.296/96"
+      ],
+      "obs": "Art. 10 e art. 10-A (Lei 13.964/2019)."
+    },
+    {
+      "id": "lei9472",
+      "nome": "Lei Geral de Telecomunicações (crime do art. 183)",
+      "norma": "Lei nº 9.472, de 16 de julho de 1997",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9472.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 183",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 9.472/97"
+      ],
+      "obs": "O art. 184 remete à pena do art. 183; o art. 185 não comina."
+    },
+    {
+      "id": "lei4729",
+      "nome": "Sonegação fiscal",
+      "norma": "Lei nº 4.729, de 14 de julho de 1965",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/1950-1969/l4729.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 4.729/65"
+      ],
+      "obs": "Em grande parte derrogada pela Lei nº 8.137/1990, que absorveu as condutas; formalmente vigente."
+    },
+    {
+      "id": "lei6001",
+      "nome": "Estatuto do Índio (crimes)",
+      "norma": "Lei nº 6.001, de 19 de dezembro de 1973",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6001.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 58",
+      "preceitos_medidos": 3,
+      "preceitos_esperados": 3,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 6.001/73"
+      ]
+    },
+    {
+      "id": "lei4591",
+      "nome": "Condomínios e incorporações (crimes)",
+      "norma": "Lei nº 4.591, de 16 de dezembro de 1964",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l4591.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 65–66",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 4.591/64"
+      ],
+      "obs": "O art. 66 define contravenções punidas na forma do art. 10 da Lei nº 1.521/1951."
+    },
+    {
+      "id": "lei4117",
+      "nome": "Código Brasileiro de Telecomunicações (crime do art. 70)",
+      "norma": "Lei nº 4.117, de 27 de agosto de 1962",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l4117.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 70",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O art. 70 comina detenção em linha corrida.",
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 4.117/62"
+      ]
+    },
+    {
+      "id": "lei4595",
+      "nome": "Sistema Financeiro Nacional (crime do art. 44, §7º)",
+      "norma": "Lei nº 4.595, de 31 de dezembro de 1964",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l4595.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 44",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O §7º do art. 44 comina reclusão em linha corrida.",
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 4.595/64"
+      ]
+    },
+    {
+      "id": "lei5553",
+      "nome": "Retenção de documentos",
+      "norma": "Lei nº 5.553, de 6 de dezembro de 1968",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l5553.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 3",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O art. 3º comina prisão simples em linha corrida.",
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 5.553/68"
+      ]
+    },
+    {
+      "id": "lei9807",
+      "nome": "Proteção a vítimas e testemunhas",
+      "norma": "Lei nº 9.807, de 13 de julho de 1999",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9807.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "—",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 0,
+      "ajuste_motivo": "Não há preceito penal vigente: o crime de revelação de identidade de protegido foi vetado na origem. O registro que o catálogo mantinha (id 1038, 'art. 19') não corresponde ao texto compilado e foi removido.",
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 9.807/99"
+      ]
+    },
+    {
+      "id": "lei14597",
+      "nome": "Lei Geral do Esporte (crimes)",
+      "norma": "Lei nº 14.597, de 14 de junho de 2023",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14597.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 165–171, 198–201",
+      "preceitos_medidos": 11,
+      "preceitos_esperados": 11,
+      "tipos_catalogados": 0,
+      "obs": "Sucedeu os crimes do Estatuto do Torcedor (Lei nº 10.671/2003, revogada pelo art. 217, III)."
+    },
+    {
+      "id": "dl201",
+      "nome": "Crimes de prefeitos e vereadores",
+      "norma": "Decreto-Lei nº 201, de 27 de fevereiro de 1967",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del0201.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 2,
+      "ajuste_motivo": "O art. 1º, §1º, comina em linha corrida: reclusão de 2 a 12 anos (itens I e II) e detenção de 3 meses a 3 anos (itens III a XXIII).",
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei9263",
+      "nome": "Planejamento familiar (crimes)",
+      "norma": "Lei nº 9.263, de 12 de janeiro de 1996",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9263.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 15–18",
+      "preceitos_medidos": 4,
+      "preceitos_esperados": 4,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei6538",
+      "nome": "Serviços postais (crimes)",
+      "norma": "Lei nº 6.538, de 22 de junho de 1978",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6538.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 36–42",
+      "preceitos_medidos": 7,
+      "preceitos_esperados": 7,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei6453",
+      "nome": "Atividades nucleares (crimes)",
+      "norma": "Lei nº 6.453, de 17 de outubro de 1977",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6453.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 20–27",
+      "preceitos_medidos": 8,
+      "preceitos_esperados": 8,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei7643",
+      "nome": "Pesca de cetáceos",
+      "norma": "Lei nº 7.643, de 18 de dezembro de 1987",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7643.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 2",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O art. 2º comina reclusão em linha corrida.",
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei4947",
+      "nome": "Direito agrário (crimes)",
+      "norma": "Lei nº 4.947, de 6 de abril de 1966",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l4947.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 19–20",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei5741",
+      "nome": "Crédito habitacional — SFH (crime do art. 9º)",
+      "norma": "Lei nº 5.741, de 1º de dezembro de 1971",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l5741.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 9",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O art. 9º comina detenção em linha corrida.",
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei5478",
+      "nome": "Ação de alimentos (crime do art. 22)",
+      "norma": "Lei nº 5.478, de 25 de julho de 1968",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l5478.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 22",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 0,
+      "obs": "O art. 21 apenas dá redação ao art. 244 do CP (contado lá)."
+    },
+    {
+      "id": "lei7347",
+      "nome": "Ação civil pública (crime do art. 10)",
+      "norma": "Lei nº 7.347, de 24 de julho de 1985",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7347compilada.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 10",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O art. 10 comina reclusão em linha corrida.",
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei6091",
+      "nome": "Transporte de eleitores (crimes)",
+      "norma": "Lei nº 6.091, de 15 de agosto de 1974",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6091.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 11",
+      "preceitos_medidos": 5,
+      "preceitos_esperados": 5,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lc64",
+      "nome": "Lei de Inelegibilidades (crime do art. 25)",
+      "norma": "Lei Complementar nº 64, de 18 de maio de 1990",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp64.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 25",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei12984",
+      "nome": "Discriminação de pessoas com HIV/aids",
+      "norma": "Lei nº 12.984, de 2 de junho de 2014",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12984.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 1",
+      "preceitos_medidos": 0,
+      "preceitos_esperados": 1,
+      "ajuste_motivo": "O art. 1º comina reclusão em linha corrida.",
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei7437",
+      "nome": "Contravenções de preconceito",
+      "norma": "Lei nº 7.437, de 20 de dezembro de 1985",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7437.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 3–9",
+      "preceitos_medidos": 7,
+      "preceitos_esperados": 7,
+      "tipos_catalogados": 0,
+      "obs": "Alcance remanescente restrito ao preconceito de sexo e de estado civil: as hipóteses de raça, cor, etnia, religião e procedência viraram crime na Lei nº 7.716/1989."
+    },
+    {
+      "id": "lei8906",
+      "nome": "Estatuto da Advocacia (crime do art. 7º-B)",
+      "norma": "Lei nº 8.906, de 4 de julho de 1994",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8906.htm",
+      "conferido_em": "2026-07-19",
+      "artigos_penais": "arts. 7",
+      "preceitos_medidos": 1,
+      "preceitos_esperados": 1,
+      "tipos_catalogados": 0,
+      "obs": "Violação de prerrogativa de advogado (incluído pela Lei nº 13.869/2019; pena da Lei nº 14.365/2022)."
+    },
+    {
+      "id": "lei10671",
+      "nome": "Estatuto do Torcedor",
+      "norma": "Lei nº 10.671, de 15 de maio de 2003",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.671.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 14.597/2023, art. 217, III",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei7170",
+      "nome": "Lei de Segurança Nacional",
+      "norma": "Lei nº 7.170, de 14 de dezembro de 1983",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7170.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 14.197/2021 (crimes contra o Estado Democrático, hoje CP arts. 359-I a 359-T)",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei4898",
+      "nome": "Abuso de autoridade (antiga)",
+      "norma": "Lei nº 4.898, de 9 de dezembro de 1965",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l4898.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 13.869/2019",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei6368",
+      "nome": "Entorpecentes (antiga)",
+      "norma": "Lei nº 6.368, de 21 de outubro de 1976",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6368.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 11.343/2006",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei5250",
+      "nome": "Lei de Imprensa",
+      "norma": "Lei nº 5.250, de 9 de fevereiro de 1967",
+      "situacao": "nao_recepcionado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l5250.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "ADPF 130 (STF, 2009)",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei2252",
+      "nome": "Corrupção de menores (antiga)",
+      "norma": "Lei nº 2.252, de 1º de julho de 1954",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/1950-1969/l2252.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 12.015/2009 (conduta hoje no ECA, art. 244-B)",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei9437",
+      "nome": "Armas de fogo (antiga)",
+      "norma": "Lei nº 9.437, de 20 de fevereiro de 1997",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l9437.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 10.826/2003",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei8666",
+      "nome": "Licitações (antiga)",
+      "norma": "Lei nº 8.666, de 21 de junho de 1993",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l8666cons.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 14.133/2021 (crimes movidos para o CP, arts. 337-E a 337-P)",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "dl7661",
+      "nome": "Falências (antiga)",
+      "norma": "Decreto-Lei nº 7.661, de 21 de junho de 1945",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del7661.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 11.101/2005",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei6815",
+      "nome": "Estatuto do Estrangeiro",
+      "norma": "Lei nº 6.815, de 19 de agosto de 1980",
+      "situacao": "revogado",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l6815.htm",
+      "conferido_em": "2026-07-19",
+      "norma_revogadora": "Lei nº 13.445/2017, art. 124, I",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    }
+  ],
+  "excluidos": [
+    {
+      "norma": "Lei nº 1.079/1950 (crimes de responsabilidade)",
+      "motivo": "Infrações político-administrativas, não tipos penais comuns; o DL 201/1967, art. 1º, entra por ser crime comum julgado pelo Judiciário."
+    },
+    {
+      "norma": "Lei nº 8.072/1990, Lei nº 9.099/1995, LEP (7.210/1984), CPP",
+      "motivo": "Alteram benefícios e processo sem tipificar — componentes da Fase 4 do roadmap."
+    },
+    {
+      "norma": "Lei nº 8.429/1992 (improbidade)",
+      "motivo": "Sanções cíveis, não penais."
+    },
+    {
+      "norma": "LGPD (Lei nº 13.709/2018)",
+      "motivo": "Não tipifica crimes (nota de referência removida na v1.1.0)."
+    },
+    {
+      "norma": "Decreto-Lei nº 25/1937 (patrimônio histórico)",
+      "motivo": "O art. 21 apenas equipara; os tipos estão na Lei nº 9.605/1998, arts. 62–65."
+    },
+    {
+      "norma": "Lei nº 6.938/1981, art. 15 (poluição)",
+      "motivo": "Superado pela Lei nº 9.605/1998 (derrogação tácita)."
+    },
+    {
+      "norma": "Lei nº 5.197/1967, art. 27 (fauna)",
+      "motivo": "Derrogado tacitamente pela Lei nº 9.605/1998, arts. 29 ss."
+    },
+    {
+      "norma": "Lei nº 5.700/1971 (símbolos nacionais)",
+      "motivo": "Sanções de multa administrativa."
+    },
+    {
+      "norma": "Lei nº 13.344/2016, Lei nº 9.983/2000, Lei nº 12.737/2012, Lei nº 14.197/2021, Lei nº 14.133/2021 (crimes), Lei nº 14.811/2024, Lei nº 14.478/2022 (art. 171-A)",
+      "motivo": "Inserem tipos no CP/CE; contados no diploma hospedeiro."
+    }
+  ]
+}
