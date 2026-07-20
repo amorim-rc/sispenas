@@ -88,27 +88,36 @@ foram todas conferidas contra o Planalto e resolvidas —; a segunda ainda é o 
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | 1.007 |
-| Dispositivos distintos | 873 |
-| Diplomas cobertos | 58 |
+| Tipos penais catalogados | 1.042 |
+| Dispositivos distintos | 902 |
+| Diplomas com registro no catálogo | 48 (65 vigentes inventariados) |
+| **Denominador** (preceitos secundários vigentes) | **1.172** |
 | Contradições internas | **0** |
 | Campos ainda `derivado_auto` | maioria |
 
-Amostragem de cobertura, para dimensionar a lacuna:
+O denominador vem de `data/diplomas.json` (Fase 1, concluída na v1.1.2): cada
+diploma com preceito penal teve seu intervalo de artigos delimitado e seus
+preceitos vigentes contados no texto compilado do Planalto. A unidade é o
+**preceito secundário** (cada cominação de pena); o catálogo desdobra incisos,
+então os números não se comparam 1:1 — mas agora a lacuna de cada bloco é
+mensurável:
 
-| Bloco | No catálogo | Esperado | Situação |
+| Bloco | Preceitos vigentes | Registros no catálogo | Situação |
 |---|---|---|---|
-| CP, Parte Especial (arts. 121–361) | 187 artigos | 241 | 54 ausentes — parte legitimamente (revogados, excludentes), parte não |
-| LCP (DL 3.688/41) | 29 | ~70 | **grande lacuna** |
-| Lei 9.279/96 (propriedade industrial) | 5 | ~30 (arts. 183–195) | **grande lacuna** |
-| CP 359-I a 359-T (Estado Democrático) | 15 | 15 | aparentemente completo |
-| CP 337-E a 337-P (licitações, Lei 14.133/21) | 8 | 12 | verificar |
-| Lei 10.741/03 (Idoso) | 11 | ~14 (arts. 95–108) | verificar |
+| CPM (DL 1.001/69) | 351 | 69 | **maior lacuna do catálogo** |
+| CE (Lei 4.737/65) | 61 | 26 | grande lacuna |
+| CP, Parte Especial (arts. 121–361) | 337 | 551 | conferência dispositivo a dispositivo (Fase 2) |
+| LCP (DL 3.688/41) | 47 | 57 | **completa na v1.1.2** (47/47 artigos vigentes) |
+| Lei 9.279/96 (propriedade industrial) | 12 | 12 | **completa na v1.1.2** |
+| Loterias (DL 6.259/44) | 13 | 4 | lacuna |
+| Lei das Eleições (9.504/97) | 10 | 5 | lacuna |
+| Sem nenhum registro | — | — | Lei Geral do Esporte (14.597/23), serviços postais (6.538/78), atividades nucleares (6.453/77), DL 201/67, planejamento familiar (9.263/96), entre outros — ver `data/diplomas.json` |
 
-:::warning[O número 1.007 não é uma medida de cobertura]
-Ele é quanto já foi digitado, não quanto existe. **Não há hoje um denominador**: ninguém
-sabe quantos tipos penais a legislação brasileira comporta. Estabelecer esse denominador é
-a primeira tarefa — sem ele, "cobertura" é opinião.
+:::note[O denominador existe, e é revisável]
+1.172 preceitos vigentes em 65 diplomas é o número **medido** hoje; a Fase 2
+(conferência dispositivo a dispositivo) pode ajustá-lo — preceitos cominados em
+linha corrida dentro de parágrafos são fáceis de subcontar. Todo ajuste manual
+está documentado campo a campo em `data/diplomas.json`.
 :::
 
 ### Fonte da verdade
@@ -122,13 +131,15 @@ já emite, em cada contradição, o link do diploma onde resolvê-la.
 
 Antes de conferir ou incluir qualquer coisa, saber **o que precisa existir**.
 
-- [ ] Inventário de **diplomas com preceito penal** em vigor: Parte Especial do CP, LCP,
-      CPM e a legislação extravagante. Fonte: índice temático do Planalto + LexML.
-- [ ] Para cada diploma, delimitar o **intervalo de artigos penais** (ex.: CDC, arts.
+- [x] Inventário de **diplomas com preceito penal** em vigor: Parte Especial do CP, LCP,
+      CPM e a legislação extravagante (v1.1.2 — 65 diplomas vigentes, 10 revogados
+      registrados).
+- [x] Para cada diploma, delimitar o **intervalo de artigos penais** (ex.: CDC, arts.
       61–80; falência, arts. 168–178).
-- [ ] Produzir `data/diplomas.json`: diploma, intervalo, situação (vigente/revogado),
-      norma revogadora, artigos esperados.
-- [ ] **Meta da fase:** um número defensável para "quantos tipos penais existem".
+- [x] Produzir `data/diplomas.json`: diploma, intervalo, situação (vigente/revogado),
+      norma revogadora, artigos esperados (`scripts/inventario_diplomas.py`).
+- [x] **Meta da fase:** um número defensável para "quantos tipos penais existem" —
+      **1.172 preceitos secundários vigentes**, medidos no texto compilado do Planalto.
 
 ### Fase 2 — Conferência dispositivo a dispositivo
 
@@ -148,11 +159,12 @@ Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
 
 ### Fase 3 — Incluir o que falta
 
-- [ ] Priorizar por **peso na pesquisa**, não por facilidade: LCP e propriedade industrial
-      primeiro, por serem as maiores lacunas conhecidas.
+- [x] Priorizar por **peso na pesquisa**, não por facilidade: LCP e propriedade industrial
+      primeiro, por serem as maiores lacunas conhecidas — **ambas completas na v1.1.2**.
+      Próximas, em ordem de lacuna: CPM, Código Eleitoral, loterias, Lei das Eleições.
 - [ ] Cada inclusão segue as convenções C1–C8 do `CONTRIBUTING.md` — nada de nota de
       referência ou causa de aumento como se fosse tipo (foi o erro corrigido na v1.1.0).
-- [ ] `id` append-only: novos vão para o fim, a partir de 1062.
+- [ ] `id` append-only: novos vão para o fim, a partir de 1112.
 
 ### Fase 4 — Componentes legislativos além dos tipos penais
 
