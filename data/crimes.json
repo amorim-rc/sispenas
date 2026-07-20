@@ -15582,22 +15582,6 @@
   "obs": "15-30 anos reclusão. HEDIONDO (equiparado)"
  },
  {
-  "id": 1038,
-  "lei": "Lei 9.807/99",
-  "artigo": "Art. 19",
-  "crime": "Identificar ou revelar a identidade de pessoa protegida ou ameaçada (revelar dados sobre localização/identificação de testemunha protegida)",
-  "pena_min": 6,
-  "pena_max": 12,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "6 meses a 1 ano detenção + multa"
- },
- {
   "id": 1039,
   "lei": "Lei 13.146/15",
   "artigo": "Art. 88",
