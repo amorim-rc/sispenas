@@ -90,7 +90,7 @@ foram todas conferidas contra o Planalto e resolvidas —; a segunda ainda é o 
 |---|---|
 | Tipos penais catalogados | 1.042 |
 | Dispositivos distintos | 902 |
-| Diplomas com registro no catálogo | 48 (65 vigentes inventariados) |
+| Diplomas com registro no catálogo | 47 (63 vigentes inventariados) |
 | **Denominador** (preceitos secundários vigentes) | **1.172** |
 | Contradições internas | **0** |
 | Campos ainda `derivado_auto` | maioria |
@@ -132,7 +132,7 @@ já emite, em cada contradição, o link do diploma onde resolvê-la.
 Antes de conferir ou incluir qualquer coisa, saber **o que precisa existir**.
 
 - [x] Inventário de **diplomas com preceito penal** em vigor: Parte Especial do CP, LCP,
-      CPM e a legislação extravagante (v1.1.2 — 65 diplomas vigentes, 10 revogados
+      CPM e a legislação extravagante (v1.1.2 — 63 diplomas vigentes, 10 revogados
       registrados).
 - [x] Para cada diploma, delimitar o **intervalo de artigos penais** (ex.: CDC, arts.
       61–80; falência, arts. 168–178).
@@ -225,6 +225,63 @@ sem isso, o crawler saberia atualizar tipos penais, mas não benefícios.
 
 ---
 
+## v1.3.0 — Cobertura completa e acervo histórico
+
+Meta em duas partes, **nesta ordem**:
+
+### 1. Completude dos tipos vigentes
+
+Fechar as lacunas apontadas pelo denominador, acompanhadas na página
+[Completude do catálogo](/docs/completude) (gerada de `data/diplomas.json` +
+`data/crimes.json` por `scripts/gerar_completude.py`):
+
+- [ ] CPM (351 preceitos × 69 registros) — a maior lacuna
+- [ ] Código Eleitoral (61 × 26)
+- [ ] Loterias — DL 6.259/44 (13 × 4) e Lei das Eleições — 9.504/97 (10 × 5)
+- [ ] Os 16 diplomas ainda **sem nenhum registro** (Lei Geral do Esporte,
+      serviços postais, atividades nucleares, DL 201/67 etc.)
+- [x] LCP e Lei 9.279/96 (concluídas na v1.1.2)
+
+### 2. Acervo histórico — tipos revogados, alterados e não recepcionados
+
+Reunir **todos os tipos penais que deixaram de valer ou mudaram**, para
+histórico completo — o que hoje nenhuma ferramenta oferece de forma
+estruturada, e que interessa diretamente à pesquisa acadêmica (ultratividade da
+lei mais benéfica; linha do tempo da descriminalização):
+
+- [ ] **Aba extra** em Pesquisa ▸ **Acervo histórico**, com a lista de tipos
+      **por categoria**: `revogado` · `alterado` · `nao_recepcionado` — no
+      mesmo formato da lista de tipos vigentes
+- [ ] **Tela de detalhe por tipo**: apenas o **texto original** e o que houve
+      com ele — alteração, revogação ou não recepção —, **quando** houve e
+      **por qual dispositivo** (com link para o tipo sucessor, quando houver)
+- [ ] **Dataset separado**: `data/historico.json` (fonte) →
+      `static/data/historico.json` (derivado), com ids próprios — **nunca
+      misturado a `crimes.json`**
+- [ ] Fonte: os textos anteriores do Planalto (as redações revogadas ficam
+      riscadas nos compilados — a mesma extração da Fase 1); os 10 diplomas
+      revogados/não recepcionados já estão inventariados em
+      `data/diplomas.json`
+- [ ] Ponto de partida já conhecido: adultério (art. 240), sedução (217),
+      rapto (219–222), ECA art. 233, LCP arts. 25*, 27, 39, 60, 61 e 65, Lei
+      de Imprensa, LSN, Estatuto do Torcedor, e as redações **alteradas**
+      registradas nas conferências (LCP art. 50 §2º, Maria da Penha art. 24-A…)
+
+:::note[Por que o acervo em dataset separado é MENOR, e não MAIOR]
+O invariante dos dados abertos — *todo registro de `crimes.json` é direito
+vigente* — permanece intacto: o acervo vive em arquivo e rota próprios, e quem
+calcula estatísticas sobre o catálogo vigente não é afetado. Nova aba + novo
+arquivo = funcionalidade compatível (MENOR). O que continua sendo **v2.0.0** é
+fundir os dois mundos: `revogado_em`/`vigente_desde` dentro do dataset
+principal, alimentados pelo crawler do DOU.
+:::
+
+**Execução:** o acervo só começa **depois** da completude dos vigentes — a
+mesma extração que fecha as lacunas é a que colhe os textos históricos, e um
+acervo montado sobre catálogo incompleto herdaria os buracos.
+
+---
+
 ## v2.0.0 — Atualização automática da legislação (crawler do DOU)
 
 Manter o catálogo atualizado com segurança jurídica, a partir do **Diário Oficial da
@@ -278,41 +335,32 @@ GitHub Actions (cron semanal)
       sem apagar o registro (senão a URL `?tipo=N` morre)
 - [ ] `fonte` e `atualizado_em` por registro, para rastrear a origem da informação
 
-### Acervo histórico — tipos penais revogados
+### Acervo histórico — integração com o catálogo principal
 
-O mesmo mecanismo que permite ao crawler registrar revogações permite algo maior:
-**preservar o que já foi crime no Brasil**. É um acervo grande e de valor próprio para a
-pesquisa — a pergunta "o que deixou de ser crime, e quando?" é tão relevante quanto "o
-que é crime hoje", e hoje nenhuma ferramenta a responde de forma estruturada.
+A **primeira entrega** do acervo (aba própria + dataset separado
+`historico.json`) é a [v1.3.0](#v130--cobertura-completa-e-acervo-histórico).
+O que fica para a
+v2.0.0 é a **fusão dos dois mundos**, que o crawler exige:
 
-Casos que o catálogo já encontra: o adultério (art. 240, revogado pela Lei 11.106/2005),
-a sedução (art. 217) e o rapto (arts. 219 a 222), revogados pela Lei 12.015/2009; a Lei de
-Imprensa (5.250/67), não recepcionada (ADPF 130); a Lei de Segurança Nacional (7.170/83),
-substituída pela Lei 14.197/21; o ECA art. 233, revogado pela Lei de Tortura — removido na
-v1.1.0 justamente por não haver onde registrá-lo.
+- [ ] Campos `revogado_em`, `revogado_por` (norma) e `vigente_desde` **no
+      dataset principal**; um tipo revogado pelo crawler **nunca é apagado** —
+      muda de estado, preserva o `id` e a URL
+- [ ] O crawler passa a **alimentar o acervo**: revogação detectada no DOU
+      gera proposta tanto no catálogo vigente quanto no histórico
+- [ ] Linha do tempo da descriminalização: o que saiu do Código, quando e por
+      qual norma
+- [ ] **Ultratividade da lei penal mais benéfica** (art. 5º, XL, CF; art. 2º,
+      par. único, CP): a lei revogada continua a reger o fato praticado sob sua
+      vigência quando for mais benéfica — daí o acervo não ser mera
+      curiosidade, e sim direito aplicável
 
-- [ ] Aba própria: **Pesquisa ▸ Acervo histórico**, separada da busca vigente para que
-      nenhum tipo revogado contamine estatística de direito vigente
-- [ ] Campos `revogado_em`, `revogado_por` (norma) e `vigente_desde`; um tipo revogado
-      **nunca é apagado** — muda de estado, preserva o `id` e a URL
-- [ ] Padrão de exibição: aviso de revogação no topo, com a norma revogadora e o link
-      para o tipo que a sucedeu, quando houver
-- [ ] Linha do tempo da descriminalização: o que saiu do Código, quando e por qual norma
-- [ ] **Ultratividade da lei penal mais benéfica** (art. 5º, XL, CF; art. 2º, par. único,
-      CP): a lei revogada continua a reger o fato praticado sob sua vigência quando for
-      mais benéfica — daí o acervo não ser mera curiosidade, e sim direito aplicável
-- [ ] Fonte: textos revogados do Planalto (que mantém as redações anteriores) — a mesma
-      extração da [Conferência integral](#conferência-integral-do-catálogo)
-
-:::note[Por que o acervo é v2.0.0, e não antes]
-Registrar revogados exige `revogado_em` e a separação vigente × revogado no consumo dos
-dados. É exatamente a quebra de invariante que já move o crawler para MAIOR — fazer as
-duas coisas na mesma versão é o desenho certo: uma paga o custo de compatibilidade da
-outra.
-
-Antes disso, na v1.1.Z, a [Conferência integral](#conferência-integral-do-catálogo) tem
-de distinguir *ausente por lacuna* de *ausente por revogação* — dos 54 artigos faltantes
-na Parte Especial do CP, boa parte é revogada, e essa triagem é a matéria-prima do acervo.
+:::note[Por que a fusão é v2.0.0]
+Enquanto o acervo vive em arquivo separado (v1.3.0), o invariante *todo
+registro de `crimes.json` é direito vigente* segue de pé. Trazer
+`revogado_em` para o dataset principal — e conviver com revogados no mesmo
+arquivo — é o que desmente esse invariante e quebra as estatísticas de
+terceiros em silêncio: MAIOR, junto com o crawler, para que uma mudança pague
+o custo de compatibilidade da outra.
 :::
 
 ---
