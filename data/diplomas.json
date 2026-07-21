@@ -69,7 +69,7 @@
       "artigos_penais": "arts. 289–293, 295–321, 323–326, 331–332, 334–336, 338–348, 350–351, 353–354",
       "preceitos_medidos": 61,
       "preceitos_esperados": 61,
-      "tipos_catalogados": 26,
+      "tipos_catalogados": 56,
       "rotulos_catalogo": [
         "CE (Lei 4.737/65)",
         "Lei 14.192/21"
@@ -135,7 +135,7 @@
       "artigos_penais": "arts. 9–10, 12–13, 15–16, 18–25, 27–33, 36–38",
       "preceitos_medidos": 25,
       "preceitos_esperados": 25,
-      "tipos_catalogados": 20,
+      "tipos_catalogados": 23,
       "rotulos_catalogo": [
         "Lei 13.869/19"
       ]
@@ -182,7 +182,7 @@
       "artigos_penais": "arts. 2–23",
       "preceitos_medidos": 23,
       "preceitos_esperados": 23,
-      "tipos_catalogados": 13,
+      "tipos_catalogados": 23,
       "rotulos_catalogo": [
         "Lei 7.492/86"
       ]
@@ -244,7 +244,7 @@
       "preceitos_medidos": 15,
       "preceitos_esperados": 16,
       "ajuste_motivo": "O art. 100 comina pena em linha corrida ('crime punível com reclusão de 6 meses a 1 ano e multa'); soma-se 1 aos 15 preceitos medidos. Arts. 56–58 são infrações administrativas (fora da conta).",
-      "tipos_catalogados": 11,
+      "tipos_catalogados": 14,
       "rotulos_catalogo": [
         "Lei 10.741/03"
       ]
@@ -274,7 +274,7 @@
       "artigos_penais": "arts. 168–178",
       "preceitos_medidos": 11,
       "preceitos_esperados": 11,
-      "tipos_catalogados": 9,
+      "tipos_catalogados": 11,
       "rotulos_catalogo": [
         "Lei 11.101/05"
       ]
@@ -305,7 +305,7 @@
       "artigos_penais": "arts. 14–20, 23",
       "preceitos_medidos": 12,
       "preceitos_esperados": 12,
-      "tipos_catalogados": 8,
+      "tipos_catalogados": 10,
       "rotulos_catalogo": [
         "Lei 9.434/97"
       ],
@@ -353,7 +353,7 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 10,
       "ajuste_motivo": "Todos os preceitos vêm em linha corrida ('constitui crime, punível com...'): arts. 33 §4º; 34 §2º; 39 §5º; 40; 57-H §§1º e 2º; 68 §2º; 72; 87 §4º; 91 p. único.",
-      "tipos_catalogados": 5,
+      "tipos_catalogados": 11,
       "rotulos_catalogo": [
         "Lei 9.504/97"
       ]
@@ -399,7 +399,7 @@
       "artigos_penais": "arts. 45–56, 58",
       "preceitos_medidos": 13,
       "preceitos_esperados": 13,
-      "tipos_catalogados": 4,
+      "tipos_catalogados": 13,
       "rotulos_catalogo": [
         "DL 6.259/44"
       ]
@@ -679,7 +679,7 @@
       "artigos_penais": "arts. 58",
       "preceitos_medidos": 3,
       "preceitos_esperados": 3,
-      "tipos_catalogados": 1,
+      "tipos_catalogados": 3,
       "rotulos_catalogo": [
         "Lei 6.001/73"
       ]
@@ -774,7 +774,10 @@
       "artigos_penais": "arts. 165–171, 198–201",
       "preceitos_medidos": 11,
       "preceitos_esperados": 11,
-      "tipos_catalogados": 0,
+      "tipos_catalogados": 11,
+      "rotulos_catalogo": [
+        "Lei 14.597/23"
+      ],
       "obs": "Sucedeu os crimes do Estatuto do Torcedor (Lei nº 10.671/2003, revogada pelo art. 217, III)."
     },
     {
@@ -788,7 +791,10 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 2,
       "ajuste_motivo": "O art. 1º, §1º, comina em linha corrida: reclusão de 2 a 12 anos (itens I e II) e detenção de 3 meses a 3 anos (itens III a XXIII).",
-      "tipos_catalogados": 0
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "DL 201/67"
+      ]
     },
     {
       "id": "lei9263",
@@ -800,7 +806,10 @@
       "artigos_penais": "arts. 15–18",
       "preceitos_medidos": 4,
       "preceitos_esperados": 4,
-      "tipos_catalogados": 0
+      "tipos_catalogados": 4,
+      "rotulos_catalogo": [
+        "Lei 9.263/96"
+      ]
     },
     {
       "id": "lei6538",
@@ -812,7 +821,10 @@
       "artigos_penais": "arts. 36–42",
       "preceitos_medidos": 7,
       "preceitos_esperados": 7,
-      "tipos_catalogados": 0
+      "tipos_catalogados": 7,
+      "rotulos_catalogo": [
+        "Lei 6.538/78"
+      ]
     },
     {
       "id": "lei6453",
@@ -824,7 +836,10 @@
       "artigos_penais": "arts. 20–27",
       "preceitos_medidos": 8,
       "preceitos_esperados": 8,
-      "tipos_catalogados": 0
+      "tipos_catalogados": 8,
+      "rotulos_catalogo": [
+        "Lei 6.453/77"
+      ]
     },
     {
       "id": "lei7643",
@@ -837,7 +852,10 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 1,
       "ajuste_motivo": "O art. 2º comina reclusão em linha corrida.",
-      "tipos_catalogados": 0
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 7.643/87"
+      ]
     },
     {
       "id": "lei4947",
@@ -849,7 +867,10 @@
       "artigos_penais": "arts. 19–20",
       "preceitos_medidos": 2,
       "preceitos_esperados": 2,
-      "tipos_catalogados": 0
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 4.947/66"
+      ]
     },
     {
       "id": "lei5741",
@@ -862,7 +883,10 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 1,
       "ajuste_motivo": "O art. 9º comina detenção em linha corrida.",
-      "tipos_catalogados": 0
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 5.741/71"
+      ]
     },
     {
       "id": "lei5478",
@@ -874,7 +898,10 @@
       "artigos_penais": "arts. 22",
       "preceitos_medidos": 1,
       "preceitos_esperados": 1,
-      "tipos_catalogados": 0,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 5.478/68"
+      ],
       "obs": "O art. 21 apenas dá redação ao art. 244 do CP (contado lá)."
     },
     {
@@ -888,7 +915,10 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 1,
       "ajuste_motivo": "O art. 10 comina reclusão em linha corrida.",
-      "tipos_catalogados": 0
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 7.347/85"
+      ]
     },
     {
       "id": "lei6091",
@@ -900,7 +930,10 @@
       "artigos_penais": "arts. 11",
       "preceitos_medidos": 5,
       "preceitos_esperados": 5,
-      "tipos_catalogados": 0
+      "tipos_catalogados": 5,
+      "rotulos_catalogo": [
+        "Lei 6.091/74"
+      ]
     },
     {
       "id": "lc64",
@@ -912,7 +945,10 @@
       "artigos_penais": "arts. 25",
       "preceitos_medidos": 1,
       "preceitos_esperados": 1,
-      "tipos_catalogados": 0
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "LC 64/90"
+      ]
     },
     {
       "id": "lei12984",
@@ -925,7 +961,10 @@
       "preceitos_medidos": 0,
       "preceitos_esperados": 1,
       "ajuste_motivo": "O art. 1º comina reclusão em linha corrida.",
-      "tipos_catalogados": 0
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 12.984/14"
+      ]
     },
     {
       "id": "lei7437",
@@ -937,7 +976,10 @@
       "artigos_penais": "arts. 3–9",
       "preceitos_medidos": 7,
       "preceitos_esperados": 7,
-      "tipos_catalogados": 0,
+      "tipos_catalogados": 7,
+      "rotulos_catalogo": [
+        "Lei 7.437/85"
+      ],
       "obs": "Alcance remanescente restrito ao preconceito de sexo e de estado civil: as hipóteses de raça, cor, etnia, religião e procedência viraram crime na Lei nº 7.716/1989."
     },
     {
@@ -950,7 +992,10 @@
       "artigos_penais": "arts. 7",
       "preceitos_medidos": 1,
       "preceitos_esperados": 1,
-      "tipos_catalogados": 0,
+      "tipos_catalogados": 1,
+      "rotulos_catalogo": [
+        "Lei 8.906/94"
+      ],
       "obs": "Violação de prerrogativa de advogado (incluído pela Lei nº 13.869/2019; pena da Lei nº 14.365/2022)."
     },
     {
