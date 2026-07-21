@@ -17,7 +17,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1345** |
+| Tipos penais catalogados | **1333** |
 | Diplomas com tipo penal vigente | 62 |
 | — com coleta iniciada | 62 |
 | Diplomas revogados/não recepcionados | [10](/docs/acervo-historico) |
@@ -30,20 +30,20 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Diploma | Tipos coletados | Situação |
 |---|---:|---|
-| Código Penal — Parte Especial | 463 | concluído ❓ |
+| Código Penal — Parte Especial | 454 | concluído ❓ |
 | Código Penal Militar — Parte Especial | 352 | 🔶 em coleta |
 | Código Eleitoral | 55 | concluído ❓ |
 | Lei das Contravenções Penais | 51 | concluído ❓ |
 | Crimes contra o meio ambiente | 48 | concluído ❓ |
-| Estatuto da Criança e do Adolescente (crimes) | 28 | concluído ❓ |
+| Estatuto da Criança e do Adolescente (crimes) | 27 | concluído ❓ |
 | Abuso de autoridade | 24 | concluído ❓ |
 | Crimes contra o sistema financeiro nacional | 23 | concluído ❓ |
 | Crimes de preconceito (racismo) | 17 | concluído ❓ |
 | Estatuto da Pessoa Idosa (crimes) | 16 | concluído ❓ |
-| Código de Trânsito Brasileiro (crimes de trânsito) | 16 | concluído ❓ |
 | Lei de Drogas | 16 | concluído ❓ |
 | Crimes contra a ordem tributária, econômica e relações de consumo | 16 | concluído ❓ |
 | Código de Defesa do Consumidor (infrações penais) | 14 | concluído ❓ |
+| Código de Trânsito Brasileiro (crimes de trânsito) | 14 | concluído ❓ |
 | Loterias (contravenções) | 13 | concluído ❓ |
 | Propriedade industrial (crimes) | 12 | concluído ❓ |
 | Transplante de órgãos (crimes) | 11 | concluído ❓ |
