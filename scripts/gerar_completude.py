@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Gera docs/completude.md — o acompanhamento de completude do catálogo.
+"""Gera docs/completude.md e docs/acervo-historico.md.
 
-A página é DERIVADA de ``data/diplomas.json`` (denominador da Fase 1) e de
-``data/crimes.json`` (o catálogo): índice de diplomas com o total de tipos
-coletados e a situação de cada um, mais os diplomas ainda sem coleta.
-Não edite ``docs/completude.md`` à mão — regenere com:
+Ambas são DERIVADAS de ``data/diplomas.json`` (denominador da Fase 1) e de
+``data/crimes.json`` (o catálogo). ``completude.md`` traz o índice de diplomas
+vigentes com o total de tipos coletados e a situação de cada um;
+``acervo-historico.md`` lista os diplomas revogados/não recepcionados e a meta
+do acervo (v1.3.0). Não edite os ``.md`` à mão — regenere com:
 
     python scripts/gerar_completude.py
 
@@ -49,11 +50,12 @@ def main() -> int:
     vigentes = [d for d in inventario["diplomas"] if d["situacao"] == "vigente"]
     historicos = [d for d in inventario["diplomas"] if d["situacao"] != "vigente"]
     total_preceitos = inventario["_meta"]["total_preceitos_esperados"]
-    com_coleta = [d for d in vigentes if tipos_por_slug.get(d["id"])]
-    # Diploma sem tipos E sem preceitos vigentes não é lacuna — nada há a
-    # coletar (ex.: Lei 9.807/99, cujo único crime foi vetado na origem).
-    sem_coleta = [d for d in vigentes
-                  if not tipos_por_slug.get(d["id"]) and d["preceitos_esperados"] > 0]
+    # O índice só lista diplomas que TÊM tipo penal a coletar. Diploma vigente
+    # sem preceito algum (ex.: Lei 9.807/99, cujo único crime foi vetado na
+    # sanção) não é lacuna — não entra, para não aparecer como "não iniciado".
+    indice = [d for d in vigentes
+              if d["preceitos_esperados"] > 0 or tipos_por_slug.get(d["id"])]
+    com_coleta = [d for d in indice if tipos_por_slug.get(d["id"])]
 
     def situacao(d: dict) -> str:
         if not tipos_por_slug.get(d["id"]):
@@ -67,7 +69,7 @@ def main() -> int:
     p("---")
     p("id: completude")
     p("title: Completude do catálogo")
-    p("sidebar_position: 3")
+    p("sidebar_position: 2")
     p("---")
     p("")
     p("{/* GERADO AUTOMATICAMENTE por scripts/gerar_completude.py — não edite à mão. */}")
@@ -84,16 +86,9 @@ def main() -> int:
     p("| Indicador | Valor |")
     p("|---|---|")
     p(f"| Tipos penais catalogados | **{len(catalogo)}** |")
-    p(f"| Preceitos secundários vigentes (denominador) | **{total_preceitos}** |")
-    p(f"| Diplomas vigentes inventariados | {len(vigentes)} |")
-    p(f"| — com coleta | {len(com_coleta)} |")
-    p(f"| — sem nenhum registro | **{len(sem_coleta)}** |")
-    p(f"| Diplomas revogados/não recepcionados registrados | {len(historicos)} |")
-    p("")
-    p("A unidade do denominador é o **preceito secundário** (cada cominação de pena no")
-    p("texto compilado do Planalto). O catálogo desdobra incisos e condutas, então um")
-    p("diploma pode ter mais tipos que preceitos sem estar errado — a comparação serve")
-    p("para dimensionar lacunas, não como percentual exato.")
+    p(f"| Diplomas com tipo penal vigente | {len(indice)} |")
+    p(f"| — com coleta iniciada | {len(com_coleta)} |")
+    p(f"| Diplomas revogados/não recepcionados | [{len(historicos)}](/docs/acervo-historico) |")
     p("")
 
     # ------------------------------------------------------------------ índice
@@ -111,40 +106,11 @@ def main() -> int:
     p("")
     p("| Diploma | Tipos coletados | Situação |")
     p("|---|---:|---|")
-    ordem = sorted(vigentes, key=lambda d: (-len(tipos_por_slug.get(d["id"], [])),
-                                            -d["preceitos_esperados"]))
+    ordem = sorted(indice, key=lambda d: (-len(tipos_por_slug.get(d["id"], [])),
+                                          -d["preceitos_esperados"]))
     for d in ordem:
         n = len(tipos_por_slug.get(d["id"], []))
         p(f"| {d['nome']} | {n} | {situacao(d)} |")
-    p("")
-
-    # ------------------------------------------------------- sem coleta ainda
-    p("## Diplomas ainda sem coleta")
-    p("")
-    p("Diplomas com preceito penal em vigor dos quais **nenhum** tipo foi reunido —")
-    p("o \"scraper\" de tipos ainda não passou por eles:")
-    p("")
-    p("| Diploma | Norma | Preceitos vigentes | Artigos penais |")
-    p("|---|---|---:|---|")
-    for d in sorted(sem_coleta, key=lambda d: -d["preceitos_esperados"]):
-        p(f"| {d['nome']} | {d['norma']} | {d['preceitos_esperados']} | "
-          f"{d.get('artigos_penais', '—')} |")
-    p("")
-
-    # ------------------------------------------------- acervo histórico (meta)
-    p("## Diplomas revogados e não recepcionados")
-    p("")
-    p("Registrados no inventário para o **acervo histórico** —")
-    p("[meta da v1.3.0](/docs/roadmap#v130--cobertura-completa-e-acervo-histórico), a ser")
-    p("executada **após** a completude dos vigentes: reunir os tipos penais revogados,")
-    p("alterados e não recepcionados, com o texto original, o que houve com cada um,")
-    p("quando e por qual dispositivo.")
-    p("")
-    p("| Diploma | Norma | O que houve |")
-    p("|---|---|---|")
-    for d in historicos:
-        rotulo = "não recepcionado" if d["situacao"] == "nao_recepcionado" else "revogado"
-        p(f"| {d['nome']} | {d['norma']} | {rotulo} — {d['norma_revogadora']} |")
     p("")
     p("A lista completa dos tipos já reunidos, com o texto de cada um, está na "
       "[busca por tipo penal](/pesquisa/tipos).")
@@ -155,7 +121,58 @@ def main() -> int:
         fh.write("\n".join(L))
         fh.write("\n")
     print(f"escrito {destino} ({len(L)} linhas)")
+
+    _gerar_acervo(historicos)
     return 0
+
+
+def _gerar_acervo(historicos: list[dict]) -> None:
+    """docs/acervo-historico.md — os diplomas revogados/não recepcionados já
+    inventariados, e a meta da v1.3.0 (reunir os tipos históricos)."""
+    L: list[str] = []
+    p = L.append
+    p("---")
+    p("id: acervo-historico")
+    p("title: Acervo histórico")
+    p("sidebar_position: 3")
+    p("---")
+    p("")
+    p("{/* GERADO AUTOMATICAMENTE por scripts/gerar_completude.py — não edite à mão. */}")
+    p("")
+    p("# Acervo histórico")
+    p("")
+    p("Reunir **o que já foi crime no Brasil** — os tipos penais revogados, "
+      "alterados e não recepcionados — é a "
+      "[meta da v1.3.0](/docs/roadmap#v130--cobertura-completa-e-acervo-histórico), "
+      "a ser executada **após** a completude dos tipos vigentes. A pergunta \"o "
+      "que deixou de ser crime, e quando?\" é tão relevante para a pesquisa "
+      "quanto \"o que é crime hoje\", e hoje nenhuma ferramenta a responde de "
+      "forma estruturada.")
+    p("")
+    p("A entrega será uma aba de pesquisa própria, separada da busca vigente para "
+      "que nenhum tipo revogado contamine estatística de direito vigente, com "
+      "uma tela por tipo mostrando o **texto original**, o que houve com ele "
+      "(alteração, revogação ou não recepção), **quando** e por **qual "
+      "dispositivo**.")
+    p("")
+    p("## Diplomas revogados e não recepcionados já inventariados")
+    p("")
+    p("Ponto de partida do acervo: os diplomas inteiros que saíram de vigência, "
+      "registrados na [Fase 1](/docs/completude). Faltam ainda os tipos "
+      "**revogados dentro de diplomas vigentes** (ex.: adultério, sedução, rapto "
+      "no CP) e as **redações anteriores** alteradas.")
+    p("")
+    p("| Diploma | Norma | O que houve |")
+    p("|---|---|---|")
+    for d in historicos:
+        rotulo = "não recepcionado" if d["situacao"] == "nao_recepcionado" else "revogado"
+        p(f"| {d['nome']} | {d['norma']} | {rotulo} — {d['norma_revogadora']} |")
+    p("")
+    destino = RAIZ / "docs" / "acervo-historico.md"
+    with open(destino, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write("\n".join(L))
+        fh.write("\n")
+    print(f"escrito {destino} ({len(L)} linhas)")
 
 
 if __name__ == "__main__":

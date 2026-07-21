@@ -1,7 +1,7 @@
 ---
 id: completude
 title: Completude do catálogo
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 {/* GERADO AUTOMATICAMENTE por scripts/gerar_completude.py — não edite à mão. */}
@@ -18,16 +18,9 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 | Indicador | Valor |
 |---|---|
 | Tipos penais catalogados | **1190** |
-| Preceitos secundários vigentes (denominador) | **1172** |
-| Diplomas vigentes inventariados | 63 |
-| — com coleta | 62 |
-| — sem nenhum registro | **0** |
-| Diplomas revogados/não recepcionados registrados | 10 |
-
-A unidade do denominador é o **preceito secundário** (cada cominação de pena no
-texto compilado do Planalto). O catálogo desdobra incisos e condutas, então um
-diploma pode ter mais tipos que preceitos sem estar errado — a comparação serve
-para dimensionar lacunas, não como percentual exato.
+| Diplomas com tipo penal vigente | 62 |
+| — com coleta iniciada | 62 |
+| Diplomas revogados/não recepcionados | [10](/docs/acervo-historico) |
 
 ## Índice por diploma
 
@@ -99,36 +92,6 @@ para dimensionar lacunas, não como percentual exato.
 | Lei de Inelegibilidades (crime do art. 25) | 1 | concluído ❓ |
 | Discriminação de pessoas com HIV/aids | 1 | concluído ❓ |
 | Estatuto da Advocacia (crime do art. 7º-B) | 1 | concluído ❓ |
-| Proteção a vítimas e testemunhas | 0 | ⛔ não iniciado |
-
-## Diplomas ainda sem coleta
-
-Diplomas com preceito penal em vigor dos quais **nenhum** tipo foi reunido —
-o "scraper" de tipos ainda não passou por eles:
-
-| Diploma | Norma | Preceitos vigentes | Artigos penais |
-|---|---|---:|---|
-
-## Diplomas revogados e não recepcionados
-
-Registrados no inventário para o **acervo histórico** —
-[meta da v1.3.0](/docs/roadmap#v130--cobertura-completa-e-acervo-histórico), a ser
-executada **após** a completude dos vigentes: reunir os tipos penais revogados,
-alterados e não recepcionados, com o texto original, o que houve com cada um,
-quando e por qual dispositivo.
-
-| Diploma | Norma | O que houve |
-|---|---|---|
-| Estatuto do Torcedor | Lei nº 10.671, de 15 de maio de 2003 | revogado — Lei nº 14.597/2023, art. 217, III |
-| Lei de Segurança Nacional | Lei nº 7.170, de 14 de dezembro de 1983 | revogado — Lei nº 14.197/2021 (crimes contra o Estado Democrático, hoje CP arts. 359-I a 359-T) |
-| Abuso de autoridade (antiga) | Lei nº 4.898, de 9 de dezembro de 1965 | revogado — Lei nº 13.869/2019 |
-| Entorpecentes (antiga) | Lei nº 6.368, de 21 de outubro de 1976 | revogado — Lei nº 11.343/2006 |
-| Lei de Imprensa | Lei nº 5.250, de 9 de fevereiro de 1967 | não recepcionado — ADPF 130 (STF, 2009) |
-| Corrupção de menores (antiga) | Lei nº 2.252, de 1º de julho de 1954 | revogado — Lei nº 12.015/2009 (conduta hoje no ECA, art. 244-B) |
-| Armas de fogo (antiga) | Lei nº 9.437, de 20 de fevereiro de 1997 | revogado — Lei nº 10.826/2003 |
-| Licitações (antiga) | Lei nº 8.666, de 21 de junho de 1993 | revogado — Lei nº 14.133/2021 (crimes movidos para o CP, arts. 337-E a 337-P) |
-| Falências (antiga) | Decreto-Lei nº 7.661, de 21 de junho de 1945 | revogado — Lei nº 11.101/2005 |
-| Estatuto do Estrangeiro | Lei nº 6.815, de 19 de agosto de 1980 | revogado — Lei nº 13.445/2017, art. 124, I |
 
 A lista completa dos tipos já reunidos, com o texto de cada um, está na [busca por tipo penal](/pesquisa/tipos).
 
