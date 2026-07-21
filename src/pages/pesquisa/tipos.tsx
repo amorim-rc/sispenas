@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import Pesquisa from '@site/src/components/Pesquisa';
+import Citacao from '@site/src/components/Citacao';
 
 import styles from './pesquisa.module.css';
 
@@ -22,6 +23,9 @@ export default function BuscaPorTipoPenal(): ReactNode {
       </header>
       <main>
         <Pesquisa />
+        <div className="container">
+          <Citacao compacto />
+        </div>
       </main>
     </Layout>
   );

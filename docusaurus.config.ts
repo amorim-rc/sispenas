@@ -104,6 +104,7 @@ const config: Config = {
           items: [
             {to: '/pesquisa/tipos', label: 'Busca por tipo penal'},
             {to: '/pesquisa/beneficios', label: 'Busca por benefício'},
+            {to: '/docs/acervo-historico', label: 'Acervo histórico'},
           ],
         },
         {
@@ -113,7 +114,6 @@ const config: Config = {
           items: [
             {to: '/docs/metodologia', label: 'Metodologia'},
             {to: '/docs/completude', label: 'Completude do catálogo'},
-            {to: '/docs/acervo-historico', label: 'Acervo histórico'},
             {to: '/docs/catalogo-tipos-penais', label: 'Catálogo de tipos penais'},
             {to: '/docs/beneficios-penais', label: 'Benefícios penais'},
             {to: '/docs/dados-abertos', label: 'Dados abertos'},

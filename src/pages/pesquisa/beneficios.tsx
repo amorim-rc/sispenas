@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import BuscaBeneficio from '@site/src/components/BuscaBeneficio';
+import Citacao from '@site/src/components/Citacao';
 
 import styles from './pesquisa.module.css';
 
@@ -22,6 +23,9 @@ export default function BuscaPorBeneficio(): ReactNode {
       </header>
       <main>
         <BuscaBeneficio />
+        <div className="container">
+          <Citacao compacto />
+        </div>
       </main>
     </Layout>
   );

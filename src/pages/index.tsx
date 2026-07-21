@@ -6,6 +6,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 import {CATALOGO} from '@site/src/lib/beneficios/catalogo';
+import Citacao from '@site/src/components/Citacao';
 import styles from './index.module.css';
 
 /** Total de benefícios avaliados — lido do catálogo em tempo de build. */
@@ -239,6 +240,8 @@ function Sobre() {
           <p>
             Desenvolvido pela <strong>Equipe SISPENAS</strong>. Licença MIT com atribuição.
           </p>
+
+          <Citacao />
 
           <p className={styles.sobreLinks}>
             <Link to="/docs/metodologia">Metodologia</Link>
