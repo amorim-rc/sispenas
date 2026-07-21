@@ -17,7 +17,7 @@
       "artigos_penais": "arts. 121–126, 129–140, 146–166, 168–169, 171–180, 184, 197–213, 215–218, 227–230, 232–239, 241–257, 259–262, 264–278, 280, 282–284, 286–294, 296–326, 328–349, 351–359",
       "preceitos_medidos": 337,
       "preceitos_esperados": 337,
-      "tipos_catalogados": 463,
+      "tipos_catalogados": 454,
       "rotulos_catalogo": [
         "CP",
         "CP (atualiz.)",
@@ -86,7 +86,7 @@
       "artigos_penais": "arts. 302–312",
       "preceitos_medidos": 12,
       "preceitos_esperados": 12,
-      "tipos_catalogados": 16,
+      "tipos_catalogados": 14,
       "rotulos_catalogo": [
         "CTB",
         "CTB (atualiz.)"
@@ -102,7 +102,7 @@
       "artigos_penais": "arts. 228–232, 234–244",
       "preceitos_medidos": 26,
       "preceitos_esperados": 26,
-      "tipos_catalogados": 28,
+      "tipos_catalogados": 27,
       "rotulos_catalogo": [
         "ECA",
         "ECA (atualiz.)"
