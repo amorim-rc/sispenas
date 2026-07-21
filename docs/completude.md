@@ -17,7 +17,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1190** |
+| Tipos penais catalogados | **1473** |
 | Diplomas com tipo penal vigente | 62 |
 | — com coleta iniciada | 62 |
 | Diplomas revogados/não recepcionados | [10](/docs/acervo-historico) |
@@ -31,7 +31,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 | Diploma | Tipos coletados | Situação |
 |---|---:|---|
 | Código Penal — Parte Especial | 565 | concluído ❓ |
-| Código Penal Militar — Parte Especial | 69 | 🔶 em coleta |
+| Código Penal Militar — Parte Especial | 352 | 🔶 em coleta |
 | Lei das Contravenções Penais | 57 | concluído ❓ |
 | Código Eleitoral | 56 | concluído ❓ |
 | Crimes contra o meio ambiente | 53 | concluído ❓ |

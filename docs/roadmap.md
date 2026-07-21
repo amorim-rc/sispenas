@@ -81,43 +81,42 @@ Patches previstos para os próximos ciclos desta linha (`1.1.z`):
 
 O SISPENAS quer ser referência em dosimetria. Isso exige duas coisas: saber que **o que
 está no catálogo está certo** (conferência) e que **o que existe na lei está no catálogo**
-(cobertura). A primeira teve um grande avanço na v1.1.Z — as 42 contradições internas
-foram todas conferidas contra o Planalto e resolvidas —; a segunda ainda é o trabalho maior.
+(cobertura). Ambas avançaram muito na linha `1.1.z`: as 42 contradições internas foram
+resolvidas (v1.1.Z), o denominador foi estabelecido (v1.1.2) e a **cobertura dos diplomas
+vigentes foi concluída** — o Código Penal Militar, última e maior lacuna, foi conferido na
+v1.1.5. O acompanhamento vive na página [Completude do catálogo](/docs/completude).
 
 ### O que se sabe hoje
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | 1.042 |
-| Dispositivos distintos | 902 |
-| Diplomas com registro no catálogo | 47 (63 vigentes inventariados) |
-| **Denominador** (preceitos secundários vigentes) | **1.172** |
+| Tipos penais catalogados | **1.473** |
+| Diplomas com tipo penal vigente cobertos | todos os inventariados |
+| **Denominador** (preceitos secundários vigentes) | 1.172 |
 | Contradições internas | **0** |
-| Campos ainda `derivado_auto` | maioria |
 
-O denominador vem de `data/diplomas.json` (Fase 1, concluída na v1.1.2): cada
-diploma com preceito penal teve seu intervalo de artigos delimitado e seus
-preceitos vigentes contados no texto compilado do Planalto. A unidade é o
-**preceito secundário** (cada cominação de pena); o catálogo desdobra incisos,
-então os números não se comparam 1:1 — mas agora a lacuna de cada bloco é
-mensurável:
+Todo diploma com preceito penal vigente tem agora seus dispositivos no catálogo,
+conferidos contra o texto compilado do Planalto. Como o catálogo **desdobra**
+cada artigo em seus tipos (caput, §§, incisos e alíneas com pena própria), os
+1.473 tipos superam os 1.172 preceitos primários — e é assim que deve ser: um
+artigo pode conter vários tipos penais autônomos.
 
-| Bloco | Preceitos vigentes | Registros no catálogo | Situação |
-|---|---|---|---|
-| CPM (DL 1.001/69) | 351 | 69 | **maior lacuna do catálogo** |
-| CE (Lei 4.737/65) | 61 | 26 | grande lacuna |
-| CP, Parte Especial (arts. 121–361) | 337 | 551 | conferência dispositivo a dispositivo (Fase 2) |
-| LCP (DL 3.688/41) | 47 | 57 | **completa na v1.1.2** (47/47 artigos vigentes) |
-| Lei 9.279/96 (propriedade industrial) | 12 | 12 | **completa na v1.1.2** |
-| Loterias (DL 6.259/44) | 13 | 4 | lacuna |
-| Lei das Eleições (9.504/97) | 10 | 5 | lacuna |
-| Sem nenhum registro | — | — | Lei Geral do Esporte (14.597/23), serviços postais (6.538/78), atividades nucleares (6.453/77), DL 201/67, planejamento familiar (9.263/96), entre outros — ver `data/diplomas.json` |
+:::note[A cobertura não é um ponto final]
+"Todos os diplomas cobertos" significa que a conferência dispositivo a
+dispositivo não localizou preceito faltante — não uma prova de exaustão. O
+denominador real não é conhecido com certeza, e uma revisão futura pode
+reabrir um diploma (a situação de cada um na [Completude](/docs/completude)
+carrega essa ressalva, o "concluído ❓"). Falta ainda **desmembrar incisos que
+são tipos distintos mesmo compartilhando a mesma pena**.
+:::
 
-:::note[O denominador existe, e é revisável]
-1.172 preceitos vigentes em 65 diplomas é o número **medido** hoje; a Fase 2
-(conferência dispositivo a dispositivo) pode ajustá-lo — preceitos cominados em
-linha corrida dentro de parágrafos são fáceis de subcontar. Todo ajuste manual
-está documentado campo a campo em `data/diplomas.json`.
+:::warning[Revisão cautelar antes do crawler do DOU (v2.0.0)]
+Parte dos campos do catálogo foi preenchida por **heurística** na cobertura em
+massa — em especial `violencia`, `grave_ameaca`, `tipo de ação penal` e
+`tentativa` nos crimes do CPM. Antes de construir o crawler, esses campos
+precisam de uma **revisão dispositivo a dispositivo**, para que a linha de base
+que o crawler compara esteja apropriadamente registrada. Um crawler que compara
+contra dados heurísticos propaga o erro.
 :::
 
 ### Fonte da verdade
@@ -145,26 +144,31 @@ Antes de conferir ou incluir qualquer coisa, saber **o que precisa existir**.
 
 Cada artigo, parágrafo, inciso e alínea conferido contra o Planalto.
 
-- [ ] Extrair o texto compilado de cada diploma do universo da Fase 1.
-- [ ] Para cada dispositivo: pena mín./máx., modalidade, multa, ação penal, hediondez,
-      elemento, tentativa, violência/grave ameaça, resultado morte.
-- [ ] **Diff automático** contra o catálogo, classificando cada dispositivo em:
-      `confere` · `diverge` · `ausente no catálogo` · `no catálogo mas não na lei`.
-- [x] Contradições internas resolvidas (v1.1.Z) — passo já concluído para os 873
-      dispositivos com registro divergente.
+- [x] Extrair o texto compilado de cada diploma (`scripts/inventario_diplomas.py`,
+      `scripts/extrair_cpm.py`).
+- [x] Para cada dispositivo: pena mín./máx., modalidade, ação penal, elemento,
+      violência/grave ameaça, resultado morte — extraídos e catalogados (parte por
+      heurística, ver a Revisão cautelar).
+- [x] **Diff automático** contra o catálogo (`scripts/diff_tipos.py`): casa cada preceito
+      do texto com o registro e aponta os sem correspondência.
+- [x] Contradições internas resolvidas (v1.1.Z); registros herdados errados do CPM
+      corrigidos em lugar (v1.1.5).
 - [ ] Registrar a conferência por dispositivo: `conferido_em`, `fonte_url`, `conferido_por`
-      — substituindo `derivado_auto` por procedência rastreável.
+      — substituindo `derivado_auto` por procedência rastreável. **Precede o crawler.**
 - [ ] **Portão:** a CI passa a exigir `conferido_em` nos dispositivos já conferidos; o
       número de não conferidos só pode cair.
 
-### Fase 3 — Incluir o que falta
+### Fase 3 — Incluir o que falta ✅ concluída (v1.1.2 → v1.1.5)
 
-- [x] Priorizar por **peso na pesquisa**, não por facilidade: LCP e propriedade industrial
-      primeiro, por serem as maiores lacunas conhecidas — **ambas completas na v1.1.2**.
-      Próximas, em ordem de lacuna: CPM, Código Eleitoral, loterias, Lei das Eleições.
-- [ ] Cada inclusão segue as convenções C1–C8 do `CONTRIBUTING.md` — nada de nota de
-      referência ou causa de aumento como se fosse tipo (foi o erro corrigido na v1.1.0).
-- [ ] `id` append-only: novos vão para o fim, a partir de 1112.
+- [x] Priorizar por **peso na pesquisa**: LCP e propriedade industrial (v1.1.2);
+      loterias, Código Eleitoral e os 16 diplomas sem coleta (v1.1.3); desmembramento
+      dos tipos dentro dos artigos da legislação civil e gaps do CP — rixa, ato obsceno,
+      duplicata simulada etc. (v1.1.4); **CPM completo, paz e guerra (v1.1.5)**.
+- [x] Cada inclusão segue C1–C8 do `CONTRIBUTING.md` — nada de nota de referência ou
+      causa de aumento como tipo.
+- [x] `id` append-only.
+- [ ] **Pendente:** desmembrar incisos que são tipos distintos ainda que compartilhem a
+      mesma pena (revisão detalhada, ver a Revisão cautelar acima).
 
 ### Fase 4 — Componentes legislativos além dos tipos penais
 
