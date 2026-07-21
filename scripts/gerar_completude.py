@@ -160,7 +160,7 @@ def _gerar_acervo(historicos: list[dict]) -> None:
     p("")
     p("Reunir **o que já foi crime no Brasil** — os tipos penais revogados, "
       "alterados e não recepcionados — é a "
-      "[meta da v1.3.0](/docs/roadmap#v130--cobertura-completa-e-acervo-histórico), "
+      "[meta da v1.4.0](/docs/roadmap#v140--cobertura-completa-e-acervo-histórico), "
       "a ser executada **após** a completude dos tipos vigentes. A pergunta \"o "
       "que deixou de ser crime, e quando?\" é tão relevante para a pesquisa "
       "quanto \"o que é crime hoje\", e hoje nenhuma ferramenta a responde de "
