@@ -17,7 +17,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1473** |
+| Tipos penais catalogados | **1345** |
 | Diplomas com tipo penal vigente | 62 |
 | — com coleta iniciada | 62 |
 | Diplomas revogados/não recepcionados | [10](/docs/acervo-historico) |
@@ -30,45 +30,45 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Diploma | Tipos coletados | Situação |
 |---|---:|---|
-| Código Penal — Parte Especial | 565 | concluído ❓ |
+| Código Penal — Parte Especial | 463 | concluído ❓ |
 | Código Penal Militar — Parte Especial | 352 | 🔶 em coleta |
-| Lei das Contravenções Penais | 57 | concluído ❓ |
-| Código Eleitoral | 56 | concluído ❓ |
-| Crimes contra o meio ambiente | 53 | concluído ❓ |
-| Estatuto da Criança e do Adolescente (crimes) | 37 | concluído ❓ |
+| Código Eleitoral | 55 | concluído ❓ |
+| Lei das Contravenções Penais | 51 | concluído ❓ |
+| Crimes contra o meio ambiente | 48 | concluído ❓ |
+| Estatuto da Criança e do Adolescente (crimes) | 28 | concluído ❓ |
 | Abuso de autoridade | 24 | concluído ❓ |
 | Crimes contra o sistema financeiro nacional | 23 | concluído ❓ |
-| Lei de Drogas | 19 | concluído ❓ |
 | Crimes de preconceito (racismo) | 17 | concluído ❓ |
 | Estatuto da Pessoa Idosa (crimes) | 16 | concluído ❓ |
 | Código de Trânsito Brasileiro (crimes de trânsito) | 16 | concluído ❓ |
+| Lei de Drogas | 16 | concluído ❓ |
 | Crimes contra a ordem tributária, econômica e relações de consumo | 16 | concluído ❓ |
 | Código de Defesa do Consumidor (infrações penais) | 14 | concluído ❓ |
 | Loterias (contravenções) | 13 | concluído ❓ |
 | Propriedade industrial (crimes) | 12 | concluído ❓ |
-| Estatuto do Desarmamento | 12 | concluído ❓ |
 | Transplante de órgãos (crimes) | 11 | concluído ❓ |
 | Lei de Falências (crimes falimentares) | 11 | concluído ❓ |
 | Lei Geral do Esporte (crimes) | 11 | concluído ❓ |
 | Lei das Eleições (crimes) | 11 | concluído ❓ |
-| Genocídio | 9 | concluído ❓ |
+| Estatuto do Desarmamento | 10 | concluído ❓ |
 | Atividades nucleares (crimes) | 8 | concluído ❓ |
 | Organizações criminosas | 8 | concluído ❓ |
 | Estatuto da Pessoa com Deficiência (crimes) | 7 | concluído ❓ |
 | Serviços postais (crimes) | 7 | concluído ❓ |
 | Contravenções de preconceito | 7 | concluído ❓ |
+| Genocídio | 7 | concluído ❓ |
 | Lei de Biossegurança (crimes) | 6 | concluído ❓ |
 | Transporte de eleitores (crimes) | 5 | concluído ❓ |
 | Tortura | 5 | concluído ❓ |
 | Antiterrorismo | 5 | concluído ❓ |
+| Crimes contra a economia popular | 5 | concluído ❓ |
 | Planejamento familiar (crimes) | 4 | concluído ❓ |
-| Crimes contra a economia popular | 4 | concluído ❓ |
 | Parcelamento do solo urbano (crimes) | 4 | concluído ❓ |
 | Lavagem de dinheiro | 4 | concluído ❓ |
+| Práticas discriminatórias no trabalho | 4 | concluído ❓ |
 | Mercado de valores mobiliários (crimes) | 3 | concluído ❓ |
 | Estatuto do Índio (crimes) | 3 | concluído ❓ |
 | Programas de computador (crimes) | 3 | concluído ❓ |
-| Práticas discriminatórias no trabalho | 3 | concluído ❓ |
 | Crimes contra a ordem econômica (combustíveis) | 2 | concluído ❓ |
 | Lei do Inquilinato (disposições penais) | 2 | concluído ❓ |
 | Comissões Parlamentares de Inquérito (crimes) | 2 | concluído ❓ |
