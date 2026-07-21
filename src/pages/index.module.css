@@ -108,3 +108,60 @@
   text-align: center;
   color: var(--ifm-color-emphasis-600);
 }
+
+/* Panorama do catálogo — contadores dinâmicos abaixo dos dois cards. */
+.contadores {
+  max-width: 820px;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+.contadoresIntro {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.contadoresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.contador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-top: 3px solid var(--ifm-color-primary);
+}
+.contadorNumero {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--ifm-color-primary);
+  font-variant-numeric: tabular-nums;
+}
+.contadorLabel {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--ifm-color-emphasis-700);
+}
+@media (max-width: 560px) {
+  .contadoresGrid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .contador {
+    flex-direction: row;
+    gap: 0.6rem;
+    justify-content: center;
+    align-items: baseline;
+    border-top: none;
+    border-left: 3px solid var(--ifm-color-primary);
+  }
+  .contadorNumero {
+    font-size: 1.6rem;
+  }
+  .contadorLabel {
+    text-align: left;
+  }
+}

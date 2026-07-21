@@ -9,8 +9,8 @@ sidebar_position: 2
 # Completude do catálogo
 
 :::note[Página gerada]
-Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 da
-[Conferência integral](/docs/roadmap#conferência-integral-do-catálogo)) e de
+Este acompanhamento é derivado de `data/diplomas.json` (o denominador da
+conferência do catálogo) e de
 `data/crimes.json` (o catálogo). Para atualizá-lo:
 `python scripts/gerar_completude.py`.
 :::

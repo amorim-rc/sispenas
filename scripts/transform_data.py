@@ -540,8 +540,16 @@ def main():
 
     # ── Relatório de qualidade ──────────────────────────────────────────────
     com_pena = [c for c in crimes if c["tem_pena_privativa"]]
+    # Condutas-base: dispositivos colapsados ao artigo-base (sem §/inciso/alínea/
+    # caput). Cada tipo é uma moldura penal própria; a conduta-base agrupa as
+    # formas (simples, qualificada, privilegiada) de um mesmo crime. A home usa
+    # os dois números: "N condutas se desdobram em M tipos/molduras".
+    def _base(c):
+        m = re.match(r"(Art\.?\s*\d+(?:-[A-Z])?)", c["artigo"])
+        return (c["lei"], m.group(1) if m else c["artigo"])
     relatorio = {
         "total_tipos_penais": len(crimes),
+        "condutas_base": len({_base(c) for c in crimes}),
         "com_pena_privativa": len(com_pena),
         "sem_pena_privativa": len(crimes) - len(com_pena),
         "dispositivos_distintos": len(por_chave),

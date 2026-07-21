@@ -1,11 +1,79 @@
-import {useEffect, type ReactNode} from 'react';
+import {useEffect, useState, type ReactNode} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
+import {CATALOGO} from '@site/src/lib/beneficios/catalogo';
 import styles from './index.module.css';
+
+/** Total de benefícios avaliados — lido do catálogo em tempo de build. */
+const TOTAL_BENEFICIOS = CATALOGO.length;
+
+/**
+ * Contadores dinâmicos do panorama do catálogo. Lê `qualidade.json` (gerado por
+ * scripts/transform_data.py, ~600 bytes) em vez do catálogo inteiro. São dois
+ * recortes de granularidade: `condutas_base` agrupa as formas de um crime
+ * (simples/qualificada/privilegiada) num só; `total_tipos_penais` conta cada
+ * moldura penal própria — o "cenário de condenação" com pena distinta.
+ */
+function Contadores(): ReactNode {
+  const url = useBaseUrl('/data/qualidade.json');
+  const [dados, setDados] = useState<{condutas: number; tipos: number} | null>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    fetch(url)
+      .then((r) => r.json())
+      .then((q) => {
+        if (vivo) setDados({condutas: q.condutas_base, tipos: q.total_tipos_penais});
+      })
+      .catch(() => {});
+    return () => {
+      vivo = false;
+    };
+  }, [url]);
+
+  const fmt = (n: number) => n.toLocaleString('pt-BR');
+  const itens: {n: string; label: ReactNode}[] = [
+    {
+      n: dados ? fmt(dados.condutas) : '—',
+      label: (
+        <>
+          condutas tipificadas
+          <br />
+          como crimes
+        </>
+      ),
+    },
+    {
+      n: dados ? fmt(dados.tipos) : '—',
+      label: (
+        <>
+          cenários de condenação
+          <br />
+          (molduras de pena)
+        </>
+      ),
+    },
+    {n: fmt(TOTAL_BENEFICIOS), label: <>benefícios penais</>},
+  ];
+
+  return (
+    <div className={styles.contadores} aria-label="Panorama do catálogo">
+      <p className={styles.contadoresIntro}>Hoje, no Brasil, o SISPENAS reúne</p>
+      <div className={styles.contadoresGrid}>
+        {itens.map((it, i) => (
+          <div key={i} className={styles.contador}>
+            <span className={styles.contadorNumero}>{it.n}</span>
+            <span className={styles.contadorLabel}>{it.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /**
  * Até a v1.0.0 a pesquisa de tipos penais era servida na raiz e o tipo
@@ -60,6 +128,7 @@ function Caminhos() {
             </p>
           </Link>
         </div>
+        <Contadores />
       </div>
     </section>
   );
