@@ -22,8 +22,11 @@ inv = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(inv)
 
 RE_ART = re.compile(r"^\s*Art\.?\s*(\d+)")
-RE_PAR = re.compile(r"^\s*§\s*(\d+)")
+# § seguido do número e, opcionalmente, de sufixo letrado "-A" (o CPM usa
+# "§ 2º-A" para os parágrafos inseridos por leis posteriores).
+RE_PAR = re.compile(r"^\s*§\s*(\d+)\s*[ºo°]?\s*(-[A-Z])?")
 RE_PAR_UNICO = re.compile(r"^\s*Par[áa]grafo\s+[úu]nico", re.IGNORECASE)
+RE_INC = re.compile(r"^\s*([IVXLC]+)\s*[-–]\s")
 UNID = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "três": 3, "tres": 3,
         "quatro": 4, "cinco": 5, "seis": 6, "sete": 7, "oito": 8, "nove": 9}
 DEZ = {"dez": 10, "onze": 11, "doze": 12, "treze": 13, "catorze": 14,
@@ -91,19 +94,40 @@ def parse_pena(linha: str):
     return mn, mx, tp
 
 
+def _clausula(linha: str) -> str:
+    """Texto definidor de um dispositivo, limpo: sem 'Art. N.'/'§N'/inciso no
+    início, sem parentéticos de redação, cortado antes do ':' que abre a pena."""
+    t = re.sub(r"^\s*Art\s*\.?\s*\d+[ºo°.\-\s]*", "", linha)
+    t = re.sub(r"^\s*§\s*\d+\s*[ºo°]?\s*(?:-[A-Z])?\s*\.?\s*", "", t)
+    t = re.sub(r"^\s*Par[áa]grafo\s+[úu]nico[.\-\s]*", "", t)
+    t = re.sub(r"^\s*[IVXLC]+\s*[-–]\s*", "", t)
+    t = re.sub(r"\s*\([^)]*\)", "", t)          # (Redação...), (um)
+    t = re.split(r"\bPena\b", t)[0]
+    t = t.rstrip(" :;.-–—")
+    return re.sub(r"\s+", " ", t).strip()
+
+
 def extrair(cache: Path, lo: int, hi: int):
     texto = inv._texto_vigente(inv._decodificar((cache / "cpm.html").read_bytes()))
     linhas = [l.strip() for l in texto.splitlines() if l.strip()]
     art = None
     disp = "caput"
     nomen = None
+    caput_desc = ""
+    disp_desc = ""
+    inciso = None
+    inc_desc = ""
+    emitidos: set[str] = set()
     registros = []
     for i, l in enumerate(linhas):
         m = RE_ART.match(l)
         if m:
             art = int(m.group(1))
             disp = "caput"
-            # nomen juris: linha anterior curta que não é art/§/pena/inciso
+            caput_desc = _clausula(l)
+            disp_desc = caput_desc
+            inciso = None
+            emitidos = set()
             prev = linhas[i - 1] if i else ""
             if (prev and len(prev) < 60 and not RE_ART.match(prev)
                     and not prev.startswith("§") and "Pena" not in prev
@@ -113,16 +137,30 @@ def extrair(cache: Path, lo: int, hi: int):
             else:
                 nomen = None
         if RE_PAR_UNICO.match(l):
-            disp = "par. único"
+            disp = "par. único"; disp_desc = _clausula(l); inciso = None
         elif (mp := RE_PAR.match(l)):
-            disp = f"§{mp.group(1)}"
+            disp = f"§{mp.group(1)}" + (mp.group(2) or "")
+            disp_desc = _clausula(l); inciso = None
+        elif (mi := RE_INC.match(l)):
+            inciso = mi.group(1)
+            inc_desc = _clausula(l)
         if art and lo <= art <= hi and inv.RE_PENA.search(l):
             mn, mx, tp = parse_pena(l)
-            conduta = linhas[i - 1][:90] if i else ""
+            desc = disp_desc if disp != "caput" else caput_desc
+            usar_disp = disp
+            usar_desc = desc
+            # Colisão: segundo preceito no mesmo dispositivo = inciso com pena
+            # própria (ex.: art. 191, I e II). Desambigua pelo inciso.
+            if disp in emitidos and inciso:
+                usar_disp = f"{disp}, {inciso}" if disp != "caput" else inciso
+                usar_desc = inc_desc or desc
+            emitidos.add(disp)
+            if not usar_desc:
+                usar_desc = caput_desc
             registros.append({
-                "art": art, "disp": disp, "nomen": nomen,
-                "conduta": conduta, "pena": l[:80],
-                "pena_min": mn, "pena_max": mx, "tipo_pena": tp,
+                "art": art, "disp": usar_disp, "nomen": nomen,
+                "desc": usar_desc[:120], "conduta": linhas[i - 1][:90] if i else "",
+                "pena": l[:80], "pena_min": mn, "pena_max": mx, "tipo_pena": tp,
             })
     return registros
 
