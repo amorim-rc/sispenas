@@ -2,8 +2,8 @@
 """Gera docs/completude.md — o acompanhamento de completude do catálogo.
 
 A página é DERIVADA de ``data/diplomas.json`` (denominador da Fase 1) e de
-``data/crimes.json`` (o catálogo): índice de diplomas com contagens, lista
-exaustiva dos tipos já reunidos por diploma e os diplomas ainda sem coleta.
+``data/crimes.json`` (o catálogo): índice de diplomas com o total de tipos
+coletados e a situação de cada um, mais os diplomas ainda sem coleta.
 Não edite ``docs/completude.md`` à mão — regenere com:
 
     python scripts/gerar_completude.py
@@ -19,27 +19,11 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 
-# Diplomas cuja coleta foi CONFERIDA integralmente contra o texto compilado
-# (todos os preceitos vigentes têm registro). Entra aqui só com conferência
-# artigo a artigo documentada na release note correspondente.
-CONFERIDOS: dict[str, str] = {
-    "lcp": "v1.1.2",
-    "lei9279": "v1.1.2",
-}
-
-
-def _num_artigo(artigo: str) -> tuple:
-    m = re.search(r"(\d+)", artigo or "")
-    return (int(m.group(1)) if m else 0, artigo)
-
-
-def _slug(texto: str) -> str:
-    """Slug de heading do Docusaurus (github-slugger): minúsculas, pontuação
-    removida, cada espaço vira um hífen (sem colapsar — travessão entre
-    espaços produz hífen duplo), acentos preservados."""
-    s = texto.lower()
-    s = re.sub(r"[^\w\s-]", "", s)
-    return s.replace(" ", "-")
+# Diplomas cuja coleta AINDA tem preceitos faltando (a conferência dispositivo
+# a dispositivo, via scripts/diff_tipos.py, encontrou lacunas genuínas). Fora
+# desta lista, um diploma com coleta é dado como "concluído" — no sentido de
+# que a revisão não localizou preceito faltante, sempre passível de erro.
+INCOMPLETOS: set[str] = {"cpm"}
 
 
 def main() -> int:
@@ -72,11 +56,11 @@ def main() -> int:
                   if not tipos_por_slug.get(d["id"]) and d["preceitos_esperados"] > 0]
 
     def situacao(d: dict) -> str:
-        if d["id"] in CONFERIDOS:
-            return f"✅ completo (conferido na {CONFERIDOS[d['id']]})"
         if not tipos_por_slug.get(d["id"]):
             return "⛔ não iniciado"
-        return "🔶 em coleta"
+        if d["id"] in INCOMPLETOS:
+            return "🔶 em coleta"
+        return "concluído ❓"
 
     L: list[str] = []
     p = L.append
@@ -115,14 +99,23 @@ def main() -> int:
     # ------------------------------------------------------------------ índice
     p("## Índice por diploma")
     p("")
-    p("| Diploma | Preceitos vigentes | Tipos coletados | Situação |")
-    p("|---|---:|---:|---|")
+    p(":::note[O que significa a situação]")
+    p("**concluído ❓** — a conferência dispositivo a dispositivo não localizou "
+      "nenhum preceito faltante após as revisões. Não é uma garantia: o "
+      "denominador real (quantos tipos a lei comporta) não é conhecido com "
+      "certeza, então este estado é **passível de erro** e pode voltar a "
+      "\"em coleta\" se uma revisão futura encontrar algo. **em coleta** — há "
+      "preceitos sabidamente faltando. **não iniciado** — nenhum tipo reunido "
+      "ainda.")
+    p(":::")
+    p("")
+    p("| Diploma | Tipos coletados | Situação |")
+    p("|---|---:|---|")
     ordem = sorted(vigentes, key=lambda d: (-len(tipos_por_slug.get(d["id"], [])),
                                             -d["preceitos_esperados"]))
     for d in ordem:
         n = len(tipos_por_slug.get(d["id"], []))
-        nome = f"[{d['nome']}](#{_slug(d['nome'])})" if n else d["nome"]
-        p(f"| {nome} | {d['preceitos_esperados']} | {n} | {situacao(d)} |")
+        p(f"| {d['nome']} | {n} | {situacao(d)} |")
     p("")
 
     # ------------------------------------------------------- sem coleta ainda
@@ -153,29 +146,9 @@ def main() -> int:
         rotulo = "não recepcionado" if d["situacao"] == "nao_recepcionado" else "revogado"
         p(f"| {d['nome']} | {d['norma']} | {rotulo} — {d['norma_revogadora']} |")
     p("")
-
-    # ------------------------------------------- lista exaustiva por diploma
-    p("## Tipos reunidos, por diploma")
+    p("A lista completa dos tipos já reunidos, com o texto de cada um, está na "
+      "[busca por tipo penal](/pesquisa/tipos).")
     p("")
-    p("Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo")
-    p("(`/pesquisa/tipos?tipo=N`).")
-    p("")
-    for d in ordem:
-        tipos = tipos_por_slug.get(d["id"])
-        if not tipos:
-            continue
-        tipos = sorted(tipos, key=lambda r: (_num_artigo(r["artigo"]), r["id"]))
-        p(f"### {d['nome']}")
-        p("")
-        p(f"*{d['norma']}* — {d['preceitos_esperados']} preceitos vigentes, "
-          f"{len(tipos)} tipos coletados. {situacao(d)}")
-        p("")
-        p("| id | Dispositivo | Tipo penal |")
-        p("|---:|---|---|")
-        for r in tipos:
-            crime = r["crime"].replace("|", "\\|")
-            p(f"| [{r['id']}](/pesquisa/tipos?tipo={r['id']}) | {r['artigo']} | {crime} |")
-        p("")
 
     destino = RAIZ / "docs" / "completude.md"
     with open(destino, "w", encoding="utf-8", newline="\n") as fh:

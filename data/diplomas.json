@@ -17,7 +17,7 @@
       "artigos_penais": "arts. 121–126, 129–140, 146–166, 168–169, 171–180, 184, 197–213, 215–218, 227–230, 232–239, 241–257, 259–262, 264–278, 280, 282–284, 286–294, 296–326, 328–349, 351–359",
       "preceitos_medidos": 337,
       "preceitos_esperados": 337,
-      "tipos_catalogados": 551,
+      "tipos_catalogados": 565,
       "rotulos_catalogo": [
         "CP",
         "CP (atualiz.)",
@@ -119,7 +119,7 @@
       "artigos_penais": "arts. 29–35, 38–42, 44–46, 48–52, 54–56, 60–69",
       "preceitos_medidos": 40,
       "preceitos_esperados": 40,
-      "tipos_catalogados": 51,
+      "tipos_catalogados": 53,
       "rotulos_catalogo": [
         "Lei 9.605/98",
         "Lei 9.605/98 (atualiz.)"
@@ -135,7 +135,7 @@
       "artigos_penais": "arts. 9–10, 12–13, 15–16, 18–25, 27–33, 36–38",
       "preceitos_medidos": 25,
       "preceitos_esperados": 25,
-      "tipos_catalogados": 23,
+      "tipos_catalogados": 24,
       "rotulos_catalogo": [
         "Lei 13.869/19"
       ]
@@ -197,7 +197,7 @@
       "artigos_penais": "arts. 2–14, 20",
       "preceitos_medidos": 17,
       "preceitos_esperados": 17,
-      "tipos_catalogados": 16,
+      "tipos_catalogados": 17,
       "rotulos_catalogo": [
         "Lei 7.716/89",
         "Lei 7.716/89 (atualiz.)"
@@ -228,7 +228,7 @@
       "artigos_penais": "arts. 63–74",
       "preceitos_medidos": 14,
       "preceitos_esperados": 14,
-      "tipos_catalogados": 12,
+      "tipos_catalogados": 14,
       "rotulos_catalogo": [
         "CDC (Lei 8.078/90)"
       ]
@@ -244,7 +244,7 @@
       "preceitos_medidos": 15,
       "preceitos_esperados": 16,
       "ajuste_motivo": "O art. 100 comina pena em linha corrida ('crime punível com reclusão de 6 meses a 1 ano e multa'); soma-se 1 aos 15 preceitos medidos. Arts. 56–58 são infrações administrativas (fora da conta).",
-      "tipos_catalogados": 14,
+      "tipos_catalogados": 16,
       "rotulos_catalogo": [
         "Lei 10.741/03"
       ]
@@ -259,7 +259,7 @@
       "artigos_penais": "arts. 2, 18–21",
       "preceitos_medidos": 7,
       "preceitos_esperados": 7,
-      "tipos_catalogados": 9,
+      "tipos_catalogados": 8,
       "rotulos_catalogo": [
         "Lei 12.850/13"
       ]
@@ -305,7 +305,7 @@
       "artigos_penais": "arts. 14–20, 23",
       "preceitos_medidos": 12,
       "preceitos_esperados": 12,
-      "tipos_catalogados": 10,
+      "tipos_catalogados": 11,
       "rotulos_catalogo": [
         "Lei 9.434/97"
       ],
@@ -414,7 +414,7 @@
       "artigos_penais": "arts. 88–91",
       "preceitos_medidos": 8,
       "preceitos_esperados": 8,
-      "tipos_catalogados": 4,
+      "tipos_catalogados": 7,
       "rotulos_catalogo": [
         "Lei 13.146/15"
       ],
@@ -446,7 +446,7 @@
       "artigos_penais": "arts. 2–4",
       "preceitos_medidos": 3,
       "preceitos_esperados": 3,
-      "tipos_catalogados": 3,
+      "tipos_catalogados": 4,
       "rotulos_catalogo": [
         "Lei 1.521/51"
       ]
@@ -507,7 +507,7 @@
       "artigos_penais": "arts. 50, 52",
       "preceitos_medidos": 3,
       "preceitos_esperados": 3,
-      "tipos_catalogados": 3,
+      "tipos_catalogados": 4,
       "rotulos_catalogo": [
         "Lei 6.766/79"
       ],
@@ -631,7 +631,7 @@
       "artigos_penais": "arts. 10",
       "preceitos_medidos": 2,
       "preceitos_esperados": 2,
-      "tipos_catalogados": 1,
+      "tipos_catalogados": 2,
       "rotulos_catalogo": [
         "Lei 9.296/96"
       ],
