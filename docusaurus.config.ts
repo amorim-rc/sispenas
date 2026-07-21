@@ -113,6 +113,7 @@ const config: Config = {
           items: [
             {to: '/docs/metodologia', label: 'Metodologia'},
             {to: '/docs/catalogo-tipos-penais', label: 'Catálogo de tipos penais'},
+            {to: '/docs/completude', label: 'Completude do catálogo'},
             {to: '/docs/beneficios-penais', label: 'Benefícios penais'},
             {to: '/docs/dados-abertos', label: 'Dados abertos'},
           ],
