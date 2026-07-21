@@ -112,8 +112,9 @@ const config: Config = {
           position: 'left',
           items: [
             {to: '/docs/metodologia', label: 'Metodologia'},
-            {to: '/docs/catalogo-tipos-penais', label: 'Catálogo de tipos penais'},
             {to: '/docs/completude', label: 'Completude do catálogo'},
+            {to: '/docs/acervo-historico', label: 'Acervo histórico'},
+            {to: '/docs/catalogo-tipos-penais', label: 'Catálogo de tipos penais'},
             {to: '/docs/beneficios-penais', label: 'Benefícios penais'},
             {to: '/docs/dados-abertos', label: 'Dados abertos'},
           ],

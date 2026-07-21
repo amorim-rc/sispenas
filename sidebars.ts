@@ -6,8 +6,9 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   docsSidebar: [
     'metodologia',
-    'catalogo-tipos-penais',
     'completude',
+    'acervo-historico',
+    'catalogo-tipos-penais',
     'beneficios-penais',
     'dados-abertos',
   ],
