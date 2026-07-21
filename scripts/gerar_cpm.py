@@ -49,11 +49,15 @@ def _chave_txt(art, disp):
 def _chave_reg(artigo):
     m = re.match(r"Art\.?\s*(\d+)", artigo)
     k = m.group(1) if m else "?"
-    mp = re.search(r"§\s*(\d+)", artigo)
+    mp = re.search(r"§\s*(\d+)\s*[ºo°]?(-[A-Z])?", artigo)
     if mp:
-        k += "|p" + mp.group(1)
+        k += "|p" + mp.group(1) + (mp.group(2).lower() if mp.group(2) else "")
     elif re.search(r"nico", artigo):
         k += "|pu"
+    # inciso após vírgula (ex.: "Art. 191, II")
+    mi = re.search(r",\s*([IVXLC]+)\b", artigo)
+    if mi:
+        k += "|" + mi.group(1).lower()
     return k
 
 
@@ -145,13 +149,21 @@ def construir(entrada: Path):
         obs_extra = ""
         if str(r["art"]) in REMISSAO and r["disp"] == "caput":
             mn, mx, tp, obs_extra = REMISSAO[str(r["art"])]
+        # Pena de morte em tempo de guerra: tipo_pena = "Morte" (o tipo fica
+        # explícito). pena_min/max guardam a reclusão do grau mínimo, para os
+        # cálculos que dependem de um número; a morte fica no rótulo e no obs.
+        morte_nota = ""
+        if tp and "morte no grau máximo" in tp:
+            tp = "Morte"
+            morte_nota = ("Pena de morte no grau máximo (fuzilamento, art. 56 do "
+                          "CPM, tempo de guerra); reclusão no grau mínimo. ")
         desc = (r.get("desc") or "").strip()
         faixa = _label_faixa(mn, mx)
         if obs_extra:
-            obs = obs_extra
+            obs = morte_nota + obs_extra
         else:
             parte_pena = f"{faixa} {tp.lower()}".strip() if faixa else ""
-            obs = ". ".join(x for x in (desc, parte_pena) if x).strip(". ")
+            obs = morte_nota + ". ".join(x for x in (desc, parte_pena) if x).strip(". ")
         rec_campos = {
             "artigo": _artigo(r["art"], r["disp"]),
             "crime": _nome(r),

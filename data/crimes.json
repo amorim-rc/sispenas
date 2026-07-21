@@ -11936,18 +11936,18 @@
  {
   "id": 787,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 190",
-  "crime": "Deserção em tempo de guerra",
-  "pena_min": 36,
-  "pena_max": 96,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 190, caput",
+  "crime": "Deserção especial",
+  "pena_min": 0,
+  "pena_max": 3,
+  "tipo_pena": "Detenção",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "3-8 anos reclusão militar. Se deserção para o exterior: 4-12 anos"
+  "obs": "Deixar o militar de apresentar-se no momento da partida do navio ou aeronave, de que é tripulante, ou do deslocamento da. até 3 meses detenção"
  },
  {
   "id": 788,
@@ -12017,9 +12017,9 @@
   "id": 792,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 205, §1º",
-  "crime": "Homicídio militar qualificado (motivo fútil/torpe, emprego de veneno/fogo/explosivo/traição)",
-  "pena_min": 144,
-  "pena_max": 360,
+  "crime": "Homicídio militar privilegiado (relevante valor social ou moral, ou violenta emoção após injusta provocação)",
+  "pena_min": 48,
+  "pena_max": 200,
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Sim",
@@ -12027,7 +12027,7 @@
   "tentativa": "Sim",
   "violencia": "Sim",
   "grave_ameaca": "Não",
-  "obs": "12-30 anos reclusão militar. HEDIONDO"
+  "obs": "Minoração facultativa do art. 205, §1º: a pena do homicídio (6-20 anos) é reduzida de 1/6 a 1/3"
  },
  {
   "id": 793,
@@ -12174,22 +12174,6 @@
   "obs": "Apropriar-se de coisa alheia móvel, de que tem a posse ou detenção. até 6 anos reclusão"
  },
  {
-  "id": 802,
-  "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 250",
-  "crime": "Apropriação indébita militar",
-  "pena_min": 12,
-  "pena_max": 36,
-  "tipo_pena": "Reclusão",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "1-3 anos reclusão militar"
- },
- {
   "id": 803,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 251, caput",
@@ -12204,22 +12188,6 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "Obter, para si ou para outrem, vantagem ilícita, em prejuízo alheio, induzindo ou mantendo alguém em êrro, mediante arti. 2-7 anos reclusão"
- },
- {
-  "id": 804,
-  "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 253",
-  "crime": "Dano militar simples (destruir/inutilizar/deteriorar coisa alheia)",
-  "pena_min": 6,
-  "pena_max": 36,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Sim",
-  "grave_ameaca": "Não",
-  "obs": "6 meses a 3 anos detenção militar"
  },
  {
   "id": 805,
@@ -12400,114 +12368,114 @@
  {
   "id": 816,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 355",
-  "crime": "Traição em tempo de guerra (prestar auxílio ao inimigo)",
-  "pena_min": 180,
+  "artigo": "Art. 355, caput",
+  "crime": "Traição",
+  "pena_min": 240,
   "pena_max": 360,
-  "tipo_pena": "Reclusão",
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
-  "violencia": "Sim",
+  "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "15-30 anos reclusão militar. Pode ser pena de morte em tempo de guerra (Art. 56 CPM)"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Tomar o nacional armas contra o Brasil ou Estado aliado, ou prestar serviço nas fôrças armadas de nação em guerra contra. 20-30 anos reclusão"
  },
  {
   "id": 817,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 356",
-  "crime": "Favor ao inimigo (militar que facilita ação do inimigo/enfraquece resistência das forças nacionais)",
-  "pena_min": 48,
-  "pena_max": 120,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 356, caput",
+  "crime": "Favor ao inimigo",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "4-10 anos reclusão militar. Em tempo de guerra"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Favorecer ou tentar o nacional favorecer o inimigo, prejudicar ou tentar prejudicar o bom êxito das operações militares,. 20-30 anos reclusão"
  },
  {
   "id": 818,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 364",
-  "crime": "Abandono de posto em tempo de guerra",
-  "pena_min": 36,
-  "pena_max": 96,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 364, caput",
+  "crime": "Cobardia qualificada",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "3-8 anos reclusão militar"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Provocar o militar, por temor, em presença do inimigo, a debandada de tropa ou guarnição; impedir a reunião de uma ou ou. 20-30 anos reclusão"
  },
  {
   "id": 819,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 365",
-  "crime": "Covardia em tempo de guerra (subtrair-se ao perigo/abandonar posição)",
-  "pena_min": 24,
-  "pena_max": 72,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 365, caput",
+  "crime": "Fuga em presença do inimigo",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "2-6 anos reclusão militar. Se em presença do inimigo: 4-12 anos"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Fugir o militar, ou incitar à fuga, em presença do inimigo. 20-30 anos reclusão"
  },
  {
   "id": 820,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 378",
-  "crime": "Violação de trégua ou armistício",
-  "pena_min": 36,
-  "pena_max": 96,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 378, caput",
+  "crime": "Separação reprovável",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
-  "violencia": "Sim",
+  "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "3-8 anos reclusão militar"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Separar o comandante, em caso de capitulação, a sorte própria da dos oficiais e praças. 20-30 anos reclusão"
  },
  {
   "id": 821,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 383",
-  "crime": "Violência contra prisioneiro de guerra (praticar ato de violência contra prisioneiro)",
-  "pena_min": 12,
-  "pena_max": 48,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 383, caput",
+  "crime": "Dano especial",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
-  "violencia": "Sim",
+  "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "1-4 anos reclusão militar. Violação do direito internacional humanitário"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar ou tentar praticar qualquer dos crimes definidos nos arts. 262, 263, §§ 1º e 2º, e 264, em benefício do inimigo. 20-30 anos reclusão"
  },
  {
   "id": 822,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 385",
-  "crime": "Saque/pilhagem (saquear/pilhar zona sob ocupação militar)",
-  "pena_min": 48,
-  "pena_max": 120,
-  "tipo_pena": "Reclusão",
+  "artigo": "Art. 385, caput",
+  "crime": "Envenenamento, corrupção ou epidemia",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
   "elemento": "Doloso",
   "tentativa": "Sim",
-  "violencia": "Sim",
+  "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "4-10 anos reclusão militar. Crime de guerra"
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Envenenar ou corromper água potável, víveres ou forragens, ou causar epidemia mediante a propagação de germes patogênico. 20-30 anos reclusão"
  },
  {
   "id": 823,
@@ -19942,24 +19910,8 @@
  {
   "id": 1321,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 189, caput",
-  "crime": "Nos crimes dos arts. 187 e 188, ns. I, II e III",
-  "pena_min": 0,
-  "pena_max": 3,
-  "tipo_pena": "Detenção",
-  "acao": "Pública Incondicionada",
-  "hediondo": "Não",
-  "elemento": "Doloso",
-  "tentativa": "Sim",
-  "violencia": "Não",
-  "grave_ameaca": "Não",
-  "obs": "Nos crimes dos arts. 187 e 188, ns. I, II e III. até 3 meses detenção"
- },
- {
-  "id": 1322,
-  "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 189, §1º",
-  "crime": "Se a apresentação se der dentro de prazo superior a vinte e quatro horas e não excedente a cinco dias",
+  "artigo": "Art. 190, §1º",
+  "crime": "Deserção especial — Se a apresentação se der dentro de prazo superior a vinte e quatro horas e não excedente a cinco dias",
   "pena_min": 2,
   "pena_max": 8,
   "tipo_pena": "Detenção",
@@ -19972,10 +19924,10 @@
   "obs": "Se a apresentação se der dentro de prazo superior a vinte e quatro horas e não excedente a cinco dias. 2-8 meses detenção"
  },
  {
-  "id": 1323,
+  "id": 1322,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 189, §2º",
-  "crime": "Se superior a cinco dias e não excedente a oito dias",
+  "artigo": "Art. 190, §2º",
+  "crime": "Deserção especial — Se superior a cinco dias e não excedente a oito dias",
   "pena_min": 3,
   "pena_max": 12,
   "tipo_pena": "Detenção",
@@ -19988,10 +19940,10 @@
   "obs": "Se superior a cinco dias e não excedente a oito dias. 3-12 meses detenção"
  },
  {
-  "id": 1324,
+  "id": 1323,
   "lei": "CPM (DL 1.001/69)",
-  "artigo": "Art. 189, §2º-A",
-  "crime": "Se superior a oito dias",
+  "artigo": "Art. 190, §2º-A",
+  "crime": "Deserção especial — Se superior a oito dias",
   "pena_min": 6,
   "pena_max": 24,
   "tipo_pena": "Detenção",
@@ -20004,7 +19956,7 @@
   "obs": "Se superior a oito dias. 6-24 meses detenção"
  },
  {
-  "id": 1325,
+  "id": 1324,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 191, caput",
   "crime": "Concêrto para deserção",
@@ -20020,7 +19972,7 @@
   "obs": "Concertarem-se militares para a prática da deserção. 3-12 meses detenção"
  },
  {
-  "id": 1326,
+  "id": 1325,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 191, II",
   "crime": "Concêrto para deserção — se consumada a deserção",
@@ -20036,7 +19988,7 @@
   "obs": "se consumada a deserção. 2-4 anos reclusão"
  },
  {
-  "id": 1327,
+  "id": 1326,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 192, caput",
   "crime": "Deserção por evasão ou fuga",
@@ -20052,7 +20004,7 @@
   "obs": "Evadir-se o militar do poder da escolta, ou de recinto de detenção ou de prisão, ou fugir em seguida à prática de crime. 6-24 meses detenção"
  },
  {
-  "id": 1328,
+  "id": 1327,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 193, caput",
   "crime": "Favorecimento a desertor",
@@ -20068,7 +20020,7 @@
   "obs": "Dar asilo a desertor, ou tomá-lo a seu serviço, ou proporcionar-lhe ou facilitar-lhe transporte ou meio de ocultação, sa. 4-12 meses detenção"
  },
  {
-  "id": 1329,
+  "id": 1328,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 194, caput",
   "crime": "Omissão de oficial",
@@ -20084,7 +20036,7 @@
   "obs": "Deixar o oficial de proceder contra desertor, sabendo, ou devendo saber encontrar-se entre os seus comandados. 6-12 meses detenção"
  },
  {
-  "id": 1330,
+  "id": 1329,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 196, §3º",
   "crime": "Descumprimento de missão — Se a abstenção é culposa",
@@ -20100,7 +20052,7 @@
   "obs": "Se a abstenção é culposa. 3-12 meses detenção"
  },
  {
-  "id": 1331,
+  "id": 1330,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 197, caput",
   "crime": "Retenção indevida",
@@ -20116,7 +20068,7 @@
   "obs": "Deixar o oficial de restituir, por ocasião da passagem de função, ou quando lhe é exigido, objeto, plano, carta, cifra,. até 6 meses detenção"
  },
  {
-  "id": 1332,
+  "id": 1331,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 197, par. único",
   "crime": "Retenção indevida — Se o objeto, plano, carta, cifra, código, ou documento envolve ou constitui segrêdo relativo à segurança nacional",
@@ -20132,7 +20084,7 @@
   "obs": "Se o objeto, plano, carta, cifra, código, ou documento envolve ou constitui segrêdo relativo à segurança nacional. 3-12 meses detenção"
  },
  {
-  "id": 1333,
+  "id": 1332,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 199, par. único",
   "crime": "Omissão de providências para evitar danos — Se a abstenção é culposa",
@@ -20148,7 +20100,7 @@
   "obs": "Se a abstenção é culposa. 3-12 meses detenção"
  },
  {
-  "id": 1334,
+  "id": 1333,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 200, par. único",
   "crime": "Omissão de providências para salvar comandados — Se a abstenção é culposa",
@@ -20164,7 +20116,7 @@
   "obs": "Se a abstenção é culposa. 6-24 meses detenção"
  },
  {
-  "id": 1335,
+  "id": 1334,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 207, §2º",
   "crime": "Provocação direta ou auxílio a suicídio — Infligir, desumana e reiteradamente, maus-tratos a alguém, sob sua autoridade ou dependência, levando-o, em ",
@@ -20180,7 +20132,7 @@
   "obs": "Infligir, desumana e reiteradamente, maus-tratos a alguém, sob sua autoridade ou dependência, levando-o, em razão disso,. 1-4 anos detenção"
  },
  {
-  "id": 1336,
+  "id": 1335,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 208, caput",
   "crime": "Genocídio",
@@ -20196,7 +20148,7 @@
   "obs": "Matar membros de um grupo nacional, étnico, religioso ou pertencente a determinada raça, com o fim de destruição total o. 15-30 anos reclusão"
  },
  {
-  "id": 1337,
+  "id": 1336,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 209, §3º",
   "crime": "Lesão leve — Se os resultados previstos nos §§ 1º e 2º deste artigo forem causados culposamente",
@@ -20212,7 +20164,7 @@
   "obs": "Se os resultados previstos nos §§ 1º e 2º deste artigo forem causados culposamente. 1-4 anos detenção"
  },
  {
-  "id": 1338,
+  "id": 1337,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 209, §3º-A",
   "crime": "Lesão leve — Se da lesão resultar morte e as circunstâncias evidenciarem que o agente não quis o resultado nem assumiu o risco de pro",
@@ -20228,7 +20180,7 @@
   "obs": "Se da lesão resultar morte e as circunstâncias evidenciarem que o agente não quis o resultado nem assumiu o risco de pro. 4-12 anos reclusão"
  },
  {
-  "id": 1339,
+  "id": 1338,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 210, caput",
   "crime": "Lesão culposa",
@@ -20244,7 +20196,7 @@
   "obs": "Se a lesão é culposa. 2-12 meses detenção"
  },
  {
-  "id": 1340,
+  "id": 1339,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 211, caput",
   "crime": "Participação em rixa",
@@ -20260,7 +20212,7 @@
   "obs": "Participar de rixa, salvo para separar os contendores. até 2 meses detenção"
  },
  {
-  "id": 1341,
+  "id": 1340,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 212, caput",
   "crime": "Abandono de pessoa",
@@ -20276,7 +20228,7 @@
   "obs": "Abandonar o militar pessoa que está sob seu cuidado, guarda, vigilância ou autoridade e, por qualquer motivo, incapaz de. 6-36 meses detenção"
  },
  {
-  "id": 1342,
+  "id": 1341,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 212, §1º",
   "crime": "Abandono de pessoa — Se do abandono resulta lesão grave",
@@ -20292,7 +20244,7 @@
   "obs": "Se do abandono resulta lesão grave. até 5 anos reclusão"
  },
  {
-  "id": 1343,
+  "id": 1342,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 212, §2º",
   "crime": "Abandono de pessoa — Se resulta morte",
@@ -20308,7 +20260,7 @@
   "obs": "Se resulta morte. 4-12 anos reclusão"
  },
  {
-  "id": 1344,
+  "id": 1343,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 213, caput",
   "crime": "Maus tratos",
@@ -20324,7 +20276,7 @@
   "obs": "Expor a perigo a vida ou saúde, em lugar sujeito à administração militar ou no exercício de função militar, de pessoa so. 2-12 meses detenção"
  },
  {
-  "id": 1345,
+  "id": 1344,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 213, §1º",
   "crime": "Maus tratos — Se do fato resulta lesão grave",
@@ -20340,7 +20292,7 @@
   "obs": "Se do fato resulta lesão grave. até 4 anos reclusão"
  },
  {
-  "id": 1346,
+  "id": 1345,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 213, §2º",
   "crime": "Maus tratos — Se resulta morte",
@@ -20356,7 +20308,7 @@
   "obs": "Se resulta morte. 2-10 anos reclusão"
  },
  {
-  "id": 1347,
+  "id": 1346,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 216, §2º",
   "crime": "Injúria — Se a injúria consiste na utilização de elementos referentes a raça, a cor, a etnia, a religião, a origem, a orientação s",
@@ -20372,7 +20324,7 @@
   "obs": "Se a injúria consiste na utilização de elementos referentes a raça, a cor, a etnia, a religião, a origem, a orientação s. 1-3 anos reclusão"
  },
  {
-  "id": 1348,
+  "id": 1347,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 217, caput",
   "crime": "Injúria real",
@@ -20388,7 +20340,7 @@
   "obs": "Se a injúria consiste em violência, ou outro ato que atinja a pessoa, e, por sua natureza ou pelo meio empregado, se con. 3-12 meses detenção"
  },
  {
-  "id": 1349,
+  "id": 1348,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 219, caput",
   "crime": "Ofensa às fôrças armadas",
@@ -20404,7 +20356,7 @@
   "obs": "Propalar fatos, que sabe inverídicos, capazes de ofender a dignidade ou abalar o crédito das fôrças armadas ou a confian. 6-12 meses detenção"
  },
  {
-  "id": 1350,
+  "id": 1349,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 225, §2º",
   "crime": "Sequestro ou cárcere privado — Se resulta à vítima, em razão de maus tratos ou da natureza da detenção, grave sofrimento físico ou moral",
@@ -20420,7 +20372,7 @@
   "obs": "Se resulta à vítima, em razão de maus tratos ou da natureza da detenção, grave sofrimento físico ou moral. 2-8 anos reclusão"
  },
  {
-  "id": 1351,
+  "id": 1350,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 225, §3º",
   "crime": "Sequestro ou cárcere privado — Se, pela razão do parágrafo anterior, resulta morte",
@@ -20436,7 +20388,7 @@
   "obs": "Se, pela razão do parágrafo anterior, resulta morte. 12-30 anos reclusão"
  },
  {
-  "id": 1352,
+  "id": 1351,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 226, caput",
   "crime": "Violação de domicílio",
@@ -20452,7 +20404,7 @@
   "obs": "Entrar ou permanecer, clandestina ou astuciosamente, ou contra a vontade expressa ou tácita de quem de direito, em casa. até 3 meses detenção"
  },
  {
-  "id": 1353,
+  "id": 1352,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 226, §1º",
   "crime": "Violação de domicílio — Se o crime é cometido durante o repouso noturno, ou com emprêgo de violência ou de arma, ou mediante arrombamento, ou po",
@@ -20468,7 +20420,7 @@
   "obs": "Se o crime é cometido durante o repouso noturno, ou com emprêgo de violência ou de arma, ou mediante arrombamento, ou po. 6-24 meses detenção"
  },
  {
-  "id": 1354,
+  "id": 1353,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 227, caput",
   "crime": "Violação de correspondência",
@@ -20484,7 +20436,7 @@
   "obs": "Devassar indevidamente o conteúdo de correspondência privada dirigida a outrem. até 6 meses detenção"
  },
  {
-  "id": 1355,
+  "id": 1354,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 227, §3º",
   "crime": "Violação de correspondência — Se o agente comete o crime com abuso de função, em serviço postal, telegráfico, radioelétrico ou telefônico",
@@ -20500,7 +20452,7 @@
   "obs": "Se o agente comete o crime com abuso de função, em serviço postal, telegráfico, radioelétrico ou telefônico. 1-3 anos detenção"
  },
  {
-  "id": 1356,
+  "id": 1355,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 228, caput",
   "crime": "Divulgação de segrêdo",
@@ -20516,7 +20468,7 @@
   "obs": "Divulgar, sem justa causa, conteúdo de documento particular sigiloso ou de correspondência confidencial, de que é detent. até 6 meses detenção"
  },
  {
-  "id": 1357,
+  "id": 1356,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 229, caput",
   "crime": "Violação de recato",
@@ -20532,7 +20484,7 @@
   "obs": "Violar, mediante processo técnico o direito ao recato pessoal ou o direito ao resguardo das palavras que não forem pronu. até 1 anos detenção"
  },
  {
-  "id": 1358,
+  "id": 1357,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 230, caput",
   "crime": "Violação de segrêdo profissional",
@@ -20548,7 +20500,7 @@
   "obs": "Revelar, sem justa causa, segrêdo de que tem ciência, em razão de função ou profissão, exercida em local sob administraç. 3-12 meses detenção"
  },
  {
-  "id": 1359,
+  "id": 1358,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 232, §1º",
   "crime": "Estupro — Se da conduta resulta lesão de natureza grave, ou se a vítima é menor de 18 e maior de 14 anos",
@@ -20564,7 +20516,7 @@
   "obs": "Se da conduta resulta lesão de natureza grave, ou se a vítima é menor de 18 e maior de 14 anos. 8-12 anos reclusão"
  },
  {
-  "id": 1360,
+  "id": 1359,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 232, §2º",
   "crime": "Estupro — Se da conduta resulta morte",
@@ -20580,7 +20532,7 @@
   "obs": "Se da conduta resulta morte. 12-30 anos reclusão"
  },
  {
-  "id": 1361,
+  "id": 1360,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 232, §3º",
   "crime": "Estupro — Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prát",
@@ -20596,7 +20548,7 @@
   "obs": "Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prát. 8-15 anos reclusão"
  },
  {
-  "id": 1362,
+  "id": 1361,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 234, caput",
   "crime": "Corrupção de menores",
@@ -20612,7 +20564,7 @@
   "obs": "Induzir alguém menor de 14 anos a satisfazer a lascívia de outrem. 2-5 anos reclusão"
  },
  {
-  "id": 1363,
+  "id": 1362,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 235, caput",
   "crime": "Praticar, ou permitir o militar que com ele se pratique, ato libidinoso em lugar sujeito à administração militar ou no e",
@@ -20628,7 +20580,7 @@
   "obs": "Praticar, ou permitir o militar que com ele se pratique, ato libidinoso em lugar sujeito à administração militar ou no e. 6-12 meses detenção"
  },
  {
-  "id": 1364,
+  "id": 1363,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 238, caput",
   "crime": "Ato obsceno",
@@ -20644,7 +20596,7 @@
   "obs": "Praticar ato obsceno em lugar sujeito à administração militar. 3-12 meses detenção"
  },
  {
-  "id": 1365,
+  "id": 1364,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 239, caput",
   "crime": "Escrito ou objeto obsceno",
@@ -20660,7 +20612,7 @@
   "obs": "Produzir, distribuir, vender, expor à venda, exibir, adquirir ou ter em depósito para o fim de venda, distribuição ou ex. 6-24 meses detenção"
  },
  {
-  "id": 1366,
+  "id": 1365,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 240, §4º",
   "crime": "Furto simples — Se o furto é praticado durante a noite",
@@ -20676,7 +20628,7 @@
   "obs": "Se o furto é praticado durante a noite. 2-8 anos reclusão"
  },
  {
-  "id": 1367,
+  "id": 1366,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 240, §5º",
   "crime": "Furto simples — Se a coisa furtada pertence à Fazenda Pública",
@@ -20692,7 +20644,7 @@
   "obs": "Se a coisa furtada pertence à Fazenda Pública. 2-6 anos reclusão"
  },
  {
-  "id": 1368,
+  "id": 1367,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 240, §6º",
   "crime": "Furto simples — Se o furto é praticado",
@@ -20708,7 +20660,7 @@
   "obs": "Se o furto é praticado. 3-10 anos reclusão"
  },
  {
-  "id": 1369,
+  "id": 1368,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 242, caput",
   "crime": "Roubo simples",
@@ -20724,7 +20676,7 @@
   "obs": "Subtrair coisa alheia móvel, para si ou para outrem, mediante emprêgo ou ameaça de emprêgo de violência contra pessoa, o. 4-15 anos reclusão"
  },
  {
-  "id": 1370,
+  "id": 1369,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 243, caput",
   "crime": "Extorsão simples",
@@ -20740,7 +20692,7 @@
   "obs": "Obter para si ou para outrem indevida vantagem econômica, constrangendo alguém, mediante violência ou grave ameaça. 4-15 anos reclusão"
  },
  {
-  "id": 1371,
+  "id": 1370,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 244, caput",
   "crime": "Extorsão mediante seqüestro",
@@ -20756,7 +20708,7 @@
   "obs": "Extorquir ou tentar extorquir para si ou para outrem, mediante seqüestro de pessoa, indevida vantagem econômica. 6-15 anos reclusão"
  },
  {
-  "id": 1372,
+  "id": 1371,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 245, caput",
   "crime": "Chantagem",
@@ -20772,7 +20724,7 @@
   "obs": "Obter ou tentar obter de alguém, para si ou para outrem, indevida vantagem econômica, mediante a ameaça de revelar fato,. 3-10 anos reclusão"
  },
  {
-  "id": 1373,
+  "id": 1372,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 246, caput",
   "crime": "Extorsão indireta",
@@ -20788,7 +20740,7 @@
   "obs": "Obter de alguém, como garantia de dívida, abusando de sua premente necessidade, documento que pode dar causa a procedime. até 3 anos reclusão"
  },
  {
-  "id": 1374,
+  "id": 1373,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 249, caput",
   "crime": "Apropriação de coisa havida acidentalmente",
@@ -20804,7 +20756,7 @@
   "obs": "Apropriar-se alguém de coisa alheia vinda ao seu poder por êrro, caso fortuito ou fôrça da natureza. até 1 anos detenção"
  },
  {
-  "id": 1375,
+  "id": 1374,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 252, caput",
   "crime": "Abuso de pessoa",
@@ -20820,7 +20772,7 @@
   "obs": "Abusar, em proveito próprio ou alheio, no exercício de função, em unidade, repartição ou estabelecimento militar, da nec. 2-6 anos reclusão"
  },
  {
-  "id": 1376,
+  "id": 1375,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 254, caput",
   "crime": "Receptação",
@@ -20836,7 +20788,7 @@
   "obs": "Adquirir, receber ou ocultar em proveito próprio ou alheio, coisa proveniente de crime, ou influir para que terceiro, de. até 5 anos reclusão"
  },
  {
-  "id": 1377,
+  "id": 1376,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 254, §2º",
   "crime": "Receptação — Se a coisa é arma, munição, explosivo ou outro material militar de uso restrito ou que contenha sinal indicativo de pert",
@@ -20852,7 +20804,7 @@
   "obs": "Se a coisa é arma, munição, explosivo ou outro material militar de uso restrito ou que contenha sinal indicativo de pert. 3-10 anos reclusão"
  },
  {
-  "id": 1378,
+  "id": 1377,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 255, caput",
   "crime": "Receptação culposa",
@@ -20868,7 +20820,7 @@
   "obs": "Adquirir ou receber coisa que, por sua natureza ou pela manifesta desproporção entre o valor e o preço, ou pela condição. até 1 anos detenção"
  },
  {
-  "id": 1379,
+  "id": 1378,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 257, caput",
   "crime": "Alteração de limites",
@@ -20884,7 +20836,7 @@
   "obs": "Suprimir ou deslocar tapume, marco ou qualquer outro sinal indicativo de linha divisória, para apropriar-se, no todo ou. até 6 meses detenção"
  },
  {
-  "id": 1380,
+  "id": 1379,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 258, caput",
   "crime": "Aposição, supressão ou alteração de marca",
@@ -20900,7 +20852,7 @@
   "obs": "Apor, suprimir ou alterar, indevidamente, em gado ou rebanho alheio, sob guarda ou administração militar, marca ou sinal. 6-36 meses detenção"
  },
  {
-  "id": 1381,
+  "id": 1380,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 259, caput",
   "crime": "Dano simples",
@@ -20916,7 +20868,7 @@
   "obs": "Destruir, inutilizar, deteriorar ou fazer desaparecer coisa alheia. até 6 meses detenção"
  },
  {
-  "id": 1382,
+  "id": 1381,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 259, par. único",
   "crime": "Dano simples — Se se trata de bem público",
@@ -20932,7 +20884,7 @@
   "obs": "Se se trata de bem público. 6-36 meses detenção"
  },
  {
-  "id": 1383,
+  "id": 1382,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 261, caput",
   "crime": "Dano qualificada",
@@ -20948,7 +20900,7 @@
   "obs": "Se o dano é cometido. até 4 anos reclusão"
  },
  {
-  "id": 1384,
+  "id": 1383,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 263, caput",
   "crime": "Dano em navio de guerra ou mercante em serviço militar",
@@ -20964,7 +20916,7 @@
   "obs": "Causar a perda, destruição, inutilização, encalhe, colisão ou alagamento de navio de guerra ou de navio mercante em serv. 3-10 anos reclusão"
  },
  {
-  "id": 1385,
+  "id": 1384,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 264, caput",
   "crime": "Praticar dano",
@@ -20980,7 +20932,7 @@
   "obs": "Praticar dano. 2-10 anos reclusão"
  },
  {
-  "id": 1386,
+  "id": 1385,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 265, caput",
   "crime": "Desaparecimento, consunção ou extravio",
@@ -20996,7 +20948,7 @@
   "obs": "Fazer desaparecer, consumir ou extraviar combustível, armamento, munição ou peças de equipamento de navio, de aeronave o. até 3 anos reclusão"
  },
  {
-  "id": 1387,
+  "id": 1386,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 267, caput",
   "crime": "Usura pecuniária",
@@ -21012,7 +20964,7 @@
   "obs": "Obter ou estipular, para si ou para outrem, no contrato de mútuo de dinheiro, abusando da premente necessidade, inexperi. 6-24 meses detenção"
  },
  {
-  "id": 1388,
+  "id": 1387,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 268, caput",
   "crime": "Incêndio",
@@ -21028,7 +20980,7 @@
   "obs": "Causar incêndio em lugar sujeito à administração militar, expondo a perigo a vida, a integridade física ou o patrimônio. 3-8 anos reclusão"
  },
  {
-  "id": 1389,
+  "id": 1388,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 268, §2º",
   "crime": "Incêndio — Se culposo o incêndio",
@@ -21044,7 +20996,7 @@
   "obs": "Se culposo o incêndio. 6-24 meses detenção"
  },
  {
-  "id": 1390,
+  "id": 1389,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 269, caput",
   "crime": "Explosão",
@@ -21060,7 +21012,7 @@
   "obs": "Causar ou tentar causar explosão, em lugar sujeito à administração militar, expondo a perigo a vida, a integridade ou o. até 4 anos reclusão"
  },
  {
-  "id": 1391,
+  "id": 1390,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 269, §1º",
   "crime": "Explosão — Se a substância utilizada é dinamite ou outra de efeitos análogos",
@@ -21076,7 +21028,7 @@
   "obs": "Se a substância utilizada é dinamite ou outra de efeitos análogos. 3-8 anos reclusão"
  },
  {
-  "id": 1392,
+  "id": 1391,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 269, §3º",
   "crime": "Explosão — Se a explosão é causada pelo desencadeamento de energia nuclear",
@@ -21092,7 +21044,7 @@
   "obs": "Se a explosão é causada pelo desencadeamento de energia nuclear. 5-20 anos reclusão"
  },
  {
-  "id": 1393,
+  "id": 1392,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 270, caput",
   "crime": "Emprêgo de gás tóxico ou asfixiante",
@@ -21108,7 +21060,7 @@
   "obs": "Expor a perigo a vida, a integridade física ou o patrimônio de outrem, em lugar sujeito à administração militar, usando. até 5 anos reclusão"
  },
  {
-  "id": 1394,
+  "id": 1393,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 270, par. único",
   "crime": "Emprêgo de gás tóxico ou asfixiante — Se o crime é culposo",
@@ -21124,7 +21076,7 @@
   "obs": "Se o crime é culposo. 6-24 meses detenção"
  },
  {
-  "id": 1395,
+  "id": 1394,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 271, caput",
   "crime": "Abuso de radiação",
@@ -21140,7 +21092,7 @@
   "obs": "Expor a perigo a vida ou a integridade física de outrem, em lugar sujeito à administração militar, pelo abuso de radiaçã. até 4 anos reclusão"
  },
  {
-  "id": 1396,
+  "id": 1395,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 271, par. único",
   "crime": "Abuso de radiação — Se o crime é culposo",
@@ -21156,7 +21108,7 @@
   "obs": "Se o crime é culposo. 6-24 meses detenção"
  },
  {
-  "id": 1397,
+  "id": 1396,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 272, caput",
   "crime": "Inundação",
@@ -21172,7 +21124,7 @@
   "obs": "Causar inundação, em lugar sujeito à administração militar, expondo a perigo a vida, a integridade física ou o patrimôni. 3-8 anos reclusão"
  },
  {
-  "id": 1398,
+  "id": 1397,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 272, par. único",
   "crime": "Inundação — Se o crime é culposo",
@@ -21188,7 +21140,7 @@
   "obs": "Se o crime é culposo. 6-24 meses detenção"
  },
  {
-  "id": 1399,
+  "id": 1398,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 273, caput",
   "crime": "Perigo de inundação",
@@ -21204,7 +21156,7 @@
   "obs": "Remover, destruir ou inutilizar obstáculo natural ou obra destinada a impedir inundação, expondo a perigo a vida, a inte. 2-4 anos reclusão"
  },
  {
-  "id": 1400,
+  "id": 1399,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 274, caput",
   "crime": "Desabamento ou desmoronamento",
@@ -21220,7 +21172,7 @@
   "obs": "Causar desabamento ou desmoronamento, em lugar sujeito à administração militar, expondo a perigo a vida, a integridade f. até 5 anos reclusão"
  },
  {
-  "id": 1401,
+  "id": 1400,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 274, par. único",
   "crime": "Desabamento ou desmoronamento — Se o crime é culposo",
@@ -21236,7 +21188,7 @@
   "obs": "Se o crime é culposo. 6-24 meses detenção"
  },
  {
-  "id": 1402,
+  "id": 1401,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 275, caput",
   "crime": "Subtração, ocultação ou inutilização de material de socorro",
@@ -21252,7 +21204,7 @@
   "obs": "Subtrair, ocultar ou inutilizar, por ocasião de incêndio, inundação, naufrágio, ou outro desastre ou calamidade, aparelh. 3-6 anos reclusão"
  },
  {
-  "id": 1403,
+  "id": 1402,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 276, caput",
   "crime": "Fatos que expõem a perigo aparelhamento militar",
@@ -21268,7 +21220,7 @@
   "obs": "Praticar qualquer dos fatos previstos nos artigos anteriores dêste capítulo, expondo a perigo, embora em lugar não sujei. 2-6 anos reclusão"
  },
  {
-  "id": 1404,
+  "id": 1403,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 276, par. único",
   "crime": "Fatos que expõem a perigo aparelhamento militar — Se o crime é culposo",
@@ -21284,7 +21236,7 @@
   "obs": "Se o crime é culposo. 6-24 meses detenção"
  },
  {
-  "id": 1405,
+  "id": 1404,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 278, caput",
   "crime": "Difusão de epizootia ou praga vegetal",
@@ -21300,7 +21252,7 @@
   "obs": "Difundir doença ou praga que possa causar dano a floresta, plantação, pastagem ou animais de utilidade econômica ou mili. até 3 anos reclusão"
  },
  {
-  "id": 1406,
+  "id": 1405,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 279, caput",
   "crime": "Embriaguez ao volante",
@@ -21316,7 +21268,7 @@
   "obs": "Dirigir veículo motorizado, sob administração militar na via pública, encontrando-se em estado de embriaguez, por bebida. 3-12 meses detenção"
  },
  {
-  "id": 1407,
+  "id": 1406,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 280, caput",
   "crime": "Perigo resultante de violação de regra de trânsito",
@@ -21332,7 +21284,7 @@
   "obs": "Violar regra de regulamento de trânsito, dirigindo veículo sob administração militar, expondo a efetivo e grave perigo a. até 6 meses detenção"
  },
  {
-  "id": 1408,
+  "id": 1407,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 282, §1º",
   "crime": "Perigo de desastre ferroviário — Se do fato resulta desastre",
@@ -21348,7 +21300,7 @@
   "obs": "Se do fato resulta desastre. 4-12 anos reclusão"
  },
  {
-  "id": 1409,
+  "id": 1408,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 282, §2º",
   "crime": "Perigo de desastre ferroviário — Se o agente quis causar o desastre ou assumiu o risco de produzi-lo",
@@ -21364,7 +21316,7 @@
   "obs": "Se o agente quis causar o desastre ou assumiu o risco de produzi-lo. 4-15 anos reclusão"
  },
  {
-  "id": 1410,
+  "id": 1409,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 282, §3º",
   "crime": "Perigo de desastre ferroviário — No caso de culpa, ocorrendo desastre",
@@ -21380,7 +21332,7 @@
   "obs": "No caso de culpa, ocorrendo desastre. 6-24 meses detenção"
  },
  {
-  "id": 1411,
+  "id": 1410,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 283, §1º",
   "crime": "Atentado contra transporte — Se do fato resulta naufrágio, submersão ou encalhe do navio, ou a queda ou destruição da aeronave",
@@ -21396,7 +21348,7 @@
   "obs": "Se do fato resulta naufrágio, submersão ou encalhe do navio, ou a queda ou destruição da aeronave. 4-12 anos reclusão"
  },
  {
-  "id": 1412,
+  "id": 1411,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 283, §2º",
   "crime": "Atentado contra transporte — No caso de culpa, se ocorre o sinistro",
@@ -21412,7 +21364,7 @@
   "obs": "No caso de culpa, se ocorre o sinistro. 6-24 meses detenção"
  },
  {
-  "id": 1413,
+  "id": 1412,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 284, caput",
   "crime": "Atentado contra viatura ou outro meio de transporte",
@@ -21428,7 +21380,7 @@
   "obs": "Expor a perigo viatura ou outro meio de transporte militar, ou sob guarda, proteção ou requisição militar emanada de ord. até 3 anos reclusão"
  },
  {
-  "id": 1414,
+  "id": 1413,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 284, §2º",
   "crime": "Atentado contra viatura ou outro meio de transporte — No caso de culpa, se ocorre desastre",
@@ -21444,7 +21396,7 @@
   "obs": "No caso de culpa, se ocorre desastre. até 1 anos detenção"
  },
  {
-  "id": 1415,
+  "id": 1414,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 286, caput",
   "crime": "Arremêsso de projétil",
@@ -21460,7 +21412,7 @@
   "obs": "Arremessar projétil contra veículo militar, em movimento, destinado a transporte por terra, por água ou pelo ar. até 6 meses detenção"
  },
  {
-  "id": 1416,
+  "id": 1415,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 287, caput",
   "crime": "Atentado contra serviço de utilidade militar",
@@ -21476,7 +21428,7 @@
   "obs": "Atentar contra a segurança ou o funcionamento de serviço de água, luz, fôrça ou acesso, ou qualquer outro de utilidade,. até 5 anos reclusão"
  },
  {
-  "id": 1417,
+  "id": 1416,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 288, caput",
   "crime": "Interromper, perturbar ou dificultar serviço telegráfico, telefônico, telemétrico, de televisão, telepercepção, sinaliza",
@@ -21492,7 +21444,7 @@
   "obs": "Interromper, perturbar ou dificultar serviço telegráfico, telefônico, telemétrico, de televisão, telepercepção, sinaliza. 1-3 anos detenção"
  },
  {
-  "id": 1418,
+  "id": 1417,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 290, §2º",
   "crime": "Se o agente é farmacêutico, médico, dentista ou veterinário",
@@ -21508,7 +21460,7 @@
   "obs": "Se o agente é farmacêutico, médico, dentista ou veterinário. 2-8 anos reclusão"
  },
  {
-  "id": 1419,
+  "id": 1418,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 292, caput",
   "crime": "Epidemia",
@@ -21524,7 +21476,7 @@
   "obs": "Causar epidemia, em lugar sujeito à administração militar, mediante propagação de germes patogênicos. 5-15 anos reclusão"
  },
  {
-  "id": 1420,
+  "id": 1419,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 293, §2º",
   "crime": "Envenenamento com perigo extensivo — Se resulta a morte de alguém",
@@ -21540,7 +21492,7 @@
   "obs": "Se resulta a morte de alguém. 15-30 anos reclusão"
  },
  {
-  "id": 1421,
+  "id": 1420,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 294, caput",
   "crime": "Corrupção ou poluição de água potável",
@@ -21556,7 +21508,7 @@
   "obs": "Corromper ou poluir água potável de uso de quartel, fortaleza, unidade, navio, aeronave ou estabelecimento militar, ou d. 2-5 anos reclusão"
  },
  {
-  "id": 1422,
+  "id": 1421,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 294, par. único",
   "crime": "Corrupção ou poluição de água potável — Se o crime é culposo",
@@ -21572,7 +21524,7 @@
   "obs": "Se o crime é culposo. 2-12 meses detenção"
  },
  {
-  "id": 1423,
+  "id": 1422,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 295, caput",
   "crime": "Fornecimento de substância nociva",
@@ -21588,7 +21540,7 @@
   "obs": "Fornecer às fôrças armadas substância alimentícia ou medicinal corrompida, adulterada ou falsificada, tornada, assim, no. 2-6 anos reclusão"
  },
  {
-  "id": 1424,
+  "id": 1423,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 295, par. único",
   "crime": "Fornecimento de substância nociva — Se o crime é culposo",
@@ -21604,7 +21556,7 @@
   "obs": "Se o crime é culposo. 6-24 meses detenção"
  },
  {
-  "id": 1425,
+  "id": 1424,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 296, par. único",
   "crime": "Se o crime é culposo",
@@ -21620,7 +21572,7 @@
   "obs": "Se o crime é culposo. até 6 meses detenção"
  },
  {
-  "id": 1426,
+  "id": 1425,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 297, caput",
   "crime": "Omissão de notificação de doença",
@@ -21636,7 +21588,7 @@
   "obs": "Deixar o médico militar, no exercício da função, de denunciar à autoridade pública doença cuja notificação é compulsória. 6-24 meses detenção"
  },
  {
-  "id": 1427,
+  "id": 1426,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 300, caput",
   "crime": "Desacatar servidor público no exercício de função ou em razão dela, em lugar sujeito à administração militar",
@@ -21652,7 +21604,7 @@
   "obs": "Desacatar servidor público no exercício de função ou em razão dela, em lugar sujeito à administração militar. 6-24 meses detenção"
  },
  {
-  "id": 1428,
+  "id": 1427,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 301, caput",
   "crime": "Desobediência",
@@ -21668,7 +21620,7 @@
   "obs": "Desobedecer a ordem legal de autoridade militar. até 6 meses detenção"
  },
  {
-  "id": 1429,
+  "id": 1428,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 303, caput",
   "crime": "Peculato",
@@ -21684,7 +21636,7 @@
   "obs": "Apropriar-se de dinheiro, valor ou qualquer outro bem móvel, público ou particular, de que tem a posse ou detenção, em r. 3-15 anos reclusão"
  },
  {
-  "id": 1430,
+  "id": 1429,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 303, §3º",
   "crime": "Peculato — Se o servidor público ou o militar contribui culposamente para que outrem subtraia ou desvie o dinheiro, valor ou bem, o",
@@ -21700,7 +21652,7 @@
   "obs": "Se o servidor público ou o militar contribui culposamente para que outrem subtraia ou desvie o dinheiro, valor ou bem, o. 3-12 meses detenção"
  },
  {
-  "id": 1431,
+  "id": 1430,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 304, caput",
   "crime": "Peculato mediante aproveitamento do êrro de outrem",
@@ -21716,7 +21668,7 @@
   "obs": "Apropriar-se de dinheiro ou qualquer utilidade que, no exercício do cargo ou comissão, recebeu por êrro de outrem. 2-7 anos reclusão"
  },
  {
-  "id": 1432,
+  "id": 1431,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 305, caput",
   "crime": "Concussão",
@@ -21732,7 +21684,7 @@
   "obs": "Exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão de. 2-8 anos reclusão"
  },
  {
-  "id": 1433,
+  "id": 1432,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 306, caput",
   "crime": "Excesso de exação",
@@ -21748,7 +21700,7 @@
   "obs": "Exigir impôsto, taxa ou emolumento que sabe indevido, ou, quando devido, empregar na cobrança meio vexatório ou gravoso,. 6-24 meses detenção"
  },
  {
-  "id": 1434,
+  "id": 1433,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 307, caput",
   "crime": "Desvio",
@@ -21764,7 +21716,7 @@
   "obs": "Desviar, em proveito próprio ou de outrem, o que recebeu indevidamente, em razão do cargo ou função, para recolher aos c. 2-12 anos reclusão"
  },
  {
-  "id": 1435,
+  "id": 1434,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 308, caput",
   "crime": "Corrupção passiva",
@@ -21780,7 +21732,7 @@
   "obs": "Solicitar ou receber, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, m. 2-12 anos reclusão"
  },
  {
-  "id": 1436,
+  "id": 1435,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 308, §2º",
   "crime": "Corrupção passiva — Se o agente pratica, deixa de praticar ou retarda o ato de ofício com infração de dever funcional, cedendo a pedido ou i",
@@ -21796,7 +21748,7 @@
   "obs": "Se o agente pratica, deixa de praticar ou retarda o ato de ofício com infração de dever funcional, cedendo a pedido ou i. 3-12 meses detenção"
  },
  {
-  "id": 1437,
+  "id": 1436,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 310, caput",
   "crime": "Participação ilícita",
@@ -21812,7 +21764,7 @@
   "obs": "Participar, de modo ostensivo ou simulado, diretamente ou por interposta pessoa, em contrato, fornecimento, ou concessão. 2-4 anos reclusão"
  },
  {
-  "id": 1438,
+  "id": 1437,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 313, caput",
   "crime": "Cheque sem fundos",
@@ -21828,7 +21780,7 @@
   "obs": "Emitir cheque sem suficiente provisão de fundos em poder do sacado, se a emissão é feita de militar em favor de militar,. até 5 anos reclusão"
  },
  {
-  "id": 1439,
+  "id": 1438,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 314, caput",
   "crime": "Certidão ou atestado ideológicamente falso",
@@ -21844,7 +21796,7 @@
   "obs": "Atestar ou certificar falsamente, em razão de função, ou profissão, fato ou circunstância que habilite alguém a obter ca. até 2 anos detenção"
  },
  {
-  "id": 1440,
+  "id": 1439,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 315, caput",
   "crime": "Uso de documento falso",
@@ -21860,7 +21812,7 @@
   "obs": "Uso de documento falso: pena a cominada à falsificação ou à alteração (arts. 311-313; reclusão de 2 a 6 anos)"
  },
  {
-  "id": 1441,
+  "id": 1440,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 316, caput",
   "crime": "Supressão de documento",
@@ -21876,7 +21828,7 @@
   "obs": "Destruir, suprimir ou ocultar, em benefício próprio ou de outrem, ou em prejuízo alheio, documento verdadeiro, de que nã. 2-6 anos reclusão"
  },
  {
-  "id": 1442,
+  "id": 1441,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 317, caput",
   "crime": "Uso de documento pessoal alheio",
@@ -21892,7 +21844,7 @@
   "obs": "Usar, como próprio, documento de identidade alheia, ou de qualquer licença ou privilégio em favor de outrem, ou ceder a. até 6 meses detenção"
  },
  {
-  "id": 1443,
+  "id": 1442,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 318, caput",
   "crime": "Falsa identidade",
@@ -21908,7 +21860,7 @@
   "obs": "Atribuir-se, ou a terceiro, perante a administração militar, falsa identidade, para obter vantagem em proveito próprio o. 3-12 meses detenção"
  },
  {
-  "id": 1444,
+  "id": 1443,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 319, caput",
   "crime": "Prevaricação",
@@ -21924,7 +21876,7 @@
   "obs": "Retardar ou deixar de praticar, indevidamente, ato de ofício, ou praticá-lo contra expressa disposição de lei, para sati. 6-24 meses detenção"
  },
  {
-  "id": 1445,
+  "id": 1444,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 320, caput",
   "crime": "Violação do dever funcional com o fim de lucro",
@@ -21940,7 +21892,7 @@
   "obs": "Violar, em qualquer negócio de que tenha sido incumbido pela administração militar, seu dever funcional para obter espec. 2-8 anos reclusão"
  },
  {
-  "id": 1446,
+  "id": 1445,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 321, caput",
   "crime": "Extravio, sonegação ou inutilização de livro ou documento",
@@ -21956,7 +21908,7 @@
   "obs": "Extraviar livro oficial, ou qualquer documento, de que tem a guarda em razão do cargo, sonegá-lo ou inutilizá-lo, total. 2-6 anos reclusão"
  },
  {
-  "id": 1447,
+  "id": 1446,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 322, caput",
   "crime": "Condescendência criminosa",
@@ -21972,7 +21924,7 @@
   "obs": "Deixar de responsabilizar subordinado que comete infração no exercício do cargo, ou, quando lhe falte competência, não l. até 6 meses detenção"
  },
  {
-  "id": 1448,
+  "id": 1447,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 323, caput",
   "crime": "Não inclusão de nome em lista",
@@ -21988,7 +21940,7 @@
   "obs": "Deixar, no exercício de função, de incluir, por negligência, qualquer nome em relação ou lista para o efeito de alistame. até 6 meses detenção"
  },
  {
-  "id": 1449,
+  "id": 1448,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 324, caput",
   "crime": "Inobservância de lei, regulamento ou instrução",
@@ -22004,7 +21956,7 @@
   "obs": "Deixar, no exercício de função, de observar lei, regulamento ou instrução, dando causa direta à prática de ato prejudici. 1-3 anos detenção"
  },
  {
-  "id": 1450,
+  "id": 1449,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 325, caput",
   "crime": "Devassar indevidamente o conteúdo de correspondência dirigida à administração militar, ou por esta expedida",
@@ -22020,7 +21972,7 @@
   "obs": "Devassar indevidamente o conteúdo de correspondência dirigida à administração militar, ou por esta expedida. 2-6 meses detenção"
  },
  {
-  "id": 1451,
+  "id": 1450,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 326, caput",
   "crime": "Violação de sigilo funcional",
@@ -22036,7 +21988,7 @@
   "obs": "Revelar fato de que tem ciência em razão do cargo ou função e que deva permanecer em segrêdo, ou facilitar-lhe a revelaç. 6-24 meses detenção"
  },
  {
-  "id": 1452,
+  "id": 1451,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 326, §2º",
   "crime": "Violação de sigilo funcional — Se da ação ou omissão resulta dano à administração militar ou a outrem",
@@ -22052,7 +22004,7 @@
   "obs": "Se da ação ou omissão resulta dano à administração militar ou a outrem. 2-6 anos reclusão"
  },
  {
-  "id": 1453,
+  "id": 1452,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 327, caput",
   "crime": "Violação de sigilo de proposta de concorrência",
@@ -22068,7 +22020,7 @@
   "obs": "Devassar o sigilo de proposta de concorrência de interêsse da administração militar ou proporcionar a terceiro o ensejo. 3-12 meses detenção"
  },
  {
-  "id": 1454,
+  "id": 1453,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 328, caput",
   "crime": "Impedir, perturbar ou fraudar a realização de hasta pública, concorrência ou tomada de preços, de interêsse da administr",
@@ -22084,7 +22036,7 @@
   "obs": "Impedir, perturbar ou fraudar a realização de hasta pública, concorrência ou tomada de preços, de interêsse da administr. 6-24 meses detenção"
  },
  {
-  "id": 1455,
+  "id": 1454,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 329, caput",
   "crime": "Exercício funcional ilegal",
@@ -22100,7 +22052,7 @@
   "obs": "Entrar no exercício de pôsto ou função militar, ou de cargo ou função em repartição militar, antes de satisfeitas as exi. até 4 meses detenção"
  },
  {
-  "id": 1456,
+  "id": 1455,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 330, caput",
   "crime": "A bandono de cargo",
@@ -22116,7 +22068,7 @@
   "obs": "Abandonar cargo público, em repartição ou estabelecimento militar. até 2 meses detenção"
  },
  {
-  "id": 1457,
+  "id": 1456,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 330, §1º",
   "crime": "A bandono de cargo — Se do fato resulta prejuízo à administração militar",
@@ -22132,7 +22084,7 @@
   "obs": "Se do fato resulta prejuízo à administração militar. 3-12 meses detenção"
  },
  {
-  "id": 1458,
+  "id": 1457,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 330, §2º",
   "crime": "A bandono de cargo — Se o fato ocorre em lugar compreendido na faixa de fronteira",
@@ -22148,7 +22100,7 @@
   "obs": "Se o fato ocorre em lugar compreendido na faixa de fronteira. 1-3 anos detenção"
  },
  {
-  "id": 1459,
+  "id": 1458,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 331, caput",
   "crime": "Aplicação ilegal de verba ou dinheiro",
@@ -22164,7 +22116,7 @@
   "obs": "Dar às verbas ou ao dinheiro público aplicação diversa da estabelecida em lei. até 6 meses detenção"
  },
  {
-  "id": 1460,
+  "id": 1459,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 332, caput",
   "crime": "Abuso de confiança ou boa-fé",
@@ -22180,7 +22132,7 @@
   "obs": "Abusar da confiança ou da boa-fé de militar ou de servidor público, em serviço ou em razão deste, apresentando-lhe ou re. 6-24 meses detenção"
  },
  {
-  "id": 1461,
+  "id": 1460,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 332, §2º",
   "crime": "Abuso de confiança ou boa-fé — Se a apresentação ou remessa decorre de culpa",
@@ -22196,7 +22148,7 @@
   "obs": "Se a apresentação ou remessa decorre de culpa. até 6 meses detenção"
  },
  {
-  "id": 1462,
+  "id": 1461,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 333, caput",
   "crime": "Violência arbitrária",
@@ -22212,7 +22164,7 @@
   "obs": "Praticar violência, em repartição ou estabelecimento militar, no exercício de função ou a pretexto de exercê-la. 6-24 meses detenção"
  },
  {
-  "id": 1463,
+  "id": 1462,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 334, caput",
   "crime": "Patrocínio indébito",
@@ -22228,7 +22180,7 @@
   "obs": "Patrocinar, direta ou indiretamente, interesse privado perante a administração militar, valendo-se da qualidade de servi. até 3 meses detenção"
  },
  {
-  "id": 1464,
+  "id": 1463,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 334, par. único",
   "crime": "Patrocínio indébito — Se o interêsse é ilegítimo",
@@ -22244,7 +22196,7 @@
   "obs": "Se o interêsse é ilegítimo. 3-12 meses detenção"
  },
  {
-  "id": 1465,
+  "id": 1464,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 335, caput",
   "crime": "Usurpação de função",
@@ -22260,7 +22212,7 @@
   "obs": "Usurpar o exercício de função em repartição ou estabelecimento militar. 3-24 meses detenção"
  },
  {
-  "id": 1466,
+  "id": 1465,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 335, par. único",
   "crime": "Usurpação de função — Se do fato o agente aufere vantagem",
@@ -22276,7 +22228,7 @@
   "obs": "Se do fato o agente aufere vantagem. 2-5 anos reclusão"
  },
  {
-  "id": 1467,
+  "id": 1466,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 336, caput",
   "crime": "Tráfico de influência",
@@ -22292,7 +22244,7 @@
   "obs": "Solicitar, exigir, cobrar ou obter, para si ou para outrem, vantagem ou promessa de vantagem, a pretexto de influir em a. 2-5 anos reclusão"
  },
  {
-  "id": 1468,
+  "id": 1467,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 337, caput",
   "crime": "Subtração ou inutilização de livro, processo ou documento",
@@ -22308,7 +22260,7 @@
   "obs": "Subtrair ou inutilizar, total ou parcialmente, livro oficial, processo ou qualquer documento, desde que o fato atente co. 2-5 anos reclusão"
  },
  {
-  "id": 1469,
+  "id": 1468,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 338, caput",
   "crime": "Inutilização de edital ou de sinal oficial",
@@ -22324,7 +22276,7 @@
   "obs": "Rasgar, ou de qualquer forma inutilizar ou conspurcar edital afixado por ordem da autoridade militar; violar ou inutiliz. até 1 anos detenção"
  },
  {
-  "id": 1470,
+  "id": 1469,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 339, caput",
   "crime": "Impedimento, perturbação ou fraude de concorrência",
@@ -22340,7 +22292,7 @@
   "obs": "Impedir, perturbar ou fraudar em prejuízo da Fazenda Nacional, concorrência, hasta pública ou tomada de preços ou outro. 1-3 anos detenção"
  },
  {
-  "id": 1471,
+  "id": 1470,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 340, caput",
   "crime": "Recusa de função na Justiça Militar",
@@ -22356,7 +22308,7 @@
   "obs": "Recusar-se o militar a exercer, sem motivo legal, função que lhe seja atribuída na administração da Justiça Militar. 1-2 anos detenção"
  },
  {
-  "id": 1472,
+  "id": 1471,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 341, caput",
   "crime": "Desacato",
@@ -22372,7 +22324,7 @@
   "obs": "Desacatar autoridade judiciária militar no exercício da função ou em razão dela. até 4 anos reclusão"
  },
  {
-  "id": 1473,
+  "id": 1472,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 342, caput",
   "crime": "Coação",
@@ -22388,7 +22340,7 @@
   "obs": "Usar de violência ou grave ameaça, com o fim de favorecer interêsse próprio ou alheio, contra autoridade, parte, ou qual. até 4 anos reclusão"
  },
  {
-  "id": 1474,
+  "id": 1473,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 343, caput",
   "crime": "Denunciação caluniosa",
@@ -22404,7 +22356,7 @@
   "obs": "Dar causa à instauração de inquérito policial ou processo judicial militar contra alguém, imputando-lhe crime sujeito à. 2-8 anos reclusão"
  },
  {
-  "id": 1475,
+  "id": 1474,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 344, caput",
   "crime": "Comunicação falsa de crime",
@@ -22420,7 +22372,7 @@
   "obs": "Provocar a ação da autoridade, comunicando-lhe a ocorrência de crime sujeito à jurisdição militar, que sabe não se ter v. até 6 meses detenção"
  },
  {
-  "id": 1476,
+  "id": 1475,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 345, caput",
   "crime": "Auto-acusação falsa",
@@ -22436,7 +22388,7 @@
   "obs": "Acusar-se, perante a autoridade, de crime sujeito à jurisdição militar, inexistente ou praticado por outrem. 3-12 meses detenção"
  },
  {
-  "id": 1477,
+  "id": 1476,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 346, caput",
   "crime": "Falso testemunho ou falsa perícia",
@@ -22452,7 +22404,7 @@
   "obs": "Fazer afirmação falsa, ou negar ou calar a verdade, como testemunha, perito, tradutor ou intérprete, em inquérito polici. 2-6 anos reclusão"
  },
  {
-  "id": 1478,
+  "id": 1477,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 347, caput",
   "crime": "Corrupção ativa de testemunha, perito ou intérprete",
@@ -22468,7 +22420,7 @@
   "obs": "Dar, oferecer ou prometer dinheiro ou qualquer outra vantagem a testemunha, perito, tradutor ou intérprete, para fazer a. 2-8 anos reclusão"
  },
  {
-  "id": 1479,
+  "id": 1478,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 348, caput",
   "crime": "Publicidade opressiva",
@@ -22484,7 +22436,7 @@
   "obs": "Fazer pela imprensa, rádio ou televisão, antes da intercorrência de decisão definitiva em processo penal militar, coment. até 6 meses detenção"
  },
  {
-  "id": 1480,
+  "id": 1479,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 349, caput",
   "crime": "Desobediência a decisão judicial",
@@ -22500,7 +22452,7 @@
   "obs": "Deixar, sem justa causa, de cumprir decisão da Justiça Militar, ou retardar ou fraudar o seu cumprimento. 3-12 meses detenção"
  },
  {
-  "id": 1481,
+  "id": 1480,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 350, caput",
   "crime": "Favorecimento pessoal",
@@ -22516,7 +22468,7 @@
   "obs": "Auxiliar a subtrair-se à ação da autoridade autor de crime militar, a que é cominada pena de morte ou reclusão. até 6 meses detenção"
  },
  {
-  "id": 1482,
+  "id": 1481,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 350, §1º",
   "crime": "Favorecimento pessoal — Se ao crime é cominada pena de detenção ou de impedimento",
@@ -22532,7 +22484,7 @@
   "obs": "Se ao crime é cominada pena de detenção ou de impedimento. até 3 meses detenção"
  },
  {
-  "id": 1483,
+  "id": 1482,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 351, caput",
   "crime": "Favorecimento real",
@@ -22548,7 +22500,7 @@
   "obs": "Prestar a criminoso, fora dos casos de co-autoria ou de receptação, auxílio destinado a tornar seguro o proveito do crim. 3-12 meses detenção"
  },
  {
-  "id": 1484,
+  "id": 1483,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 352, caput",
   "crime": "Inutilização, sonegação ou descaminho de material probante",
@@ -22564,7 +22516,7 @@
   "obs": "Inutilizar, total ou parcialmente, sonegar ou dar descaminho a autos, documento ou objeto de valor probante, que tem sob. 6-36 meses detenção"
  },
  {
-  "id": 1485,
+  "id": 1484,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 352, par. único",
   "crime": "Inutilização, sonegação ou descaminho de material probante — Se a inutilização ou o descaminho resulta de ação ou omissão culposa",
@@ -22580,7 +22532,7 @@
   "obs": "Se a inutilização ou o descaminho resulta de ação ou omissão culposa. até 6 meses detenção"
  },
  {
-  "id": 1486,
+  "id": 1485,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 353, caput",
   "crime": "Exploração de prestígio",
@@ -22596,7 +22548,7 @@
   "obs": "Solicitar ou receber dinheiro ou qualquer outra utilidade, a pretexto de influir em juiz, órgão do Ministério Público, s. até 5 anos reclusão"
  },
  {
-  "id": 1487,
+  "id": 1486,
   "lei": "CPM (DL 1.001/69)",
   "artigo": "Art. 354, caput",
   "crime": "Exercer função, atividade, direito, autoridade ou múnus, de que foi suspenso ou privado por decisão da Justiça Militar",
@@ -22610,5 +22562,1029 @@
   "violencia": "Não",
   "grave_ameaca": "Não",
   "obs": "Exercer função, atividade, direito, autoridade ou múnus, de que foi suspenso ou privado por decisão da Justiça Militar. 3-24 meses detenção"
+ },
+ {
+  "id": 1487,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 357, caput",
+  "crime": "Tentativa contra a soberania do Brasil",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar o nacional o crime definido no art. 142. 20-30 anos reclusão"
+ },
+ {
+  "id": 1488,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 358, caput",
+  "crime": "Coação a comandante",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Sim",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Entrar o nacional em conluio, usar de violência ou ameaça, provocar tumulto ou desordem com o fim de obrigar o comandant. 20-30 anos reclusão"
+ },
+ {
+  "id": 1489,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 359, caput",
+  "crime": "Informação ou auxílio ao inimigo",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Prestar o nacional ao inimigo informação ou auxílio que lhe possa facilitar a ação militar. 20-30 anos reclusão"
+ },
+ {
+  "id": 1490,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 360, caput",
+  "crime": "Aliciação de militar",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Aliciar o nacional algum militar a passar-se para o inimigo ou prestar-lhe auxílio para êsse fim. 20-30 anos reclusão"
+ },
+ {
+  "id": 1491,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 361, caput",
+  "crime": "Ato prejudicial à eficiência da tropa",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Provocar o nacional, em presença do inimigo, a debandada de tropa, ou guarnição, impedir a reunião de uma ou outra ou ca. 20-30 anos reclusão"
+ },
+ {
+  "id": 1492,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 362, caput",
+  "crime": "Traição imprópria",
+  "pena_min": 120,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar o estrangeiro os crimes previstos nos arts. 356, ns. I, primeira parte, II, III e IV, 357 a 361. 10-30 anos reclusão"
+ },
+ {
+  "id": 1493,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 363, caput",
+  "crime": "Cobardia",
+  "pena_min": 24,
+  "pena_max": 96,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Subtrair-se ou tentar subtrair-se o militar, por temor, em presença do inimigo, ao cumprimento do dever militar. 2-8 anos reclusão"
+ },
+ {
+  "id": 1494,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 366, caput",
+  "crime": "Espionagem",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar qualquer dos crimes previstos nos arts. 143 e seu § 1°, 144 e seus §§ 1º e 2º, e 146, em favor do inimigo ou co. 20-30 anos reclusão"
+ },
+ {
+  "id": 1495,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 366, par. único",
+  "crime": "Espionagem — No caso de concurso por culpa, para execução do crime previsto no art. 143, § 2º, ou de revelação culposa",
+  "pena_min": 36,
+  "pena_max": 72,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "No caso de concurso por culpa, para execução do crime previsto no art. 143, § 2º, ou de revelação culposa. 3-6 anos reclusão"
+ },
+ {
+  "id": 1496,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 367, caput",
+  "crime": "Penetração de estrangeiro",
+  "pena_min": 120,
+  "pena_max": 240,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Entrar o estrangeiro em território nacional, ou insinuar-se em fôrça ou unidade em operações de guerra, ainda que fora d. 10-20 anos reclusão"
+ },
+ {
+  "id": 1497,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 368, caput",
+  "crime": "Motim, revolta ou conspiração",
+  "pena_min": 180,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar qualquer dos crimes definidos nos arts. 149 e seu parágrafo único, e 152. 15-30 anos reclusão"
+ },
+ {
+  "id": 1498,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 368, par. único",
+  "crime": "Motim, revolta ou conspiração — Se o fato é praticado em presença do inimigo",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Se o fato é praticado em presença do inimigo. 20-30 anos reclusão"
+ },
+ {
+  "id": 1499,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 369, caput",
+  "crime": "Omissão de lealdade militar",
+  "pena_min": 48,
+  "pena_max": 144,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Praticar o crime previsto no artigo 151. 4-12 anos reclusão"
+ },
+ {
+  "id": 1500,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 370, caput",
+  "crime": "Incitamento",
+  "pena_min": 36,
+  "pena_max": 120,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Incitar militar à desobediência, à indisciplina ou à prática de crime militar. 3-10 anos reclusão"
+ },
+ {
+  "id": 1501,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 371, caput",
+  "crime": "Incitamento em presença do inimigo",
+  "pena_min": 120,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar qualquer dos crimes previstos no art. 370 e seu parágrafo, em presença do inimigo. 10-30 anos reclusão"
+ },
+ {
+  "id": 1502,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 372, caput",
+  "crime": "Rendição ou capitulação",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Render-se o comandante, sem ter esgotado os recursos extremos de ação militar; ou, em caso de capitulação, não se conduz. 20-30 anos reclusão"
+ },
+ {
+  "id": 1503,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 373, caput",
+  "crime": "Omissão de vigilância",
+  "pena_min": 12,
+  "pena_max": 36,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Deixar-se o comandante surpreender pelo inimigo. 1-3 anos detenção"
+ },
+ {
+  "id": 1504,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 373, par. único",
+  "crime": "Omissão de vigilância — Se o fato compromete as operações militares",
+  "pena_min": 60,
+  "pena_max": 240,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Se o fato compromete as operações militares. 5-20 anos reclusão"
+ },
+ {
+  "id": 1505,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 374, caput",
+  "crime": "Descumprimento do dever militar",
+  "pena_min": 0,
+  "pena_max": 60,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Deixar, em presença do inimigo, de conduzir-se de acôrdo com o dever militar. até 5 anos reclusão"
+ },
+ {
+  "id": 1506,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 375, caput",
+  "crime": "Falta de cumprimento de ordem",
+  "pena_min": 24,
+  "pena_max": 96,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Dar causa, por falta de cumprimento de ordem, à ação militar do inimigo. 2-8 anos reclusão"
+ },
+ {
+  "id": 1507,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 375, par. único",
+  "crime": "Falta de cumprimento de ordem — Se o fato expõe a perigo fôrça, posição ou outros elementos de ação militar",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Se o fato expõe a perigo fôrça, posição ou outros elementos de ação militar. 20-30 anos reclusão"
+ },
+ {
+  "id": 1508,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 376, caput",
+  "crime": "Entrega ou abandono culposo",
+  "pena_min": 120,
+  "pena_max": 360,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Dar causa, por culpa, ao abandono ou à entrega ao inimigo de posição, navio, aeronave, engenho de guerra, provisões, ou. 10-30 anos reclusão"
+ },
+ {
+  "id": 1509,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 377, caput",
+  "crime": "Captura ou sacrifício culposo",
+  "pena_min": 120,
+  "pena_max": 360,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Dar causa, por culpa, ao sacrifício ou captura de fôrça sob o seu comando. 10-30 anos reclusão"
+ },
+ {
+  "id": 1510,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 379, caput",
+  "crime": "Abandono de comboio",
+  "pena_min": 24,
+  "pena_max": 96,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Abandonar comboio, cuja escolta lhe tenha sido confiada. 2-8 anos reclusão"
+ },
+ {
+  "id": 1511,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 379, §1º",
+  "crime": "Abandono de comboio — Se do fato resulta avaria grave, ou perda total ou parcial do comboio",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Se do fato resulta avaria grave, ou perda total ou parcial do comboio. 20-30 anos reclusão"
+ },
+ {
+  "id": 1512,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 379, §2º",
+  "crime": "Abandono de comboio — Separar-se, por culpa, do comboio ou da escolta",
+  "pena_min": 0,
+  "pena_max": 48,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Separar-se, por culpa, do comboio ou da escolta. até 4 anos reclusão"
+ },
+ {
+  "id": 1513,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 380, caput",
+  "crime": "Separação culposa de comando",
+  "pena_min": 0,
+  "pena_max": 48,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Permanecer o oficial, por culpa, separado do comando superior. até 4 anos reclusão"
+ },
+ {
+  "id": 1514,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 381, caput",
+  "crime": "Tolerância culposa",
+  "pena_min": 0,
+  "pena_max": 48,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Deixar, por culpa, evadir-se prisioneiro. até 4 anos reclusão"
+ },
+ {
+  "id": 1515,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 382, caput",
+  "crime": "Entendimento com o inimigo",
+  "pena_min": 0,
+  "pena_max": 36,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Entrar o militar, sem autorização, em entendimento com outro militar ou emissário de país inimigo, ou servir, para êsse. até 3 anos reclusão"
+ },
+ {
+  "id": 1516,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 383, par. único",
+  "crime": "Dano especial — Se o crime é culposo",
+  "pena_min": 48,
+  "pena_max": 120,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Se o crime é culposo. 4-10 anos detenção"
+ },
+ {
+  "id": 1517,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 384, caput",
+  "crime": "Dano em bens de interêsse militar",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Danificar serviço de abastecimento de água, luz ou fôrça, estrada, meio de transporte, instalação telegráfica ou outro m. 20-30 anos reclusão"
+ },
+ {
+  "id": 1518,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 385, par. único",
+  "crime": "Envenenamento, corrupção ou epidemia — Se o crime é culposo",
+  "pena_min": 24,
+  "pena_max": 96,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Se o crime é culposo. 2-8 anos detenção"
+ },
+ {
+  "id": 1519,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 386, caput",
+  "crime": "Crimes de perigo comum",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar crime de perigo comum definido nos arts. 268 a 276 e 278, na modalidade dolosa. 20-30 anos reclusão"
+ },
+ {
+  "id": 1520,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 387, caput",
+  "crime": "Recusa de obediência ou oposição",
+  "pena_min": 120,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar, em presença do inimigo, qualquer dos crimes definidos nos arts. 163 e 164. 10-30 anos reclusão"
+ },
+ {
+  "id": 1521,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 388, caput",
+  "crime": "Coação contra oficial general ou comandante",
+  "pena_min": 60,
+  "pena_max": 180,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Sim",
+  "obs": "Exercer coação contra oficial general ou comandante da unidade, mesmo que não seja superior, com o fim de impedir-lhe o. 5-15 anos reclusão"
+ },
+ {
+  "id": 1522,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 389, caput",
+  "crime": "Violência contra superior ou militar de serviço",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar qualquer dos crimes definidos nos arts. 157 e 158, a que esteja cominada, no máximo, reclusão, de trinta anos. 20-30 anos reclusão"
+ },
+ {
+  "id": 1523,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 389, par. único",
+  "crime": "Violência contra superior ou militar de serviço — Se ao crime não é cominada, no máximo, reclusão de trinta anos, mas é praticado com arma e em presen",
+  "pena_min": 180,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Se ao crime não é cominada, no máximo, reclusão de trinta anos, mas é praticado com arma e em presença do inimigo. 15-30 anos reclusão"
+ },
+ {
+  "id": 1524,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 390, caput",
+  "crime": "Abandono de pôsto",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar, em presença do inimigo, crime de abandono de pôsto, definido no art. 195. 20-30 anos reclusão"
+ },
+ {
+  "id": 1525,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 391, caput",
+  "crime": "Deserção",
+  "pena_min": 9,
+  "pena_max": 36,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Deserção especial em tempo de guerra: pena a cominada à deserção (art. 187) com aumento de metade"
+ },
+ {
+  "id": 1526,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 392, caput",
+  "crime": "Deserção em presença do inimigo",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Desertar em presença do inimigo. 20-30 anos reclusão"
+ },
+ {
+  "id": 1527,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 393, caput",
+  "crime": "Falta de apresentação",
+  "pena_min": 12,
+  "pena_max": 72,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Deixar o convocado, no caso de mobilização total ou parcial, de apresentar-se, dentro do prazo marcado, no centro de mob. 1-6 anos detenção"
+ },
+ {
+  "id": 1528,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 394, caput",
+  "crime": "Libertação de prisioneiro",
+  "pena_min": 180,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Promover ou facilitar a libertação de prisioneiro de guerra sob guarda ou custódia de fôrça nacional ou aliada. 15-30 anos reclusão"
+ },
+ {
+  "id": 1529,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 395, caput",
+  "crime": "Evasão de prisioneiro",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Evadir-se prisioneiro de guerra e voltar a tomar armas contra o Brasil ou Estado aliado. 20-30 anos reclusão"
+ },
+ {
+  "id": 1530,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 396, caput",
+  "crime": "Amotinamento de prisioneiros",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Amotinarem-se prisioneiros em presença do inimigo. 20-30 anos reclusão"
+ },
+ {
+  "id": 1531,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 397, caput",
+  "crime": "Favorecimento culposo",
+  "pena_min": 24,
+  "pena_max": 48,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Culposo",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Contribuir culposamente para que alguém pratique crime que favoreça o inimigo. 2-4 anos reclusão"
+ },
+ {
+  "id": 1532,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 398, caput",
+  "crime": "Prolongamento de hostilidades",
+  "pena_min": 24,
+  "pena_max": 120,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Prolongar o comandante as hostilidades, depois de oficialmente saber celebrada a paz ou ajustado o armistício. 2-10 anos reclusão"
+ },
+ {
+  "id": 1533,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 399, caput",
+  "crime": "Ordem arbritária",
+  "pena_min": 0,
+  "pena_max": 36,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Ordenar o comandante contribuição de guerra, sem autorização, ou excedendo os limites desta. até 3 anos reclusão"
+ },
+ {
+  "id": 1534,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 400, caput",
+  "crime": "Homicídio simples",
+  "pena_min": 144,
+  "pena_max": 360,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Praticar homicídio, em presença do inimigo. 12-30 anos reclusão"
+ },
+ {
+  "id": 1535,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 400, III",
+  "crime": "Homicídio simples — no caso do § 2° do art. 205",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. no caso do § 2° do art. 205. 20-30 anos reclusão"
+ },
+ {
+  "id": 1536,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 401, caput",
+  "crime": "Genocídio",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar, em zona militarmente ocupada, o crime previsto no art. 208. 20-30 anos reclusão"
+ },
+ {
+  "id": 1537,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 402, caput",
+  "crime": "Casos assimilados",
+  "pena_min": 72,
+  "pena_max": 288,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Praticar, com o mesmo fim e na zona referida no artigo anterior, qualquer dos atos previstos nos ns. I, II, III, IV ou V. 6-24 anos reclusão"
+ },
+ {
+  "id": 1538,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 403, caput",
+  "crime": "Lesão leve",
+  "pena_min": 6,
+  "pena_max": 24,
+  "tipo_pena": "Detenção",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Praticar, em presença do inimigo, crime definido no art. 209. 6-24 meses detenção"
+ },
+ {
+  "id": 1539,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 403, §1º",
+  "crime": "Lesão leve — No caso do § 1° do art. 209",
+  "pena_min": 48,
+  "pena_max": 120,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "No caso do § 1° do art. 209. 4-10 anos reclusão"
+ },
+ {
+  "id": 1540,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 403, §2º",
+  "crime": "Lesão leve — No caso do § 2º do art. 209",
+  "pena_min": 72,
+  "pena_max": 180,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "No caso do § 2º do art. 209. 6-15 anos reclusão"
+ },
+ {
+  "id": 1541,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 403, §3º",
+  "crime": "Lesão leve — No caso do § 3º do art. 209",
+  "pena_min": 96,
+  "pena_max": 240,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "No caso do § 3º do art. 209. 8-20 anos reclusão"
+ },
+ {
+  "id": 1542,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 404, caput",
+  "crime": "Furto",
+  "pena_min": 0,
+  "pena_max": 144,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Furto em tempo de guerra: reclusão no dobro da cominada para o furto em tempo de paz (art. 240, até 6 anos)"
+ },
+ {
+  "id": 1543,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 405, caput",
+  "crime": "Roubo ou extorsão",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Sim",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Pena: morte no grau máximo se cominada reclusão de 30 anos; reclusão no grau mínimo (roubo/extorsão em tempo de guerra)"
+ },
+ {
+  "id": 1544,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 406, caput",
+  "crime": "Saque",
+  "pena_min": 240,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. Praticar o saque em zona de operações militares ou em território militarmente ocupado. 20-30 anos reclusão"
+ },
+ {
+  "id": 1545,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 407, caput",
+  "crime": "Rapto",
+  "pena_min": 24,
+  "pena_max": 48,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Sim",
+  "obs": "Raptar mulher honesta, mediante violência ou grave ameaça, para fim libidinoso, em lugar de efetivas operações militares. 2-4 anos reclusão"
+ },
+ {
+  "id": 1546,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 407, §1º",
+  "crime": "Rapto — Se da violência resulta lesão grave",
+  "pena_min": 72,
+  "pena_max": 120,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Se da violência resulta lesão grave. 6-10 anos reclusão"
+ },
+ {
+  "id": 1547,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 407, §2º",
+  "crime": "Rapto — Se resulta morte",
+  "pena_min": 144,
+  "pena_max": 360,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Não",
+  "grave_ameaca": "Não",
+  "obs": "Se resulta morte. 12-30 anos reclusão"
+ },
+ {
+  "id": 1548,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 408, caput",
+  "crime": "Violência carnal",
+  "pena_min": 48,
+  "pena_max": 144,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Praticar qualquer dos crimes de violência carnal definidos nos arts. 232 e 233, em lugar de efetivas operações militares. 4-12 anos reclusão"
+ },
+ {
+  "id": 1549,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 408, par. único",
+  "crime": "Violência carnal — Se da violência resulta",
+  "pena_min": 96,
+  "pena_max": 240,
+  "tipo_pena": "Reclusão",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Se da violência resulta. 8-20 anos reclusão"
+ },
+ {
+  "id": 1550,
+  "lei": "CPM (DL 1.001/69)",
+  "artigo": "Art. 408, par. único, b)",
+  "crime": "Violência carnal — morte",
+  "pena_min": 180,
+  "pena_max": 360,
+  "tipo_pena": "Morte",
+  "acao": "Pública Incondicionada",
+  "hediondo": "Não",
+  "elemento": "Doloso",
+  "tentativa": "Sim",
+  "violencia": "Sim",
+  "grave_ameaca": "Não",
+  "obs": "Pena de morte no grau máximo (fuzilamento, art. 56 do CPM, tempo de guerra); reclusão no grau mínimo. morte. 15-30 anos reclusão"
  }
 ]

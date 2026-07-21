@@ -21,12 +21,14 @@ _spec = importlib.util.spec_from_file_location("inv", RAIZ / "scripts" / "invent
 inv = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(inv)
 
-RE_ART = re.compile(r"^\s*Art\.?\s*(\d+)")
+# "Art  . 190" (espaços antes do ponto) ocorre no compilado do CPM.
+RE_ART = re.compile(r"^\s*Art\s*\.?\s*(\d+)")
 # § seguido do número e, opcionalmente, de sufixo letrado "-A" (o CPM usa
 # "§ 2º-A" para os parágrafos inseridos por leis posteriores).
 RE_PAR = re.compile(r"^\s*§\s*(\d+)\s*[ºo°]?\s*(-[A-Z])?")
 RE_PAR_UNICO = re.compile(r"^\s*Par[áa]grafo\s+[úu]nico", re.IGNORECASE)
 RE_INC = re.compile(r"^\s*([IVXLC]+)\s*[-–]\s")
+RE_ALINEA = re.compile(r"^\s*([a-z])\)\s")
 UNID = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "três": 3, "tres": 3,
         "quatro": 4, "cinco": 5, "seis": 6, "sete": 7, "oito": 8, "nove": 9}
 DEZ = {"dez": 10, "onze": 11, "doze": 12, "treze": 13, "catorze": 14,
@@ -101,6 +103,7 @@ def _clausula(linha: str) -> str:
     t = re.sub(r"^\s*§\s*\d+\s*[ºo°]?\s*(?:-[A-Z])?\s*\.?\s*", "", t)
     t = re.sub(r"^\s*Par[áa]grafo\s+[úu]nico[.\-\s]*", "", t)
     t = re.sub(r"^\s*[IVXLC]+\s*[-–]\s*", "", t)
+    t = re.sub(r"^\s*[a-z]\)\s*", "", t)
     t = re.sub(r"\s*\([^)]*\)", "", t)          # (Redação...), (um)
     t = re.split(r"\bPena\b", t)[0]
     t = t.rstrip(" :;.-–—")
@@ -143,6 +146,9 @@ def extrair(cache: Path, lo: int, hi: int):
             disp_desc = _clausula(l); inciso = None
         elif (mi := RE_INC.match(l)):
             inciso = mi.group(1)
+            inc_desc = _clausula(l)
+        elif (ma := RE_ALINEA.match(l)):
+            inciso = f"{ma.group(1)})"
             inc_desc = _clausula(l)
         if art and lo <= art <= hi and inv.RE_PENA.search(l):
             mn, mx, tp = parse_pena(l)

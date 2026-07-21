@@ -29,3 +29,16 @@ Ponto de partida do acervo: os diplomas inteiros que saíram de vigência, regis
 | Falências (antiga) | Decreto-Lei nº 7.661, de 21 de junho de 1945 | revogado — Lei nº 11.101/2005 |
 | Estatuto do Estrangeiro | Lei nº 6.815, de 19 de agosto de 1980 | revogado — Lei nº 13.445/2017, art. 124, I |
 
+## Casos já identificados para o acervo
+
+Dispositivos que saíram de vigência, foram alterados ou nunca vigoraram, encontrados durante a conferência do catálogo. São a semente do acervo — cada um receberá, na v1.3.0, uma entrada com o texto original e o histórico.
+
+| Dispositivo | Categoria | O que houve |
+|---|---|---|
+| Lei 9.807/99, art. 19 (revelação de identidade de testemunha protegida) | vetado | Vetado na sanção da lei; nunca vigorou. O catálogo chegou a ter um registro indevido (id 1038), removido na v1.1.2. |
+| CP, art. 240 (adultério) | revogado | Revogado pela Lei 11.106/2005. |
+| CP, art. 217 (sedução) | revogado | Revogado pela Lei 12.015/2009. |
+| CP, arts. 219 a 222 (rapto) | revogado | Revogados pela Lei 12.015/2009. |
+| ECA, art. 233 (tortura de criança) | revogado | Revogado pela Lei 9.455/1997 (Lei de Tortura). |
+| LCP, arts. 60 e 61 (mendicância e importunação ofensiva) | revogado | Revogados pelas Leis 11.983/2009 e 13.718/2018. |
+
