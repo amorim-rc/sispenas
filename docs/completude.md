@@ -17,7 +17,7 @@ Este acompanhamento é derivado de `data/diplomas.json` (o denominador, Fase 1 d
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1162** |
+| Tipos penais catalogados | **1190** |
 | Preceitos secundários vigentes (denominador) | **1172** |
 | Diplomas vigentes inventariados | 63 |
 | — com coleta | 62 |
@@ -33,42 +33,42 @@ para dimensionar lacunas, não como percentual exato.
 
 | Diploma | Preceitos vigentes | Tipos coletados | Situação |
 |---|---:|---:|---|
-| [Código Penal — Parte Especial](#código-penal--parte-especial) | 337 | 551 | 🔶 em coleta |
+| [Código Penal — Parte Especial](#código-penal--parte-especial) | 337 | 565 | 🔶 em coleta |
 | [Código Penal Militar — Parte Especial](#código-penal-militar--parte-especial) | 351 | 69 | 🔶 em coleta |
 | [Lei das Contravenções Penais](#lei-das-contravenções-penais) | 47 | 57 | ✅ completo (conferido na v1.1.2) |
 | [Código Eleitoral](#código-eleitoral) | 61 | 56 | 🔶 em coleta |
-| [Crimes contra o meio ambiente](#crimes-contra-o-meio-ambiente) | 40 | 51 | 🔶 em coleta |
+| [Crimes contra o meio ambiente](#crimes-contra-o-meio-ambiente) | 40 | 53 | 🔶 em coleta |
 | [Estatuto da Criança e do Adolescente (crimes)](#estatuto-da-criança-e-do-adolescente-crimes) | 26 | 37 | 🔶 em coleta |
-| [Abuso de autoridade](#abuso-de-autoridade) | 25 | 23 | 🔶 em coleta |
+| [Abuso de autoridade](#abuso-de-autoridade) | 25 | 24 | 🔶 em coleta |
 | [Crimes contra o sistema financeiro nacional](#crimes-contra-o-sistema-financeiro-nacional) | 23 | 23 | 🔶 em coleta |
 | [Lei de Drogas](#lei-de-drogas) | 10 | 19 | 🔶 em coleta |
-| [Crimes de preconceito (racismo)](#crimes-de-preconceito-racismo) | 17 | 16 | 🔶 em coleta |
+| [Crimes de preconceito (racismo)](#crimes-de-preconceito-racismo) | 17 | 17 | 🔶 em coleta |
+| [Estatuto da Pessoa Idosa (crimes)](#estatuto-da-pessoa-idosa-crimes) | 16 | 16 | 🔶 em coleta |
 | [Código de Trânsito Brasileiro (crimes de trânsito)](#código-de-trânsito-brasileiro-crimes-de-trânsito) | 12 | 16 | 🔶 em coleta |
 | [Crimes contra a ordem tributária, econômica e relações de consumo](#crimes-contra-a-ordem-tributária-econômica-e-relações-de-consumo) | 6 | 16 | 🔶 em coleta |
-| [Estatuto da Pessoa Idosa (crimes)](#estatuto-da-pessoa-idosa-crimes) | 16 | 14 | 🔶 em coleta |
+| [Código de Defesa do Consumidor (infrações penais)](#código-de-defesa-do-consumidor-infrações-penais) | 14 | 14 | 🔶 em coleta |
 | [Loterias (contravenções)](#loterias-contravenções) | 13 | 13 | 🔶 em coleta |
-| [Código de Defesa do Consumidor (infrações penais)](#código-de-defesa-do-consumidor-infrações-penais) | 14 | 12 | 🔶 em coleta |
 | [Propriedade industrial (crimes)](#propriedade-industrial-crimes) | 12 | 12 | ✅ completo (conferido na v1.1.2) |
 | [Estatuto do Desarmamento](#estatuto-do-desarmamento) | 7 | 12 | 🔶 em coleta |
+| [Transplante de órgãos (crimes)](#transplante-de-órgãos-crimes) | 12 | 11 | 🔶 em coleta |
 | [Lei de Falências (crimes falimentares)](#lei-de-falências-crimes-falimentares) | 11 | 11 | 🔶 em coleta |
 | [Lei Geral do Esporte (crimes)](#lei-geral-do-esporte-crimes) | 11 | 11 | 🔶 em coleta |
 | [Lei das Eleições (crimes)](#lei-das-eleições-crimes) | 10 | 11 | 🔶 em coleta |
-| [Transplante de órgãos (crimes)](#transplante-de-órgãos-crimes) | 12 | 10 | 🔶 em coleta |
-| [Organizações criminosas](#organizações-criminosas) | 7 | 9 | 🔶 em coleta |
 | [Genocídio](#genocídio) | 3 | 9 | 🔶 em coleta |
 | [Atividades nucleares (crimes)](#atividades-nucleares-crimes) | 8 | 8 | 🔶 em coleta |
+| [Organizações criminosas](#organizações-criminosas) | 7 | 8 | 🔶 em coleta |
+| [Estatuto da Pessoa com Deficiência (crimes)](#estatuto-da-pessoa-com-deficiência-crimes) | 8 | 7 | 🔶 em coleta |
 | [Serviços postais (crimes)](#serviços-postais-crimes) | 7 | 7 | 🔶 em coleta |
 | [Contravenções de preconceito](#contravenções-de-preconceito) | 7 | 7 | 🔶 em coleta |
 | [Lei de Biossegurança (crimes)](#lei-de-biossegurança-crimes) | 6 | 6 | 🔶 em coleta |
 | [Transporte de eleitores (crimes)](#transporte-de-eleitores-crimes) | 5 | 5 | 🔶 em coleta |
 | [Tortura](#tortura) | 4 | 5 | 🔶 em coleta |
 | [Antiterrorismo](#antiterrorismo) | 4 | 5 | 🔶 em coleta |
-| [Estatuto da Pessoa com Deficiência (crimes)](#estatuto-da-pessoa-com-deficiência-crimes) | 8 | 4 | 🔶 em coleta |
 | [Planejamento familiar (crimes)](#planejamento-familiar-crimes) | 4 | 4 | 🔶 em coleta |
+| [Crimes contra a economia popular](#crimes-contra-a-economia-popular) | 3 | 4 | 🔶 em coleta |
+| [Parcelamento do solo urbano (crimes)](#parcelamento-do-solo-urbano-crimes) | 3 | 4 | 🔶 em coleta |
 | [Lavagem de dinheiro](#lavagem-de-dinheiro) | 1 | 4 | 🔶 em coleta |
-| [Crimes contra a economia popular](#crimes-contra-a-economia-popular) | 3 | 3 | 🔶 em coleta |
 | [Mercado de valores mobiliários (crimes)](#mercado-de-valores-mobiliários-crimes) | 3 | 3 | 🔶 em coleta |
-| [Parcelamento do solo urbano (crimes)](#parcelamento-do-solo-urbano-crimes) | 3 | 3 | 🔶 em coleta |
 | [Estatuto do Índio (crimes)](#estatuto-do-índio-crimes) | 3 | 3 | 🔶 em coleta |
 | [Programas de computador (crimes)](#programas-de-computador-crimes) | 2 | 3 | 🔶 em coleta |
 | [Práticas discriminatórias no trabalho](#práticas-discriminatórias-no-trabalho) | 1 | 3 | 🔶 em coleta |
@@ -77,10 +77,10 @@ para dimensionar lacunas, não como percentual exato.
 | [Comissões Parlamentares de Inquérito (crimes)](#comissões-parlamentares-de-inquérito-crimes) | 2 | 2 | 🔶 em coleta |
 | [Lei Henry Borel](#lei-henry-borel) | 2 | 2 | 🔶 em coleta |
 | [Agrotóxicos (crimes)](#agrotóxicos-crimes) | 2 | 2 | 🔶 em coleta |
+| [Interceptação telefônica (crimes)](#interceptação-telefônica-crimes) | 2 | 2 | 🔶 em coleta |
 | [Crimes de prefeitos e vereadores](#crimes-de-prefeitos-e-vereadores) | 2 | 2 | 🔶 em coleta |
 | [Direito agrário (crimes)](#direito-agrário-crimes) | 2 | 2 | 🔶 em coleta |
 | [Lei de Migração (crime do art. 232-A)](#lei-de-migração-crime-do-art-232-a) | 1 | 2 | 🔶 em coleta |
-| [Interceptação telefônica (crimes)](#interceptação-telefônica-crimes) | 2 | 1 | 🔶 em coleta |
 | [Condomínios e incorporações (crimes)](#condomínios-e-incorporações-crimes) | 2 | 1 | 🔶 em coleta |
 | [Lei Maria da Penha (crime do art. 24-A)](#lei-maria-da-penha-crime-do-art-24-a) | 1 | 1 | 🔶 em coleta |
 | [Lei Geral de Telecomunicações (crime do art. 183)](#lei-geral-de-telecomunicações-crime-do-art-183) | 1 | 1 | 🔶 em coleta |
@@ -133,7 +133,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 
 ### Código Penal — Parte Especial
 
-*Decreto-Lei nº 2.848, de 7 de dezembro de 1940* — 337 preceitos vigentes, 551 tipos coletados. 🔶 em coleta
+*Decreto-Lei nº 2.848, de 7 de dezembro de 1940* — 337 preceitos vigentes, 565 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
@@ -240,6 +240,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [62](/pesquisa/tipos?tipo=62) | Art. 136, §2º | Maus-tratos com resultado morte |
 | [866](/pesquisa/tipos?tipo=866) | Art. 136, §2º | Maus-tratos com resultado morte |
 | [63](/pesquisa/tipos?tipo=63) | Art. 136, §3º | Maus-tratos com aumento de 1/3 (contra menor de 14 anos) |
+| [1246](/pesquisa/tipos?tipo=1246) | Art. 137, caput | Rixa (participar de rixa, salvo para separar os contendores) |
 | [64](/pesquisa/tipos?tipo=64) | Art. 138, caput | Calúnia |
 | [847](/pesquisa/tipos?tipo=847) | Art. 138, §1º | Calúnia — quem sabendo falsa a imputação a propala ou divulga |
 | [848](/pesquisa/tipos?tipo=848) | Art. 138, §2º | Calúnia contra os mortos |
@@ -286,6 +287,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [709](/pesquisa/tipos?tipo=709) | Art. 151, §1º, II | Violação de comunicação telegráfica, radioelétrica ou telefônica |
 | [710](/pesquisa/tipos?tipo=710) | Art. 151, §1º, III | Impedir a comunicação telegráfica, radioelétrica ou telefônica |
 | [711](/pesquisa/tipos?tipo=711) | Art. 151, §1º, IV | Instalar ou utilizar estação ou aparelho radioelétrico sem autorização legal |
+| [1247](/pesquisa/tipos?tipo=1247) | Art. 152, caput | Abuso de correspondência comercial (abusar da condição de sócio ou empregado para desviar, sonegar, suprimir ou revelar correspondência) |
 | [85](/pesquisa/tipos?tipo=85) | Art. 153 | Divulgação de segredo |
 | [86](/pesquisa/tipos?tipo=86) | Art. 153, §1º-A | Divulgação de informações sigilosas da administração pública |
 | [87](/pesquisa/tipos?tipo=87) | Art. 154 | Violação do segredo profissional |
@@ -349,6 +351,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [123](/pesquisa/tipos?tipo=123) | Art. 161, caput | Alteração de limites (usurpação) |
 | [124](/pesquisa/tipos?tipo=124) | Art. 161, §1º, I | Usurpação de águas |
 | [125](/pesquisa/tipos?tipo=125) | Art. 161, §1º, II | Esbulho possessório |
+| [1248](/pesquisa/tipos?tipo=1248) | Art. 162, caput | Supressão ou alteração de marca em animais (em gado ou rebanho alheio) |
 | [126](/pesquisa/tipos?tipo=126) | Art. 163, caput | Dano simples |
 | [127](/pesquisa/tipos?tipo=127) | Art. 163, parágrafo único | Dano qualificado (violência/substância inflamável/patrimônio público/motivo egoístico) |
 | [659](/pesquisa/tipos?tipo=659) | Art. 163, §único, I | Dano qualificado com violência à pessoa ou grave ameaça |
@@ -381,7 +384,14 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [136](/pesquisa/tipos?tipo=136) | Art. 171, §5º | Estelionato contra idoso ou vulnerável (aumento de 1/3 ao dobro) |
 | [606](/pesquisa/tipos?tipo=606) | Art. 171-A (CP) | Fraude com utilização de ativos virtuais, valores mobiliários ou ativos financeiros (organizar/gerir/ofertar carteira/intermediação envolvendo ativos virtuais para obter vantagem ilícita) |
 | [607](/pesquisa/tipos?tipo=607) | Art. 171-A, §único (CP) | Fraude com ativos virtuais qualificada (se cometida por meio de operadora de valores mobiliários ou de prestadora de serviços de ativos virtuais) |
+| [1249](/pesquisa/tipos?tipo=1249) | Art. 172, caput | Duplicata simulada (emitir fatura, duplicata ou nota de venda que não corresponda à mercadoria vendida, em quantidade ou qualidade) |
+| [1250](/pesquisa/tipos?tipo=1250) | Art. 173, caput | Abuso de incapazes (abusar de necessidade, paixão ou inexperiência de menor, ou da alienação ou debilidade mental de outrem, induzindo à prática de ato prejudicial) |
+| [1251](/pesquisa/tipos?tipo=1251) | Art. 174, caput | Induzimento à especulação (abusar da inexperiência, simplicidade ou inferioridade mental de outrem, induzindo à prática de jogo, aposta ou especulação com títulos ou mercadorias) |
+| [1252](/pesquisa/tipos?tipo=1252) | Art. 175, caput | Fraude no comércio (enganar o adquirente ou consumidor, vendendo mercadoria falsificada ou deteriorada como verdadeira ou perfeita, ou entregando uma mercadoria por outra) |
 | [1070](/pesquisa/tipos?tipo=1070) | Art. 176 | Outras fraudes (tomar refeição/hospedar-se/transportar-se sem recursos) |
+| [1253](/pesquisa/tipos?tipo=1253) | Art. 177, caput | Fraudes e abusos na fundação ou administração de sociedade por ações (afirmação falsa em prospecto ou comunicação ao público) |
+| [1254](/pesquisa/tipos?tipo=1254) | Art. 178, caput | Emissão irregular de conhecimento de depósito ou warrant, em desacordo com disposição legal |
+| [1255](/pesquisa/tipos?tipo=1255) | Art. 179, caput | Fraude à execução (alienar, desviar, destruir ou danificar bens, ou simular dívidas, na pendência de processo de execução) |
 | [137](/pesquisa/tipos?tipo=137) | Art. 180, caput | Receptação simples |
 | [138](/pesquisa/tipos?tipo=138) | Art. 180, §1º | Receptação qualificada (atividade comercial/industrial) |
 | [651](/pesquisa/tipos?tipo=651) | Art. 180, §1º | Receptação qualificada (no exercício de atividade comercial ou industrial) |
@@ -449,12 +459,15 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [900](/pesquisa/tipos?tipo=900) | Art. 229 | Estabelecimento em que ocorra exploração sexual (manter casa de prostituição) |
 | [179](/pesquisa/tipos?tipo=179) | Art. 230 | Rufianismo |
 | [901](/pesquisa/tipos?tipo=901) | Art. 230 | Rufianismo (tirar proveito da prostituição alheia, participando diretamente de seus lucros ou fazendo-se sustentar por quem a exerça) |
+| [1256](/pesquisa/tipos?tipo=1256) | Art. 232-A, caput | Promoção de migração ilegal (promover, com fim de obter vantagem econômica, a entrada ilegal de estrangeiro no país ou de brasileiro em país estrangeiro) |
+| [1257](/pesquisa/tipos?tipo=1257) | Art. 233, caput | Ato obsceno (praticar ato obsceno em lugar público, ou aberto ou exposto ao público) |
 | [180](/pesquisa/tipos?tipo=180) | Art. 234 | Escrito ou objeto obsceno |
 | [181](/pesquisa/tipos?tipo=181) | Art. 235 | Bigamia |
 | [182](/pesquisa/tipos?tipo=182) | Art. 236 | Induzimento a erro essencial e ocultação de impedimento |
 | [183](/pesquisa/tipos?tipo=183) | Art. 237 | Conhecimento prévio de impedimento matrimonial |
 | [184](/pesquisa/tipos?tipo=184) | Art. 238 | Simulação de autoridade para celebração de casamento |
 | [185](/pesquisa/tipos?tipo=185) | Art. 239 | Simulação de casamento |
+| [1258](/pesquisa/tipos?tipo=1258) | Art. 241, caput | Registro de nascimento inexistente (promover no registro civil a inscrição de nascimento inexistente) |
 | [186](/pesquisa/tipos?tipo=186) | Art. 242 | Registro de nascimento falso (parto suposto / supressão / alteração de direito) |
 | [187](/pesquisa/tipos?tipo=187) | Art. 243 | Sonegação de estado de filiação |
 | [188](/pesquisa/tipos?tipo=188) | Art. 244 | Abandono material |
@@ -553,6 +566,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [245](/pesquisa/tipos?tipo=245) | Art. 300 | Falso reconhecimento de firma ou letra |
 | [246](/pesquisa/tipos?tipo=246) | Art. 301 | Certidão ou atestado ideologicamente falso |
 | [247](/pesquisa/tipos?tipo=247) | Art. 302 | Falsidade de atestado médico |
+| [1263](/pesquisa/tipos?tipo=1263) | Art. 303, caput | Reprodução ou alteração de selo ou peça filatélica com valor para coleção, sem anotação visível de reprodução |
 | [248](/pesquisa/tipos?tipo=248) | Art. 304 | Uso de documento falso |
 | [249](/pesquisa/tipos?tipo=249) | Art. 305 | Supressão de documento |
 | [250](/pesquisa/tipos?tipo=250) | Art. 306 | Falsificação do sinal empregado no contraste de metal precioso |
@@ -894,7 +908,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 
 ### Crimes contra o meio ambiente
 
-*Lei nº 9.605, de 12 de fevereiro de 1998* — 40 preceitos vigentes, 51 tipos coletados. 🔶 em coleta
+*Lei nº 9.605, de 12 de fevereiro de 1998* — 40 preceitos vigentes, 53 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
@@ -927,6 +941,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [378](/pesquisa/tipos?tipo=378) | Art. 49 | Destruir/danificar/lesar/maltratar plantas de ornamentação ou árvores urbanas |
 | [379](/pesquisa/tipos?tipo=379) | Art. 50 | Destruir ou danificar florestas nativas sem autorização do órgão competente |
 | [380](/pesquisa/tipos?tipo=380) | Art. 50-A | Desmatar, explorar economicamente ou degradar floresta em terras de domínio público ou devolutas sem autorização |
+| [1264](/pesquisa/tipos?tipo=1264) | Art. 51 | Comercialização ou utilização de motosserra em florestas e demais formas de vegetação, sem licença ou registro |
 | [381](/pesquisa/tipos?tipo=381) | Art. 52 | Penetrar em Unidade de Conservação de proteção integral portando substâncias/instrumentos para caça/exploração |
 | [382](/pesquisa/tipos?tipo=382) | Art. 54, caput | Poluição de qualquer natureza que resulte ou possa resultar em danos à saúde humana ou provoque mortandade de animais/destruição significativa da flora |
 | [383](/pesquisa/tipos?tipo=383) | Art. 54, §2º | Poluição qualificada (que torne localidade imprópria para ocupação humana; cause poluição hídrica tornando necessária interrupção; dificulte/impeça uso público de praias; lançamento em desacordo) |
@@ -938,6 +953,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [384](/pesquisa/tipos?tipo=384) | Art. 55 | Pesquisa/lavra/extração de recursos minerais sem autorização ou em desacordo com a obtida |
 | [385](/pesquisa/tipos?tipo=385) | Art. 56 | Produzir/processar/embalar/importar/exportar/comercializar/fornecer/transportar/armazenar/guardar/ter em depósito/usar produto ou substância tóxica/perigosa/nociva em desacordo com normas de segurança |
 | [386](/pesquisa/tipos?tipo=386) | Art. 60 | Construir/reformar/ampliar/instalar/fazer funcionar estabelecimento/obra/atividade potencialmente poluidora sem licença ambiental |
+| [1265](/pesquisa/tipos?tipo=1265) | Art. 61 | Disseminação de doença, praga ou espécie que possa causar dano à agricultura, pecuária, fauna, flora ou ecossistemas |
 | [387](/pesquisa/tipos?tipo=387) | Art. 62 | Destruir/inutilizar/deteriorar bem protegido por lei/ato administrativo/decisão judicial (patrimônio cultural) |
 | [1060](/pesquisa/tipos?tipo=1060) | Art. 62, I | Destruir/inutilizar/deteriorar bem especialmente protegido por lei/ato administrativo/decisão judicial (patrimônio cultural) |
 | [1061](/pesquisa/tipos?tipo=1061) | Art. 62, II | Destruir/inutilizar/deteriorar arquivo/registro/museu/biblioteca/pinacoteca/instalação científica ou similar |
@@ -996,7 +1012,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 
 ### Abuso de autoridade
 
-*Lei nº 13.869, de 5 de setembro de 2019* — 25 preceitos vigentes, 23 tipos coletados. 🔶 em coleta
+*Lei nº 13.869, de 5 de setembro de 2019* — 25 preceitos vigentes, 24 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
@@ -1019,6 +1035,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1216](/pesquisa/tipos?tipo=1216) | Art. 29 | Prestação de informação falsa sobre procedimento judicial, policial, fiscal ou administrativo, para prejudicar interesse de investigado |
 | [452](/pesquisa/tipos?tipo=452) | Art. 30 | Dar início ou proceder a persecução penal/civil/administrativa sem justa causa ou contra quem sabe inocente |
 | [453](/pesquisa/tipos?tipo=453) | Art. 31 | Estender injustificadamente a investigação além do prazo razoável |
+| [1259](/pesquisa/tipos?tipo=1259) | Art. 32 | Negar ao interessado, defensor ou advogado acesso aos autos de investigação (preliminar, termo circunstanciado, inquérito ou qualquer procedimento investigatório) |
 | [454](/pesquisa/tipos?tipo=454) | Art. 33 | Exigir informação ou cumprimento de obrigação sem embasamento legal |
 | [455](/pesquisa/tipos?tipo=455) | Art. 36 | Decretar/executar medida cautelar diversa da prisão ou sanção administrativa sem amparo legal |
 | [456](/pesquisa/tipos?tipo=456) | Art. 37 | Demorar demasiada e injustificadamente no exame de processo/documento/procedimento em que tenha interesse o preso ou tenha sido decretada qualquer medida restritiva de liberdade |
@@ -1082,7 +1099,7 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 
 ### Crimes de preconceito (racismo)
 
-*Lei nº 7.716, de 5 de janeiro de 1989* — 17 preceitos vigentes, 16 tipos coletados. 🔶 em coleta
+*Lei nº 7.716, de 5 de janeiro de 1989* — 17 preceitos vigentes, 17 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
@@ -1100,8 +1117,32 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [435](/pesquisa/tipos?tipo=435) | Art. 13 | Impedir/obstar casamento ou convivência familiar e social por preconceito |
 | [436](/pesquisa/tipos?tipo=436) | Art. 14 | Impedir o exercício de qualquer direito por preconceito |
 | [437](/pesquisa/tipos?tipo=437) | Art. 20 | Praticar/induzir/incitar discriminação ou preconceito de raça/cor/etnia/religião/procedência nacional |
+| [1245](/pesquisa/tipos?tipo=1245) | Art. 20, §1º | Fabricação, comércio, distribuição ou veiculação de símbolos que utilizem a cruz suástica ou gamada para divulgação do nazismo |
 | [609](/pesquisa/tipos?tipo=609) | Art. 20-A | Praticar/induzir/incitar discriminação em contexto desportivo |
 | [610](/pesquisa/tipos?tipo=610) | Art. 20-B | Proferir/divulgar declaração/mensagem discriminatória em redes sociais ou internet |
+
+### Estatuto da Pessoa Idosa (crimes)
+
+*Lei nº 10.741, de 1º de outubro de 2003* — 16 preceitos vigentes, 16 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [484](/pesquisa/tipos?tipo=484) | Art. 96 | Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar, ou por qualquer outro meio |
+| [485](/pesquisa/tipos?tipo=485) | Art. 97 | Deixar de prestar assistência ao idoso quando obrigado por lei ou mandado |
+| [486](/pesquisa/tipos?tipo=486) | Art. 98 | Abandonar idoso em hospitais/casas de saúde/entidades de longa permanência ou não prover suas necessidades básicas |
+| [487](/pesquisa/tipos?tipo=487) | Art. 99 | Expor idoso a perigo à integridade e à saúde, submetendo-o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis |
+| [1233](/pesquisa/tipos?tipo=1233) | Art. 99, §1º | Exposição a perigo da pessoa idosa com resultado lesão corporal grave |
+| [1234](/pesquisa/tipos?tipo=1234) | Art. 99, §2º | Exposição a perigo da pessoa idosa com resultado morte |
+| [488](/pesquisa/tipos?tipo=488) | Art. 100 | Obstar acesso de idoso a cargo público por motivo de idade |
+| [489](/pesquisa/tipos?tipo=489) | Art. 101 | Negar/dificultar a qualquer pessoa o acesso a ações e serviços de saúde por motivo de idade |
+| [490](/pesquisa/tipos?tipo=490) | Art. 102 | Apropriar-se de/desviar bens, proventos, pensão ou qualquer outro rendimento do idoso, dando-lhes aplicação diversa de sua finalidade |
+| [1217](/pesquisa/tipos?tipo=1217) | Art. 103 | Negar acolhimento ou permanência da pessoa idosa como abrigada, por recusa desta em outorgar procuração à entidade |
+| [491](/pesquisa/tipos?tipo=491) | Art. 104 | Reter cartão magnético de conta bancária relativa a benefícios/proventos/pensão de idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida |
+| [1218](/pesquisa/tipos?tipo=1218) | Art. 105 | Exibir ou veicular, por qualquer meio, informações ou imagens depreciativas ou injuriosas à pessoa idosa |
+| [492](/pesquisa/tipos?tipo=492) | Art. 106 | Induzir idoso sem discernimento a outorgar procuração para fins de administração de bens ou deles dispor livremente |
+| [493](/pesquisa/tipos?tipo=493) | Art. 107 | Coagir, de qualquer modo, o idoso a doar/contratar/testar/outorgar procuração |
+| [494](/pesquisa/tipos?tipo=494) | Art. 108 | Lavrar ato notarial que envolva pessoa idosa sem discernimento de seus atos, sem a devida representação legal |
+| [1219](/pesquisa/tipos?tipo=1219) | Art. 109 | Impedir ou embaraçar ato do representante do Ministério Público ou de outro agente fiscalizador (Estatuto da Pessoa Idosa) |
 
 ### Código de Trânsito Brasileiro (crimes de trânsito)
 
@@ -1149,26 +1190,26 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [760](/pesquisa/tipos?tipo=760) | Art. 7º, I | Crime contra relações de consumo — favorecer/preferir comprador sem justa causa |
 | [761](/pesquisa/tipos?tipo=761) | Art. 7º, II | Crime contra relações de consumo — vender/expor mercadoria com peso/medida diferente do indicado |
 
-### Estatuto da Pessoa Idosa (crimes)
+### Código de Defesa do Consumidor (infrações penais)
 
-*Lei nº 10.741, de 1º de outubro de 2003* — 16 preceitos vigentes, 14 tipos coletados. 🔶 em coleta
+*Lei nº 8.078, de 11 de setembro de 1990* — 14 preceitos vigentes, 14 tipos coletados. 🔶 em coleta
 
 | id | Dispositivo | Tipo penal |
 |---:|---|---|
-| [484](/pesquisa/tipos?tipo=484) | Art. 96 | Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar, ou por qualquer outro meio |
-| [485](/pesquisa/tipos?tipo=485) | Art. 97 | Deixar de prestar assistência ao idoso quando obrigado por lei ou mandado |
-| [486](/pesquisa/tipos?tipo=486) | Art. 98 | Abandonar idoso em hospitais/casas de saúde/entidades de longa permanência ou não prover suas necessidades básicas |
-| [487](/pesquisa/tipos?tipo=487) | Art. 99 | Expor idoso a perigo à integridade e à saúde, submetendo-o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis |
-| [488](/pesquisa/tipos?tipo=488) | Art. 100 | Obstar acesso de idoso a cargo público por motivo de idade |
-| [489](/pesquisa/tipos?tipo=489) | Art. 101 | Negar/dificultar a qualquer pessoa o acesso a ações e serviços de saúde por motivo de idade |
-| [490](/pesquisa/tipos?tipo=490) | Art. 102 | Apropriar-se de/desviar bens, proventos, pensão ou qualquer outro rendimento do idoso, dando-lhes aplicação diversa de sua finalidade |
-| [1217](/pesquisa/tipos?tipo=1217) | Art. 103 | Negar acolhimento ou permanência da pessoa idosa como abrigada, por recusa desta em outorgar procuração à entidade |
-| [491](/pesquisa/tipos?tipo=491) | Art. 104 | Reter cartão magnético de conta bancária relativa a benefícios/proventos/pensão de idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida |
-| [1218](/pesquisa/tipos?tipo=1218) | Art. 105 | Exibir ou veicular, por qualquer meio, informações ou imagens depreciativas ou injuriosas à pessoa idosa |
-| [492](/pesquisa/tipos?tipo=492) | Art. 106 | Induzir idoso sem discernimento a outorgar procuração para fins de administração de bens ou deles dispor livremente |
-| [493](/pesquisa/tipos?tipo=493) | Art. 107 | Coagir, de qualquer modo, o idoso a doar/contratar/testar/outorgar procuração |
-| [494](/pesquisa/tipos?tipo=494) | Art. 108 | Lavrar ato notarial que envolva pessoa idosa sem discernimento de seus atos, sem a devida representação legal |
-| [1219](/pesquisa/tipos?tipo=1219) | Art. 109 | Impedir ou embaraçar ato do representante do Ministério Público ou de outro agente fiscalizador (Estatuto da Pessoa Idosa) |
+| [525](/pesquisa/tipos?tipo=525) | Art. 63 | Omitir dizeres ou sinais ostensivos sobre a nocividade ou periculosidade de produtos |
+| [1238](/pesquisa/tipos?tipo=1238) | Art. 63, §2º | Omissão culposa de dizeres sobre nocividade ou periculosidade de produto |
+| [526](/pesquisa/tipos?tipo=526) | Art. 64 | Deixar de comunicar à autoridade competente e aos consumidores a nocividade ou periculosidade de produtos cujo conhecimento seja posterior à sua colocação no mercado |
+| [527](/pesquisa/tipos?tipo=527) | Art. 65 | Executar serviço de alto grau de periculosidade contrariando determinação de autoridade competente |
+| [528](/pesquisa/tipos?tipo=528) | Art. 66 | Fazer afirmação falsa ou enganosa/omitir informação relevante sobre produto ou serviço |
+| [1239](/pesquisa/tipos?tipo=1239) | Art. 66, §2º | Afirmação falsa ou enganosa culposa sobre produto ou serviço |
+| [529](/pesquisa/tipos?tipo=529) | Art. 67 | Publicidade enganosa ou abusiva |
+| [530](/pesquisa/tipos?tipo=530) | Art. 68 | Publicidade de produto ou serviço que sabe ou deveria saber ser capaz de provocar acidente de consumo |
+| [531](/pesquisa/tipos?tipo=531) | Art. 69 | Deixar de organizar dados fáticos/técnicos/científicos que dão base à publicidade |
+| [532](/pesquisa/tipos?tipo=532) | Art. 70 | Empregar, na reparação de produtos, peças ou componentes de reposição usados sem autorização do consumidor |
+| [533](/pesquisa/tipos?tipo=533) | Art. 71 | Cobranças de dívidas com ameaça/constrangimento/exposição ao ridículo ou interferência em trabalho/descanso/lazer |
+| [534](/pesquisa/tipos?tipo=534) | Art. 72 | Impedir ou dificultar acesso do consumidor a informações que sobre ele constem em cadastros/banco de dados/fichas/registros |
+| [535](/pesquisa/tipos?tipo=535) | Art. 73 | Deixar de corrigir imediatamente informação sobre consumidor constante de banco de dados/cadastro, quando sabidamente inexata |
+| [536](/pesquisa/tipos?tipo=536) | Art. 74 | Deixar de entregar ao consumidor o termo de garantia adequadamente preenchido e com especificação clara de seu conteúdo |
 
 ### Loterias (contravenções)
 
@@ -1189,25 +1230,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1171](/pesquisa/tipos?tipo=1171) | Art. 55 | Divulgação de anúncio, aviso ou resultado de extração de loteria que não possa circular (jornal, revista, rádio, cinema ou qualquer forma) |
 | [1172](/pesquisa/tipos?tipo=1172) | Art. 56 | Transmissão, por telégrafo ou qualquer meio, do resultado de extração de loteria que não possa circular no lugar de destino |
 | [1173](/pesquisa/tipos?tipo=1173) | Art. 58 | Jogo do bicho (realizar a loteria em que o comprador aposta em combinação de algarismos ou nome de animais) |
-
-### Código de Defesa do Consumidor (infrações penais)
-
-*Lei nº 8.078, de 11 de setembro de 1990* — 14 preceitos vigentes, 12 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [525](/pesquisa/tipos?tipo=525) | Art. 63 | Omitir dizeres ou sinais ostensivos sobre a nocividade ou periculosidade de produtos |
-| [526](/pesquisa/tipos?tipo=526) | Art. 64 | Deixar de comunicar à autoridade competente e aos consumidores a nocividade ou periculosidade de produtos cujo conhecimento seja posterior à sua colocação no mercado |
-| [527](/pesquisa/tipos?tipo=527) | Art. 65 | Executar serviço de alto grau de periculosidade contrariando determinação de autoridade competente |
-| [528](/pesquisa/tipos?tipo=528) | Art. 66 | Fazer afirmação falsa ou enganosa/omitir informação relevante sobre produto ou serviço |
-| [529](/pesquisa/tipos?tipo=529) | Art. 67 | Publicidade enganosa ou abusiva |
-| [530](/pesquisa/tipos?tipo=530) | Art. 68 | Publicidade de produto ou serviço que sabe ou deveria saber ser capaz de provocar acidente de consumo |
-| [531](/pesquisa/tipos?tipo=531) | Art. 69 | Deixar de organizar dados fáticos/técnicos/científicos que dão base à publicidade |
-| [532](/pesquisa/tipos?tipo=532) | Art. 70 | Empregar, na reparação de produtos, peças ou componentes de reposição usados sem autorização do consumidor |
-| [533](/pesquisa/tipos?tipo=533) | Art. 71 | Cobranças de dívidas com ameaça/constrangimento/exposição ao ridículo ou interferência em trabalho/descanso/lazer |
-| [534](/pesquisa/tipos?tipo=534) | Art. 72 | Impedir ou dificultar acesso do consumidor a informações que sobre ele constem em cadastros/banco de dados/fichas/registros |
-| [535](/pesquisa/tipos?tipo=535) | Art. 73 | Deixar de corrigir imediatamente informação sobre consumidor constante de banco de dados/cadastro, quando sabidamente inexata |
-| [536](/pesquisa/tipos?tipo=536) | Art. 74 | Deixar de entregar ao consumidor o termo de garantia adequadamente preenchido e com especificação clara de seu conteúdo |
 
 ### Propriedade industrial (crimes)
 
@@ -1246,6 +1268,24 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1045](/pesquisa/tipos?tipo=1045) | Art. 17 | Comércio ilegal de arma de fogo (adquirir/alugar/receber/transportar/conduzir/ocultar/ter em depósito/desmontar/montar/remontar/adulterar/vender/expor à venda/ter em estoque arma de fogo/acessório/munição sem autorização, em desacordo com determinação legal ou regulamentar) |
 | [346](/pesquisa/tipos?tipo=346) | Art. 18 | Tráfico internacional de arma de fogo |
 | [1046](/pesquisa/tipos?tipo=1046) | Art. 18 | Tráfico internacional de arma de fogo (importar/exportar/favorecer entrada ou saída do território nacional, a qualquer título, arma de fogo sem autorização) |
+
+### Transplante de órgãos (crimes)
+
+*Lei nº 9.434, de 4 de fevereiro de 1997* — 12 preceitos vigentes, 11 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [584](/pesquisa/tipos?tipo=584) | Art. 14 | Remover tecidos/órgãos/partes do corpo de pessoa ou cadáver em desacordo com a lei |
+| [585](/pesquisa/tipos?tipo=585) | Art. 14, §1º | Remoção de órgãos/tecidos mediante paga ou promessa de recompensa |
+| [713](/pesquisa/tipos?tipo=713) | Art. 14, §2º | Remoção de tecidos ou órgãos em pessoa viva com resultado lesão (incapacidade por mais de 30 dias, perigo de vida, debilidade permanente ou aceleração de parto) |
+| [714](/pesquisa/tipos?tipo=714) | Art. 14, §3º | Remoção de tecidos ou órgãos em pessoa viva com resultado lesão gravíssima (incapacidade para o trabalho, enfermidade incurável, perda de membro, deformidade permanente ou aborto) |
+| [1243](/pesquisa/tipos?tipo=1243) | Art. 14, §4º | Remoção de tecidos ou órgãos em pessoa viva com resultado morte |
+| [586](/pesquisa/tipos?tipo=586) | Art. 15 | Comprar ou vender tecidos/órgãos/partes do corpo humano |
+| [587](/pesquisa/tipos?tipo=587) | Art. 16 | Realizar transplante com órgãos/tecidos obtidos em desacordo com a lei |
+| [588](/pesquisa/tipos?tipo=588) | Art. 17 | Recolher tecidos/órgãos/partes de cadáver para transplante, inclusive para tecidos, sem autorização do cônjuge ou parente |
+| [589](/pesquisa/tipos?tipo=589) | Art. 18 | Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial |
+| [1220](/pesquisa/tipos?tipo=1220) | Art. 19 | Deixar de recompor cadáver devolvendo-lhe aspecto condigno para sepultamento, ou deixar de entregá-lo ou retardar sua entrega aos familiares |
+| [1221](/pesquisa/tipos?tipo=1221) | Art. 20 | Publicar anúncio ou apelo público de doação de órgãos em desacordo com o art. 11 |
 
 ### Lei de Falências (crimes falimentares)
 
@@ -1301,39 +1341,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1231](/pesquisa/tipos?tipo=1231) | Art. 87, §4º | Obstrução à fiscalização da apuração (descumprir o direito de fiscais e delegados de observar a abertura da urna e a apuração) |
 | [1232](/pesquisa/tipos?tipo=1232) | Art. 91, parágrafo único | Retenção de título eleitoral ou de comprovante de alistamento eleitoral |
 
-### Transplante de órgãos (crimes)
-
-*Lei nº 9.434, de 4 de fevereiro de 1997* — 12 preceitos vigentes, 10 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [584](/pesquisa/tipos?tipo=584) | Art. 14 | Remover tecidos/órgãos/partes do corpo de pessoa ou cadáver em desacordo com a lei |
-| [585](/pesquisa/tipos?tipo=585) | Art. 14, §1º | Remoção de órgãos/tecidos mediante paga ou promessa de recompensa |
-| [713](/pesquisa/tipos?tipo=713) | Art. 14, §2º | Remoção de órgãos/tecidos que causa lesão corporal grave ou incapacidade permanente no doador |
-| [714](/pesquisa/tipos?tipo=714) | Art. 14, §3º | Remoção de órgãos/tecidos que resulta em morte do doador |
-| [586](/pesquisa/tipos?tipo=586) | Art. 15 | Comprar ou vender tecidos/órgãos/partes do corpo humano |
-| [587](/pesquisa/tipos?tipo=587) | Art. 16 | Realizar transplante com órgãos/tecidos obtidos em desacordo com a lei |
-| [588](/pesquisa/tipos?tipo=588) | Art. 17 | Recolher tecidos/órgãos/partes de cadáver para transplante, inclusive para tecidos, sem autorização do cônjuge ou parente |
-| [589](/pesquisa/tipos?tipo=589) | Art. 18 | Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial |
-| [1220](/pesquisa/tipos?tipo=1220) | Art. 19 | Deixar de recompor cadáver devolvendo-lhe aspecto condigno para sepultamento, ou deixar de entregá-lo ou retardar sua entrega aos familiares |
-| [1221](/pesquisa/tipos?tipo=1221) | Art. 20 | Publicar anúncio ou apelo público de doação de órgãos em desacordo com o art. 11 |
-
-### Organizações criminosas
-
-*Lei nº 12.850, de 2 de agosto de 2013* — 7 preceitos vigentes, 9 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [401](/pesquisa/tipos?tipo=401) | Art. 2º, caput | Promover, constituir, financiar ou integrar organização criminosa |
-| [762](/pesquisa/tipos?tipo=762) | Art. 2º, §2º | Organização criminosa armada (com emprego de arma de fogo) — aumento de 1/2 a 2/3 |
-| [763](/pesquisa/tipos?tipo=763) | Art. 2º, §3º | Organização criminosa com participação de criança ou adolescente — aumento de 1/6 a 2/3 |
-| [764](/pesquisa/tipos?tipo=764) | Art. 2º, §4º-A | Organização criminosa com participação de agente público — aumento de 1/6 a 2/3 |
-| [402](/pesquisa/tipos?tipo=402) | Art. 18 | Revelar identidade/imagem de colaborador oculto (infiltração) ou de agente infiltrado |
-| [765](/pesquisa/tipos?tipo=765) | Art. 18 | Revelar identidade de colaborador/delator/vítima/testemunha protegida |
-| [403](/pesquisa/tipos?tipo=403) | Art. 19 | Imputar falsamente investigação/processo criminal a colaborador (denunciação caluniosa) |
-| [766](/pesquisa/tipos?tipo=766) | Art. 19 | Imputar falsamente investigação/processo a pessoa não envolvida em colaboração premiada |
-| [404](/pesquisa/tipos?tipo=404) | Art. 21 | Recusar ou omitir dados cadastrais/registros/documentos/informações requisitadas pelo juiz/MP/delegado |
-
 ### Genocídio
 
 *Lei nº 2.889, de 1º de outubro de 1956* — 3 preceitos vigentes, 9 tipos coletados. 🔶 em coleta
@@ -1364,6 +1371,35 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1128](/pesquisa/tipos?tipo=1128) | Art. 25 | Exportar ou importar sem licença material nuclear, minérios nucleares e concentrados |
 | [1129](/pesquisa/tipos?tipo=1129) | Art. 26 | Deixar de observar normas de segurança ou proteção relativas a instalação ou material nuclear, expondo a perigo a vida, a integridade física ou o patrimônio |
 | [1130](/pesquisa/tipos?tipo=1130) | Art. 27 | Impedir ou dificultar o funcionamento de instalação nuclear ou o transporte de material nuclear |
+
+### Organizações criminosas
+
+*Lei nº 12.850, de 2 de agosto de 2013* — 7 preceitos vigentes, 8 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [401](/pesquisa/tipos?tipo=401) | Art. 2º, caput | Promover, constituir, financiar ou integrar organização criminosa |
+| [762](/pesquisa/tipos?tipo=762) | Art. 2º, §2º | Organização criminosa armada (com emprego de arma de fogo) — aumento de 1/2 a 2/3 |
+| [763](/pesquisa/tipos?tipo=763) | Art. 2º, §3º | Organização criminosa com participação de criança ou adolescente — aumento de 1/6 a 2/3 |
+| [764](/pesquisa/tipos?tipo=764) | Art. 2º, §4º-A | Organização criminosa com participação de agente público — aumento de 1/6 a 2/3 |
+| [402](/pesquisa/tipos?tipo=402) | Art. 18 | Revelar identidade/imagem de colaborador oculto (infiltração) ou de agente infiltrado |
+| [403](/pesquisa/tipos?tipo=403) | Art. 19 | Imputar falsamente investigação/processo criminal a colaborador (denunciação caluniosa) |
+| [1260](/pesquisa/tipos?tipo=1260) | Art. 20 | Descumprir determinação de sigilo das investigações que envolvam ação controlada e infiltração de agentes |
+| [404](/pesquisa/tipos?tipo=404) | Art. 21 | Recusar ou omitir dados cadastrais/registros/documentos/informações requisitadas pelo juiz/MP/delegado |
+
+### Estatuto da Pessoa com Deficiência (crimes)
+
+*Lei nº 13.146, de 6 de julho de 2015* — 8 preceitos vigentes, 7 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [1039](/pesquisa/tipos?tipo=1039) | Art. 88 | Praticar/induzir/incitar discriminação de pessoa em razão de sua deficiência |
+| [1235](/pesquisa/tipos?tipo=1235) | Art. 88, §2º | Discriminação de pessoa com deficiência por meio de comunicação social ou publicação |
+| [1040](/pesquisa/tipos?tipo=1040) | Art. 89 | Recusar/suspender/procrastinar/cancelar inscrição de aluno em estabelecimento de ensino em razão de deficiência |
+| [1041](/pesquisa/tipos?tipo=1041) | Art. 90 | Abandonar pessoa com deficiência em hospitais/casas de saúde/entidades de abrigamento ou omitir nelas as necessidades básicas |
+| [1236](/pesquisa/tipos?tipo=1236) | Art. 90, §1º | Abandono de pessoa com deficiência com resultado lesão corporal grave |
+| [1237](/pesquisa/tipos?tipo=1237) | Art. 90, §2º | Abandono de pessoa com deficiência com resultado morte |
+| [1042](/pesquisa/tipos?tipo=1042) | Art. 91 | Reter ou utilizar cartão magnético, conta bancária ou qualquer outro recurso que assegure direitos da pessoa com deficiência |
 
 ### Serviços postais (crimes)
 
@@ -1442,17 +1478,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1036](/pesquisa/tipos?tipo=1036) | Art. 5º | Realizar atos preparatórios de terrorismo (oferecer/receber treinamento em País que possa facilitar a prática de terrorismo, reunir pessoas com fins terroristas, adquirir armas/munições/explosivos para fins terroristas) |
 | [1037](/pesquisa/tipos?tipo=1037) | Art. 6º | Financiamento do terrorismo (receber/prover/oferecer/obter/guardar/manter em depósito/solicitar/investir/transportar fundos/ativos financeiros com objetivo de financiar terrorismo) |
 
-### Estatuto da Pessoa com Deficiência (crimes)
-
-*Lei nº 13.146, de 6 de julho de 2015* — 8 preceitos vigentes, 4 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [1039](/pesquisa/tipos?tipo=1039) | Art. 88 | Praticar/induzir/incitar discriminação de pessoa em razão de sua deficiência |
-| [1040](/pesquisa/tipos?tipo=1040) | Art. 89 | Recusar/suspender/procrastinar/cancelar inscrição de aluno em estabelecimento de ensino em razão de deficiência |
-| [1041](/pesquisa/tipos?tipo=1041) | Art. 90 | Abandonar pessoa com deficiência em hospitais/casas de saúde/entidades de abrigamento ou omitir nelas as necessidades básicas |
-| [1042](/pesquisa/tipos?tipo=1042) | Art. 91 | Reter ou utilizar cartão magnético, conta bancária ou qualquer outro recurso que assegure direitos da pessoa com deficiência |
-
 ### Planejamento familiar (crimes)
 
 *Lei nº 9.263, de 12 de janeiro de 1996* — 4 preceitos vigentes, 4 tipos coletados. 🔶 em coleta
@@ -1463,6 +1488,28 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [1151](/pesquisa/tipos?tipo=1151) | Art. 16 | Omissão de notificação de esterilização cirúrgica pelo médico à autoridade sanitária |
 | [1152](/pesquisa/tipos?tipo=1152) | Art. 17 | Induzir ou instigar dolosamente a prática de esterilização cirúrgica |
 | [1153](/pesquisa/tipos?tipo=1153) | Art. 18 | Exigir atestado de esterilização para qualquer fim |
+
+### Crimes contra a economia popular
+
+*Lei nº 1.521, de 26 de dezembro de 1951* — 3 preceitos vigentes, 4 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [538](/pesquisa/tipos?tipo=538) | Art. 2º, IV | Açambarcamento (reter matérias-primas/mercadorias para provocar alta de preços) |
+| [537](/pesquisa/tipos?tipo=537) | Art. 2º, IX | Usura (cobrar juros/comissões/descontos acima dos tabelados/permitidos) |
+| [539](/pesquisa/tipos?tipo=539) | Art. 3º | Pirâmide financeira / fraude contra a economia popular (promessa de dividendos/lucros fixos) |
+| [1261](/pesquisa/tipos?tipo=1261) | Art. 4º | Usura pecuniária ou real (cobrar juros acima da taxa legal; obter lucro patrimonial que exceda 1/5 do valor, abusando de premente necessidade, inexperiência ou leviandade) |
+
+### Parcelamento do solo urbano (crimes)
+
+*Lei nº 6.766, de 19 de dezembro de 1979* — 3 preceitos vigentes, 4 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [736](/pesquisa/tipos?tipo=736) | Art. 50, I | Dar início a loteamento ou desmembramento sem autorização ou em desacordo com a lei |
+| [737](/pesquisa/tipos?tipo=737) | Art. 50, II | Vender ou prometer vender lote em loteamento não registrado no Registro de Imóveis |
+| [738](/pesquisa/tipos?tipo=738) | Art. 50, III | Fazer ou veicular propaganda de loteamento/desmembramento com informações falsas |
+| [1262](/pesquisa/tipos?tipo=1262) | Art. 52 | Registro de loteamento ou desmembramento não aprovado pelos órgãos competentes, ou de compromisso/cessão de direitos a ele relativo |
 
 ### Lavagem de dinheiro
 
@@ -1475,16 +1522,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [625](/pesquisa/tipos?tipo=625) | Art. 1º, §4º (atualiz.) | Lavagem de dinheiro com uso de ativos virtuais (criptomoedas) |
 | [407](/pesquisa/tipos?tipo=407) | Art. 1º, §5º | Lavagem de dinheiro com diminuição de 1/3 a 2/3 (colaboração espontânea) |
 
-### Crimes contra a economia popular
-
-*Lei nº 1.521, de 26 de dezembro de 1951* — 3 preceitos vigentes, 3 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [538](/pesquisa/tipos?tipo=538) | Art. 2º, IV | Açambarcamento (reter matérias-primas/mercadorias para provocar alta de preços) |
-| [537](/pesquisa/tipos?tipo=537) | Art. 2º, IX | Usura (cobrar juros/comissões/descontos acima dos tabelados/permitidos) |
-| [539](/pesquisa/tipos?tipo=539) | Art. 3º | Pirâmide financeira / fraude contra a economia popular (promessa de dividendos/lucros fixos) |
-
 ### Mercado de valores mobiliários (crimes)
 
 *Lei nº 6.385, de 7 de dezembro de 1976* — 3 preceitos vigentes, 3 tipos coletados. 🔶 em coleta
@@ -1494,16 +1531,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [540](/pesquisa/tipos?tipo=540) | Art. 27-C | Manipulação de mercado |
 | [541](/pesquisa/tipos?tipo=541) | Art. 27-D | Uso indevido de informação privilegiada (insider trading) |
 | [542](/pesquisa/tipos?tipo=542) | Art. 27-E | Exercício irregular de cargo, profissão, atividade ou função no mercado de valores mobiliários |
-
-### Parcelamento do solo urbano (crimes)
-
-*Lei nº 6.766, de 19 de dezembro de 1979* — 3 preceitos vigentes, 3 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [736](/pesquisa/tipos?tipo=736) | Art. 50, I | Dar início a loteamento ou desmembramento sem autorização ou em desacordo com a lei |
-| [737](/pesquisa/tipos?tipo=737) | Art. 50, II | Vender ou prometer vender lote em loteamento não registrado no Registro de Imóveis |
-| [738](/pesquisa/tipos?tipo=738) | Art. 50, III | Fazer ou veicular propaganda de loteamento/desmembramento com informações falsas |
 
 ### Estatuto do Índio (crimes)
 
@@ -1580,6 +1607,15 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 | [734](/pesquisa/tipos?tipo=734) | Art. 15 | Produzir/comercializar/transportar/aplicar/prestar serviço na aplicação/dar destinação final a agrotóxicos em desacordo com a lei |
 | [735](/pesquisa/tipos?tipo=735) | Art. 16 | Empregar agrotóxico que cause dano à saúde das pessoas e ao meio ambiente (modalidade culposa) |
 
+### Interceptação telefônica (crimes)
+
+*Lei nº 9.296, de 24 de julho de 1996* — 2 preceitos vigentes, 2 tipos coletados. 🔶 em coleta
+
+| id | Dispositivo | Tipo penal |
+|---:|---|---|
+| [496](/pesquisa/tipos?tipo=496) | Art. 10 | Realizar interceptação telefônica/telemática/quebrar segredo de justiça sem autorização judicial ou com objetivos não autorizados |
+| [1244](/pesquisa/tipos?tipo=1244) | Art. 10-A | Captação ambiental de sinais eletromagnéticos, ópticos ou acústicos para investigação ou instrução criminal sem autorização judicial |
+
 ### Crimes de prefeitos e vereadores
 
 *Decreto-Lei nº 201, de 27 de fevereiro de 1967* — 2 preceitos vigentes, 2 tipos coletados. 🔶 em coleta
@@ -1606,14 +1642,6 @@ Lista exaustiva do que já está no catálogo. O `id` é a URL pública do tipo
 |---:|---|---|
 | [569](/pesquisa/tipos?tipo=569) | Art. 232 | Promoção de entrada ilegal de estrangeiro em território nacional |
 | [570](/pesquisa/tipos?tipo=570) | Art. 232, §1º | Promoção de saída ilegal de pessoa de território nacional para exercer trabalho no exterior |
-
-### Interceptação telefônica (crimes)
-
-*Lei nº 9.296, de 24 de julho de 1996* — 2 preceitos vigentes, 1 tipos coletados. 🔶 em coleta
-
-| id | Dispositivo | Tipo penal |
-|---:|---|---|
-| [496](/pesquisa/tipos?tipo=496) | Art. 10 | Realizar interceptação telefônica/telemática/quebrar segredo de justiça sem autorização judicial ou com objetivos não autorizados |
 
 ### Condomínios e incorporações (crimes)
 
