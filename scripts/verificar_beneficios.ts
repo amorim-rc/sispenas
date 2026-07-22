@@ -18,6 +18,7 @@ import {
   crimesComPenaPrivativa,
 } from '../src/lib/beneficios/reverso';
 import {cenarioFromCrime} from '../src/lib/cenario';
+import {calcularConcurso, calcularDosimetria} from '../src/lib/dosimetria';
 
 // Lê o MESMO arquivo servido à aplicação (static/data/crimes.json), e não a fonte
 // bruta em data/crimes.json: os campos derivados (pena_min_meses, pena_privativa,
@@ -293,6 +294,65 @@ console.log('\n5. Alcance sob a legislação vigente (pena concreta = mínima co
       `  ${def.nome.padEnd(52)} cabível ${String(c.cabivel).padStart(5)} (${pct.padStart(5)}%)  condicional ${String(c.condicional).padStart(5)}  incabível ${String(c.incabivel).padStart(5)}`,
     );
   }
+}
+
+// ── 6. Dosimetria por fases (art. 68) ──────────────────────────────────
+// Casos-âncora conferidos contra a planilha de referência de dosimetria.
+console.log('\n6. Dosimetria por fases (art. 68, CP)');
+{
+  // Homicídio simples: 6 a 20 anos → 72 a 240 meses; intervalo 168.
+  const homicidio = {pena_min_meses: 72, pena_max_meses: 240} as Crime;
+
+  // 1ª fase: cada circunstância judicial desfavorável soma 1/8 do intervalo (21).
+  const umaJudicial = calcularDosimetria(homicidio, [{id: 'jud-culpabilidade'}]);
+  ok(umaJudicial.penaBase === 93, `1ª fase: 1 circunstância desfavorável → 72 + 21 = 93 (obtido ${umaJudicial.penaBase})`);
+
+  const duasJudiciais = calcularDosimetria(homicidio, [
+    {id: 'jud-culpabilidade'}, {id: 'jud-antecedentes'},
+  ]);
+  ok(duasJudiciais.penaBase === 114, `1ª fase: 2 desfavoráveis → 72 + 42 = 114 (obtido ${duasJudiciais.penaBase})`);
+
+  // 1ª fase não ultrapassa a moldura, mesmo com as 8 desfavoráveis.
+  const todasJudiciais = calcularDosimetria(homicidio, [
+    'jud-culpabilidade', 'jud-antecedentes', 'jud-conduta-social', 'jud-personalidade',
+    'jud-motivos', 'jud-circunstancias', 'jud-consequencias', 'jud-comportamento-vitima',
+  ].map((id) => ({id})));
+  ok(todasJudiciais.penaBase === 240, `1ª fase: 8 desfavoráveis não passam do máximo (obtido ${todasJudiciais.penaBase})`);
+
+  // 2ª fase: agravante = 1/6 da pena-base (114/6 = 19).
+  const comAgravante = calcularDosimetria(homicidio, [
+    {id: 'jud-culpabilidade'}, {id: 'jud-antecedentes'}, {id: 'agravante-reincidencia'},
+  ]);
+  ok(comAgravante.penaIntermediaria === 133, `2ª fase: 114 + 1/6 = 133 (obtido ${comAgravante.penaIntermediaria})`);
+
+  // Súmula 231: atenuante sozinha não reduz abaixo do mínimo.
+  const soAtenuante = calcularDosimetria(homicidio, [{id: 'atenuante-confissao'}]);
+  ok(soAtenuante.penaIntermediaria === 72 && soAtenuante.sumula231Aplicada,
+    `2ª fase: atenuante no piso não reduz abaixo do mínimo — Súmula 231 (obtido ${soAtenuante.penaIntermediaria})`);
+
+  // 3ª fase: a tentativa PODE levar abaixo do mínimo legal.
+  const tentado = calcularDosimetria(homicidio, [{id: 'tentativa'}]);
+  ok(tentado.penaDefinitiva < 72,
+    `3ª fase: tentativa (−1/3) rompe o piso da moldura → ${tentado.penaDefinitiva} < 72`);
+
+  // Encadeamento completo do exemplo da planilha: 114 → 133 → −1/3 = 88.7.
+  const completo = calcularDosimetria(homicidio, [
+    {id: 'jud-culpabilidade'}, {id: 'jud-antecedentes'},
+    {id: 'agravante-reincidencia'}, {id: 'tentativa'},
+  ]);
+  ok(completo.penaDefinitiva === 88.7,
+    `três fases encadeadas: 114 → 133 → 88.7 (obtido ${completo.penaDefinitiva})`);
+
+  // Concurso material soma; formal exasperado é limitado pela soma (art. 70, par. único).
+  const material = calcularConcurso([72, 48], 'material');
+  ok(material.total === 120, `concurso material: 72 + 48 = 120 (obtido ${material.total})`);
+
+  const formal = calcularConcurso([72, 48], 'formal', 1 / 6);
+  ok(formal.total === 84, `concurso formal: maior (72) + 1/6 = 84 (obtido ${formal.total})`);
+
+  const formalExcessivo = calcularConcurso([72, 6], 'formal', 1 / 2);
+  ok(formalExcessivo.total === 78,
+    `art. 70, par. único: exasperação (108) excede a soma (78) → aplica a soma (obtido ${formalExcessivo.total})`);
 }
 
 console.log(falhas === 0 ? '\n✓ Todas as verificações passaram.\n' : `\n✗ ${falhas} verificação(ões) falharam.\n`);

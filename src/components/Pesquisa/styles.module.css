@@ -374,3 +374,100 @@
   font-weight: 700;
   font-family: var(--ifm-font-family-monospace);
 }
+
+/* ── Dosimetria por fases (art. 68) ─────────────────────────────────────── */
+.dosimetria {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+/* Cada fase é um bloco visualmente separado: a base de cálculo e os limites
+   mudam de uma para outra, e a leitura precisa deixar isso evidente. */
+.fasesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.9rem;
+  margin: 0.9rem 0 1.1rem;
+}
+.faseBloco {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-top: 3px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+}
+.faseTitulo {
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+  color: var(--ifm-color-primary);
+}
+.faseDica {
+  margin: 0 0 0.6rem;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-600);
+}
+.faseVazia {
+  margin: 0;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--ifm-color-emphasis-500);
+}
+.faseLista { list-style: none; margin: 0; padding: 0; }
+.faseItem { margin-bottom: 0.45rem; }
+.faseLabel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem;
+  align-items: baseline;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+.faseNome { grid-column: 2; }
+.faseDisp {
+  grid-column: 2;
+  font-size: 0.72rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.faseFracao {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.25rem 0 0 1.4rem;
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-700);
+}
+.faseFracao input[type='range'] { flex: 1; max-width: 120px; }
+
+.dosiResultado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+}
+.dosiEtapa { display: flex; flex-direction: column; }
+.dosiRotulo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ifm-color-emphasis-600);
+}
+.dosiEtapa strong { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.dosiFinal strong { color: var(--ifm-color-primary); font-size: 1.2rem; }
+.dosiSeta { color: var(--ifm-color-emphasis-500); }
+.dosiNota {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--ifm-color-warning-dark);
+}
+.dosiMemoria {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+}
+.dosiMemoria summary { cursor: pointer; color: var(--ifm-color-emphasis-700); }
+.dosiMemoria ol { margin: 0.5rem 0 0; padding-left: 1.4rem; line-height: 1.7; }
+.efeitoMais { color: var(--ifm-color-danger-dark); font-weight: 600; }
+.efeitoMenos { color: var(--ifm-color-success-dark); font-weight: 600; }

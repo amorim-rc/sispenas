@@ -3,6 +3,7 @@ import type {Crime, Cenario} from '@site/src/lib/types';
 import {calcularBeneficios, CATEGORIA_LABEL, type Categoria, type BeneficioResultado} from '@site/src/lib/beneficios';
 import {cenarioFromCrime} from '@site/src/lib/cenario';
 import {formatPena} from '@site/src/lib/format';
+import Dosimetria from './Dosimetria';
 import styles from './styles.module.css';
 
 const STATUS_LABEL: Record<string, string> = {
@@ -91,6 +92,13 @@ export default function Detalhe({
   useEffect(() => {
     setCen(cenarioFromCrime(crime));
   }, [crime.id]);
+
+  // Pena apurada na dosimetria por fases; null = nenhum modificador marcado,
+  // e a barra manual de pena concreta segue no comando.
+  const [penaDosimetria, setPenaDosimetria] = useState<number | null>(null);
+  useEffect(() => {
+    if (penaDosimetria !== null) setCen((p) => ({...p, penaConcreta: penaDosimetria}));
+  }, [penaDosimetria]);
 
   const beneficios = useMemo(() => calcularBeneficios(cen), [cen]);
   const grupos: Categoria[] = ['processual', 'aplicacao', 'execucao'];
@@ -196,6 +204,13 @@ export default function Detalhe({
           </div>
         </div>
       </div>
+
+      <Dosimetria
+        crime={crime}
+        penaMin={cen.penaMin}
+        penaMax={cen.penaMax}
+        onPenaDefinitiva={setPenaDosimetria}
+      />
 
       <h4 className={styles.benefSecTitulo}>Benefícios penais — recálculo dinâmico</h4>
       {grupos.map((g) => (
