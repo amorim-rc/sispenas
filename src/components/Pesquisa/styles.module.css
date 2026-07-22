@@ -413,8 +413,30 @@
   font-style: italic;
   color: var(--ifm-color-emphasis-500);
 }
-.faseLista { list-style: none; margin: 0; padding: 0; }
+/* Teto de altura = o tamanho natural da 1ª fase (8 circunstâncias do art. 59).
+   Os blocos já se igualam pelo grid; sem o teto, quem dita a altura dos três é
+   a 2ª fase, com suas 27 agravantes e atenuantes. Daqui em diante, rola. */
+.faseLista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 27rem;
+  overflow-y: auto;
+  /* Espaço para a barra não encostar no texto, e um respiro para que o corte
+     no fim da lista se leia como continuação e não como fim. */
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+}
+.faseLista::-webkit-scrollbar { width: 8px; }
+.faseLista::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+}
+.faseLista::-webkit-scrollbar-thumb:hover { background: var(--ifm-color-emphasis-400); }
 .faseItem { margin-bottom: 0.45rem; }
+/* Sem isto a margem do último item empurra a 1ª fase 7px além do teto e ela
+   ganha uma barra de rolagem que não rola nada. */
+.faseItem:last-child { margin-bottom: 0; }
 .faseLabel {
   display: grid;
   grid-template-columns: auto 1fr;
