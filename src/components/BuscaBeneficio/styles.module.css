@@ -631,3 +631,36 @@
     padding: 1rem;
   }
 }
+
+/* Alcance nas duas unidades (cenário de condenação × dispositivo). */
+.duasUnidades {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.25rem;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+  font-size: 0.85rem;
+}
+.duLabel {
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+}
+.duItem {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  color: var(--ifm-color-emphasis-800);
+}
+.duItem strong {
+  font-size: 1.05rem;
+  color: var(--ifm-color-primary);
+  font-variant-numeric: tabular-nums;
+}
+.duItem em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+}

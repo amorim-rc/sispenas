@@ -471,3 +471,118 @@
 .dosiMemoria ol { margin: 0.5rem 0 0; padding-left: 1.4rem; line-height: 1.7; }
 .efeitoMais { color: var(--ifm-color-danger-dark); font-weight: 600; }
 .efeitoMenos { color: var(--ifm-color-success-dark); font-weight: 600; }
+
+/* ── Concurso de crimes (arts. 69-71) ───────────────────────────────────── */
+.concurso {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+.concursoLista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+.concursoChip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  background: var(--ifm-background-surface-color);
+  font-size: 0.82rem;
+}
+.concursoChip em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+.concursoChip button {
+  border: none;
+  background: transparent;
+  color: var(--ifm-color-emphasis-600);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0 0 0 0.15rem;
+}
+.concursoChip button:hover { color: var(--ifm-color-danger); }
+.concursoBusca { position: relative; margin-bottom: 0.9rem; }
+.concursoBusca input {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.88rem;
+}
+.concursoSugestoes {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 6px 18px var(--ifm-color-emphasis-200);
+}
+.concursoSugestoes button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.7rem;
+  border: none;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  font-size: 0.84rem;
+}
+.concursoSugestoes button:hover { background: var(--ifm-color-emphasis-200); }
+.concursoSugestoes button span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.concursoTabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.concursoTabela th,
+.concursoTabela td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  text-align: left;
+  vertical-align: top;
+}
+.concursoFavoravel {
+  background: var(--ifm-color-success-contrast-background);
+}
+.concursoDisp {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.concursoTotal {
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.concursoMemoria {
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-700);
+}
+.concursoNota {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+}

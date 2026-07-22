@@ -45,39 +45,39 @@ cálculo vive numa camada de simulação (novo `data/modificadores.json` + lógi
 sobre os mesmos dados abertos.
 
 ### 1ª fase — pena-base
-- [ ] **Circunstâncias judiciais** (art. 59): culpabilidade, antecedentes, conduta social,
+- [x] **Circunstâncias judiciais** (art. 59): culpabilidade, antecedentes, conduta social,
       motivos, consequências. Hoje só filtram benefícios; passam a poder deslocar a
       pena-base dentro da moldura.
 
 ### 2ª fase — agravantes e atenuantes (arts. 61–66)
-- [ ] Agravantes e atenuantes como modificadores, com a **Súmula 231 do STJ** explícita
+- [x] Agravantes e atenuantes como modificadores, com a **Súmula 231 do STJ** explícita
       (atenuante não reduz abaixo do mínimo — assimetria que a 3ª fase não tem).
 
 ### 3ª fase — causas de aumento e diminuição
-- [ ] **Causas de aumento/diminuição genéricas** — as que valem para vários tipos e **não**
+- [x] **Causas de aumento/diminuição genéricas** — as que valem para vários tipos e **não**
       estão no preceito de cada um (art. 141 na honra, art. 226 nos sexuais, art. 327 nos
       crimes contra a administração…) — como modificadores em `data/modificadores.json`
       (dispositivo, fração/quantum, escopo de aplicação).
-- [ ] **Contabilização controlada** (decisão de projeto): as causas de aumento **embutidas**
+- [x] **Contabilização controlada** (decisão de projeto): as causas de aumento **embutidas**
       no artigo do crime (§4º/§6º/§7º do art. 121, por exemplo) permanecem como **linhas** —
       são preceitos primários da lei, com URL própria e moldura já calculada. Um modificador
       só é **oferecido** a um tipo quando aquela causa de aumento **não** está no rol de
       preceitos derivados dele, evitando dupla contagem no número de cenários.
 
 ### Concurso
-- [ ] **Concurso de crimes** — combinador de linhas: material (art. 69, soma das penas),
+- [x] **Concurso de crimes** — combinador de linhas: material (art. 69, soma das penas),
       formal (art. 70) e continuidade (art. 71, uma pena com aumento).
-- [ ] **Concurso de pessoas** — seletor de **papel do agente** (autor / partícipe). A
+- [x] **Concurso de pessoas** — seletor de **papel do agente** (autor / partícipe). A
       **participação de menor importância** (art. 29, §1º) aplica a redução de 1/6 a 1/3 à
       mesma moldura, fechando a lacuna do agente com participação reduzida. A **cooperação
       dolosamente distinta** (art. 29, §2º) resolve-se apontando para o tipo menos grave —
       que já tem a própria linha —, sem criar variante combinatória nova.
 
 ### Consumo
-- [ ] No detalhe do tipo, os modificadores aplicáveis viram **toggles** que deslocam a
+- [x] No detalhe do tipo, os modificadores aplicáveis viram **toggles** que deslocam a
       moldura e **recalculam os benefícios ao vivo** — conectando o que hoje são dois fios
       separados (a simulação de pena e as circunstâncias do réu).
-- [ ] A busca por benefício reporta o **alcance em duas unidades**: por **dispositivo** (o
+- [x] A busca por benefício reporta o **alcance em duas unidades**: por **dispositivo** (o
       crime) e por **cenário de condenação** (a moldura resultante) — tornando o número
       comparável ao das ~1.529 unidades do artigo original de 2008.
 

@@ -4,6 +4,7 @@ import {calcularBeneficios, CATEGORIA_LABEL, type Categoria, type BeneficioResul
 import {cenarioFromCrime} from '@site/src/lib/cenario';
 import {formatPena} from '@site/src/lib/format';
 import Dosimetria from './Dosimetria';
+import Concurso from './Concurso';
 import styles from './styles.module.css';
 
 const STATUS_LABEL: Record<string, string> = {
@@ -211,6 +212,8 @@ export default function Detalhe({
         penaMax={cen.penaMax}
         onPenaDefinitiva={setPenaDosimetria}
       />
+
+      <Concurso crime={crime} penaAtual={cen.penaConcreta} todos={todos} />
 
       <h4 className={styles.benefSecTitulo}>Benefícios penais — recálculo dinâmico</h4>
       {grupos.map((g) => (
