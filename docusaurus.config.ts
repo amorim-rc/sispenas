@@ -47,7 +47,7 @@ const config: Config = {
         blog: {
           path: 'release-notes',
           routeBasePath: 'release-notes',
-          blogTitle: 'Release notes',
+          blogTitle: 'Notas de atualizações',
           blogDescription: 'Histórico de versões do SISPENAS.',
           blogSidebarTitle: 'Versões',
           blogSidebarCount: 'ALL',
@@ -55,7 +55,7 @@ const config: Config = {
           onUntruncatedBlogPosts: 'ignore',
           feedOptions: {
             type: 'all',
-            title: 'SISPENAS — Release notes',
+            title: 'SISPENAS — Notas de atualizações',
             copyright: `SISPENAS © ${new Date().getFullYear()} — Equipe SISPENAS.`,
           },
         },
@@ -120,7 +120,7 @@ const config: Config = {
           ],
         },
         {to: '/docs/roadmap', label: 'Roadmap', position: 'left'},
-        {to: '/release-notes', label: 'Release notes', position: 'left'},
+        {to: '/release-notes', label: 'Notas de atualizações', position: 'left'},
         {
           href: 'https://github.com/amorim-rc/sispenas',
           label: 'GitHub',
