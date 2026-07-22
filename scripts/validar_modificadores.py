@@ -22,6 +22,10 @@ RAIZ = Path(__file__).resolve().parent.parent
 NATUREZAS = {"judicial", "atenuante", "agravante", "diminuicao", "aumento", "concurso"}
 FASE_DE = {"judicial": 1, "atenuante": 2, "agravante": 2,
            "diminuicao": 3, "aumento": 3, "concurso": "concurso"}
+# A base de incidência é determinada pela fase — é o que garante que o cálculo
+# siga o art. 68 (base → intermediária → definitiva) e que a UI agrupe certo.
+SOBRE_DE = {1: "intervalo", 2: "pena_base", 3: "pena_provisoria",
+            "concurso": "especial"}
 ESCOPOS = {"geral", "titulo", "lei", "tipos", "tipos_por_artigo", "combinador"}
 
 
@@ -49,6 +53,15 @@ def main() -> int:
         elif m.get("fase") != FASE_DE[nat]:
             erros.append(f"{rot} fase {m.get('fase')!r} incoerente com natureza {nat!r} "
                          f"(esperada {FASE_DE[nat]!r})")
+        else:
+            esperado = SOBRE_DE[m["fase"]]
+            if m.get("sobre") != esperado:
+                erros.append(f"{rot} sobre={m.get('sobre')!r} incoerente com fase "
+                             f"{m['fase']!r} (esperado {esperado!r})")
+        # Súmula 231 só faz sentido na 2ª fase (atenuante não desce do mínimo)
+        if m.get("piso_minimo") and m.get("fase") != 2:
+            erros.append(f"{rot} piso_minimo=true fora da 2ª fase "
+                         f"(a 3ª fase pode ultrapassar a moldura)")
 
         for campo in ("fracao_min", "fracao_max"):
             v = m.get(campo)
