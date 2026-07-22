@@ -2,9 +2,11 @@ import React, {useEffect, useMemo, useState} from 'react';
 import type {Crime, Cenario} from '@site/src/lib/types';
 import {calcularBeneficios, CATEGORIA_LABEL, type Categoria, type BeneficioResultado} from '@site/src/lib/beneficios';
 import {cenarioFromCrime} from '@site/src/lib/cenario';
+import type {SelecaoModificador} from '@site/src/lib/dosimetria/types';
 import {formatPena} from '@site/src/lib/format';
 import Dosimetria from './Dosimetria';
 import Concurso from './Concurso';
+import ConcursoPessoas from './ConcursoPessoas';
 import styles from './styles.module.css';
 
 const STATUS_LABEL: Record<string, string> = {
@@ -94,12 +96,38 @@ export default function Detalhe({
     setCen(cenarioFromCrime(crime));
   }, [crime.id]);
 
+  // Seleção de modificadores erguida para cá: a dosimetria e o painel de
+  // concurso de pessoas escrevem na MESMA lista, para que a participação de
+  // menor importância entre no encadeamento das três fases — e não por fora.
+  // Troca de tipo penal zera as escolhas: são do caso, não do catálogo.
+  const [sel, setSel] = useState<SelecaoModificador[]>([]);
+  useEffect(() => {
+    setSel([]);
+  }, [crime.id]);
+
   // Pena apurada na dosimetria por fases; null = nenhum modificador marcado,
   // e a barra manual de pena concreta segue no comando.
   const [penaDosimetria, setPenaDosimetria] = useState<number | null>(null);
+  // Pena arrastada à mão na barra, guardada à parte para que o concurso possa
+  // sobrepor-se sem destruí-la.
+  const [penaManual, setPenaManual] = useState(() => cenarioFromCrime(crime).penaConcreta);
   useEffect(() => {
-    if (penaDosimetria !== null) setCen((p) => ({...p, penaConcreta: penaDosimetria}));
-  }, [penaDosimetria]);
+    setPenaManual(cenarioFromCrime(crime).penaConcreta);
+  }, [crime.id]);
+
+  // Pena do tipo EM FOCO, isolado — é ela que entra no concurso de crimes.
+  // Não pode ser `cen.penaConcreta`, sob pena de realimentar o cálculo com o
+  // próprio total cumulado.
+  const penaIsolada = penaDosimetria ?? penaManual;
+
+  // Pena cumulada da modalidade de concurso escolhida. Tem PRECEDÊNCIA sobre a
+  // pena do tipo isolado: condenado em concurso, é o total que define o que o
+  // réu pode pleitear.
+  const [penaConcurso, setPenaConcurso] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCen((p) => ({...p, penaConcreta: penaConcurso ?? penaIsolada}));
+  }, [penaIsolada, penaConcurso]);
 
   const beneficios = useMemo(() => calcularBeneficios(cen), [cen]);
   const grupos: Categoria[] = ['processual', 'aplicacao', 'execucao'];
@@ -175,9 +203,14 @@ export default function Detalhe({
             <span>
               Pena concreta aplicada: <strong>{meses(cen.penaConcreta)}</strong>
               <Ajuda texto="Pena efetivamente fixada na sentença para um caso concreto (não é da lei, é da condenação). É a base dos benefícios de aplicação e execução: substituição por restritivas, sursis, regime inicial, progressão e livramento." />
+              {penaConcurso !== null ? (
+                <em className={styles.penaOrigem}>vinda do concurso de crimes</em>
+              ) : penaDosimetria !== null ? (
+                <em className={styles.penaOrigem}>vinda da dosimetria</em>
+              ) : null}
             </span>
             <input type="range" min={0} max={600} step={1} value={cen.penaConcreta}
-              onChange={(e) => set('penaConcreta', +e.target.value)} />
+              onChange={(e) => setPenaManual(+e.target.value)} />
           </label>
           {alteradoLegislativo && (
             <button className={styles.resetBtn} onClick={() => setCen(cenarioFromCrime(crime))}>
@@ -210,10 +243,22 @@ export default function Detalhe({
         crime={crime}
         penaMin={cen.penaMin}
         penaMax={cen.penaMax}
+        sel={sel}
+        setSel={setSel}
         onPenaDefinitiva={setPenaDosimetria}
       />
 
-      <Concurso crime={crime} penaAtual={cen.penaConcreta} todos={todos} />
+      {crime.tem_pena_privativa && (
+        <div className={styles.concursosGrid}>
+          <Concurso
+            crime={crime}
+            penaAtual={penaIsolada}
+            todos={todos}
+            onPenaConcurso={setPenaConcurso}
+          />
+          <ConcursoPessoas sel={sel} setSel={setSel} />
+        </div>
+      )}
 
       <h4 className={styles.benefSecTitulo}>Benefícios penais — recálculo dinâmico</h4>
       {grupos.map((g) => (

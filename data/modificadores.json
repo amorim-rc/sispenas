@@ -24,36 +24,728 @@
     "contabilizacao": "Um modificador só é OFERECIDO a um tipo quando a causa correspondente NÃO está já embutida no rol de preceitos derivados dele (as embutidas — §4º/§6º/§7º — permanecem como linhas próprias, com moldura já calculada). Evita dupla contagem no número de cenários de condenação."
   },
   "modificadores": [
-    {"id": "jud-culpabilidade", "nome": "Culpabilidade", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Grau de reprovabilidade da conduta. Cada circunstância judicial desfavorável desloca 1/8 do intervalo da moldura."},
-    {"id": "jud-antecedentes", "nome": "Antecedentes", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Súmula 444 do STJ: inquéritos e ações em curso não agravam a pena-base."},
-    {"id": "jud-conduta-social", "nome": "Conduta social", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Comportamento do agente no meio familiar, profissional e social."},
-    {"id": "jud-personalidade", "nome": "Personalidade do agente", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Exige elementos concretos nos autos; a jurisprudência rejeita valoração genérica."},
-    {"id": "jud-motivos", "nome": "Motivos do crime", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Não pode coincidir com motivo já usado como qualificadora ou agravante (bis in idem)."},
-    {"id": "jud-circunstancias", "nome": "Circunstâncias do crime", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Modo de execução, tempo, lugar — desde que não constituam elementar ou qualificadora."},
-    {"id": "jud-consequencias", "nome": "Consequências do crime", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Resultado que exceda o inerente ao tipo."},
-    {"id": "jud-comportamento-vitima", "nome": "Comportamento da vítima", "dispositivo": "CP, art. 59", "natureza": "judicial", "fase": 1, "sobre": "intervalo", "fracao_min": 0.125, "fracao_max": 0.125, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Circunstância que só pode favorecer o réu — nunca agravar (entendimento consolidado)."},
-
-    {"id": "agravante-reincidencia", "nome": "Reincidência", "dispositivo": "CP, art. 61, I", "natureza": "agravante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Fração de 1/6 é a praxe (não tabelada em lei). Súmula 241 do STJ: a mesma condenação não serve simultaneamente de agravante e de maus antecedentes."},
-    {"id": "agravante-motivo-futil", "nome": "Motivo fútil", "dispositivo": "CP, art. 61, II, a", "natureza": "agravante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": false, "escopo": {"tipo": "geral"}, "condicao": "nao_qualificado_pelo_mesmo_motivo", "obs": "Não incide se o motivo fútil já qualifica o tipo (bis in idem)."},
-    {"id": "agravante-motivo-torpe", "nome": "Motivo torpe", "dispositivo": "CP, art. 61, II, a", "natureza": "agravante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": false, "escopo": {"tipo": "geral"}, "condicao": "nao_qualificado_pelo_mesmo_motivo", "obs": "Idem — não incide onde a torpeza já é qualificadora."},
-    {"id": "agravante-violencia-mulher", "nome": "Violência contra a mulher", "dispositivo": "CP, art. 61, II, f", "natureza": "agravante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Violência contra a mulher na forma da lei específica; não cumula com a majorante da Lei Maria da Penha sobre o mesmo fato."},
-
-    {"id": "atenuante-menoridade", "nome": "Menoridade relativa (menor de 21 na data do fato)", "dispositivo": "CP, art. 65, I", "natureza": "atenuante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": true, "escopo": {"tipo": "geral"}, "obs": "Atenuante preponderante (art. 67). Súmula 231 do STJ: não reduz abaixo do mínimo legal."},
-    {"id": "atenuante-senilidade", "nome": "Senilidade (maior de 70 na data da sentença)", "dispositivo": "CP, art. 65, I", "natureza": "atenuante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": true, "escopo": {"tipo": "geral"}, "obs": "Súmula 231: não reduz abaixo do mínimo."},
-    {"id": "atenuante-confissao", "nome": "Confissão espontânea", "dispositivo": "CP, art. 65, III, d", "natureza": "atenuante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": true, "escopo": {"tipo": "geral"}, "obs": "Súmula 545 do STJ: incide quando a confissão fundamenta a condenação, ainda que parcial ou retratada."},
-    {"id": "atenuante-desconhecimento-lei", "nome": "Desconhecimento da lei", "dispositivo": "CP, art. 65, II", "natureza": "atenuante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": true, "escopo": {"tipo": "geral"}, "obs": "Não se confunde com erro de proibição (art. 21), que pode isentar ou reduzir de 1/6 a 1/3 na 3ª fase."},
-    {"id": "atenuante-coacao-ordem", "nome": "Coação resistível, ordem de superior ou violenta emoção", "dispositivo": "CP, art. 65, III, c", "natureza": "atenuante", "fase": 2, "sobre": "pena_base", "fracao_min": 0.1667, "fracao_max": 0.1667, "piso_minimo": true, "escopo": {"tipo": "geral"}, "obs": "A coação irresistível exclui a culpabilidade (art. 22); aqui é a resistível."},
-
-    {"id": "tentativa", "nome": "Tentativa", "dispositivo": "CP, art. 14, II, par. único", "natureza": "diminuicao", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.333, "fracao_max": 0.667, "piso_minimo": false, "escopo": {"tipo": "geral"}, "condicao": "admite_tentativa", "obs": "Redução de 1/3 a 2/3 conforme a proximidade da consumação (iter criminis). Só nos tipos cujo campo `tentativa` do catálogo é Sim."},
-    {"id": "arrependimento-posterior", "nome": "Arrependimento posterior", "dispositivo": "CP, art. 16", "natureza": "diminuicao", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.333, "fracao_max": 0.667, "piso_minimo": false, "escopo": {"tipo": "geral"}, "condicao": "sem_violencia_ou_grave_ameaca", "obs": "Crime sem violência ou grave ameaça à pessoa, com reparação do dano ou restituição da coisa até o recebimento da denúncia."},
-    {"id": "erro-de-proibicao-evitavel", "nome": "Erro de proibição evitável", "dispositivo": "CP, art. 21", "natureza": "diminuicao", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.167, "fracao_max": 0.333, "piso_minimo": false, "escopo": {"tipo": "geral"}, "obs": "Se inevitável, isenta de pena; se evitável, reduz de 1/6 a 1/3."},
-    {"id": "participacao-menor-importancia", "nome": "Participação de menor importância (concurso de pessoas)", "dispositivo": "CP, art. 29, §1º", "natureza": "diminuicao", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.167, "fracao_max": 0.333, "piso_minimo": false, "escopo": {"tipo": "geral"}, "condicao": "papel_participe", "obs": "Modificador do PAPEL DO AGENTE no concurso de pessoas. A cooperação dolosamente distinta (§2º) não usa este modificador: resolve-se pelo tipo menos grave, que já tem linha própria."},
-    {"id": "aumento-honra-art141", "nome": "Aumento nos crimes contra a honra", "dispositivo": "CP, art. 141", "natureza": "aumento", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.333, "fracao_max": 0.333, "piso_minimo": false, "escopo": {"tipo": "tipos_por_artigo", "lei": "CP", "artigos": ["Art. 138", "Art. 139", "Art. 140"]}, "obs": "Aumento de 1/3 se contra o Presidente da República ou chefe de governo estrangeiro; funcionário público em razão da função; na presença de várias pessoas; contra maior de 60 ou pessoa com deficiência. O par. único triplica a pena se cometido por paga."},
-    {"id": "aumento-sexuais-art226", "nome": "Aumento nos crimes contra a dignidade sexual", "dispositivo": "CP, art. 226", "natureza": "aumento", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.25, "fracao_max": 0.5, "piso_minimo": false, "escopo": {"tipo": "titulo", "lei": "CP", "valor": "VI"}, "obs": "Aumento de 1/4 no concurso de duas ou mais pessoas; de 1/2 se o agente é ascendente, padrasto, cônjuge, tutor, empregador ou tem autoridade sobre a vítima."},
-    {"id": "aumento-funcional-art327", "nome": "Aumento nos crimes funcionais (cargo em comissão ou direção)", "dispositivo": "CP, art. 327, §2º", "natureza": "aumento", "fase": 3, "sobre": "pena_provisoria", "fracao_min": 0.333, "fracao_max": 0.333, "piso_minimo": false, "escopo": {"tipo": "titulo", "lei": "CP", "valor": "XI"}, "obs": "Aumento de 1/3 quando o autor ocupa cargo em comissão, função de direção ou assessoramento."},
-
-    {"id": "concurso-material", "nome": "Concurso material de crimes", "dispositivo": "CP, art. 69", "natureza": "concurso", "fase": "concurso", "sobre": "especial", "fracao_min": null, "fracao_max": null, "piso_minimo": false, "escopo": {"tipo": "combinador"}, "obs": "Duas ou mais ações, dois ou mais crimes: as penas se SOMAM (cúmulo material). Não é fração."},
-    {"id": "concurso-formal", "nome": "Concurso formal próprio", "dispositivo": "CP, art. 70", "natureza": "concurso", "fase": "concurso", "sobre": "especial", "fracao_min": 0.167, "fracao_max": 0.5, "piso_minimo": false, "escopo": {"tipo": "combinador"}, "obs": "Uma só ação, dois ou mais crimes: a MAIOR pena é aumentada de 1/6 a 1/2. Art. 70, par. único (concurso material benéfico): se o resultado exceder a soma do cúmulo material, aplica-se a soma. O formal IMPRÓPRIO (desígnios autônomos) soma, como no material."},
-    {"id": "concurso-continuado", "nome": "Crime continuado", "dispositivo": "CP, art. 71", "natureza": "concurso", "fase": "concurso", "sobre": "especial", "fracao_min": 0.167, "fracao_max": 0.667, "piso_minimo": false, "escopo": {"tipo": "combinador"}, "obs": "Crimes da mesma espécie nas mesmas condições de tempo, lugar e modo: a maior pena é aumentada de 1/6 a 2/3. Par. único (dolosos, com violência, contra vítimas diferentes): até o triplo, observado o art. 70, par. único."}
+    {
+      "id": "jud-culpabilidade",
+      "nome": "Culpabilidade",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Grau de reprovabilidade da conduta. Cada circunstância judicial desfavorável desloca 1/8 do intervalo da moldura."
+    },
+    {
+      "id": "jud-antecedentes",
+      "nome": "Antecedentes",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Súmula 444 do STJ: inquéritos e ações em curso não agravam a pena-base."
+    },
+    {
+      "id": "jud-conduta-social",
+      "nome": "Conduta social",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Comportamento do agente no meio familiar, profissional e social."
+    },
+    {
+      "id": "jud-personalidade",
+      "nome": "Personalidade do agente",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Exige elementos concretos nos autos; a jurisprudência rejeita valoração genérica."
+    },
+    {
+      "id": "jud-motivos",
+      "nome": "Motivos do crime",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Não pode coincidir com motivo já usado como qualificadora ou agravante (bis in idem)."
+    },
+    {
+      "id": "jud-circunstancias",
+      "nome": "Circunstâncias do crime",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Modo de execução, tempo, lugar — desde que não constituam elementar ou qualificadora."
+    },
+    {
+      "id": "jud-consequencias",
+      "nome": "Consequências do crime",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Resultado que exceda o inerente ao tipo."
+    },
+    {
+      "id": "jud-comportamento-vitima",
+      "nome": "Comportamento da vítima",
+      "dispositivo": "CP, art. 59",
+      "natureza": "judicial",
+      "fase": 1,
+      "sobre": "intervalo",
+      "fracao_min": 0.125,
+      "fracao_max": 0.125,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Circunstância que só pode favorecer o réu — nunca agravar (entendimento consolidado)."
+    },
+    {
+      "id": "agravante-reincidencia",
+      "nome": "Reincidência",
+      "dispositivo": "CP, art. 61, I",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Fração de 1/6 é a praxe (não tabelada em lei). Súmula 241 do STJ: a mesma condenação não serve simultaneamente de agravante e de maus antecedentes."
+    },
+    {
+      "id": "agravante-motivo-futil",
+      "nome": "Motivo fútil",
+      "dispositivo": "CP, art. 61, II, a",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "condicao": "nao_qualificado_pelo_mesmo_motivo",
+      "obs": "Não incide se o motivo fútil já qualifica o tipo (bis in idem)."
+    },
+    {
+      "id": "agravante-motivo-torpe",
+      "nome": "Motivo torpe",
+      "dispositivo": "CP, art. 61, II, a",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "condicao": "nao_qualificado_pelo_mesmo_motivo",
+      "obs": "Idem — não incide onde a torpeza já é qualificadora."
+    },
+    {
+      "id": "agravante-violencia-mulher",
+      "nome": "Violência contra a mulher",
+      "dispositivo": "CP, art. 61, II, f",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Violência contra a mulher na forma da lei específica; não cumula com a majorante da Lei Maria da Penha sobre o mesmo fato."
+    },
+    {
+      "id": "atenuante-menoridade",
+      "nome": "Menoridade relativa (menor de 21 na data do fato)",
+      "dispositivo": "CP, art. 65, I",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Atenuante preponderante (art. 67). Súmula 231 do STJ: não reduz abaixo do mínimo legal."
+    },
+    {
+      "id": "atenuante-senilidade",
+      "nome": "Senilidade (maior de 70 na data da sentença)",
+      "dispositivo": "CP, art. 65, I",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Súmula 231: não reduz abaixo do mínimo."
+    },
+    {
+      "id": "atenuante-confissao",
+      "nome": "Confissão espontânea",
+      "dispositivo": "CP, art. 65, III, d",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Súmula 545 do STJ: incide quando a confissão fundamenta a condenação, ainda que parcial ou retratada."
+    },
+    {
+      "id": "atenuante-desconhecimento-lei",
+      "nome": "Desconhecimento da lei",
+      "dispositivo": "CP, art. 65, II",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Não se confunde com erro de proibição (art. 21), que pode isentar ou reduzir de 1/6 a 1/3 na 3ª fase."
+    },
+    {
+      "id": "atenuante-coacao-ordem",
+      "nome": "Coação resistível, ordem de superior ou violenta emoção",
+      "dispositivo": "CP, art. 65, III, c",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "A coação irresistível exclui a culpabilidade (art. 22); aqui é a resistível."
+    },
+    {
+      "id": "tentativa",
+      "nome": "Tentativa",
+      "dispositivo": "CP, art. 14, II, par. único",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "condicao": "admite_tentativa",
+      "obs": "Redução de 1/3 a 2/3 conforme a proximidade da consumação (iter criminis). Só nos tipos cujo campo `tentativa` do catálogo é Sim."
+    },
+    {
+      "id": "arrependimento-posterior",
+      "nome": "Arrependimento posterior",
+      "dispositivo": "CP, art. 16",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "condicao": "sem_violencia_ou_grave_ameaca",
+      "obs": "Crime sem violência ou grave ameaça à pessoa, com reparação do dano ou restituição da coisa até o recebimento da denúncia."
+    },
+    {
+      "id": "erro-de-proibicao-evitavel",
+      "nome": "Erro de proibição evitável",
+      "dispositivo": "CP, art. 21",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.167,
+      "fracao_max": 0.333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Se inevitável, isenta de pena; se evitável, reduz de 1/6 a 1/3."
+    },
+    {
+      "id": "participacao-menor-importancia",
+      "nome": "Participação de menor importância (concurso de pessoas)",
+      "dispositivo": "CP, art. 29, §1º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.167,
+      "fracao_max": 0.333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "condicao": "papel_participe",
+      "obs": "Modificador do PAPEL DO AGENTE no concurso de pessoas. A cooperação dolosamente distinta (§2º) não usa este modificador: resolve-se pelo tipo menos grave, que já tem linha própria."
+    },
+    {
+      "id": "aumento-honra-art141",
+      "nome": "Aumento nos crimes contra a honra",
+      "dispositivo": "CP, art. 141",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 138",
+          "Art. 139",
+          "Art. 140"
+        ]
+      },
+      "obs": "Aumento de 1/3 se contra o Presidente da República ou chefe de governo estrangeiro; funcionário público em razão da função; na presença de várias pessoas; contra maior de 60 ou pessoa com deficiência. O par. único triplica a pena se cometido por paga."
+    },
+    {
+      "id": "aumento-sexuais-art226",
+      "nome": "Aumento nos crimes contra a dignidade sexual",
+      "dispositivo": "CP, art. 226",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.25,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "titulo",
+        "lei": "CP",
+        "valor": "VI"
+      },
+      "obs": "Aumento de 1/4 no concurso de duas ou mais pessoas; de 1/2 se o agente é ascendente, padrasto, cônjuge, tutor, empregador ou tem autoridade sobre a vítima."
+    },
+    {
+      "id": "aumento-funcional-art327",
+      "nome": "Aumento nos crimes funcionais (cargo em comissão ou direção)",
+      "dispositivo": "CP, art. 327, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "titulo",
+        "lei": "CP",
+        "valor": "XI"
+      },
+      "obs": "Aumento de 1/3 quando o autor ocupa cargo em comissão, função de direção ou assessoramento."
+    },
+    {
+      "id": "concurso-material",
+      "nome": "Concurso material de crimes",
+      "dispositivo": "CP, art. 69",
+      "natureza": "concurso",
+      "fase": "concurso",
+      "sobre": "especial",
+      "fracao_min": null,
+      "fracao_max": null,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "combinador"
+      },
+      "obs": "Duas ou mais ações, dois ou mais crimes: as penas se SOMAM (cúmulo material). Não é fração."
+    },
+    {
+      "id": "concurso-formal",
+      "nome": "Concurso formal próprio",
+      "dispositivo": "CP, art. 70",
+      "natureza": "concurso",
+      "fase": "concurso",
+      "sobre": "especial",
+      "fracao_min": 0.167,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "combinador"
+      },
+      "obs": "Uma só ação, dois ou mais crimes: a MAIOR pena é aumentada de 1/6 a 1/2. Art. 70, par. único (concurso material benéfico): se o resultado exceder a soma do cúmulo material, aplica-se a soma. O formal IMPRÓPRIO (desígnios autônomos) soma, como no material."
+    },
+    {
+      "id": "concurso-continuado",
+      "nome": "Crime continuado",
+      "dispositivo": "CP, art. 71",
+      "natureza": "concurso",
+      "fase": "concurso",
+      "sobre": "especial",
+      "fracao_min": 0.167,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "combinador"
+      },
+      "obs": "Crimes da mesma espécie nas mesmas condições de tempo, lugar e modo: a maior pena é aumentada de 1/6 a 2/3. Par. único (dolosos, com violência, contra vítimas diferentes): até o triplo, observado o art. 70, par. único."
+    },
+    {
+      "id": "agravante-facilitar-outro-crime",
+      "nome": "Facilitar ou assegurar outro crime",
+      "dispositivo": "CP, art. 61, II, b",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Para facilitar ou assegurar a execução, ocultação, impunidade ou vantagem de outro crime.",
+      "condicao": "nao_qualificado_pelo_mesmo_motivo"
+    },
+    {
+      "id": "agravante-traicao-emboscada",
+      "nome": "Traição, emboscada ou dissimulação",
+      "dispositivo": "CP, art. 61, II, c",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Ou outro recurso que dificultou ou tornou impossível a defesa do ofendido.",
+      "condicao": "nao_qualificado_pelo_mesmo_motivo"
+    },
+    {
+      "id": "agravante-meio-cruel",
+      "nome": "Veneno, fogo, explosivo, tortura ou meio insidioso/cruel",
+      "dispositivo": "CP, art. 61, II, d",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Ou meio de que podia resultar perigo comum.",
+      "condicao": "nao_qualificado_pelo_mesmo_motivo"
+    },
+    {
+      "id": "agravante-parentesco",
+      "nome": "Contra ascendente, descendente, irmão ou cônjuge",
+      "dispositivo": "CP, art. 61, II, e",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Vínculo familiar próximo com a vítima."
+    },
+    {
+      "id": "agravante-abuso-relacoes",
+      "nome": "Abuso de autoridade, relações domésticas, coabitação ou hospitalidade",
+      "dispositivo": "CP, art. 61, II, f",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "A mesma alínea agrava a violência contra a mulher (item próprio)."
+    },
+    {
+      "id": "agravante-abuso-poder",
+      "nome": "Abuso de poder ou violação de dever de cargo, ofício, ministério ou profissão",
+      "dispositivo": "CP, art. 61, II, g",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Não incide onde a qualidade de funcionário já é elementar do tipo."
+    },
+    {
+      "id": "agravante-vitima-vulneravel",
+      "nome": "Contra criança, maior de 60 anos, enfermo ou gestante",
+      "dispositivo": "CP, art. 61, II, h",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Não incide se a condição já qualifica ou majora o tipo (bis in idem)."
+    },
+    {
+      "id": "agravante-sob-protecao",
+      "nome": "Ofendido sob imediata proteção da autoridade",
+      "dispositivo": "CP, art. 61, II, i",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Vítima sob custódia ou proteção estatal."
+    },
+    {
+      "id": "agravante-calamidade",
+      "nome": "Em ocasião de calamidade ou desgraça particular do ofendido",
+      "dispositivo": "CP, art. 61, II, j",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Incêndio, naufrágio, inundação ou calamidade pública."
+    },
+    {
+      "id": "agravante-embriaguez-preordenada",
+      "nome": "Embriaguez preordenada",
+      "dispositivo": "CP, art. 61, II, l",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "O agente embriaga-se de propósito para cometer o crime."
+    },
+    {
+      "id": "agravante-organiza-cooperacao",
+      "nome": "Promove, organiza ou dirige a atuação dos demais",
+      "dispositivo": "CP, art. 62, I",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Agravante do concurso de pessoas: papel de liderança."
+    },
+    {
+      "id": "agravante-coage-induz",
+      "nome": "Coage ou induz outrem à execução material",
+      "dispositivo": "CP, art. 62, II",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Agravante do concurso de pessoas."
+    },
+    {
+      "id": "agravante-instiga-subordinado",
+      "nome": "Instiga ou determina a cometer o crime alguém sob sua autoridade ou não punível",
+      "dispositivo": "CP, art. 62, III",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Autoria mediata ou domínio sobre subordinado."
+    },
+    {
+      "id": "agravante-paga-recompensa",
+      "nome": "Executa ou participa mediante paga ou promessa de recompensa",
+      "dispositivo": "CP, art. 62, IV",
+      "natureza": "agravante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Não incide onde a paga já qualifica o tipo."
+    },
+    {
+      "id": "atenuante-relevante-valor",
+      "nome": "Motivo de relevante valor social ou moral",
+      "dispositivo": "CP, art. 65, III, a",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Não incide se o mesmo motivo já privilegia o tipo."
+    },
+    {
+      "id": "atenuante-reparou-dano",
+      "nome": "Procurou evitar ou minorar as consequências, ou reparou o dano",
+      "dispositivo": "CP, art. 65, III, b",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Antes do julgamento. Distingue-se do arrependimento posterior (art. 16), que é da 3ª fase."
+    },
+    {
+      "id": "atenuante-multidao",
+      "nome": "Sob influência de multidão em tumulto não provocado",
+      "dispositivo": "CP, art. 65, III, e",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Tumulto a que o agente não deu causa."
+    },
+    {
+      "id": "atenuante-inominada",
+      "nome": "Atenuante inominada",
+      "dispositivo": "CP, art. 66",
+      "natureza": "atenuante",
+      "fase": 2,
+      "sobre": "pena_base",
+      "fracao_min": 0.1667,
+      "fracao_max": 0.1667,
+      "piso_minimo": true,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Circunstância relevante, anterior ou posterior ao crime, ainda que não prevista em lei."
+    },
+    {
+      "id": "semi-imputabilidade",
+      "nome": "Semi-imputabilidade",
+      "dispositivo": "CP, art. 26, par. único",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Perturbação da saúde mental que reduz a capacidade de entendimento. Alternativa à medida de segurança."
+    },
+    {
+      "id": "embriaguez-fortuita-incompleta",
+      "nome": "Embriaguez fortuita incompleta",
+      "dispositivo": "CP, art. 28, §2º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "geral"
+      },
+      "obs": "Caso fortuito ou força maior que reduziu — sem eliminar — a capacidade de entendimento. Se completa, isenta (§1º)."
+    }
   ]
 }

@@ -472,11 +472,25 @@
 .efeitoMais { color: var(--ifm-color-danger-dark); font-weight: 600; }
 .efeitoMenos { color: var(--ifm-color-success-dark); font-weight: 600; }
 
-/* ── Concurso de crimes (arts. 69-71) ───────────────────────────────────── */
+/* ── Concurso de crimes (arts. 69-71) e de pessoas (art. 29) ─────────────── */
+
+/* As duas seções dividem a linha: cada uma é estreita o bastante, e juntas
+   encurtam bastante a página. Abaixo de 900px voltam a empilhar. */
+.concursosGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 0 2rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .concursosGrid { grid-template-columns: 1fr; }
+}
+
 .concurso {
   margin-top: 1.75rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--ifm-color-emphasis-300);
+  min-width: 0;
 }
 .concursoLista {
   display: flex;
@@ -484,31 +498,51 @@
   gap: 0.5rem;
   margin: 0.75rem 0;
 }
+/* O chip identifica o dispositivo (Art. X · Diploma), nomeia o preceito e
+   fecha com a pena — nesta ordem, porque é assim que se lê uma citação. */
 .concursoChip {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.45rem;
-  padding: 0.3rem 0.6rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 1.5rem 0.45rem 0.65rem;
   border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--ifm-background-surface-color);
-  font-size: 0.82rem;
+  max-width: 100%;
 }
-.concursoChip em {
-  font-style: normal;
+.concursoChipFoco {
+  border-color: var(--ifm-color-primary);
+  padding-right: 0.65rem;
+}
+.chipRef {
+  font-size: 0.74rem;
   font-weight: 600;
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-emphasis-700);
 }
-.concursoChip button {
+.chipNome {
+  font-size: 0.84rem;
+  line-height: 1.3;
+}
+.chipPena {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  font-variant-numeric: tabular-nums;
+}
+.chipRemover {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.25rem;
   border: none;
   background: transparent;
   color: var(--ifm-color-emphasis-600);
   cursor: pointer;
   font-size: 1rem;
   line-height: 1;
-  padding: 0 0 0 0.15rem;
+  padding: 0.1rem;
 }
-.concursoChip button:hover { color: var(--ifm-color-danger); }
+.chipRemover:hover { color: var(--ifm-color-danger); }
 .concursoBusca { position: relative; margin-bottom: 0.9rem; }
 .concursoBusca input {
   width: 100%;
@@ -551,25 +585,40 @@
   font-size: 0.75rem;
   color: var(--ifm-color-emphasis-600);
 }
-.concursoTabela {
-  width: 100%;
-  border-collapse: collapse;
+/* Modalidades como opções marcáveis, e não como tabela: a escolha muda os
+   benefícios, então precisa parecer um controle — não um relatório. */
+.concursoOpcoes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.concursoOpcao {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  cursor: pointer;
   font-size: 0.85rem;
 }
-.concursoTabela th,
-.concursoTabela td {
-  padding: 0.5rem 0.6rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-  text-align: left;
-  vertical-align: top;
+.concursoOpcao:hover { background: var(--ifm-color-emphasis-100); }
+.concursoOpcaoNome { flex: 1; min-width: 0; }
+.concursoOpcaoNome em {
+  display: block;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: var(--ifm-color-emphasis-600);
 }
 .concursoFavoravel {
   background: var(--ifm-color-success-contrast-background);
 }
-.concursoDisp {
-  display: block;
-  font-size: 0.73rem;
-  color: var(--ifm-color-emphasis-600);
+.concursoAtiva {
+  border-color: var(--ifm-color-primary);
+  box-shadow: inset 0 0 0 1px var(--ifm-color-primary);
 }
 .concursoTotal {
   font-weight: 700;
@@ -577,12 +626,52 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.concursoMemoria {
-  font-size: 0.78rem;
-  color: var(--ifm-color-emphasis-700);
-}
 .concursoNota {
   margin: 0.6rem 0 0;
   font-size: 0.8rem;
   color: var(--ifm-color-emphasis-700);
+  line-height: 1.55;
+}
+
+/* Papel do agente no concurso de pessoas (art. 29). */
+.papelLista {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.papelOpcao {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.87rem;
+}
+.papelOpcao:hover { background: var(--ifm-color-emphasis-100); }
+.papelNome { flex: 1; min-width: 0; }
+.papelNome em {
+  display: block;
+  font-style: normal;
+  font-size: 0.73rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.papelNota {
+  margin: 0.25rem 0 0 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Marca de onde veio a pena concreta, para que a barra manual sobreposta pelo
+   cálculo não pareça um bug. */
+.penaOrigem {
+  margin-left: 0.4rem;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: var(--ifm-color-primary);
 }

@@ -47,23 +47,27 @@ export default function Dosimetria({
   crime,
   penaMin,
   penaMax,
+  sel,
+  setSel,
   onPenaDefinitiva,
 }: {
   crime: Crime;
   /** Moldura corrente (respeita a simulação legislativa das barras). */
   penaMin: number;
   penaMax: number;
+  /** Seleção compartilhada com o painel de concurso de pessoas. */
+  sel: SelecaoModificador[];
+  setSel: React.Dispatch<React.SetStateAction<SelecaoModificador[]>>;
   onPenaDefinitiva: (v: number | null) => void;
 }) {
-  const [sel, setSel] = useState<SelecaoModificador[]>([]);
-
-  // Troca de tipo penal zera as escolhas — são do caso, não do catálogo.
-  useEffect(() => {
-    setSel([]);
-  }, [crime.id]);
-
+  // Os modificadores do PAPEL DO AGENTE (participação de menor importância)
+  // são oferecidos no painel de Concurso de pessoas, não aqui — apesar de
+  // serem, no cálculo, causas de diminuição da 3ª fase.
   const aplicaveis = useMemo(
-    () => modificadoresAplicaveis(MODIFICADORES, crime),
+    () =>
+      modificadoresAplicaveis(MODIFICADORES, crime).filter(
+        (m) => m.condicao !== 'papel_participe',
+      ),
     [crime.id],
   );
 
