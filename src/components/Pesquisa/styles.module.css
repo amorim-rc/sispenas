@@ -374,3 +374,326 @@
   font-weight: 700;
   font-family: var(--ifm-font-family-monospace);
 }
+
+/* ── Dosimetria por fases (art. 68) ─────────────────────────────────────── */
+.dosimetria {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+/* Cada fase é um bloco visualmente separado: a base de cálculo e os limites
+   mudam de uma para outra, e a leitura precisa deixar isso evidente. */
+.fasesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.9rem;
+  margin: 0.9rem 0 1.1rem;
+}
+.faseBloco {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-top: 3px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+}
+.faseTitulo {
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+  color: var(--ifm-color-primary);
+}
+.faseDica {
+  margin: 0 0 0.6rem;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--ifm-color-emphasis-600);
+}
+.faseVazia {
+  margin: 0;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--ifm-color-emphasis-500);
+}
+/* Teto de altura = o tamanho natural da 1ª fase (8 circunstâncias do art. 59).
+   Os blocos já se igualam pelo grid; sem o teto, quem dita a altura dos três é
+   a 2ª fase, com suas 27 agravantes e atenuantes. Daqui em diante, rola. */
+.faseLista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 27rem;
+  overflow-y: auto;
+  /* Espaço para a barra não encostar no texto, e um respiro para que o corte
+     no fim da lista se leia como continuação e não como fim. */
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+}
+.faseLista::-webkit-scrollbar { width: 8px; }
+.faseLista::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+}
+.faseLista::-webkit-scrollbar-thumb:hover { background: var(--ifm-color-emphasis-400); }
+.faseItem { margin-bottom: 0.45rem; }
+/* Sem isto a margem do último item empurra a 1ª fase 7px além do teto e ela
+   ganha uma barra de rolagem que não rola nada. */
+.faseItem:last-child { margin-bottom: 0; }
+.faseLabel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem;
+  align-items: baseline;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+.faseNome { grid-column: 2; }
+.faseDisp {
+  grid-column: 2;
+  font-size: 0.72rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.faseFracao {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.25rem 0 0 1.4rem;
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-700);
+}
+.faseFracao input[type='range'] { flex: 1; max-width: 120px; }
+
+.dosiResultado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+}
+.dosiEtapa { display: flex; flex-direction: column; }
+.dosiRotulo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ifm-color-emphasis-600);
+}
+.dosiEtapa strong { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.dosiFinal strong { color: var(--ifm-color-primary); font-size: 1.2rem; }
+.dosiSeta { color: var(--ifm-color-emphasis-500); }
+.dosiNota {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--ifm-color-warning-dark);
+}
+.dosiMemoria {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+}
+.dosiMemoria summary { cursor: pointer; color: var(--ifm-color-emphasis-700); }
+.dosiMemoria ol { margin: 0.5rem 0 0; padding-left: 1.4rem; line-height: 1.7; }
+.efeitoMais { color: var(--ifm-color-danger-dark); font-weight: 600; }
+.efeitoMenos { color: var(--ifm-color-success-dark); font-weight: 600; }
+
+/* ── Concurso de crimes (arts. 69-71) e de pessoas (art. 29) ─────────────── */
+
+/* As duas seções dividem a linha: cada uma é estreita o bastante, e juntas
+   encurtam bastante a página. Abaixo de 900px voltam a empilhar. */
+.concursosGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 0 2rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .concursosGrid { grid-template-columns: 1fr; }
+}
+
+.concurso {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  min-width: 0;
+}
+.concursoLista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+/* O chip identifica o dispositivo (Art. X · Diploma), nomeia o preceito e
+   fecha com a pena — nesta ordem, porque é assim que se lê uma citação. */
+.concursoChip {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 1.5rem 0.45rem 0.65rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  max-width: 100%;
+}
+.concursoChipFoco {
+  border-color: var(--ifm-color-primary);
+  padding-right: 0.65rem;
+}
+.chipRef {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+}
+.chipNome {
+  font-size: 0.84rem;
+  line-height: 1.3;
+}
+.chipPena {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  font-variant-numeric: tabular-nums;
+}
+.chipRemover {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.25rem;
+  border: none;
+  background: transparent;
+  color: var(--ifm-color-emphasis-600);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.1rem;
+}
+.chipRemover:hover { color: var(--ifm-color-danger); }
+.concursoBusca { position: relative; margin-bottom: 0.9rem; }
+.concursoBusca input {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.88rem;
+}
+.concursoSugestoes {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 6px 18px var(--ifm-color-emphasis-200);
+}
+.concursoSugestoes button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.7rem;
+  border: none;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  font-size: 0.84rem;
+}
+.concursoSugestoes button:hover { background: var(--ifm-color-emphasis-200); }
+.concursoSugestoes button span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+}
+/* Modalidades como opções marcáveis, e não como tabela: a escolha muda os
+   benefícios, então precisa parecer um controle — não um relatório. */
+.concursoOpcoes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.concursoOpcao {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.concursoOpcao:hover { background: var(--ifm-color-emphasis-100); }
+.concursoOpcaoNome { flex: 1; min-width: 0; }
+.concursoOpcaoNome em {
+  display: block;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.concursoFavoravel {
+  background: var(--ifm-color-success-contrast-background);
+}
+.concursoAtiva {
+  border-color: var(--ifm-color-primary);
+  box-shadow: inset 0 0 0 1px var(--ifm-color-primary);
+}
+.concursoTotal {
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.concursoNota {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.55;
+}
+
+/* Papel do agente no concurso de pessoas (art. 29). */
+.papelLista {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.papelOpcao {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.87rem;
+}
+.papelOpcao:hover { background: var(--ifm-color-emphasis-100); }
+.papelNome { flex: 1; min-width: 0; }
+.papelNome em {
+  display: block;
+  font-style: normal;
+  font-size: 0.73rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.papelNota {
+  margin: 0.25rem 0 0 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Marca de onde veio a pena concreta, para que a barra manual sobreposta pelo
+   cálculo não pareça um bug. */
+.penaOrigem {
+  margin-left: 0.4rem;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: var(--ifm-color-primary);
+}

@@ -17,6 +17,7 @@ import {
   avaliarCatalogo,
   cenarioReversoPadrao,
   contar,
+  contarDuasUnidades,
   crimesComPenaPrivativa,
   type BasePenaConcreta,
   type CenarioReverso,
@@ -144,6 +145,9 @@ export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDe
     [def.id, params, crimes, rev],
   );
   const contagem = useMemo(() => contar(linhas), [linhas]);
+  // Alcance nas duas unidades: por cenário de condenação (cada moldura) e por
+  // dispositivo (as formas de um mesmo crime contam uma vez só).
+  const duasUnidades = useMemo(() => contarDuasUnidades(linhas), [linhas]);
 
   // Comparação com o estado legal vigente: quantos tipos o benefício alcança hoje?
   //
@@ -404,6 +408,33 @@ export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDe
             <span className={styles.resumoLabel}>Todos</span>
             <span className={styles.resumoPct}>100%</span>
           </button>
+        </div>
+
+        {/* Alcance nas duas unidades — a granularidade muda a estatística. */}
+        <div className={styles.duasUnidades}>
+          <span className={styles.duLabel}>
+            Alcance (cabíveis + condicionais)
+            <Ajuda texto="A mesma pergunta responde a dois números, conforme a unidade. Por CENÁRIO DE CONDENAÇÃO, cada moldura de pena conta (homicídio simples, qualificado e culposo são três). Por DISPOSITIVO, as formas de um mesmo crime contam uma vez só, e basta uma delas ser alcançada. A medida por cenário é a comparável ao SISPENAS original de 2008." />
+          </span>
+          {([
+            {
+              rotulo: 'cenários de condenação',
+              n: duasUnidades.cenarios.cabivel + duasUnidades.cenarios.condicional,
+              total: duasUnidades.totalCenarios,
+            },
+            {
+              rotulo: 'dispositivos (crimes distintos)',
+              n: duasUnidades.dispositivos.cabivel + duasUnidades.dispositivos.condicional,
+              total: duasUnidades.totalDispositivos,
+            },
+          ] as const).map((u) => (
+            <span key={u.rotulo} className={styles.duItem}>
+              <strong>{u.n}</strong> de {u.total} {u.rotulo}
+              <em>
+                {u.total > 0 ? ((u.n / u.total) * 100).toFixed(1) : '0'}%
+              </em>
+            </span>
+          ))}
         </div>
 
         {editado && (

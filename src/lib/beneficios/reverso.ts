@@ -136,3 +136,60 @@ export function contar(linhas: LinhaReversa[]): Contagem {
   for (const l of linhas) out[l.resultado.status] += 1;
   return out;
 }
+
+/** Artigo-base de um registro ("Art. 121, §2º, I" → "Art. 121"). */
+function artigoBase(artigo: string): string {
+  const m = /^(Art\.?\s*\d+(?:-[A-Z])?)/i.exec(artigo.trim());
+  return m ? m[1] : artigo.trim();
+}
+
+function leiBase(lei: string): string {
+  return lei.replace(/\s*\(atualiz\.?\)/, '').trim();
+}
+
+/** Melhor status entre variantes: basta uma alcançar para o crime ser alcançado. */
+const RANK: Record<Status, number> = {cabivel: 2, condicional: 1, incabivel: 0};
+
+export interface AlcanceDuasUnidades {
+  /** Por CENÁRIO DE CONDENAÇÃO — cada moldura de pena (linha do catálogo). */
+  cenarios: Contagem;
+  totalCenarios: number;
+  /**
+   * Por DISPOSITIVO — as formas de um mesmo crime (simples, qualificada,
+   * privilegiada) contam uma vez só. Um dispositivo é alcançado quando ao
+   * menos uma de suas formas o é.
+   */
+  dispositivos: Contagem;
+  totalDispositivos: number;
+}
+
+/**
+ * Alcance de um benefício nas DUAS unidades de medida.
+ *
+ * A distinção importa porque a granularidade muda a estatística: um crime
+ * muito desdobrado (homicídio, furto) pesa uma vez por moldura na contagem por
+ * cenário, e uma única vez na contagem por dispositivo. É também o que torna o
+ * número comparável ao do SISPENAS original de 2008, que media em unidades
+ * mais granulares.
+ */
+export function contarDuasUnidades(linhas: LinhaReversa[]): AlcanceDuasUnidades {
+  const cenarios = contar(linhas);
+
+  const melhorPorDispositivo = new Map<string, Status>();
+  for (const l of linhas) {
+    const chave = `${leiBase(l.crime.lei)}|${artigoBase(l.crime.artigo)}`;
+    const atual = melhorPorDispositivo.get(chave);
+    if (atual === undefined || RANK[l.resultado.status] > RANK[atual]) {
+      melhorPorDispositivo.set(chave, l.resultado.status);
+    }
+  }
+  const dispositivos: Contagem = {cabivel: 0, condicional: 0, incabivel: 0};
+  for (const st of melhorPorDispositivo.values()) dispositivos[st] += 1;
+
+  return {
+    cenarios,
+    totalCenarios: linhas.length,
+    dispositivos,
+    totalDispositivos: melhorPorDispositivo.size,
+  };
+}
