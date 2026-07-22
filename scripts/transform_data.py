@@ -85,6 +85,15 @@ CORRECOES_MORTE = {
     # cobrindo TANTO lesão grave QUANTO morte no mesmo registro. Não é possível
     # afirmar o resultado morte a partir deste registro — fica em revisão.
     # (mantido False; ver relatório de qualidade)
+    #
+    # Vicaricídio (art. 121-B, incluído pela Lei 15.384/2026): é homicídio, mas
+    # o nomen juris não contém "homicídio" nem "morte", e a heurística deriva do
+    # NOME. Sem estas linhas o crime deixaria de constar como resultado morte —
+    # com efeito direto sobre livramento condicional e progressão.
+    1562: True,
+    1563: True,
+    1564: True,
+    1565: True,
 }
 
 # ── Perdão judicial (art. 107, IX, CP) ──────────────────────────────────────
@@ -362,13 +371,22 @@ def parse_pena_range(obs: str):
 
 
 def _rotulo_de_meses(meses: float) -> str:
-    """Rótulo de fallback quando não há intervalo parseável (usa pena_* em meses)."""
+    """Rótulo de fallback quando não há intervalo parseável (usa pena_* em meses).
+
+    Acima de dois anos a pena é dita em anos, e em "anos e meses" quando não é
+    múltipla de doze: as causas de aumento produzem molduras quebradas (20 anos
+    aumentados de 1/3 são 320 meses), e "320 meses a 60 anos" põe duas unidades
+    diferentes nas duas pontas do mesmo intervalo.
+    """
     if meses <= 0:
         return "—"
     if meses < 1:
         return _rotulo(round(meses * 30), "dias")
     if float(meses).is_integer() and meses % 12 == 0:
         return _rotulo(int(meses // 12), "anos")
+    if float(meses).is_integer() and meses >= 24:
+        anos, resto = divmod(int(meses), 12)
+        return f"{_rotulo(anos, 'anos')} e {_rotulo(resto, 'meses')}"
     return _rotulo(int(meses) if float(meses).is_integer() else round(meses, 1), "meses")
 
 

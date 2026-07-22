@@ -1,12 +1,12 @@
 {
- "total_tipos_penais": 1329,
- "condutas_base": 948,
- "com_pena_privativa": 1304,
+ "total_tipos_penais": 1341,
+ "condutas_base": 949,
+ "com_pena_privativa": 1316,
  "sem_pena_privativa": 25,
- "dispositivos_distintos": 1329,
+ "dispositivos_distintos": 1341,
  "registros_duplicados": 0,
  "duplicatas_divergentes": 0,
- "resultado_morte": 68,
+ "resultado_morte": 80,
  "perdao_judicial_previsto": 12,
  "multa_ambigua": 0,
  "perdao_judicial_sem_tipo": [
