@@ -1,0 +1,397 @@
+#!/usr/bin/env python3
+"""Bootstrap das entradas do changelog em arquivos TypeScript (um por entrada).
+
+Uso ÚNICO: migra o histórico de release-notes/*.md para o novo formato
+src/data/changelog/entries/<ano>/<id>.ts. Depois disto, entradas novas são
+criadas à mão (ver docs/create-changelog-entry.md). Rodar de novo sobrescreve.
+"""
+import io
+import json
+import sys
+from pathlib import Path
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+
+BASE = "https://amorim-rc.github.io/sispenas"
+RAIZ = Path(__file__).resolve().parent.parent / "src" / "data" / "changelog" / "entries"
+
+# (id, date, title, summary, [body...], tipo, [areas...], version, [links...])
+ENTRADAS = [
+    # ── v1.2.1 — esta atualização ─────────────────────────────────────────────
+    dict(
+        id="2026-07-27-notas-de-atualizacoes-em-feed",
+        date="2026-07-27", version="v1.2.1", tipo="novidade",
+        areas=["Interface", "Documentação"],
+        title="Notas de atualizações reformuladas em feed",
+        summary=(
+            "A página de notas deixa de ser uma lista de posts por versão e passa a ser um "
+            "feed de mudanças: cada alteração é uma entrada datada, resumida em um parágrafo, "
+            "com tags de tipo e área e abertura para os detalhes."
+        ),
+        body=[
+            "Os filtros ficam num menu vertical — Tipo, Área e Versão —, com multisseleção. "
+            "Quando a tela aperta, o menu recolhe num botão de Filtros, o que já adapta a "
+            "navegação para o celular.",
+            "Cada entrada aponta, na abertura, para o local exato onde a mudança aparece no site.",
+        ],
+        links=[{"label": "Ver o feed", "href": f"{BASE}/release-notes"}],
+    ),
+    dict(
+        id="2026-07-27-changelog-em-arquivos-typescript",
+        date="2026-07-27", version="v1.2.1", tipo="melhoria", areas=["Documentação"],
+        title="Cada entrada do changelog é um arquivo próprio",
+        summary=(
+            "As notas passam a viver em arquivos TypeScript, um por entrada, agregados "
+            "automaticamente. Adicionar uma nota é criar um arquivo; não há mais lista central "
+            "a manter em sincronia."
+        ),
+        body=[
+            "O formato foi desenhado para que um backend futuro produza exatamente o mesmo JSON "
+            "sem tocar no frontend.",
+            "O fluxo de criação está documentado em create-changelog-entry, com regras para que "
+            "uma IA produza esses arquivos corretamente.",
+        ],
+    ),
+    dict(
+        id="2026-07-27-nota-da-release-montada-das-entradas",
+        date="2026-07-27", version="v1.2.1", tipo="melhoria", areas=["Documentação"],
+        title="A nota da Release no GitHub é montada a partir das entradas",
+        summary=(
+            "A nota grande de cada versão deixa de ser escrita à mão: o workflow de release "
+            "concatena as entradas do changelog daquela versão. Um dado, dois destinos — o feed "
+            "no site e o corpo da Release."
+        ),
+        body=[
+            "Fonte única: as entradas. A Release no GitHub e o feed no site passam a ler a mesma "
+            "coisa, e não podem mais divergir.",
+        ],
+    ),
+    dict(
+        id="2026-07-27-acervo-historico-pagina-propria",
+        date="2026-07-27", version="v1.2.1", tipo="melhoria", areas=["Acervo histórico"],
+        title="Acervo histórico como página própria",
+        summary=(
+            "O Acervo histórico sai da barra lateral da Documentação e passa a ser uma página "
+            "autônoma, no formato da página do catálogo — por ora apenas com os textos, já que "
+            "a busca ainda não foi implementada."
+        ),
+        body=[
+            "Continua acessível pelo menu Pesquisa. A entrega da busca própria, que separa os "
+            "tipos revogados dos vigentes, é a meta da v1.4.0.",
+        ],
+        links=[{"label": "Ver o Acervo histórico", "href": f"{BASE}/docs/acervo-historico"}],
+    ),
+
+    # ── v1.2.0 — Dosimetria completa ──────────────────────────────────────────
+    dict(
+        id="2026-07-22-dosimetria-tres-fases-art-68",
+        date="2026-07-22", version="v1.2.0", tipo="novidade", areas=["Dosimetria"],
+        title="Dosimetria pelas três fases do art. 68",
+        summary=(
+            "O sistema deixa de partir da pena cominada e passa a percorrer as três fases da "
+            "dosimetria — pena-base, intermediária e definitiva —, com a pena apurada alimentando "
+            "os benefícios. Cada fase incide sobre uma base diferente e respeita os seus próprios "
+            "limites."
+        ),
+        body=[
+            "A separação por fase não é organização visual: cada fase incide sobre uma base "
+            "diferente e obedece a limites próprios — e é aí que uma implementação ingênua erraria.",
+            "A 1ª fase move 1/8 do intervalo da moldura por circunstância judicial e fica presa à "
+            "moldura. A 2ª move 1/6 da pena-base e também fica presa à moldura, com o piso na "
+            "Súmula 231 do STJ. A 3ª incide sobre a pena intermediária, com a fração própria de "
+            "cada causa, e é a única que pode romper a moldura.",
+            "É essa assimetria que permite a tentativa levar a pena abaixo do mínimo cominado — o "
+            "que a 2ª fase jamais faria.",
+        ],
+        links=[{"label": "Ver a dosimetria no homicídio simples", "href": f"{BASE}/pesquisa/tipos?tipo=1"}],
+    ),
+    dict(
+        id="2026-07-22-concurso-de-crimes-define-beneficios",
+        date="2026-07-22", version="v1.2.0", tipo="novidade",
+        areas=["Dosimetria", "Benefícios"],
+        title="O concurso de crimes passa a definir os benefícios",
+        summary=(
+            "Além de comparar material, formal e continuado, agora se escolhe a modalidade — e a "
+            "pena cumulada substitui a pena do tipo isolado no cálculo dos benefícios. Condenado "
+            "em concurso, é o total, e não a pena de um crime só, que decide o que o réu pode "
+            "pleitear."
+        ),
+        body=[
+            "A modalidade é de marca única e desmarcável. Comparam-se material (art. 69, soma), "
+            "formal (art. 70) e continuado (art. 71), com o resultado mais favorável ao réu em "
+            "destaque e a regra do art. 70, parágrafo único aplicada: a exasperação nunca supera "
+            "a soma do cúmulo material.",
+            "Exibir as modalidades sem aplicá-las era mostrar a conta certa no lugar errado.",
+        ],
+        links=[{"label": "Ver o concurso no homicídio simples", "href": f"{BASE}/pesquisa/tipos?tipo=1"}],
+    ),
+    dict(
+        id="2026-07-22-concurso-de-pessoas-papel-do-agente",
+        date="2026-07-22", version="v1.2.0", tipo="novidade", areas=["Dosimetria"],
+        title="Concurso de pessoas: o papel do agente",
+        summary=(
+            "Novo painel para o art. 29: escolhido o papel — autor/coautor ou partícipe de menor "
+            "importância —, a redução entra no encadeamento das três fases e pode levar a pena "
+            "abaixo do mínimo. Fecha a lacuna do agente com participação reduzida condenado pelo "
+            "mesmo tipo do autor."
+        ),
+        body=[
+            "A cooperação dolosamente distinta (art. 29, §2º) não se resolve aqui: quem quis "
+            "participar de crime menos grave responde pela pena daquele crime, que tem linha "
+            "própria no catálogo.",
+        ],
+        links=[{"label": "Ver o painel de concurso de pessoas", "href": f"{BASE}/pesquisa/tipos?tipo=1"}],
+    ),
+    dict(
+        id="2026-07-22-beneficios-alcance-em-duas-unidades",
+        date="2026-07-22", version="v1.2.0", tipo="melhoria", areas=["Benefícios"],
+        title="Alcance dos benefícios em duas unidades",
+        summary=(
+            "A busca por benefício passa a reportar o alcance nas duas granularidades — por "
+            "cenário de condenação e por dispositivo —, e a diferença entre elas é a própria lição "
+            "sobre como se mede a política penal."
+        ),
+        body=[
+            "Por cenário, cada moldura conta (homicídio simples, qualificado e culposo são três); "
+            "por dispositivo, as formas de um mesmo crime contam uma vez. A medida por cenário é a "
+            "comparável ao SISPENAS original de 2008 — que reportava 36,17% para a transação "
+            "penal, contra os 37,1% de hoje.",
+        ],
+        links=[{"label": "Ver na busca por benefício", "href": f"{BASE}/pesquisa/beneficios"}],
+    ),
+    dict(
+        id="2026-07-22-art-121-refeito-contra-o-texto-compilado",
+        date="2026-07-22", version="v1.2.0", tipo="correcao", areas=["Tipos penais"],
+        title="Art. 121 refeito contra o texto compilado",
+        summary=(
+            "Ao trabalhar a 3ª fase, o artigo mais consultado do Código revelou-se desatualizado "
+            "em três frentes ao mesmo tempo. Saem cinco linhas revogadas ou duplicadas, "
+            "corrigem-se sete e entram treze — inclusive um crime novo, o vicaricídio. O catálogo "
+            "vai de 1.333 a 1.341 tipos."
+        ),
+        body=[
+            "Saem cinco linhas que afirmavam vigente o que não é: o §2º, VI, o §2º-A e seu inciso, "
+            "e o §7º — todos revogados pela Lei 14.994/2024 — e uma duplicata do §4º.",
+            "Corrigem-se sete: o §2º, VIII dizia uso permitido onde a lei diz uso restrito ou "
+            "proibido; o §2º, VII virou VII, a; o §6º chamava-se culposo e tinha a mínima sem o "
+            "aumento; e os quatro aumentos do feminicídio estavam no §1º quando estão no §2º, com "
+            "moldura calculada sobre os 12 a 30 anos da época em que era qualificadora, e não os "
+            "20 a 40 do crime autônomo.",
+            "Entram treze, de leis que o levantamento anterior não alcançou — até o art. 121-B, o "
+            "vicaricídio (Lei 15.384/2026). Acuidade jurídica é o valor central: dado errado "
+            "publicado é pior que dado ausente.",
+        ],
+        links=[{"label": "Ver o art. 121-B (vicaricídio) no catálogo", "href": f"{BASE}/pesquisa/tipos?tipo=1562"}],
+    ),
+    dict(
+        id="2026-07-22-notas-de-atualizacoes-em-portugues",
+        date="2026-07-22", version="v1.2.0", tipo="melhoria", areas=["Interface"],
+        title="“Notas de atualizações” no lugar de “Release notes”",
+        summary=(
+            "A aba do changelog passa a ter nome em português. A rota /release-notes foi mantida "
+            "de propósito: mudá-la quebraria links já publicados."
+        ),
+        body=[
+            "Pela tabela de versionamento, mudar a rota seria alteração estrutural (X.0.0), porque "
+            "quebra URLs públicas — por isso só o rótulo mudou.",
+        ],
+    ),
+
+    # ── Histórico (uma entrada por versão) ────────────────────────────────────
+    dict(
+        id="2026-07-21-como-citar-e-acervo-na-pesquisa",
+        date="2026-07-21", version="v1.1.9", tipo="melhoria", areas=["Documentação", "Interface"],
+        title="Como citar em destaque e Acervo histórico na aba Pesquisa",
+        summary=(
+            "Duas melhorias voltadas ao uso acadêmico e à navegação: o modo de citação do SISPENAS "
+            "ganha destaque na tela inicial e em páginas da Pesquisa, e o Acervo histórico passa a "
+            "ser alcançado pelo menu Pesquisa."
+        ),
+        body=[
+            "A citação em destaque reduz o atrito de quem precisa referenciar a ferramenta em "
+            "pesquisa ou publicação.",
+        ],
+    ),
+    dict(
+        id="2026-07-21-panorama-na-pagina-inicial",
+        date="2026-07-21", version="v1.1.8", tipo="novidade", areas=["Documentação"],
+        title="Panorama dinâmico na página inicial",
+        summary=(
+            "A página de abertura passa a dizer, com números atualizados a cada build, quantas "
+            "condutas estão tipificadas, quantos cenários de condenação a lei comporta e quantos "
+            "benefícios penais existem."
+        ),
+        body=[
+            "Os três números saem do próprio catálogo derivado no build — não são digitados à mão, "
+            "e por isso não envelhecem em silêncio. O roadmap, em paralelo, ficou enxuto.",
+        ],
+        links=[{"label": "Ver a tela inicial", "href": f"{BASE}/"}],
+    ),
+    dict(
+        id="2026-07-21-verificacao-da-deduplicacao",
+        date="2026-07-21", version="v1.1.7", tipo="correcao", areas=["Tipos penais"],
+        title="Verificação rigorosa da deduplicação e limpeza de encoding",
+        summary=(
+            "Revisão de segurança sobre a deduplicação da versão anterior, provocada por uma "
+            "pergunta direta: havia mesmo só duplicatas? A reconferência achou descrições trocadas "
+            "e mais duplicatas escondidas, todas corrigidas."
+        ),
+        body=[
+            "A lição ficou registrada: deduplicar por (lei, artigo) exato não basta — é preciso "
+            "conferir sem o caput, sem o “(atualiz.)” e com os sufixos de artigo, e rodar "
+            "similaridade de nome antes de remover.",
+        ],
+    ),
+    dict(
+        id="2026-07-21-deduplicacao-do-catalogo",
+        date="2026-07-21", version="v1.1.6", tipo="correcao", areas=["Tipos penais"],
+        title="Deduplicação do catálogo e desmembramento de alíneas",
+        summary=(
+            "Revisão detalhada de todos os tipos penais. Foram removidos cerca de 139 dispositivos "
+            "repetidos em três classes que quebravam em silêncio, e as alíneas passaram a ser "
+            "desmembradas como subdivisões próprias."
+        ),
+        body=[
+            "As três classes de duplicata: o mesmo crime com e sem caput, com o rótulo "
+            "“(atualiz.)” e com sufixos de artigo. Todas conferidas contra a fonte antes "
+            "da remoção.",
+        ],
+        links=[{"label": "Ver a busca por tipo penal", "href": f"{BASE}/pesquisa/tipos"}],
+    ),
+    dict(
+        id="2026-07-21-codigo-penal-militar-completo",
+        date="2026-07-21", version="v1.1.5", tipo="novidade", areas=["Tipos penais"],
+        title="Código Penal Militar completo e conferido",
+        summary=(
+            "O Código Penal Militar (Decreto-Lei nº 1.001/69) era a última e maior lacuna do "
+            "catálogo. Foi catalogado por inteiro, em duas frentes — crimes de paz e de guerra —, "
+            "e conferido dispositivo a dispositivo."
+        ),
+        body=[
+            "A conferência revelou e corrigiu erros sistemáticos de registro (penas e artigos "
+            "trocados) que vinham da importação anterior.",
+        ],
+    ),
+    dict(
+        id="2026-07-20-conferencia-nivel-tipo-cp",
+        date="2026-07-20", version="v1.1.4", tipo="correcao", areas=["Tipos penais"],
+        title="Conferência em nível de tipo: desmembramento e gaps do CP",
+        summary=(
+            "Conferência dispositivo a dispositivo da legislação, com o desmembramento de tipos "
+            "que estavam agregados num só registro e o preenchimento de lacunas do próprio Código "
+            "Penal."
+        ),
+        body=[
+            "É a Fase 2 do roadmap de conferência: depois de ter todos os diplomas, olhar cada "
+            "preceito de perto.",
+        ],
+    ),
+    dict(
+        id="2026-07-20-cobertura-diplomas-loterias-eleitoral",
+        date="2026-07-20", version="v1.1.3", tipo="novidade", areas=["Tipos penais"],
+        title="Cobertura: todos os diplomas, loterias e Código Eleitoral",
+        summary=(
+            "Avanço grande de cobertura: nenhum diploma com preceito penal em vigor fica de fora "
+            "do inventário. Entram, entre outros, as contravenções de loterias, os crimes "
+            "eleitorais e a legislação esparsa ainda não coletada."
+        ),
+        body=[
+            "Fecha a Fase 1 do roadmap de conferência — o denominador — com todos os diplomas "
+            "levantados.",
+        ],
+    ),
+    dict(
+        id="2026-07-19-denominador-da-cobertura",
+        date="2026-07-19", version="v1.1.2", tipo="novidade", areas=["Tipos penais"],
+        title="O denominador da cobertura: 1.172 preceitos",
+        summary=(
+            "Novo data/diplomas.json estabelece o total de preceitos penais por diploma — a base "
+            "contra a qual se mede quanto do catálogo já está coberto, e o primeiro passo para "
+            "chegar aos 100%."
+        ),
+        body=[
+            "O denominador é o que separa “temos muitos tipos” de “cobrimos X% do "
+            "que existe”. Sem ele, a completude é impressão; com ele, é medida.",
+        ],
+        links=[{"label": "Ver a completude do catálogo", "href": f"{BASE}/docs/completude"}],
+    ),
+    dict(
+        id="2026-07-16-catalogo-conferido-contra-o-planalto",
+        date="2026-07-16", version="v1.1.1", tipo="correcao", areas=["Tipos penais"],
+        title="Catálogo conferido contra o Planalto e Lei 15.397/2026",
+        summary=(
+            "Esta versão zera as 42 contradições internas do catálogo e atualiza o furto e o roubo "
+            "conforme a Lei 15.397/2026, tudo conferido contra o texto compilado oficial."
+        ),
+        body=[
+            "Correção de dado é correção, não mudança menor: cada contradição foi resolvida contra "
+            "a fonte, e a trava de CI passou a exigir zero contradições.",
+        ],
+    ),
+    dict(
+        id="2026-07-15-busca-por-beneficio",
+        date="2026-07-15", version="v1.1.0", tipo="novidade", areas=["Benefícios"],
+        title="Busca por benefício e catálogo declarativo",
+        summary=(
+            "Esta versão inverte o percurso de pesquisa. Até aqui só era possível partir de um "
+            "tipo penal; agora se pode partir de um benefício e ver a que tipos ele alcança."
+        ),
+        body=[
+            "O catálogo passou a ser declarativo, o que tornou possível calcular o alcance de cada "
+            "benefício sobre todo o acervo de tipos.",
+        ],
+        links=[{"label": "Ver a busca por benefício", "href": f"{BASE}/pesquisa/beneficios"}],
+    ),
+    dict(
+        id="2025-01-01-primeira-versao-sobre-docusaurus",
+        date="2025-01-01", version="v1.0.0", tipo="novidade", areas=["Interface"],
+        title="SISPENAS sobre Docusaurus",
+        summary=(
+            "Primeira versão pública: reimplementação digital, aberta e interativa do SISPENAS "
+            "originalmente concebido por Maíra Rocha Machado e Marta Rodriguez de Assis Machado "
+            "(Direito GV/FGV, 2008)."
+        ),
+        body=[
+            "A busca por tipo penal e o cálculo dos benefícios estreiam sobre uma base de dados "
+            "aberta, versionada e conferível.",
+        ],
+    ),
+]
+
+
+def emitir(e: dict) -> str:
+    obj = {
+        "id": e["id"],
+        "date": e["date"],
+        "title": e["title"],
+        "summary": e["summary"],
+        "body": e["body"],
+        "tipo": e["tipo"],
+        "areas": e["areas"],
+    }
+    if e.get("version"):
+        obj["version"] = e["version"]
+    if e.get("links"):
+        obj["links"] = e["links"]
+    corpo = json.dumps(obj, ensure_ascii=False, indent=2)
+    return (
+        "import type {ChangelogEntry} from '../../types';\n\n"
+        f"const entrada: ChangelogEntry = {corpo};\n\n"
+        "export default entrada;\n"
+    )
+
+
+def main() -> None:
+    n = 0
+    for e in ENTRADAS:
+        ano = e["date"][:4]
+        destino = RAIZ / ano / f"{e['id']}.ts"
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        destino.write_text(emitir(e), encoding="utf-8", newline="\n")
+        n += 1
+        print(f"  {e['date']}  {e.get('version','—'):8} {e['tipo']:10} {e['id']}")
+    print(f"\n{n} entradas escritas em {RAIZ}")
+
+
+if __name__ == "__main__":
+    main()
