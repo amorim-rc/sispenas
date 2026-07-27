@@ -89,8 +89,15 @@
 .filtros {
   align-self: start; position: sticky; top: 84px;
   max-height: calc(100vh - 104px); overflow-y: auto;
-  padding-right: 4px;
+  padding-right: 6px;
+  /* Barra de rolagem fina e discreta — a padrão do Windows é larga demais. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
+.filtros::-webkit-scrollbar { width: 6px; }
+.filtros::-webkit-scrollbar-track { background: transparent; }
+.filtros::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+.filtros::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 .filtrosTitulo {
   font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
   text-transform: uppercase; color: var(--text); margin: 0 0 18px;
