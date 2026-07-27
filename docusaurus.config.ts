@@ -41,24 +41,10 @@ const config: Config = {
           routeBasePath: 'docs',
           admonitions: true,
         },
-        // O plugin de blog serve de changelog: cada release é um post datado em
-        // release-notes/. É a mesma abordagem que o próprio Docusaurus usa para
-        // o changelog dele. O roadmap fica só com o que está por vir.
-        blog: {
-          path: 'release-notes',
-          routeBasePath: 'release-notes',
-          blogTitle: 'Notas de atualizações',
-          blogDescription: 'Histórico de versões do SISPENAS.',
-          blogSidebarTitle: 'Versões',
-          blogSidebarCount: 'ALL',
-          showReadingTime: false,
-          onUntruncatedBlogPosts: 'ignore',
-          feedOptions: {
-            type: 'all',
-            title: 'SISPENAS — Notas de atualizações',
-            copyright: `SISPENAS © ${new Date().getFullYear()} — Equipe SISPENAS.`,
-          },
-        },
+        // As Notas de atualizações NÃO usam mais o plugin de blog: são um feed
+        // próprio (src/pages/release-notes) alimentado por arquivos .ts, um por
+        // entrada, em src/data/changelog/entries/. Ver docs/create-changelog-entry.
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -74,8 +60,16 @@ const config: Config = {
         // pesquisa de tipos penais era servida na raiz. Ambas mudaram de lugar na
         // v1.1.0; estes redirecionamentos preservam os links já publicados.
         // O caso `/?tipo=N` depende da query string e é tratado em src/pages/index.tsx.
+        //
+        // Até a v1.2.0 as notas eram posts de blog em /release-notes/vX-Y-Z. A
+        // v1.2.1 troca por um feed único; estes redirecionamentos preservam os
+        // links já publicados de cada versão, apontando para o feed.
         redirects: [
           {from: '/docs/sobre', to: '/'},
+          ...[
+            'v1-0-0', 'v1-1-0', 'v1-1-1', 'v1-1-2', 'v1-1-3', 'v1-1-4',
+            'v1-1-5', 'v1-1-6', 'v1-1-7', 'v1-1-8', 'v1-1-9', 'v1-2-0',
+          ].map((v) => ({from: `/release-notes/${v}`, to: '/release-notes'})),
         ],
       },
     ],

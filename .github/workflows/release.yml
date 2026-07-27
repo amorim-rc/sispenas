@@ -29,7 +29,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Versão, release note e título
+      # Node 24 importa os arquivos .ts das entradas nativamente (type stripping),
+      # sem precisar de `npm ci` — as entradas não têm dependências de runtime.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Versão e corpo da Release
         id: rn
         run: |
           VERSION="$(node -p "require('./package.json').version")"
@@ -41,24 +47,15 @@ jobs:
             exit 0
           fi
           echo "existe=0" >> "$GITHUB_OUTPUT"
-          # Os arquivos usam a versão com PONTOS (release-notes/...-v1.1.1.md).
-          FILE="$(ls release-notes/*-"${TAG}".md 2>/dev/null | head -1)"
-          if [ -z "$FILE" ]; then
-            echo "titulo=$TAG" >> "$GITHUB_OUTPUT"
-            printf 'Release %s.\n' "$TAG" > corpo.md
-            echo "::warning::Sem release note para $TAG (release-notes/*-$TAG.md) — corpo mínimo."
-          else
-            TITULO="$(sed -n 's/^title:[[:space:]]*//p' "$FILE" | head -1 | sed 's/^"//; s/"$//')"
-            echo "titulo=${TITULO:-$TAG}" >> "$GITHUB_OUTPUT"
-            # Corpo: tudo após o frontmatter (2º `---`), sem o marcador de truncamento.
-            awk 'BEGIN{fm=0} /^---[[:space:]]*$/{fm++; next} fm>=2{print}' "$FILE" \
-              | sed '/{\/\* truncate \*\/}/d' > corpo.md
-          fi
+          # A nota grande é o acúmulo das entradas do changelog daquela versão.
+          node scripts/montar-nota-release.mjs "$TAG" > corpo.md 2>/dev/null
+          echo "Corpo montado para $TAG:"
+          cat corpo.md
 
       - name: Criar a Release (cria também a tag no commit atual)
         if: steps.rn.outputs.existe == '0'
         run: |
           gh release create "${{ steps.rn.outputs.tag }}" \
             --target "${GITHUB_SHA}" \
-            --title "${{ steps.rn.outputs.titulo }}" \
+            --title "${{ steps.rn.outputs.tag }}" \
             --notes-file corpo.md

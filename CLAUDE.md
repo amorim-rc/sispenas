@@ -7,25 +7,28 @@ conferência contra o **texto compilado** oficial do `planalto.gov.br`.
 ## Fluxo de release — OBRIGATÓRIO em toda atuação
 
 O projeto publica **duas coisas** a cada versão: a Release no GitHub (para colaboradores) e
-a release note no site (para quem acompanha). Ambas saem do **mesmo arquivo**. Por isso:
+o feed de Notas de atualizações no site (para quem acompanha). Ambas saem das **mesmas
+entradas**. Por isso:
 
-1. **Toda mudança substantiva atualiza a release note da versão corrente** em
-   `release-notes/`. Enquanto se trabalha rumo à versão `X.Y.Z`, mantenha (criando se
-   preciso) `release-notes/AAAA-MM-DD-vX.Y.Z.md`, acrescentando ali o que a mudança fez.
-   Correções de dado, novos tipos/benefícios, fixes e ajustes de interface contam;
-   mudança interna trivial (comentário, refactor sem efeito) não precisa.
+1. **Toda mudança substantiva vira uma entrada do changelog** em
+   `src/data/changelog/entries/<ano>/<id>.ts` — um arquivo por mudança, texto puro,
+   com `tipo`, `areas` e `version`. O passo a passo (inclusive para uma IA gerar o arquivo)
+   está em `src/data/changelog/create-changelog-entry.md`. Não há mais `release-notes/*.md`
+   nem lista central: adicionar nota = criar arquivo. Correções de dado, novos
+   tipos/benefícios, fixes e ajustes de interface contam; mudança interna trivial não precisa.
 
 2. **Versione segundo `docs/roadmap.md`** (semver com significado explícito): correção de
    dado ou bug → `1.1.Z`; funcionalidade nova compatível → `1.Y.0`; quebra de contrato dos
-   dados abertos ou das URLs → `X.0.0`.
+   dados abertos ou das URLs → `X.0.0`. A entrada carrega essa versão no campo `version`.
 
 3. **Para publicar, o PR que FECHA a versão sobe `version` em `package.json` (e em
    `CITATION.cff`).** Ao mergear na `main`, o workflow `.github/workflows/release.yml`
-   detecta a versão nova, cria a tag `vX.Y.Z` e publica a Release com o texto da release
-   note. **Não faça `git push origin vX.Y.Z` manual** — é automático.
+   monta o corpo da Release concatenando as entradas daquela versão
+   (`scripts/montar-nota-release.mjs`), cria a tag `vX.Y.Z` e publica. **Não faça
+   `git push origin vX.Y.Z` manual** — é automático.
 
-Resumo: *escreveu a release note + subiu a versão + mergeou → release publicada, no GitHub
-e no site.*
+Resumo: *criou as entradas + subiu a versão + mergeou → release publicada, no GitHub e no
+site.* O feed usa `require.context`; para regenerar o JSON de paridade, `npm run changelog:json`.
 
 ## Convenções do catálogo
 
