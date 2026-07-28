@@ -740,24 +740,24 @@
     "lei": "CP",
     "artigo": "Art. 133, caput",
     "crime": "Abandono de incapaz",
-    "pena_min": 6,
-    "pena_max": 36,
-    "tipo_pena": "Detenção",
+    "pena_min": 24,
+    "pena_max": 60,
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos detenção"
+    "obs": "2-5 anos reclusão. Abandonar pessoa sob seu cuidado, guarda, vigilância ou autoridade, incapaz de defender-se dos riscos do abandono (Redação dada pela Lei 15.163/2025)"
   },
   {
     "id": 54,
     "lei": "CP",
     "artigo": "Art. 133, §1º",
     "crime": "Abandono de incapaz com resultado lesão grave",
-    "pena_min": 12,
-    "pena_max": 60,
+    "pena_min": 36,
+    "pena_max": 84,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -765,15 +765,15 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão se resulta lesão corporal de natureza grave"
+    "obs": "3-7 anos reclusão se do abandono resulta lesão corporal de natureza grave (Redação dada pela Lei 15.163/2025)"
   },
   {
     "id": 55,
     "lei": "CP",
     "artigo": "Art. 133, §2º",
     "crime": "Abandono de incapaz com resultado morte",
-    "pena_min": 48,
-    "pena_max": 144,
+    "pena_min": 96,
+    "pena_max": 168,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -781,15 +781,15 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-12 anos reclusão se resulta morte"
+    "obs": "8-14 anos reclusão se do abandono resulta morte (Redação dada pela Lei 15.163/2025)"
   },
   {
     "id": 56,
     "lei": "CP",
     "artigo": "Art. 133, §3º",
     "crime": "Abandono de incapaz com aumento de 1/3 (ascendente/tutor/curador)",
-    "pena_min": 8,
-    "pena_max": 48,
+    "pena_min": 32,
+    "pena_max": 80,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -852,24 +852,24 @@
     "lei": "CP",
     "artigo": "Art. 136, caput",
     "crime": "Maus-tratos",
-    "pena_min": 2,
-    "pena_max": 12,
-    "tipo_pena": "Detenção",
+    "pena_min": 24,
+    "pena_max": 60,
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2 meses a 1 ano detenção ou multa. Expor a perigo a vida ou a saúde de pessoa sob autoridade, guarda ou vigilância, para fins de educação, ensino, tratamento ou custódia"
+    "obs": "2-5 anos reclusão. Expor a perigo a vida ou a saúde de pessoa sob sua autoridade, guarda ou vigilância (Redação dada pela Lei 15.163/2025)"
   },
   {
     "id": 61,
     "lei": "CP",
     "artigo": "Art. 136, §1º",
     "crime": "Maus-tratos com resultado lesão grave",
-    "pena_min": 12,
-    "pena_max": 48,
+    "pena_min": 36,
+    "pena_max": 84,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -877,15 +877,15 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "1-4 anos reclusão se resulta lesão corporal de natureza grave"
+    "obs": "3-7 anos reclusão se do fato resulta lesão corporal de natureza grave (Redação dada pela Lei 15.163/2025)"
   },
   {
     "id": 62,
     "lei": "CP",
     "artigo": "Art. 136, §2º",
     "crime": "Maus-tratos com resultado morte",
-    "pena_min": 48,
-    "pena_max": 144,
+    "pena_min": 96,
+    "pena_max": 168,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -893,15 +893,15 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "4-12 anos reclusão se resulta morte"
+    "obs": "8-14 anos reclusão se resulta morte (Redação dada pela Lei 15.163/2025)"
   },
   {
     "id": 63,
     "lei": "CP",
     "artigo": "Art. 136, §3º",
     "crime": "Maus-tratos com aumento de 1/3 (contra menor de 14 anos)",
-    "pena_min": 3,
-    "pena_max": 16,
+    "pena_min": 32,
+    "pena_max": 80,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -2244,8 +2244,8 @@
     "lei": "CP",
     "artigo": "Art. 217-A, caput",
     "crime": "Estupro de vulnerável",
-    "pena_min": 96,
-    "pena_max": 180,
+    "pena_min": 120,
+    "pena_max": 216,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Sim",
@@ -2253,15 +2253,15 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "8-15 anos reclusão. Hediondo. Ter conjunção carnal ou praticar outro ato libidinoso com menor de 14 anos. Independe de consentimento (vulnerabilidade absoluta)"
+    "obs": "10-18 anos reclusão + multa. HEDIONDO. Conjunção carnal ou outro ato libidinoso com menor de 14 anos (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 149,
     "lei": "CP",
     "artigo": "Art. 217-A, §3º",
     "crime": "Estupro de vulnerável com resultado lesão grave",
-    "pena_min": 120,
-    "pena_max": 240,
+    "pena_min": 144,
+    "pena_max": 288,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Sim",
@@ -2269,15 +2269,15 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "10-20 anos reclusão. Hediondo"
+    "obs": "12-24 anos reclusão + multa. HEDIONDO. Se da conduta resulta lesão corporal de natureza grave (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 150,
     "lei": "CP",
     "artigo": "Art. 217-A, §4º",
     "crime": "Estupro de vulnerável com resultado morte",
-    "pena_min": 144,
-    "pena_max": 360,
+    "pena_min": 240,
+    "pena_max": 480,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Sim",
@@ -2285,15 +2285,15 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "12-30 anos reclusão. Hediondo"
+    "obs": "20-40 anos reclusão + multa. HEDIONDO. Se da conduta resulta morte (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 151,
     "lei": "CP",
     "artigo": "Art. 218",
     "crime": "Corrupção de menores (para atos sexuais)",
-    "pena_min": 24,
-    "pena_max": 60,
+    "pena_min": 72,
+    "pena_max": 168,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -2301,15 +2301,15 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-5 anos reclusão. Induzir alguém menor de 14 anos a satisfazer a lascívia de outrem"
+    "obs": "6-14 anos reclusão + multa. Induzir alguém menor de 14 anos a satisfazer a lascívia de outrem (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 152,
     "lei": "CP",
     "artigo": "Art. 218-A",
     "crime": "Satisfação de lascívia mediante presença de criança ou adolescente",
-    "pena_min": 24,
-    "pena_max": 48,
+    "pena_min": 60,
+    "pena_max": 144,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -2317,15 +2317,15 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-4 anos reclusão. Praticar conjunção carnal ou outro ato libidinoso na presença de alguém menor de 14 anos, ou induzi-lo a presenciar, para satisfazer lascívia própria ou de outrem"
+    "obs": "5-12 anos reclusão + multa. Praticar na presença de menor de 14, ou induzi-lo a presenciar, conjunção carnal ou outro ato libidinoso (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 153,
     "lei": "CP",
     "artigo": "Art. 218-B",
     "crime": "Favorecimento da prostituição ou exploração sexual de criança/adolescente/vulnerável",
-    "pena_min": 48,
-    "pena_max": 120,
+    "pena_min": 84,
+    "pena_max": 192,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Sim",
@@ -2333,15 +2333,15 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-10 anos reclusão. Hediondo. Submeter, induzir ou atrair à prostituição ou outra forma de exploração sexual alguém menor de 18 anos ou que, por enfermidade ou deficiência mental, não tem o necessário discernimento"
+    "obs": "7-16 anos reclusão + multa. HEDIONDO. Submeter, induzir ou atrair menor de 18 à prostituição ou outra exploração sexual (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 154,
     "lei": "CP",
     "artigo": "Art. 218-C",
     "crime": "Divulgação de cena de estupro/sexo/nudez sem consentimento (pornografia de vingança)",
-    "pena_min": 12,
-    "pena_max": 60,
+    "pena_min": 48,
+    "pena_max": 120,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -2349,7 +2349,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão. Oferecer/trocar/disponibilizar/transmitir/vender/expor/distribuir cena de estupro ou de nudez sem consentimento. +1/3 a 2/3 se praticado por alguém que mantém/manteve relação íntima de afeto (revenge porn). Lei 13.718/2018"
+    "obs": "4-10 anos reclusão + multa, se o fato não constitui crime mais grave. Divulgação de cena de estupro, sexo, nudez ou pornografia sem consentimento (revenge porn) (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 155,
@@ -9470,22 +9470,6 @@
     "obs": "2-5 anos reclusão + multa. Lei 14.532/23. Discriminação em meios de comunicação social ou publicação de qualquer natureza. Qualificadora pelo meio (internet)"
   },
   {
-    "id": 611,
-    "lei": "ECA",
-    "artigo": "Art. 218-C (CP)",
-    "crime": "Divulgação de cena de estupro, sexo ou pornografia sem consentimento (revenge porn)",
-    "pena_min": 12,
-    "pena_max": 60,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão. Se o agente praticar contra pessoa com quem teve relação íntima: +1/3 a 2/3. Se com fim de vingança ou humilhação: +1/3 a 2/3"
-  },
-  {
     "id": 620,
     "lei": "CP (atualiz.)",
     "artigo": "Art. 147-A, §1º, III",
@@ -10034,8 +10018,8 @@
     "lei": "CP",
     "artigo": "Art. 217-A, §1º",
     "crime": "Estupro de vulnerável — vítima deficiente ou sem discernimento para consentir",
-    "pena_min": 96,
-    "pena_max": 180,
+    "pena_min": 120,
+    "pena_max": 216,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Sim",
@@ -10043,31 +10027,15 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "8-15 anos reclusão. HEDIONDO"
-  },
-  {
-    "id": 675,
-    "lei": "CP",
-    "artigo": "Art. 218-B, §1º",
-    "crime": "Favorecimento da prostituição de vulnerável — dono/gerente/responsável de local",
-    "pena_min": 48,
-    "pena_max": 120,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "4-10 anos reclusão + multa. HEDIONDO. Proprietário de local de prostituição de menor"
+    "obs": "10-18 anos reclusão + multa. HEDIONDO. Vítima que, por enfermidade/deficiência ou outra causa, não pode oferecer resistência (mesma pena do caput)"
   },
   {
     "id": 676,
     "lei": "CP",
     "artigo": "Art. 218-B, §2º, I",
     "crime": "Favorecimento da prostituição de vulnerável — quem pratica conjunção carnal ou ato libidinoso com menor de 18 em situação de exploração",
-    "pena_min": 24,
-    "pena_max": 60,
+    "pena_min": 84,
+    "pena_max": 192,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10075,7 +10043,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-5 anos reclusão + multa. Cliente de prostituição de vulnerável"
+    "obs": "7-16 anos reclusão + multa. Quem pratica conjunção carnal ou ato libidinoso com menor de 18 e maior de 14 em situação de exploração — incorre nas mesmas penas do caput (Redação dada pela Lei 15.280/2025)"
   },
   {
     "id": 677,
@@ -10220,22 +10188,6 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "2-6 anos reclusão. Aumento se para obter vantagem econômica. Aplica-se multa"
-  },
-  {
-    "id": 687,
-    "lei": "CP",
-    "artigo": "Art. 218, §2º",
-    "crime": "Corrupção de menores — induzir com ele a praticar ato libidinoso",
-    "pena_min": 24,
-    "pena_max": 60,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "2-5 anos reclusão"
   },
   {
     "id": 688,
