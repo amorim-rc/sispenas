@@ -21474,5 +21474,37 @@
     "violencia": "Sim",
     "grave_ameaca": "Não",
     "obs": "Aumento de 1/3 até a metade sobre o vicaricídio. Incluído pela Lei 15.384/2026"
+  },
+  {
+    "id": 1566,
+    "lei": "CP",
+    "artigo": "Art. 147-C, caput",
+    "crime": "Ameaça no contexto de organização criminosa ultraviolenta",
+    "pena_min": 12,
+    "pena_max": 36,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Sim",
+    "obs": "1-3 anos reclusão. Ameaçar alguém de mal injusto e grave no contexto da atuação de organização criminosa ultraviolenta (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026"
+  },
+  {
+    "id": 1567,
+    "lei": "CP",
+    "artigo": "Art. 338-A, caput",
+    "crime": "Descumprimento de decisão que defere medidas protetivas de urgência",
+    "pena_min": 24,
+    "pena_max": 60,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "2-5 anos reclusão + multa. Descumprir decisão judicial que defere medidas protetivas de urgência (art. 338-A, incluído pela Lei 15.280/2025). Independe da competência civil ou criminal do juiz que as deferiu"
   }
 ]
