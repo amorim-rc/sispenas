@@ -2048,22 +2048,6 @@
     "obs": "4-8 anos reclusão + multa. Fraude por meio de redes sociais, contatos telefônicos ou envio de correio eletrônico fraudulento. +1/3 a 2/3 se servidor mantido fora do País. Lei 14.155/2021"
   },
   {
-    "id": 136,
-    "lei": "CP",
-    "artigo": "Art. 171, §5º",
-    "crime": "Estelionato contra idoso ou vulnerável (aumento de 1/3 ao dobro)",
-    "pena_min": 16,
-    "pena_max": 120,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "Aumento de 1/3 ao dobro se contra idoso ou vulnerável, considerada a relevância do resultado. Ação pública incondicionada (exceção à regra do §5º)"
-  },
-  {
     "id": 137,
     "lei": "CP",
     "artigo": "Art. 180, caput",
@@ -9505,9 +9489,9 @@
     "id": 624,
     "lei": "CP (atualiz.)",
     "artigo": "Art. 171, §4º",
-    "crime": "Estelionato contra idoso ou vulnerável",
-    "pena_min": 48,
-    "pena_max": 96,
+    "crime": "Estelionato contra idoso ou vulnerável (aumento de 1/3 ao dobro)",
+    "pena_min": 16,
+    "pena_max": 120,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -9515,7 +9499,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-8 anos reclusão. Lei 14.155/21. Pena aplicada em dobro se contra idoso. Ação pública incondicionada neste caso (não depende de representação)"
+    "obs": "Aumento de 1/3 ao dobro sobre o caput (reclusão de um a cinco anos), se o crime é cometido contra idoso ou vulnerável (art. 171, §4º, Lei 14.155/2021)"
   },
   {
     "id": 625,
@@ -10048,10 +10032,10 @@
   {
     "id": 677,
     "lei": "CP",
-    "artigo": "Art. 288, §único",
-    "crime": "Associação criminosa armada (3+ pessoas associadas com emprego de arma de fogo)",
-    "pena_min": 36,
-    "pena_max": 72,
+    "artigo": "Art. 288, §1º",
+    "crime": "Associação criminosa com aumento até a metade (armada ou com participação de criança ou adolescente)",
+    "pena_min": 18,
+    "pena_max": 54,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10059,7 +10043,7 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3-6 anos reclusão. Pena do caput aplicada em dobro quando armada ou com participação de criança/adolescente"
+    "obs": "Aumento de até a metade sobre o caput (reclusão de um a três anos) se a associação é armada ou se há participação de criança ou adolescente (art. 288, §1º, Redação da Lei 15.245/2025)"
   },
   {
     "id": 678,
@@ -21538,5 +21522,21 @@
     "violencia": "Sim",
     "grave_ameaca": "Sim",
     "obs": "20-40 anos reclusão + multa. Roubo do qual resulta morte (§3º, II), cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). HEDIONDO (art. 1º, II, da Lei 8.072/90). Incluído pela Lei 15.358/2026"
+  },
+  {
+    "id": 1573,
+    "lei": "CP",
+    "artigo": "Art. 288, §2º",
+    "crime": "Solicitação ou contratação de crime a integrante de associação criminosa",
+    "pena_min": 12,
+    "pena_max": 36,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "1-3 anos reclusão (mesma pena do caput). Quem, de qualquer modo, solicita ou contrata o cometimento de crime a integrante de associação criminosa, independentemente da pena do crime solicitado. Incluído pela Lei 15.245/2025"
   }
 ]
