@@ -21666,5 +21666,21 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "3 meses a 1 ano detenção + multa (mesmas penas do caput). Provocar desastre ambiental que prejudique a vida, a integridade física ou o bem-estar de animais silvestres ou domésticos. §1º-C incluído pela Lei 15.355/2026"
+  },
+  {
+    "id": 1584,
+    "lei": "Lei 13.869/19",
+    "artigo": "Art. 15-A",
+    "crime": "Violência institucional — submeter vítima ou testemunha de crime violento a procedimentos desnecessários, repetitivos ou invasivos que a levem a reviver a violência",
+    "pena_min": 3,
+    "pena_max": 12,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "3 meses a 1 ano detenção + multa. Submeter vítima de infração penal ou testemunha de crime violento a procedimentos desnecessários, repetitivos ou invasivos, sem estrita necessidade. §1º: +2/3 se permite terceiro intimidar a vítima; §2º: pena em dobro se o próprio agente a intimida. Art. 15-A incluído pela Lei 14.321/2022"
   }
 ]

@@ -47,15 +47,18 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **Lei 15.163/25** (exposição a perigo) → Idoso, PcD | v1.2.8 |
 | **ECA** (leis 14.811/24 e 15.234/25) | v1.2.9 |
 | **Lei de Racismo** (Lei 14.532/23, padrão CP) | v1.2.10 |
+| **Ambiental** (Lei 9.605/98 — reformas 2024-2026) | v1.2.11 |
+| **Abuso de autoridade** (Lei 13.869/19 — sem reforma 2023+; achado o art. 15-A) | v1.2.12 |
 
 ## O que FALTA (retomar aqui)
 
-**Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma):
-ambiental (9.605, 48 tipos), sistema financeiro (7.492, 23), abuso de autoridade
-(13.869, 24), ordem tributária (8.137, 16), CTB, CDC, esporte (14.597), falências
-(11.101), organizações criminosas (12.850), Henry Borel (14.344), Maria da Penha
-(11.340), CPM (352 tipos — militar, raramente alterado, pode ser sessão própria),
-e ~40 diplomas pequenos/antigos (baixa probabilidade de alteração recente).
+**Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
+na ordem de prioridade (mais consultados/prováveis primeiro): sistema financeiro
+(7.492, 23), ordem tributária (8.137, 16),
+CTB, esporte (14.597), organizações criminosas (12.850), Henry Borel (14.344),
+Maria da Penha (11.340), CDC, falências (11.101), CPM (352 tipos — militar,
+raramente alterado, pode ser sessão própria), e ~40 diplomas pequenos/antigos
+(baixa probabilidade de alteração recente).
 
 Sugestão de ordem: os mais consultados e mais prováveis de reforma recente
 primeiro; deixar o CPM e os diplomas antigos de 1–2 tipos por último.

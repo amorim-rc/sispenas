@@ -982,6 +982,44 @@
         ]
       },
       "obs": "A pena do art. 60 é aumentada até o dobro se o licenciamento da atividade ou do empreendimento for sujeito a Estudo Prévio de Impacto Ambiental. §único incluído pela Lei 15.190/2025."
+    },
+    {
+      "id": "aumento-abuso-revitimizacao-permitir-15a",
+      "nome": "Violência institucional: permitir que terceiro intimide a vítima (+2/3)",
+      "dispositivo": "Lei 13.869/19, art. 15-A, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.869/19",
+        "artigos": [
+          "Art. 15-A"
+        ]
+      },
+      "obs": "A pena da violência institucional (art. 15-A) é aumentada de 2/3 se o agente público permite que terceiro intimide a vítima de crime violento, gerando indevida revitimização. §1º incluído pela Lei 14.321/2022."
+    },
+    {
+      "id": "aumento-abuso-revitimizacao-agente-15a",
+      "nome": "Violência institucional: o próprio agente intimida a vítima (dobro)",
+      "dispositivo": "Lei 13.869/19, art. 15-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.869/19",
+        "artigos": [
+          "Art. 15-A"
+        ]
+      },
+      "obs": "A pena da violência institucional (art. 15-A) é aplicada em dobro se o próprio agente público intimida a vítima de crime violento, gerando indevida revitimização. §2º incluído pela Lei 14.321/2022."
     }
   ]
 }
