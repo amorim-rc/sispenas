@@ -51,6 +51,7 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **Abuso de autoridade** (Lei 13.869/19 — sem reforma 2023+; achado o art. 15-A) | v1.2.12 |
 | **Sistema financeiro** (Lei 7.492/86 — triado, sem defasagem) | — (sem release) |
 | **Ordem tributária** (Lei 8.137/90 — agravante do art. 12, LC 224/25) | v1.2.13 |
+| **CTB** (Lei 9.503/97 — terminologia "sinistro", Lei 14.599/23) | v1.2.14 |
 
 > **Sistema financeiro (7.492/86):** triado e completo (arts. 2º–23 presentes).
 > Sem reforma penal desde 2023. A única mudança recente (Lei 14.478/2022, ativos
@@ -61,7 +62,7 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 
 **Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
 na ordem de prioridade (mais consultados/prováveis primeiro):
-CTB, esporte (14.597), organizações criminosas (12.850), Henry Borel (14.344),
+esporte (14.597), organizações criminosas (12.850), Henry Borel (14.344),
 Maria da Penha (11.340), CDC, falências (11.101), CPM (352 tipos — militar,
 raramente alterado, pode ser sessão própria), e ~40 diplomas pequenos/antigos
 (baixa probabilidade de alteração recente).
