@@ -54,6 +54,8 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **CTB** (Lei 9.503/97 — terminologia "sinistro", Lei 14.599/23) | v1.2.14 |
 | **Esporte** (Lei 14.597/23 — triado, sem defasagem penal) | — (sem release) |
 | **Organizações criminosas** (Lei 12.850/13 — obstrução, Lei 15.245/25) | v1.2.15 |
+| **Henry Borel** (Lei 14.344/22 — art. 26 estava com crime/pena errados) | v1.2.16 |
+| **Maria da Penha** (Lei 11.340/06 — art. 24-A: pena e §4º atualizados) | v1.2.16 |
 
 > **Sistema financeiro (7.492/86):** triado e completo (arts. 2º–23 presentes).
 > Sem reforma penal desde 2023. A única mudança recente (Lei 14.478/2022, ativos
@@ -64,10 +66,16 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 
 **Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
 na ordem de prioridade (mais consultados/prováveis primeiro):
-Henry Borel (14.344),
-Maria da Penha (11.340), CDC, falências (11.101), CPM (352 tipos — militar,
+CDC (Lei 8.078/90), falências (11.101), CPM (352 tipos — militar,
 raramente alterado, pode ser sessão própria), e ~40 diplomas pequenos/antigos
 (baixa probabilidade de alteração recente).
+
+> **Achado da sessão (importante):** dois erros que NÃO eram só defasagem, e sim
+> registros errados desde a origem, só apareceram ao casar artigo a artigo contra
+> o compilado — o art. 26 da Lei Henry Borel (crime, pena e tipo de pena trocados)
+> e o art. 24-A da Maria da Penha (pena antiga + causa de aumento inexistente por
+> "arma de fogo"). Reforça o método: conferir CADA rótulo contra o texto, não
+> confiar no registro nem presumir que só as leis novas trazem defeito.
 
 Sugestão de ordem: os mais consultados e mais prováveis de reforma recente
 primeiro; deixar o CPM e os diplomas antigos de 1–2 tipos por último.

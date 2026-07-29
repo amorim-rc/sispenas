@@ -1042,6 +1042,82 @@
         ]
       },
       "obs": "As penas dos crimes dos arts. 1º, 2º e 4º a 7º podem ser agravadas de 1/3 até a metade quando: I - ocasionam grave dano à coletividade; II - o crime é cometido por servidor público no exercício das funções; III - recaem sobre serviços ou bens essenciais à vida ou à saúde; IV - relacionam-se a bens alcançados pelas imunidades tributárias do art. 150, VI, da CF. Inciso IV incluído pela Lei Complementar 224/2025 (em vigor desde 1º/01/2026). Não alcança os crimes funcionais do art. 3º."
+    },
+    {
+      "id": "aumento-henryborel-omissao-lesao-26",
+      "nome": "Omissão de comunicação (Henry Borel) com lesão grave (+1/2)",
+      "dispositivo": "Lei 14.344/22, art. 26, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.344/22",
+        "artigos": [
+          "Art. 26"
+        ]
+      },
+      "obs": "A pena do art. 26 é aumentada de metade se da omissão resulta lesão corporal de natureza grave. §1º da Lei 14.344/2022."
+    },
+    {
+      "id": "aumento-henryborel-omissao-morte-26",
+      "nome": "Omissão de comunicação (Henry Borel) com morte (triplo)",
+      "dispositivo": "Lei 14.344/22, art. 26, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 2.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.344/22",
+        "artigos": [
+          "Art. 26"
+        ]
+      },
+      "obs": "A pena do art. 26 é triplicada se da omissão resulta morte. §1º da Lei 14.344/2022."
+    },
+    {
+      "id": "aumento-henryborel-omissao-autor-26",
+      "nome": "Omissão de comunicação (Henry Borel) por ascendente/responsável (dobro)",
+      "dispositivo": "Lei 14.344/22, art. 26, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.344/22",
+        "artigos": [
+          "Art. 26"
+        ]
+      },
+      "obs": "A pena do art. 26 é aplicada em dobro se o crime é praticado por ascendente, parente consanguíneo até o terceiro grau, responsável legal, tutor, guardião, padrasto ou madrasta da vítima. §2º da Lei 14.344/2022."
+    },
+    {
+      "id": "aumento-maria-penha-monitoracao-24a",
+      "nome": "Descumprimento de protetiva com violação de monitoração eletrônica (+1/3 a 1/2)",
+      "dispositivo": "Lei 11.340/06, art. 24-A, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 11.340/06",
+        "artigos": [
+          "Art. 24-A"
+        ]
+      },
+      "obs": "A pena do art. 24-A é aumentada de 1/3 até a metade se o descumprimento decorre da violação de áreas de exclusão monitoradas eletronicamente ou da remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial. §4º incluído pela Lei 15.383/2026."
     }
   ]
 }
