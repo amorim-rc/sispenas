@@ -59,6 +59,7 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **CDC** (Lei 8.078/90 — sem reforma 2023+; erro de origem no art. 73) | v1.2.11 |
 | **Falências** (Lei 11.101/05 — sem reforma 2023+; erros de origem nos arts. 171/173/177) | v1.2.11 |
 | **Diplomas menores** (varredura dos ~44 restantes) | v1.2.12 |
+| **CPM** (DL 1.001/69 — reforma Lei 14.688/23: hediondos + tráfico) | v1.2.13 |
 
 > **Uma sessão = uma release.** Toda a revisão da cauda longa acima saiu numa
 > **única release v1.2.11**, com uma entrada de changelog por diploma. Não abrir
@@ -72,8 +73,19 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 
 ## O que FALTA (retomar aqui)
 
-**CPM (DL 1.001/69, 352 tipos — militar).** É o que resta. Provável sessão própria
-(minor release). Raramente alterado, mas conferir por lei-reforma como os demais.
+**CPM — FECHADO (v1.2.13).** A Lei 14.688/2023 reformou o CPM em massa (~56 crimes),
+MAS o catálogo já fora montado com o texto pós-reforma: conferi ~25 artigos com pena
+explícita e TODOS batiam (estupro 6-10, corrupção passiva 2-12, lesão/morte 4-12 etc.).
+Defasagem real era pontual: (1) classificação hedionda invertida — só o art. 205 §1º
+(homicídio PRIVILEGIADO) estava hediondo, o que é ERRO; corrigido e estendido aos que
+de fato são (205 §2º qualificado, 232 estupro+§§, 244 extorsão mediante sequestro),
+via art. 3º da L14.688 + inciso VI da L8.072; (2) art. 290 §5º (tráfico de drogas
+militar, reclusão 5-15, equiparado a hediondo, id 1589) — ausente. Art. 233 (revogado
+pela L14.688) nem estava no catálogo. PENDÊNCIA menor observada (não corrigida, fora
+do escopo da reforma): id=792 (205 §1º) tem pena_min/max 48-200 mas obs deriva "6-20
+anos" — inconsistência pré-existente a revisar. A classificação hedionda de OUTROS
+diplomas (CP, leis esparsas) não foi auditada em massa — candidata a uma passada
+própria (o campo `hediondo` foi preenchido pontualmente, não sistematicamente).
 
 **Resíduo dos diplomas menores (v1.2.12):** triados todos os ≥3 tipos + todos os
 pós-1990 + as reformas conhecidas. Achados: tortura (9.455/97, inciso III novo,
