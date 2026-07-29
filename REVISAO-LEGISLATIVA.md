@@ -49,12 +49,18 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **Lei de Racismo** (Lei 14.532/23, padrão CP) | v1.2.10 |
 | **Ambiental** (Lei 9.605/98 — reformas 2024-2026) | v1.2.11 |
 | **Abuso de autoridade** (Lei 13.869/19 — sem reforma 2023+; achado o art. 15-A) | v1.2.12 |
+| **Sistema financeiro** (Lei 7.492/86 — triado, sem defasagem) | — (sem release) |
+| **Ordem tributária** (Lei 8.137/90 — agravante do art. 12, LC 224/25) | v1.2.13 |
+
+> **Sistema financeiro (7.492/86):** triado e completo (arts. 2º–23 presentes).
+> Sem reforma penal desde 2023. A única mudança recente (Lei 14.478/2022, ativos
+> virtuais) só equiparou provedores de cripto a instituição financeira no art. 1º,
+> §único — expande o sujeito, não cria tipo. Nada a fazer; sem release.
 
 ## O que FALTA (retomar aqui)
 
 **Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
-na ordem de prioridade (mais consultados/prováveis primeiro): sistema financeiro
-(7.492, 23), ordem tributária (8.137, 16),
+na ordem de prioridade (mais consultados/prováveis primeiro):
 CTB, esporte (14.597), organizações criminosas (12.850), Henry Borel (14.344),
 Maria da Penha (11.340), CDC, falências (11.101), CPM (352 tipos — militar,
 raramente alterado, pode ser sessão própria), e ~40 diplomas pequenos/antigos
