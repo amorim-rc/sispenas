@@ -1,5 +1,25 @@
 [
   {
+    "id": "2026-07-29-tortura-violencia-domestica-15410",
+    "date": "2026-07-29",
+    "title": "Tortura: nova modalidade no contexto de violência doméstica",
+    "summary": "A Lei 15.410/2026 acrescentou um inciso ao crime de tortura (Lei 9.455/1997): submeter mulher, reiteradamente, a intenso sofrimento físico ou mental no contexto de violência doméstica e familiar.",
+    "body": [
+      "A nova modalidade (art. 1º, III) tem a mesma pena das demais formas de tortura — reclusão de 2 a 8 anos — e é equiparada a crime hediondo, sem prejuízo das penas de outras infrações que o mesmo fato configure. Entra como linha própria no catálogo, ao lado da tortura para obter confissão (inciso I) e da tortura como castigo (inciso II)."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.2.12",
+    "links": [
+      {
+        "label": "Ver a tortura em violência doméstica (art. 1º, III)",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1587"
+      }
+    ]
+  },
+  {
     "id": "2026-07-29-org-criminosa-obstrucao-15245",
     "date": "2026-07-29",
     "title": "Crime organizado: dois crimes novos de obstrução (Lei 15.245/2025)",
@@ -149,6 +169,26 @@
     ]
   },
   {
+    "id": "2026-07-29-combustiveis-art1-8176",
+    "date": "2026-07-29",
+    "title": "Combustíveis: art. 1º da Lei 8.176/91 corrigido e atualizado",
+    "summary": "O art. 1º da Lei 8.176/1991 estava descrito como adulteração de combustível, mas pune o comércio de combustíveis em desacordo com as normas. A descrição foi corrigida e alinhada à mudança da Lei 15.348/2026.",
+    "body": [
+      "O crime contra a ordem econômica do art. 1º alcança adquirir, distribuir ou revender derivados de petróleo, álcool e demais combustíveis em desacordo com as normas, e usar gás liquefeito de petróleo em desacordo — não a adulteração, que é figura diversa. A pena permanece detenção de 1 a 5 anos. A Lei 15.348/2026 restringiu o inciso II ao uso de GLP para fins automotivos."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.2.12",
+    "links": [
+      {
+        "label": "Ver o crime do art. 1º da Lei 8.176/91",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=563"
+      }
+    ]
+  },
+  {
     "id": "2026-07-29-cdc-art73-pena-corrigida",
     "date": "2026-07-29",
     "title": "CDC: pena do art. 73 corrigida de anos para meses",
@@ -188,6 +228,28 @@
       {
         "label": "Ver os maus-tratos a animais (art. 32)",
         "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1582"
+      }
+    ]
+  },
+  {
+    "id": "2026-07-29-agrotoxicos-lei-14785",
+    "date": "2026-07-29",
+    "title": "Agrotóxicos: catálogo migrado da lei revogada para o novo marco (Lei 14.785/2023)",
+    "summary": "A Lei 14.785/2023 revogou a antiga Lei de Agrotóxicos (Lei 7.802/1989) e trouxe novos crimes. O catálogo ainda apontava para a lei revogada; foi migrado para os dispositivos vigentes.",
+    "body": [
+      "O crime de produzir, transportar, importar, utilizar ou comercializar agrotóxicos irregulares deixa de ser o art. 15 da lei antiga (reclusão de 2 a 4 anos) e passa a ser o art. 56 da Lei 14.785/2023, agora exigindo produto não registrado ou não autorizado e com pena maior: reclusão de 3 a 9 anos, e multa.",
+      "O art. 56 traz quatro causas de aumento, incorporadas à dosimetria: dano à propriedade alheia (de um sexto a um terço), dano ao meio ambiente (de um terço à metade), lesão corporal grave (da metade a dois terços) e morte (de dois terços até o dobro). Entra também o art. 57 — resíduos e embalagens vazias em desacordo, com reclusão de 2 a 4 anos. A antiga modalidade culposa (art. 16 da lei revogada) não foi reeditada e saiu do catálogo."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Dosimetria"
+    ],
+    "version": "v1.2.12",
+    "links": [
+      {
+        "label": "Ver o crime de agrotóxico irregular (art. 56)",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=734"
       }
     ]
   },

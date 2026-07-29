@@ -8817,7 +8817,7 @@
     "id": 563,
     "lei": "Lei 8.176/91",
     "artigo": "Art. 1º",
-    "crime": "Adulterar/falsificar combustível ou lubrificante, adquirir/transportar/revender/entregar a consumo combustível adulterado",
+    "crime": "Comércio de combustível em desacordo com as normas (adquirir, distribuir ou revender derivados de petróleo, álcool e demais combustíveis) ou usar GLP para fins automotivos em desacordo",
     "pena_min": 12,
     "pena_max": 60,
     "tipo_pena": "Detenção",
@@ -8827,7 +8827,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-5 anos detenção ou multa"
+    "obs": "1-5 anos detenção. Crime contra a ordem econômica. A Lei 15.348/2026 restringiu o inciso II ao uso de GLP para fins automotivos. O registro anterior descrevia adulteração de combustível, que não é a figura do art. 1º"
   },
   {
     "id": 564,
@@ -10687,11 +10687,11 @@
   },
   {
     "id": 734,
-    "lei": "Lei 7.802/89",
-    "artigo": "Art. 15",
-    "crime": "Produzir/comercializar/transportar/aplicar/prestar serviço na aplicação/dar destinação final a agrotóxicos em desacordo com a lei",
-    "pena_min": 24,
-    "pena_max": 48,
+    "lei": "Lei 14.785/23",
+    "artigo": "Art. 56",
+    "crime": "Produzir, armazenar, transportar, importar, utilizar ou comercializar agrotóxicos, produtos de controle ambiental ou afins não registrados ou não autorizados",
+    "pena_min": 36,
+    "pena_max": 108,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10699,23 +10699,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-4 anos reclusão + multa"
-  },
-  {
-    "id": 735,
-    "lei": "Lei 7.802/89",
-    "artigo": "Art. 16",
-    "crime": "Empregar agrotóxico que cause dano à saúde das pessoas e ao meio ambiente (modalidade culposa)",
-    "pena_min": 12,
-    "pena_max": 36,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Culposo",
-    "tentativa": "Não",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "1-3 anos reclusão + multa. Forma culposa"
+    "obs": "3 a 9 anos reclusão + multa. §único (aumentos): +1/6 a 1/3 se dano à propriedade alheia; +1/3 a 1/2 se dano ao meio ambiente; +1/2 a 2/3 se lesão grave; +2/3 ao dobro se morte. A Lei 14.785/2023 revogou a Lei 7.802/89"
   },
   {
     "id": 736,
@@ -21714,5 +21698,37 @@
     "tentativa": "Não",
     "crime": "Conspiração para obstrução de ações contra o crime organizado — ajustarem-se duas ou mais pessoas para a prática de violência ou grave ameaça contra agente público, advogado, jurado, testemunha, colaborador ou perito para embaraçar processo ou investigação de organização criminosa",
     "obs": "4 a 12 anos reclusão + multa. §1º: mesma pena se a conduta recai sobre cônjuge, companheiro, filho ou parente até o 3º grau das pessoas protegidas. §2º: se a violência ou grave ameaça é tentada ou consumada, soma-se a pena do crime correspondente. §3º e §4º: cumprimento de pena e prisão provisória em presídio federal de segurança máxima. Art. 21-B incluído pela Lei 15.245/2025"
+  },
+  {
+    "id": 1587,
+    "lei": "Lei 9.455/97",
+    "artigo": "Art. 1º, III",
+    "crime": "Tortura de mulher no contexto de violência doméstica e familiar (submeter, reiteradamente, a intenso sofrimento físico ou mental)",
+    "pena_min": 24,
+    "pena_max": 96,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Sim",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Sim",
+    "grave_ameaca": "Não",
+    "obs": "2-8 anos reclusão. Hediondo (equiparado). Submeter mulher, reiteradamente, a intenso sofrimento físico ou mental no contexto de violência doméstica e familiar, sem prejuízo das penas de outras infrações. Inciso III incluído pela Lei 15.410/2026"
+  },
+  {
+    "id": 1588,
+    "lei": "Lei 14.785/23",
+    "artigo": "Art. 57",
+    "crime": "Produzir, importar, comercializar ou dar destinação a resíduos e a embalagens vazias de agrotóxicos, produtos de controle ambiental ou afins em desacordo com a lei",
+    "pena_min": 24,
+    "pena_max": 48,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "2 a 4 anos reclusão + multa. Lei 14.785/2023 (novo marco dos agrotóxicos, que revogou a Lei 7.802/89)"
   }
 ]

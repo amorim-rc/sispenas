@@ -58,6 +58,7 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **Maria da Penha** (Lei 11.340/06 — art. 24-A: pena e §4º atualizados) | v1.2.11 |
 | **CDC** (Lei 8.078/90 — sem reforma 2023+; erro de origem no art. 73) | v1.2.11 |
 | **Falências** (Lei 11.101/05 — sem reforma 2023+; erros de origem nos arts. 171/173/177) | v1.2.11 |
+| **Diplomas menores** (varredura dos ~44 restantes) | v1.2.12 |
 
 > **Uma sessão = uma release.** Toda a revisão da cauda longa acima saiu numa
 > **única release v1.2.11**, com uma entrada de changelog por diploma. Não abrir
@@ -71,10 +72,20 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 
 ## O que FALTA (retomar aqui)
 
-**Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
-na ordem de prioridade (mais consultados/prováveis primeiro):
-CPM (DL 1.001/69, 352 tipos — militar, raramente alterado, pode ser sessão
-própria), e ~40 diplomas pequenos/antigos (baixa probabilidade de alteração recente).
+**CPM (DL 1.001/69, 352 tipos — militar).** É o que resta. Provável sessão própria
+(minor release). Raramente alterado, mas conferir por lei-reforma como os demais.
+
+**Resíduo dos diplomas menores (v1.2.12):** triados todos os ≥3 tipos + todos os
+pós-1990 + as reformas conhecidas. Achados: tortura (9.455/97, inciso III novo,
+L15.410/26), agrotóxicos (7.802/89 REVOGADA pela L14.785/23 — migrado p/ arts.
+56/57 + 4 aumentos), combustíveis (8.176/91 art. 1º, erro de origem + restrição da
+L15.348/26). Ainda NÃO varridos (risco desprezível, 1-2 tipos antigos/nicho):
+8.245/91 (locação), 7.347/85 (ACP), LC 64/90, 1.579/52 (CPI), 4.947/66, 4.729/65,
+4.591/64, 4.117/62, 4.595/64, 5.553/68, 7.643/87, 5.741/71, 5.478/68.
+**LIÇÃO NOVA:** revogação TOTAL por lei posterior NÃO aparece como anotação na
+página da lei antiga (agrotóxicos só apareceu porque a L14.785/23 é conhecida).
+O scan de anotações "2023+" na própria página é cego a isso — cruzar também os
+"revoga as Leis nºs ..." das leis-reforma novas.
 
 > **Achado da sessão (importante):** vários erros que NÃO eram defasagem, e sim
 > registros errados desde a origem, só apareceram ao casar artigo a artigo contra

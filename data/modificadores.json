@@ -1118,6 +1118,82 @@
         ]
       },
       "obs": "A pena do art. 24-A é aumentada de 1/3 até a metade se o descumprimento decorre da violação de áreas de exclusão monitoradas eletronicamente ou da remoção, violação ou alteração do dispositivo de monitoração sem autorização judicial. §4º incluído pela Lei 15.383/2026."
+    },
+    {
+      "id": "aumento-agrotoxico-dano-propriedade-56",
+      "nome": "Agrotóxico irregular com dano à propriedade alheia (+1/6 a 1/3)",
+      "dispositivo": "Lei 14.785/23, art. 56, §único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.167,
+      "fracao_max": 0.333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.785/23",
+        "artigos": [
+          "Art. 56"
+        ]
+      },
+      "obs": "A pena do art. 56 (agrotóxico não registrado) é aumentada se do crime resultar dano à propriedade alheia. §único incluído pela Lei 14.785/2023."
+    },
+    {
+      "id": "aumento-agrotoxico-dano-ambiental-56",
+      "nome": "Agrotóxico irregular com dano ao meio ambiente (+1/3 a 1/2)",
+      "dispositivo": "Lei 14.785/23, art. 56, §único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.785/23",
+        "artigos": [
+          "Art. 56"
+        ]
+      },
+      "obs": "A pena do art. 56 (agrotóxico não registrado) é aumentada se do crime resultar dano ao meio ambiente. §único incluído pela Lei 14.785/2023."
+    },
+    {
+      "id": "aumento-agrotoxico-lesao-grave-56",
+      "nome": "Agrotóxico irregular com lesão corporal grave (+1/2 a 2/3)",
+      "dispositivo": "Lei 14.785/23, art. 56, §único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.785/23",
+        "artigos": [
+          "Art. 56"
+        ]
+      },
+      "obs": "A pena do art. 56 (agrotóxico não registrado) é aumentada se do crime resultar lesão corporal de natureza grave. §único incluído pela Lei 14.785/2023."
+    },
+    {
+      "id": "aumento-agrotoxico-morte-56",
+      "nome": "Agrotóxico irregular com resultado morte (+2/3 ao dobro)",
+      "dispositivo": "Lei 14.785/23, art. 56, §único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.785/23",
+        "artigos": [
+          "Art. 56"
+        ]
+      },
+      "obs": "A pena do art. 56 (agrotóxico não registrado) é aumentada se do crime resultar a morte. §único incluído pela Lei 14.785/2023."
     }
   ]
 }
