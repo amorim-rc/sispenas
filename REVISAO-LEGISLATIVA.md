@@ -56,6 +56,8 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **Organizações criminosas** (Lei 12.850/13 — obstrução, Lei 15.245/25) | v1.2.11 |
 | **Henry Borel** (Lei 14.344/22 — art. 26 estava com crime/pena errados) | v1.2.11 |
 | **Maria da Penha** (Lei 11.340/06 — art. 24-A: pena e §4º atualizados) | v1.2.11 |
+| **CDC** (Lei 8.078/90 — sem reforma 2023+; erro de origem no art. 73) | v1.2.11 |
+| **Falências** (Lei 11.101/05 — sem reforma 2023+; erros de origem nos arts. 171/173/177) | v1.2.11 |
 
 > **Uma sessão = uma release.** Toda a revisão da cauda longa acima saiu numa
 > **única release v1.2.11**, com uma entrada de changelog por diploma. Não abrir
@@ -71,16 +73,16 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 
 **Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
 na ordem de prioridade (mais consultados/prováveis primeiro):
-CDC (Lei 8.078/90), falências (11.101), CPM (352 tipos — militar,
-raramente alterado, pode ser sessão própria), e ~40 diplomas pequenos/antigos
-(baixa probabilidade de alteração recente).
+CPM (DL 1.001/69, 352 tipos — militar, raramente alterado, pode ser sessão
+própria), e ~40 diplomas pequenos/antigos (baixa probabilidade de alteração recente).
 
-> **Achado da sessão (importante):** dois erros que NÃO eram só defasagem, e sim
+> **Achado da sessão (importante):** vários erros que NÃO eram defasagem, e sim
 > registros errados desde a origem, só apareceram ao casar artigo a artigo contra
-> o compilado — o art. 26 da Lei Henry Borel (crime, pena e tipo de pena trocados)
-> e o art. 24-A da Maria da Penha (pena antiga + causa de aumento inexistente por
-> "arma de fogo"). Reforça o método: conferir CADA rótulo contra o texto, não
-> confiar no registro nem presumir que só as leis novas trazem defeito.
+> o compilado — Henry Borel art. 26 (crime/pena/tipo trocados), Maria da Penha
+> art. 24-A (pena antiga + aumento inexistente por "arma de fogo"), CDC art. 73
+> (1-5 anos em vez de 1-6 meses) e falências arts. 171/173/177 (crime e/ou pena
+> trocados). Reforça o método: conferir CADA rótulo contra o texto, não confiar no
+> registro nem presumir que só as leis novas trazem defeito.
 
 Sugestão de ordem: os mais consultados e mais prováveis de reforma recente
 primeiro; deixar o CPM e os diplomas antigos de 1–2 tipos por último.

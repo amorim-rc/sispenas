@@ -108,6 +108,27 @@
     ]
   },
   {
+    "id": "2026-07-29-falencias-tres-artigos-corrigidos",
+    "date": "2026-07-29",
+    "title": "Falências: três crimes corrigidos para o que a lei realmente prevê",
+    "summary": "A Lei de Falências (Lei 11.101/2005) não teve reforma penal desde 2023, mas a conferência artigo a artigo contra o texto compilado revelou três registros com crime ou pena trocados.",
+    "body": [
+      "O art. 171 estava descrito como sonegação de bens, quando pune sonegar ou omitir informações no processo de falência ou recuperação (a pena de reclusão de 2 a 4 anos já estava correta). O art. 173, registrado como adulteração de documentos com pena de 3 a 6 anos, na verdade pune a apropriação, o desvio ou a ocultação de bens do devedor ou da massa, com reclusão de 2 a 4 anos.",
+      "O art. 177 trazia a omissão de documentos contábeis, com detenção de 1 a 2 anos — que é o crime do art. 178, já presente no catálogo. O art. 177 pune, na verdade, a violação de impedimento: a aquisição de bens da massa pelo juiz, pelo membro do Ministério Público, pelo administrador judicial, pelo perito e por outros agentes do processo, com reclusão de 2 a 4 anos."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.2.11",
+    "links": [
+      {
+        "label": "Ver a apropriação de bens da massa (art. 173)",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=504"
+      }
+    ]
+  },
+  {
     "id": "2026-07-29-ctb-sinistro-de-transito",
     "date": "2026-07-29",
     "title": "CTB: \"acidente\" passa a \"sinistro de trânsito\"",
@@ -124,6 +145,26 @@
       {
         "label": "Ver a fuga do local do sinistro (art. 305)",
         "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=353"
+      }
+    ]
+  },
+  {
+    "id": "2026-07-29-cdc-art73-pena-corrigida",
+    "date": "2026-07-29",
+    "title": "CDC: pena do art. 73 corrigida de anos para meses",
+    "summary": "A triagem do Código de Defesa do Consumidor não encontrou reforma penal desde 2023, mas revelou um erro de registro: o art. 73 estava com pena de 1 a 5 anos, quando a lei prevê detenção de 1 a 6 meses.",
+    "body": [
+      "O art. 73 pune deixar de corrigir imediatamente informação sobre consumidor, constante de cadastro ou banco de dados, que se sabe inexata. A pena legal é detenção de 1 a 6 meses, ou multa — o catálogo trazia 1 a 5 anos, provável troca de unidade. Corrigido contra o texto compilado. Os demais crimes do CDC (arts. 63 a 74) foram conferidos e conferem."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.2.11",
+    "links": [
+      {
+        "label": "Ver o art. 73 do CDC",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=535"
       }
     ]
   },
