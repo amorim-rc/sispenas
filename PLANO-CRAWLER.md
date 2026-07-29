@@ -33,6 +33,14 @@ esperar os pré-requisitos da v2.0.0. Ao implementar, **atualizar a seção v2.0
 do roadmap** para registrar essa mudança de arquitetura (compilado-first; DOU
 como watcher).
 
+**Destino do crawler do DOU (decidido em 29/07/2026):** abandonado como espinha
+dorsal — o classificador de IA sobre norma bruta sai do caminho crítico. A única
+fraqueza do compilado é a latência de consolidação (dias a semanas entre o DOU e
+a incorporação ao texto compilado), irrelevante para a cadência mensal do
+conferidor. Se um dia for preciso reagir no dia da publicação, um watcher mínimo
+do DOU (sem IA: gatilho "saiu norma citando o diploma X → rodar o conferidor da
+fonte X antecipadamente") pode ser acrescentado como fase opcional futura.
+
 ## 2. Decisões de arquitetura (fechadas — não rediscutir na implementação)
 
 1. **Linguagem: Python 3.12**, como os scripts existentes. Dependências novas em
@@ -233,6 +241,26 @@ Lição dos agrotóxicos: a página da Lei 7.802/89 **não anuncia** que a Lei
   pode ser o cache do Planalto para datacenter; reexecutar; se persistir,
   investigar fetch (F0 documenta alternativas).
 
+### 5.10 (Opcional, F6) PR automático para achados mecânicos
+
+Evolução natural depois de alguns ciclos de relatórios estáveis (precisão
+comprovada). Escopo **estrito**:
+
+- **Só UPDATE de linha existente** com correção inequívoca: moldura ou tipo de
+  pena divergente do compilado. O gerador edita `data/crimes.json` (a fonte,
+  nunca o derivado), reescreve o `obs` liderando pela faixa nova (armadilha
+  nº 3), cria a entrada de changelog e abre PR citando o trecho do compilado.
+  **Merge continua exigindo revisão humana** (competência jurídica) — como o
+  roadmap já previa para o crawler.
+- **Nunca ADD/REMOVE**: crime novo ou revogação exigem decisões de modelagem
+  que não se automatizam com segurança (linha × modificador, equiparações,
+  campos violencia/grave_ameaca/tentativa/acao, atribuição de id, hediondez,
+  `resultado_morte`/`CORRECOES_MORTE`). Esses achados permanecem na issue, para
+  uma sessão humana/IA aplicar como patch.
+- Gates: CI completa no PR (`--estrito`, derivado sincronizado, typecheck,
+  verificar, build) + checador de vigência (nunca propor mudança ainda não
+  vigente) + no máximo um PR aberto por vez (não empilhar).
+
 ## 6. Armadilhas conhecidas (da revisão manual — TODAS viram teste ou regra)
 
 | # | Armadilha | Mitigação no plano |
@@ -280,8 +308,10 @@ modelo menor com este arquivo como única briefing.
 | **F3** | `pena_parser.py` extraído/estendido + `conferir.py` + relatório | Refactor byte-idêntico; recall e precisão da seção 7 passando; relatório legível gerado para o catálogo inteiro | 1–2 sessões | Sim, com F2 pronto |
 | **F4** | `vigencia.py` + `revogacao.py` + exceções | Caso 15.190 (vacatio) e caso 7.802 (revogação total) detectados em teste | 1 sessão | Sim |
 | **F5** | `conferidor.yml` + issue automática + atualização do roadmap + **excluir este arquivo** | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first) | 1 sessão | Sim |
+| **F6** (opcional, pós-F5) | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
 
-Total: ~7–9 sessões curtas. Ordem estrita F0→F5 (cada fase depende da anterior).
+Total: ~7–9 sessões curtas (F6 opcional: +1–2). Ordem estrita F0→F5 (cada fase
+depende da anterior); F6 só após ciclos de relatório com precisão comprovada.
 
 ## 9. Versionamento e contrato de dados
 
@@ -313,5 +343,8 @@ Total: ~7–9 sessões curtas. Ordem estrita F0→F5 (cada fase depende da anter
 - [ ] F3 — extrator de pena + differ + relatório
 - [ ] F4 — vigência + revogação total
 - [ ] F5 — automação CI + roadmap + exclusão deste arquivo
+- [ ] F6 (opcional, pós-F5) — PR automático de achados mecânicos
 
-**Última atualização:** 2026-07-29 — plano criado; nenhuma fase iniciada.
+**Última atualização:** 2026-07-29 — plano criado e refinado (destino do DOU
+explicitado; F6 opcional de PR automático); nenhuma fase iniciada. Nota: se a F6
+for adotada, a exclusão deste arquivo migra da F5 para a F6.
