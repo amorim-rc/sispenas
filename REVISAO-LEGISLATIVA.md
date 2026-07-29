@@ -1,0 +1,72 @@
+# Revisão de defasagem legislativa — estado e método
+
+Documento de continuidade da **revisão do catálogo contra o texto compilado
+oficial** (`planalto.gov.br`). Objetivo: encontrar e corrigir a defasagem do
+catálogo frente às leis penais recentes (2023+). Atualizado em **2026-07-29**.
+
+> Acuidade jurídica é o valor central: dado errado publicado é pior que dado
+> ausente. Nada entra sem conferência contra o texto compilado.
+
+## Método (validado ao longo de v1.2.2–v1.2.10)
+
+**Revisar POR LEI-REFORMA, não diploma a diploma.** Poucas leis recentes explicam
+quase toda a defasagem, e cada uma tocou vários diplomas.
+
+1. **Ler a lei-reforma na fonte.** O texto da lei lista, em "A Lei X passa a
+   vigorar…", **todos os diplomas que ela alterou**. Isso evita varrer 60 diplomas.
+2. **Separar penal de não-penal.** Boa parte das alterações é processual (CPP,
+   LEP, competência) — fora do catálogo, que só cataloga **tipos penais**.
+3. **Cruzar com o catálogo casando por NÚMERO DE ARTIGO em TODOS os rótulos.**
+4. **Classificar (rigor do art. 121):** o que fixa pena própria vira **linha**;
+   o que "aumenta a respectiva pena" vira **modificador** de dosimetria; regras de
+   concurso/procedimento não entram.
+5. **Conferir no navegador**, nunca por cliente não interativo — o Planalto serve
+   página desatualizada a `WebFetch`/curl.
+
+### Armadilhas que já custaram erro
+
+- **Rótulo pela lei criadora.** Artigos do CP inseridos por lei recente vêm com
+  `lei="Lei 14.811/24"`, não `"CP"`. Casar por artigo em todos os rótulos, nunca
+  filtrar `lei==CP`.
+- **O `obs` dita a moldura.** `transform_data` deriva a moldura via
+  `parse_pena_range(obs)`, que VENCE os campos `pena_min/max`. O `obs` deve
+  liderar pela faixa correta e não conter faixa numérica secundária.
+- **`jaEmbutida`** suprime modificador cujo dispositivo está no mesmo artigo do
+  crime. Para aumentos que não são linha (org. criminosa), usar `ignora_embutida`.
+- **Fração > 1** (dobro=1, triplo=2): a 3ª fase admite em aumentos; validador
+  aceita até 3 quando `fase==3 && natureza=='aumento'`.
+- **Rótulos divididos.** Escopo de modificador aceita UM rótulo. Se o diploma
+  está sob dois (ex.: `Lei 7.716/89` e `... (atualiz.)`), unificar antes.
+
+## O que já está FECHADO
+
+| Escopo | Versões |
+|---|---|
+| **CP — Parte Especial** (completo, art. por art.) | v1.2.2 – v1.2.6 |
+| **Lei 15.358/26** (org. criminosa) → Drogas, Desarmamento | v1.2.7 |
+| **Lei 15.163/25** (exposição a perigo) → Idoso, PcD | v1.2.8 |
+| **ECA** (leis 14.811/24 e 15.234/25) | v1.2.9 |
+| **Lei de Racismo** (Lei 14.532/23, padrão CP) | v1.2.10 |
+
+## O que FALTA (retomar aqui)
+
+**Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma):
+ambiental (9.605, 48 tipos), sistema financeiro (7.492, 23), abuso de autoridade
+(13.869, 24), ordem tributária (8.137, 16), CTB, CDC, esporte (14.597), falências
+(11.101), organizações criminosas (12.850), Henry Borel (14.344), Maria da Penha
+(11.340), CPM (352 tipos — militar, raramente alterado, pode ser sessão própria),
+e ~40 diplomas pequenos/antigos (baixa probabilidade de alteração recente).
+
+Sugestão de ordem: os mais consultados e mais prováveis de reforma recente
+primeiro; deixar o CPM e os diplomas antigos de 1–2 tipos por último.
+
+## Onde estão as coisas
+
+- Fonte do catálogo: `data/crimes.json` (derivado em `static/data/crimes.json`).
+- Modificadores de dosimetria: `data/modificadores.json`.
+- Cada mudança vira uma entrada em `src/data/changelog/entries/<ano>/<id>.ts`
+  (ver `src/data/changelog/create-changelog-entry.md`).
+- Verificação: `python scripts/transform_data.py --estrito --max-contradicoes=0`,
+  `python scripts/validar_modificadores.py`, `npm run typecheck`,
+  `npm run verificar`, `npm run build`.
+- Versionamento: correção de dado → patch (`1.2.Z`), fechado um lote por vez.
