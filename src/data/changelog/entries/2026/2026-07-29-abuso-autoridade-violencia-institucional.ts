@@ -12,7 +12,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Tipos penais', 'Dosimetria'],
-  version: 'v1.2.12',
+  version: 'v1.2.11',
   links: [
     {
       label: 'Ver a violência institucional (art. 15-A)',

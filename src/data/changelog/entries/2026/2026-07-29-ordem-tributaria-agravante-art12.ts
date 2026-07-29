@@ -12,7 +12,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Dosimetria'],
-  version: 'v1.2.13',
+  version: 'v1.2.11',
   links: [
     {
       label: 'Ver a sonegação fiscal material (art. 1º)',

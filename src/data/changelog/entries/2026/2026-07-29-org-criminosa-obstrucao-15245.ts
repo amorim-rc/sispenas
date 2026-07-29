@@ -12,7 +12,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Tipos penais'],
-  version: 'v1.2.15',
+  version: 'v1.2.11',
   links: [
     {
       label: 'Ver a obstrução de ações contra o crime organizado (art. 21-A)',

@@ -12,7 +12,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Tipos penais', 'Dosimetria'],
-  version: 'v1.2.16',
+  version: 'v1.2.11',
   links: [
     {
       label: 'Ver o descumprimento de medida protetiva (art. 24-A)',

@@ -11,7 +11,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Tipos penais'],
-  version: 'v1.2.14',
+  version: 'v1.2.11',
   links: [
     {
       label: 'Ver a fuga do local do sinistro (art. 305)',

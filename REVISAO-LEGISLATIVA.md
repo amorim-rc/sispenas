@@ -48,14 +48,19 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **ECA** (leis 14.811/24 e 15.234/25) | v1.2.9 |
 | **Lei de Racismo** (Lei 14.532/23, padrão CP) | v1.2.10 |
 | **Ambiental** (Lei 9.605/98 — reformas 2024-2026) | v1.2.11 |
-| **Abuso de autoridade** (Lei 13.869/19 — sem reforma 2023+; achado o art. 15-A) | v1.2.12 |
-| **Sistema financeiro** (Lei 7.492/86 — triado, sem defasagem) | — (sem release) |
-| **Ordem tributária** (Lei 8.137/90 — agravante do art. 12, LC 224/25) | v1.2.13 |
-| **CTB** (Lei 9.503/97 — terminologia "sinistro", Lei 14.599/23) | v1.2.14 |
-| **Esporte** (Lei 14.597/23 — triado, sem defasagem penal) | — (sem release) |
-| **Organizações criminosas** (Lei 12.850/13 — obstrução, Lei 15.245/25) | v1.2.15 |
-| **Henry Borel** (Lei 14.344/22 — art. 26 estava com crime/pena errados) | v1.2.16 |
-| **Maria da Penha** (Lei 11.340/06 — art. 24-A: pena e §4º atualizados) | v1.2.16 |
+| **Abuso de autoridade** (Lei 13.869/19 — sem reforma 2023+; achado o art. 15-A) | v1.2.11 |
+| **Sistema financeiro** (Lei 7.492/86 — triado, sem defasagem) | — (sem alteração) |
+| **Ordem tributária** (Lei 8.137/90 — agravante do art. 12, LC 224/25) | v1.2.11 |
+| **CTB** (Lei 9.503/97 — terminologia "sinistro", Lei 14.599/23) | v1.2.11 |
+| **Esporte** (Lei 14.597/23 — triado, sem defasagem penal) | — (sem alteração) |
+| **Organizações criminosas** (Lei 12.850/13 — obstrução, Lei 15.245/25) | v1.2.11 |
+| **Henry Borel** (Lei 14.344/22 — art. 26 estava com crime/pena errados) | v1.2.11 |
+| **Maria da Penha** (Lei 11.340/06 — art. 24-A: pena e §4º atualizados) | v1.2.11 |
+
+> **Uma sessão = uma release.** Toda a revisão da cauda longa acima saiu numa
+> **única release v1.2.11**, com uma entrada de changelog por diploma. Não abrir
+> uma versão por diploma: acumular as entradas do lote sob a mesma `version` e só
+> subir `package.json` uma vez, ao fechar a sessão.
 
 > **Sistema financeiro (7.492/86):** triado e completo (arts. 2º–23 presentes).
 > Sem reforma penal desde 2023. A única mudança recente (Lei 14.478/2022, ativos
