@@ -864,6 +864,50 @@
       },
       "ignora_embutida": true,
       "obs": "Redução de 1/3 a 2/3 se os crimes de abolição violenta (art. 359-L) ou golpe de Estado (art. 359-M) são praticados em contexto de multidão, desde que o agente não financie nem exerça liderança. Incluído pela Lei 15.402/2026."
+    },
+    {
+      "id": "aumento-drogas-orgcrim-40a",
+      "nome": "Tráfico e condutas afins por organização criminosa ultraviolenta (dobro)",
+      "dispositivo": "Lei 11.343/06, art. 40-A",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 11.343/06",
+        "artigos": [
+          "Art. 33",
+          "Art. 34",
+          "Art. 35",
+          "Art. 36",
+          "Art. 37"
+        ]
+      },
+      "obs": "As penas dos arts. 33 a 37 (tráfico e condutas equiparadas) são aplicadas em dobro se o crime é cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-armas-orgcrim-21a",
+      "nome": "Crimes de arma de fogo por organização criminosa ultraviolenta (+2/3)",
+      "dispositivo": "Lei 10.826/03, art. 21-A",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 10.826/03",
+        "artigos": [
+          "Art. 12",
+          "Art. 14",
+          "Art. 16"
+        ]
+      },
+      "obs": "Nos crimes dos arts. 12, 14 e 16 (posse/porte irregular e comércio ilegal), a pena é aumentada de 2/3 se cometidos por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
     }
   ]
 }
