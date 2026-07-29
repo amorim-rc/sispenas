@@ -52,6 +52,8 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 | **Sistema financeiro** (Lei 7.492/86 — triado, sem defasagem) | — (sem release) |
 | **Ordem tributária** (Lei 8.137/90 — agravante do art. 12, LC 224/25) | v1.2.13 |
 | **CTB** (Lei 9.503/97 — terminologia "sinistro", Lei 14.599/23) | v1.2.14 |
+| **Esporte** (Lei 14.597/23 — triado, sem defasagem penal) | — (sem release) |
+| **Organizações criminosas** (Lei 12.850/13 — obstrução, Lei 15.245/25) | v1.2.15 |
 
 > **Sistema financeiro (7.492/86):** triado e completo (arts. 2º–23 presentes).
 > Sem reforma penal desde 2023. A única mudança recente (Lei 14.478/2022, ativos
@@ -62,7 +64,7 @@ quase toda a defasagem, e cada uma tocou vários diplomas.
 
 **Cauda longa de diplomas ainda não triados** (por lei-reforma ou por diploma),
 na ordem de prioridade (mais consultados/prováveis primeiro):
-esporte (14.597), organizações criminosas (12.850), Henry Borel (14.344),
+Henry Borel (14.344),
 Maria da Penha (11.340), CDC, falências (11.101), CPM (352 tipos — militar,
 raramente alterado, pode ser sessão própria), e ~40 diplomas pequenos/antigos
 (baixa probabilidade de alteração recente).

@@ -21682,5 +21682,37 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "3 meses a 1 ano detenção + multa. Submeter vítima de infração penal ou testemunha de crime violento a procedimentos desnecessários, repetitivos ou invasivos, sem estrita necessidade. §1º: +2/3 se permite terceiro intimidar a vítima; §2º: pena em dobro se o próprio agente a intimida. Art. 15-A incluído pela Lei 14.321/2022"
+  },
+  {
+    "lei": "Lei 12.850/13",
+    "pena_min": 48,
+    "pena_max": 144,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1585,
+    "artigo": "Art. 21-A",
+    "tentativa": "Sim",
+    "crime": "Obstrução de ações contra o crime organizado — solicitar (mediante vantagem) ou ordenar a prática de violência ou grave ameaça contra agente público, advogado, jurado, testemunha, colaborador ou perito para embaraçar processo ou investigação de organização criminosa",
+    "obs": "4 a 12 anos reclusão + multa. §1º: mesma pena se a conduta recai sobre cônjuge, companheiro, filho ou parente até o 3º grau das pessoas protegidas. §2º: se a violência ou grave ameaça é tentada ou consumada, soma-se a pena do crime correspondente. §3º e §4º: cumprimento de pena e prisão provisória em presídio federal de segurança máxima. Art. 21-A incluído pela Lei 15.245/2025"
+  },
+  {
+    "lei": "Lei 12.850/13",
+    "pena_min": 48,
+    "pena_max": 144,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1586,
+    "artigo": "Art. 21-B",
+    "tentativa": "Não",
+    "crime": "Conspiração para obstrução de ações contra o crime organizado — ajustarem-se duas ou mais pessoas para a prática de violência ou grave ameaça contra agente público, advogado, jurado, testemunha, colaborador ou perito para embaraçar processo ou investigação de organização criminosa",
+    "obs": "4 a 12 anos reclusão + multa. §1º: mesma pena se a conduta recai sobre cônjuge, companheiro, filho ou parente até o 3º grau das pessoas protegidas. §2º: se a violência ou grave ameaça é tentada ou consumada, soma-se a pena do crime correspondente. §3º e §4º: cumprimento de pena e prisão provisória em presídio federal de segurança máxima. Art. 21-B incluído pela Lei 15.245/2025"
   }
 ]
