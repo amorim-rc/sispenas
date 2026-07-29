@@ -908,6 +908,61 @@
         ]
       },
       "obs": "Nos crimes dos arts. 12, 14 e 16 (posse/porte irregular e comércio ilegal), a pena é aumentada de 2/3 se cometidos por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-injuria-racial-concurso-2a",
+      "nome": "Injúria racial em concurso de pessoas (+1/2)",
+      "dispositivo": "Lei 7.716/89, art. 2º-A, §único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 7.716/89",
+        "artigos": [
+          "Art. 2º-A"
+        ]
+      },
+      "obs": "A pena da injúria racial (art. 2º-A) é aumentada de metade se cometida mediante concurso de 2 ou mais pessoas. §único incluído pela Lei 14.532/2023."
+    },
+    {
+      "id": "aumento-racismo-descontracao-20a",
+      "nome": "Racismo em contexto de descontração ou recreação (+1/3 a 1/2)",
+      "dispositivo": "Lei 7.716/89, art. 20-A",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "lei",
+        "valor": "Lei 7.716/89"
+      },
+      "obs": "Os crimes da Lei de Racismo têm as penas aumentadas de 1/3 até a metade quando ocorrem em contexto ou com intuito de descontração, diversão ou recreação. Art. 20-A incluído pela Lei 14.532/2023."
+    },
+    {
+      "id": "aumento-racismo-funcionario-20b",
+      "nome": "Racismo por funcionário público (+1/3 a 1/2)",
+      "dispositivo": "Lei 7.716/89, art. 20-B",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 7.716/89",
+        "artigos": [
+          "Art. 2º-A",
+          "Art. 20"
+        ]
+      },
+      "obs": "As penas dos arts. 2º-A e 20 são aumentadas de 1/3 até a metade quando praticados por funcionário público no exercício das funções ou a pretexto de exercê-las. Art. 20-B incluído pela Lei 14.532/2023."
     }
   ]
 }
