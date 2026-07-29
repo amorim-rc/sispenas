@@ -91,6 +91,9 @@ function satisfazCondicao(m: Modificador, c: Crime): boolean {
  * ele já está embutido.
  */
 function jaEmbutida(m: Modificador, c: Crime): boolean {
+  // Aumentos "sobre a respectiva pena" cominam no próprio artigo do crime, mas
+  // não são linha do catálogo — devem ser oferecidos, não suprimidos.
+  if (m.ignora_embutida) return false;
   const artMod = numeroArtigo(m.dispositivo);
   const artCrime = numeroArtigo(c.artigo);
   if (artMod === null || artCrime === null) return false;

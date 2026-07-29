@@ -41,6 +41,13 @@ export interface Modificador {
   escopo: Escopo;
   /** Pré-requisito do tipo penal para o modificador ser oferecido. */
   condicao?: string;
+  /**
+   * Ignora a supressão por `jaEmbutida`. Usar quando o aumento comina no MESMO
+   * artigo do crime mas NÃO é uma linha própria do catálogo — caso dos aumentos
+   * "sobre a respectiva pena" (org. criminosa ultraviolenta: 129 §8º-A, 158 §4º…),
+   * que devem ser oferecidos como modificador, e não contados como cenário.
+   */
+  ignora_embutida?: boolean;
   obs?: string;
 }
 

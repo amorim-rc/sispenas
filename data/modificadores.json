@@ -746,6 +746,124 @@
         "tipo": "geral"
       },
       "obs": "Caso fortuito ou força maior que reduziu — sem eliminar — a capacidade de entendimento. Se completa, isenta (§1º)."
+    },
+    {
+      "id": "aumento-lesao-orgcrim-129",
+      "nome": "Lesão por organização criminosa ultraviolenta (+2/3)",
+      "dispositivo": "CP, art. 129, §8º-A",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 129"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Aumento de 2/3 se a lesão corporal (exceto a seguida de morte do §3º, que tem linha própria no §3º-A) é praticada por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-extorsao-orgcrim-158",
+      "nome": "Extorsão por organização criminosa ultraviolenta (triplo)",
+      "dispositivo": "CP, art. 158, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 2.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 158"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Aplica-se em triplo a pena (aumento de 200%) se a extorsão é cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-extorsao-sequestro-orgcrim-159",
+      "nome": "Extorsão mediante sequestro por organização criminosa ultraviolenta (+2/3)",
+      "dispositivo": "CP, art. 159, §5º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 159"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Aumento de 2/3 se a extorsão mediante sequestro é cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-receptacao-orgcrim-180",
+      "nome": "Receptação por organização criminosa ultraviolenta (+2/3)",
+      "dispositivo": "CP, art. 180, §8º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 180"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Aumento de 2/3 se a receptação é cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-patrimonio-inst-financeira-183a",
+      "nome": "Crime patrimonial contra instituição financeira ou segurança privada (1/3 ao dobro)",
+      "dispositivo": "CP, art. 183-A",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "titulo",
+        "lei": "CP",
+        "valor": "II"
+      },
+      "obs": "Nos crimes contra o patrimônio (Título II), aumento de 1/3 ao dobro se cometidos contra instituições financeiras ou prestadores de serviço de segurança privada (Estatuto da Segurança Privada). Incluído pela Lei 14.967/2024."
+    },
+    {
+      "id": "diminuicao-multidao-instituicoes-359mb",
+      "nome": "Multidão nos crimes contra as instituições democráticas (−1/3 a −2/3)",
+      "dispositivo": "CP, art. 359-M-B",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 359-L",
+          "Art. 359-M"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Redução de 1/3 a 2/3 se os crimes de abolição violenta (art. 359-L) ou golpe de Estado (art. 359-M) são praticados em contexto de multidão, desde que o agente não financie nem exerça liderança. Incluído pela Lei 15.402/2026."
     }
   ]
 }

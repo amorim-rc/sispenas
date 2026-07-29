@@ -63,10 +63,13 @@ def main() -> int:
             erros.append(f"{rot} piso_minimo=true fora da 2ª fase "
                          f"(a 3ª fase pode ultrapassar a moldura)")
 
+        # A 3ª fase admite aumento "múltiplo" (dobro=1, triplo=2) — fração > 1.
+        # As demais fases ficam presas a [0,1].
+        teto = 3 if (m.get("fase") == 3 and m.get("natureza") == "aumento") else 1
         for campo in ("fracao_min", "fracao_max"):
             v = m.get(campo)
-            if v is not None and not (0 <= v <= 1):
-                erros.append(f"{rot} {campo}={v} fora de [0,1]")
+            if v is not None and not (0 <= v <= teto):
+                erros.append(f"{rot} {campo}={v} fora de [0,{teto}]")
         fmn, fmx = m.get("fracao_min"), m.get("fracao_max")
         if fmn is not None and fmx is not None and fmn > fmx:
             erros.append(f"{rot} fracao_min {fmn} > fracao_max {fmx}")
