@@ -47,11 +47,12 @@ cego do conferidor — **lei penal nova autônoma** (diploma que ainda não est�
 1. **Linguagem: Python 3.12**, como os scripts existentes. Dependências novas em
    `scripts/crawler/requirements.txt` (NÃO no build do site): `playwright`,
    `beautifulsoup4`, `lxml`.
-2. **Fetch com navegador real (Playwright/Chromium)**. Motivo comprovado nesta
-   revisão: o Planalto serve página **desatualizada** a cliente não interativo
-   (curl/WebFetch). A F0 testa se headers/cache-busting bastam (mais barato); se
-   bastarem, o fetcher usa HTTP puro com Playwright como fallback — mas o plano
-   assume Playwright como baseline.
+2. **Fetch com navegador real (Playwright/Chromium) — CONFIRMADO na F0**
+   (29/07/2026): o CDN do Planalto serve variantes **arcaicas por página** a
+   cliente HTTP (a Lei 11.340 veio pré-2018 via curl, com `Last-Modified`
+   mentindo), imune a UA/headers/cookies/cache-buster. Sem caminho HTTP
+   otimizado; sentinela continua obrigatória. Evidências em
+   `crawler/DECISOES-F0.md`.
 3. **Relatório, nunca escrita automática.** O conferidor produz
    `crawler/relatorios/AAAA-MM-DD.md` (+ `.json`). Humano decide e aplica como
    patch (`1.2.Z`), como na revisão manual. Acuidade jurídica é o valor central:
@@ -213,14 +214,14 @@ relatório numa seção própria ("vigência futura — não aplicar ainda"), co
 ### 5.7 Detector de revogação total — `revogacao.py` (F4)
 
 Lição dos agrotóxicos: a página da Lei 7.802/89 **não anuncia** que a Lei
-14.785/2023 a revogou por inteiro. Três verificações, em ordem de custo:
+14.785/2023 a revogou por inteiro. Verificações (LexML foi testado na F0 e
+**descartado** — URN sem metadados estáticos; SRU atrás de challenge anti-bot):
 
 1. Banner no topo do snapshot (regex `Revogad[ao]\s+pela` nos primeiros 2KB);
-2. **LexML** (`https://www.lexml.gov.br/urn/urn:lex:br:federal:lei:AAAA;NNNNN`
-   e a API SRU) — metadados de "revogada por / alterada por" (F0 valida a
-   viabilidade e o formato da resposta);
-3. Fallback: alerta de envelhecimento — diploma sem alteração há N anos e sem
-   verificação LexML é sinalizado para conferência manual esporádica.
+2. **Watcher do DOU (5.11/F7)**: a lei revogadora nova casa a citação do
+   diploma e o vocabulário penal — cobre o caso dali em diante;
+3. Fallback: alerta de envelhecimento — diploma sem alteração há N anos é
+   sinalizado para conferência manual esporádica.
 
 ### 5.8 Relatório
 
@@ -334,11 +335,11 @@ modelo menor com este arquivo como única briefing.
 
 | Fase | Entrega | Critério de aceite | Esforço | Barata? |
 |---|---|---|---|---|
-| **F0** | Spike: fetch (headers × Playwright), charset, LexML, levantamento HTML de 5 páginas | Nota `crawler/DECISOES-F0.md` com: estratégia de fetch escolhida e provada (página do CP com sentinela atual via método escolhido), formato LexML validado | 1 sessão | Não (exige julgamento) |
+| **F0** ✅ 29/07/2026 | Spike: fetch, charset, LexML, levantamento HTML | **Concluída** — `crawler/DECISOES-F0.md`: Playwright obrigatório (curl serve cópia pré-2018 da L11340), cp1252 padrão, anotações = links com href p/ lei+âncora, revogado total = corpo removido, LexML descartado | — | — |
 | **F1** | `data/fontes.json` completo + `baixar.py` + gitignore + requirements | `baixar.py --todas` baixa ~60 snapshots com sentinela válida; nenhum rótulo órfão; `url_planalto()` lendo de fontes.json com derivado byte-idêntico | 1 sessão | Sim |
 | **F2** | `parsear.py` + fixtures + testes | Fixtures da seção 7 parseadas com 100% dos casos de teste passando; art. 121 do CP produz exatamente os dispositivos vigentes conhecidos | 2–3 sessões | Parcial (fixtures sim; regras do parser pedem cuidado) |
 | **F3** | `pena_parser.py` extraído/estendido + `conferir.py` + relatório | Refactor byte-idêntico; recall e precisão da seção 7 passando; relatório legível gerado para o catálogo inteiro | 1–2 sessões | Sim, com F2 pronto |
-| **F4** | `vigencia.py` + `revogacao.py` + exceções | Caso 15.190 (vacatio) e caso 7.802 (revogação total) detectados em teste | 1 sessão | Sim |
+| **F4** | `vigencia.py` + `revogacao.py` (banner; sem LexML) + exceções | Caso 15.190 (vacatio) detectado; caso 7.802 coberto por banner/watcher documentado em teste | 1 sessão | Sim |
 | **F5** | `conferidor.yml` (cron semanal seg 05:00 BRT + dispatch) + issue automática + atualização do roadmap | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first; DOU vira watcher) | 1 sessão | Sim |
 | **F6** | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
 | **F7** | Watcher do DOU sem IA (5.11) + **excluir este arquivo** | Rodada de teste lista as normas penais de uma semana conhecida (ex.: a semana da Lei 15.410/26); seção integrada à issue semanal | 1 sessão | Sim |
@@ -365,12 +366,18 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
 3. Ao terminar a fase: marcar os checkboxes abaixo, rodar a verificação padrão
    (`transform_data --estrito`, `typecheck`, `verificar`, `build` — nada pode
    quebrar mesmo sendo tooling), e atualizar a linha de status.
-4. Na fase final (F7): excluir `PLANO-CRAWLER.md`, mover o que for perene para
-   `docs/` (se algo for), e registrar a conclusão na memória do projeto.
+4. Na fase final (F7): excluir `PLANO-CRAWLER.md` **e `REVISAO-LEGISLATIVA.md`**
+   (decisão do usuário, 29/07/2026 — o handoff da revisão manual vive até lá
+   porque a F2 usa suas lições como casos de teste), mover o que for perene
+   para `docs/` (se algo for), e registrar a conclusão na memória do projeto.
+5. Fixture obrigatória da F2 (achado da F0): o HTML da Lei 11.340 deve vir do
+   **navegador** (Playwright), nunca de curl — o CDN serve cópia pré-2018 a
+   cliente HTTP.
 
 ### Status
 
-- [ ] F0 — spike de fetch/charset/LexML
+- [x] F0 — spike de fetch/charset/LexML — **concluída em 29/07/2026**
+      (`crawler/DECISOES-F0.md`)
 - [ ] F1 — fontes.json + fetcher
 - [ ] F2 — parser estrutural + fixtures
 - [ ] F3 — extrator de pena + differ + relatório
@@ -379,9 +386,11 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
 - [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)
 - [ ] F7 — watcher do DOU sem IA + exclusão deste arquivo
 
-**Última atualização:** 2026-07-29 — plano criado e refinado duas vezes com o
-usuário: (1) DOU-crawler substituído por watcher sem IA (5.11/F7); (2) F6
-promovida a fase firme; (3) cadência semanal, segunda 05:00 de Brasília
-(cron `0 8 * * 1` UTC). Nenhuma fase iniciada. O pipeline é 100% determinístico
-— sem IA e sem consumo de tokens; o custo é só minutos de GitHub Actions
-(gratuitos em repositório público).
+**Última atualização:** 2026-07-29 — **F0 CONCLUÍDA** (ver
+`crawler/DECISOES-F0.md`): Playwright confirmado obrigatório com prova (curl
+recebe cópia pré-2018 da Lei 11.340 com Last-Modified mentiroso), cp1252 como
+charset padrão, marcação HTML caracterizada (anotações-link, revogado sem
+corpo, versões sobrepostas sem riscado), LexML descartado. Próxima fase: **F1**
+(fontes.json + fetcher Playwright). O pipeline é 100% determinístico — sem IA e
+sem consumo de tokens; o custo é só minutos de GitHub Actions (gratuitos em
+repositório público).
