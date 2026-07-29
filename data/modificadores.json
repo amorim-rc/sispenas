@@ -963,6 +963,25 @@
         ]
       },
       "obs": "As penas dos arts. 2º-A e 20 são aumentadas de 1/3 até a metade quando praticados por funcionário público no exercício das funções ou a pretexto de exercê-las. Art. 20-B incluído pela Lei 14.532/2023."
+    },
+    {
+      "id": "aumento-ambiental-licenca-eia-60",
+      "nome": "Atividade poluidora sem licença sujeita a EIA (até o dobro)",
+      "dispositivo": "Lei 9.605/98, art. 60, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 60"
+        ]
+      },
+      "obs": "A pena do art. 60 é aumentada até o dobro se o licenciamento da atividade ou do empreendimento for sujeito a Estudo Prévio de Impacto Ambiental. §único incluído pela Lei 15.190/2025."
     }
   ]
 }

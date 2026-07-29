@@ -5825,7 +5825,7 @@
     "id": 372,
     "lei": "Lei 9.605/98",
     "artigo": "Art. 41",
-    "crime": "Provocar incêndio em mata ou floresta",
+    "crime": "Provocar incêndio em floresta ou em demais formas de vegetação",
     "pena_min": 24,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
@@ -5835,7 +5835,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-4 anos reclusão + multa. §único: se culposo: 6m-1a detenção"
+    "obs": "2-4 anos reclusão + multa. §único: se culposo: 6m-1a detenção. Redação ampliada ('demais formas de vegetação') pela Lei 14.944/2024"
   },
   {
     "id": 373,
@@ -6050,8 +6050,8 @@
     "lei": "Lei 9.605/98",
     "artigo": "Art. 60",
     "crime": "Construir/reformar/ampliar/instalar/fazer funcionar estabelecimento/obra/atividade potencialmente poluidora sem licença ambiental",
-    "pena_min": 1,
-    "pena_max": 6,
+    "pena_min": 6,
+    "pena_max": 24,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -6059,7 +6059,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção ou multa"
+    "obs": "6 meses a 2 anos detenção ou multa ou ambas. §único: pena aumentada até o dobro se a atividade for sujeita a Estudo Prévio de Impacto Ambiental. Redação/§único pela Lei 15.190/2025"
   },
   {
     "id": 387,
@@ -6145,7 +6145,7 @@
     "id": 392,
     "lei": "Lei 9.605/98",
     "artigo": "Art. 67",
-    "crime": "Concessão de licença/autorização/permissão ambiental em desacordo com normas por funcionário público",
+    "crime": "Conceder dolosamente o funcionário público licença/autorização/permissão que sabe estar em desacordo com normas ambientais",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -6155,7 +6155,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa"
+    "obs": "1-3 anos detenção + multa. Passou a exigir dolo direto ('que sabe estar em desacordo') e teve a forma culposa (§único) revogada pela Lei 15.190/2025"
   },
   {
     "id": 393,
@@ -21634,5 +21634,37 @@
     "violencia": "Sim",
     "grave_ameaca": "Não",
     "obs": "1-3 anos reclusão + multa (mesmas penas do caput), sem prejuízo da pena da violência. §2º-B incluído pela Lei 14.532/2023"
+  },
+  {
+    "id": 1582,
+    "lei": "Lei 9.605/98",
+    "artigo": "Art. 32, §1º-B",
+    "crime": "Maus-tratos: tatuagem ou piercing estético em cães e gatos",
+    "pena_min": 3,
+    "pena_max": 12,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Sim",
+    "grave_ameaca": "Não",
+    "obs": "3 meses a 1 ano detenção + multa (mesmas penas do caput). Realizar ou permitir tatuagens e colocação de piercings em cães e gatos com fins estéticos. §1º-B incluído pela Lei 15.150/2025"
+  },
+  {
+    "id": 1583,
+    "lei": "Lei 9.605/98",
+    "artigo": "Art. 32, §1º-C",
+    "crime": "Maus-tratos: desastre ambiental que prejudica animais silvestres ou domésticos",
+    "pena_min": 3,
+    "pena_max": 12,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "3 meses a 1 ano detenção + multa (mesmas penas do caput). Provocar desastre ambiental que prejudique a vida, a integridade física ou o bem-estar de animais silvestres ou domésticos. §1º-C incluído pela Lei 15.355/2026"
   }
 ]
