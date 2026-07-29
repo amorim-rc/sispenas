@@ -33,13 +33,14 @@ esperar os pré-requisitos da v2.0.0. Ao implementar, **atualizar a seção v2.0
 do roadmap** para registrar essa mudança de arquitetura (compilado-first; DOU
 como watcher).
 
-**Destino do crawler do DOU (decidido em 29/07/2026):** abandonado como espinha
-dorsal — o classificador de IA sobre norma bruta sai do caminho crítico. A única
-fraqueza do compilado é a latência de consolidação (dias a semanas entre o DOU e
-a incorporação ao texto compilado), irrelevante para a cadência mensal do
-conferidor. Se um dia for preciso reagir no dia da publicação, um watcher mínimo
-do DOU (sem IA: gatilho "saiu norma citando o diploma X → rodar o conferidor da
-fonte X antecipadamente") pode ser acrescentado como fase opcional futura.
+**Destino do crawler do DOU (decidido em 29/07/2026):** o crawler do DOU com
+classificador de IA está **abandonado** e substituído por um **watcher sem IA**
+(seção 5.11, fase F7): filtro textual semanal na Seção 1 do DOU por citação dos
+diplomas monitorados e por palavras-chave penais ("pena", "reclusão",
+"detenção", "revoga"…). A vacatio legis dá a folga: com o Planalto revisado
+semanalmente, uma olhada simples no DOU basta. O watcher cobre o único ponto
+cego do conferidor — **lei penal nova autônoma** (diploma que ainda não está em
+`fontes.json` e, portanto, em nenhuma página monitorada).
 
 ## 2. Decisões de arquitetura (fechadas — não rediscutir na implementação)
 
@@ -232,19 +233,25 @@ Lição dos agrotóxicos: a página da Lei 7.802/89 **não anuncia** que a Lei
 
 ### 5.9 Automação — `.github/workflows/conferidor.yml` (F5)
 
-- `schedule` mensal + `workflow_dispatch`; instala Playwright, roda
-  `baixar.py --todas` e `conferir.py`; sobe snapshots+relatório como artifact.
-- Se exit 3: abre/atualiza **issue** "Conferidor: achados de AAAA-MM" com o
-  relatório no corpo (`gh issue create/comment` via `GH_TOKEN`). **Não abre PR
-  nem toca nos dados** (isso é a Parte B/v2.0.0).
+- **Cadência: semanal, toda segunda-feira às 05:00 de Brasília** — cron em UTC:
+  `0 8 * * 1` (Brasília é UTC−3 fixo; o horário de verão foi extinto em 2019).
+  O GitHub pode atrasar crons alguns minutos — irrelevante aqui.
+- **Acionamento manual** (`workflow_dispatch`): GitHub → aba **Actions** →
+  workflow "Conferidor" → botão **Run workflow**. Sem terminal.
+- O job instala Playwright, roda `baixar.py --todas` e `conferir.py`; sobe
+  snapshots+relatório como artifact.
+- Se exit 3: abre/atualiza **issue no GitHub do repositório** ("Conferidor:
+  achados da semana AAAA-SS") com o relatório no corpo (`gh issue
+  create/comment` via `GH_TOKEN`). Na F5 **não abre PR nem toca nos dados** —
+  o PR automático dos achados mecânicos chega na F6 (5.10).
 - Sentinela falhou (página velha na CI)? Falha o job com mensagem própria —
   pode ser o cache do Planalto para datacenter; reexecutar; se persistir,
   investigar fetch (F0 documenta alternativas).
 
-### 5.10 (Opcional, F6) PR automático para achados mecânicos
+### 5.10 (F6) PR automático para achados mecânicos
 
-Evolução natural depois de alguns ciclos de relatórios estáveis (precisão
-comprovada). Escopo **estrito**:
+Fase firme (decisão do usuário, 29/07/2026), condicionada a alguns ciclos de
+relatórios estáveis (precisão comprovada) antes de ligar. Escopo **estrito**:
 
 - **Só UPDATE de linha existente** com correção inequívoca: moldura ou tipo de
   pena divergente do compilado. O gerador edita `data/crimes.json` (a fonte,
@@ -260,6 +267,31 @@ comprovada). Escopo **estrito**:
 - Gates: CI completa no PR (`--estrito`, derivado sincronizado, typecheck,
   verificar, build) + checador de vigência (nunca propor mudança ainda não
   vigente) + no máximo um PR aberto por vez (não empilhar).
+
+### 5.11 (F7) Watcher do DOU — sem IA — `scripts/crawler/dou_watcher.py`
+
+Substitui o antigo "crawler do DOU" do roadmap. Filtro textual puro, acoplado ao
+mesmo workflow semanal:
+
+- **Fonte** (o spike da F7 escolhe): endpoint JSON `in.gov.br/leiturajornal`
+  (sem autenticação) ou o INLABS (XML diário oficial, exige conta gratuita).
+  Janela: os 8 dias anteriores à rodada, Seção 1.
+- **Filtro** (norma é candidata se atende A ou B):
+  - **A — citação de diploma monitorado**: regex gerada de `fontes.json`
+    ("Lei nº 9.605", "Decreto-Lei nº 2.848", "Lei nº 11.340"…);
+  - **B — vocabulário penal**: `reclusão`, `detenção`, `pena –`/`pena de`,
+    `prisão simples`, `revoga`, `passa a vigorar acrescido`, `Código Penal`,
+    `crime`. Só em atos normativos (Lei, LC, MP, Decreto-Lei) — ignora
+    portarias/despachos, que dominam o volume.
+- **Saída**: seção "DOU da semana — normas possivelmente penais" na issue do
+  conferidor: norma, data, link e termos que casaram. **Nenhuma decisão
+  automática** — é alerta de triagem humana.
+- **Papel estratégico**: detectar lei penal **nova e autônoma** (diploma fora de
+  `fontes.json`), o único caso invisível ao conferidor do compilado. Quando
+  aparecer: humano adiciona a fonte nova em `fontes.json` e o conferidor passa a
+  vigiá-la para sempre.
+- Falsos positivos são aceitáveis e esperados (é um alerta semanal barato);
+  falso negativo é o que se quer evitar — na dúvida, listar.
 
 ## 6. Armadilhas conhecidas (da revisão manual — TODAS viram teste ou regra)
 
@@ -307,11 +339,12 @@ modelo menor com este arquivo como única briefing.
 | **F2** | `parsear.py` + fixtures + testes | Fixtures da seção 7 parseadas com 100% dos casos de teste passando; art. 121 do CP produz exatamente os dispositivos vigentes conhecidos | 2–3 sessões | Parcial (fixtures sim; regras do parser pedem cuidado) |
 | **F3** | `pena_parser.py` extraído/estendido + `conferir.py` + relatório | Refactor byte-idêntico; recall e precisão da seção 7 passando; relatório legível gerado para o catálogo inteiro | 1–2 sessões | Sim, com F2 pronto |
 | **F4** | `vigencia.py` + `revogacao.py` + exceções | Caso 15.190 (vacatio) e caso 7.802 (revogação total) detectados em teste | 1 sessão | Sim |
-| **F5** | `conferidor.yml` + issue automática + atualização do roadmap + **excluir este arquivo** | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first) | 1 sessão | Sim |
-| **F6** (opcional, pós-F5) | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
+| **F5** | `conferidor.yml` (cron semanal seg 05:00 BRT + dispatch) + issue automática + atualização do roadmap | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first; DOU vira watcher) | 1 sessão | Sim |
+| **F6** | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
+| **F7** | Watcher do DOU sem IA (5.11) + **excluir este arquivo** | Rodada de teste lista as normas penais de uma semana conhecida (ex.: a semana da Lei 15.410/26); seção integrada à issue semanal | 1 sessão | Sim |
 
-Total: ~7–9 sessões curtas (F6 opcional: +1–2). Ordem estrita F0→F5 (cada fase
-depende da anterior); F6 só após ciclos de relatório com precisão comprovada.
+Total: ~9–12 sessões curtas. Ordem estrita F0→F5; F6 liga só após ciclos de
+relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
 
 ## 9. Versionamento e contrato de dados
 
@@ -332,7 +365,7 @@ depende da anterior); F6 só após ciclos de relatório com precisão comprovada
 3. Ao terminar a fase: marcar os checkboxes abaixo, rodar a verificação padrão
    (`transform_data --estrito`, `typecheck`, `verificar`, `build` — nada pode
    quebrar mesmo sendo tooling), e atualizar a linha de status.
-4. Na F5: excluir `PLANO-CRAWLER.md`, mover o que for perene para
+4. Na fase final (F7): excluir `PLANO-CRAWLER.md`, mover o que for perene para
    `docs/` (se algo for), e registrar a conclusão na memória do projeto.
 
 ### Status
@@ -342,9 +375,13 @@ depende da anterior); F6 só após ciclos de relatório com precisão comprovada
 - [ ] F2 — parser estrutural + fixtures
 - [ ] F3 — extrator de pena + differ + relatório
 - [ ] F4 — vigência + revogação total
-- [ ] F5 — automação CI + roadmap + exclusão deste arquivo
-- [ ] F6 (opcional, pós-F5) — PR automático de achados mecânicos
+- [ ] F5 — automação CI (semanal, seg 05:00 BRT) + roadmap
+- [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)
+- [ ] F7 — watcher do DOU sem IA + exclusão deste arquivo
 
-**Última atualização:** 2026-07-29 — plano criado e refinado (destino do DOU
-explicitado; F6 opcional de PR automático); nenhuma fase iniciada. Nota: se a F6
-for adotada, a exclusão deste arquivo migra da F5 para a F6.
+**Última atualização:** 2026-07-29 — plano criado e refinado duas vezes com o
+usuário: (1) DOU-crawler substituído por watcher sem IA (5.11/F7); (2) F6
+promovida a fase firme; (3) cadência semanal, segunda 05:00 de Brasília
+(cron `0 8 * * 1` UTC). Nenhuma fase iniciada. O pipeline é 100% determinístico
+— sem IA e sem consumo de tokens; o custo é só minutos de GitHub Actions
+(gratuitos em repositório público).
