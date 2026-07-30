@@ -308,63 +308,14 @@ def validar_ids(crimes: list) -> list:
     return problemas
 
 
-# ── Unidades de pena (dias / meses / anos) ──────────────────────────────────
-# Fator de conversão para MESES (unidade canônica de cálculo). O CP conta o mês
-# como 30 dias (Art. 11), então 1 dia = 1/30 mês e 1 ano = 12 meses.
-UNIDADE_EM_MESES = {"dias": 1 / 30, "meses": 1.0, "anos": 12.0}
-_NOMES_UNIDADE = {"dias": ("dia", "dias"), "meses": ("mês", "meses"), "anos": ("ano", "anos")}
-
-
-def _norm_unidade(u: str) -> str:
-    u = u.lower()
-    if u.startswith("d"):
-        return "dias"
-    if u.startswith("a"):
-        return "anos"
-    return "meses"  # mês / mes / meses
-
-
-def _rotulo(valor: float, unidade: str) -> str:
-    inteiro = int(valor) if float(valor).is_integer() else valor
-    sing, plur = _NOMES_UNIDADE[unidade]
-    return f"{inteiro} {sing if inteiro == 1 else plur}"
-
-
-def _meses(valor: float, unidade: str) -> float:
-    return round(valor * UNIDADE_EM_MESES[unidade], 4)
-
-
-_U = r"(dias?|meses|m[eê]s|anos?)"
-RANGE_2U = re.compile(rf"(\d+)\s*{_U}\s*a\s*(\d+)\s*{_U}", re.IGNORECASE)
-RANGE_1U = re.compile(rf"(\d+)\s*(?:a|-|–|—)\s*(\d+)\s*{_U}", re.IGNORECASE)
-ABBR = re.compile(r"(\d+)\s*([dma])\s*(?:-|a|–|—)\s*(\d+)\s*([dma])", re.IGNORECASE)
-_ABBR_U = {"d": "dias", "m": "meses", "a": "anos"}
-
-
-def parse_pena_range(obs: str):
-    """Extrai o primeiro intervalo de pena do texto -> (vmin, umin, vmax, umax).
-
-    Reconhece "15 dias a 6 meses", "1-5 anos", "2 a 5 anos", "3m-1a". Retorna
-    None se nada for encontrado. O primeiro match corresponde ao caput.
-
-    Neutraliza antes o "dias-multa" (pena de MULTA em dias-multa, art. 49 do CP):
-    ele nunca é a pena de prisão, mas casaria o padrão "5 a 15 dias" e sobreporia
-    o tempo de reclusão/detenção — o que corromperia, p.ex., os crimes eleitorais
-    ("reclusão até 5 anos e 5 a 15 dias-multa") e os de tráfico ("500 a 1.500
-    dias-multa").
-    """
-    text = re.sub(r"dias?\s*[-\s]?\s*multa", " multa ", obs or "", flags=re.IGNORECASE)
-    m = RANGE_2U.search(text)
-    if m:
-        return int(m.group(1)), _norm_unidade(m.group(2)), int(m.group(3)), _norm_unidade(m.group(4))
-    m = RANGE_1U.search(text)
-    if m:
-        u = _norm_unidade(m.group(3))
-        return int(m.group(1)), u, int(m.group(2)), u
-    m = ABBR.search(text)
-    if m:
-        return int(m.group(1)), _ABBR_U[m.group(2).lower()], int(m.group(3)), _ABBR_U[m.group(4).lower()]
-    return None
+# ── Unidades e leitura de pena ──────────────────────────────────────────────
+# Extraídas para `scripts/pena_parser.py` (F3 do conferidor): o catálogo e o
+# conferidor precisam ler a MESMA moldura do MESMO jeito — duas implementações
+# discordando produziriam divergência falsa no relatório semanal.
+from pena_parser import (  # noqa: E402
+    UNIDADE_EM_MESES, _NOMES_UNIDADE, _norm_unidade, _rotulo, _meses,
+    RANGE_2U, RANGE_1U, ABBR, _ABBR_U, parse_pena_range,
+)
 
 
 def _rotulo_de_meses(meses: float) -> str:
