@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "proposito": "Achados já examinados e decididos — o conferidor os omite para que o relatório semanal continue legível. Sem esta lista, os mesmos itens voltariam em toda rodada e o alerta viraria ruído.",
+    "regras": [
+      "Toda exceção declara MOTIVO e DATA: é memória do julgamento, não silenciador.",
+      "Com `ids`, dispensa só aquelas linhas do catálogo; sem `ids`, dispensa o dispositivo inteiro. Prefira `ids`, para que uma divergência NOVA no mesmo artigo continue aparecendo.",
+      "Defasagem real NUNCA vira exceção — vira patch no catálogo."
+    ]
+  },
+  "excecoes": [
+    {
+      "fonte": "cp",
+      "chave": "Art. 158|§ 3º",
+      "ids": [1068, 1069],
+      "motivo": "O § 3º comina a pena da restrição da liberdade (6 a 12 anos) e, para lesão grave ou morte, REMETE ao art. 159, §§ 2º e 3º. O catálogo expande a remissão em linhas próprias (16-24 e 24-30), porque o leitor precisa da moldura resolvida. O differ compara as três com a moldura do caput do § e acusa divergência — é artefato da remissão, não erro. A linha da moldura própria (id 116) segue conferida normalmente.",
+      "data": "2026-07-30"
+    }
+  ]
+}

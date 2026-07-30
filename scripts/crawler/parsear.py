@@ -158,6 +158,7 @@ class Dispositivo:
     vigencia_pendente: bool = False
     incisos: list[dict] = field(default_factory=list)
     # Versões coletadas antes de decidir qual vale (ver `_consolidar`).
+    _versoes_situacao: list[tuple[int, str]] = field(default_factory=list)
     _versoes_texto: list[tuple[int, str, Anotacao | None]] = field(default_factory=list)
     _versoes_pena: list[tuple[int, str, Anotacao | None]] = field(default_factory=list)
 
@@ -186,6 +187,15 @@ def _consolidar(d: Dispositivo) -> None:
             return None, None
         melhor = max(versoes, key=lambda v: (datavel(v[2]), v[0]))
         return melhor[1], melhor[2]
+
+    # A situação também é posicional: vale o ÚLTIMO marcador do documento.
+    # Revogação vem DEPOIS do texto antigo ("Art. 350 ... (Revogado pela...)");
+    # veto derrubado vem ANTES do texto promulgado ("Art. 9º (VETADO)." seguido
+    # do artigo em vigor, com "(Promulgação partes vetadas)"). Fixar a situação
+    # no primeiro marcador daria o art. 9º da Lei de Abuso como vetado, e ele
+    # está em pleno vigor.
+    if d._versoes_situacao:
+        d.situacao = max(d._versoes_situacao, key=lambda v: v[0])[1]
 
     texto, anot_texto = vigente(d._versoes_texto)
     pena, anot_pena = vigente(d._versoes_pena)
@@ -242,12 +252,16 @@ def parsear(documento: str) -> list[Dispositivo]:
                         and len(corpo_util) < 80)
             if revogado:
                 # Artigo revogado perde o corpo: sobra o cabeçalho + a anotação.
-                d.situacao = "revogado"
+                d._versoes_situacao.append((ordem, "revogado"))
                 d.anotacao = anotacao
             else:
+                d._versoes_situacao.append((ordem, "vigente"))
                 d._versoes_texto.append((ordem, corpo, anotacao))
-            if _VETADO.search(texto):
-                d.situacao = "vetado"
+            # O "(VETADO)" de um parágrafo não veta o artigo inteiro: só marca
+            # quando o próprio dispositivo ficou sem corpo (art. 9º da Lei de
+            # Abuso tem § vetado e caput em pleno vigor).
+            if _VETADO.search(texto) and len(corpo_util) < 40:
+                d._versoes_situacao.append((ordem, "vetado"))
             d.vigencia_pendente = d.vigencia_pendente or pendente
             continue
 
@@ -268,12 +282,16 @@ def parsear(documento: str) -> list[Dispositivo]:
                          or (anotacao and anotacao.acao == "revogado"))
                         and len(corpo_util) < 80)
             if revogado:
-                d.situacao = "revogado"
+                d._versoes_situacao.append((ordem, "revogado"))
                 d.anotacao = anotacao
             else:
+                d._versoes_situacao.append((ordem, "vigente"))
                 d._versoes_texto.append((ordem, corpo, anotacao))
-            if _VETADO.search(texto):
-                d.situacao = "vetado"
+            # O "(VETADO)" de um parágrafo não veta o artigo inteiro: só marca
+            # quando o próprio dispositivo ficou sem corpo (art. 9º da Lei de
+            # Abuso tem § vetado e caput em pleno vigor).
+            if _VETADO.search(texto) and len(corpo_util) < 40:
+                d._versoes_situacao.append((ordem, "vetado"))
             d.vigencia_pendente = d.vigencia_pendente or pendente
             continue
 

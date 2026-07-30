@@ -340,7 +340,7 @@ modelo menor com este arquivo como única briefing.
 | **F0** ✅ 29/07/2026 | Spike: fetch, charset, LexML, levantamento HTML | **Concluída** — `crawler/DECISOES-F0.md`: Playwright obrigatório (curl serve cópia pré-2018 da L11340), cp1252 padrão, anotações = links com href p/ lei+âncora, revogado total = corpo removido, LexML descartado | — | — |
 | **F1** ✅ 30/07/2026 | `data/fontes.json` (62 fontes, 69 rótulos) + `baixar.py` + gitignore + `url_planalto` unificado | **Concluída** — 62/62 snapshots íntegros (sentinela válida), zero rótulo órfão, derivado **byte-idêntico**, sem dependências externas | — | — |
 | **F2** ✅ 30/07/2026 | `parsear.py` + 5 fixtures + 18 testes + testes na CI | **Concluída** — art. 121 produz exatamente os 12 marcadores vigentes; 62/62 diplomas parseados sem falha (11.617 dispositivos, 1.149 com pena explícita, 116 revogados); sem dependências externas | — | — |
-| **F3** | `pena_parser.py` extraído/estendido + `conferir.py` + relatório | Refactor byte-idêntico; recall e precisão da seção 7 passando; relatório legível gerado para o catálogo inteiro | 1–2 sessões | Sim, com F2 pronto |
+| **F3** ✅ 30/07/2026 | `pena_parser.py` + `conferir.py` + `excecoes.json` + relatório | **Concluída** — refactor byte-idêntico; 41 testes; primeira rodada completa: 257 → 191 achados depois de corrigidos 4 defeitos do próprio differ | — | — |
 | **F4** | `vigencia.py` + `revogacao.py` (banner; sem LexML) + exceções | Caso 15.190 (vacatio) detectado; caso 7.802 coberto por banner/watcher documentado em teste | 1 sessão | Sim |
 | **F5** | `conferidor.yml` (cron semanal seg 05:00 BRT + dispatch) + issue automática + atualização do roadmap | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first; DOU vira watcher) | 1 sessão | Sim |
 | **F6** | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
@@ -384,7 +384,8 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
       (62/62 fontes íntegras; `python scripts/crawler/baixar.py --todas`)
 - [x] F2 — parser estrutural + fixtures — **concluída em 30/07/2026**
       (`python -m pytest scripts/crawler/tests`)
-- [ ] F3 — extrator de pena + differ + relatório
+- [x] F3 — extrator de pena + differ + relatório — **concluída em 30/07/2026**
+      (`python scripts/crawler/conferir.py`)
 - [ ] F4 — vigência + revogação total
 - [ ] F5 — automação CI (semanal, seg 05:00 BRT) + roadmap
 - [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)

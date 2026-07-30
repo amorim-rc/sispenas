@@ -127,11 +127,22 @@ def _limpar(texto: str) -> str:
     return re.sub(r"\(([^()]*)\)", trata, t)
 
 
+_DEZENAS = ("vinte", "trinta", "quarenta", "cinquenta", "sessenta")
+_UNIDADES = [p for p in _EXTENSO if _EXTENSO[p] < 10]
+# "vinte e quatro" é UM número (24), não dois. Sem tratar o composto, o art.
+# 159, § 3º ("de vinte e quatro a trinta anos") vira "de 20 e 4 a 30 anos" e a
+# moldura sai 4–30 em vez de 24–30.
+_COMPOSTO = re.compile(
+    rf"\b({'|'.join(_DEZENAS)})\s+e\s+({'|'.join(_UNIDADES)})\b", re.IGNORECASE)
+_SIMPLES = re.compile("|".join(rf"\b{p}\b" for p in _EXTENSO), re.IGNORECASE)
+
+
 def _extenso_para_numero(texto: str) -> str:
     """Converte "de seis a vinte anos" em "de 6 a 20 anos" (CP de 1940)."""
-    def troca(m):
-        return str(_EXTENSO[m.group(0).lower()])
-    return re.sub("|".join(rf"\b{p}\b" for p in _EXTENSO), troca, texto, flags=re.IGNORECASE)
+    texto = _COMPOSTO.sub(
+        lambda m: str(_EXTENSO[m.group(1).lower()] + _EXTENSO[m.group(2).lower()]),
+        texto)
+    return _SIMPLES.sub(lambda m: str(_EXTENSO[m.group(0).lower()]), texto)
 
 
 def ler_pena(texto: str) -> dict | None:

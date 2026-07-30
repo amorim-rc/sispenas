@@ -37,8 +37,6 @@ import sys
 from datetime import date
 from pathlib import Path
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-
 RAIZ = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -76,18 +74,39 @@ def chave(artigo: str) -> str | None:
     mp = _PAR.search(artigo)
     if mp:
         marcador = f"§ {mp.group(1)}º" + (f"-{mp.group(2)}" if mp.group(2) else "")
-    elif re.search(r"par[áa]grafo\s+[úu]nico", artigo, re.I):
+    elif re.search(r"(?:par[áa]grafo|par\.|§)\s*[úu]nico", artigo, re.I):
+        # O catálogo abrevia ("par. único"); a lei escreve por extenso. Sem
+        # aceitar as duas formas, as linhas do parágrafo único caem no caput e
+        # o differ acusa divergência contra a moldura errada.
         marcador = "parágrafo único"
     else:
         marcador = "caput"
     return f"{base}|{marcador}"
 
 
-def carregar_excecoes() -> dict[str, str]:
+def carregar_excecoes() -> list[dict]:
     if not EXCECOES.exists():
-        return {}
-    dados = json.loads(EXCECOES.read_text(encoding="utf-8"))
-    return {e["chave"]: e.get("motivo", "") for e in dados.get("excecoes", [])}
+        return []
+    return json.loads(EXCECOES.read_text(encoding="utf-8")).get("excecoes", [])
+
+
+def dispensado(excecoes: list[dict], fonte: str, chave_disp: str,
+               ids: list[int] | None = None) -> bool:
+    """Este achado já foi julgado e decidido?
+
+    A exceção casa por diploma + dispositivo e, opcionalmente, por `ids`: sem
+    eles, dispensa o dispositivo inteiro; com eles, só aquelas linhas — de modo
+    que uma divergência NOVA no mesmo artigo continue aparecendo.
+    """
+    for e in excecoes:
+        if e.get("fonte") != fonte or e.get("chave") != chave_disp:
+            continue
+        alvo = e.get("ids")
+        if not alvo:
+            return True
+        if ids and set(ids) <= set(alvo):
+            return True
+    return False
 
 
 def indexar_catalogo() -> dict[str, dict[str, list[dict]]]:
@@ -123,7 +142,7 @@ def moldura_catalogo(linha: dict) -> tuple[float, float]:
 
 
 def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
-                   excecoes: dict[str, str]) -> list[dict]:
+                   excecoes: list[dict]) -> list[dict]:
     """Confronta um diploma e devolve os achados."""
     pasta = SNAPSHOTS / fonte["id"]
     arquivos = sorted(pasta.glob("*.html")) if pasta.exists() else []
@@ -137,7 +156,7 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
 
     # 1) O que o catálogo tem e a lei diz estar revogado, ou cuja moldura mudou.
     for k, linhas in sorted(do_catalogo.items()):
-        if k in excecoes:
+        if dispensado(excecoes, fonte["id"], k):
             continue
         disp = da_lei.get(k)
         if disp is None:
@@ -155,6 +174,8 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
         if not pena:
             continue
         for linha in linhas:
+            if dispensado(excecoes, fonte["id"], k, [linha["id"]]):
+                continue
             cmin, cmax = moldura_catalogo(linha)
             if pena["so_multa"]:
                 if cmax > 0:
@@ -188,7 +209,7 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
 
     # 2) O que a lei tem com pena própria e o catálogo não registra.
     for d in dispositivos:
-        if d.chave in do_catalogo or d.chave in excecoes:
+        if d.chave in do_catalogo or dispensado(excecoes, fonte["id"], d.chave):
             continue
         if d.situacao != "vigente":
             continue
@@ -240,6 +261,10 @@ def montar_relatorio(por_fonte: dict[str, list[dict]]) -> str:
 
 
 def main() -> int:
+    # Só ao rodar como script: reconfigurar o stdout no import quebraria a
+    # captura do pytest, que troca sys.stdout por um arquivo próprio.
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8",
+                                  errors="replace")
     p = argparse.ArgumentParser(description="Confere o catálogo contra o compilado.")
     p.add_argument("--fonte", action="append", default=[], metavar="ID")
     p.add_argument("--saida", default=str(RELATORIOS))
