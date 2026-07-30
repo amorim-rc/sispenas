@@ -181,29 +181,26 @@ def validar_tipos_penais(crimes: list) -> list:
 # Texto COMPILADO (com as alterações posteriores), nunca o original: é ele que
 # vale para conferência. Usado no relatório de qualidade, para que cada
 # contradição venha com o link de onde resolvê-la.
-PLANALTO = {
-    r"^CP( \(atualiz\.\))?$": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm",
-    r"^CPM": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del1001compilado.htm",
-    r"^LCP": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del3688.htm",
-    r"^CTB|9\.503": "https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm",
-    r"^CE |4\.737": "https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm",
-    r"^ECA|8\.069": "https://www.planalto.gov.br/ccivil_03/leis/l8069compilado.htm",
-    r"11\.343": "https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343compilado.htm",
-    r"9\.455": "https://www.planalto.gov.br/ccivil_03/leis/l9455.htm",
-    r"8\.072": "https://www.planalto.gov.br/ccivil_03/leis/l8072compilado.htm",
-    r"10\.826": "https://www.planalto.gov.br/ccivil_03/leis/2003/l10.826compilado.htm",
-    r"13\.869": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13869.htm",
-    r"9\.605": "https://www.planalto.gov.br/ccivil_03/leis/l9605compilado.htm",
-    r"12\.850": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12850compilado.htm",
-    r"8\.137": "https://www.planalto.gov.br/ccivil_03/leis/l8137compilado.htm",
-}
+#
+# O registro vive em `data/fontes.json` — mesma fonte que o conferidor usa para
+# baixar os textos (scripts/crawler/baixar.py). Antes o mapa era duplicado aqui,
+# por expressão regular, e envelheceu: quatro diplomas apontavam para URLs
+# "…compilado.htm" que hoje respondem 404. Uma fonte só, casada por rótulo
+# exato, elimina a duplicação e mantém os links verificados pelo download.
+def _carregar_fontes() -> dict:
+    caminho = ROOT / "data" / "fontes.json"
+    dados = json.loads(caminho.read_text(encoding="utf-8"))
+    return {rotulo: f["url"] for f in dados["fontes"] for rotulo in f["rotulos"]}
+
+
+PLANALTO = _carregar_fontes()
 
 
 def url_planalto(lei: str) -> str:
     """Link do texto compilado do diploma, ou busca no Planalto se desconhecido."""
-    for padrao, url in PLANALTO.items():
-        if re.search(padrao, lei or "", re.I):
-            return url
+    url = PLANALTO.get((lei or "").strip())
+    if url:
+        return url
     return f"https://www.planalto.gov.br/ccivil_03/ (buscar: {lei})"
 
 

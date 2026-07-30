@@ -3,33 +3,49 @@
 Entregável da fase F0 do `PLANO-CRAWLER.md`. Experimentos executados ao vivo
 contra o Planalto em 29/07/2026; evidências citadas abaixo.
 
-## 1. Estratégia de fetch — **Playwright obrigatório** (decidido)
+## 1. Estratégia de fetch — **HTTP simples basta** (corrigido na F1)
+
+> ⚠️ **Correção (30/07/2026).** A conclusão original desta seção — "o CDN serve
+> cópias arcaicas, Playwright é obrigatório" — **estava errada**, e a causa foi
+> um erro meu de decodificação, não o Planalto. Registro mantido porque o erro
+> é instrutivo.
+
+O que de fato acontece:
 
 | Experimento | Resultado |
 |---|---|
-| `curl` sem User-Agent | **Recusado** (resposta vazia). |
-| `curl` com UA de Chrome — CP, CPM, 9.605, 8.137 | Página **atual** (sentinelas 15.384/14.688/15.355/LC 224 presentes). |
-| `curl` com UA — **Lei 11.340 (Maria da Penha)** | Página **ANTIGA, pré-2018** (sem art. 24-A, sem Lei 13.641), embora `Last-Modified: 02/07/2026`. |
-| + `Cache-Control: no-cache`, `Pragma`, query cache-buster | **Mesmos bytes antigos.** |
-| + cookie jar (TS01/f5_cspm do BIG-IP) + Referer | **Mesmos bytes antigos.** |
-| Navegador real (mesmo instante, mesma URL) | Página **atual** (24-A, 14.994, 15.383 presentes). |
+| `curl` **sem** User-Agent | **Recusado** (resposta vazia) — UA de navegador é obrigatório. |
+| `curl` com UA — CP, CPM, 9.605, 8.137 | Página **atual** (15.384/14.688/15.355/LC 224 presentes). |
+| `curl` com UA — **Lei 11.340** | Parecia **pré-2018** (sem 24-A)… porque eu a decodifiquei como cp1252. Ela vem em **UTF-16 LE com BOM**. Decodificada certo, tem 24-A, 13.641, 14.994 e 15.383 — **está atual**. |
+| **F1: as 62 fontes** via `urllib` + UA + detecção de charset | **62/62 íntegras**, todas com a sentinela presente. |
 
-Conclusão: o CDN do Planalto (F5/BIG-IP) serve **variantes arcaicas por página**
-a clientes não-navegador, por fingerprinting que UA/headers/cookies não
-contornam — e o `Last-Modified` **mente**. O dano é silencioso e a página afetada
-é imprevisível (4 de 5 vieram frescas; a 5ª veio de ~2017). Portanto:
+Conclusões (agora com as 62 fontes como evidência, não 5):
 
-- **Fetcher da F1 usa exclusivamente Playwright/Chromium** — sem caminho
-  HTTP "otimizado" (o risco não compensa a economia de ~60 páginas/semana).
-- **Sentinela por fonte continua obrigatória** (defesa em profundidade: pega
-  regressão do próprio Planalto e cache velho em datacenter da CI).
+- **Fetcher usa HTTP puro da biblioteca padrão** (`urllib`), sem Playwright e
+  sem dependência externa. Mais simples, mais rápido e sem browser na CI.
+- **UA de navegador é obrigatório** (sem ele, conexão recusada).
+- **Sentinela por fonte continua obrigatória** — e provou seu valor: foi ela que
+  expôs tanto o erro de encoding quanto uma URL errada, em vez de deixar o
+  conferidor comparar contra texto corrompido.
 
-## 2. Encoding — **windows-1252 por padrão** (decidido)
+**Lição de método:** "página parece desatualizada" é sintoma ambíguo — antes de
+culpar a fonte, verificar a decodificação. Um `decode()` errado corrompe em
+silêncio e imita perfeitamente conteúdo velho.
 
-Todas as 6 páginas amostradas: **sem `<meta charset>`**, `Content-Type:
-text/html` **sem charset**, e conteúdo que **não é UTF-8 válido**. Decodificar
-`cp1252` por padrão; tentar UTF-8 primeiro e cair para cp1252 no
-`UnicodeDecodeError` (páginas novas do Planalto podem vir em UTF-8).
+## 2. Encoding — **heterogêneo; detectar sempre** (decidido)
+
+O acervo mistura codificações e **não declara nenhuma**: sem `<meta charset>` e
+sem charset no `Content-Type`. Medido nas 62 fontes: **61 windows-1252 e 1
+UTF-16 LE com BOM** (Lei 11.340). Ordem de detecção implementada em
+`scripts/crawler/baixar.py`: **BOM** → `meta charset` → UTF-8 → cp1252.
+
+Duas armadilhas concretas encontradas:
+1. UTF-16 **sem** detecção de BOM vira mojibake que passa por texto antigo;
+2. o UTF-16 do Planalto vem com **um byte solto no fim** (quebra o decode
+   estrito com "truncated data") — descartar o byte ímpar final.
+
+Os snapshots são gravados **normalizados em UTF-8**, para que o resto do
+pipeline (F2+) nunca mais lide com codificação.
 
 ## 3. Estrutura HTML (levantamento no CP compilado atual)
 
@@ -64,8 +80,18 @@ dali em diante. O componente `revogacao.py` da F4 perde a perna LexML.
 
 ## 5. Ajustes decorrentes no plano
 
-- F1: dependência única de fetch = `playwright` (sem modo HTTP).
+- F1: **sem dependências externas** — `urllib` da biblioteca padrão. Playwright
+  descartado (ver correção da seção 1).
 - F4: critério de aceite passa a ser o caso 7.802 detectado **por banner** (e o
   caso futuro coberto pelo watcher da F7); some a menção a LexML.
-- Fixture obrigatória da F2: o HTML **do navegador** da Lei 11.340 (o snapshot
-  curl desta página é inútil — está pré-2018).
+- Fixture obrigatória da F2: a Lei 11.340 (**UTF-16**) e uma cp1252, para travar
+  a detecção de charset em teste.
+
+## 6. Achado colateral da F1 — links quebrados no `transform_data`
+
+O mapa `PLANALTO` que existia em `scripts/transform_data.py` apontava para
+`…compilado.htm` em cinco diplomas; **quatro respondem 404 hoje** (11.343,
+9.605, 12.850 e 8.137 — só o 10.826 sobrevive). Como esses links iam para o
+relatório de qualidade, estavam quebrados em silêncio. O mapa foi substituído
+pela leitura de `data/fontes.json`, cujas URLs são verificadas a cada rodada
+do `baixar.py` — a duplicação sumiu e o link volta a ser confiável.

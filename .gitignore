@@ -12,6 +12,12 @@
 # Configuração local de ferramentas
 /.claude
 
+# Conferidor: páginas baixadas do Planalto e relatórios de cada rodada.
+# São reproduzíveis (scripts/crawler/baixar.py) e pesam ~5 MB por rodada; na
+# CI viram artifact. As DECISOES-*.md do diretório continuam versionadas.
+/crawler/snapshots
+/crawler/relatorios
+
 # Misc
 .DS_Store
 .env.local

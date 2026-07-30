@@ -44,15 +44,17 @@ cego do conferidor — **lei penal nova autônoma** (diploma que ainda não est�
 
 ## 2. Decisões de arquitetura (fechadas — não rediscutir na implementação)
 
-1. **Linguagem: Python 3.12**, como os scripts existentes. Dependências novas em
-   `scripts/crawler/requirements.txt` (NÃO no build do site): `playwright`,
-   `beautifulsoup4`, `lxml`.
-2. **Fetch com navegador real (Playwright/Chromium) — CONFIRMADO na F0**
-   (29/07/2026): o CDN do Planalto serve variantes **arcaicas por página** a
-   cliente HTTP (a Lei 11.340 veio pré-2018 via curl, com `Last-Modified`
-   mentindo), imune a UA/headers/cookies/cache-buster. Sem caminho HTTP
-   otimizado; sentinela continua obrigatória. Evidências em
-   `crawler/DECISOES-F0.md`.
+1. **Linguagem: Python 3.12**, como os scripts existentes. **A F1 não precisou
+   de nenhuma dependência externa** (só a biblioteca padrão); se a F2 precisar
+   de parser HTML, criar `scripts/crawler/requirements.txt` — nunca no build do
+   site.
+2. **Fetch: HTTP simples (`urllib`) com User-Agent de navegador — REVISADO na
+   F1** (30/07/2026). A conclusão da F0 ("Playwright obrigatório") **estava
+   errada**: era erro meu de decodificação (a Lei 11.340 vem em UTF-16 e eu a
+   li como cp1252, o que a fez parecer pré-2018). Com detecção de charset
+   correta, **62/62 fontes vieram atuais por HTTP puro**. Sem Playwright, sem
+   browser na CI. Sem UA a conexão é recusada; a sentinela por fonte continua
+   obrigatória. Evidências em `crawler/DECISOES-F0.md`.
 3. **Relatório, nunca escrita automática.** O conferidor produz
    `crawler/relatorios/AAAA-MM-DD.md` (+ `.json`). Humano decide e aplica como
    patch (`1.2.Z`), como na revisão manual. Acuidade jurídica é o valor central:
@@ -336,7 +338,7 @@ modelo menor com este arquivo como única briefing.
 | Fase | Entrega | Critério de aceite | Esforço | Barata? |
 |---|---|---|---|---|
 | **F0** ✅ 29/07/2026 | Spike: fetch, charset, LexML, levantamento HTML | **Concluída** — `crawler/DECISOES-F0.md`: Playwright obrigatório (curl serve cópia pré-2018 da L11340), cp1252 padrão, anotações = links com href p/ lei+âncora, revogado total = corpo removido, LexML descartado | — | — |
-| **F1** | `data/fontes.json` completo + `baixar.py` + gitignore + requirements | `baixar.py --todas` baixa ~60 snapshots com sentinela válida; nenhum rótulo órfão; `url_planalto()` lendo de fontes.json com derivado byte-idêntico | 1 sessão | Sim |
+| **F1** ✅ 30/07/2026 | `data/fontes.json` (62 fontes, 69 rótulos) + `baixar.py` + gitignore + `url_planalto` unificado | **Concluída** — 62/62 snapshots íntegros (sentinela válida), zero rótulo órfão, derivado **byte-idêntico**, sem dependências externas | — | — |
 | **F2** | `parsear.py` + fixtures + testes | Fixtures da seção 7 parseadas com 100% dos casos de teste passando; art. 121 do CP produz exatamente os dispositivos vigentes conhecidos | 2–3 sessões | Parcial (fixtures sim; regras do parser pedem cuidado) |
 | **F3** | `pena_parser.py` extraído/estendido + `conferir.py` + relatório | Refactor byte-idêntico; recall e precisão da seção 7 passando; relatório legível gerado para o catálogo inteiro | 1–2 sessões | Sim, com F2 pronto |
 | **F4** | `vigencia.py` + `revogacao.py` (banner; sem LexML) + exceções | Caso 15.190 (vacatio) detectado; caso 7.802 coberto por banner/watcher documentado em teste | 1 sessão | Sim |
@@ -378,7 +380,8 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
 
 - [x] F0 — spike de fetch/charset/LexML — **concluída em 29/07/2026**
       (`crawler/DECISOES-F0.md`)
-- [ ] F1 — fontes.json + fetcher
+- [x] F1 — fontes.json + fetcher — **concluída em 30/07/2026**
+      (62/62 fontes íntegras; `python scripts/crawler/baixar.py --todas`)
 - [ ] F2 — parser estrutural + fixtures
 - [ ] F3 — extrator de pena + differ + relatório
 - [ ] F4 — vigência + revogação total
@@ -386,11 +389,15 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
 - [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)
 - [ ] F7 — watcher do DOU sem IA + exclusão deste arquivo
 
-**Última atualização:** 2026-07-29 — **F0 CONCLUÍDA** (ver
-`crawler/DECISOES-F0.md`): Playwright confirmado obrigatório com prova (curl
-recebe cópia pré-2018 da Lei 11.340 com Last-Modified mentiroso), cp1252 como
-charset padrão, marcação HTML caracterizada (anotações-link, revogado sem
-corpo, versões sobrepostas sem riscado), LexML descartado. Próxima fase: **F1**
-(fontes.json + fetcher Playwright). O pipeline é 100% determinístico — sem IA e
-sem consumo de tokens; o custo é só minutos de GitHub Actions (gratuitos em
-repositório público).
+**Última atualização:** 2026-07-30 — **F0 e F1 CONCLUÍDAS.** F0 caracterizou o
+HTML (anotações são links com href para lei+âncora; artigo revogado tem o corpo
+removido; dispositivo alterado mantém a redação antiga **sem** riscado, valendo
+a anotação mais recente; LexML descartado). F1 entregou `data/fontes.json`
+(62 diplomas, 69 rótulos, zero órfão) e `scripts/crawler/baixar.py`: **62/62
+fontes íntegras**, sem dependências externas, derivado byte-idêntico, e
+`url_planalto()` do `transform_data` agora lê do mesmo registro (o mapa antigo
+tinha 4 URLs 404). **Correção importante:** a tese "Playwright obrigatório" da
+F0 caiu — era erro de decodificação (UTF-16 lido como cp1252); HTTP puro basta.
+Próxima fase: **F2** (parser estrutural + fixtures). O pipeline é 100%
+determinístico — sem IA e sem consumo de tokens; o custo é só minutos de GitHub
+Actions (gratuitos em repositório público).

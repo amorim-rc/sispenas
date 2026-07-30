@@ -272,3 +272,54 @@ esquema versionado que reestruturam o conjunto de dados.
 - [ ] Séries temporais do endurecimento/abrandamento penal
 - [ ] Exportação para pesquisa (CSV, JSON, API versionada)
 - [ ] Esquema versionado dos dados abertos, com política de depreciação
+
+---
+
+## Infraestrutura — domínio próprio, organização e proteção da `main`
+
+Mudanças de hospedagem e governança, **sem versão própria**: não alteram dados
+nem funcionalidades. A ordem entre as duas primeiras é obrigatória — **domínio
+antes da organização** (o `github.io` de Pages **não** redireciona em
+transferência de repositório; com o domínio configurado, a URL canônica
+sobrevive à troca de dono).
+
+### Domínio próprio — passo a passo
+
+- [ ] 1. Registrar o domínio (ex.: Registro.br).
+- [ ] 2. DNS: no apex, registros `A` → `185.199.108.153`, `185.199.109.153`,
+      `185.199.110.153`, `185.199.111.153` (opcional `AAAA` →
+      `2606:50c0:8000::153` até `:8003::153`); em `www`, `CNAME` →
+      `amorim-rc.github.io`.
+- [ ] 3. GitHub: Settings ▸ Pages ▸ **Custom domain** → informar o domínio →
+      aguardar a checagem de DNS → marcar **Enforce HTTPS** (o certificado leva
+      de minutos a ~1h).
+- [ ] 4. Verificar o domínio na conta (Settings da conta ▸ Pages ▸ **Verified
+      domains**) — impede apropriação por terceiros e prepara a migração.
+- [ ] 5. No repositório: `docusaurus.config.ts` → `url: 'https://<domínio>'` e
+      `baseUrl: '/'`; novas URLs absolutas (changelog, README, CITATION) passam
+      a usar o domínio.
+- [ ] 6. Testar: `https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1`
+      deve responder 301 para o domínio. Sem quebra de rota ⇒ a virada é
+      `melhoria` (entrada de changelog), não MAIOR.
+
+### Migração para organização — observações
+
+- [ ] Transferir só **depois** do domínio: Settings ▸ Danger Zone ▸ Transfer
+      ownership. Migram issues, PRs, Actions, secrets e estrelas; as URLs
+      `github.com` antigas redirecionam.
+- [ ] Depois da transferência: re-verificar o domínio na organização; conferir
+      Settings ▸ Pages; atualizar `organizationName` no `docusaurus.config.ts`,
+      links do README e `CITATION.cff`; `git remote set-url` local.
+- [ ] Criar o repositório-toco `amorim-rc/sispenas` (o nome fica livre) com
+      `index.html` + `404.html` de redirecionamento preservando caminho e
+      query — os links `github.io` citados em trabalhos continuam vivos.
+
+### Proteção da `main` — ruleset (decisão de 29/07/2026)
+
+- [ ] PR obrigatório com **aprovação única do mantenedor** (via CODEOWNERS) e
+      **CI verde** para merge; bypass para o administrador (fluxo solo atual) e
+      para o app GitHub Actions (`regen-data.yml`, `release.yml`, futuro
+      conferidor). Enquanto o mantenedor for único, o bypass mantém o fluxo de
+      trabalho; a regra passa a valer de fato quando houver colaboradores.
+- [ ] Ruleset de tags `v*` restrita aos mesmos atores — a release é criada pelo
+      workflow, nunca por push manual de tag (incidente já ocorrido).
