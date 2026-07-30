@@ -332,16 +332,16 @@ próprio, que é selecionável.
       workflow adulterado na própria branch, onde essas duas defesas não
       alcançam. (CODEOWNERS sobre `/.github/` continua valendo como camada extra
       no merge.)
-- [ ] Ruleset da `main`: PR obrigatório + **aprovação do Code Owner** + status
+- [x] Ruleset da `main`: PR obrigatório + **aprovação do Code Owner** + status
       check da CI + bloquear force-push e deleção. Bypass: `Repository admin`
       (fluxo solo) e o **app**.
-- [ ] Ruleset de tags `v*`: restringir criação, atualização e deleção, com o
+- [x] Ruleset de tags `v*`: restringir criação, atualização e deleção, com o
       mesmo bypass — a release é criada pelo workflow, nunca por push manual de
       tag (incidente já ocorrido).
 - [x] Os workflows já estão preparados: `regen-data.yml` e `release.yml` usam o
       token do app **quando configurado** e caem no token padrão enquanto não
       houver app, de modo que o repositório nunca fica preso pela metade.
-- [ ] Trocar `app-id` por `client-id` na `create-github-app-token` (a v3
-      depreciou o primeiro). Exige criar antes a variable `APP_CLIENT_ID` — a
-      ordem importa: mudar o workflow primeiro faria o passo do app ser pulado,
-      e com o ruleset ativo o `regen-data` não conseguiria empurrar na `main`.
+- [x] Trocar `app-id` por `client-id` na `create-github-app-token` (a v3
+      depreciou o primeiro). A ordem importou: criar antes a variable
+      `APP_CLIENT_ID`, porque mudar o workflow primeiro faria o passo do app ser
+      pulado, e com o ruleset ativo o `regen-data` não conseguiria empurrar.

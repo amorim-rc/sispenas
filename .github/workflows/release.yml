@@ -29,10 +29,10 @@ jobs:
     steps:
       - name: Token do app de automação (quando configurado)
         id: app
-        if: vars.APP_ID != ''
+        if: vars.APP_CLIENT_ID != ''
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ vars.APP_ID }}
+          client-id: ${{ vars.APP_CLIENT_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - uses: actions/checkout@v7
