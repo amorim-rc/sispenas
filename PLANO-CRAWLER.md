@@ -341,7 +341,7 @@ modelo menor com este arquivo como única briefing.
 | **F1** ✅ 30/07/2026 | `data/fontes.json` (62 fontes, 69 rótulos) + `baixar.py` + gitignore + `url_planalto` unificado | **Concluída** — 62/62 snapshots íntegros (sentinela válida), zero rótulo órfão, derivado **byte-idêntico**, sem dependências externas | — | — |
 | **F2** ✅ 30/07/2026 | `parsear.py` + 5 fixtures + 18 testes + testes na CI | **Concluída** — art. 121 produz exatamente os 12 marcadores vigentes; 62/62 diplomas parseados sem falha (11.617 dispositivos, 1.149 com pena explícita, 116 revogados); sem dependências externas | — | — |
 | **F3** ✅ 30/07/2026 | `pena_parser.py` + `conferir.py` + `excecoes.json` + relatório | **Concluída** — refactor byte-idêntico; 41 testes; primeira rodada completa: 257 → 191 achados depois de corrigidos 4 defeitos do próprio differ | — | — |
-| **F4** | `vigencia.py` + `revogacao.py` (banner; sem LexML) + exceções | Caso 15.190 (vacatio) detectado; caso 7.802 coberto por banner/watcher documentado em teste | 1 sessão | Sim |
+| **F4** ✅ 30/07/2026 | `vigencia.py` + `revogacao.py` + CLI de consulta | **Concluída** — 15.190/2025 (vacatio 180d → 04/02/2026), LC 224/2025 (efeitos diferidos) e 15.410/2026 (imediata) lidas corretamente; revogação total por banner, com o caso 7.802 travado em teste. 54 testes |
 | **F5** | `conferidor.yml` (cron semanal seg 05:00 BRT + dispatch) + issue automática + atualização do roadmap | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first; DOU vira watcher) | 1 sessão | Sim |
 | **F6** | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
 | **F7** | Watcher do DOU sem IA (5.11) + **excluir este arquivo** | Rodada de teste lista as normas penais de uma semana conhecida (ex.: a semana da Lei 15.410/26); seção integrada à issue semanal | 1 sessão | Sim |
@@ -386,7 +386,8 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
       (`python -m pytest scripts/crawler/tests`)
 - [x] F3 — extrator de pena + differ + relatório — **concluída em 30/07/2026**
       (`python scripts/crawler/conferir.py`)
-- [ ] F4 — vigência + revogação total
+- [x] F4 — vigência + revogação total — **concluída em 30/07/2026**
+      (`python scripts/crawler/vigencia.py "Lei nº 15.190" 2025`)
 - [ ] F5 — automação CI (semanal, seg 05:00 BRT) + roadmap
 - [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)
 - [ ] F7 — watcher do DOU sem IA + exclusão deste arquivo
