@@ -1,0 +1,97 @@
+name: Conferidor semanal
+
+# Toda segunda-feira, 05:00 de Brasília: baixa os textos compilados dos diplomas
+# do catálogo, confronta com static/data/crimes.json e ABRE UMA ISSUE com o que
+# divergir. Não altera dado nenhum — a decisão é humana, porque boa parte dos
+# achados exige juízo jurídico (um dispositivo novo pode ser linha, modificador
+# ou nada).
+#
+# 100% determinístico: sem IA e sem token de modelo. O custo é alguns minutos de
+# Actions por semana.
+
+on:
+  schedule:
+    # UTC. Brasília é UTC-3 fixo desde o fim do horário de verão (2019).
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: conferidor
+  cancel-in-progress: false
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      # ~60 páginas com 1,2 s de intervalo: alguns minutos, carga desprezível
+      # para o Planalto. A sentinela de cada fonte reprova página truncada ou
+      # servida de cache velho, em vez de deixar o differ comparar com lixo.
+      - name: Baixar os textos compilados
+        id: baixar
+        run: python3 scripts/crawler/baixar.py --todas
+
+      - name: Conferir o catálogo
+        id: conferir
+        # exit 3 = há achados; é resultado, não falha.
+        run: |
+          set +e
+          python3 scripts/crawler/conferir.py
+          codigo=$?
+          set -e
+          echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
+          if [ "$codigo" -ne 0 ] && [ "$codigo" -ne 3 ]; then exit "$codigo"; fi
+
+      - name: Guardar relatório e snapshots
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: conferidor-${{ github.run_number }}
+          path: |
+            crawler/relatorios/
+            crawler/snapshots/
+          retention-days: 30
+
+      # A issue é o canal: chega sozinha, tem histórico e permite discutir cada
+      # achado em linha. Uma issue por rodada, para que a semana seja unidade de
+      # trabalho e o fechamento signifique "triado".
+      - name: Abrir issue com os achados
+        if: steps.conferir.outputs.codigo == '3'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RELATORIO="crawler/relatorios/$(date -u +%Y-%m-%d).md"
+          TITULO="Conferidor: achados de $(date -u +%Y-%m-%d)"
+          {
+            echo "Rodada automática do conferidor contra o texto compilado do Planalto."
+            echo
+            echo "- Relatório completo e páginas baixadas: **artifact \`conferidor-${{ github.run_number }}\`** desta execução."
+            echo "- Cada achado é uma **pergunta**, não uma conclusão: confira o dispositivo no compilado antes de alterar o catálogo."
+            echo "- Decisão de modelagem já tomada vai para \`scripts/crawler/excecoes.json\`, com motivo e data; defasagem real vira patch."
+            echo
+            echo "---"
+            echo
+            cat "$RELATORIO"
+          } > corpo.md
+          # O corpo da issue tem limite de 65.536 caracteres.
+          if [ "$(wc -c < corpo.md)" -gt 60000 ]; then
+            head -c 60000 corpo.md > corpo-curto.md
+            echo >> corpo-curto.md
+            echo "_(relatório truncado — veja o artifact para a lista completa)_" >> corpo-curto.md
+            mv corpo-curto.md corpo.md
+          fi
+          gh issue create --repo "${{ github.repository }}" \
+            --title "$TITULO" --label conferidor --body-file corpo.md
+
+      - name: Registrar que não houve achado
+        if: steps.conferir.outputs.codigo == '0'
+        run: echo "Catálogo em dia com o texto compilado — nenhuma issue aberta."

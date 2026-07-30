@@ -31,63 +31,57 @@ que não existia (`resultado_morte`) é `MENOR`, ainda que motivado por um erro:
 do JSON ganham informação sem perder nenhuma.
 :::
 
-## v1.2.0 — Dosimetria completa (cálculo por fases)
+---
 
-Hoje o sistema parte da **pena cominada** e deixa as circunstâncias do réu mexerem só nos
-benefícios, não na pena. A v1.2.0 percorre as três fases do art. 68 do CP e faz o cálculo
-**deslocar a moldura** — revelando, para cada tipo penal, quantos **cenários de condenação**
-a lei comporta.
+## v2.0.0 — Catálogo conferido automaticamente
 
-**Modelo em camadas.** O dispositivo continua sendo a **linha canônica** (URL estável); as
-circunstâncias entram como **modificadores combináveis** aplicados na consulta, sem inflar a
-lista nem tocar o esquema de `crimes.json`. É por isso que a virada é MENOR, não MAIOR: o
-cálculo vive numa camada de simulação (novo `data/modificadores.json` + lógica de cliente),
-sobre os mesmos dados abertos.
+O catálogo foi montado por acréscimo, e a defasagem só aparecia por acaso. A v2.0.0
+troca isso por um **conferidor semanal**: toda segunda-feira o sistema baixa os textos
+compilados dos ~60 diplomas no `planalto.gov.br`, estrutura cada dispositivo, lê as
+molduras e confronta com o catálogo — abrindo uma **issue** com o que divergir.
 
-### 1ª fase — pena-base
-- [x] **Circunstâncias judiciais** (art. 59): culpabilidade, antecedentes, conduta social,
-      motivos, consequências. Hoje só filtram benefícios; passam a poder deslocar a
-      pena-base dentro da moldura.
+É determinístico de ponta a ponta: sem IA, sem inferência: onde não há certeza, há
+relatório para decisão humana. Acuidade jurídica continua sendo o valor central.
 
-### 2ª fase — agravantes e atenuantes (arts. 61–66)
-- [x] Agravantes e atenuantes como modificadores, com a **Súmula 231 do STJ** explícita
-      (atenuante não reduz abaixo do mínimo — assimetria que a 3ª fase não tem).
+### O que já está pronto
 
-### 3ª fase — causas de aumento e diminuição
-- [x] **Causas de aumento/diminuição genéricas** — as que valem para vários tipos e **não**
-      estão no preceito de cada um (art. 141 na honra, art. 226 nos sexuais, art. 327 nos
-      crimes contra a administração…) — como modificadores em `data/modificadores.json`
-      (dispositivo, fração/quantum, escopo de aplicação).
-- [x] **Contabilização controlada** (decisão de projeto): as causas de aumento **embutidas**
-      no artigo do crime (§4º/§6º/§7º do art. 121, por exemplo) permanecem como **linhas** —
-      são preceitos primários da lei, com URL própria e moldura já calculada. Um modificador
-      só é **oferecido** a um tipo quando aquela causa de aumento **não** está no rol de
-      preceitos derivados dele, evitando dupla contagem no número de cenários.
+- [x] Registro de fontes (`data/fontes.json`): 62 diplomas, 69 rótulos, nenhum órfão
+- [x] Coletor com detecção de codificação e **sentinela de frescor** por diploma
+- [x] Parser estrutural do texto compilado (dispositivo, pena, situação, anotação)
+- [x] Extrator de moldura compartilhado com o catálogo, para que os dois lados leiam
+      a mesma pena do mesmo jeito
+- [x] Differ com lista de **exceções** (o que já foi julgado não volta toda semana)
+- [x] Checador de **vigência** (vacatio legis e produção de efeitos diferida) e
+      detector de **revogação total** de diploma
 
-### Concurso
-- [x] **Concurso de crimes** — combinador de linhas: material (art. 69, soma das penas),
-      formal (art. 70) e continuidade (art. 71, uma pena com aumento).
-- [x] **Concurso de pessoas** — seletor de **papel do agente** (autor / partícipe). A
-      **participação de menor importância** (art. 29, §1º) aplica a redução de 1/6 a 1/3 à
-      mesma moldura, fechando a lacuna do agente com participação reduzida. A **cooperação
-      dolosamente distinta** (art. 29, §2º) resolve-se apontando para o tipo menos grave —
-      que já tem a própria linha —, sem criar variante combinatória nova.
+### O que falta
 
-### Consumo
-- [x] No detalhe do tipo, os modificadores aplicáveis viram **toggles** que deslocam a
-      moldura e **recalculam os benefícios ao vivo** — conectando o que hoje são dois fios
-      separados (a simulação de pena e as circunstâncias do réu).
-- [x] A busca por benefício reporta o **alcance em duas unidades**: por **dispositivo** (o
-      crime) e por **cenário de condenação** (a moldura resultante) — tornando o número
-      comparável ao das ~1.529 unidades do artigo original de 2008.
+- [ ] Rodada semanal automática, com issue no repositório
+- [ ] **PR automático** para o que é mecânico e inequívoco — corrigir moldura ou tipo
+      de pena de linha existente. Criação e remoção de linha seguem humanas: exigem
+      decidir se o dispositivo é linha, modificador ou nada
+- [ ] **Watcher do DOU** (filtro textual, sem IA): citação dos diplomas monitorados e
+      vocabulário penal, para encontrar **lei penal nova autônoma** — o único caso
+      invisível a quem só relê os diplomas que já conhece
+- [ ] Tratar as revogações encontradas: hoje o catálogo publica como vigentes ao menos
+      quatro crimes revogados (CP art. 150, §2º; CP art. 185; CP art. 350; ECA art. 233)
+- [ ] Trilha de auditoria por registro: `fonte` e `atualizado_em`
+
+:::note[Por que MAIOR]
+Um tipo revogado **não pode simplesmente sumir**: `id` é URL pública e some junto com
+ele. Ou o registro passa a conviver no arquivo com marca de revogado — e aí cai o
+invariante *todo registro de `crimes.json` é direito vigente* —, ou a rota morre. Nos
+dois caminhos, quem consome os dados abertos ou cita a URL é afetado em silêncio.
+Isso é quebra de contrato: `X.0.0`.
+:::
 
 ---
 
-## v1.3.0 — Catálogo de benefícios versionado em dados
+## v2.1.0 — Catálogo de benefícios versionado em dados
 
 Concluir o caminho aberto pela v1.1.0: tirar os benefícios do código e colocá-los em
-**JSON versionado**, como já ocorre com `crimes.json`. É pré-requisito da v2.0.0 —
-sem isso, o crawler saberia atualizar tipos penais, mas não benefícios.
+**JSON versionado**, como já ocorre com `crimes.json`. Enquanto isso não existe, o
+conferidor sabe vigiar tipos penais, mas não benefícios.
 
 - [ ] Serializar `BeneficioDef` para `data/beneficios.json` (metadados, requisitos,
       vedações, parâmetros), mantendo em código apenas as funções de avaliação
@@ -102,131 +96,34 @@ sem isso, o crawler saberia atualizar tipos penais, mas não benefícios.
 
 ---
 
-## v1.4.0 — Cobertura completa e acervo histórico
-
-### 1. Verificação da possibilidade de lacunas
-
-A cobertura dos tipos vigentes **não tem mais lacuna apontada** — todo dispositivo com
-preceito penal em vigor foi conferido contra o texto compilado do Planalto (ver
-[Completude do catálogo](/docs/completude)). Esta parte deixa de ser "fechar lacunas
-conhecidas" e passa a ser **procurar lacunas ainda não vistas**:
-
-- [ ] Reexecutar o inventário contra o índice temático do Planalto + LexML, à caça de
-      diplomas com preceito penal **fora** do inventário atual.
-- [ ] Revisar as exclusões deliberadas (penas cominadas por remissão quebrada, causas de
-      aumento genéricas) à luz da v1.2.0.
-- [ ] **Revisão cautelar das heurísticas** — violência, grave ameaça, ação penal e
-      tentativa preenchidas na cobertura em massa (sobretudo no CPM) — antes que o crawler
-      as use como linha de base.
-
-### 2. Acervo histórico — tipos revogados, alterados e não recepcionados
+## v2.2.0 — Acervo histórico
 
 Reunir **todos os tipos penais que deixaram de valer ou mudaram**, para histórico
 completo — o que hoje nenhuma ferramenta oferece de forma estruturada, e que interessa
 diretamente à pesquisa acadêmica (ultratividade da lei mais benéfica; linha do tempo da
-descriminalização):
+descriminalização). O conferidor alimenta esta aba: revogação que ele detectar entra
+aqui, em vez de desaparecer.
 
 - [ ] **Aba própria** em Pesquisa ▸ **Acervo histórico**, com a lista de tipos **por
-      categoria**: `revogado` · `alterado` · `nao_recepcionado` — no mesmo formato da lista
-      de tipos vigentes
+      categoria**: `revogado` · `alterado` · `nao_recepcionado` — no mesmo formato da
+      lista de tipos vigentes
 - [ ] **Tela de detalhe por tipo**: o **texto original** e o que houve com ele — alteração,
       revogação ou não recepção —, **quando** houve e **por qual dispositivo** (com link
       para o tipo sucessor, quando houver)
 - [ ] **Dataset separado**: `data/historico.json` (fonte) → `static/data/historico.json`
-      (derivado), com ids próprios — **nunca misturado a `crimes.json`**
-- [ ] Fonte: os textos anteriores do Planalto (as redações revogadas ficam riscadas nos
-      compilados — a mesma extração da conferência); os 10 diplomas revogados/não
-      recepcionados já estão inventariados em `data/diplomas.json`, e os casos já
-      identificados estão listados em [Acervo histórico](/docs/acervo-historico)
+      (derivado), com ids próprios
+- [ ] Fonte: os textos anteriores do Planalto (as redações revogadas ficam no compilado —
+      a mesma extração do conferidor); os 10 diplomas revogados/não recepcionados já estão
+      inventariados em `data/diplomas.json`, e os casos já identificados estão listados em
+      [Acervo histórico](/docs/acervo-historico)
 - [ ] Ponto de partida já conhecido: adultério (art. 240), sedução (217), rapto (219–222),
       ECA art. 233, LCP arts. 27, 39, 60, 61 e 65, Lei de Imprensa, LSN, Estatuto do
       Torcedor, o art. 19 (vetado) da Lei 9.807/99 e as redações **alteradas** registradas
       nas conferências (art. 121, §2º VI — feminicídio; Maria da Penha art. 24-A…)
 
-:::note[Por que o acervo em dataset separado é MENOR, e não MAIOR]
-O invariante dos dados abertos — *todo registro de `crimes.json` é direito vigente* —
-permanece intacto: o acervo vive em arquivo e rota próprios, e quem calcula estatísticas
-sobre o catálogo vigente não é afetado. Nova aba + novo arquivo = funcionalidade
-compatível (MENOR). O que continua sendo **v2.0.0** é fundir os dois mundos:
-`revogado_em`/`vigente_desde` dentro do dataset principal, alimentados pelo crawler do DOU.
-:::
-
 ---
 
-## v2.0.0 — Atualização automática da legislação (crawler do DOU)
-
-Manter o catálogo atualizado com segurança jurídica, a partir do **Diário Oficial da
-União**. O pipeline de dados da v1.1.0 já foi desenhado para receber isto: fonte editável
-separada do derivado, invariantes de `id`, validação estrita na CI e relatório de
-qualidade. É também a **release de salto técnico na estrutura do repositório** — e por isso
-incorpora as melhorias transversais que antes não tinham versão fixa.
-
-**Por que MAIOR e não menor:** o crawler precisa registrar revogações, e apagar o registro
-não é opção (a URL `?tipo=N` morreria). Tipos revogados passam a conviver no arquivo — o
-que **desmente o invariante** de que todo registro é direito vigente. Nenhum campo é
-removido, mas toda estatística feita por terceiros passa a estar errada em silêncio. Isso
-é quebra de contrato, ainda que o esquema pareça intacto.
-
-**Pré-requisito — catálogo completo.** A virada para a v2.0.0 só acontece quando o
-catálogo de **tipos penais e de benefícios** estiver completo e conferido. Toda a busca de
-completude e conferência (a [Completude do catálogo](/docs/completude) dos tipos e a
-v1.3.0 dos benefícios) fica na linha `1.y.z`, por não quebrar contrato: são correções e
-acréscimos sobre o esquema atual. O crawler é o que **muda o significado** do conjunto de
-dados (passa a conter revogados) — e automatizar a atualização de um catálogo ainda
-incompleto ou não conferido multiplicaria o erro em vez de o corrigir.
-
-### Arquitetura
-
-```
-GitHub Actions (cron semanal)
-   → Crawler do DOU (Imprensa Nacional / in.gov.br)
-   → Filtro por seção e palavras-chave penais (pena, reclusão, detenção, revoga, art.)
-   → Agente de IA classifica: cria / altera / revoga tipo penal?
-   → Gera proposta de alteração em data/crimes.json  (fonte, nunca o derivado)
-   → Abre Pull Request (NUNCA commita direto no main)
-   → CI valida: transform_data.py --estrito + invariantes de id + npm run verificar
-   → Revisão humana obrigatória (competência jurídica) antes do merge
-   → regen-data.yml regenera static/data/crimes.json
-```
-
-### Tarefas
-
-- [ ] Coletor do DOU (fonte oficial `in.gov.br`), com paginação e cache
-- [ ] Normalizador de texto (extrair artigo, pena mín/máx, modalidade)
-- [ ] Classificador (IA) de impacto penal com citação rastreável à fonte
-- [ ] Gerador de diff estruturado sobre `data/crimes.json`, **append-only em `id`**
-- [ ] Abertura automática de PR + changelog
-- [ ] Trilha de auditoria (data da norma, link do DOU, responsável pela revisão)
-- [ ] **Curadoria assistida**: o crawler não infere `perdao_judicial_previsto`; deve
-      sinalizar candidatos para decisão humana
-
-### Pendências de compatibilidade
-
-- [ ] `revogado_em` / `vigente_desde` por tipo penal: hoje o catálogo só representa o
-      direito vigente, e um crawler que acompanha o DOU **precisa** representar revogações
-      sem apagar o registro (senão a URL `?tipo=N` morre)
-- [ ] `fonte` e `atualizado_em` por registro, para rastrear a origem da informação
-
-### Acervo histórico — integração com o catálogo principal
-
-A **primeira entrega** do acervo (aba própria + dataset separado `historico.json`) é a
-[v1.4.0](#v140--cobertura-completa-e-acervo-histórico). O que fica para a v2.0.0 é a
-**fusão dos dois mundos**, que o crawler exige:
-
-- [ ] Campos `revogado_em`, `revogado_por` (norma) e `vigente_desde` **no dataset
-      principal**; um tipo revogado pelo crawler **nunca é apagado** — muda de estado,
-      preserva o `id` e a URL
-- [ ] O crawler passa a **alimentar o acervo**: revogação detectada no DOU gera proposta
-      tanto no catálogo vigente quanto no histórico
-- [ ] Linha do tempo da descriminalização: o que saiu do Código, quando e por qual norma
-- [ ] **Ultratividade da lei penal mais benéfica** (art. 5º, XL, CF; art. 2º, par. único,
-      CP): a lei revogada continua a reger o fato praticado sob sua vigência quando for
-      mais benéfica — daí o acervo não ser mera curiosidade, e sim direito aplicável
-
-### Melhorias técnicas transversais (salto de estrutura)
-
-Sendo a release que reestrutura tecnicamente o repositório, a v2.0.0 absorve as melhorias
-que antes flutuavam sem versão:
+## v2.3.0 — Melhorias técnicas e de usabilidade
 
 - [ ] **Acessibilidade**: navegação por teclado na tabela, `aria-live` nos contadores que
       mudam com a simulação, foco visível consistente
@@ -236,36 +133,23 @@ que antes flutuavam sem versão:
 - [ ] Testes de regressão da dosimetria com casos reais de jurisprudência
 - [ ] Dashboards analíticos (distribuição de penas, hediondos por década)
 
-:::note[Por que a fusão é v2.0.0]
-Enquanto o acervo vive em arquivo separado (v1.4.0), o invariante *todo registro de
-`crimes.json` é direito vigente* segue de pé. Trazer `revogado_em` para o dataset
-principal — e conviver com revogados no mesmo arquivo — é o que desmente esse invariante e
-quebra as estatísticas de terceiros em silêncio: MAIOR, junto com o crawler, para que uma
-mudança pague o custo de compatibilidade da outra.
-:::
-
 ---
 
-## v3.0.0 — Processo penal e jurisprudência
+## v3.0.0 — Processo penal, jurisprudência e pesquisa de políticas públicas
 
-Estender a atualização automática ao **Direito Processual Penal**, que rege boa parte dos
-benefícios — um salto em relação ao conteúdo originalmente planejado, possível uma vez que
-o direito material já está consolidado e mantido pelo crawler.
+A virada de paradigma: o sistema deixa de ser um catálogo de **direito material** e passa
+a cobrir também o **processo penal** e a **jurisprudência** que regem, na prática, os
+benefícios — e a servir de plataforma de pesquisa sobre a legislação, não só de consulta.
+Só faz sentido depois que o direito material estiver consolidado e mantido sozinho.
+
+### Processo penal e jurisprudência
 
 - [ ] Monitorar alterações do **CPP**, da **Lei 9.099/95** e da **LEP**
 - [ ] Monitorar **súmulas e teses de repercussão geral** (STF/STJ) que alterem limiares ou
       vedações (ex.: Súmula 536 STJ)
 - [ ] Alertas quando decisão vinculante invalidar uma regra implementada
 
----
-
-## v4.0.0 — Plataforma de pesquisa de políticas públicas
-
-Avanços técnicos mais refinados, possíveis uma vez que o conteúdo está consolidado e
-sendo automaticamente atualizado e/ou depreciado — podendo inclusive incorporar melhorias
-sobre o conteúdo dedicado ao Processo Penal. Reservado para quando houver **quebra de
-contrato** dos dados abertos, provável ao introduzir a vigência temporal em escala e o
-esquema versionado que reestruturam o conjunto de dados.
+### Plataforma de pesquisa
 
 - [ ] Cruzamento exaustivo tipos × benefícios (matriz de elegibilidade)
 - [ ] Simulação legislativa em lote ("aumentar em 2 anos a pena dos crimes patrimoniais")
@@ -273,75 +157,9 @@ esquema versionado que reestruturam o conjunto de dados.
 - [ ] Exportação para pesquisa (CSV, JSON, API versionada)
 - [ ] Esquema versionado dos dados abertos, com política de depreciação
 
----
-
-## Infraestrutura — domínio próprio, organização e proteção da `main`
-
-Mudanças de hospedagem e governança, **sem versão própria**: não alteram dados
-nem funcionalidades. A ordem entre as duas primeiras é obrigatória — **domínio
-antes da organização** (o `github.io` de Pages **não** redireciona em
-transferência de repositório; com o domínio configurado, a URL canônica
-sobrevive à troca de dono).
-
-### Domínio próprio — passo a passo
-
-- [ ] 1. Registrar o domínio (ex.: Registro.br).
-- [ ] 2. DNS: no apex, registros `A` → `185.199.108.153`, `185.199.109.153`,
-      `185.199.110.153`, `185.199.111.153` (opcional `AAAA` →
-      `2606:50c0:8000::153` até `:8003::153`); em `www`, `CNAME` →
-      `amorim-rc.github.io`.
-- [ ] 3. GitHub: Settings ▸ Pages ▸ **Custom domain** → informar o domínio →
-      aguardar a checagem de DNS → marcar **Enforce HTTPS** (o certificado leva
-      de minutos a ~1h).
-- [ ] 4. Verificar o domínio na conta (Settings da conta ▸ Pages ▸ **Verified
-      domains**) — impede apropriação por terceiros e prepara a migração.
-- [ ] 5. No repositório: `docusaurus.config.ts` → `url: 'https://<domínio>'` e
-      `baseUrl: '/'`; novas URLs absolutas (changelog, README, CITATION) passam
-      a usar o domínio.
-- [ ] 6. Testar: `https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1`
-      deve responder 301 para o domínio. Sem quebra de rota ⇒ a virada é
-      `melhoria` (entrada de changelog), não MAIOR.
-
-### Migração para organização — observações
-
-- [ ] Transferir só **depois** do domínio: Settings ▸ Danger Zone ▸ Transfer
-      ownership. Migram issues, PRs, Actions, secrets e estrelas; as URLs
-      `github.com` antigas redirecionam.
-- [ ] Depois da transferência: re-verificar o domínio na organização; conferir
-      Settings ▸ Pages; atualizar `organizationName` no `docusaurus.config.ts`,
-      links do README e `CITATION.cff`; `git remote set-url` local.
-- [ ] Criar o repositório-toco `amorim-rc/sispenas` (o nome fica livre) com
-      `index.html` + `404.html` de redirecionamento preservando caminho e
-      query — os links `github.io` citados em trabalhos continuam vivos.
-
-### Proteção da `main` — ruleset + app de automação (decisão de 30/07/2026)
-
-O objetivo: **qualquer autor de PR precisa de CI verde e revisão do mantenedor**,
-sem que isso trave as automações do próprio repositório. O obstáculo é que o
-`github-actions[bot]` **não é ator selecionável** no bypass de rulesets (não é
-limitação de plano — Pro não muda isso). A saída oficial é um **GitHub App**
-próprio, que é selecionável.
-
-- [x] Criar um GitHub App do projeto (permissões mínimas: Contents e Pull
-      requests: read/write), instalá-lo no repositório e guardar `APP_ID` como
-      *variable* e a chave privada como *secret*.
-- [x] **Guardar a chave num Environment** (`automacao`) com *deployment branch
-      policy* restrita à `main`. Esta é a trava que importa: o GitHub recusa
-      entregar o secret a jobs fora da `main`, **do lado do servidor**. Confiar
-      em `if:` no YAML ou em CODEOWNERS não basta — quem tem write pode rodar um
-      workflow adulterado na própria branch, onde essas duas defesas não
-      alcançam. (CODEOWNERS sobre `/.github/` continua valendo como camada extra
-      no merge.)
-- [x] Ruleset da `main`: PR obrigatório + **aprovação do Code Owner** + status
-      check da CI + bloquear force-push e deleção. Bypass: `Repository admin`
-      (fluxo solo) e o **app**.
-- [x] Ruleset de tags `v*`: restringir criação, atualização e deleção, com o
-      mesmo bypass — a release é criada pelo workflow, nunca por push manual de
-      tag (incidente já ocorrido).
-- [x] Os workflows já estão preparados: `regen-data.yml` e `release.yml` usam o
-      token do app **quando configurado** e caem no token padrão enquanto não
-      houver app, de modo que o repositório nunca fica preso pela metade.
-- [x] Trocar `app-id` por `client-id` na `create-github-app-token` (a v3
-      depreciou o primeiro). A ordem importou: criar antes a variable
-      `APP_CLIENT_ID`, porque mudar o workflow primeiro faria o passo do app ser
-      pulado, e com o ruleset ativo o `regen-data` não conseguiria empurrar.
+:::note[Por que MAIOR]
+Cobrir processo penal e jurisprudência muda **o que o conjunto de dados é**: limiares
+passam a depender de data e de tese vinculante, e a resposta a uma mesma consulta deixa
+de ser função apenas do tipo penal. Somada ao esquema versionado dos dados abertos, é
+quebra de contrato — e vale a pena pagá-la de uma vez só.
+:::
