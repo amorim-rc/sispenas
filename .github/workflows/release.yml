@@ -22,9 +22,19 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
+    # Ver a nota em regen-data.yml: o Environment restringe os secrets do app à
+    # `main`, do lado do servidor. Aqui o token do app é o que permite criar a
+    # tag quando o ruleset de tags proíbe criação por atores comuns.
+    environment: automacao
     steps:
+      - name: Token do app de automação (quando configurado)
+        id: app
+        if: vars.APP_ID != ''
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -37,6 +47,8 @@ jobs:
 
       - name: Versão e corpo da Release
         id: rn
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token || github.token }}
         run: |
           VERSION="$(node -p "require('./package.json').version")"
           TAG="v${VERSION}"
@@ -54,6 +66,8 @@ jobs:
 
       - name: Criar a Release (cria também a tag no commit atual)
         if: steps.rn.outputs.existe == '0'
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token || github.token }}
         run: |
           gh release create "${{ steps.rn.outputs.tag }}" \
             --target "${GITHUB_SHA}" \

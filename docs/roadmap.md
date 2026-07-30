@@ -314,12 +314,30 @@ sobrevive à troca de dono).
       `index.html` + `404.html` de redirecionamento preservando caminho e
       query — os links `github.io` citados em trabalhos continuam vivos.
 
-### Proteção da `main` — ruleset (decisão de 29/07/2026)
+### Proteção da `main` — ruleset + app de automação (decisão de 30/07/2026)
 
-- [ ] PR obrigatório com **aprovação única do mantenedor** (via CODEOWNERS) e
-      **CI verde** para merge; bypass para o administrador (fluxo solo atual) e
-      para o app GitHub Actions (`regen-data.yml`, `release.yml`, futuro
-      conferidor). Enquanto o mantenedor for único, o bypass mantém o fluxo de
-      trabalho; a regra passa a valer de fato quando houver colaboradores.
-- [ ] Ruleset de tags `v*` restrita aos mesmos atores — a release é criada pelo
-      workflow, nunca por push manual de tag (incidente já ocorrido).
+O objetivo: **qualquer autor de PR precisa de CI verde e revisão do mantenedor**,
+sem que isso trave as automações do próprio repositório. O obstáculo é que o
+`github-actions[bot]` **não é ator selecionável** no bypass de rulesets (não é
+limitação de plano — Pro não muda isso). A saída oficial é um **GitHub App**
+próprio, que é selecionável.
+
+- [ ] Criar um GitHub App do projeto (permissões mínimas: Contents e Pull
+      requests: read/write), instalá-lo no repositório e guardar `APP_ID` como
+      *variable* e a chave privada como *secret*.
+- [ ] **Guardar a chave num Environment** (`automacao`) com *deployment branch
+      policy* restrita à `main`. Esta é a trava que importa: o GitHub recusa
+      entregar o secret a jobs fora da `main`, **do lado do servidor**. Confiar
+      em `if:` no YAML ou em CODEOWNERS não basta — quem tem write pode rodar um
+      workflow adulterado na própria branch, onde essas duas defesas não
+      alcançam. (CODEOWNERS sobre `/.github/` continua valendo como camada extra
+      no merge.)
+- [ ] Ruleset da `main`: PR obrigatório + **aprovação do Code Owner** + status
+      check da CI + bloquear force-push e deleção. Bypass: `Repository admin`
+      (fluxo solo) e o **app**.
+- [ ] Ruleset de tags `v*`: restringir criação, atualização e deleção, com o
+      mesmo bypass — a release é criada pelo workflow, nunca por push manual de
+      tag (incidente já ocorrido).
+- [ ] Os workflows já estão preparados: `regen-data.yml` e `release.yml` usam o
+      token do app **quando configurado** e caem no token padrão enquanto não
+      houver app, de modo que o repositório nunca fica preso pela metade.

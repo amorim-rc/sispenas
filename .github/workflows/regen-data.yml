@@ -22,8 +22,27 @@ concurrency:
 jobs:
   regen:
     runs-on: ubuntu-latest
+    # O Environment é a trava SERVER-SIDE dos secrets do app: com a política de
+    # branch restrita à `main`, o GitHub recusa entregar a chave a um job que
+    # rode em qualquer outra branch. Sem isso, bastaria a um colaborador com
+    # write empurrar uma branch com o workflow adulterado para usar o app —
+    # `if:` no YAML e CODEOWNERS não impedem execução fora da main.
+    environment: automacao
     steps:
+      # O token do app é o que atravessa o ruleset da main (o github-actions[bot]
+      # não é ator selecionável no bypass). Enquanto o app não existir, o passo é
+      # pulado e tudo segue com o token padrão — o repositório nunca fica preso.
+      - name: Token do app de automação (quando configurado)
+        id: app
+        if: vars.APP_ID != ''
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.app.outputs.token || github.token }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
