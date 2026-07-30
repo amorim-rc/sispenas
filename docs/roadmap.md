@@ -20,9 +20,9 @@ O SISPENAS tem dois públicos que dependem de estabilidade, e são eles que defi
 
 | Posição | Incrementa quando | Exemplos |
 |---|---|---|
-| **MAIOR** (`X.0.0`) | Quebra de compatibilidade para esses públicos: remoção ou renomeação de campo do JSON, **mudança de significado de campo ou do conjunto de dados**, reatribuição de `id`, remoção de rota sem redirecionamento. | Passar a incluir tipos revogados; separar `crimes.json` em vários arquivos. |
-| **MENOR** (`1.Y.0`) | Funcionalidade nova mantendo compatibilidade: **acrescentar** campo ao JSON, nova tela, novo benefício, nova rota. | A v1.1.0 acrescentou `resultado_morte` e a Busca por benefício sem remover nada. |
-| **CORREÇÃO** (`1.1.Z`) | Correção sem funcionalidade nova: erro de dosimetria, dado errado no catálogo, defeito de interface. | Corrigir a pena de um artigo; ajustar contraste. |
+| **MAIOR** (`X.0.0`) | **Salto na natureza do produto**: reestruturação funcional, arquitetural ou procedimental — o sistema passa a fazer algo de outra ordem, não apenas mais do mesmo. | Deixar de ser um catálogo mantido à mão e passar a ser conferido sozinho contra a fonte oficial; estender a cobertura ao processo penal e à jurisprudência. |
+| **MENOR** (`X.Y.0`) | O que já existe, com **acréscimos, alterações e remoções** de registros e telas — a natureza do produto permanece. | Acrescentar campo ao JSON, nova tela, novo benefício; incluir ou remover tipos penais. |
+| **CORREÇÃO** (`X.Y.Z`) | Correção sem funcionalidade nova: erro de dosimetria, dado errado no catálogo, defeito de interface. | Corrigir a pena de um artigo; ajustar contraste. |
 
 :::note[Correção de dado é `CORREÇÃO`, não `MENOR`]
 Resolver uma das contradições do catálogo muda o resultado de uma consulta — mas
@@ -68,11 +68,19 @@ relatório para decisão humana. Acuidade jurídica continua sendo o valor centr
 - [ ] Trilha de auditoria por registro: `fonte` e `atualizado_em`
 
 :::note[Por que MAIOR]
-Um tipo revogado **não pode simplesmente sumir**: `id` é URL pública e some junto com
-ele. Ou o registro passa a conviver no arquivo com marca de revogado — e aí cai o
-invariante *todo registro de `crimes.json` é direito vigente* —, ou a rota morre. Nos
-dois caminhos, quem consome os dados abertos ou cita a URL é afetado em silêncio.
-Isso é quebra de contrato: `X.0.0`.
+Não é o tamanho da mudança, é a **natureza** dela: o catálogo deixa de ser um acervo
+mantido à mão, que só revelava defasagem por acaso, e passa a ser continuamente
+confrontado com a fonte oficial. Muda o procedimento (a conferência vira rotina
+semanal, não expedição), muda a arquitetura (entra um pipeline de coleta, parsing e
+diferença) e muda o que o produto promete: não mais "conferimos quando olhamos", e sim
+"vigiamos toda semana". É salto de ordem, não incremento.
+:::
+
+:::caution[Consequência a resolver: a URL de um tipo removido]
+`id` é URL pública, citada em pareceres e trabalhos. Remover um tipo revogado deixa
+`?tipo=N` sem destino. A v2.2.0 é a saída: o registro **migra** para o acervo histórico
+e a rota antiga passa a apontar para lá — o leitor encontra o que procurava, com a
+informação de que foi revogado, em vez de um erro.
 :::
 
 ---
@@ -158,8 +166,9 @@ Só faz sentido depois que o direito material estiver consolidado e mantido sozi
 - [ ] Esquema versionado dos dados abertos, com política de depreciação
 
 :::note[Por que MAIOR]
-Cobrir processo penal e jurisprudência muda **o que o conjunto de dados é**: limiares
-passam a depender de data e de tese vinculante, e a resposta a uma mesma consulta deixa
-de ser função apenas do tipo penal. Somada ao esquema versionado dos dados abertos, é
-quebra de contrato — e vale a pena pagá-la de uma vez só.
+Outro salto de natureza: o sistema deixa de responder "o que a lei comina para este
+crime" e passa a responder "o que se aplica a este caso, nesta data, segundo a lei e os
+tribunais". Limiares passam a depender de vigência temporal e de tese vinculante, e a
+ferramenta de consulta vira plataforma de pesquisa. É expansão de paradigma e de
+cobertura ao mesmo tempo.
 :::
