@@ -124,6 +124,9 @@ _INCISO = re.compile(r"^([IVXLC]+)\s*[-–—]\s", re.I)
 _ALINEA = re.compile(r"^([a-z])\)\s")
 _PENA = re.compile(r"^Pena\b", re.I)
 _VETADO = re.compile(r"\(VETADO\)", re.I)
+# "(Revogado)" às vezes vem no TEXTO do parágrafo, não no link da anotação —
+# caso do art. 67, § único da Lei 9.605, onde o link diz "Redação dada".
+_REVOGADO_TXT = re.compile(r"\(Revogad[oa]", re.I)
 
 
 def _norm_marcador(numero: str, sufixo: str | None) -> str:
@@ -233,7 +236,11 @@ def parsear(documento: str) -> list[Dispositivo]:
             d.epigrafe = d.epigrafe or epigrafe_pendente
             epigrafe_pendente = None
             corpo = texto[m.end():].strip()
-            if anotacao and anotacao.acao == "revogado" and len(corpo) < 80:
+            corpo_util = re.sub(r"\([^)]*\)", "", corpo).strip()
+            revogado = ((_REVOGADO_TXT.search(texto)
+                         or (anotacao and anotacao.acao == "revogado"))
+                        and len(corpo_util) < 80)
+            if revogado:
                 # Artigo revogado perde o corpo: sobra o cabeçalho + a anotação.
                 d.situacao = "revogado"
                 d.anotacao = anotacao
@@ -256,7 +263,11 @@ def parsear(documento: str) -> list[Dispositivo]:
                         else "parágrafo único")
             d = obter(artigo, sufixo, marcador)
             corpo = texto[(mp.end() if mp else _PAR_UNICO.match(texto).end()):].strip(" .-–—")
-            if anotacao and anotacao.acao == "revogado" and len(corpo) < 80:
+            corpo_util = re.sub(r"\([^)]*\)", "", corpo).strip()
+            revogado = ((_REVOGADO_TXT.search(texto)
+                         or (anotacao and anotacao.acao == "revogado"))
+                        and len(corpo_util) < 80)
+            if revogado:
                 d.situacao = "revogado"
                 d.anotacao = anotacao
             else:
