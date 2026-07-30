@@ -322,10 +322,10 @@ sem que isso trave as automações do próprio repositório. O obstáculo é que
 limitação de plano — Pro não muda isso). A saída oficial é um **GitHub App**
 próprio, que é selecionável.
 
-- [ ] Criar um GitHub App do projeto (permissões mínimas: Contents e Pull
+- [x] Criar um GitHub App do projeto (permissões mínimas: Contents e Pull
       requests: read/write), instalá-lo no repositório e guardar `APP_ID` como
       *variable* e a chave privada como *secret*.
-- [ ] **Guardar a chave num Environment** (`automacao`) com *deployment branch
+- [x] **Guardar a chave num Environment** (`automacao`) com *deployment branch
       policy* restrita à `main`. Esta é a trava que importa: o GitHub recusa
       entregar o secret a jobs fora da `main`, **do lado do servidor**. Confiar
       em `if:` no YAML ou em CODEOWNERS não basta — quem tem write pode rodar um
@@ -338,6 +338,10 @@ próprio, que é selecionável.
 - [ ] Ruleset de tags `v*`: restringir criação, atualização e deleção, com o
       mesmo bypass — a release é criada pelo workflow, nunca por push manual de
       tag (incidente já ocorrido).
-- [ ] Os workflows já estão preparados: `regen-data.yml` e `release.yml` usam o
+- [x] Os workflows já estão preparados: `regen-data.yml` e `release.yml` usam o
       token do app **quando configurado** e caem no token padrão enquanto não
       houver app, de modo que o repositório nunca fica preso pela metade.
+- [ ] Trocar `app-id` por `client-id` na `create-github-app-token` (a v3
+      depreciou o primeiro). Exige criar antes a variable `APP_CLIENT_ID` — a
+      ordem importa: mudar o workflow primeiro faria o passo do app ser pulado,
+      e com o ruleset ativo o `regen-data` não conseguiria empurrar na `main`.
