@@ -38,6 +38,14 @@ jobs:
       - name: Conferir se static/data/crimes.json está atualizado
         run: git diff --exit-code --stat static/data/crimes.json
 
+      # Parser do conferidor: roda só contra as fixtures congeladas em
+      # scripts/crawler/fixtures — sem rede, portanto sem depender do Planalto
+      # estar no ar. O download ao vivo é exclusividade do workflow semanal.
+      - name: Testar o parser do conferidor
+        run: |
+          python3 -m pip install --quiet pytest
+          python3 -m pytest scripts/crawler/tests -q
+
       - name: Typecheck
         run: npm run typecheck
 

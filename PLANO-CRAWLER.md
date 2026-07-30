@@ -339,7 +339,7 @@ modelo menor com este arquivo como única briefing.
 |---|---|---|---|---|
 | **F0** ✅ 29/07/2026 | Spike: fetch, charset, LexML, levantamento HTML | **Concluída** — `crawler/DECISOES-F0.md`: Playwright obrigatório (curl serve cópia pré-2018 da L11340), cp1252 padrão, anotações = links com href p/ lei+âncora, revogado total = corpo removido, LexML descartado | — | — |
 | **F1** ✅ 30/07/2026 | `data/fontes.json` (62 fontes, 69 rótulos) + `baixar.py` + gitignore + `url_planalto` unificado | **Concluída** — 62/62 snapshots íntegros (sentinela válida), zero rótulo órfão, derivado **byte-idêntico**, sem dependências externas | — | — |
-| **F2** | `parsear.py` + fixtures + testes | Fixtures da seção 7 parseadas com 100% dos casos de teste passando; art. 121 do CP produz exatamente os dispositivos vigentes conhecidos | 2–3 sessões | Parcial (fixtures sim; regras do parser pedem cuidado) |
+| **F2** ✅ 30/07/2026 | `parsear.py` + 5 fixtures + 18 testes + testes na CI | **Concluída** — art. 121 produz exatamente os 12 marcadores vigentes; 62/62 diplomas parseados sem falha (11.617 dispositivos, 1.149 com pena explícita, 116 revogados); sem dependências externas | — | — |
 | **F3** | `pena_parser.py` extraído/estendido + `conferir.py` + relatório | Refactor byte-idêntico; recall e precisão da seção 7 passando; relatório legível gerado para o catálogo inteiro | 1–2 sessões | Sim, com F2 pronto |
 | **F4** | `vigencia.py` + `revogacao.py` (banner; sem LexML) + exceções | Caso 15.190 (vacatio) detectado; caso 7.802 coberto por banner/watcher documentado em teste | 1 sessão | Sim |
 | **F5** | `conferidor.yml` (cron semanal seg 05:00 BRT + dispatch) + issue automática + atualização do roadmap | Workflow roda no `workflow_dispatch` de ponta a ponta e abre issue de exemplo; roadmap v2.0.0 atualizado (compilado-first; DOU vira watcher) | 1 sessão | Sim |
@@ -382,14 +382,29 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
       (`crawler/DECISOES-F0.md`)
 - [x] F1 — fontes.json + fetcher — **concluída em 30/07/2026**
       (62/62 fontes íntegras; `python scripts/crawler/baixar.py --todas`)
-- [ ] F2 — parser estrutural + fixtures
+- [x] F2 — parser estrutural + fixtures — **concluída em 30/07/2026**
+      (`python -m pytest scripts/crawler/tests`)
 - [ ] F3 — extrator de pena + differ + relatório
 - [ ] F4 — vigência + revogação total
 - [ ] F5 — automação CI (semanal, seg 05:00 BRT) + roadmap
 - [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)
 - [ ] F7 — watcher do DOU sem IA + exclusão deste arquivo
 
-**Última atualização:** 2026-07-30 — **F0 e F1 CONCLUÍDAS.** F0 caracterizou o
+**Achados da F2 a verificar na F3** (candidatos a erro de catálogo, encontrados
+de passagem ao montar as fixtures — exigem conferência jurídica antes de virar
+correção):
+- **LCP art. 32**: a lei comina *"multa, de duzentos mil réis a dois contos de
+  réis"*; o catálogo (id da LCP, art. 32) traz *"15 dias a 3 meses, prisão
+  simples"*. Ou o registro pegou outro artigo, ou herdou pena de dispositivo
+  vizinho. Conferir contra o compilado antes de mexer.
+- **CP art. 121, § 2º-D**: o texto oficial tem erro de digitação — *"de 20
+  (vinte) a 40 (quarenta anos)"*. Não afeta o catálogo, mas o extrator de pena
+  precisa confiar nos algarismos, não no número por extenso.
+- **Pena embutida na frase**: no CPM art. 290, § 5º, a pena está no corpo do
+  parágrafo ("a pena será de reclusão de 5 a 15 anos"), sem linha "Pena –".
+  O extrator da F3 tem de procurar no `texto` quando `pena_texto` for nulo.
+
+**Última atualização:** 2026-07-30 — **F0, F1 e F2 CONCLUÍDAS.** F0 caracterizou o
 HTML (anotações são links com href para lei+âncora; artigo revogado tem o corpo
 removido; dispositivo alterado mantém a redação antiga **sem** riscado, valendo
 a anotação mais recente; LexML descartado). F1 entregou `data/fontes.json`
@@ -398,6 +413,10 @@ fontes íntegras**, sem dependências externas, derivado byte-idêntico, e
 `url_planalto()` do `transform_data` agora lê do mesmo registro (o mapa antigo
 tinha 4 URLs 404). **Correção importante:** a tese "Playwright obrigatório" da
 F0 caiu — era erro de decodificação (UTF-16 lido como cp1252); HTTP puro basta.
-Próxima fase: **F2** (parser estrutural + fixtures). O pipeline é 100%
+F2 entregou `parsear.py` (fatiamento do HTML cru, porque a árvore do Word
+malformado desloca as fronteiras de parágrafo), 5 fixtures congeladas e 18
+testes — inclusive o caso decisivo do art. 24-A, em que a redação de 2018
+aparece antes da de 2024 sem riscado e o parser escolhe a mais recente.
+Próxima fase: **F3** (extrator de pena + differ + relatório). O pipeline é 100%
 determinístico — sem IA e sem consumo de tokens; o custo é só minutos de GitHub
 Actions (gratuitos em repositório público).
