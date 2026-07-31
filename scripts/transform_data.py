@@ -145,6 +145,32 @@ def _casa(regra, c: dict) -> bool:
     return True
 
 
+def validar_moldura(crimes: list) -> list:
+    """A moldura é a AUTORIDADE — e por isso tem de estar bem escrita.
+
+    Desde a v1.2.17 é `pena_min`/`pena_max` que define a pena publicada; o `obs`
+    voltou a ser descritivo. Duas exigências, verificadas a cada build:
+
+    1. **Inteiro quando inteiro.** `24.0` e `24` valem o mesmo para o cálculo,
+       mas o primeiro polui o diff e muda o tipo no JSON público. A regra vale
+       para todo mundo — quem edita à mão e quem gera correção automática.
+    2. **Mínimo não pode passar do máximo.**
+    """
+    problemas = []
+    for c in crimes:
+        for campo in ("pena_min", "pena_max"):
+            v = c.get(campo)
+            if isinstance(v, float) and float(v).is_integer():
+                problemas.append(
+                    f"id {c.get('id')}: {campo}={v!r} deve ser inteiro ({int(v)})")
+            if v is not None and not isinstance(v, (int, float)):
+                problemas.append(f"id {c.get('id')}: {campo}={v!r} não é número")
+        mn, mx = float(c.get("pena_min") or 0), float(c.get("pena_max") or 0)
+        if mn > mx:
+            problemas.append(f"id {c.get('id')}: pena_min {mn} maior que pena_max {mx}")
+    return problemas
+
+
 def validar_tipos_penais(crimes: list) -> list:
     """Invariante DURO: todo registro é um tipo penal com sanção cominada.
 
@@ -318,61 +344,74 @@ from pena_parser import (  # noqa: E402
 )
 
 
-def _rotulo_de_meses(meses: float) -> str:
-    """Rótulo de fallback quando não há intervalo parseável (usa pena_* em meses).
+def _ponta(meses: float) -> tuple[str, float | None, str | None]:
+    """(rótulo, valor, unidade) de uma ponta da moldura, a partir dos MESES.
 
-    Acima de dois anos a pena é dita em anos, e em "anos e meses" quando não é
-    múltipla de doze: as causas de aumento produzem molduras quebradas (20 anos
-    aumentados de 1/3 são 320 meses), e "320 meses a 60 anos" põe duas unidades
-    diferentes nas duas pontas do mesmo intervalo.
+    A unidade volta como None quando a pena é composta ("26 anos e 8 meses"):
+    nesse caso não há como compactar o intervalo, e cada ponta se escreve por
+    inteiro. Causas de aumento produzem molduras assim (20 anos com um terço
+    são 320 meses).
+
+    Dias: o mês do art. 11 do CP tem 30 dias, então `meses * 30` devolve o
+    número exato — 0,3333 mês são 10 dias, 0,5 são 15. A ida e volta é exata
+    para todo valor de 1 a 29 dias (ver os testes do conferidor).
     """
     if meses <= 0:
-        return "—"
+        return "—", None, None
     if meses < 1:
-        return _rotulo(round(meses * 30), "dias")
+        dias = round(meses * 30)
+        return _rotulo(dias, "dias"), dias, "dias"
     if float(meses).is_integer() and meses % 12 == 0:
-        return _rotulo(int(meses // 12), "anos")
+        anos = int(meses // 12)
+        return _rotulo(anos, "anos"), anos, "anos"
     if float(meses).is_integer() and meses >= 24:
         anos, resto = divmod(int(meses), 12)
-        return f"{_rotulo(anos, 'anos')} e {_rotulo(resto, 'meses')}"
-    return _rotulo(int(meses) if float(meses).is_integer() else round(meses, 1), "meses")
+        return f"{_rotulo(anos, 'anos')} e {_rotulo(resto, 'meses')}", None, None
+    valor = int(meses) if float(meses).is_integer() else round(meses, 1)
+    return _rotulo(valor, "meses"), valor, "meses"
+
+
+def _rotulo_de_meses(meses: float) -> str:
+    return _ponta(meses)[0]
+
+
+def _faixa_de_meses(minimo: float, maximo: float) -> str:
+    """Intervalo por extenso: "2 a 5 anos", "15 dias a 3 meses", "até 6 meses"."""
+    rot_min, v_min, u_min = _ponta(minimo)
+    rot_max, v_max, u_max = _ponta(maximo)
+    if maximo <= 0:
+        return "—"
+    if minimo <= 0:
+        return f"até {rot_max}"
+    if minimo == maximo:
+        return rot_max          # pena fixa: "1 ano", não "1 a 1 ano"
+    if u_min is not None and u_min == u_max:
+        sing, plur = _NOMES_UNIDADE[u_max]
+        return f"{v_min} a {v_max} {sing if v_max == 1 else plur}"
+    return f"{rot_min} a {rot_max}"
 
 
 def derivar_pena(c: dict):
-    """Define rótulos de exibição e valores canônicos em meses.
+    """Rótulos de exibição a partir da moldura em meses.
 
-    Campos adicionados:
+    **`pena_min`/`pena_max` são a autoridade.** Até a v1.2.16 a moldura era
+    extraída do TEXTO do `obs` por expressão regular, e o número só valia como
+    reserva — o que fazia uma frase secundária mudar a pena publicada: o art.
+    32, §1º-A da Lei 9.605 exibia "3 meses a 1 ano" porque o `obs` mencionava a
+    pena antiga. Invertida a ordem, o `obs` voltou a ser o que o nome diz.
+
+    Campos acrescentados:
       pena_min_meses / pena_max_meses  -> float (unidade de cálculo)
       pena_min_rotulo / pena_max_rotulo -> str (exibição com unidade natural)
-      pena_unidade_derivada -> bool (True se veio do parser do texto)
+      pena_faixa_rotulo -> str (o intervalo como se lê)
     """
-    parsed = parse_pena_range(c.get("obs", ""))
-    if parsed is not None:
-        vmin, umin, vmax, umax = parsed
-        c["pena_min_meses"] = _meses(vmin, umin)
-        c["pena_max_meses"] = _meses(vmax, umax)
-        c["pena_min_rotulo"] = _rotulo(vmin, umin)
-        c["pena_max_rotulo"] = _rotulo(vmax, umax)
-        c["pena_unidade_derivada"] = True
-        if umin == umax:
-            sing, plur = _NOMES_UNIDADE[umax]
-            c["pena_faixa_rotulo"] = f"{vmin} a {vmax} {sing if vmax == 1 else plur}"
-        else:
-            c["pena_faixa_rotulo"] = f"{c['pena_min_rotulo']} a {c['pena_max_rotulo']}"
-    else:
-        mn = float(c.get("pena_min") or 0)
-        mx = float(c.get("pena_max") or 0)
-        c["pena_min_meses"] = round(mn, 4)
-        c["pena_max_meses"] = round(mx, 4)
-        c["pena_min_rotulo"] = _rotulo_de_meses(mn)
-        c["pena_max_rotulo"] = _rotulo_de_meses(mx)
-        c["pena_unidade_derivada"] = False
-        if mx <= 0:
-            c["pena_faixa_rotulo"] = "—"
-        elif c["pena_min_rotulo"] == "—":
-            c["pena_faixa_rotulo"] = f"até {c['pena_max_rotulo']}"
-        else:
-            c["pena_faixa_rotulo"] = f"{c['pena_min_rotulo']} a {c['pena_max_rotulo']}"
+    mn = float(c.get("pena_min") or 0)
+    mx = float(c.get("pena_max") or 0)
+    c["pena_min_meses"] = round(mn, 4)
+    c["pena_max_meses"] = round(mx, 4)
+    c["pena_min_rotulo"] = _rotulo_de_meses(mn)
+    c["pena_max_rotulo"] = _rotulo_de_meses(mx)
+    c["pena_faixa_rotulo"] = _faixa_de_meses(mn, mx)
 
 
 def detect_multa(obs: str, tipo_pena: str):
@@ -412,7 +451,8 @@ def main():
     review_rows = []
 
     # Invariantes estruturais: falham sempre, independentemente de --estrito.
-    problemas = validar_ids(crimes) + validar_tipos_penais(crimes)
+    problemas = (validar_ids(crimes) + validar_tipos_penais(crimes)
+                 + validar_moldura(crimes))
     if problemas:
         for p in problemas:
             print(f"ERRO: {p}", file=sys.stderr)

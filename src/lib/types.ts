@@ -48,7 +48,7 @@ export interface Crime {
   /** Faixa completa para exibição (ex.: "15 dias a 6 meses", "1 a 5 anos"). */
   pena_faixa_rotulo: string;
   /** True se a unidade veio do parser do texto (senão, fallback em meses). */
-  pena_unidade_derivada: boolean;
+
   // ── Qualidade e integração com o motor de benefícios ──
   /**
    * O tipo comina pena privativa de liberdade? Só quem tem entra nas
