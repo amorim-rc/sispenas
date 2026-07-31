@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0   # tags: a checagem do changelog compara com as versões já publicadas
 
       - name: Setup Node
         uses: actions/setup-node@v7
