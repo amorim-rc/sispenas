@@ -42,7 +42,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from parsear import parsear  # noqa: E402
-from pena_parser import ler_pena  # noqa: E402
+from pena_parser import ler_pena, ler_penas  # noqa: E402
 
 SNAPSHOTS = RAIZ / "crawler" / "snapshots"
 RELATORIOS = RAIZ / "crawler" / "relatorios"
@@ -170,13 +170,22 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
             })
             continue
 
-        pena = ler_pena(disp.pena_texto or disp.texto)
-        if not pena:
+        molduras = ler_penas(disp.pena_texto or disp.texto)
+        if not molduras:
             continue
+        # Um preceito pode cominar DUAS penas (dolosa e culposa, no mesmo
+        # dispositivo): cada uma é uma linha do catálogo. Comparar toda linha
+        # com a primeira moldura acusaria divergência falsa e, pior, uma
+        # "correção" trocaria a pena de uma pela da outra. Cada linha é
+        # confrontada com a moldura MAIS PRÓXIMA; sobrando moldura sem linha,
+        # é candidata a linha nova — decisão humana.
         for linha in linhas:
+            cmin, cmax = moldura_catalogo(linha)
+            pena = min(molduras,
+                       key=lambda m: abs(m["min_meses"] - cmin) + abs(m["max_meses"] - cmax))
+            pena = dict(pena, multiplas=len(molduras) > 1)
             if dispensado(excecoes, fonte["id"], k, [linha["id"]]):
                 continue
-            cmin, cmax = moldura_catalogo(linha)
             if pena["so_multa"]:
                 if cmax > 0:
                     achados.append({
@@ -198,6 +207,8 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
                     "ids": [linha["id"]],
                     "detalhe": f"lei {lmin:g}–{lmax:g} × catálogo {cmin:g}–{cmax:g} "
                                f"(meses); texto: {(disp.pena_texto or '')[:90]}",
+                    "multiplas": pena.get("multiplas", False),
+                    "teto_apenas": pena["teto_apenas"],
                 })
             elif (pena["tipo"] and linha.get("tipo_pena")
                   and pena["tipo"].lower() not in linha["tipo_pena"].lower()):

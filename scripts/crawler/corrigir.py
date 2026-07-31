@@ -89,6 +89,13 @@ def gerar(fonte_id: str) -> tuple[list[dict], list[dict]]:
         if not a["tipo"].startswith("DIVERGENTE") or len(a.get("ids", [])) != 1:
             humanos.append(a)
             continue
+        # Duas guardas contra afirmação jurídica que a máquina não pode fazer:
+        # preceito com DUAS molduras (dolosa e culposa) pede linha nova, não
+        # sobrescrita; e pena escrita como teto ("reclusão até cinco anos")
+        # implicaria declarar que não há mínimo legal. Ambas vão para a issue.
+        if a.get("multiplas") or a.get("teto_apenas"):
+            humanos.append(a)
+            continue
         faixa = re.search(r"lei\s+([\d.]+)–([\d.]+)", a["detalhe"])
         tipo = re.search(r"lei\s+(reclusão|detenção|prisão simples)", a["detalhe"])
         linha = catalogo.get(a["ids"][0])
