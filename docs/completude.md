@@ -17,10 +17,10 @@ conferência do catálogo) e de
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1333** |
+| Tipos penais catalogados | **1418** |
 | Diplomas com tipo penal vigente | 62 |
 | — com coleta iniciada | 62 |
-| Diplomas revogados/não recepcionados | [10](/docs/acervo-historico) |
+| Diplomas revogados/não recepcionados | [11](/docs/acervo-historico) |
 
 ## Índice por diploma
 
@@ -30,15 +30,15 @@ conferência do catálogo) e de
 
 | Diploma | Tipos coletados | Situação |
 |---|---:|---|
-| Código Penal — Parte Especial | 454 | concluído ❓ |
-| Código Penal Militar — Parte Especial | 352 | 🔶 em coleta |
-| Código Eleitoral | 55 | concluído ❓ |
+| Código Penal — Parte Especial | 512 | concluído ❓ |
+| Código Penal Militar — Parte Especial | 360 | 🔶 em coleta |
+| Código Eleitoral | 60 | concluído ❓ |
+| Crimes contra o meio ambiente | 53 | concluído ❓ |
 | Lei das Contravenções Penais | 51 | concluído ❓ |
-| Crimes contra o meio ambiente | 48 | concluído ❓ |
-| Estatuto da Criança e do Adolescente (crimes) | 27 | concluído ❓ |
-| Abuso de autoridade | 24 | concluído ❓ |
+| Estatuto da Criança e do Adolescente (crimes) | 30 | concluído ❓ |
+| Abuso de autoridade | 25 | concluído ❓ |
 | Crimes contra o sistema financeiro nacional | 23 | concluído ❓ |
-| Crimes de preconceito (racismo) | 17 | concluído ❓ |
+| Crimes de preconceito (racismo) | 18 | concluído ❓ |
 | Estatuto da Pessoa Idosa (crimes) | 16 | concluído ❓ |
 | Lei de Drogas | 16 | concluído ❓ |
 | Crimes contra a ordem tributária, econômica e relações de consumo | 16 | concluído ❓ |
@@ -51,15 +51,15 @@ conferência do catálogo) e de
 | Lei Geral do Esporte (crimes) | 11 | concluído ❓ |
 | Lei das Eleições (crimes) | 11 | concluído ❓ |
 | Estatuto do Desarmamento | 10 | concluído ❓ |
+| Organizações criminosas | 10 | concluído ❓ |
+| Estatuto da Pessoa com Deficiência (crimes) | 8 | concluído ❓ |
 | Atividades nucleares (crimes) | 8 | concluído ❓ |
-| Organizações criminosas | 8 | concluído ❓ |
-| Estatuto da Pessoa com Deficiência (crimes) | 7 | concluído ❓ |
 | Serviços postais (crimes) | 7 | concluído ❓ |
 | Contravenções de preconceito | 7 | concluído ❓ |
 | Genocídio | 7 | concluído ❓ |
 | Lei de Biossegurança (crimes) | 6 | concluído ❓ |
+| Tortura | 6 | concluído ❓ |
 | Transporte de eleitores (crimes) | 5 | concluído ❓ |
-| Tortura | 5 | concluído ❓ |
 | Antiterrorismo | 5 | concluído ❓ |
 | Crimes contra a economia popular | 5 | concluído ❓ |
 | Planejamento familiar (crimes) | 4 | concluído ❓ |

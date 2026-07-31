@@ -591,18 +591,28 @@
     },
     {
       "id": "lei7802",
-      "nome": "Agrotóxicos (crimes)",
+      "nome": "Agrotóxicos (antiga)",
       "norma": "Lei nº 7.802, de 11 de julho de 1989",
-      "situacao": "vigente",
+      "situacao": "revogado",
       "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/l7802.htm",
-      "conferido_em": "2026-07-19",
-      "artigos_penais": "arts. 15–16",
-      "preceitos_medidos": 0,
+      "conferido_em": "2026-07-29",
+      "norma_revogadora": "Lei nº 14.785/2023, art. 65, I",
+      "preceitos_esperados": 0,
+      "tipos_catalogados": 0
+    },
+    {
+      "id": "lei14785",
+      "nome": "Agrotóxicos (crimes)",
+      "norma": "Lei nº 14.785, de 27 de dezembro de 2023",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14785.htm",
+      "conferido_em": "2026-07-29",
+      "artigos_penais": "arts. 56–57",
+      "preceitos_medidos": 2,
       "preceitos_esperados": 2,
-      "ajuste_motivo": "Arts. 15 e 16 cominam reclusão em linha corrida.",
       "tipos_catalogados": 2,
       "rotulos_catalogo": [
-        "Lei 7.802/89"
+        "Lei 14.785/23"
       ]
     },
     {
