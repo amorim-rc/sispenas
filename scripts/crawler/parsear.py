@@ -126,7 +126,7 @@ _PENA = re.compile(r"^Pena\b", re.I)
 _VETADO = re.compile(r"\(VETADO\)", re.I)
 # "(Revogado)" às vezes vem no TEXTO do parágrafo, não no link da anotação —
 # caso do art. 67, § único da Lei 9.605, onde o link diz "Redação dada".
-_REVOGADO_TXT = re.compile(r"\(Revogad[oa]", re.I)
+_REVOGADO_TXT = re.compile(r"\(Revogad[oa]\b", re.I)
 
 
 def _norm_marcador(numero: str, sufixo: str | None) -> str:

@@ -13,7 +13,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Tipos penais', 'Dosimetria'],
-  version: 'v1.2.17',
+  version: 'v1.3.0',
   links: [
     {
       label: 'Ver um crime com pena contada em dias',

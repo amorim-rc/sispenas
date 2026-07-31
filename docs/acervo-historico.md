@@ -31,7 +31,7 @@ Ponto de partida do acervo: os diplomas inteiros que saíram de vigência, regis
 
 ## Casos já identificados para o acervo
 
-Dispositivos que saíram de vigência, foram alterados ou nunca vigoraram, encontrados durante a conferência do catálogo. São a semente do acervo — cada um receberá, na v1.3.0, uma entrada com o texto original e o histórico.
+Dispositivos que saíram de vigência, foram alterados ou nunca vigoraram, encontrados durante a conferência do catálogo. São a semente do acervo — cada um receberá, na v2.2.0, uma entrada com o texto original e o histórico.
 
 | Dispositivo | Categoria | O que houve |
 |---|---|---|
@@ -39,6 +39,21 @@ Dispositivos que saíram de vigência, foram alterados ou nunca vigoraram, encon
 | CP, art. 240 (adultério) | revogado | Revogado pela Lei 11.106/2005. |
 | CP, art. 217 (sedução) | revogado | Revogado pela Lei 12.015/2009. |
 | CP, arts. 219 a 222 (rapto) | revogado | Revogados pela Lei 12.015/2009. |
-| ECA, art. 233 (tortura de criança) | revogado | Revogado pela Lei 9.455/1997 (Lei de Tortura). |
+| ECA, art. 233 (tortura de criança) | revogado | Revogado pela Lei 9.455/1997 (Lei de Tortura). **Constava como vigente no catálogo (id 742) até a v1.3.0.** |
 | LCP, arts. 60 e 61 (mendicância e importunação ofensiva) | revogado | Revogados pelas Leis 11.983/2009 e 13.718/2018. |
+
+### Retirados do catálogo de tipos vigentes na v1.3.0
+
+A conferência automática contra o texto compilado encontrou quatro dispositivos revogados que ainda constavam como direito vigente. Saíram do catálogo e ficam registrados aqui até que o acervo tenha estrutura própria (v2.2.0), com texto original e sucessão normativa.
+
+| Dispositivo | Registro anterior | Revogado por |
+|---|---|---|
+| CP, art. 150, §2º (violação de domicílio — contra funcionário público) | id 878 | Lei 13.869/2019 (Lei de Abuso de Autoridade) |
+| CP, art. 185 (usurpação de nome ou pseudônimo alheio) | id 159 | Lei 10.695/2003 |
+| CP, art. 350 (exercício arbitrário ou abuso de poder) | id 964 | Lei 13.869/2019 (Lei de Abuso de Autoridade) |
+| ECA, art. 233 (tortura de criança ou adolescente) | id 742 | Lei 9.455/1997 (Lei de Tortura) |
+
+:::caution[As URLs desses registros deixaram de responder]
+`id` é endereço público (`/pesquisa/tipos?tipo=N`), e quatro deles saíram do ar com a remoção. Enquanto o acervo não tem página própria, esta tabela é o destino de quem chegar por um link antigo — e a v2.2.0 fará a rota apontar para o registro histórico, em vez de terminar em erro.
+:::
 

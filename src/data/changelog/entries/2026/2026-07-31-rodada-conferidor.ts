@@ -13,7 +13,7 @@ const entrada: ChangelogEntry = {
   ],
   tipo: 'correcao',
   areas: ['Tipos penais'],
-  version: 'v1.2.18',
+  version: 'v1.3.0',
   links: [
     {
       label: 'Ver a violência doméstica (art. 129, §9º)',

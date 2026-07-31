@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0   # tags: a checagem do changelog compara com as versões já publicadas
 
       - name: Setup Node
         uses: actions/setup-node@v7
@@ -45,6 +47,12 @@ jobs:
         run: |
           python3 -m pip install --quiet pytest
           python3 -m pytest scripts/crawler/tests -q
+
+      # Entrada do changelog não pode anunciar versão que nunca foi publicada:
+      # o bump por substituição de texto já falhou em silêncio três vezes, e o
+      # feed ficou prometendo v1.2.16 a v1.2.18 com o projeto em 1.2.15.
+      - name: Conferir coerência do changelog
+        run: node scripts/validar-changelog.mjs
 
       - name: Typecheck
         run: npm run typecheck
