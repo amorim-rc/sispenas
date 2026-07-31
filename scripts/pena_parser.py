@@ -71,19 +71,26 @@ def parse_pena_range(obs: str):
     dias-multa").
     """
     text = re.sub(r"dias?\s*[-\s]?\s*multa", " multa ", obs or "", flags=re.IGNORECASE)
+
+    # Vale o intervalo que aparece PRIMEIRO no texto, não o primeiro padrão que
+    # casar. Testar RANGE_2U antes de RANGE_1U fazia uma pena posterior vencer a
+    # anterior: no art. 254 do CP — "reclusão, de três a seis anos, e multa, no
+    # caso de dolo, ou detenção, de seis meses a dois anos, no caso de culpa" —
+    # a moldura lida era a culposa. O preceito do caput é sempre o primeiro.
+    candidatos = []
     m = RANGE_2U.search(text)
     if m:
-        return (int(m.group(1)), _norm_unidade(m.group(2)),
-                int(m.group(3)), _norm_unidade(m.group(4)))
+        candidatos.append((m.start(), (int(m.group(1)), _norm_unidade(m.group(2)),
+                                       int(m.group(3)), _norm_unidade(m.group(4)))))
     m = RANGE_1U.search(text)
     if m:
         u = _norm_unidade(m.group(3))
-        return int(m.group(1)), u, int(m.group(2)), u
+        candidatos.append((m.start(), (int(m.group(1)), u, int(m.group(2)), u)))
     m = ABBR.search(text)
     if m:
-        return (int(m.group(1)), _ABBR_U[m.group(2).lower()],
-                int(m.group(3)), _ABBR_U[m.group(4).lower()])
-    return None
+        candidatos.append((m.start(), (int(m.group(1)), _ABBR_U[m.group(2).lower()],
+                                       int(m.group(3)), _ABBR_U[m.group(4).lower()])))
+    return min(candidatos)[1] if candidatos else None
 
 
 # ── Leitura do texto do Planalto (usada pelo conferidor) ────────────────────
@@ -145,6 +152,39 @@ def _extenso_para_numero(texto: str) -> str:
     return _SIMPLES.sub(lambda m: str(_EXTENSO[m.group(0).lower()]), texto)
 
 
+_TIPO_RE = re.compile(r"(reclus[ãa]o|deten[çc][ãa]o|pris[ãa]o simples)", re.IGNORECASE)
+
+
+def ler_penas(texto: str) -> list[dict]:
+    """TODAS as molduras de um preceito secundário, na ordem em que aparecem.
+
+    Um mesmo preceito às vezes comina duas penas — o art. 254 do CP traz
+    "reclusão, de três a seis anos… no caso de dolo, ou detenção, de seis meses
+    a dois anos, no caso de culpa". São **dois tipos penais**, não um: no
+    catálogo, cada moldura é uma linha própria, com sua URL. Ler só a primeira
+    (ou pior, a última) apagaria uma delas.
+
+    Devolve lista vazia quando não há pena privativa reconhecível.
+    """
+    if not texto:
+        return []
+    bruto = texto.strip()
+    marcas = list(_TIPO_RE.finditer(bruto))
+    if not marcas:
+        lida = ler_pena(bruto)          # pode ser "só multa"
+        return [lida] if lida else []
+
+    molduras: list[dict] = []
+    for i, m in enumerate(marcas):
+        fim = marcas[i + 1].start() if i + 1 < len(marcas) else len(bruto)
+        trecho = bruto[m.start():fim]
+        lida = ler_pena(trecho)
+        if lida and not lida["so_multa"]:
+            lida["contexto"] = trecho[:120]
+            molduras.append(lida)
+    return molduras
+
+
 def ler_pena(texto: str) -> dict | None:
     """Interpreta uma linha de pena do Planalto.
 
@@ -166,9 +206,16 @@ def ler_pena(texto: str) -> dict | None:
     faixa = parse_pena_range(limpo)
     if faixa:
         vmin, umin, vmax, umax = faixa
-        return {"tipo": tipo, "min_meses": _meses(vmin, umin),
-                "max_meses": _meses(vmax, umax), "so_multa": False,
-                "teto_apenas": False}
+        minimo, maximo = _meses(vmin, umin), _meses(vmax, umax)
+        # Mínimo maior que máximo não é moldura: é leitura errada. Acontece
+        # quando a pena vem embutida no corpo do artigo junto de outros números
+        # — o art. 58 do DL 6.259/44 comina "prisão simples e multa de dez mil
+        # cruzeiros a cinquenta mil cruzeiros", e os valores monetários viram
+        # faixa de tempo. Recusar é melhor que propor pena invertida.
+        if minimo > maximo:
+            return None
+        return {"tipo": tipo, "min_meses": minimo, "max_meses": maximo,
+                "so_multa": False, "teto_apenas": False}
 
     m = _ATE.search(limpo)
     if m:

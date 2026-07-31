@@ -89,15 +89,20 @@ def gerar(fonte_id: str) -> tuple[list[dict], list[dict]]:
         if not a["tipo"].startswith("DIVERGENTE") or len(a.get("ids", [])) != 1:
             humanos.append(a)
             continue
-        faixa = re.search(r"lei\s+([\d.]+)–([\d.]+)", a["detalhe"])
-        tipo = re.search(r"lei\s+(reclusão|detenção|prisão simples)", a["detalhe"])
-        linha = catalogo.get(a["ids"][0])
-        if linha is None or (not faixa and not tipo):
+        # Preceito com DUAS molduras (dolosa e culposa no mesmo texto) pede
+        # linha nova, não sobrescrita — é modelagem, e vai para a issue.
+        # Pena escrita como teto ("reclusão até cinco anos", comum no Código
+        # Eleitoral) é caso simples: registra-se sem mínimo, como o catálogo já
+        # faz nos tipos que só têm teto.
+        if a.get("multiplas"):
             humanos.append(a)
             continue
-        alvo = ((float(faixa.group(1)), float(faixa.group(2))) if faixa
-                else (float(linha.get("pena_min") or 0), float(linha.get("pena_max") or 0)))
-        p = propor(linha, alvo[0], alvo[1], tipo.group(1) if tipo else None, a["detalhe"])
+        linha = catalogo.get(a["ids"][0])
+        lei = a.get("pena_lei")
+        if linha is None or not lei:
+            humanos.append(a)
+            continue
+        p = propor(linha, lei["min"], lei["max"], lei["tipo"], a["detalhe"])
         (propostas if p else humanos).append(p or a)
     return propostas, humanos
 

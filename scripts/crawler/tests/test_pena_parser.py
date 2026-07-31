@@ -66,3 +66,33 @@ def test_compatibilidade_com_o_catalogo():
     assert parse_pena_range("1-5 anos reclusão") == (1, "anos", 5, "anos")
     assert parse_pena_range("2 a 5 anos") == (2, "anos", 5, "anos")
     assert parse_pena_range("sem faixa aqui") is None
+
+
+class TestMultiplasMolduras:
+    """Um preceito com duas penas são DOIS tipos penais, não um.
+
+    O art. 254 do CP comina "reclusão, de três a seis anos… no caso de dolo, ou
+    detenção, de seis meses a dois anos, no caso de culpa". Ler só uma delas
+    apagaria a outra do catálogo; ler a errada trocaria a pena de uma pela da
+    outra — foi o que quase entrou num PR automático.
+    """
+
+    def test_dolosa_e_culposa_no_mesmo_preceito(self):
+        from pena_parser import ler_penas
+        molduras = ler_penas(
+            "Pena - reclusão, de três a seis anos, e multa, no caso de dolo, ou "
+            "detenção, de seis meses a dois anos, no caso de culpa.")
+        assert [(m["tipo"], m["min_meses"], m["max_meses"]) for m in molduras] == [
+            ("reclusão", 36.0, 72.0), ("detenção", 6.0, 24.0)]
+
+    def test_preceito_simples_devolve_uma(self):
+        from pena_parser import ler_penas
+        assert len(ler_penas("Pena – reclusão, de 2 (dois) a 5 (cinco) anos, e multa.")) == 1
+
+    def test_a_moldura_do_caput_e_a_primeira(self):
+        """`ler_pena` (singular) tem de devolver a pena do CAPUT — a que aparece
+        primeiro —, e não a que casar primeiro num padrão mais específico."""
+        lida = ler_pena(
+            "Pena - reclusão, de três a seis anos, e multa, no caso de dolo, ou "
+            "detenção, de seis meses a dois anos, no caso de culpa.")
+        assert (lida["tipo"], lida["min_meses"], lida["max_meses"]) == ("reclusão", 36.0, 72.0)
