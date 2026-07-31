@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "descricao": "Registro de fontes do conferidor (PLANO-CRAWLER F1): cada diploma do catálogo, a URL do texto compilado no Planalto e a sentinela de frescor.",
+    "descricao": "Registro de fontes do conferidor (ver scripts/crawler/README.md): cada diploma do catálogo, a URL do texto compilado no Planalto e a sentinela de frescor.",
     "regras": [
       "rotulos: TODOS os valores do campo `lei` de data/crimes.json que apontam para este diploma — inclusive rótulos pela lei criadora (ex.: 'Lei 14.811/24' são artigos do CP). Todo rótulo distinto do catálogo deve constar de exatamente um diploma.",
       "sentinela: string que DEVE existir na página baixada. Nos diplomas com reforma recente conferida, é a emenda mais nova incorporada (prova de frescor); nos demais, uma string distintiva do texto (prova de conteúdo/não truncamento). Atualizar a cada reforma incorporada ao catálogo.",

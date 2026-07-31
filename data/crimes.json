@@ -10659,7 +10659,7 @@
     "artigo": "Art. 50, I",
     "crime": "Dar início a loteamento ou desmembramento sem autorização ou em desacordo com a lei",
     "pena_min": 12,
-    "pena_max": 60,
+    "pena_max": 48,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10667,7 +10667,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão + multa. Crime urbanístico"
+    "obs": "1 a 4 anos reclusão + multa. Crime urbanístico"
   },
   {
     "id": 737,
@@ -10675,7 +10675,7 @@
     "artigo": "Art. 50, II",
     "crime": "Vender ou prometer vender lote em loteamento não registrado no Registro de Imóveis",
     "pena_min": 12,
-    "pena_max": 60,
+    "pena_max": 48,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10683,7 +10683,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão + multa"
+    "obs": "1 a 4 anos reclusão + multa"
   },
   {
     "id": 738,
@@ -10691,7 +10691,7 @@
     "artigo": "Art. 50, III",
     "crime": "Fazer ou veicular propaganda de loteamento/desmembramento com informações falsas",
     "pena_min": 12,
-    "pena_max": 60,
+    "pena_max": 48,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10699,7 +10699,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão + multa"
+    "obs": "1 a 4 anos reclusão + multa"
   },
   {
     "id": 740,

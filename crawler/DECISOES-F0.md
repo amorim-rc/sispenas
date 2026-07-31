@@ -1,7 +1,10 @@
 # F0 — Decisões do spike (29/07/2026)
 
-Entregável da fase F0 do `PLANO-CRAWLER.md`. Experimentos executados ao vivo
-contra o Planalto em 29/07/2026; evidências citadas abaixo.
+Registro do spike que abriu o conferidor: experimentos executados ao vivo contra
+o Planalto em 29/07/2026, com as evidências citadas abaixo. Fica aqui porque
+explica **por que** o fetcher é como é — inclusive uma conclusão que se provou
+errada e foi corrigida. O funcionamento do pipeline está em
+`scripts/crawler/README.md`.
 
 ## 1. Estratégia de fetch — **HTTP simples basta** (corrigido na F1)
 
