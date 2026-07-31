@@ -144,6 +144,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      actions: read          # baixar o artifact com os snapshots desta rodada
     steps:
       # Sem o app, o PR sairia como github-actions[bot] — que não atravessa o
       # ruleset da main e, pior, deixaria o mantenedor sem poder aprovar o
