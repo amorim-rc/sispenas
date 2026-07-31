@@ -343,7 +343,7 @@ modelo menor com este arquivo como única briefing.
 | **F3** ✅ 30/07/2026 | `pena_parser.py` + `conferir.py` + `excecoes.json` + relatório | **Concluída** — refactor byte-idêntico; 41 testes; primeira rodada completa: 257 → 191 achados depois de corrigidos 4 defeitos do próprio differ | — | — |
 | **F4** ✅ 30/07/2026 | `vigencia.py` + `revogacao.py` + CLI de consulta | **Concluída** — 15.190/2025 (vacatio 180d → 04/02/2026), LC 224/2025 (efeitos diferidos) e 15.410/2026 (imediata) lidas corretamente; revogação total por banner, com o caso 7.802 travado em teste. 54 testes |
 | **F5** ✅ 30/07/2026 | `conferidor.yml` + label `conferidor` + roadmap reorganizado | **Concluída** — cron semanal (seg 05:00 BRT), issue por rodada, artifact com relatório e snapshots (30 dias) |
-| **F6** | PR automático p/ achados mecânicos (5.10) — só UPDATE, nunca ADD/REMOVE | PR de exemplo gerado com CI verde e corpo citando o compilado; limite de 1 PR aberto; merge segue humano | 1–2 sessões | Parcial |
+| **F6** 🟡 31/07/2026 | Geradores `corrigir.py` (UPDATE) e `criar.py` (ADD) | **Geradores prontos e aplicados** — PRs #17 (95 molduras) e #18 (95 tipos novos, 4 revogados removidos, 23 tentativas). Achados caíram de 191 para 10. **Falta**: ligar a abertura de PR ao workflow semanal (hoje o `conferidor.yml` só abre issue; os PRs foram gerados à mão). | — | — |
 | **F7** | Watcher do DOU sem IA (5.11) + **excluir este arquivo** | Rodada de teste lista as normas penais de uma semana conhecida (ex.: a semana da Lei 15.410/26); seção integrada à issue semanal | 1 sessão | Sim |
 
 Total: ~9–12 sessões curtas. Ordem estrita F0→F5; F6 liga só após ciclos de
@@ -389,7 +389,12 @@ relatório com precisão comprovada; F7 pode rodar em paralelo à espera da F6.
 - [x] F4 — vigência + revogação total — **concluída em 30/07/2026**
       (`python scripts/crawler/vigencia.py "Lei nº 15.190" 2025`)
 - [x] F5 — automação CI (semanal, seg 05:00 BRT) + roadmap — **concluída em 30/07/2026**
-- [ ] F6 — PR automático de achados mecânicos (após precisão comprovada)
+- [x] F6 — geradores de correção e de linha nova — **aplicados em 31/07/2026**
+      (`corrigir.py --fonte X --aplicar`, `criar.py --fonte X --aplicar`)
+- [ ] F6b — abrir o PR **pelo workflow**, com o token do app (autor = bot).
+      Hoje o `conferidor.yml` só abre issue; os dois PRs saíram da máquina do
+      mantenedor e, por isso, com a autoria dele — o que impede aprovar o
+      próprio PR pelo fluxo normal.
 - [ ] F7 — watcher do DOU sem IA + exclusão deste arquivo
 
 **Achados da F2 a verificar na F3** (candidatos a erro de catálogo, encontrados
@@ -405,6 +410,10 @@ correção):
 - **Pena embutida na frase**: no CPM art. 290, § 5º, a pena está no corpo do
   parágrafo ("a pena será de reclusão de 5 a 15 anos"), sem linha "Pena –".
   O extrator da F3 tem de procurar no `texto` quando `pena_texto` for nulo.
+
+**Estado em 31/07/2026:** catálogo em **1.449 tipos** (v1.3.0); o conferidor
+reporta **10 achados**, contra 191 na primeira rodada. A próxima rodada
+automática é **segunda-feira, 05:00 de Brasília**, e abrirá issue com esses 10.
 
 **Última atualização:** 2026-07-30 — **F0, F1 e F2 CONCLUÍDAS.** F0 caracterizou o
 HTML (anotações são links com href para lei+âncora; artigo revogado tem o corpo
