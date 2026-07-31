@@ -112,8 +112,12 @@ def ler_anotacao(texto: str) -> Anotacao | None:
 
 
 # ── Classificação dos parágrafos ────────────────────────────────────────────
-# "Art. 121.", "Art 121 -", "Art. 121-A.", "Art. 359-M."
-_ARTIGO = re.compile(r"^Art\.?\s*(\d+)(?:\s*[-–—]\s*([A-Z]))?\s*(?:[.\-–—º°]|\s)", re.I)
+# "Art. 121.", "Art 121 -", "Art. 121-A.", "Art. 359-M." — e também "Art . 37",
+# com espaço antes do ponto: a Lei 6.766 escreve assim do art. 37 em diante, e
+# sem aceitar essa forma o parser perdia 25 artigos, grudando as penas deles no
+# último dispositivo reconhecido (foi assim que o art. 36-A, que trata de
+# administração de imóveis, ganhou "pena" de detenção).
+_ARTIGO = re.compile(r"^Art\s*\.?\s*(\d+)(?:\s*[-–—]\s*([A-Z]))?\s*(?:[.\-–—º°]|\s)", re.I)
 # "§ 1º", "§ 1o", "§ 2°", "§ 2º-D", "Parágrafo único".
 # O sufixo só vale se a letra maiúscula estiver isolada: em "§ 5º - Na hipótese"
 # o travessão introduz o texto, e capturar o "N" inventaria um "§ 5º-N".
@@ -156,6 +160,14 @@ class Dispositivo:
     anotacao: Anotacao | None = None
     epigrafe: str | None = None
     vigencia_pendente: bool = False
+    # Texto CITADO: o artigo só altera outro diploma, e o que vem embaixo dele é
+    # a redação transcrita da lei alterada (ver `_marcar_citacoes`).
+    citacao: bool = False
+    # Quantos parágrafos separam o texto do dispositivo da linha "Pena". Um
+    # preceito e sua sanção são vizinhos (1, ou 2 com uma anotação no meio);
+    # distância grande é sinal de que a pena pertence a OUTRO dispositivo e o
+    # cabeçalho dele não foi reconhecido.
+    pena_distancia: int | None = None
     incisos: list[dict] = field(default_factory=list)
     # Versões coletadas antes de decidir qual vale (ver `_consolidar`).
     _versoes_situacao: list[tuple[int, str]] = field(default_factory=list)
@@ -184,9 +196,9 @@ def _consolidar(d: Dispositivo) -> None:
 
     def vigente(versoes):
         if not versoes:
-            return None, None
+            return None, None, None
         melhor = max(versoes, key=lambda v: (datavel(v[2]), v[0]))
-        return melhor[1], melhor[2]
+        return melhor[1], melhor[2], melhor[0]
 
     # A situação também é posicional: vale o ÚLTIMO marcador do documento.
     # Revogação vem DEPOIS do texto antigo ("Art. 350 ... (Revogado pela...)");
@@ -197,16 +209,82 @@ def _consolidar(d: Dispositivo) -> None:
     if d._versoes_situacao:
         d.situacao = max(d._versoes_situacao, key=lambda v: v[0])[1]
 
-    texto, anot_texto = vigente(d._versoes_texto)
-    pena, anot_pena = vigente(d._versoes_pena)
+    texto, anot_texto, ordem_texto = vigente(d._versoes_texto)
+    pena, anot_pena, ordem_pena = vigente(d._versoes_pena)
     if texto:
         d.texto = texto
     if pena:
         d.pena_texto = pena
+    if ordem_pena is not None and ordem_texto is not None:
+        d.pena_distancia = ordem_pena - ordem_texto
     # Preferir a anotação que descreve uma alteração à mera remissão.
     candidatas = [a for a in (anot_pena, anot_texto, d.anotacao) if a]
     d.anotacao = next((a for a in candidatas if a.acao in ACOES_DE_VERSAO),
                       candidatas[0] if candidatas else None)
+
+
+# "O art. 129 do Decreto-Lei nº 2.848 … passa a vigorar com as seguintes
+# alterações:" — o artigo não cria nada: transcreve a redação que dá a OUTRA lei.
+_ALTERA = re.compile(
+    r"passa(?:m|r[áa])?\s+a\s+vigorar"
+    r"|passa(?:m|r[áa])?\s+a\s+ter\s+a\s+seguinte\s+reda[çc]"
+    r"|com\s+as\s+seguintes\s+altera[çc]"
+    r"|fica(?:m)?\s+acresc(?:entad|id)", re.IGNORECASE)
+
+
+def _marcar_citacoes(dispositivos: list[Dispositivo]) -> None:
+    """Marca como citação tudo que pende de um artigo meramente alterador.
+
+    Lição cara: a primeira leva de linhas novas (F6) criou nove "crimes" que não
+    existem — a Lei de Abuso "contém" o art. 10 da Lei 9.296, a Lei 8.137
+    "contém" o art. 172 do Código Penal, a Maria da Penha "contém" o art. 129,
+    § 9º — porque o texto compilado transcreve, embaixo do artigo alterador, a
+    redação dada à lei alterada. Pior: a transcrição congela a redação da época,
+    então o "crime" duplicado nascia com a pena antiga.
+
+    Duas formas de citação, e as duas apareceram naquela leva:
+
+    1. **Pendurada no artigo alterador** — a redação transcrita vira "§" ou
+       "parágrafo único" dele (Maria da Penha, art. 44, § 9º = art. 129, § 9º do
+       CP). Reconhecida pelo texto do caput.
+    2. **Artigo transcrito por inteiro** — o cabeçalho citado é lido como artigo
+       novo, e o número denuncia: na Lei 12.850 vem "Art. 24, Art. 288, Art. 25";
+       na Lei de Migração, "Art. 115, Art. 232-A, Art. 116". Um número que
+       DESTOA da sequência e é seguido pela continuação dela é transcrição.
+
+    O dispositivo citado não some do parse (o relatório continua podendo
+    mostrá-lo); fica marcado, e quem cria linha nova o ignora.
+    """
+    alteradores = {d.rotulo_artigo for d in dispositivos
+                   if d.marcador == "caput" and _ALTERA.search(d.texto or "")}
+
+    caputs = [d for d in dispositivos if d.marcador == "caput"]
+    for i, d in enumerate(caputs[1:-1], start=1):
+        anterior, seguinte = caputs[i - 1], caputs[i + 1]
+        try:
+            n, ant, seg = (int(x.artigo) for x in (d, anterior, seguinte))
+        except (TypeError, ValueError):
+            continue
+        if ant < seg < n:
+            alteradores.add(d.rotulo_artigo)
+
+    for d in dispositivos:
+        if d.rotulo_artigo in alteradores:
+            d.citacao = True
+
+
+def _revogado_por_link(p: Paragrafo) -> bool:
+    """A revogação veio como LINK no próprio parágrafo do dispositivo?
+
+    Nem todo artigo revogado perde o corpo. As contravenções revogadas em lugar
+    (LCP, arts. 27, 39, 65 e 69) mantêm texto e pena, com "(Revogado pela Lei
+    nº …)" no cabeçalho e, às vezes, também na linha da pena — e a regra do
+    corpo curto não as via. Passaram a "crimes vigentes" no catálogo por isso.
+
+    O link é o que dá segurança: uma revogação anotada NESTE parágrafo é sobre
+    ESTE dispositivo, enquanto a mesma frase solta no texto pode ser remissão.
+    """
+    return any((a := ler_anotacao(x)) and a.acao == "revogado" for x in p.anotacoes)
 
 
 def parsear(documento: str) -> list[Dispositivo]:
@@ -247,9 +325,10 @@ def parsear(documento: str) -> list[Dispositivo]:
             epigrafe_pendente = None
             corpo = texto[m.end():].strip()
             corpo_util = re.sub(r"\([^)]*\)", "", corpo).strip()
-            revogado = ((_REVOGADO_TXT.search(texto)
-                         or (anotacao and anotacao.acao == "revogado"))
-                        and len(corpo_util) < 80)
+            revogado = (_revogado_por_link(p)
+                        or ((_REVOGADO_TXT.search(texto)
+                             or (anotacao and anotacao.acao == "revogado"))
+                            and len(corpo_util) < 80))
             if revogado:
                 # Artigo revogado perde o corpo: sobra o cabeçalho + a anotação.
                 d._versoes_situacao.append((ordem, "revogado"))
@@ -278,9 +357,10 @@ def parsear(documento: str) -> list[Dispositivo]:
             d = obter(artigo, sufixo, marcador)
             corpo = texto[(mp.end() if mp else _PAR_UNICO.match(texto).end()):].strip(" .-–—")
             corpo_util = re.sub(r"\([^)]*\)", "", corpo).strip()
-            revogado = ((_REVOGADO_TXT.search(texto)
-                         or (anotacao and anotacao.acao == "revogado"))
-                        and len(corpo_util) < 80)
+            revogado = (_revogado_por_link(p)
+                        or ((_REVOGADO_TXT.search(texto)
+                             or (anotacao and anotacao.acao == "revogado"))
+                            and len(corpo_util) < 80))
             if revogado:
                 d._versoes_situacao.append((ordem, "revogado"))
                 d.anotacao = anotacao
@@ -314,6 +394,7 @@ def parsear(documento: str) -> list[Dispositivo]:
 
     for d in dispositivos:
         _consolidar(d)
+    _marcar_citacoes(dispositivos)
     return dispositivos
 
 
@@ -330,5 +411,6 @@ def como_dicionarios(dispositivos: list[Dispositivo]) -> list[dict]:
                      {"acao": d.anotacao.acao, "norma": d.anotacao.norma,
                       "ano": d.anotacao.ano}),
         "vigencia_pendente": d.vigencia_pendente,
+        "citacao": d.citacao,
         "incisos": d.incisos,
     } for d in dispositivos]

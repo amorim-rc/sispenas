@@ -125,7 +125,7 @@ def montar(achado: dict, fonte: dict, catalogo: list[dict], novo_id: int) -> dic
                                 caput, condicao),
         "pena_min": inteiro(pena["min"]),
         "pena_max": inteiro(pena["max"]),
-        "tipo_pena": TIPOS.get((pena["tipo"] or "").lower(), "Reclusão"),
+        "tipo_pena": TIPOS[(pena["tipo"] or "").lower()],
         "acao": herda("acao", "Pública Incondicionada"),
         "hediondo": "Não" if culposo else herda("hediondo", "Não"),
         "elemento": "Culposo" if culposo else "Doloso",
@@ -159,6 +159,13 @@ def gerar(fonte_id: str, proximo_id: int) -> tuple[list[dict], int]:
             continue
         if not a.get("pena_lei"):
             continue                      # sem moldura legível não vira linha
+        # Espécie de pena fora das três do catálogo NÃO vira linha. O default
+        # silencioso ("Reclusão") transformou a suspensão administrativa da
+        # programação de emissora (ECA, art. 254) em "reclusão de até dois
+        # dias" — um crime que não existe. Sem espécie reconhecida, o achado
+        # segue para a triagem humana.
+        if (a["pena_lei"].get("tipo") or "").lower() not in TIPOS:
+            continue
         propostas.append(montar(a, fonte, catalogo, proximo_id))
         proximo_id += 1
     return propostas, proximo_id

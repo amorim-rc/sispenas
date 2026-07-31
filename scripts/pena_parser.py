@@ -153,6 +153,11 @@ def _extenso_para_numero(texto: str) -> str:
 
 
 _TIPO_RE = re.compile(r"(reclus[ãa]o|deten[çc][ãa]o|pris[ãa]o simples)", re.IGNORECASE)
+# "reclusão OU detenção, de um a três anos" (CP, art. 306, § único) é UMA
+# moldura com espécie alternativa, não duas molduras. O que separa as duas
+# palavras é só um conectivo; quando há duas penas de verdade, entre elas está
+# a moldura da primeira ("reclusão, de três a seis anos, … ou detenção, …").
+_CONECTIVO = re.compile(r"[\s,;]*(?:ou|e)?[\s,;]*")
 
 
 def ler_penas(texto: str) -> list[dict]:
@@ -175,13 +180,25 @@ def ler_penas(texto: str) -> list[dict]:
         return [lida] if lida else []
 
     molduras: list[dict] = []
-    for i, m in enumerate(marcas):
-        fim = marcas[i + 1].start() if i + 1 < len(marcas) else len(bruto)
-        trecho = bruto[m.start():fim]
+    i = 0
+    while i < len(marcas):
+        j = i
+        while (j + 1 < len(marcas)
+               and _CONECTIVO.fullmatch(bruto[marcas[j].end():marcas[j + 1].start()])):
+            j += 1                      # espécie alternativa: mesma moldura
+        fim = marcas[j + 1].start() if j + 1 < len(marcas) else len(bruto)
+        trecho = bruto[marcas[i].start():fim]
         lida = ler_pena(trecho)
         if lida and not lida["so_multa"]:
+            tipos = [m.group(0).lower() for m in marcas[i:j + 1]]
+            lida["tipos"] = tipos
+            # Com espécie alternativa, `tipo` fica com as duas: escolher uma é
+            # decisão de modelagem, e os geradores recusam o que não é uma das
+            # três espécies do catálogo.
+            lida["tipo"] = " ou ".join(tipos)
             lida["contexto"] = trecho[:120]
             molduras.append(lida)
+        i = j + 1
     return molduras
 
 
@@ -195,6 +212,16 @@ def ler_pena(texto: str) -> dict | None:
     if not texto:
         return None
     bruto = texto.strip()
+    # A MULTA vem primeiro: preceito que começa por "Pena - multa" comina multa,
+    # e o que vier depois do ponto e vírgula é consequência, não espécie de pena.
+    # O art. 254 do ECA ("Pena - multa …; duplicada em caso de reincidência a
+    # autoridade judiciária poderá determinar a SUSPENSÃO da programação da
+    # emissora por até dois dias") era lido como pena de "suspensão" de dois
+    # dias, e virou um "crime" no catálogo — sendo infração administrativa.
+    # Procurar a espécie antes do teste de multa é o que permitia isso.
+    if _SO_MULTA.match(bruto) and not _TIPO_RE.search(bruto):
+        return {"tipo": None, "min_meses": 0.0, "max_meses": 0.0,
+                "so_multa": True, "teto_apenas": False}
     tipo = next((t for t in _TIPOS if t in bruto.lower()), None)
     if tipo is None:
         # Sem tipo de pena privativa: ou é só multa, ou não é preceito de pena.
@@ -214,14 +241,14 @@ def ler_pena(texto: str) -> dict | None:
         # faixa de tempo. Recusar é melhor que propor pena invertida.
         if minimo > maximo:
             return None
-        return {"tipo": tipo, "min_meses": minimo, "max_meses": maximo,
-                "so_multa": False, "teto_apenas": False}
+        return {"tipo": tipo, "tipos": [tipo], "min_meses": minimo,
+                "max_meses": maximo, "so_multa": False, "teto_apenas": False}
 
     m = _ATE.search(limpo)
     if m:
         valor = m.group(1)
         valor = int(valor) if valor.isdigit() else _EXTENSO[valor.lower()]
-        return {"tipo": tipo, "min_meses": 0.0,
+        return {"tipo": tipo, "tipos": [tipo], "min_meses": 0.0,
                 "max_meses": _meses(valor, _norm_unidade(m.group(2))),
                 "so_multa": False, "teto_apenas": True}
     return None

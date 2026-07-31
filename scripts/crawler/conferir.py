@@ -161,6 +161,19 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
         disp = da_lei.get(k)
         if disp is None:
             continue  # dispositivo não localizado: tratado no bloco 3
+        if disp.citacao:
+            # A linha do catálogo aponta para artigo que só ALTERA outra lei: o
+            # que está ali é a redação transcrita da lei alterada, e o crime
+            # verdadeiro mora no diploma de destino (que também é conferido).
+            # Comparar a moldura contra essa transcrição é comparar com a
+            # redação congelada na data da alteração.
+            achados.append({
+                "tipo": "TEXTO-CITADO", "gravidade": 3, "chave": k,
+                "ids": [x["id"] for x in linhas],
+                "detalhe": f"o artigo apenas altera outro diploma — "
+                           f"{(disp.texto or '')[:100]}",
+            })
+            continue
         if disp.situacao in ("revogado", "vetado"):
             achados.append({
                 "tipo": "REVOGADO", "gravidade": 3, "chave": k,
@@ -241,8 +254,11 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
                                  "max": pena["max_meses"],
                                  "teto": pena["teto_apenas"]},
                 })
+            # Espécie alternativa ("reclusão ou detenção") casa com qualquer uma
+            # das duas: o catálogo escolheu uma, e a lei autoriza as duas.
             elif (pena["tipo"] and linha.get("tipo_pena")
-                  and pena["tipo"].lower() not in linha["tipo_pena"].lower()):
+                  and not any(t in linha["tipo_pena"].lower()
+                              for t in pena.get("tipos") or [pena["tipo"].lower()])):
                 achados.append({
                     "tipo": "DIVERGENTE-tipo", "gravidade": 2, "chave": k,
                     "ids": [linha["id"]],
@@ -258,7 +274,11 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
     for d in dispositivos:
         if d.chave in do_catalogo or dispensado(excecoes, fonte["id"], d.chave):
             continue
-        if d.situacao != "vigente":
+        if d.situacao != "vigente" or d.citacao:
+            # Citação: o artigo apenas altera outro diploma, e o texto embaixo
+            # dele é a redação transcrita da lei alterada — que o conferidor já
+            # vigia na página dela, com a redação de hoje. Acusar AUSENTE aqui
+            # produzia crime duplicado e com a pena da época da alteração.
             continue
         pena = ler_pena(d.pena_texto or "")
         if not pena or pena["so_multa"]:

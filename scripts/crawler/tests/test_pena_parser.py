@@ -96,3 +96,37 @@ class TestMultiplasMolduras:
             "Pena - reclusão, de três a seis anos, e multa, no caso de dolo, ou "
             "detenção, de seis meses a dois anos, no caso de culpa.")
         assert (lida["tipo"], lida["min_meses"], lida["max_meses"]) == ("reclusão", 36.0, 72.0)
+
+class TestEspecieDePena:
+    """Três classes de leitura que criaram "crime" onde não havia (v1.4.0)."""
+
+    def test_pena_que_comeca_por_multa_e_so_multa(self):
+        """O art. 254 do ECA é infração ADMINISTRATIVA: "Pena - multa …;
+        duplicada em caso de reincidência a autoridade judiciária poderá
+        determinar a suspensão da programação da emissora por até dois dias".
+        Procurar a espécie antes de testar a multa lia "suspensão de dois dias"
+        como pena privativa — e o catálogo ganhou "reclusão de até 2 dias"."""
+        lida = ler_pena(
+            "Pena - multa de vinte a cem salários de referência; duplicada em caso "
+            "de reincidência a autoridade judiciária poderá determinar a suspensão "
+            "da programação da emissora por até dois dias.")
+        assert lida["so_multa"] is True
+        assert lida["tipo"] is None
+
+    def test_multa_seguida_de_pena_privativa_continua_sendo_pena(self):
+        """A ordem inversa existe e não pode ser confundida com só-multa."""
+        lida = ler_pena("Pena - multa e detenção, de um a três anos.")
+        assert lida["so_multa"] is False
+        assert lida["tipo"] == "detenção"
+
+    def test_especie_alternativa_e_uma_moldura_so(self):
+        """O art. 306, § único, do CP comina "reclusão OU detenção, de um a três
+        anos": uma moldura com duas espécies, não duas molduras. Separá-las fazia
+        o differ acusar divergência de espécie e propor trocar reclusão por
+        detenção num registro que estava certo."""
+        from pena_parser import ler_penas
+        molduras = ler_penas("Pena - reclusão ou detenção, de um a três anos, e multa.")
+        assert len(molduras) == 1
+        assert molduras[0]["tipos"] == ["reclusão", "detenção"]
+        assert (molduras[0]["min_meses"], molduras[0]["max_meses"]) == (12.0, 36.0)
+

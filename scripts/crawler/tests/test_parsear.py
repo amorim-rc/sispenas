@@ -135,3 +135,31 @@ def test_lcp32_pena_de_multa(carregar):
     pena = d["caput"]["pena_texto"]
     assert "multa" in pena and "réis" in pena
     assert "detenção" not in pena and "reclusão" not in pena
+
+
+# ── Texto CITADO de outro diploma (F6b) ─────────────────────────────────────
+# Os três testes abaixo travam o defeito que pôs 29 registros falsos no
+# catálogo na v1.3.0. O compilado transcreve, embaixo do artigo alterador, a
+# redação dada à lei alterada — e essa transcrição parecia dispositivo próprio.
+def test_artigo_que_so_altera_outra_lei_e_citacao(carregar):
+    d = {x.chave: x for x in parsear(carregar("citacao-12850"))}
+    assert d["Art. 24|caput"].citacao          # "O art. 288 do CP passa a vigorar…"
+    assert d["Art. 25|caput"].citacao
+
+
+def test_artigo_transcrito_fora_de_sequencia_e_citacao(carregar):
+    """Na Lei 12.850 os artigos vêm 24, 288, 25: o 288 é o artigo do Código
+    Penal transcrito. Número que destoa e é seguido pela continuação da
+    sequência é transcrição, não artigo do diploma."""
+    d = {x.chave: x for x in parsear(carregar("citacao-12850"))}
+    assert d["Art. 288|caput"].citacao
+    assert d["Art. 288|caput"].pena_texto      # tem pena — e é justamente o risco
+    assert not d["Art. 26|caput"].citacao      # a sequência própria continua limpa
+
+
+def test_contravencao_revogada_mantem_o_texto(carregar):
+    """A LCP não apaga o corpo do artigo revogado: põe "(Revogado pela Lei nº
+    14.132, de 2021)" ao lado. A regra do corpo curto não via isso, e quatro
+    contravenções revogadas entraram no catálogo como vigentes."""
+    d = {x.chave: x for x in parsear(carregar("lcp-art65-revogado"))}
+    assert d["Art. 65|caput"].situacao == "revogado"

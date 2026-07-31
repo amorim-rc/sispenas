@@ -60,11 +60,17 @@ def reescrever_obs(obs: str, faixa: str, tipo: str) -> str:
 def propor(linha: dict, alvo_min: float, alvo_max: float,
            tipo_lei: str | None, evidencia: str) -> dict | None:
     """Linha corrigida, ou None quando não há mudança a fazer."""
+    # Espécie fora das três do catálogo (o "impedimento" do CPM, a "suspensão"
+    # que aparece em sanção administrativa) não é correção mecânica: manter a
+    # espécie antiga e reescrever o `obs` seria maquiar a linha sem resolver
+    # nada — e a divergência real continua na issue, para exame.
+    if tipo_lei and tipo_lei.lower() not in TIPOS:
+        return None
     nova = dict(linha)
     nova["pena_min"] = inteiro(alvo_min)
     nova["pena_max"] = inteiro(alvo_max)
     if tipo_lei:
-        nova["tipo_pena"] = TIPOS.get(tipo_lei.lower(), linha["tipo_pena"])
+        nova["tipo_pena"] = TIPOS[tipo_lei.lower()]
     nova["obs"] = reescrever_obs(linha.get("obs", ""),
                                  _faixa_de_meses(alvo_min, alvo_max),
                                  nova["tipo_pena"])
