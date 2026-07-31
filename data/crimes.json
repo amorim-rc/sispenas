@@ -614,14 +614,14 @@
     "crime": "Lesão corporal em contexto de violência doméstica",
     "pena_min": 24,
     "pena_max": 60,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2 a 5 anos detenção. Contra ascendente/descendente/irmão/cônjuge/companheiro, ou com quem conviva/tenha convivido. Ação pública incondicionada (Súmula 542 STJ)"
+    "obs": "2 a 5 anos reclusão. Contra ascendente/descendente/irmão/cônjuge/companheiro, ou com quem conviva/tenha convivido. Ação pública incondicionada (Súmula 542 STJ)"
   },
   {
     "id": 46,
@@ -2502,14 +2502,14 @@
     "crime": "Invasão de estabelecimento industrial/comercial/agrícola e sabotagem",
     "pena_min": 12,
     "pena_max": 36,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "1 a 3 anos detenção + multa"
+    "obs": "1 a 3 anos reclusão + multa"
   },
   {
     "id": 166,
@@ -3094,14 +3094,14 @@
     "crime": "Subtração, ocultação ou inutilização de material de salvamento",
     "pena_min": 24,
     "pena_max": 60,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 a 5 anos detenção + multa"
+    "obs": "2 a 5 anos reclusão + multa"
   },
   {
     "id": 203,
@@ -8004,14 +8004,14 @@
     "crime": "Patrocinar interesse ilegítimo de particular em processo de licitação",
     "pena_min": 6,
     "pena_max": 36,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos detenção + multa"
+    "obs": "6 meses a 3 anos reclusão + multa"
   },
   {
     "id": 511,
@@ -8036,14 +8036,14 @@
     "crime": "Obstar/impedir/dificultar a inscrição ou participação de licitante",
     "pena_min": 6,
     "pena_max": 36,
-    "tipo_pena": "Reclusão",
+    "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos reclusão + multa"
+    "obs": "6 meses a 3 anos detenção + multa"
   },
   {
     "id": 513,
@@ -8052,14 +8052,14 @@
     "crime": "Afastar licitante por meio de violência/grave ameaça/fraude/oferecimento de vantagem",
     "pena_min": 24,
     "pena_max": 36,
-    "tipo_pena": "Reclusão",
+    "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "2 a 3 anos reclusão + multa, além da pena correspondente à violência"
+    "obs": "2 a 3 anos detenção + multa, além da pena correspondente à violência"
   },
   {
     "id": 514,
@@ -8852,14 +8852,14 @@
     "crime": "Exigir do locatário quantia além do aluguel e encargos permitidos",
     "pena_min": 0.1667,
     "pena_max": 6,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Prisão simples",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "5 dias a 6 meses detenção + multa"
+    "obs": "5 dias a 6 meses prisão simples + multa"
   },
   {
     "id": 566,
@@ -9204,14 +9204,14 @@
     "crime": "Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial",
     "pena_min": 6,
     "pena_max": 24,
-    "tipo_pena": "Reclusão",
+    "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos reclusão + multa. Quando não se tratar de tecidos regeneráveis entre cônjuges ou parentes consanguíneos"
+    "obs": "6 meses a 2 anos detenção + multa. Quando não se tratar de tecidos regeneráveis entre cônjuges ou parentes consanguíneos"
   },
   {
     "id": 590,
@@ -10628,14 +10628,14 @@
     "crime": "Operação de instituição financeira sem autorização do Banco Central",
     "pena_min": 12,
     "pena_max": 24,
-    "tipo_pena": "Reclusão",
+    "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1 a 2 anos reclusão + multa. Nota: a Lei 7.492/86 (Art. 16) também pune conduta similar com 1-4 anos reclusão"
+    "obs": "1 a 2 anos detenção + multa. Nota: a Lei 7.492/86 (Art. 16) também pune conduta similar com 1-4 anos reclusão"
   },
   {
     "id": 728,
@@ -12770,16 +12770,16 @@
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 291",
     "crime": "Efetuar registro/alistamento/atualização de eleitor com infração das disposições do Código Eleitoral",
-    "pena_min": 1,
-    "pena_max": 6,
-    "tipo_pena": "Detenção",
+    "pena_min": 0,
+    "pena_max": 60,
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção + multa. Se doloso. Se culposo: 15d-1m"
+    "obs": "até 5 anos reclusão + multa. Se doloso. Se culposo: 15d-1m"
   },
   {
     "id": 1012,
@@ -12802,8 +12802,8 @@
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 297",
     "crime": "Impedir/embaraçar exercício do sufrágio (impedir ou embaraçar o exercício do voto)",
-    "pena_min": 6,
-    "pena_max": 24,
+    "pena_min": 0,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -12811,7 +12811,7 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "6 meses a 2 anos detenção + multa"
+    "obs": "até 6 meses detenção + multa"
   },
   {
     "id": 1018,
@@ -12820,14 +12820,14 @@
     "crime": "Promover concentração de eleitores, sob qualquer forma, no dia da eleição, com o objetivo de exercer influência sobre o eleitorado",
     "pena_min": 48,
     "pena_max": 72,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 6 anos detenção + multa"
+    "obs": "4 a 6 anos reclusão + multa"
   },
   {
     "id": 1019,
@@ -12850,8 +12850,8 @@
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 305",
     "crime": "Interferir o juiz eleitoral na realização da eleição, a pretexto de manter a ordem, para favorecer candidato/partido",
-    "pena_min": 6,
-    "pena_max": 24,
+    "pena_min": 0,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -12859,7 +12859,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos detenção + multa"
+    "obs": "até 6 meses detenção + multa"
   },
   {
     "id": 1021,
@@ -12882,23 +12882,7 @@
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 310",
     "crime": "Violar ou tentar violar o sigilo do voto",
-    "pena_min": 12,
-    "pena_max": 48,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "1-4 anos reclusão + multa"
-  },
-  {
-    "id": 1023,
-    "lei": "CE (Lei 4.737/65)",
-    "artigo": "Art. 312",
-    "crime": "Violar/perturbar/tentar violar ou perturbar os trabalhos da junta eleitoral",
-    "pena_min": 1,
+    "pena_min": 0,
     "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
@@ -12907,7 +12891,23 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção + multa"
+    "obs": "até 6 meses detenção + multa"
+  },
+  {
+    "id": 1023,
+    "lei": "CE (Lei 4.737/65)",
+    "artigo": "Art. 312",
+    "crime": "Violar/perturbar/tentar violar ou perturbar os trabalhos da junta eleitoral",
+    "pena_min": 0,
+    "pena_max": 24,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "até 2 anos detenção + multa"
   },
   {
     "id": 1024,
@@ -12930,16 +12930,16 @@
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 315",
     "crime": "Divulgar na propaganda eleitoral fatos inverídicos em relação a partidos ou candidatos, capazes de exercer influência sobre o eleitorado",
-    "pena_min": 2,
-    "pena_max": 12,
-    "tipo_pena": "Detenção",
+    "pena_min": 0,
+    "pena_max": 60,
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 meses a 1 ano detenção + multa"
+    "obs": "até 5 anos reclusão + multa"
   },
   {
     "id": 1026,
@@ -17386,14 +17386,14 @@
     "crime": "Amotinamento",
     "pena_min": 12,
     "pena_max": 24,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1 a 2 anos detenção"
+    "obs": "Amotinarem-se presos, ou internados, perturbando a disciplina do recinto de prisão militar. 1-2 anos reclusão"
   },
   {
     "id": 1318,
@@ -17498,14 +17498,14 @@
     "crime": "Concêrto para deserção",
     "pena_min": 24,
     "pena_max": 48,
-    "tipo_pena": "Detenção",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 a 4 anos detenção"
+    "obs": "2 a 4 anos reclusão"
   },
   {
     "id": 1325,
@@ -20266,14 +20266,14 @@
     "crime": "Motim, revolta ou conspiração",
     "pena_min": 120,
     "pena_max": 360,
-    "tipo_pena": "Morte",
+    "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "10 a 30 anos morte. no grau mínimo. Praticar qualquer dos crimes definidos nos arts. 149 e seu parágrafo único, e 152. 15-30 anos reclusão"
+    "obs": "10 a 30 anos reclusão. no grau mínimo. Praticar qualquer dos crimes definidos nos arts. 149 e seu parágrafo único, e 152. 15-30 anos reclusão"
   },
   {
     "id": 1498,

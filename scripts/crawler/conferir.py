@@ -209,6 +209,11 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
                                f"(meses); texto: {(disp.pena_texto or '')[:90]}",
                     "multiplas": pena.get("multiplas", False),
                     "teto_apenas": pena["teto_apenas"],
+                    # A moldura vai ESTRUTURADA: quem for corrigir não deve
+                    # precisar reler esta mensagem com expressão regular.
+                    "pena_lei": {"tipo": pena["tipo"], "min": pena["min_meses"],
+                                 "max": pena["max_meses"],
+                                 "teto": pena["teto_apenas"]},
                 })
             elif (pena["tipo"] and linha.get("tipo_pena")
                   and pena["tipo"].lower() not in linha["tipo_pena"].lower()):
@@ -216,6 +221,11 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
                     "tipo": "DIVERGENTE-tipo", "gravidade": 2, "chave": k,
                     "ids": [linha["id"]],
                     "detalhe": f"lei {pena['tipo']} × catálogo {linha['tipo_pena']}",
+                    "multiplas": pena.get("multiplas", False),
+                    "teto_apenas": pena["teto_apenas"],
+                    "pena_lei": {"tipo": pena["tipo"], "min": pena["min_meses"],
+                                 "max": pena["max_meses"],
+                                 "teto": pena["teto_apenas"]},
                 })
 
     # 2) O que a lei tem com pena própria e o catálogo não registra.
