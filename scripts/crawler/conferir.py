@@ -179,6 +179,32 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
         # "correção" trocaria a pena de uma pela da outra. Cada linha é
         # confrontada com a moldura MAIS PRÓXIMA; sobrando moldura sem linha,
         # é candidata a linha nova — decisão humana.
+        # Preceito que comina DUAS penas (dolosa e culposa no mesmo texto) são
+        # dois tipos penais. Se o catálogo tem menos linhas que molduras, falta
+        # linha — e ela é candidata a nascer, não a sobrescrever a existente.
+        if len(molduras) > len(linhas):
+            usadas = set()
+            for linha in linhas:
+                cmin, cmax = moldura_catalogo(linha)
+                i = min(range(len(molduras)),
+                        key=lambda j: abs(molduras[j]["min_meses"] - cmin)
+                        + abs(molduras[j]["max_meses"] - cmax))
+                usadas.add(i)
+            for j, m in enumerate(molduras):
+                if j in usadas:
+                    continue
+                achados.append({
+                    "tipo": "MOLDURA-EXTRA", "gravidade": 1, "chave": k,
+                    "ids": [], "fonte": fonte["id"],
+                    "detalhe": f"o preceito comina outra pena sem linha no catálogo: "
+                               f"{m['tipo']} {m['min_meses']:g}–{m['max_meses']:g} "
+                               f"meses — {m.get('contexto', '')[:80]}",
+                    "pena_lei": {"tipo": m["tipo"], "min": m["min_meses"],
+                                 "max": m["max_meses"], "teto": m["teto_apenas"]},
+                    "contexto": m.get("contexto", ""),
+                    "epigrafe": disp.epigrafe, "texto_lei": disp.texto,
+                })
+
         for linha in linhas:
             cmin, cmax = moldura_catalogo(linha)
             pena = min(molduras,
@@ -243,6 +269,9 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
             "detalhe": f"{(d.epigrafe or d.texto or '')[:70]} — "
                        f"{(d.pena_texto or '')[:70]}",
             "vigencia_pendente": d.vigencia_pendente,
+            "epigrafe": d.epigrafe, "texto_lei": d.texto,
+            "pena_lei": {"tipo": pena["tipo"], "min": pena["min_meses"],
+                         "max": pena["max_meses"], "teto": pena["teto_apenas"]},
         })
 
     for a in achados:

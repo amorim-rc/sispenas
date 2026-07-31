@@ -15,7 +15,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: 20
+          # 24: o leitor de entradas do changelog importa os arquivos .ts
+          # nativamente (type stripping), como o release.yml já faz.
+          node-version: 24
           cache: npm
 
       - name: Setup Python
@@ -45,6 +47,12 @@ jobs:
         run: |
           python3 -m pip install --quiet pytest
           python3 -m pytest scripts/crawler/tests -q
+
+      # Entrada do changelog não pode anunciar versão que nunca foi publicada:
+      # o bump por substituição de texto já falhou em silêncio três vezes, e o
+      # feed ficou prometendo v1.2.16 a v1.2.18 com o projeto em 1.2.15.
+      - name: Conferir coerência do changelog
+        run: node scripts/validar-changelog.mjs
 
       - name: Typecheck
         run: npm run typecheck

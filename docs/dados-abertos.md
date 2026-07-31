@@ -39,11 +39,10 @@ O catálogo completo é publicado como dado aberto em formato JSON:
   "pena_min_rotulo": "6 anos",
   "pena_max_rotulo": "20 anos",
   "pena_faixa_rotulo": "6 a 20 anos",
-  "pena_unidade_derivada": true,
   "infracao_menor_potencial": false,
 
-  "avaliavel": true,
-  "motivo_nao_avaliavel": "",
+  "tem_pena_privativa": true,
+  "sancoes_nao_privativas": [],
   "resultado_morte": true,
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
@@ -54,18 +53,45 @@ O catálogo completo é publicado como dado aberto em formato JSON:
 }
 ```
 
-Penas (`pena_min`, `pena_max`, `pena_*_meses`) estão em **meses**. O primeiro bloco é a
-fonte redigida à mão; os demais são derivados. Ver
-[Catálogo de tipos penais](/docs/catalogo-tipos-penais) para o significado de cada campo.
+Penas (`pena_min`, `pena_max`, `pena_*_meses`) estão em **meses** — o mês do art. 11 do
+Código Penal tem 30 dias, então 0,5 são 15 dias. O primeiro bloco é a fonte redigida à
+mão; os demais são calculados por `scripts/transform_data.py` a cada build.
 
-### Campos que exigem atenção
+## Para que serve cada campo
 
-| Campo | Por quê |
+Nem todo campo tem o mesmo peso: alguns definem o que o sistema responde, outros
+apenas descrevem. A tabela abaixo diz **onde cada um é usado**, para quem for reaproveitar
+os dados saber o que pode mudar sem quebrar uma conta.
+
+### Fonte — redigida à mão, é a autoridade
+
+| Campo | Onde é usado |
 |---|---|
-| `avaliavel` | **Filtre por `true` em qualquer estatística.** 22 registros são notas de referência e causas de aumento, com pena zero: incluí-los infla o alcance de todo benefício com teto de pena. |
-| `duplicata_divergente` | 48 dispositivos aparecem duas vezes **com penas conflitantes**. O catálogo expõe a contradição em vez de escolher um valor. |
-| `resultado_morte_derivado` | `true` = veio da heurística, sem revisão manual. |
-| `id` | É **append-only** e serve de URL pública (`/pesquisa/tipos?tipo=N`). Nunca é reatribuído. |
+| `id` | Endereço público do tipo (`/pesquisa/tipos?tipo=N`), citado em pareceres e trabalhos. **Nunca é reatribuído**: um id aposentado não volta a ser usado por outro crime. |
+| `lei`, `artigo` | Identificam o dispositivo. Juntos formam a `chave_dispositivo`, que detecta registro repetido, e ligam a linha ao texto oficial conferido toda semana pelo conferidor. |
+| `crime` | Nome exibido na busca. Também é dele — **e não do `obs`** — que se deduz o `resultado_morte`. |
+| `pena_min`, `pena_max` | **A moldura.** Alimentam toda a dosimetria e todos os benefícios com limiar de pena (transação penal, ANPP, sursis, regime inicial, prescrição). Desde a v1.2.17 são a autoridade; antes disso a moldura era extraída do texto do `obs`, e uma frase secundária podia mudar a pena publicada. |
+| `tipo_pena` | Reclusão, detenção, prisão simples ou nenhuma. Define o regime inicial e distingue o tipo sem pena privativa. |
+| `acao` | Espécie de ação penal. Condiciona os institutos que dependem de representação ou de queixa. |
+| `hediondo` | Fecha indulto, graça e comutação, e endurece as frações de progressão e livramento condicional. |
+| `elemento` | Doloso, culposo ou preterdoloso. Crime culposo admite substituição por pena restritiva qualquer que seja a pena, e não admite tentativa. |
+| `tentativa` | Habilita a redução do art. 14, II na terceira fase da dosimetria. |
+| `violencia`, `grave_ameaca` | Vedam substituição por restritivas de direitos, ANPP e arrependimento posterior. |
+| `obs` | **Descritivo.** Observação de leitura humana — origem da redação, formas do artigo, remissões. Não define a pena; o que dele ainda se extrai é a presença e o regime da multa. |
+
+### Derivados — recalculados a cada build, não edite
+
+| Campo | Para que existe |
+|---|---|
+| `pena_min_meses`, `pena_max_meses` | Moldura canônica para cálculo. |
+| `pena_min_rotulo`, `pena_max_rotulo`, `pena_faixa_rotulo` | Exibição na unidade natural: "15 dias a 3 meses", "2 a 5 anos", "até 5 anos". |
+| `pena_privativa`, `tem_pena_privativa`, `sancoes_nao_privativas` | Separam o tipo com pena de prisão daquele cuja sanção é outra (art. 28 da Lei 11.343/06). |
+| `tem_multa`, `multa_regime` | Multa cumulativa, alternativa ou isolada, lida do `obs`. |
+| `infracao_menor_potencial` | Pena máxima até dois anos — porta de entrada da Lei 9.099/95. |
+| `resultado_morte`, `resultado_morte_derivado` | Marcam o tipo com morte como resultado; o segundo avisa que veio de heurística sobre o **nome** do crime, sem revisão manual. |
+| `perdao_judicial_previsto` | Só é `true` nas hipóteses expressamente previstas em lei — não há perdão judicial genérico. |
+| `chave_dispositivo`, `duplicata`, `duplicata_divergente`, `duplicata_ids` | Detecção de registro repetido. `duplicata_divergente` marcaria o mesmo dispositivo com penas conflitantes; **hoje não há nenhum**. |
+| `derivado_auto` | Marca o registro cujos campos passaram por preenchimento automático. |
 
 ## Relatório de qualidade
 
