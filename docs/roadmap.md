@@ -53,19 +53,22 @@ relatório para decisão humana. Acuidade jurídica continua sendo o valor centr
 - [x] Differ com lista de **exceções** (o que já foi julgado não volta toda semana)
 - [x] Checador de **vigência** (vacatio legis e produção de efeitos diferida) e
       detector de **revogação total** de diploma
+- [x] Rodada semanal automática, com issue no repositório
+- [x] **PR automático** para o que é mecânico e inequívoco — corrigir moldura ou tipo
+      de pena de linha existente, um diploma por rodada, um PR aberto por vez.
+      Criação e remoção de linha seguem humanas: exigem decidir se o dispositivo é
+      linha, modificador ou nada
+- [x] **Watcher do DOU** (filtro textual, sem IA): citação dos diplomas monitorados e
+      vocabulário penal, para encontrar **lei penal nova autônoma** — o único caso
+      invisível a quem só relê os diplomas que já conhece
+- [x] Revogações e registros indevidos encontrados até aqui: retirados do catálogo e
+      registrados no [acervo histórico](/docs/acervo-historico) com o id anterior
 
 ### O que falta
 
-- [ ] Rodada semanal automática, com issue no repositório
-- [ ] **PR automático** para o que é mecânico e inequívoco — corrigir moldura ou tipo
-      de pena de linha existente. Criação e remoção de linha seguem humanas: exigem
-      decidir se o dispositivo é linha, modificador ou nada
-- [ ] **Watcher do DOU** (filtro textual, sem IA): citação dos diplomas monitorados e
-      vocabulário penal, para encontrar **lei penal nova autônoma** — o único caso
-      invisível a quem só relê os diplomas que já conhece
-- [ ] Tratar as revogações encontradas: hoje o catálogo publica como vigentes ao menos
-      quatro crimes revogados (CP art. 150, §2º; CP art. 185; CP art. 350; ECA art. 233)
 - [ ] Trilha de auditoria por registro: `fonte` e `atualizado_em`
+- [ ] Rotina de revogação: hoje cada achado de dispositivo revogado é tratado à mão,
+      porque remover implica decidir o destino da URL pública
 
 :::note[Por que MAIOR]
 Não é o tamanho da mudança, é a **natureza** dela: o catálogo deixa de ser um acervo
