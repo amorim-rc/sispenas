@@ -1,10 +1,13 @@
 name: Conferidor semanal
 
-# Toda segunda-feira, 05:00 de Brasília: baixa os textos compilados dos diplomas
-# do catálogo, confronta com static/data/crimes.json e ABRE UMA ISSUE com o que
-# divergir. Não altera dado nenhum — a decisão é humana, porque boa parte dos
-# achados exige juízo jurídico (um dispositivo novo pode ser linha, modificador
-# ou nada).
+# Toda segunda-feira, 05:00 de Brasília, em dois atos:
+#
+#   1. CONFERIR — baixa os textos compilados dos diplomas do catálogo, confronta
+#      com static/data/crimes.json e olha o DOU da semana em busca de lei penal
+#      nova. O que sair daí vira UMA ISSUE, para triagem humana.
+#   2. PROPOR — do que é inequívoco (moldura ou espécie de pena divergente do
+#      compilado, em linha que já existe), abre UM PR por rodada, de UM diploma,
+#      com a evidência de cada mudança. Merge continua sendo decisão de gente.
 #
 # 100% determinístico: sem IA e sem token de modelo. O custo é alguns minutos de
 # Actions por semana.
@@ -14,6 +17,17 @@ on:
     # UTC. Brasília é UTC-3 fixo desde o fim do horário de verão (2019).
     - cron: '0 8 * * 1'
   workflow_dispatch:
+    inputs:
+      abrir_pr:
+        description: 'Abrir o PR das correções mecânicas'
+        type: boolean
+        default: true
+      incluir_linhas_novas:
+        description: >-
+          Incluir linhas NOVAS no PR (exige revisão de modelagem: a primeira
+          leva automática trouxe 29 registros que não eram tipos penais)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -26,6 +40,8 @@ concurrency:
 jobs:
   conferir:
     runs-on: ubuntu-latest
+    outputs:
+      codigo: ${{ steps.conferir.outputs.codigo }}
     steps:
       - uses: actions/checkout@v7
 
@@ -51,6 +67,18 @@ jobs:
           echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
           if [ "$codigo" -ne 0 ] && [ "$codigo" -ne 3 ]; then exit "$codigo"; fi
 
+      # O ponto cego do conferidor é a lei penal NOVA e autônoma: diploma que
+      # ainda não está em fontes.json e, portanto, em página nenhuma que ele
+      # releia. O watcher do DOU cobre só isso. Falha aqui não derruba a rodada:
+      # o in.gov.br fora do ar não pode calar o relatório do catálogo.
+      - name: Olhar o DOU da semana
+        id: dou
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/crawler/dou_watcher.py --dias 8 > /dev/null
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+
       - name: Guardar relatório e snapshots
         if: always()
         uses: actions/upload-artifact@v5
@@ -65,22 +93,26 @@ jobs:
       # achado em linha. Uma issue por rodada, para que a semana seja unidade de
       # trabalho e o fechamento signifique "triado".
       - name: Abrir issue com os achados
-        if: steps.conferir.outputs.codigo == '3'
+        if: steps.conferir.outputs.codigo == '3' || steps.dou.outputs.codigo == '3'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          RELATORIO="crawler/relatorios/$(date -u +%Y-%m-%d).md"
-          TITULO="Conferidor: achados de $(date -u +%Y-%m-%d)"
+          HOJE="$(date -u +%Y-%m-%d)"
+          RELATORIO="crawler/relatorios/$HOJE.md"
+          DOU="crawler/relatorios/dou-$HOJE.md"
           {
             echo "Rodada automática do conferidor contra o texto compilado do Planalto."
             echo
             echo "- Relatório completo e páginas baixadas: **artifact \`conferidor-${{ github.run_number }}\`** desta execução."
             echo "- Cada achado é uma **pergunta**, não uma conclusão: confira o dispositivo no compilado antes de alterar o catálogo."
             echo "- Decisão de modelagem já tomada vai para \`scripts/crawler/excecoes.json\`, com motivo e data; defasagem real vira patch."
+            echo "- As correções mecânicas desta rodada podem já estar em PR aberto pelo próprio robô."
             echo
             echo "---"
             echo
-            cat "$RELATORIO"
+            [ -f "$RELATORIO" ] && cat "$RELATORIO"
+            echo
+            [ -f "$DOU" ] && cat "$DOU"
           } > corpo.md
           # O corpo da issue tem limite de 65.536 caracteres.
           if [ "$(wc -c < corpo.md)" -gt 60000 ]; then
@@ -90,8 +122,143 @@ jobs:
             mv corpo-curto.md corpo.md
           fi
           gh issue create --repo "${{ github.repository }}" \
-            --title "$TITULO" --label conferidor --body-file corpo.md
+            --title "Conferidor: achados de $HOJE" --label conferidor --body-file corpo.md
 
       - name: Registrar que não houve achado
-        if: steps.conferir.outputs.codigo == '0'
-        run: echo "Catálogo em dia com o texto compilado — nenhuma issue aberta."
+        if: steps.conferir.outputs.codigo == '0' && steps.dou.outputs.codigo != '3'
+        run: echo "Catálogo em dia com o texto compilado e nada penal no DOU."
+
+  # ── PR das correções mecânicas ────────────────────────────────────────────
+  # Job separado de propósito: o token do app só é pedido quando há o que
+  # propor, e o Environment prende esse token à `main`.
+  propor:
+    needs: conferir
+    if: >-
+      needs.conferir.outputs.codigo == '3'
+      && (github.event_name != 'workflow_dispatch' || inputs.abrir_pr)
+    runs-on: ubuntu-latest
+    # O Environment é a trava SERVER-SIDE dos secrets do app: com a política de
+    # branch restrita à `main`, o GitHub recusa entregar a chave a um job que
+    # rode em qualquer outra branch (o mesmo desenho do regen-data.yml).
+    environment: automacao
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # Sem o app, o PR sairia como github-actions[bot] — que não atravessa o
+      # ruleset da main e, pior, deixaria o mantenedor sem poder aprovar o
+      # próprio PR. Sem o app configurado, o job não abre PR: os achados seguem
+      # na issue, como antes.
+      - name: Token do app de automação
+        id: app
+        if: vars.APP_CLIENT_ID != ''
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Sem app configurado, não há PR
+        if: steps.app.outputs.token == ''
+        run: |
+          echo "::warning::APP_CLIENT_ID não configurado — os achados ficam só na issue."
+          exit 0
+
+      - uses: actions/checkout@v7
+        if: steps.app.outputs.token != ''
+        with:
+          token: ${{ steps.app.outputs.token }}
+
+      # Um PR aberto por vez. Empilhar PRs do robô sobre o mesmo arquivo produz
+      # conflito garantido e revisão apressada — o próximo diploma espera a
+      # semana seguinte.
+      - name: Já existe PR do conferidor aberto?
+        id: aberto
+        if: steps.app.outputs.token != ''
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+        run: |
+          n=$(gh pr list --repo "${{ github.repository }}" --label conferidor \
+                --state open --json number --jq 'length')
+          echo "quantidade=$n" >> "$GITHUB_OUTPUT"
+          [ "$n" -eq 0 ] || echo "::notice::$n PR do conferidor já aberto — nada a fazer nesta rodada."
+
+      - uses: actions/setup-python@v7
+        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v7
+        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        with:
+          node-version: 24
+          cache: npm
+
+      # O differ lê os snapshots baixados no job anterior.
+      - name: Recuperar os snapshots da rodada
+        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        uses: actions/download-artifact@v5
+        with:
+          name: conferidor-${{ github.run_number }}
+          path: crawler/
+
+      - name: Montar a proposta
+        id: propor
+        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        run: |
+          set +e
+          python3 scripts/crawler/propor.py --aplicar --saida crawler/proposta \
+            ${{ (github.event_name == 'workflow_dispatch' && inputs.incluir_linhas_novas) && '--com-novas' || '' }}
+          codigo=$?
+          set -e
+          echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
+          # 1 = nada mecânico nesta rodada (os achados restantes exigem gente).
+          if [ "$codigo" -eq 0 ]; then
+            python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          meta = json.loads(pathlib.Path("crawler/proposta/meta.json").read_text(encoding="utf-8"))
+          for chave in ("ramo", "titulo", "versao", "fonte", "correcoes", "novas"):
+              print(f"{chave}={meta[chave]}")
+          PY
+          elif [ "$codigo" -ne 1 ]; then
+            exit "$codigo"
+          fi
+
+      # `changelog:json` e `gerar_completude` não têm dependência externa — o
+      # derivado é commitado e a CI compara, então sem regenerar o próprio PR do
+      # robô reprovaria na checagem de sincronia.
+      - name: Regenerar o derivado e o feed
+        if: steps.propor.outputs.codigo == '0'
+        run: |
+          python3 scripts/transform_data.py --estrito --max-contradicoes=0
+          python3 scripts/gerar_completude.py
+          npm run changelog:json
+
+      - name: Abrir o PR
+        if: steps.propor.outputs.codigo == '0'
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          RAMO: ${{ steps.propor.outputs.ramo }}
+          TITULO: ${{ steps.propor.outputs.titulo }}
+          VERSAO: ${{ steps.propor.outputs.versao }}
+          FONTE: ${{ steps.propor.outputs.fonte }}
+          CORRECOES: ${{ steps.propor.outputs.correcoes }}
+          SLUG: ${{ steps.app.outputs.app-slug }}
+        run: |
+          git config user.name "${SLUG:-sispenas-automacao}[bot]"
+          git config user.email "${SLUG:-sispenas-automacao}[bot]@users.noreply.github.com"
+          git checkout -b "$RAMO"
+          git add -A
+          git commit -F - <<EOF
+          fix(catalogo): $CORRECOES correção(ões) em $FONTE conferidas com o compilado
+
+          Rodada automática do conferidor (v$VERSAO). Cada mudança cita o
+          dispositivo conferido no texto compilado do Planalto.
+          EOF
+          git push --force-with-lease origin "$RAMO"
+          gh pr create --repo "${{ github.repository }}" \
+            --head "$RAMO" --base main --title "$TITULO" \
+            --label conferidor --body-file crawler/proposta/corpo.md
+
+      - name: Nada mecânico nesta rodada
+        if: steps.propor.outputs.codigo == '1'
+        run: echo "Os achados desta semana exigem decisão humana — só a issue foi aberta."

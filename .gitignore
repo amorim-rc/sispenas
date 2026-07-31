@@ -17,6 +17,7 @@
 # CI viram artifact. As DECISOES-*.md do diretório continuam versionadas.
 /crawler/snapshots
 /crawler/relatorios
+/crawler/proposta
 
 # Misc
 .DS_Store
