@@ -18,7 +18,7 @@ const entrada: ChangelogEntry = {
   "links": [
     {
       "label": "Ver o art. 121-B (vicaricídio) no catálogo",
-      "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1562"
+      "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1318"
     }
   ]
 };

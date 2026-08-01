@@ -17,9 +17,9 @@ conferência do catálogo) e de
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1419** |
+| Tipos penais catalogados | **1412** |
 | Diplomas com tipo penal vigente | 62 |
-| — com coleta iniciada | 62 |
+| — com coleta iniciada | 60 |
 | Diplomas revogados/não recepcionados | [11](/docs/acervo-historico) |
 
 ## Índice por diploma
@@ -30,7 +30,7 @@ conferência do catálogo) e de
 
 | Diploma | Tipos coletados | Situação |
 |---|---:|---|
-| Código Penal — Parte Especial | 512 | concluído ❓ |
+| Código Penal — Parte Especial | 509 | concluído ❓ |
 | Código Penal Militar — Parte Especial | 360 | 🔶 em coleta |
 | Código Eleitoral | 60 | concluído ❓ |
 | Crimes contra o meio ambiente | 53 | concluído ❓ |
@@ -51,7 +51,7 @@ conferência do catálogo) e de
 | Lei Geral do Esporte (crimes) | 11 | concluído ❓ |
 | Lei das Eleições (crimes) | 11 | concluído ❓ |
 | Estatuto do Desarmamento | 10 | concluído ❓ |
-| Organizações criminosas | 10 | concluído ❓ |
+| Organizações criminosas | 9 | concluído ❓ |
 | Estatuto da Pessoa com Deficiência (crimes) | 8 | concluído ❓ |
 | Atividades nucleares (crimes) | 8 | concluído ❓ |
 | Serviços postais (crimes) | 7 | concluído ❓ |
@@ -77,13 +77,11 @@ conferência do catálogo) e de
 | Interceptação telefônica (crimes) | 2 | concluído ❓ |
 | Crimes de prefeitos e vereadores | 2 | concluído ❓ |
 | Direito agrário (crimes) | 2 | concluído ❓ |
-| Lei de Migração (crime do art. 232-A) | 2 | concluído ❓ |
 | Condomínios e incorporações (crimes) | 1 | concluído ❓ |
 | Lei Maria da Penha (crime do art. 24-A) | 1 | concluído ❓ |
 | Lei Geral de Telecomunicações (crime do art. 183) | 1 | concluído ❓ |
 | Sonegação fiscal | 1 | concluído ❓ |
 | Código Brasileiro de Telecomunicações (crime do art. 70) | 1 | concluído ❓ |
-| Sistema Financeiro Nacional (crime do art. 44, §7º) | 1 | concluído ❓ |
 | Retenção de documentos | 1 | concluído ❓ |
 | Pesca de cetáceos | 1 | concluído ❓ |
 | Crédito habitacional — SFH (crime do art. 9º) | 1 | concluído ❓ |
@@ -92,6 +90,8 @@ conferência do catálogo) e de
 | Lei de Inelegibilidades (crime do art. 25) | 1 | concluído ❓ |
 | Discriminação de pessoas com HIV/aids | 1 | concluído ❓ |
 | Estatuto da Advocacia (crime do art. 7º-B) | 1 | concluído ❓ |
+| Lei de Migração (crime do art. 232-A) | 0 | ⛔ não iniciado |
+| Sistema Financeiro Nacional (crime do art. 44, §7º) | 0 | ⛔ não iniciado |
 
 A lista completa dos tipos já reunidos, com o texto de cada um, está na [busca por tipo penal](/pesquisa/tipos).
 

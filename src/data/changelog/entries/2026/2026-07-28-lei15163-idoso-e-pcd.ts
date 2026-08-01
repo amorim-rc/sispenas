@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a exposição a perigo da pessoa idosa',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=487',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=473',
     },
   ],
 };

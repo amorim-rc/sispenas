@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o estupro no CPM (art. 232)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=814',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=720',
     },
   ],
 };

@@ -1194,6 +1194,25 @@
         ]
       },
       "obs": "A pena do art. 56 (agrotóxico não registrado) é aumentada se do crime resultar a morte. §único incluído pela Lei 14.785/2023."
+    },
+    {
+      "id": "aumento-orgcrim-art2-p4",
+      "nome": "Aumento na organização criminosa",
+      "dispositivo": "Lei 12.850/13, art. 2º, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.167,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 12.850/13",
+        "artigos": [
+          "Art. 2º"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 2/3 se há participação de criança ou adolescente; concurso de funcionário público valendo-se da condição; produto destinado ao exterior; conexão com outras organizações; ou transnacionalidade. Constava indevidamente como tipo penal autônomo, sob um §4º-A que a lei não tem."
     }
   ]
 }

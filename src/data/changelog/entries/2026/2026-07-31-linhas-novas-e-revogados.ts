@@ -18,7 +18,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a inundação culposa (art. 254)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1590',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1346',
     },
     {
       label: 'Ver o acervo histórico',

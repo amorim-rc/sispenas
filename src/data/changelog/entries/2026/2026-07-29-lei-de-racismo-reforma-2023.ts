@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a injúria racial e seus aumentos',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=608',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=582',
     },
   ],
 };

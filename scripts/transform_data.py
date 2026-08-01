@@ -54,7 +54,7 @@ NEG_MULTA = re.compile(r"sem multa|multa reparat|reparação do dano", re.IGNORE
 CORRECOES = {
     # Art. 227 CP (caput): a multa só incide na hipótese do §3º (fim de lucro);
     # o tipo-base não comina multa.
-    176: {"tem_multa": False, "multa_regime": "nenhuma"},
+    167: {"tem_multa": False, "multa_regime": "nenhuma"},
     898: {"tem_multa": False, "multa_regime": "nenhuma"},
 }
 
@@ -91,10 +91,10 @@ CORRECOES_MORTE = {
     # o nomen juris não contém "homicídio" nem "morte", e a heurística deriva do
     # NOME. Sem estas linhas o crime deixaria de constar como resultado morte —
     # com efeito direto sobre livramento condicional e progressão.
-    1562: True,
-    1563: True,
-    1564: True,
-    1565: True,
+    1318: True,
+    1319: True,
+    1320: True,
+    1321: True,
 }
 
 # ── Perdão judicial (art. 107, IX, CP) ──────────────────────────────────────

@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a sonegação fiscal material (art. 1º)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=408',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=398',
     },
   ],
 };

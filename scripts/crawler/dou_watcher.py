@@ -45,6 +45,9 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent.parent
 FONTES = RAIZ / "data" / "fontes.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tempo import hoje  # noqa: E402
+
 RELATORIOS = RAIZ / "crawler" / "relatorios"
 
 LISTAGEM = "https://www.in.gov.br/leiturajornal?secao={secao}&data={data}"
@@ -256,7 +259,7 @@ def main() -> int:
     p.add_argument("--saida", default=str(RELATORIOS))
     args = p.parse_args()
 
-    fim = date.fromisoformat(args.data) if args.data else date.today()
+    fim = date.fromisoformat(args.data) if args.data else hoje()
     inicio = fim - timedelta(days=args.dias - 1)
     candidatas = rodar(fim, args.dias)
 

@@ -17,7 +17,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver os maus-tratos a animais (art. 32)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1582',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1338',
     },
   ],
 };

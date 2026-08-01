@@ -2,40 +2,7 @@
   "_meta": {
     "descricao": "ids que já foram URL pública de um tipo penal e saíram do catálogo. NUNCA podem ser reatribuídos: um link antigo passaria a apontar para outro crime — falha silenciosa e difícil de notar.",
     "regra": "id novo = max(id em uso, id aposentado) + 1. Imposto por scripts/transform_data.py (validar_ids) e usado por scripts/crawler/criar.py.",
-    "obs": "Não é uma errata publicada: é a lista que impede a reutilização. O que houve com cada registro está na nota da versão em que ele saiu. Registros anteriores à v1.1.2 podem ter deixado lacunas não listadas aqui — o catálogo tem 250 buracos de numeração, nem todos reconstituíveis."
+    "reinicio": "A numeração foi REINICIADA em 31/07/2026 (v1.4.0), de 1 a 1412, enquanto o projeto ainda é protótipo e nenhuma URL de tipo havia sido citada fora daqui. A lista abaixo recomeça vazia de propósito: os ids anteriores a essa data não significam nada no esquema novo, e guardá-los só bloquearia números sem motivo. Daqui em diante, todo registro retirado entra aqui."
   },
-  "aposentados": [
-    {
-      "ids": [1038],
-      "versao": "v1.1.2",
-      "motivo": "Lei 9.807/99, art. 19 — dispositivo vetado, nunca vigorou."
-    },
-    {
-      "ids": [611, 675, 687],
-      "versao": "v1.2.4",
-      "motivo": "CP, art. 218 §2º e art. 218-B §1º (revogados) e duplicata do art. 218-C sob rótulo do ECA."
-    },
-    {
-      "ids": [136],
-      "versao": "v1.2.5",
-      "motivo": "CP, art. 171 §5º — revogado pela Lei 15.397/2026."
-    },
-    {
-      "ids": [159, 742, 878, 964],
-      "versao": "v1.3.0",
-      "motivo": "CP arts. 185, 150 §2º e 350 e ECA art. 233 — revogados; ver acervo histórico."
-    },
-    {
-      "ids": [482, 483],
-      "versao": "v1.4.0",
-      "motivo": "ECA, arts. 245 e 246 — infrações administrativas registradas como crime, com a pena do art. 236."
-    },
-    {
-      "ids": [1645, 1646, 1647, 1648, 1649, 1650, 1651, 1652, 1657, 1658, 1663,
-              1664, 1665, 1669, 1670, 1671, 1672, 1673, 1674, 1675, 1676, 1677,
-              1678, 1679, 1680, 1681, 1682, 1683, 1684],
-      "versao": "v1.4.0",
-      "motivo": "Leva automática da v1.3.0: 4 contravenções revogadas (acervo histórico) e 25 registros que não eram tipo penal — texto de outro diploma transcrito, infração administrativa, equiparação, duplicata e dispositivo sem preceito penal."
-    }
-  ]
+  "aposentados": []
 }

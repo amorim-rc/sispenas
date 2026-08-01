@@ -181,7 +181,7 @@ ENTRADAS = [
             "vicaricídio (Lei 15.384/2026). Acuidade jurídica é o valor central: dado errado "
             "publicado é pior que dado ausente.",
         ],
-        links=[{"label": "Ver o art. 121-B (vicaricídio) no catálogo", "href": f"{BASE}/pesquisa/tipos?tipo=1562"}],
+        links=[{"label": "Ver o art. 121-B (vicaricídio) no catálogo", "href": f"{BASE}/pesquisa/tipos?tipo=1318"}],
     ),
     dict(
         id="2026-07-22-notas-de-atualizacoes-em-portugues",

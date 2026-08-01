@@ -17,7 +17,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o latrocínio por organização criminosa no catálogo',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1572',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1328',
     },
   ],
 };

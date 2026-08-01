@@ -33,13 +33,13 @@ ACERVO_CASOS: list[tuple[str, str, str]] = [
     ("Lei 9.807/99, art. 19 (revelação de identidade de testemunha protegida)",
      "vetado",
      "Vetado na sanção da lei; nunca vigorou. O catálogo chegou a ter um "
-     "registro indevido (id 1038), removido na v1.1.2."),
+     "registro indevido, removido na v1.1.2."),
     ("CP, art. 240 (adultério)", "revogado", "Revogado pela Lei 11.106/2005."),
     ("CP, art. 217 (sedução)", "revogado", "Revogado pela Lei 12.015/2009."),
     ("CP, arts. 219 a 222 (rapto)", "revogado", "Revogados pela Lei 12.015/2009."),
     ("ECA, art. 233 (tortura de criança)", "revogado",
      "Revogado pela Lei 9.455/1997 (Lei de Tortura). **Constava como vigente no "
-     "catálogo (id 742) até a v1.3.0.**"),
+     "catálogo até a v1.3.0.**"),
     ("LCP, arts. 60 e 61 (mendicância e importunação ofensiva)", "revogado",
      "Revogados pelas Leis 11.983/2009 e 13.718/2018."),
     ("LCP, art. 27 (exploração da credulidade pública)", "revogado",
@@ -55,29 +55,34 @@ ACERVO_CASOS: list[tuple[str, str, str]] = [
 ]
 
 # Tipos penais que saíram do catálogo POR REVOGAÇÃO: eram crime, deixaram de
-# ser, e a URL pública morreu com a remoção — é o que esta tabela responde a
-# quem chega por um link antigo, até o acervo ter página própria (v2.2.0).
+# ser, e ainda constavam entre os vigentes.
 #
 # Só entra aqui o que a LEI tirou de vigência. Registro que saiu porque estava
 # errado (duplicata, infração administrativa, texto de outro diploma) não é
-# acervo histórico: é errata, e vive em `docs/dados-abertos.md`. Misturar as
+# acervo histórico: isso é descrito na nota da versão em que saiu. Misturar as
 # duas coisas transformaria o acervo — que é material de pesquisa sobre o que já
 # foi crime no Brasil — num histórico dos nossos enganos.
-RETIRADOS: list[tuple[str, str, str, str]] = [
+#
+# Sem `id`: a numeração do catálogo foi reiniciada na v1.4.0, e citar o número
+# antigo apontaria para outro crime.
+RETIRADOS: list[tuple[str, str, str]] = [
     ("CP, art. 150, §2º (violação de domicílio contra funcionário público)",
-     "878", "v1.3.0", "Revogado pela Lei 13.869/2019 (Lei de Abuso de Autoridade)."),
+     "v1.3.0", "Revogado pela Lei 13.869/2019 (Lei de Abuso de Autoridade)."),
     ("CP, art. 185 (usurpação de nome ou pseudônimo alheio)",
-     "159", "v1.3.0", "Revogado pela Lei 10.695/2003."),
+     "v1.3.0", "Revogado pela Lei 10.695/2003."),
     ("CP, art. 350 (exercício arbitrário ou abuso de poder)",
-     "964", "v1.3.0", "Revogado pela Lei 13.869/2019 (Lei de Abuso de Autoridade)."),
+     "v1.3.0", "Revogado pela Lei 13.869/2019 (Lei de Abuso de Autoridade)."),
     ("ECA, art. 233 (tortura de criança ou adolescente)",
-     "742", "v1.3.0", "Revogado pela Lei 9.455/1997 (Lei de Tortura)."),
+     "v1.3.0", "Revogado pela Lei 9.455/1997 (Lei de Tortura)."),
     ("LCP, arts. 27, 39, 65 e 69 (credulidade pública, associação secreta, "
      "perturbação da tranquilidade, atividade remunerada de estrangeiro)",
-     "1649 a 1652", "v1.4.0",
+     "v1.4.0",
      "Revogados pelas Leis 9.521/1997, 14.197/2021, 14.132/2021 e 6.815/1980. "
      "Os registros existiram por poucas horas, criados pela leva automática da "
      "v1.3.0."),
+    ("Lei 4.595/64, art. 44, §7º (operação de instituição financeira sem "
+     "autorização do Banco Central)",
+     "v1.4.0", "Revogado pela Lei 13.506/2017, que converteu a MP 784/2017."),
 ]
 
 
@@ -239,10 +244,10 @@ def _gerar_acervo(historicos: list[dict]) -> None:
       "vigentes — a conferência semanal contra o texto compilado os encontrou. "
       "Ficam aqui até que o acervo tenha estrutura própria (v2.2.0).")
     p("")
-    p("| Registro | id | Saiu em | Revogado por |")
-    p("|---|---|---|---|")
-    for registro, ids, versao, motivo in RETIRADOS:
-        p(f"| {registro} | {ids} | {versao} | {motivo} |")
+    p("| Registro | Saiu em | Revogado por |")
+    p("|---|---|---|")
+    for registro, versao, motivo in RETIRADOS:
+        p(f"| {registro} | {versao} | {motivo} |")
     p("")
     p(":::caution[As URLs desses registros deixaram de responder]")
     p("`id` é endereço público (`/pesquisa/tipos?tipo=N`), e esses saíram do ar "

@@ -34,8 +34,10 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import date
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tempo import hoje  # noqa: E402
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
@@ -116,13 +118,13 @@ def baixar_fonte(fonte: dict, destino: Path) -> dict:
 
     dir_fonte = destino / fonte["id"]
     dir_fonte.mkdir(parents=True, exist_ok=True)
-    arquivo = dir_fonte / f"{date.today().isoformat()}.html"
+    arquivo = dir_fonte / f"{hoje().isoformat()}.html"
     arquivo.write_text(texto, encoding="utf-8")
 
     meta = {
         "id": fonte["id"],
         "url": fonte["url"],
-        "baixado_em": date.today().isoformat(),
+        "baixado_em": hoje().isoformat(),
         "bytes_origem": len(bruto),
         "codificacao": codificacao,
         "sha256": hashlib.sha256(bruto).hexdigest(),

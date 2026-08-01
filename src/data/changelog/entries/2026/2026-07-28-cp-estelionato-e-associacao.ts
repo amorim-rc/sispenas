@@ -18,7 +18,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a associação criminosa no catálogo',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=231',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=222',
     },
   ],
 };

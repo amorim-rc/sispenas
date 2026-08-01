@@ -17,7 +17,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a violência doméstica (art. 129, §9º)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=61',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=55',
     },
   ],
 };

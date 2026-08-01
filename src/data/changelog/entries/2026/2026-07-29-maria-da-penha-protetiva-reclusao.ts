@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o descumprimento de medida protetiva (art. 24-A)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=495',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=481',
     },
   ],
 };

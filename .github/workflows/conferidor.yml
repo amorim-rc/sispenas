@@ -97,7 +97,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          HOJE="$(date -u +%Y-%m-%d)"
+          # Data de BRASÍLIA, como o relatório: às 21h do dia 31 já é dia 1º em
+          # UTC, e a issue saía datada de amanhã.
+          HOJE="$(TZ=America/Sao_Paulo date +%Y-%m-%d)"
           RELATORIO="crawler/relatorios/$HOJE.md"
           DOU="crawler/relatorios/dou-$HOJE.md"
           {

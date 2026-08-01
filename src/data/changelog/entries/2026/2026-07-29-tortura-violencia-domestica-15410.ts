@@ -15,7 +15,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a tortura em violência doméstica (art. 1º, III)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1587',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1343',
     },
   ],
 };

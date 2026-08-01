@@ -51,6 +51,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import corrigir  # noqa: E402
 import criar  # noqa: E402
 from conferir import SNAPSHOTS  # noqa: E402
+from tempo import hoje  # noqa: E402
 from transform_data import _faixa_de_meses, proximo_id  # noqa: E402
 
 FONTES = RAIZ / "data" / "fontes.json"
@@ -238,16 +239,16 @@ def _frase_correcoes(correcoes: list[dict]) -> str:
     return "; ".join(exemplos)
 
 
-def entrada_changelog(escolha: dict, versao: str, hoje: str) -> tuple[Path, str]:
+def entrada_changelog(escolha: dict, versao: str, dia: str) -> tuple[Path, str]:
     """A entrada do feed — texto puro, sem markdown (contrato do ChangelogEntry)."""
     f = escolha["fonte"]
     correcoes, novas = escolha["correcoes"], escolha["novas"]
-    ident = f"{hoje}-conferidor-{f['id']}"
-    destino = ENTRADAS / hoje[:4] / f"{ident}.ts"
+    ident = f"{dia}-conferidor-{f['id']}"
+    destino = ENTRADAS / dia[:4] / f"{ident}.ts"
     n = 2
     while destino.exists():
-        ident = f"{hoje}-conferidor-{f['id']}-{n}"
-        destino = ENTRADAS / hoje[:4] / f"{ident}.ts"
+        ident = f"{dia}-conferidor-{f['id']}-{n}"
+        destino = ENTRADAS / dia[:4] / f"{ident}.ts"
         n += 1
 
     rotulo = _rotulo(f)
@@ -285,7 +286,7 @@ def entrada_changelog(escolha: dict, versao: str, hoje: str) -> tuple[Path, str]
 
 const entrada: ChangelogEntry = {{
   id: '{ident}',
-  date: '{hoje}',
+  date: '{dia}',
   title: {json.dumps(titulo, ensure_ascii=False)},
   summary:
     {json.dumps(f"Rodada automática do conferidor — {rotulo}: " + " e ".join(partes) + ", contra o texto compilado do Planalto.", ensure_ascii=False)},
@@ -303,13 +304,13 @@ export default entrada;
 
 
 # ── Execução ────────────────────────────────────────────────────────────────
-def aplicar(escolha: dict, versao: str, hoje: str, saida: Path) -> dict:
+def aplicar(escolha: dict, versao: str, dia: str, saida: Path) -> dict:
     if escolha["correcoes"]:
         corrigir.aplicar(escolha["correcoes"])
     if escolha["novas"]:
         criar.aplicar(escolha["novas"])
 
-    destino, ts = entrada_changelog(escolha, versao, hoje)
+    destino, ts = entrada_changelog(escolha, versao, dia)
     destino.parent.mkdir(parents=True, exist_ok=True)
     # CRLF como o resto do repositório (as demais entradas são CRLF).
     destino.write_bytes(ts.replace("\n", "\r\n").encode("utf-8"))
@@ -323,7 +324,7 @@ def aplicar(escolha: dict, versao: str, hoje: str, saida: Path) -> dict:
         "novas": len(escolha["novas"]),
         "humanos": len(escolha["humanos"]),
         "versao": versao,
-        "ramo": f"conferidor/{fonte['id']}-{hoje}",
+        "ramo": f"conferidor/{fonte['id']}-{dia}",
         "titulo": (f"fix(catalogo): {escolha['total']} ajuste(s) em "
                    f"{_rotulo(fonte)} conferidos com o texto compilado"),
         "entrada": str(destino if RAIZ not in destino.parents
@@ -370,7 +371,7 @@ def main() -> int:
         print(f"(simulação — nada foi escrito; fecharia a v{versao})")
         return 0
 
-    meta = aplicar(escolha, versao, date.today().isoformat(), Path(args.saida))
+    meta = aplicar(escolha, versao, hoje().isoformat(), Path(args.saida))
     print(f"aplicado; ramo {meta['ramo']}, versão v{meta['versao']}, "
           f"corpo em {args.saida}/corpo.md")
     return 0

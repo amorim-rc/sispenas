@@ -42,6 +42,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from parsear import parsear  # noqa: E402
+from tempo import hoje  # noqa: E402
 from pena_parser import ler_pena, ler_penas  # noqa: E402
 
 SNAPSHOTS = RAIZ / "crawler" / "snapshots"
@@ -330,7 +331,8 @@ def _por_referencia(disp, linha: dict) -> str:
     return "indeterminado"
 
 
-def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]]) -> dict:
+def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]],
+              excecoes: list[dict] | None = None) -> dict:
     """Quanto do catálogo é de fato CONFERIDO contra a lei — e quanto não é.
 
     O relatório de achados responde "o que está errado". Esta função responde a
@@ -350,8 +352,9 @@ def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]]) -> d
       — pode ser rótulo errado no catálogo ou limite do parser. É o número que
       mede o alcance real da conferência.
     """
+    excecoes = excecoes or []
     resultado = {"conferido": [], "divergente": [], "sem_moldura_na_lei": [],
-                 "nao_localizado": [], "sem_snapshot": []}
+                 "nao_localizado": [], "sem_snapshot": [], "dispensado": []}
     for fonte in fontes:
         do_catalogo = indice.get(fonte["id"], {})
         if not do_catalogo:
@@ -371,6 +374,13 @@ def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]]) -> d
             molduras = [m for m in ler_penas(disp.pena_texto or disp.texto)
                         if not m["so_multa"]]
             for linha in linhas:
+                # Já julgado e decidido: não é conferido nem divergente — é
+                # dispensado, e o relatório precisa dizê-lo em vez de somar ao
+                # número que promete conferência.
+                if (dispensado(excecoes, fonte["id"], k, [linha["id"]])
+                        or dispensado(excecoes, fonte["id"], k)):
+                    resultado["dispensado"].append((fonte["id"], k, linha["id"]))
+                    continue
                 if not molduras:
                     resultado["sem_moldura_na_lei"].append(
                         (fonte["id"], k, linha["id"], _por_referencia(disp, linha)))
@@ -408,6 +418,9 @@ def montar_cobertura(res: dict, total_catalogo: int) -> str:
         f"sanção) e {motivos.get('indeterminado', 0)} indeterminados;",
         f"- **{n['nao_localizado']}** cujo dispositivo não foi localizado no compilado;",
     ]
+    if n["dispensado"]:
+        L.append(f"- {n['dispensado']} dispensados por exceção já julgada "
+                 "(`scripts/crawler/excecoes.json`).")
     if n["sem_snapshot"]:
         L.append(f"- {n['sem_snapshot']} sem página baixada nesta rodada;")
     if fora:
@@ -424,8 +437,7 @@ def montar_cobertura(res: dict, total_catalogo: int) -> str:
 
 def montar_relatorio(por_fonte: dict[str, list[dict]]) -> str:
     total = sum(len(v) for v in por_fonte.values())
-    hoje = date.today().isoformat()
-    linhas = [f"# Conferidor — {hoje}", ""]
+    linhas = [f"# Conferidor — {hoje().isoformat()}", ""]
     if not total:
         linhas.append("Nenhuma divergência entre o catálogo e o texto compilado.")
         return "\n".join(linhas) + "\n"
@@ -476,17 +488,17 @@ def main() -> int:
             por_fonte[f["id"]] = achados
 
     total = len(json.loads(CATALOGO.read_text(encoding="utf-8")))
-    cob = montar_cobertura(cobertura(fontes, indice), total)
+    cob = montar_cobertura(cobertura(fontes, indice, excecoes), total)
     relatorio = montar_relatorio(por_fonte) + "\n" + cob
     destino = Path(args.saida)
     destino.mkdir(parents=True, exist_ok=True)
-    (destino / f"{date.today().isoformat()}.md").write_text(relatorio, encoding="utf-8")
-    (destino / f"{date.today().isoformat()}.json").write_text(
+    (destino / f"{hoje().isoformat()}.md").write_text(relatorio, encoding="utf-8")
+    (destino / f"{hoje().isoformat()}.json").write_text(
         json.dumps(por_fonte, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     total = sum(len(v) for v in por_fonte.values())
     print(relatorio if total <= 40 else
-          f"{total} achados — relatório em {destino}/{date.today().isoformat()}.md")
+          f"{total} achados — relatório em {destino}/{hoje().isoformat()}.md")
     return 3 if total else 0
 
 

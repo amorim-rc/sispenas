@@ -17,7 +17,7 @@
     "links": [
       {
         "label": "Ver a violência doméstica (art. 129, §9º)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=61"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=55"
       }
     ]
   },
@@ -65,7 +65,7 @@
     "links": [
       {
         "label": "Ver um crime com pena contada em dias",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=519"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=504"
       }
     ]
   },
@@ -89,7 +89,7 @@
     "links": [
       {
         "label": "Ver a inundação culposa (art. 254)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1590"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1346"
       },
       {
         "label": "Ver o acervo histórico",
@@ -118,6 +118,30 @@
       {
         "label": "Ver o Roadmap",
         "href": "https://amorim-rc.github.io/sispenas/docs/roadmap"
+      }
+    ]
+  },
+  {
+    "id": "2026-07-31-auditoria-e-renumeracao",
+    "date": "2026-07-31",
+    "title": "Auditoria completa do catálogo: nenhuma divergência com a lei, e a numeração recomeça do 1",
+    "summary": "O catálogo inteiro foi confrontado, registro a registro, com o texto compilado do Planalto. Os doze pontos que restavam foram resolvidos, e o resultado passa a ser publicado como número: de 1.412 tipos penais, 1.158 estão conferidos contra a lei e nenhum diverge dela.",
+    "body": [
+      "A conferência agora mede a própria cobertura, e não só o que encontra. Dos 1.412 registros, 1.158 foram confrontados com a moldura que a lei comina e batem com ela. Os 252 restantes não são incógnitas: 138 têm pena definida por referência a outro dispositivo (equiparações, causas de aumento e de diminuição), 27 não têm pena de prisão — multa e outras sanções — e 87 estão em artigos cuja pena aparece em outro lugar do mesmo artigo. Nenhum registro ficou sem correspondência no texto oficial. Publicar esse número junto do relatório é a diferença entre \"não encontramos erro\" e \"conferimos isto, e não conferimos aquilo\".",
+      "Doze pontos pendentes foram resolvidos. Sete registros saíram: quatro eram duplicatas de crimes que já constavam com o artigo certo, dois apontavam para dispositivos que não existem na lei, e um estava revogado. Cinco foram corrigidos: a falsidade ideológica eleitoral, que constava com o nome de outro crime e com pena de 15 dias a 6 meses, quando a lei comina até 5 anos para documento público e até 3 para o particular; o sequestro qualificado pela internação da vítima em casa de saúde, que trazia a pena de outro parágrafo; o amotinamento militar, cujo texto pune os cabeças com reclusão e os demais com detenção, e agora tem um registro para cada; e a promoção de migração ilegal, que estava sob um artigo inexistente da Lei de Migração quando o crime está no Código Penal.",
+      "O aumento de pena da organização criminosa deixou de ser um tipo penal e virou o que sempre foi: uma causa de aumento, de um sexto a dois terços, aplicada sobre a pena do art. 2º da Lei 12.850. Constava como crime autônomo, sob um parágrafo que a lei não tem.",
+      "Por fim, os identificadores dos tipos penais foram renumerados de 1 a 1.412, sem buracos. A numeração vinha de acréscimos e remoções sucessivos e tinha 250 lacunas; como a ferramenta ainda é um protótipo e nenhum endereço de tipo havia sido citado fora do repositório, esta é a última oportunidade de começar limpo. Daqui em diante a regra volta a valer sem exceção: identificador não é reaproveitado, e registro retirado deixa seu número aposentado para sempre."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Documentação"
+    ],
+    "version": "v1.4.0",
+    "links": [
+      {
+        "label": "Como os dados são coletados e revisados",
+        "href": "https://amorim-rc.github.io/sispenas/docs/dados-abertos"
       }
     ]
   },
@@ -159,7 +183,7 @@
     "links": [
       {
         "label": "Ver a tortura em violência doméstica (art. 1º, III)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1587"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1343"
       }
     ]
   },
@@ -201,7 +225,7 @@
     "links": [
       {
         "label": "Ver a obstrução de ações contra o crime organizado (art. 21-A)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1585"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1341"
       }
     ]
   },
@@ -222,7 +246,7 @@
     "links": [
       {
         "label": "Ver a sonegação fiscal material (art. 1º)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=408"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=398"
       }
     ]
   },
@@ -244,7 +268,7 @@
     "links": [
       {
         "label": "Ver o descumprimento de medida protetiva (art. 24-A)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=495"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=481"
       }
     ]
   },
@@ -266,7 +290,7 @@
     "links": [
       {
         "label": "Ver a injúria racial e seus aumentos",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=608"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=582"
       }
     ]
   },
@@ -288,7 +312,7 @@
     "links": [
       {
         "label": "Ver a omissão de comunicação (art. 26)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=605"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=580"
       }
     ]
   },
@@ -309,7 +333,7 @@
     "links": [
       {
         "label": "Ver a apropriação de bens da massa (art. 173)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=504"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=490"
       }
     ]
   },
@@ -329,7 +353,7 @@
     "links": [
       {
         "label": "Ver a fuga do local do sinistro (art. 305)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=353"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=343"
       }
     ]
   },
@@ -350,7 +374,7 @@
     "links": [
       {
         "label": "Ver o estupro no CPM (art. 232)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=814"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=720"
       }
     ]
   },
@@ -370,7 +394,7 @@
     "links": [
       {
         "label": "Ver o crime do art. 1º da Lei 8.176/91",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=563"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=547"
       }
     ]
   },
@@ -390,7 +414,7 @@
     "links": [
       {
         "label": "Ver o art. 73 do CDC",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=535"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=519"
       }
     ]
   },
@@ -413,7 +437,7 @@
     "links": [
       {
         "label": "Ver os maus-tratos a animais (art. 32)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1582"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1338"
       }
     ]
   },
@@ -435,7 +459,7 @@
     "links": [
       {
         "label": "Ver o crime de agrotóxico irregular (art. 56)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=734"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=660"
       }
     ]
   },
@@ -457,7 +481,7 @@
     "links": [
       {
         "label": "Ver a violência institucional (art. 15-A)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1584"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1340"
       }
     ]
   },
@@ -478,7 +502,7 @@
     "links": [
       {
         "label": "Ver o aumento no tráfico de drogas",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=327"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=317"
       }
     ]
   },
@@ -499,7 +523,7 @@
     "links": [
       {
         "label": "Ver a exposição a perigo da pessoa idosa",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=487"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=473"
       }
     ]
   },
@@ -520,7 +544,7 @@
     "links": [
       {
         "label": "Ver o novo crime do art. 244-C",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1578"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1334"
       }
     ]
   },
@@ -541,7 +565,7 @@
     "links": [
       {
         "label": "Ver os modificadores na extorsão",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=113"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=106"
       }
     ]
   },
@@ -562,7 +586,7 @@
     "links": [
       {
         "label": "Ver o latrocínio por organização criminosa no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1572"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1328"
       }
     ]
   },
@@ -584,7 +608,7 @@
     "links": [
       {
         "label": "Ver o estupro de vulnerável no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=148"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=140"
       }
     ]
   },
@@ -606,7 +630,7 @@
     "links": [
       {
         "label": "Ver a associação criminosa no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=231"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=222"
       }
     ]
   },
@@ -628,7 +652,7 @@
     "links": [
       {
         "label": "Ver o art. 147-C no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1566"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1322"
       }
     ]
   },
@@ -819,7 +843,7 @@
     "links": [
       {
         "label": "Ver o art. 121-B (vicaricídio) no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1562"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1318"
       }
     ]
   },

@@ -15,7 +15,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a fuga do local do sinistro (art. 305)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=353',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=343',
     },
   ],
 };

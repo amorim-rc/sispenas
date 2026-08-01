@@ -18,7 +18,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o estupro de vulnerável no catálogo',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=148',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=140',
     },
   ],
 };

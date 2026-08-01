@@ -17,7 +17,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver os modificadores na extorsão',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=113',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=106',
     },
   ],
 };
