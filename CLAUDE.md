@@ -37,7 +37,11 @@ ignoradas:
 
 - `data/crimes.json` é a **fonte**; `static/data/crimes.json` é **derivado** por
   `scripts/transform_data.py` — teste sempre contra o derivado.
-- `id` é **append-only**: é a URL pública (`?tipo=N`). Nunca reatribua nem renumere.
+- `id` é **append-only**: é a URL pública (`?tipo=N`). Nunca reatribua nem renumere. A
+  numeração foi reiniciada UMA vez (v1.4.0, com o projeto ainda em protótipo); desde
+  então id retirado entra em `data/ids-aposentados.json` e `--estrito` reprova
+  reaproveitamento — inclusive o caso silencioso de remover o topo da numeração e o
+  `max + 1` devolver um número já usado.
 - `resultado_morte` deriva do **nome** do tipo, nunca do `obs`.
 - Editar `.md` com Python/`sed` no Windows introduz **CRLF** (quebra os admonitions
   `:::note[...]`); use `write_bytes` ou confira o EOL.
