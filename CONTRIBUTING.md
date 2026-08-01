@@ -11,17 +11,21 @@
 
 ## Como o catálogo é atualizado
 
-1. **Carga inicial (uma vez):** o catálogo é montado a partir de uma **planilha**. Uma
-   **IA lê a planilha, faz o parser e escreve `data/crimes.json`** no schema abaixo.
-2. **Manutenção contínua (depois disso):** as atualizações vêm de **duas** origens, não
-   de digitação manual de tipos:
-   - **Scraper do DOU** (ver roadmap): captura alterações legislativas e propõe o diff.
-   - **IA entregando as informações a adicionar/alterar**, já no schema.
-3. **Ajustes finos por humanos:** humanos fazem, no máximo, **pequenas correções a termo**
-   (typo, reclassificação pontual), nunca adições manuais em escala.
+A carga inicial veio de uma planilha; a manutenção, hoje, é o **conferidor** — um pipeline
+determinístico, sem IA, descrito em [`scripts/crawler/README.md`](scripts/crawler/README.md).
 
-> Em resumo: **planilha+IA (carga inicial) → depois scraper do DOU ou IA (manutenção)**.
-> Humanos entram só para correções finas.
+1. **Toda segunda-feira, 05:00 de Brasília**, o workflow `conferidor.yml` baixa o texto
+   compilado dos diplomas de `data/fontes.json`, compara pena a pena com o catálogo e olha
+   os atos normativos da Seção 1 do Diário Oficial da semana.
+2. **O que diverge vira issue.** Cada achado é uma pergunta, não uma conclusão.
+3. **O que é leitura direta vira PR**, aberto pelo próprio robô (`sispenas-automacao[bot]`):
+   moldura ou espécie de pena de um registro que já existe divergindo do que a lei comina.
+   Um diploma por rodada, um PR aberto por vez, evidência ao lado de cada mudança.
+4. **O que exige juízo continua humano:** criar registro, remover registro, decidir se um
+   dispositivo é tipo autônomo, causa de aumento ou nada disso. O merge do PR também.
+
+> Em resumo: **a máquina confere e propõe; gente decide e aprova.** Nada entra no catálogo
+> sem conferência contra o texto compilado do Planalto.
 
 ## Passos de uma atualização (PR)
 
@@ -51,21 +55,26 @@ Cada versão publica **duas coisas a partir do mesmo arquivo**: a Release no Git
 colaboradores) e a release note no site em `/release-notes` (para quem acompanha). O fluxo
 garante que as duas sempre saem juntas:
 
-1. **Toda mudança substantiva atualiza a release note da versão corrente** em
-   `release-notes/AAAA-MM-DD-vX.Y.Z.md` — crie o arquivo para a versão em desenvolvimento e
-   vá acrescentando o que cada mudança fez. (Correções de dado, novos tipos/benefícios,
-   fixes e ajustes de interface contam; refactor interno trivial não precisa.)
+1. **Toda mudança substantiva vira uma entrada do changelog** em
+   `src/data/changelog/entries/<ano>/<id>.ts` — um arquivo por mudança, texto puro, com
+   `tipo`, `areas` e `version`. O passo a passo está em
+   [`src/data/changelog/create-changelog-entry.md`](src/data/changelog/create-changelog-entry.md).
+   Não há mais `release-notes/*.md` nem lista central: adicionar nota = criar arquivo.
+   (Correções de dado, novos tipos/benefícios, fixes e ajustes de interface contam;
+   refactor interno trivial não precisa.)
 
 2. **Versione segundo o [roadmap](docs/roadmap.md#como-este-roadmap-usa-o-versionamento-semântico):**
    correção → `1.1.Z`; funcionalidade nova compatível → `1.Y.0`; quebra de contrato → `X.0.0`.
 
 3. **O PR que fecha a versão sobe `version` em `package.json` e `CITATION.cff`.** Ao mergear
-   na `main`, o workflow `.github/workflows/release.yml` detecta a versão nova, **cria a tag
-   `vX.Y.Z` e publica a Release** com o texto da release note — automaticamente. **Não faça
-   `git push` de tag manual**; a tag é criada pelo workflow.
+   na `main`, o workflow `.github/workflows/release.yml` detecta a versão nova, monta o corpo
+   concatenando as entradas daquela versão (`scripts/montar-nota-release.mjs`), **cria a tag
+   `vX.Y.Z` e publica a Release** — automaticamente. **Não faça `git push` de tag manual**;
+   a tag é criada pelo workflow.
 
-Resumo: *escreveu a release note + subiu a versão + mergeou → release publicada, no GitHub e
-no site.* Para republicar uma Release malformada, apague-a e rode o workflow "Publicar
+Resumo: *criou as entradas + subiu a versão + mergeou → release publicada, no GitHub e no
+site.* `scripts/validar-changelog.mjs` reprova, na CI, entrada que anuncie versão ainda não
+publicada. Para republicar uma Release malformada, apague-a e rode o workflow "Publicar
 Release" à mão (Actions → Run workflow).
 
 ## Convenções do catálogo
@@ -112,10 +121,13 @@ que falta dado.
 
 O `id` é a **URL pública** de cada tipo (`/pesquisa/tipos?tipo=N`) e o site está publicado.
 
-- Id novo = `max(id) + 1`. Nunca no meio, nunca renumerando.
-- Id removido vira **buraco permanente**; jamais é reatribuído a outro dispositivo — um
-  link antigo passaria a apontar para o crime errado, falha silenciosa.
-- Os ids de 1 a 1061 já foram usados; 21 deles estão vagos e assim permanecem.
+- Id novo = `max(id em uso, id aposentado) + 1`. Nunca no meio, nunca renumerando.
+- Id removido vira **buraco permanente** e entra em `data/ids-aposentados.json`; jamais é
+  reatribuído a outro dispositivo — um link antigo passaria a apontar para o crime errado,
+  falha silenciosa. Contar só o `max` em uso não basta: remover o topo da numeração faz o
+  máximo cair, e o próximo id repetiria um endereço já usado. `--estrito` reprova isso.
+- A numeração foi **reiniciada uma vez**, na v1.4.0 (1 a 1.412), com o projeto ainda em
+  protótipo e nenhuma URL de tipo citada fora do repositório. Não se repete.
 
 ### C4. Um registro por dispositivo
 
@@ -123,8 +135,8 @@ A chave é `lei + artigo`. Repetir o mesmo dispositivo cria uma **duplicata**; s
 divergirem em pena ou hediondez, cria uma **contradição** — o catálogo passa a afirmar
 duas penas para o mesmo artigo.
 
-Há **42 contradições** herdadas. A CI roda `--max-contradicoes=42`: o número pode cair,
-nunca subir. Ao resolver uma, baixe o limite no `.github/workflows/ci.yml`.
+As 42 contradições herdadas foram **todas resolvidas** contra o texto compilado. A CI roda
+`--max-contradicoes=0`: o catálogo não pode regredir.
 
 Para distinguir incisos do mesmo parágrafo, use o inciso no `artigo`
 (`Art. 121, §2º, I`), nunca dois registros com `Art. 121, §2º`.
@@ -147,11 +159,18 @@ do art. 5º, XLIII, da CF (graça, indulto, anistia). Exceções consolidadas fi
 `"Não"`: tráfico privilegiado (art. 33, §4º — STF, HC 118.533) e associação para o
 tráfico (art. 35).
 
-### C7. A faixa de pena vem do `obs`
+### C7. A faixa de pena vem de `pena_min`/`pena_max` ⛔ imposta
 
-Escreva a faixa em `obs` na unidade natural ("15 dias a 6 meses", "1-5 anos"); o
-transformador converte para meses e preserva o rótulo. `pena_min`/`pena_max` (em meses)
-são o fallback. Regra: `pena_min_meses <= pena_max_meses`.
+Os dois campos, **em meses**, são a autoridade: é deles que saem a moldura publicada e
+todo o cálculo de benefícios. O `obs` é descritivo — escreva nele a faixa na unidade
+natural ("15 dias a 6 meses", "1-5 anos") para quem lê, mas **ele não define pena**.
+
+Foi o contrário até a v1.2.16, e o preço apareceu: a moldura era extraída do texto do
+`obs` por expressão regular, e uma frase secundária mudava a pena publicada — o art. 32,
+§1º-A da Lei 9.605 exibia "3 meses a 1 ano" porque o `obs` mencionava a pena antiga.
+
+Regras verificadas a cada build: `pena_min <= pena_max`, e inteiro escrito como inteiro
+(`24`, não `24.0`).
 
 **Tipo sem pena mínima.** Nem todo tipo comina os dois extremos. Vários só têm teto —
 "detenção **até** 3 meses" (art. 32 da LCP; arts. 289, 290, 300, 301 e 309 do Código

@@ -50,6 +50,7 @@ RELATORIOS = RAIZ / "crawler" / "relatorios"
 CATALOGO = RAIZ / "static" / "data" / "crimes.json"
 FONTES = RAIZ / "data" / "fontes.json"
 EXCECOES = Path(__file__).resolve().parent / "excecoes.json"
+TRILHA = RAIZ / "data" / "conferencia.json"
 
 # Tolerância na comparação de molduras: 1 dia. Abaixo disso é arredondamento da
 # conversão para meses (o CP conta o mês como 30 dias), não divergência real.
@@ -397,6 +398,51 @@ def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]],
     return resultado
 
 
+def carimbar(res: dict, destino: Path) -> int:
+    """Grava a trilha de auditoria: quando cada registro foi conferido, e contra o quê.
+
+    O relatório da rodada é sobre a RODADA; some na semana seguinte. Esta trilha é
+    sobre o REGISTRO, e é o que permite a quem cita um dado saber quando ele foi
+    confrontado com a lei — a pergunta que um catálogo de pesquisa precisa responder.
+
+    Fica num arquivo próprio, e não em `data/crimes.json`, por dois motivos: a fonte é
+    escrita à mão e não deve ganhar campo de máquina; e carimbar 1.400 registros por
+    semana dentro dela encheria todo diff de ruído. `transform_data` junta os dois no
+    derivado, que é o que a aplicação lê.
+    """
+    fontes = {f["id"]: f for f in json.loads(FONTES.read_text(encoding="utf-8"))["fontes"]}
+    dia = hoje().isoformat()
+    trilha: dict[str, dict] = {}
+    for resultado in ("conferido", "divergente", "sem_moldura_na_lei", "dispensado"):
+        for item in res[resultado]:
+            fid, chave_disp, ident = item[0], item[1], item[2]
+            trilha[str(ident)] = {
+                "conferido_em": dia,
+                "resultado": resultado,
+                "dispositivo": chave_disp,
+                "fonte": fontes[fid]["url"],
+            }
+    conteudo = {
+        "_meta": {
+            "descricao": "Trilha de auditoria por registro: quando cada tipo penal foi "
+                         "confrontado com o texto compilado, com que resultado e contra "
+                         "qual página. Gerado por scripts/crawler/conferir.py --carimbar.",
+            "resultados": {
+                "conferido": "a moldura publicada bate com a que a lei comina",
+                "divergente": "não bate — virou achado da rodada",
+                "sem_moldura_na_lei": "o dispositivo não traz moldura própria (pena por "
+                                      "referência, sanção não privativa)",
+                "dispensado": "exceção já julgada, em excecoes.json",
+            },
+            "gerado_em": dia,
+        },
+        "registros": dict(sorted(trilha.items(), key=lambda kv: int(kv[0]))),
+    }
+    destino.write_bytes((json.dumps(conteudo, ensure_ascii=False, indent=2) + "\n")
+                        .replace("\n", "\r\n").encode("utf-8"))
+    return len(trilha)
+
+
 def montar_cobertura(res: dict, total_catalogo: int) -> str:
     """A seção de cobertura do relatório, em números redondos."""
     n = {k: len(v) for k, v in res.items()}
@@ -473,6 +519,8 @@ def main() -> int:
     p = argparse.ArgumentParser(description="Confere o catálogo contra o compilado.")
     p.add_argument("--fonte", action="append", default=[], metavar="ID")
     p.add_argument("--saida", default=str(RELATORIOS))
+    p.add_argument("--carimbar", action="store_true",
+                   help="grava a trilha de auditoria em data/conferencia.json")
     args = p.parse_args()
 
     fontes = json.loads(FONTES.read_text(encoding="utf-8"))["fontes"]
@@ -488,8 +536,15 @@ def main() -> int:
             por_fonte[f["id"]] = achados
 
     total = len(json.loads(CATALOGO.read_text(encoding="utf-8")))
-    cob = montar_cobertura(cobertura(fontes, indice, excecoes), total)
+    medida = cobertura(fontes, indice, excecoes)
+    cob = montar_cobertura(medida, total)
     relatorio = montar_relatorio(por_fonte) + "\n" + cob
+
+    # A trilha só é reescrita numa rodada COMPLETA: carimbar depois de conferir um
+    # diploma só apagaria o registro dos outros 61.
+    if args.carimbar and not args.fonte:
+        n = carimbar(medida, TRILHA)
+        print(f"trilha de auditoria: {n} registros carimbados em {TRILHA.name}")
     destino = Path(args.saida)
     destino.mkdir(parents=True, exist_ok=True)
     (destino / f"{hoje().isoformat()}.md").write_text(relatorio, encoding="utf-8")

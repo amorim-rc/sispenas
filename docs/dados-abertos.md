@@ -92,6 +92,9 @@ os dados saber o que pode mudar sem quebrar uma conta.
 | `perdao_judicial_previsto` | Só é `true` nas hipóteses expressamente previstas em lei — não há perdão judicial genérico. |
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente`, `duplicata_ids` | Detecção de registro repetido. `duplicata_divergente` marcaria o mesmo dispositivo com penas conflitantes; **hoje não há nenhum**. |
 | `derivado_auto` | Marca o registro cujos campos passaram por preenchimento automático. |
+| `fonte` | A página do texto compilado contra a qual este registro é conferido. |
+| `conferido_em` | Data da última conferência deste registro contra a lei (AAAA-MM-DD). |
+| `conferido_resultado` | `conferido` (a moldura bate), `sem_moldura_na_lei` (o dispositivo não traz moldura própria: pena por referência ou sanção não privativa), `divergente` (virou achado) ou `dispensado` (exceção já julgada). |
 
 ## De onde vem cada registro, e como ele é revisado
 
@@ -159,6 +162,19 @@ Diário publica por dia e que não podem criar crime. O resultado é uma lista p
 uma decisão: aparecer nela só significa que vale a pena abrir o texto. O filtro é
 deliberadamente largo, porque um alarme falso custa dez segundos de leitura e uma lei nova
 que passe despercebida custa meses de catálogo desatualizado.
+
+### Cada registro diz quando foi conferido
+
+Saber que existe conferência semanal não basta para quem cita um dado: é preciso saber
+**deste** registro. Por isso cada tipo penal carrega três campos de auditoria — `fonte` (a
+página oficial contra a qual ele é conferido), `conferido_em` (a data) e
+`conferido_resultado` (se a moldura bateu, se o dispositivo não tem moldura própria, ou se
+virou achado).
+
+A trilha é produzida pela rodada semanal e vive em
+[`/data/conferencia.json`](pathname:///sispenas/data/conferencia.json), fora do catálogo
+editado à mão. Registro recém-criado, ainda não alcançado por uma rodada, tem os três
+campos nulos — o que também é uma informação.
 
 ### O que ainda não é conferido automaticamente
 

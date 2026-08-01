@@ -35,7 +35,7 @@ data/crimes.json  ──►  scripts/transform_data.py  ──►  static/data/c
 
 | Campo | Descrição |
 |---|---|
-| `id` | Identificador estável. É o que aparece em `?tipo=N` na URL. |
+| `id` | Identificador estável. É o que aparece em `?tipo=N` na URL. Nunca reatribuído. |
 | `lei` | Diploma (`CP`, `CTB`, `Lei 11.343/06`…). |
 | `artigo` | Dispositivo (`Art. 121, §2º, I`). |
 | `crime` | Nome do tipo penal. |
@@ -46,7 +46,7 @@ data/crimes.json  ──►  scripts/transform_data.py  ──►  static/data/c
 | `elemento` | `Doloso`, `Culposo`, `Preterdoloso`. |
 | `tentativa` | O tipo admite tentativa? |
 | `violencia` / `grave_ameaca` | Elementares que vedam vários benefícios. |
-| `obs` | Texto livre com a descrição legal. É de onde a pena é parseada. |
+| `obs` | Texto livre com a descrição legal. **Descritivo**: a pena publicada vem de `pena_min`/`pena_max`, não daqui. |
 
 ## Campos derivados
 
@@ -56,13 +56,14 @@ Gerados por `scripts/transform_data.py`. **Todos são heurísticos** e sujeitos 
 |---|---|
 | `pena_privativa` | Mapeado de `tipo_pena`. |
 | `tem_multa`, `multa_regime` | Regex sobre `obs` (`e multa` → cumulativa; `ou multa` → alternativa). |
-| `pena_min_meses`, `pena_max_meses` | Parser de intervalos (`"15 dias a 6 meses"`, `"1-5 anos"`), com fallback para `pena_min`/`pena_max`. O mês vale 30 dias (art. 11, CP). |
+| `pena_min_meses`, `pena_max_meses` | Cópia de `pena_min`/`pena_max`, que são a autoridade. O mês vale 30 dias (art. 11, CP). |
 | `pena_*_rotulo`, `pena_faixa_rotulo` | Exibição na unidade natural. |
 | `infracao_menor_potencial` | `pena_max_meses <= 24` **e** pena > 0. |
 | `tem_pena_privativa` | O tipo comina prisão? Se não, declara `sancoes_nao_privativas`. |
 | `resultado_morte` | Regex sobre o **nome** do tipo (art. 112, VI e VIII, LEP). |
 | `perdao_judicial_previsto` | Lista curada de dispositivos (art. 107, IX, CP). |
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente` | Detecção de registros repetidos. |
+| `fonte`, `conferido_em`, `conferido_resultado` | Trilha de auditoria: contra qual página, quando e com que resultado o registro foi conferido. Vem de `data/conferencia.json`, escrito pela rodada semanal. |
 | `duplicata_tipo` | `pena` · `identidade` · `hediondez` — o tipo do defeito (ver abaixo). |
 
 ### `tem_pena_privativa` — e por que o catálogo só tem tipos penais
@@ -79,11 +80,13 @@ reportava 325 tipos cabíveis; o correto era 303.
 Foram removidos, e a regra passou a ser **imposta** pelo transformador: um registro que não
 declare pena nem sanção falha o build (convenção C1, no `CONTRIBUTING.md`).
 
-Sobra uma distinção legítima: **tipo penal que não comina prisão**. Hoje é só o art. 28 da
-Lei 11.343/06 (porte para consumo), cujas sanções são as do art. 28, I a III — advertência,
-prestação de serviços e medida educativa. Ele é tipo penal, fica no catálogo, declara
-`sancoes_nao_privativas` e recebe `tem_pena_privativa: false`, que o mantém fora das
-estatísticas de alcance (que se medem por patamar de pena) sem excluí-lo da consulta.
+Sobra uma distinção legítima: **tipo penal que não comina prisão**. O exemplo mais claro é
+o art. 28 da Lei 11.343/06 (porte para consumo), cujas sanções são as do art. 28, I a III —
+advertência, prestação de serviços e medida educativa; a maior parte dos demais são
+contravenções punidas só com multa, como o art. 32 da LCP (dirigir sem habilitação). São
+tipos penais, ficam no catálogo, declaram `sancoes_nao_privativas` ou `tipo_pena: "Multa"`
+e recebem `tem_pena_privativa: false`, que os mantém fora das estatísticas de alcance (que
+se medem por patamar de pena) sem excluí-los da consulta.
 
 :::note[Majorantes com pena própria são exibidas]
 As causas de aumento que constituem um **dispositivo com pena própria** — como o roubo
@@ -120,13 +123,17 @@ primeira o admite.
 A cada regeneração, o script emite `static/data/qualidade.json` com o estado do catálogo,
 e a CI o valida antes de qualquer publicação.
 
-| Indicador | Valor |
+Os números vivos ficam em duas páginas geradas, para não envelhecerem aqui:
+[Completude](/docs/completude) (quantos tipos, por diploma) e
+[`/data/qualidade.json`](pathname:///sispenas/data/qualidade.json) (o relatório completo,
+com os `id` de cada pendência). O que esta página fixa são os **invariantes**:
+
+| Invariante | Estado |
 |---|---|
-| Tipos penais | 1.007 |
-| Com pena privativa | 1.005 |
-| Sem pena privativa | 2 (art. 28 da Lei 11.343/06; art. 146-A caput, bullying) |
-| Dispositivos distintos | 873 |
-| **Contradições internas** | **0** |
+| Contradições internas | **0**, travadas pela CI |
+| Registros sem pena declarada | **0** (todo tipo declara pena ou sanção) |
+| `id` reaproveitado | **0**, travado pela CI |
+| Divergência com o texto compilado | **0** na última conferência semanal |
 
 ### Contradições: zeradas e travadas
 
@@ -145,7 +152,11 @@ entrar**. O catálogo não pode regredir.
 - **Toda sanção declarada** (C2) e **`id` append-only** (C3): a URL pública nunca aponta
   para o crime errado.
 - **Zero contradições** (C4) e derivado sincronizado com a fonte.
-- **Casos-âncora de direito penal** (`npm run verificar`): 22 benefícios × 1.005 tipos.
+- **Casos-âncora de direito penal** (`npm run verificar`): cada benefício avaliado contra o
+  catálogo real, com os invariantes do motor.
+- **Conferência semanal contra o Planalto** (`conferidor.yml`): pena, espécie, existência e
+  situação de cada dispositivo, com a cobertura publicada no relatório — ver
+  [Dados abertos](/docs/dados-abertos#de-onde-vem-cada-registro-e-como-ele-é-revisado).
 
 ## Como corrigir um tipo penal
 

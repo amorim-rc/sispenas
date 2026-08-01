@@ -26,12 +26,14 @@ segura, o achado vira pergunta na issue em vez de virar dado.
 | `propor.py` | Escolhe o diploma da rodada, aplica, escreve a entrada de changelog, sobe a versão e monta o corpo do PR. |
 | `dou_watcher.py` | Filtro semanal da Seção 1 do DOU, para achar lei penal **nova e autônoma**. |
 | `excecoes.json` | O que já foi julgado e decidido. Sem isso o relatório repetiria para sempre os mesmos achados. |
+| `tempo.py` | A data de Brasília. O runner roda em UTC, e sem isso a rodada das 21h se datava de amanhã. |
 
 ## Rodar à mão
 
 ```bash
 python scripts/crawler/baixar.py --todas          # ou --fonte cp
 python scripts/crawler/conferir.py                # relatório de tudo
+python scripts/crawler/conferir.py --carimbar     # + trilha em data/conferencia.json
 python scripts/crawler/propor.py                  # o PR que sairia (não escreve)
 python scripts/crawler/dou_watcher.py --dias 8
 python -m pytest scripts/crawler/tests            # sem rede, contra fixtures
@@ -41,6 +43,10 @@ O workflow também roda sob demanda: aba **Actions** → "Conferidor semanal" �
 **Run workflow**, com opção de não abrir PR e de incluir linhas novas.
 
 ## O que o robô faz e o que não faz
+
+**Faz**, sozinho, direto na `main`: carimba a trilha de auditoria
+(`data/conferencia.json` → `fonte`, `conferido_em` e `conferido_resultado` no derivado).
+É registro do que a máquina fez, não proposta de mudança de dado.
 
 **Faz**, sozinho, em PR: corrigir moldura ou espécie de pena de linha que já
 existe, quando o compilado diz outra coisa. Um diploma por rodada, um PR aberto

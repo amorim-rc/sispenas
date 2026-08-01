@@ -130,13 +130,17 @@ jobs:
         if: steps.conferir.outputs.codigo == '0' && steps.dou.outputs.codigo != '3'
         run: echo "Catálogo em dia com o texto compilado e nada penal no DOU."
 
-  # ── PR das correções mecânicas ────────────────────────────────────────────
-  # Job separado de propósito: o token do app só é pedido quando há o que
-  # propor, e o Environment prende esse token à `main`.
+  # ── Carimbo da conferência e PR das correções mecânicas ───────────────────
+  # Job separado de propósito: escreve no repositório e, por isso, é o único que
+  # pede o token do app — que o Environment prende à `main`.
+  #
+  # Roda em TODA rodada, mesmo sem achado: é aqui que a trilha de auditoria é
+  # atualizada, e "conferido hoje, tudo certo" é justamente o caso que mais
+  # importa registrar.
   propor:
     needs: conferir
     if: >-
-      needs.conferir.outputs.codigo == '3'
+      needs.conferir.result == 'success'
       && (github.event_name != 'workflow_dispatch' || inputs.abrir_pr)
     runs-on: ubuntu-latest
     # O Environment é a trava SERVER-SIDE dos secrets do app: com a política de
@@ -186,23 +190,43 @@ jobs:
           [ "$n" -eq 0 ] || echo "::notice::$n PR do conferidor já aberto — nada a fazer nesta rodada."
 
       - uses: actions/setup-python@v7
-        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        if: steps.app.outputs.token != ''
         with:
           python-version: '3.12'
 
       - uses: actions/setup-node@v7
-        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        if: steps.app.outputs.token != ''
         with:
           node-version: 24
           cache: npm
 
       # O differ lê os snapshots baixados no job anterior.
       - name: Recuperar os snapshots da rodada
-        if: steps.app.outputs.token != '' && steps.aberto.outputs.quantidade == '0'
+        if: steps.app.outputs.token != ''
         uses: actions/download-artifact@v5
         with:
           name: conferidor-${{ github.run_number }}
           path: crawler/
+
+      # A trilha de auditoria: quando cada registro foi confrontado com a lei,
+      # com que resultado e contra qual página. Vai direto para a `main`, sem
+      # PR — é registro do que a máquina fez, não proposta de mudança de dado.
+      - name: Carimbar a conferência
+        if: steps.app.outputs.token != ''
+        env:
+          SLUG: ${{ steps.app.outputs.app-slug }}
+        run: |
+          python3 scripts/crawler/conferir.py --carimbar > /dev/null || true
+          python3 scripts/transform_data.py --estrito --max-contradicoes=0
+          if [ -n "$(git status --porcelain data/conferencia.json static/data/crimes.json)" ]; then
+            git config user.name "${SLUG:-sispenas-automacao}[bot]"
+            git config user.email "${SLUG:-sispenas-automacao}[bot]@users.noreply.github.com"
+            git add data/conferencia.json static/data/crimes.json
+            git commit -m "chore(catalogo): carimbo da conferência semanal [skip ci]"
+            git push
+          else
+            echo "Trilha inalterada."
+          fi
 
       - name: Montar a proposta
         id: propor

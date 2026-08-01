@@ -33,6 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "crimes.json"
 APOSENTADOS = ROOT / "data" / "ids-aposentados.json"
+CONFERENCIA = ROOT / "data" / "conferencia.json"
 OUT = ROOT / "static" / "data" / "crimes.json"
 RELATORIO = ROOT / "static" / "data" / "qualidade.json"
 
@@ -471,8 +472,21 @@ def detect_multa(obs: str, tipo_pena: str):
     return True, "cumulativa", ambiguo, motivo
 
 
+def carregar_trilha() -> dict:
+    """Trilha de auditoria da última rodada do conferidor, se houver.
+
+    Ausente num clone que ainda não rodou o conferidor — nesse caso os campos
+    saem nulos, e a aplicação trata como "ainda não conferido". Nunca falha o
+    build por causa disso: a trilha é informação SOBRE o dado, não o dado.
+    """
+    if not CONFERENCIA.exists():
+        return {}
+    return json.loads(CONFERENCIA.read_text(encoding="utf-8")).get("registros", {})
+
+
 def main():
     crimes = json.loads(SRC.read_text(encoding="utf-8"))
+    trilha = carregar_trilha()
     review_rows = []
 
     # Invariantes estruturais: falham sempre, independentemente de --estrito.
@@ -521,6 +535,15 @@ def main():
         c["perdao_judicial_previsto"] = any(_casa(p, c) for p in PERDAO_JUDICIAL)
 
         c["chave_dispositivo"] = chave_dispositivo(c)
+
+        # Trilha de auditoria: quando este registro foi confrontado com a lei,
+        # com que resultado e contra qual página. Vem da última rodada do
+        # conferidor (data/conferencia.json) — quem cita um dado precisa saber
+        # de quando é a conferência, e não só que ela existe.
+        auditoria = trilha.get(str(c["id"]))
+        c["fonte"] = (auditoria or {}).get("fonte")
+        c["conferido_em"] = (auditoria or {}).get("conferido_em")
+        c["conferido_resultado"] = (auditoria or {}).get("resultado")
 
         if ambiguo:
             review_rows.append(

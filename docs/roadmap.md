@@ -66,9 +66,9 @@ relatório para decisão humana. Acuidade jurídica continua sendo o valor centr
 
 ### O que falta
 
-- [ ] Trilha de auditoria por registro: `fonte` e `atualizado_em`
-- [ ] Rotina de revogação: hoje cada achado de dispositivo revogado é tratado à mão,
-      porque remover implica decidir o destino da URL pública
+Nada além do que já está entregue: a trilha de auditoria por registro (`fonte` e
+`conferido_em`) foi antecipada para a v1.5.0, e a rotina de revogação depende do acervo
+histórico ter destino próprio — está na [v2.2.0](#v220--acervo-histórico).
 
 :::note[Por que MAIOR]
 Não é o tamanho da mudança, é a **natureza** dela: o catálogo deixa de ser um acervo
@@ -131,6 +131,10 @@ aqui, em vez de desaparecer.
       ECA art. 233, LCP arts. 27, 39, 60, 61 e 65, Lei de Imprensa, LSN, Estatuto do
       Torcedor, o art. 19 (vetado) da Lei 9.807/99 e as redações **alteradas** registradas
       nas conferências (art. 121, §2º VI — feminicídio; Maria da Penha art. 24-A…)
+- [ ] **Rotina de revogação**: hoje cada dispositivo revogado que a conferência encontra é
+      tratado à mão, porque removê-lo implica decidir o destino da URL pública. Com o
+      acervo em pé, a rotina fecha o ciclo — o registro migra para cá e a rota antiga
+      passa a apontar para o histórico, em vez de terminar em erro
 
 ---
 
