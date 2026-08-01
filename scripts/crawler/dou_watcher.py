@@ -189,6 +189,7 @@ def triar(itens: list[dict], padrao: re.Pattern, numeros: dict[str, str],
         if not citados and not termos:
             continue
         candidatas.append({
+            "integral": integral,
             "titulo": (item.get("title") or "").strip(),
             "especie": (item.get("artType") or "").strip(),
             "data": item.get("pubDate") or "",
@@ -198,7 +199,59 @@ def triar(itens: list[dict], padrao: re.Pattern, numeros: dict[str, str],
             "integral": bool(integral),
             "ementa": (item.get("content") or "")[:300],
         })
+        candidatas[-1]["fonte_proposta"] = propor_fonte(
+            candidatas[-1], integral, set(numeros))
     return candidatas
+
+
+
+# Vocabulário que distingue "lei que CRIA crime" de "lei que fala de pena". Só o
+# primeiro justifica vigiar um diploma novo toda semana.
+_TIPIFICA = re.compile(
+    r"Pena\s*[-–—:]|reclus[ãa]o,\s*de|deten[çc][ãa]o,\s*de|pris[ãa]o simples,\s*de",
+    re.IGNORECASE)
+_NUMERO_LEI = re.compile(r"LEI\s+(?:COMPLEMENTAR\s+)?N[ºo°.\s]*\s*([\d.]+)", re.IGNORECASE)
+_ANO = re.compile(r"DE\s+\d{1,2}\s+DE\s+\w+\s+DE\s+(\d{4})", re.IGNORECASE)
+
+
+def propor_fonte(candidata: dict, integral: str, ja_monitorados: set[str]) -> dict | None:
+    """Entrada de `data/fontes.json` para uma lei que parece criar tipo penal.
+
+    Proposta, não conclusão: o `id` e os `rotulos` são chutes razoáveis, e a
+    pergunta que importa — *esta lei cria tipo penal próprio?* — continua sendo
+    humana. O valor está em não ter de escrever a entrada do zero: a URL do
+    compilado segue padrão fixo no Planalto, e a sentinela sai do próprio texto.
+    """
+    if not _TIPIFICA.search(integral or ""):
+        return None
+    # Lei que CITA diploma monitorado está alterando algo que já vigiamos: o
+    # crime novo vai aparecer na página daquele diploma, e criar fonte para ela
+    # duplicaria a vigilância. O que interessa aqui é a lei que não se apoia em
+    # nenhuma das 63 páginas — a penal nova e autônoma.
+    if candidata.get("diplomas_citados"):
+        return None
+    m = _NUMERO_LEI.search(candidata["titulo"])
+    ma = _ANO.search(candidata["titulo"])
+    if not m or not ma:
+        return None
+    numero = m.group(1).replace(".", "")
+    ano = ma.group(1)
+    if numero in ja_monitorados:
+        return None
+    faixa = f"_ato{(int(ano) - (int(ano) - 2023) % 4)}-{(int(ano) - (int(ano) - 2023) % 4) + 3}"
+    complementar = "complementar" in candidata["titulo"].lower()
+    arquivo = f"lcp{numero}.htm" if complementar else f"l{numero}.htm"
+    return {
+        "id": f"NOVA-{numero}",
+        "rotulos": [f"Lei {numero[:-3]}.{numero[-3:]}/{ano[-2:]}" if len(numero) > 3
+                    else f"Lei {numero}/{ano[-2:]}"],
+        "url": f"https://www.planalto.gov.br/ccivil_03/{faixa}/{ano}/lei/{arquivo}",
+        "sentinela": numero,
+        "obs": (f"PROPOSTA automática a partir do DOU de {candidata['data']}. Confira a "
+                f"URL (o Planalto muda o padrão em leis complementares e antigas), "
+                f"escolha um `id` descritivo e ajuste os rótulos para os que o catálogo "
+                f"usar. Ato: {candidata['url']}"),
+    }
 
 
 # ── Relatório ───────────────────────────────────────────────────────────────
@@ -227,6 +280,12 @@ def montar_relatorio(candidatas: list[dict], inicio: date, fim: date) -> str:
         if not c["integral"]:
             L.append("- ⚠️ texto integral não pôde ser lido; a triagem usou só a ementa")
         L.append(f"- Ementa: {c['ementa']}")
+        if c.get("fonte_proposta"):
+            L += ["- **Parece criar tipo penal.** Entrada proposta para "
+                  "`data/fontes.json` (o PR da semana já a traz aplicada, para conferir):",
+                  "", "```json",
+                  json.dumps(c["fonte_proposta"], ensure_ascii=False, indent=2),
+                  "```"]
         L.append("")
     return "\n".join(L) + "\n"
 
@@ -269,6 +328,10 @@ def main() -> int:
     (destino / f"dou-{fim.isoformat()}.md").write_text(relatorio, encoding="utf-8")
     (destino / f"dou-{fim.isoformat()}.json").write_text(
         json.dumps(candidatas, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # O PR da semana lê daqui as entradas de diploma a acrescentar em fontes.json.
+    (destino / "fontes-propostas.json").write_text(
+        json.dumps([c["fonte_proposta"] for c in candidatas if c.get("fonte_proposta")],
+                   ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(relatorio)
     return 3 if candidatas else 0
 

@@ -139,6 +139,113 @@ def escolher(com_novas: bool, apenas: str | None = None) -> dict | None:
     return melhor
 
 
+# ── Auditoria: propostas que dependem de juízo ──────────────────────────────
+# Regra da casa: o que a máquina lê com segurança ela corrige; o que depende de
+# juízo jurídico ela PROPÕE, em PR, com o fundamento ao lado. Corrigir um PR é
+# mais barato do que montar um do zero — e o diff mostra exatamente o que muda.
+CAMPO_DO_ACHADO = {"hediondez": "hediondo", "acao_penal": "acao"}
+
+
+def propostas_de_auditoria(achados: list[dict]) -> list[dict]:
+    """Achados da auditoria que viram mudança concreta de campo."""
+    catalogo = {c["id"]: c for c in json.loads(CATALOGO_FONTE.read_text(encoding="utf-8"))}
+    propostas = []
+    for a in achados:
+        campo = CAMPO_DO_ACHADO.get(a.get("campo"))
+        if not campo or "id" not in a or not a.get("para"):
+            continue
+        linha = catalogo.get(a["id"])
+        if linha is None or linha.get(campo) == a["para"]:
+            continue
+        propostas.append({
+            "id": a["id"], "campo": campo,
+            "de": linha.get(campo), "para": a["para"],
+            "fundamento": a.get("fundamento") or a["detalhe"],
+            "lei": linha["lei"], "artigo": linha["artigo"], "crime": linha["crime"],
+        })
+    return propostas
+
+
+def aplicar_auditoria(propostas: list[dict]) -> None:
+    dados = json.loads(CATALOGO_FONTE.read_text(encoding="utf-8"))
+    por_id = {p["id"]: p for p in propostas}
+    for c in dados:
+        p = por_id.get(c["id"])
+        if p:
+            c[p["campo"]] = p["para"]
+    texto = json.dumps(dados, ensure_ascii=False, indent=2) + "\n"
+    CATALOGO_FONTE.write_bytes(texto.replace("\n", "\r\n").encode("utf-8"))
+
+
+def aplicar_fontes_propostas() -> list[dict]:
+    """Acrescenta a `data/fontes.json` os diplomas que o watcher propôs.
+
+    Entram com `id` provisório (`NOVA-15410`) e `obs` explicando o que conferir:
+    a URL do compilado segue padrão, mas o Planalto foge dele em lei
+    complementar e em lei antiga. Corrigir isso no PR é mais barato do que
+    escrever a entrada do zero — que é o ponto.
+    """
+    proposto = RAIZ / "crawler" / "relatorios" / "fontes-propostas.json"
+    if not proposto.exists():
+        return []
+    novas = json.loads(proposto.read_text(encoding="utf-8"))
+    if not novas:
+        return []
+    texto = FONTES.read_bytes().decode("utf-8")
+    existentes = {f["id"] for f in json.loads(texto)["fontes"]}
+    entram = [n for n in novas if n["id"] not in existentes]
+    if not entram:
+        return []
+    i = texto.rindex("}\r\n  ]")
+    bloco = ",\r\n" + ",\r\n".join(
+        "    " + json.dumps(n, ensure_ascii=False) for n in entram)
+    FONTES.write_bytes((texto[:i + 1] + bloco + texto[i + 1:]).encode("utf-8"))
+    return entram
+
+
+def corpo_auditoria(propostas: list[dict], versao: str, relatorio: str,
+                    fontes_novas: list[dict] | None = None) -> str:
+    """Corpo do PR de auditoria: cada mudança com o fundamento que a sustenta."""
+    por_campo: dict[str, list[dict]] = {}
+    for p in propostas:
+        por_campo.setdefault(p["campo"], []).append(p)
+
+    L = [
+        "## Auditoria dos campos de classificação", "",
+        f"{len(propostas)} mudança(s) propostas em campos que **decidem benefício** e que "
+        "a conferência de penas não alcançava. Fecha a versão **v" + versao + "**.", "",
+        "> ⚠️ **Isto pede o seu juízo, não só uma conferida.** A máquina comparou o "
+        "catálogo com o rol legal e com as fórmulas de ação penal do próprio diploma; "
+        "onde a lei condiciona a classificação a circunstância do caso, ela não propôs "
+        "nada. Cada linha abaixo cita o fundamento — confira antes de aprovar.", "",
+    ]
+    titulos = {"hediondo": "Hediondez", "acao": "Ação penal"}
+    for campo, itens in sorted(por_campo.items()):
+        L += [f"### {titulos.get(campo, campo)} — {len(itens)}", ""]
+        for p in itens:
+            L += [
+                f"- **id {p['id']}** `{p['lei']} {p['artigo']}` — {p['de']} → **{p['para']}**",
+                f"  - *{p['crime'][:100]}*",
+                f"  - {p['fundamento']}",
+                f"  - <{SITE}/pesquisa/tipos?tipo={p['id']}>",
+            ]
+        L.append("")
+    if fontes_novas:
+        L += [f"### Diplomas novos ({len(fontes_novas)})", "",
+              "O watcher do DOU encontrou lei que **parece criar tipo penal** e que nenhum "
+              "diploma monitorado cobre. A entrada já vai aplicada em `data/fontes.json`, "
+              "com `id` provisório — **confira a URL do compilado e troque o `id` por um "
+              "descritivo** antes de aprovar. A partir do merge, o diploma passa a ser "
+              "conferido toda semana.", ""]
+        for n in fontes_novas:
+            L += [f"- **{n['id']}** — {', '.join(n['rotulos'])}", f"  - <{n['url']}>",
+                  f"  - {n['obs']}"]
+        L.append("")
+    L += ["---", "", "Relatório completo da auditoria, com o que NÃO virou proposta:", "",
+          "<details><summary>abrir</summary>", "", relatorio, "", "</details>", ""]
+    return "\n".join(L) + "\n"
+
+
 # ── Textos ──────────────────────────────────────────────────────────────────
 def _rotulo(fonte: dict) -> str:
     return fonte["rotulos"][0]
@@ -337,6 +444,113 @@ def aplicar(escolha: dict, versao: str, dia: str, saida: Path) -> dict:
     return meta
 
 
+def entrada_changelog_auditoria(propostas: list[dict], versao: str,
+                                dia: str) -> tuple[Path, str]:
+    """Entrada do feed para a rodada de auditoria."""
+    ident = f"{dia}-auditoria-classificacao"
+    destino = ENTRADAS / dia[:4] / f"{ident}.ts"
+    n = 2
+    while destino.exists():
+        ident = f"{dia}-auditoria-classificacao-{n}"
+        destino = ENTRADAS / dia[:4] / f"{ident}.ts"
+        n += 1
+
+    por_campo: dict[str, int] = {}
+    for p in propostas:
+        por_campo[p["campo"]] = por_campo.get(p["campo"], 0) + 1
+    partes = []
+    if por_campo.get("hediondo"):
+        partes.append(_plural(por_campo["hediondo"], "tipo teve a hediondez corrigida",
+                              "tipos tiveram a hediondez corrigida"))
+    if por_campo.get("acao"):
+        partes.append(_plural(por_campo["acao"], "teve a ação penal corrigida",
+                              "tiveram a ação penal corrigida"))
+    titulo = "Classificação conferida contra a lei: " + " e ".join(partes)
+
+    corpo = [
+        "A hediondez de um crime não é opinião: está no art. 1º da Lei 8.072/1990, que é "
+        "uma lista fechada. A ação penal também tem regra — pública incondicionada, salvo "
+        "quando o próprio diploma diz o contrário. Os dois campos decidem benefício, e "
+        "nenhum dos dois era conferido contra a lei até agora.",
+        "A conferência semanal passa a compará-los: o rol de hediondos, transcrito numa "
+        "tabela que a máquina vigia contra alterações do texto legal, e as fórmulas de "
+        "ação penal escritas no próprio artigo. Onde a lei condiciona a classificação a "
+        "uma circunstância do caso — o homicídio praticado por grupo de extermínio, a "
+        "organização criminosa direcionada a crime hediondo —, nada é proposto: a lei não "
+        "decide pelo tipo, e quem decide é quem julga.",
+    ]
+    ts = f"""import type {{ChangelogEntry}} from '../../types';
+
+const entrada: ChangelogEntry = {{
+  id: '{ident}',
+  date: '{dia}',
+  title: {json.dumps(titulo, ensure_ascii=False)},
+  summary:
+    {json.dumps("Auditoria dos campos de classificação contra o texto legal: " + " e ".join(partes) + ".", ensure_ascii=False)},
+  body: [
+{chr(10).join('    ' + json.dumps(p, ensure_ascii=False) + ',' for p in corpo)}
+  ],
+  tipo: 'correcao',
+  areas: ['Tipos penais', 'Benefícios'],
+  version: 'v{versao}',
+}};
+
+export default entrada;
+"""
+    return destino, ts
+
+
+def _rodada_de_auditoria(args) -> int:
+    """PR das mudanças de classificação.
+
+    Só corre quando não há correção de PENA pendente: um PR por rodada, e a pena
+    tem prioridade — é o que a máquina lê com segurança. A classificação vem
+    depois, e vem como proposta.
+    """
+    import auditar
+
+    achados = auditar.rodar()
+    propostas = propostas_de_auditoria(achados)
+    print(f"auditoria: {len(achados)} achado(s), {len(propostas)} viram proposta")
+    for p in propostas[:40]:
+        print(f"  id {p['id']:5d} {p['campo']:9s} {p['de']} -> {p['para']}  "
+              f"{p['lei']} {p['artigo']}")
+    if not propostas:
+        return 1
+
+    versao = proxima_versao(versao_atual())
+    if not args.aplicar:
+        print(f"(simulacao - nada foi escrito; fecharia a v{versao})")
+        return 0
+
+    aplicar_auditoria(propostas)
+    fontes_novas = aplicar_fontes_propostas()
+    dia = hoje().isoformat()
+    destino, ts = entrada_changelog_auditoria(propostas, versao, dia)
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    destino.write_bytes(ts.replace("\n", "\r\n").encode("utf-8"))
+    subir_versao(versao)
+
+    saida = Path(args.saida)
+    saida.mkdir(parents=True, exist_ok=True)
+    (saida / "corpo.md").write_text(
+        corpo_auditoria(propostas, versao, auditar.montar_relatorio(achados),
+                        fontes_novas),
+        encoding="utf-8", newline="\n")
+    meta = {
+        "fonte": "auditoria", "rotulo": "classificação",
+        "correcoes": len(propostas), "novas": 0,
+        "humanos": len(achados) - len(propostas), "versao": versao,
+        "ramo": f"conferidor/auditoria-{dia}",
+        "titulo": f"fix(catalogo): {len(propostas)} ajuste(s) de hediondez e ação penal",
+        "entrada": destino.name,
+    }
+    (saida / "meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n",
+                                     encoding="utf-8", newline="\n")
+    print(f"aplicado; ramo {meta['ramo']}, versão v{versao}")
+    return 0
+
+
 def main() -> int:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description="Monta a proposta da rodada do conferidor.")
@@ -346,7 +560,12 @@ def main() -> int:
     p.add_argument("--aplicar", action="store_true",
                    help="escreve no catálogo, no changelog e na versão")
     p.add_argument("--saida", default=str(RAIZ / "crawler" / "proposta"))
+    p.add_argument("--auditoria", action="store_true",
+                   help="propõe as mudanças de hediondez e ação penal (exigem juízo)")
     args = p.parse_args()
+
+    if args.auditoria:
+        return _rodada_de_auditoria(args)
 
     escolha = escolher(com_novas=args.com_novas, apenas=args.fonte)
     if escolha is None:

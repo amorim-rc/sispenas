@@ -182,8 +182,14 @@ Honestidade sobre o alcance, para quem for citar:
 
 - a conferência automática cobre **pena, espécie de pena, existência e situação** do
   dispositivo;
-- **não** cobre o nome dado ao tipo, a natureza da ação penal, a classificação como
-  hediondo nem as causas de aumento e diminuição — esses campos são revisados à mão;
+- **hediondez** é comparada com o rol do art. 1º da Lei 8.072/1990, e **ação penal** com as
+  fórmulas escritas no próprio artigo — mas onde a lei condiciona a classificação a
+  circunstância do caso (homicídio por grupo de extermínio, organização direcionada a
+  crime hediondo), a máquina não decide nem propõe;
+- **causas de aumento** e **nome do tipo** só geram lista para leitura humana: modelar um
+  aumento exige decidir sobre quais tipos ele incide, e comparar nomes é heurística;
+- **tentativa, violência e grave ameaça** não têm fonte textual que os declare — são
+  qualificações do tipo, revisadas à mão;
 - o [relatório de qualidade](#relatório-de-qualidade) publica, a cada build, as
   contradições conhecidas e os `id` envolvidos.
 

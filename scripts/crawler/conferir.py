@@ -273,6 +273,14 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
                 })
 
     # 2) O que a lei tem com pena própria e o catálogo não registra.
+    #
+    # Diploma de REFERÊNCIA não entra aqui: a Lei 8.072 é vigiada pelo rol de
+    # hediondos, não por tipos próprios, e seus arts. 8º e 9º — que alteram pena
+    # de crimes de OUTROS diplomas — apareceriam como dez tipos ausentes.
+    if fonte.get("referencia"):
+        for a in achados:
+            a["fonte"] = fonte["id"]
+        return achados
     for d in dispositivos:
         if d.chave in do_catalogo or dispensado(excecoes, fonte["id"], d.chave):
             continue

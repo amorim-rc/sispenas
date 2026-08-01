@@ -79,6 +79,16 @@ jobs:
           python3 scripts/crawler/dou_watcher.py --dias 8 > /dev/null
           echo "codigo=$?" >> "$GITHUB_OUTPUT"
 
+      # Hediondez, ação penal, causas de aumento e nome do tipo: os campos que
+      # decidem benefício e que a conferência de PENAS não alcança.
+      - name: Auditar os campos de classificação
+        id: auditoria
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/crawler/auditar.py > /dev/null
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+
       - name: Guardar relatório e snapshots
         if: always()
         uses: actions/upload-artifact@v5
@@ -93,7 +103,9 @@ jobs:
       # achado em linha. Uma issue por rodada, para que a semana seja unidade de
       # trabalho e o fechamento signifique "triado".
       - name: Abrir issue com os achados
-        if: steps.conferir.outputs.codigo == '3' || steps.dou.outputs.codigo == '3'
+        if: >-
+          steps.conferir.outputs.codigo == '3' || steps.dou.outputs.codigo == '3'
+          || steps.auditoria.outputs.codigo == '3'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -115,6 +127,8 @@ jobs:
             [ -f "$RELATORIO" ] && cat "$RELATORIO"
             echo
             [ -f "$DOU" ] && cat "$DOU"
+            echo
+            [ -f "crawler/relatorios/auditoria-$HOJE.md" ] && cat "crawler/relatorios/auditoria-$HOJE.md"
           } > corpo.md
           # O corpo da issue tem limite de 65.536 caracteres.
           if [ "$(wc -c < corpo.md)" -gt 60000 ]; then
@@ -237,8 +251,16 @@ jobs:
             ${{ (github.event_name == 'workflow_dispatch' && inputs.incluir_linhas_novas) && '--com-novas' || '' }}
           codigo=$?
           set -e
+          # 1 = nada mecânico. Aí a vez é da auditoria de classificação, que
+          # propõe hediondez e ação penal — mudanças que PEDEM juízo, e por isso
+          # vão em PR, com o fundamento ao lado, em vez de virar linha na issue.
+          if [ "$codigo" -eq 1 ]; then
+            set +e
+            python3 scripts/crawler/propor.py --auditoria --aplicar --saida crawler/proposta
+            codigo=$?
+            set -e
+          fi
           echo "codigo=$codigo" >> "$GITHUB_OUTPUT"
-          # 1 = nada mecânico nesta rodada (os achados restantes exigem gente).
           if [ "$codigo" -eq 0 ]; then
             python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json, pathlib

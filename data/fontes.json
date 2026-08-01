@@ -69,6 +69,7 @@
     {"id": "retencao-documentos-5553", "rotulos": ["Lei 5.553/68"], "url": "https://www.planalto.gov.br/ccivil_03/leis/l5553.htm", "sentinela": "documento"},
     {"id": "cetaceos-7643", "rotulos": ["Lei 7.643/87"], "url": "https://www.planalto.gov.br/ccivil_03/leis/l7643.htm", "sentinela": "cetáceo"},
     {"id": "sfh-5741", "rotulos": ["Lei 5.741/71"], "url": "https://www.planalto.gov.br/ccivil_03/leis/l5741.htm", "sentinela": "hipoteca"},
-    {"id": "alimentos-5478", "rotulos": ["Lei 5.478/68"], "url": "https://www.planalto.gov.br/ccivil_03/leis/l5478.htm", "sentinela": "alimentos"}
+    {"id": "alimentos-5478", "rotulos": ["Lei 5.478/68"], "url": "https://www.planalto.gov.br/ccivil_03/leis/l5478.htm", "sentinela": "alimentos"},
+    {"id": "hediondos-8072", "rotulos": [], "referencia": true, "url": "https://www.planalto.gov.br/ccivil_03/leis/l8072.htm", "sentinela": "15.358", "obs": "Não tem tipo penal próprio: é o rol dos crimes hediondos (art. 1º), contra o qual o campo `hediondo` do catálogo é auditado. Ver data/hediondos.json e scripts/crawler/auditar.py."}
   ]
 }

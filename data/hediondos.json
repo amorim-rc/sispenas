@@ -1,0 +1,233 @@
+{
+  "_meta": {
+    "descricao": "Rol dos crimes hediondos e equiparados, transcrito do art. 1º da Lei 8.072/1990 e do art. 5º, XLIII, da Constituição. É a tabela contra a qual o campo `hediondo` do catálogo é auditado.",
+    "por_que_curada": "O art. 1º é uma lista fechada, mas o texto compilado do Planalto empilha TODAS as redações já dadas a cada inciso — o inciso I aparece sete vezes, de 1994 a 2025. Ler a lista por expressão regular escolheria a versão errada em silêncio. Por isso a tabela é escrita à mão, uma vez, e a máquina faz duas coisas que ela faz bem: confere o catálogo contra a tabela e avisa quando o texto da lei muda (impressao_do_texto).",
+    "fonte": "https://www.planalto.gov.br/ccivil_03/leis/l8072.htm",
+    "dispositivos_vigiados": [
+      "Art. 1|caput",
+      "Art. 1|parágrafo único"
+    ],
+    "conferido_em": "2026-08-01",
+    "ultima_alteracao_conhecida": "Lei 15.358/2026 (inciso VIII do parágrafo único) e Lei 15.384/2026 (inciso I-C)",
+    "como_atualizar": "Quando o conferidor acusar mudança de impressão, reler os dois dispositivos no compilado, ajustar as regras abaixo e regravar `impressao_do_texto` com o valor que o relatório informar."
+  },
+  "impressao_do_texto": "f383fa3226b2b752",
+  "regras": [
+    {
+      "fundamento": "Lei 8.072, art. 1º, I",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 121, §2º",
+      "nota": "homicídio qualificado — desde a Lei 15.159/2025 o inciso remete ao §2º inteiro"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, I",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 121, caput",
+      "condicional": true,
+      "nota": "só quando praticado em atividade típica de grupo de extermínio — circunstância do caso, não do tipo"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, I-A",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 129, §[23]º",
+      "condicional": true,
+      "nota": "lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino)"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, I-B",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 121-A"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, I-C",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 121-B"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, II, a",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 157, §2º, V"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, II, b",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 157, §2º-A, I"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, II, b",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 157, §2º-B"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, II, c",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 157, §3º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, III",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 158, §3º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, IV",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 159"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, V",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 213"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, VI",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 217-A"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, VII",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 267, §1º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, VII-B",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 273(?!, §2º)",
+      "nota": "o rol não alcança a forma culposa do §2º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, VIII",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 218-B"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, IX",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 155, §4º-A"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, X",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 122(, §4º)?(, caput)?$",
+      "nota": "só na modalidade praticada por rede de computadores ou transmissão em tempo real",
+      "condicional": true
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, XI",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 148, §1º, IV"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, XII",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 149-A",
+      "condicional": true,
+      "nota": "hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, I",
+      "lei": "Lei 2\\.889",
+      "artigo": "^Art\\. [123]"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, II",
+      "lei": "Lei 10\\.826",
+      "artigo": "^Art\\. 16"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, III",
+      "lei": "Lei 10\\.826",
+      "artigo": "^Art\\. 17"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, IV",
+      "lei": "Lei 10\\.826",
+      "artigo": "^Art\\. 18"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, V",
+      "lei": "Lei 12\\.850",
+      "artigo": "^Art\\. 2",
+      "condicional": true,
+      "nota": "só quando a organização é direcionada à prática de crime hediondo ou equiparado — circunstância do caso"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VII",
+      "lei": "^ECA$",
+      "artigo": "^Art\\. 240, §1º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VII",
+      "lei": "^ECA$",
+      "artigo": "^Art\\. 241-B"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 9\\.455",
+      "artigo": "^Art\\. 1",
+      "nota": "tortura"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 13\\.260",
+      "artigo": "^Art\\. ",
+      "nota": "terrorismo"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 11\\.343",
+      "artigo": "^Art\\. 33(, caput| \\(|, §1º)?$",
+      "nota": "tráfico: caput e §1º. O §2º (induzimento ao uso) e o §3º (uso compartilhado) não são tráfico"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 11\\.343",
+      "artigo": "^Art\\. 3[46]",
+      "nota": "maquinário (34) e financiamento (36) do tráfico"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 11\\.343",
+      "artigo": "^Art\\. 37",
+      "condicional": true,
+      "nota": "informante/colaborador: a equiparação é reconhecida por parte da jurisprudência e negada por outra — decisão do projeto, não leitura de texto"
+    }
+  ],
+  "excecoes": [
+    {
+      "lei": "Lei 11\\.343",
+      "artigo": "^Art\\. 33, §4º",
+      "hediondo": "Não",
+      "fundamento": "STF, HC 118.533/MS (Pleno, 2016): o tráfico privilegiado não é equiparado a hediondo. Súmula 512 do STJ cancelada."
+    },
+    {
+      "lei": "Lei 11\\.343",
+      "artigo": "^Art\\. 35",
+      "hediondo": "Não",
+      "fundamento": "STJ, jurisprudência consolidada: a associação para o tráfico não consta do rol e não é equiparada; a Lei 8.072 alcança o tráfico, não o crime autônomo de associação."
+    },
+    {
+      "lei": "^CP$",
+      "artigo": "^Art\\. 121, §1º",
+      "hediondo": "Não",
+      "fundamento": "Homicídio privilegiado não está no rol; a hediondez alcança o qualificado (§2º)."
+    }
+  ],
+  "pendentes": [
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VI",
+      "descricao": "Crimes do Código Penal Militar 'que apresentem identidade com os crimes previstos no art. 1º desta Lei' (Lei 14.688/2023). A identidade é juízo de correspondência entre tipos, não remissão a dispositivo — a tabela não pode resolvê-la sozinha, e o catálogo hoje marca 7 tipos do CPM como hediondos.",
+      "acao": "auditoria própria, com leitura do CPM ao lado do art. 1º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VIII",
+      "descricao": "Domínio social estruturado e favorecimento (Lei 15.358/2026), que remete ao 'marco legal do combate ao crime organizado'. Falta mapear qual diploma e quais dispositivos, e se o catálogo já os registra.",
+      "acao": "identificar o diploma e acrescentá-lo a data/fontes.json"
+    }
+  ],
+  "fora_de_alcance": [
+    {
+      "lei": "^CPM",
+      "motivo": "O inciso VI do parágrafo único (Lei 14.688/2023) declara hediondos os crimes do CPM 'que apresentem identidade com os crimes previstos no art. 1º desta Lei'. Identidade é juízo de correspondência entre tipos, não remissão a dispositivo: a tabela não a resolve, e acusar 360 registros militares seria ruído. O CPM fica fora desta auditoria até ter tabela própria — ver `pendentes`."
+    }
+  ]
+}
