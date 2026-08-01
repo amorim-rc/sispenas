@@ -32,6 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "crimes.json"
+APOSENTADOS = ROOT / "data" / "ids-aposentados.json"
 OUT = ROOT / "static" / "data" / "crimes.json"
 RELATORIO = ROOT / "static" / "data" / "qualidade.json"
 
@@ -331,7 +332,31 @@ def validar_ids(crimes: list) -> list:
     if nao_inteiros:
         problemas.append(f"{len(nao_inteiros)} `id` não inteiro(s): {nao_inteiros[:5]}")
 
+    # id APOSENTADO nunca volta. A regra "próximo id = max + 1" tem um furo: se
+    # a remoção foi no topo da numeração, o max cai e o id seguinte reaproveita
+    # um endereço que já significou outro crime. Aconteceu na v1.4.0, quando 15
+    # ids do fim saíram de uma vez.
+    reusados = sorted(set(ids) & ids_aposentados())
+    if reusados:
+        problemas.append(
+            f"{len(reusados)} `id` reaproveitado(s) de registro já retirado: "
+            f"{reusados[:10]} — ver data/ids-aposentados.json")
+
     return problemas
+
+
+def ids_aposentados() -> set[int]:
+    """ids que já foram URL pública e saíram do catálogo (data/ids-aposentados.json)."""
+    if not APOSENTADOS.exists():
+        return set()
+    registro = json.loads(APOSENTADOS.read_text(encoding="utf-8"))
+    return {i for grupo in registro.get("aposentados", []) for i in grupo["ids"]}
+
+
+def proximo_id(crimes: list) -> int:
+    """O próximo id livre: acima de tudo que existe E de tudo que já existiu."""
+    return max({c["id"] for c in crimes if isinstance(c.get("id"), int)}
+               | ids_aposentados()) + 1
 
 
 # ── Unidades e leitura de pena ──────────────────────────────────────────────

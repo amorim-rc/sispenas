@@ -12577,17 +12577,17 @@
     "id": 996,
     "lei": "LCP (DL 3.688/41)",
     "artigo": "Art. 32",
-    "crime": "Dirigir veículos na via pública ou embarcações em águas públicas pondo em perigo a segurança alheia ou sem habilitação",
-    "pena_min": 0.5,
-    "pena_max": 3,
-    "tipo_pena": "Prisão simples",
+    "crime": "Falta de habilitação para dirigir veículo na via pública ou embarcação a motor em águas públicas",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "15 dias a 3 meses prisão simples + multa. Parcialmente absorvido pelo CTB (9.503/97)"
+    "obs": "Pena: MULTA, de duzentos mil réis a dois contos de réis (valor histórico, não convertido). Sem pena privativa de liberdade. A direção de veículo sem habilitação, gerando perigo de dano, é o art. 309 do CTB; a prisão simples de 15 dias a 3 meses é a do art. 34 desta Lei (direção perigosa)"
   },
   {
     "id": 999,
@@ -12657,17 +12657,17 @@
     "id": 1008,
     "lei": "LCP (DL 3.688/41)",
     "artigo": "Art. 68",
-    "crime": "Recusa de dados sobre própria identidade ou qualificação (recusar à autoridade competente informações sobre identidade pessoal, estado ou profissão)",
-    "pena_min": 0.5,
-    "pena_max": 3,
-    "tipo_pena": "Prisão simples",
+    "crime": "Recusa de dados sobre a própria identidade ou qualificação",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "15 dias a 3 meses prisão simples + multa"
+    "obs": "Pena: MULTA, de duzentos mil réis a dois contos de réis (valor histórico, não convertido). Sem pena privativa de liberdade. Recusar à autoridade, quando justificadamente exigidos, dados sobre a própria identidade, estado, profissão, domicílio e residência"
   },
   {
     "id": 1011,
@@ -22706,5 +22706,21 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "1 a 3 anos detenção. Acrescido a partir do texto compilado (dispositivo com pena própria)."
+  },
+  {
+    "id": 1685,
+    "lei": "LCP (DL 3.688/41)",
+    "artigo": "Art. 68, parágrafo único",
+    "crime": "Declaração falsa sobre a própria identidade ou qualificação",
+    "pena_min": 1,
+    "pena_max": 6,
+    "tipo_pena": "Prisão simples",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "1 a 6 meses prisão simples + multa. Fazer, nas mesmas circunstâncias do caput, declarações inverídicas sobre identidade pessoal, estado, profissão, domicílio e residência, se o fato não constitui infração penal mais grave"
   }
 ]

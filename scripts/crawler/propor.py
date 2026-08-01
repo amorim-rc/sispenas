@@ -51,7 +51,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import corrigir  # noqa: E402
 import criar  # noqa: E402
 from conferir import SNAPSHOTS  # noqa: E402
-from transform_data import _faixa_de_meses  # noqa: E402
+from transform_data import _faixa_de_meses, proximo_id  # noqa: E402
 
 FONTES = RAIZ / "data" / "fontes.json"
 CATALOGO_FONTE = RAIZ / "data" / "crimes.json"
@@ -120,7 +120,8 @@ def escolher(com_novas: bool, apenas: str | None = None) -> dict | None:
     na mesma árvore têm de produzir o mesmo PR.
     """
     catalogo = json.loads(CATALOGO_FONTE.read_text(encoding="utf-8"))
-    proximo_id = max(c["id"] for c in catalogo) + 1
+    # Conta os ids aposentados: um endereço público nunca é reaproveitado.
+    proximo = proximo_id(catalogo)
 
     melhor = None
     for f in carregar_fontes():
@@ -128,7 +129,7 @@ def escolher(com_novas: bool, apenas: str | None = None) -> dict | None:
             continue
         if not (SNAPSHOTS / f["id"]).exists():
             continue  # sem snapshot não há o que conferir (nem o que propor)
-        correcoes, novas, humanos = propostas_da_fonte(f["id"], proximo_id, com_novas)
+        correcoes, novas, humanos = propostas_da_fonte(f["id"], proximo, com_novas)
         if not correcoes and not novas:
             continue
         if melhor is None or len(correcoes) + len(novas) > melhor["total"]:

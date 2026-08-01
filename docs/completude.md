@@ -17,7 +17,7 @@ conferência do catálogo) e de
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1418** |
+| Tipos penais catalogados | **1419** |
 | Diplomas com tipo penal vigente | 62 |
 | — com coleta iniciada | 62 |
 | Diplomas revogados/não recepcionados | [11](/docs/acervo-historico) |
@@ -34,7 +34,7 @@ conferência do catálogo) e de
 | Código Penal Militar — Parte Especial | 360 | 🔶 em coleta |
 | Código Eleitoral | 60 | concluído ❓ |
 | Crimes contra o meio ambiente | 53 | concluído ❓ |
-| Lei das Contravenções Penais | 51 | concluído ❓ |
+| Lei das Contravenções Penais | 52 | concluído ❓ |
 | Estatuto da Criança e do Adolescente (crimes) | 30 | concluído ❓ |
 | Abuso de autoridade | 25 | concluído ❓ |
 | Crimes contra o sistema financeiro nacional | 23 | concluído ❓ |

@@ -1,9 +1,9 @@
 {
- "total_tipos_penais": 1418,
+ "total_tipos_penais": 1419,
  "condutas_base": 953,
- "com_pena_privativa": 1393,
- "sem_pena_privativa": 25,
- "dispositivos_distintos": 1418,
+ "com_pena_privativa": 1392,
+ "sem_pena_privativa": 27,
+ "dispositivos_distintos": 1419,
  "registros_duplicados": 0,
  "duplicatas_divergentes": 0,
  "resultado_morte": 84,
