@@ -112,6 +112,27 @@ Os dados abertos são **API pública** para efeito de versionamento semântico: 
 campo é MENOR, remover ou ressignificar campo é MAIOR. Ver
 [Roadmap](/docs/roadmap#como-este-roadmap-usa-o-versionamento-semântico).
 
+## Errata — ids retirados por erro de registro
+
+`id` é endereço público e append-only: nunca é reatribuído. Ainda assim, um registro que
+**não deveria ter existido** sai do catálogo, e com ele a URL. Estes são os casos, com o
+que estava publicado e por quê. Não confundir com o [acervo
+histórico](/docs/acervo-historico): lá estão os tipos que a **lei** tirou de vigência;
+aqui, os que **nós** registramos errado.
+
+| Registro | id | Saiu em | O erro |
+|---|---|---|---|
+| ECA, arts. 245 e 246 (comunicar maus-tratos; obstruir direitos em entidade de atendimento) | 482, 483 | v1.4.0 | São **infrações administrativas**, punidas com multa. Constavam com detenção de 6 meses a 2 anos, que é a pena do art. 236 — este sim crime, e já registrado (id 466). Erro de origem: estavam publicados desde a montagem do catálogo. |
+| ECA, arts. 254 e 255 (transmitir fora do horário; exibir espetáculo inadequado) | 1663, 1664 | v1.4.0 | Também infrações administrativas. A suspensão da programação prevista para a reincidência foi lida como pena de prisão de dois e de quinze dias. |
+| CPM, art. 189 e parágrafos (deserção especial) | 1645 a 1648 | v1.4.0 | Duplicatas do art. 190, já registrado (ids 787 e 1321 a 1323). O texto oficial escreve "Art . 190", com espaço antes do ponto, e o parser atribuiu os parágrafos ao artigo anterior. |
+| CE, art. 348, §2º, e art. 351 (equiparação a documento público) | 1657, 1658 | v1.4.0 | Normas de **equiparação**: dizem o que se considera documento para efeito dos arts. 348 a 350, e não descrevem conduta punível. |
+| Lei 6.766/79, art. 36-A; Lei 6.453/77, art. 2º, §5º; Lei 13.869/19, art. 3º | 1669, 1672, 1681 a 1683 | v1.4.0 | Dispositivos sem preceito penal (administração de imóveis, dispensa de garantia, regra de ação penal). A pena registrada pertencia a outro artigo do mesmo diploma. |
+| Redações do Código Penal transcritas dentro das leis que o alteraram (arts. 129 §9º, 172, 218, 244, 288, 316 §1º, 318, 342 e 232-A) | 1665, 1670, 1671, 1673 a 1680, 1684 | v1.4.0 | O texto compilado reproduz, embaixo do artigo alterador, a redação dada à outra lei — e congelada na data da alteração. Cada um desses crimes já constava no diploma de destino, com a redação de hoje. |
+
+Todos os registros da v1.4.0, exceto os dois primeiros, foram criados pela leva automática
+da v1.3.0 e viveram poucas horas. As guardas que impedem cada um desses casos estão em
+`scripts/crawler/` e têm teste próprio; a criação automática de registro foi desligada.
+
 ## Como citar
 
 > Equipe SISPENAS. *SISPENAS — Sistema de Pesquisa de Tipos Penais e Benefícios*.

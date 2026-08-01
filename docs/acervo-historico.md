@@ -42,26 +42,28 @@ Dispositivos que saíram de vigência, foram alterados ou nunca vigoraram, encon
 | CP, arts. 219 a 222 (rapto) | revogado | Revogados pela Lei 12.015/2009. |
 | ECA, art. 233 (tortura de criança) | revogado | Revogado pela Lei 9.455/1997 (Lei de Tortura). **Constava como vigente no catálogo (id 742) até a v1.3.0.** |
 | LCP, arts. 60 e 61 (mendicância e importunação ofensiva) | revogado | Revogados pelas Leis 11.983/2009 e 13.718/2018. |
+| LCP, art. 27 (exploração da credulidade pública) | revogado | Revogado pela Lei 9.521/1997. |
+| LCP, art. 39 (associação secreta) | revogado | Revogado pela Lei 14.197/2021. |
+| LCP, art. 65 (perturbação da tranquilidade) | revogado | Revogado pela Lei 14.132/2021, que criou a perseguição (CP, art. 147-A). |
+| LCP, art. 69 (atividade remunerada de estrangeiro) | revogado | Revogado pela Lei 6.815/1980. O compilado mantém o texto dos quatro artigos acima, com a revogação anotada ao lado — foi assim que a leva automática da v1.3.0 os tomou por vigentes. |
 
-## Registros retirados do catálogo de tipos vigentes
+## Tipos retirados do catálogo por revogação
 
-A conferência automática contra o texto compilado encontrou registros que não eram direito penal vigente: dispositivos revogados, infrações administrativas, normas de equiparação e redações de OUTRO diploma transcritas dentro da lei que as alterou. Saíram do catálogo e ficam registrados aqui até que o acervo tenha estrutura própria (v2.2.0).
+Estes eram crime, deixaram de ser, e ainda constavam entre os tipos vigentes — a conferência semanal contra o texto compilado os encontrou. Ficam aqui até que o acervo tenha estrutura própria (v2.2.0).
 
-| Registro | id | Saiu em | Por quê |
+| Registro | id | Saiu em | Revogado por |
 |---|---|---|---|
 | CP, art. 150, §2º (violação de domicílio contra funcionário público) | 878 | v1.3.0 | Revogado pela Lei 13.869/2019 (Lei de Abuso de Autoridade). |
 | CP, art. 185 (usurpação de nome ou pseudônimo alheio) | 159 | v1.3.0 | Revogado pela Lei 10.695/2003. |
 | CP, art. 350 (exercício arbitrário ou abuso de poder) | 964 | v1.3.0 | Revogado pela Lei 13.869/2019 (Lei de Abuso de Autoridade). |
 | ECA, art. 233 (tortura de criança ou adolescente) | 742 | v1.3.0 | Revogado pela Lei 9.455/1997 (Lei de Tortura). |
-| ECA, arts. 245 e 246 (comunicação de maus-tratos; obstrução a direitos) | 482, 483 | v1.4.0 | **Infrações administrativas**, não crimes: o ECA as pune com multa, e o catálogo lhes atribuía detenção de 6 meses a 2 anos — que é a pena do art. 236, já registrado (id 466). |
-| ECA, arts. 254 e 255 (transmissão fora do horário; exibição inadequada) | 1663, 1664 | v1.4.0 | Infrações administrativas punidas com multa. A suspensão da programação prevista para a reincidência foi lida como pena privativa. |
-| LCP, arts. 27, 39, 65 e 69 (credulidade pública, associação secreta, perturbação da tranquilidade, atividade remunerada de estrangeiro) | 1649 a 1652 | v1.4.0 | Contravenções **revogadas** pelas Leis 9.521/1997, 14.197/2021, 14.132/2021 e 6.815/1980. O compilado mantém o texto, com a revogação anotada ao lado. |
-| CPM, art. 189 e parágrafos (deserção especial) | 1645 a 1648 | v1.4.0 | Duplicatas do art. 190, já registrado (ids 787 e 1321 a 1323): o texto oficial escreve "Art . 190", com espaço antes do ponto, e os parágrafos acabaram atribuídos ao artigo anterior. |
-| CE, art. 348, §2º, e art. 351 (equiparação a documento público) | 1657, 1658 | v1.4.0 | Normas de **equiparação**, não tipos autônomos: dizem o que se considera documento para efeito dos arts. 348 a 350. |
-| Lei 6.766/79, art. 36-A, e Lei 6.453/77, art. 2º, §5º | 1681 a 1683 | v1.4.0 | Dispositivos sem preceito penal (administração de imóveis e dispensa de garantia); a pena registrada pertencia a outro artigo do mesmo diploma. |
-| Redações do Código Penal transcritas dentro de outras leis (arts. 129 §9º, 172, 218, 244, 288, 316 §1º, 318, 342 e 232-A) | 1665, 1669 a 1680, 1684 | v1.4.0 | O artigo apenas **altera** outro diploma, e o texto compilado transcreve embaixo dele a redação dada. Cada um desses crimes já constava no diploma de destino, com a redação de hoje — a transcrição congela a da época. |
+| LCP, arts. 27, 39, 65 e 69 (credulidade pública, associação secreta, perturbação da tranquilidade, atividade remunerada de estrangeiro) | 1649 a 1652 | v1.4.0 | Revogados pelas Leis 9.521/1997, 14.197/2021, 14.132/2021 e 6.815/1980. Os registros existiram por poucas horas, criados pela leva automática da v1.3.0. |
 
 :::caution[As URLs desses registros deixaram de responder]
 `id` é endereço público (`/pesquisa/tipos?tipo=N`), e esses saíram do ar com a remoção. Enquanto o acervo não tem página própria, esta tabela é o destino de quem chegar por um link antigo — e a v2.2.0 fará a rota apontar para o registro histórico, em vez de terminar em erro.
+:::
+
+:::note[Registro retirado por ERRO não entra no acervo]
+O acervo reúne o que já foi crime no Brasil; não é a lista dos nossos enganos. Registro que saiu porque estava errado — duplicata, infração administrativa tomada por crime, texto de outro diploma transcrito — é **errata**, e está em [Dados abertos](/docs/dados-abertos#errata--ids-retirados-por-erro-de-registro).
 :::
 
