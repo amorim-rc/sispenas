@@ -252,11 +252,11 @@ def _gerar_acervo(historicos: list[dict]) -> None:
     p(":::")
     p("")
     p(":::note[Registro retirado por ERRO não entra no acervo]")
-    p("O acervo reúne o que já foi crime no Brasil; não é a lista dos nossos "
-      "enganos. Registro que saiu porque estava errado — duplicata, infração "
-      "administrativa tomada por crime, texto de outro diploma transcrito — é "
-      "**errata**, e está em "
-      "[Dados abertos](/docs/dados-abertos#errata--ids-retirados-por-erro-de-registro).")
+    p("O acervo reúne o que já foi crime no Brasil — é material de pesquisa "
+      "sobre a lei, não a lista dos nossos enganos. Registro que saiu porque "
+      "estava errado (duplicata, infração administrativa tomada por crime, texto "
+      "de outro diploma transcrito) é descrito nas "
+      "[notas da versão](/release-notes) em que saiu, e não aqui.")
     p(":::")
     p("")
     destino = RAIZ / "docs" / "acervo-historico.md"

@@ -93,6 +93,84 @@ os dados saber o que pode mudar sem quebrar uma conta.
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente`, `duplicata_ids` | Detecção de registro repetido. `duplicata_divergente` marcaria o mesmo dispositivo com penas conflitantes; **hoje não há nenhum**. |
 | `derivado_auto` | Marca o registro cujos campos passaram por preenchimento automático. |
 
+## De onde vem cada registro, e como ele é revisado
+
+Um dado errado publicado é pior que um dado ausente. Esta seção explica, sem pressupor
+conhecimento técnico, como um tipo penal chega ao catálogo e o que acontece com ele depois
+— porque quem cita o dado precisa saber o que foi conferido, por quem, e o que não foi.
+
+### A fonte é o texto compilado, não a lei publicada no dia
+
+Uma lei penal quase nunca nasce sozinha: ela altera outra. O Código Penal de hoje é o
+decreto-lei de 1940 mais oitenta anos de emendas. Por isso a fonte do catálogo não é o
+texto original de cada lei, e sim o **texto compilado** do `planalto.gov.br`: a versão que
+o próprio governo mantém atualizada, com a redação em vigor no corpo do artigo e, ao lado
+de cada dispositivo, uma nota dizendo quem o incluiu, alterou ou revogou — "(Redação dada
+pela Lei nº 14.994, de 2024)".
+
+Ler o compilado é o que permite responder "qual é a pena **hoje**" sem reconstruir a
+história da norma emenda por emenda.
+
+### O ciclo semanal, em quatro passos
+
+Toda segunda-feira, de madrugada, o repositório repete sozinho o mesmo procedimento:
+
+1. **Baixar.** Busca a página compilada dos 62 diplomas que têm tipo penal no catálogo.
+   Cada diploma tem uma **sentinela**: um trecho que comprovadamente existe na versão
+   atual da página (em geral a emenda mais recente já incorporada). Se a sentinela não
+   aparecer, a rodada falha em vez de continuar — é a proteção contra comparar o catálogo
+   com uma cópia velha servida por engano.
+2. **Ler.** Cada página é decomposta em dispositivos: artigo, parágrafo, o texto da
+   conduta, a linha "Pena" e a situação (em vigor, revogado, vetado). Quando o mesmo
+   dispositivo aparece em duas redações — o compilado costuma manter a antiga logo acima
+   da nova —, vale a de nota mais recente.
+3. **Comparar.** A pena lida na lei é confrontada com a publicada no catálogo, dispositivo
+   a dispositivo. Divergiu, faltou, foi revogado: vira achado.
+4. **Reportar.** Os achados viram uma **issue** no repositório, aberta ao público. Quando
+   a divergência é de leitura direta — a moldura ou a espécie de pena de um registro que já
+   existe não corresponde ao que a lei comina —, o sistema também abre um **pull request**
+   com a correção proposta, citando o trecho da lei ao lado de cada mudança.
+
+Nada disso usa inteligência artificial. É comparação de texto: as mesmas regras, aplicadas
+do mesmo jeito, toda semana — e por isso qualquer pessoa pode repetir a rodada e obter o
+mesmo resultado.
+
+### O que a máquina decide e o que fica para uma pessoa
+
+A máquina **nunca** publica sozinha. O pull request é uma proposta e depende de aprovação
+humana, e o alcance dela é deliberadamente estreito: corrigir a pena de um registro
+existente. Criar um registro novo, remover um registro ou reclassificar um dispositivo
+continua sendo decisão de gente, porque exige julgamento jurídico — o mesmo texto pode ser
+um crime autônomo, uma causa de aumento da pena de outro crime, ou nem uma coisa nem
+outra. Quando a leitura automática não é segura, o achado vira pergunta na triagem da
+semana, não dado publicado.
+
+### O segundo olho: o Diário Oficial
+
+Reler todas as semanas as leis que já conhecemos tem um ponto cego óbvio: uma **lei penal
+inteiramente nova**, que ainda não está em nenhuma página vigiada. Para cobri-lo, a mesma
+rodada semanal percorre os atos normativos da Seção 1 do Diário Oficial da União dos
+últimos oito dias — leis, leis complementares, medidas provisórias — e separa os que citam
+algum diploma do catálogo ou trazem vocabulário penal ("reclusão", "detenção", "pena de",
+"revoga").
+
+São cerca de cinco atos por semana, contra as centenas de portarias e despachos que o
+Diário publica por dia e que não podem criar crime. O resultado é uma lista para ler, não
+uma decisão: aparecer nela só significa que vale a pena abrir o texto. O filtro é
+deliberadamente largo, porque um alarme falso custa dez segundos de leitura e uma lei nova
+que passe despercebida custa meses de catálogo desatualizado.
+
+### O que ainda não é conferido automaticamente
+
+Honestidade sobre o alcance, para quem for citar:
+
+- a conferência automática cobre **pena, espécie de pena, existência e situação** do
+  dispositivo;
+- **não** cobre o nome dado ao tipo, a natureza da ação penal, a classificação como
+  hediondo nem as causas de aumento e diminuição — esses campos são revisados à mão;
+- o [relatório de qualidade](#relatório-de-qualidade) publica, a cada build, as
+  contradições conhecidas e os `id` envolvidos.
+
 ## Relatório de qualidade
 
 Cada regeneração emite [`/data/qualidade.json`](pathname:///sispenas/data/qualidade.json)
@@ -111,27 +189,6 @@ mesmo derivado, e a CI falha se o derivado commitado divergir da fonte.
 Os dados abertos são **API pública** para efeito de versionamento semântico: acrescentar
 campo é MENOR, remover ou ressignificar campo é MAIOR. Ver
 [Roadmap](/docs/roadmap#como-este-roadmap-usa-o-versionamento-semântico).
-
-## Errata — ids retirados por erro de registro
-
-`id` é endereço público e append-only: nunca é reatribuído. Ainda assim, um registro que
-**não deveria ter existido** sai do catálogo, e com ele a URL. Estes são os casos, com o
-que estava publicado e por quê. Não confundir com o [acervo
-histórico](/docs/acervo-historico): lá estão os tipos que a **lei** tirou de vigência;
-aqui, os que **nós** registramos errado.
-
-| Registro | id | Saiu em | O erro |
-|---|---|---|---|
-| ECA, arts. 245 e 246 (comunicar maus-tratos; obstruir direitos em entidade de atendimento) | 482, 483 | v1.4.0 | São **infrações administrativas**, punidas com multa. Constavam com detenção de 6 meses a 2 anos, que é a pena do art. 236 — este sim crime, e já registrado (id 466). Erro de origem: estavam publicados desde a montagem do catálogo. |
-| ECA, arts. 254 e 255 (transmitir fora do horário; exibir espetáculo inadequado) | 1663, 1664 | v1.4.0 | Também infrações administrativas. A suspensão da programação prevista para a reincidência foi lida como pena de prisão de dois e de quinze dias. |
-| CPM, art. 189 e parágrafos (deserção especial) | 1645 a 1648 | v1.4.0 | Duplicatas do art. 190, já registrado (ids 787 e 1321 a 1323). O texto oficial escreve "Art . 190", com espaço antes do ponto, e o parser atribuiu os parágrafos ao artigo anterior. |
-| CE, art. 348, §2º, e art. 351 (equiparação a documento público) | 1657, 1658 | v1.4.0 | Normas de **equiparação**: dizem o que se considera documento para efeito dos arts. 348 a 350, e não descrevem conduta punível. |
-| Lei 6.766/79, art. 36-A; Lei 6.453/77, art. 2º, §5º; Lei 13.869/19, art. 3º | 1669, 1672, 1681 a 1683 | v1.4.0 | Dispositivos sem preceito penal (administração de imóveis, dispensa de garantia, regra de ação penal). A pena registrada pertencia a outro artigo do mesmo diploma. |
-| Redações do Código Penal transcritas dentro das leis que o alteraram (arts. 129 §9º, 172, 218, 244, 288, 316 §1º, 318, 342 e 232-A) | 1665, 1670, 1671, 1673 a 1680, 1684 | v1.4.0 | O texto compilado reproduz, embaixo do artigo alterador, a redação dada à outra lei — e congelada na data da alteração. Cada um desses crimes já constava no diploma de destino, com a redação de hoje. |
-
-Todos os registros da v1.4.0, exceto os dois primeiros, foram criados pela leva automática
-da v1.3.0 e viveram poucas horas. As guardas que impedem cada um desses casos estão em
-`scripts/crawler/` e têm teste próprio; a criação automática de registro foi desligada.
 
 ## Como citar
 
