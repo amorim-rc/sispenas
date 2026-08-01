@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import html as _html
 import re
+import unicodedata
 from dataclasses import dataclass, field
 
 # ── Fatiamento em parágrafos ────────────────────────────────────────────────
@@ -36,7 +37,17 @@ _LINK = re.compile(r"(?is)<a\b[^>]*>(.*?)</a>")
 
 
 def _texto(bruto: str) -> str:
-    return re.sub(r"\s+", " ", _html.unescape(_TAG.sub(" ", bruto))).strip()
+    """Texto limpo do trecho, com os acentos SEMPRE compostos (NFC).
+
+    O acervo do Planalto escreve parte dos acentos como entidade separada — "i"
+    seguido de `&#769;` (acento agudo combinante). Depois do unescape, "feminicídio"
+    fica com dois caracteres onde o resto do mundo vê um, e toda expressão regular
+    com letra acentuada deixa de casar **em silêncio**: "é aumentada" não é
+    encontrado, "três" não é convertido em 3, "Redação dada" não é reconhecido
+    como anotação. Normalizar aqui, uma vez, protege todo o pipeline.
+    """
+    limpo = re.sub(r"\s+", " ", _html.unescape(_TAG.sub(" ", bruto))).strip()
+    return unicodedata.normalize("NFC", limpo)
 
 
 @dataclass
@@ -119,10 +130,9 @@ def ler_anotacao(texto: str) -> Anotacao | None:
 # administração de imóveis, ganhou "pena" de detenção).
 _ARTIGO = re.compile(r"^Art\s*\.?\s*(\d+)(?:\s*[-–—]\s*([A-Z]))?\s*(?:[.\-–—º°]|\s)", re.I)
 # "§ 1º", "§ 1o", "§ 2°", "§ 2º-D", "Parágrafo único".
-# O sufixo só vale se a letra maiúscula estiver isolada: em "§ 5º - Na hipótese"
-# o travessão introduz o texto, e capturar o "N" inventaria um "§ 5º-N".
-_PARAGRAFO = re.compile(
-    r"^§\s*(\d+)\s*[ºo°]?\s*(?:[-–—]\s*([A-Z])(?![a-zà-ÿ]))?", re.I)
+_PAR_NUMERO = re.compile(r"^§\s*(\d+)\s*[ºo°]?", re.I)
+_PAR_SUFIXO = re.compile(r"^(\s*)[-–—]\s?([A-Z])(?![a-zà-ÿ])")
+_PROSA = re.compile(r"\s+[A-Za-zÀ-ÿ]")
 _PAR_UNICO = re.compile(r"^Par[áa]grafo\s+[úu]nico", re.I)
 _INCISO = re.compile(r"^([IVXLC]+)\s*[-–—]\s", re.I)
 _ALINEA = re.compile(r"^([a-z])\)\s")
@@ -135,6 +145,35 @@ _REVOGADO_TXT = re.compile(r"\(Revogad[oa]\b", re.I)
 
 def _norm_marcador(numero: str, sufixo: str | None) -> str:
     return f"§ {numero}º" + (f"-{sufixo}" if sufixo else "")
+
+
+def ler_paragrafo(texto: str) -> tuple[str, str | None, int] | None:
+    """"§ 2 o -A (Revogado…)" -> ("2", "A"); "§ 1º - A pena é…" -> ("1", None).
+
+    A letra maiúscula depois do travessão é ambígua no acervo do Planalto: tanto
+    marca parágrafo sufixado ("§ 2º-D", "§ 4º-A A pena é…") quanto abre a frase
+    ("§ 1º - A pena é de reclusão, de dois a cinco anos:"). Distinguir por dois
+    sinais, nesta ordem:
+
+    1. **hífen colado ao ordinal** ("§ 4º-A") — é sufixo, sempre;
+    2. hífen espaçado ("§ 2 o -A") — só é sufixo se o que vier depois NÃO for
+       prosa: "(Revogado pela Lei…)", ".", ":" etc.
+
+    Ler "A pena" como sufixo criava um "§ 1º-A" fantasma e fazia sumir do parse o
+    § 1º de verdade — e, com ele, os registros do catálogo que apontavam para lá
+    (arts. 148, 168 e 317 do CP, entre outros: dezesseis registros que a
+    conferência simplesmente não alcançava).
+    """
+    m = _PAR_NUMERO.match(texto)
+    if not m:
+        return None
+    resto = texto[m.end():]
+    s = _PAR_SUFIXO.match(resto)
+    if s:
+        colado = s.group(1) == ""
+        if colado or not _PROSA.match(resto[s.end():]):
+            return m.group(1), s.group(2), m.end() + s.end()
+    return m.group(1), None, m.end()
 
 
 def _epigrafe(texto: str) -> str | None:
@@ -350,12 +389,11 @@ def parsear(documento: str) -> list[Dispositivo]:
             epigrafe_pendente = _epigrafe(texto) or epigrafe_pendente
             continue
 
-        mp = _PARAGRAFO.match(texto)
+        mp = ler_paragrafo(texto)
         if mp or _PAR_UNICO.match(texto):
-            marcador = (_norm_marcador(mp.group(1), mp.group(2)) if mp
-                        else "parágrafo único")
+            marcador = (_norm_marcador(mp[0], mp[1]) if mp else "parágrafo único")
             d = obter(artigo, sufixo, marcador)
-            corpo = texto[(mp.end() if mp else _PAR_UNICO.match(texto).end()):].strip(" .-–—")
+            corpo = texto[(mp[2] if mp else _PAR_UNICO.match(texto).end()):].strip(" .-–—")
             corpo_util = re.sub(r"\([^)]*\)", "", corpo).strip()
             revogado = (_revogado_por_link(p)
                         or ((_REVOGADO_TXT.search(texto)

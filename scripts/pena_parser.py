@@ -189,6 +189,14 @@ def ler_penas(texto: str) -> list[dict]:
         fim = marcas[j + 1].start() if j + 1 < len(marcas) else len(bruto)
         trecho = bruto[marcas[i].start():fim]
         lida = ler_pena(trecho)
+        if lida is None:
+            # Espécie DEPOIS da moldura: "será punida com a pena de 2 (dois) a 5
+            # (cinco) anos de reclusão e multa" (Lei 7.643, art. 2º). Fatiar a
+            # partir da espécie deixa o intervalo para trás. A janela de 70
+            # caracteres alcança o que veio antes sem arrastar a conduta inteira,
+            # que costuma trazer números alheios à pena.
+            inicio = max(0 if i == 0 else marcas[i - 1].end(), marcas[i].start() - 70)
+            lida = ler_pena(bruto[inicio:fim])
         if lida and not lida["so_multa"]:
             tipos = [m.group(0).lower() for m in marcas[i:j + 1]]
             lida["tipos"] = tipos

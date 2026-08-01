@@ -283,6 +283,13 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
         pena = ler_pena(d.pena_texto or "")
         if not pena or pena["so_multa"]:
             continue  # sem pena privativa própria não é linha do catálogo
+        # Preceito e sanção são vizinhos no texto (1 parágrafo, ou 2 com uma
+        # anotação no meio). Distância grande significa que a linha "Pena" é de
+        # OUTRO dispositivo cujo cabeçalho não foi reconhecido — foi assim que a
+        # regra de ação penal da Lei de Abuso (art. 3º) apareceu com detenção de
+        # 1 a 4 anos, herdada do estatuto da OAB transcrito no fim da lei.
+        if (d.pena_distancia or 0) > 3:
+            continue
         achados.append({
             "tipo": "AUSENTE", "gravidade": 1, "chave": d.chave,
             "ids": [],
@@ -297,6 +304,122 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
     for a in achados:
         a["fonte"] = fonte["id"]
     return achados
+
+
+# Dispositivo cuja pena a lei define POR REFERÊNCIA a outro: equiparação ("nas
+# mesmas penas incorre"), aumento e diminuição ("a pena é aumentada de 1/3").
+# Não é pena ilegível — é pena derivada, e derivá-la é modelagem: o catálogo
+# grava o resultado da conta, e conferir isso exige o motor de modificadores.
+_REMISSIVA = re.compile(
+    r"mesmas?\s+pena|pena[s]?\s+do\s+caput|penas?\s+deste\s+artigo"
+    r"|incorre\s+n[ao]s?\s+pena|[ée]\s+aumentad|[ée]\s+agravad|[ée]\s+majorad"
+    r"|[ée]\s+reduzid|[ée]\s+diminu[íi]d|aumenta(?:m)?-se|reduz-se|diminui-se"
+    r"|em\s+dobro|ao\s+dobro|em\s+triplo|duplicad|pode\s+(?:ser\s+)?reduzi"
+    r"|pode\s+diminuir|ser[áã]o?\s+aumentad|penas?\s*[-–—:]\s*(?:as?\s+d|metade)"
+    r"|pena\s+d[oa]\s+art|aplica-se\s+(?:tamb[ée]m\s+)?a\s+(?:mesma\s+)?pena"
+    r"|sujeit[oa]s?\s+[àa]s?\s+penas|punid[oa]\s+com\s+as\s+penas"
+    r"|constitu[ei]m?\s+crimes?", re.IGNORECASE)
+
+
+def _por_referencia(disp, linha: dict) -> str:
+    """Por que este registro não tem moldura própria na lei."""
+    if not linha.get("tem_pena_privativa", True):
+        return "sancao_nao_privativa"
+    if _REMISSIVA.search(disp.pena_texto or disp.texto or ""):
+        return "pena_por_referencia"
+    return "indeterminado"
+
+
+def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]]) -> dict:
+    """Quanto do catálogo é de fato CONFERIDO contra a lei — e quanto não é.
+
+    O relatório de achados responde "o que está errado". Esta função responde a
+    pergunta anterior, que é a que decide se dá para confiar no catálogo: **de
+    quantos registros o conferidor tem opinião?** Um registro cujo dispositivo
+    nem sequer é localizado no texto compilado não aparece como divergente —
+    aparece como nada, e silêncio não é aprovação.
+
+    Quatro classes, por registro:
+
+    - `conferido`: dispositivo localizado, vigente, com moldura legível na lei, e
+      a pena publicada bate (dentro da tolerância de 1 dia);
+    - `divergente`: localizado e a pena NÃO bate — é o que vira achado;
+    - `sem_moldura_na_lei`: localizado, mas a lei não traz moldura legível ali
+      (pena remetida ao caput, pena embutida na frase, sanção só de multa);
+    - `nao_localizado`: o dispositivo do registro não foi encontrado no compilado
+      — pode ser rótulo errado no catálogo ou limite do parser. É o número que
+      mede o alcance real da conferência.
+    """
+    resultado = {"conferido": [], "divergente": [], "sem_moldura_na_lei": [],
+                 "nao_localizado": [], "sem_snapshot": []}
+    for fonte in fontes:
+        do_catalogo = indice.get(fonte["id"], {})
+        if not do_catalogo:
+            continue
+        pasta = SNAPSHOTS / fonte["id"]
+        arquivos = sorted(pasta.glob("*.html")) if pasta.exists() else []
+        if not arquivos:
+            resultado["sem_snapshot"] += [x["id"] for v in do_catalogo.values() for x in v]
+            continue
+        da_lei = {d.chave: d for d in parsear(arquivos[-1].read_text(encoding="utf-8"))}
+
+        for k, linhas in do_catalogo.items():
+            disp = da_lei.get(k)
+            if disp is None:
+                resultado["nao_localizado"] += [(fonte["id"], k, x["id"]) for x in linhas]
+                continue
+            molduras = [m for m in ler_penas(disp.pena_texto or disp.texto)
+                        if not m["so_multa"]]
+            for linha in linhas:
+                if not molduras:
+                    resultado["sem_moldura_na_lei"].append(
+                        (fonte["id"], k, linha["id"], _por_referencia(disp, linha)))
+                    continue
+                cmin, cmax = moldura_catalogo(linha)
+                pena = min(molduras, key=lambda m: abs(m["min_meses"] - cmin)
+                           + abs(m["max_meses"] - cmax))
+                bate_max = abs(cmax - pena["max_meses"]) <= TOLERANCIA_MESES
+                bate_min = pena["teto_apenas"] or abs(cmin - pena["min_meses"]) <= TOLERANCIA_MESES
+                especie = any(t in (linha.get("tipo_pena") or "").lower()
+                              for t in pena.get("tipos") or [])
+                alvo = "conferido" if (bate_max and bate_min and especie) else "divergente"
+                resultado[alvo].append((fonte["id"], k, linha["id"]))
+    return resultado
+
+
+def montar_cobertura(res: dict, total_catalogo: int) -> str:
+    """A seção de cobertura do relatório, em números redondos."""
+    n = {k: len(v) for k, v in res.items()}
+    medido = sum(n.values())
+    fora = total_catalogo - medido
+    pct = (100 * n["conferido"] / total_catalogo) if total_catalogo else 0
+    motivos: dict[str, int] = {}
+    for item in res["sem_moldura_na_lei"]:
+        motivos[item[3]] = motivos.get(item[3], 0) + 1
+    L = [
+        "## Cobertura da conferência", "",
+        f"De **{total_catalogo}** registros do catálogo:", "",
+        f"- **{n['conferido']}** ({pct:.1f}%) conferidos e batendo com o texto compilado;",
+        f"- **{n['divergente']}** divergentes (viram achado);",
+        f"- **{n['sem_moldura_na_lei']}** sem moldura PRÓPRIA na lei — "
+        f"{motivos.get('pena_por_referencia', 0)} com pena definida por referência "
+        "(equiparação, aumento, diminuição), "
+        f"{motivos.get('sancao_nao_privativa', 0)} sem pena privativa (multa ou outra "
+        f"sanção) e {motivos.get('indeterminado', 0)} indeterminados;",
+        f"- **{n['nao_localizado']}** cujo dispositivo não foi localizado no compilado;",
+    ]
+    if n["sem_snapshot"]:
+        L.append(f"- {n['sem_snapshot']} sem página baixada nesta rodada;")
+    if fora:
+        L.append(f"- {fora} fora do alcance (rótulo sem diploma em `fontes.json`).")
+    L += ["", "Silêncio não é aprovação: as três últimas linhas são o que o "
+          "conferidor **não** garante.", ""]
+    if res["nao_localizado"]:
+        L += ["<details><summary>Dispositivos não localizados</summary>", ""]
+        for fid, k, ident in sorted(res["nao_localizado"])[:80]:
+            L.append(f"- `{fid}` `{k}` — id {ident}")
+        L += ["", "</details>", ""]
+    return "\n".join(L)
 
 
 def montar_relatorio(por_fonte: dict[str, list[dict]]) -> str:
@@ -352,7 +475,9 @@ def main() -> int:
         if achados:
             por_fonte[f["id"]] = achados
 
-    relatorio = montar_relatorio(por_fonte)
+    total = len(json.loads(CATALOGO.read_text(encoding="utf-8")))
+    cob = montar_cobertura(cobertura(fontes, indice), total)
+    relatorio = montar_relatorio(por_fonte) + "\n" + cob
     destino = Path(args.saida)
     destino.mkdir(parents=True, exist_ok=True)
     (destino / f"{date.today().isoformat()}.md").write_text(relatorio, encoding="utf-8")
