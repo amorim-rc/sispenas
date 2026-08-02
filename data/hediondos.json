@@ -16,6 +16,13 @@
     {
       "fundamento": "Lei 8.072, art. 1º, I",
       "lei": "^CP$",
+      "artigo": "^Art\\. 121, §2º-D",
+      "condicional": true,
+      "nota": "o rol remete ao §2º; o §2º-D é parágrafo próprio, criado depois. Alcance a definir"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, I",
+      "lei": "^CP$",
       "artigo": "^Art\\. 121, §2º",
       "nota": "homicídio qualificado — desde a Lei 15.159/2025 o inciso remete ao §2º inteiro"
     },
@@ -163,8 +170,8 @@
     {
       "fundamento": "CF, art. 5º, XLIII (equiparado)",
       "lei": "Lei 9\\.455",
-      "artigo": "^Art\\. 1",
-      "nota": "tortura"
+      "artigo": "^Art\\. 1º?(,\\s*(caput|[IVX]+))?$|^Art\\. 1º?, §[13]",
+      "nota": "tortura (caput, §1º e §3º). A OMISSÃO do §2º tem pena própria de detenção e equiparação controvertida — condicional"
     },
     {
       "fundamento": "CF, art. 5º, XLIII (equiparado)",
@@ -175,14 +182,14 @@
     {
       "fundamento": "CF, art. 5º, XLIII (equiparado)",
       "lei": "Lei 11\\.343",
-      "artigo": "^Art\\. 33(, caput| \\(|, §1º)?$",
-      "nota": "tráfico: caput e §1º. O §2º (induzimento ao uso) e o §3º (uso compartilhado) não são tráfico"
+      "artigo": "^Art\\. 33(, caput)?$|^Art\\. 33, §1º",
+      "nota": "tráfico: caput e §1º (e seus incisos). O §2º (induzimento ao uso) e o §3º (uso compartilhado) não são tráfico; o §4º é exceção jurisprudencial"
     },
     {
       "fundamento": "CF, art. 5º, XLIII (equiparado)",
       "lei": "Lei 11\\.343",
-      "artigo": "^Art\\. 3[46]",
-      "nota": "maquinário (34) e financiamento (36) do tráfico"
+      "artigo": "^Art\\. 36",
+      "nota": "financiamento do tráfico"
     },
     {
       "fundamento": "CF, art. 5º, XLIII (equiparado)",
@@ -190,6 +197,34 @@
       "artigo": "^Art\\. 37",
       "condicional": true,
       "nota": "informante/colaborador: a equiparação é reconhecida por parte da jurisprudência e negada por outra — decisão do projeto, não leitura de texto"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 11\\.343",
+      "artigo": "^Art\\. 34",
+      "condicional": true,
+      "nota": "maquinário: o STJ tem decisões nos dois sentidos sobre a equiparação — é escolha do projeto, não leitura de texto"
+    },
+    {
+      "fundamento": "CF, art. 5º, XLIII (equiparado)",
+      "lei": "Lei 9\\.455",
+      "artigo": "^Art\\. 1º?, §2º",
+      "condicional": true,
+      "nota": "omissão perante a tortura: pena própria de detenção, e a doutrina diverge sobre estender a equiparação"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, III (por remissão)",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 158, §2º",
+      "condicional": true,
+      "nota": "o §2º manda aplicar as penas do art. 157, §3º, que é hediondo; o rol, porém, cita o §3º do 158"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, II, c (por identidade)",
+      "lei": "^CP$",
+      "artigo": "^Art\\. 157, §5º",
+      "condicional": true,
+      "nota": "latrocínio praticado por organização ultraviolenta: parágrafo criado depois do rol, que cita o §3º"
     }
   ],
   "excecoes": [

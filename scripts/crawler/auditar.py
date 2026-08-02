@@ -190,6 +190,14 @@ _ACAO_CONDICIONADA = re.compile(
 # O catálogo escreve a ação penal privada de duas formas ("Privada" e "Ação
 # Penal Privada"); a auditoria aceita as duas e só acusa quando a ESPÉCIE
 # diverge, não a grafia.
+# Quando o próprio artigo declara a ação INCONDICIONADA numa hipótese (art. 153,
+# §2º do CP) ou ressalva casos ("salvo quando praticados em prejuízo de entidade
+# de direito público"), a fórmula não vale para o artigo inteiro — e a auditoria
+# não pode propor nada sem ler qual hipótese é qual.
+_RESSALVA = re.compile(
+    r"a[çc][ãa]o\s+penal\s+(?:ser[áa]\s+)?(?:p[úu]blica\s+)?incondicionada"
+    r"|salvo\s+quando|salvo\s+se|salvo\s+nos\s+casos", re.I)
+
 _ROTULO_ACAO = {
     "privada": "Ação Penal Privada",
     "condicionada": "Pública Condicionada",
@@ -233,6 +241,20 @@ def auditar_acao_penal(catalogo: list[dict], indice_fontes: dict) -> list[dict]:
         if k not in disp:
             continue
         texto = _texto_do_artigo(disp, k)
+        if _RESSALVA.search(texto):
+            # O artigo distingue hipóteses ("quando resultar prejuízo para a
+            # Administração Pública, a ação penal será incondicionada"). Qual
+            # registro cai em qual hipótese é leitura humana — vira achado para
+            # a issue, nunca proposta de troca.
+            if _ACAO_PRIVADA.search(texto) or _ACAO_CONDICIONADA.search(texto):
+                achados.append({
+                    "campo": "acao_penal", "tipo": "ACAO-COM-RESSALVA", "gravidade": 1,
+                    "id": registro["id"], "lei": registro["lei"],
+                    "artigo": registro["artigo"], "crime": registro["crime"][:90],
+                    "detalhe": "o artigo tem fórmula de ação penal E ressalva de hipótese; "
+                               f"o catálogo registra {registro.get('acao')}",
+                })
+            continue
         if _ACAO_PRIVADA.search(texto):
             esperado = _ROTULO_ACAO["privada"]
         elif _ACAO_CONDICIONADA.search(texto):
