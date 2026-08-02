@@ -153,7 +153,7 @@
     {
       "fundamento": "Lei 8.072, art. 1º, § único, V",
       "lei": "Lei 12\\.850",
-      "artigo": "^Art\\. 2",
+      "artigo": "^Art\\. 2º?(,|$)",
       "condicional": true,
       "nota": "só quando a organização é direcionada à prática de crime hediondo ou equiparado — circunstância do caso"
     },

@@ -305,6 +305,23 @@ def classificar_contradicao(grupo: list) -> str:
     return "pena"
 
 
+def validar_condicionais(crimes: list) -> list:
+    """Classificação circunstanciada não pode ser afirmada como se fosse do tipo.
+
+    Um registro que declara `hediondo_condicao` está dizendo "depende do caso" —
+    e marcar `hediondo: "Sim"` ao lado disso afirmaria o que a lei não afirma,
+    além de ligar sozinho as vedações do art. 5º, XLIII, da Constituição.
+    """
+    problemas = []
+    for c in crimes:
+        if c.get("hediondo_condicao") and c.get("hediondo") == "Sim":
+            problemas.append(
+                f"id {c['id']}: declara `hediondo_condicao` e ainda assim marca "
+                "`hediondo: Sim` — a condição existe justamente porque o tipo, "
+                "sozinho, não decide")
+    return problemas
+
+
 def validar_ids(crimes: list) -> list:
     """Invariantes DUROS do identificador. Nunca são débito tolerável.
 
@@ -491,7 +508,7 @@ def main():
 
     # Invariantes estruturais: falham sempre, independentemente de --estrito.
     problemas = (validar_ids(crimes) + validar_tipos_penais(crimes)
-                 + validar_moldura(crimes))
+                 + validar_moldura(crimes) + validar_condicionais(crimes))
     if problemas:
         for p in problemas:
             print(f"ERRO: {p}", file=sys.stderr)
@@ -535,6 +552,14 @@ def main():
         c["perdao_judicial_previsto"] = any(_casa(p, c) for p in PERDAO_JUDICIAL)
 
         c["chave_dispositivo"] = chave_dispositivo(c)
+
+        # Classificação CIRCUNSTANCIADA: a lei não decide pelo tipo. O art. 121
+        # só é hediondo quando praticado em atividade de grupo de extermínio; a
+        # ação do art. 161 só é privada se a propriedade for particular. Nesses,
+        # o catálogo guarda a CONDIÇÃO e deixa o campo no padrão seguro — quem
+        # marca é quem conhece o caso, na simulação.
+        c["hediondo_condicional"] = bool(c.get("hediondo_condicao"))
+        c["acao_condicional"] = bool(c.get("acao_condicao"))
 
         # Trilha de auditoria: quando este registro foi confrontado com a lei,
         # com que resultado e contra qual página. Vem da última rodada do

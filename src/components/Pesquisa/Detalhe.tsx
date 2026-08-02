@@ -150,8 +150,22 @@ export default function Detalhe({
           <span className={styles.tag}>{crime.pena_privativa}</span>
           {crime.tem_multa && <span className={styles.tag}>Multa ({crime.multa_regime})</span>}
           {crime.hediondo === 'Sim' && <span className={`${styles.tag} ${styles.tagHed}`}>Hediondo</span>}
+          {/* Classificação que depende do CASO, não do tipo: a etiqueta diz
+              "pode ser", e a condição fica a um passar de mouse. Sem isso, o
+              leitor veria "não hediondo" onde a lei diz "depende". */}
+          {crime.hediondo_condicional && (
+            <span className={`${styles.tag} ${styles.tagCondicional}`}>
+              Hediondo se…
+              <Ajuda texto={`A hediondez aqui depende de circunstância do caso, não do tipo. ${crime.hediondo_condicao} Marque "Hediondo/equiparado" nas circunstâncias abaixo para simular a hipótese.`} />
+            </span>
+          )}
           <span className={styles.tag}>{crime.elemento}</span>
-          <span className={styles.tag}>{crime.acao}</span>
+          <span className={styles.tag}>
+            {crime.acao}
+            {crime.acao_condicional && (
+              <Ajuda texto={`A espécie de ação penal depende do caso. ${crime.acao_condicao}`} />
+            )}
+          </span>
         </div>
       </div>
 
@@ -227,7 +241,11 @@ export default function Detalhe({
           <div className={styles.checkGrid}>
             <label><input type="checkbox" checked={cen.primario} onChange={(e) => set('primario', e.target.checked)} /> Primário</label>
             <label><input type="checkbox" checked={cen.reincidenteEspecifico} onChange={(e) => set('reincidenteEspecifico', e.target.checked)} /> Reincidente específico</label>
-            <label><input type="checkbox" checked={cen.hediondo} onChange={(e) => set('hediondo', e.target.checked)} /> Hediondo/equiparado</label>
+            <label className={crime.hediondo_condicional ? styles.checkDestacado : undefined}>
+              <input type="checkbox" checked={cen.hediondo} onChange={(e) => set('hediondo', e.target.checked)} />
+              {' '}Hediondo/equiparado
+              {crime.hediondo_condicional && <span className={styles.checkNota}> — depende do caso neste tipo</span>}
+            </label>
             <label><input type="checkbox" checked={cen.resultadoMorte} onChange={(e) => set('resultadoMorte', e.target.checked)} /> Resultado morte</label>
             <label><input type="checkbox" checked={cen.violencia} onChange={(e) => set('violencia', e.target.checked)} /> Violência</label>
             <label><input type="checkbox" checked={cen.graveAmeaca} onChange={(e) => set('graveAmeaca', e.target.checked)} /> Grave ameaça</label>

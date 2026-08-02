@@ -179,6 +179,22 @@
   font-size: 0.75rem;
 }
 .tagHed { background: #e91e63; color: #fff; }
+/* Classificação que depende do caso: nem afirma, nem esconde. O contorno
+   tracejado é o que distingue "é hediondo" de "pode ser, se…". */
+.tagCondicional {
+  background: transparent;
+  border: 1px dashed #e91e63;
+  color: #e91e63;
+}
+.checkDestacado {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 6px;
+  padding: 0.1rem 0.35rem;
+}
+.checkNota {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-700);
+}
 .detalheObs {
   margin: 1rem 0;
   padding: 0.75rem 1rem;

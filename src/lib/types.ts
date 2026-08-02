@@ -26,6 +26,15 @@ export interface Crime {
   tipo_pena: string;
   acao: string;
   hediondo: SimNao;
+  /**
+   * Quando a hediondez depende de circunstância do CASO, e não do tipo: o
+   * homicídio do art. 121 só é hediondo se praticado em atividade típica de
+   * grupo de extermínio. Aqui fica a condição, em texto; `hediondo` permanece
+   * "Não", e quem marca é quem conhece o caso, na simulação.
+   */
+  hediondo_condicao?: string;
+  /** Mesma ideia para a ação penal (art. 161, §3º: privada se a propriedade é particular). */
+  acao_condicao?: string;
   elemento: string;
   tentativa: SimNao;
   violencia: SimNao;
@@ -37,6 +46,9 @@ export interface Crime {
   multa_regime: MultaRegime;
   infracao_menor_potencial: boolean;
   derivado_auto: boolean;
+  /** Derivados de `hediondo_condicao`/`acao_condicao`: a classificação depende do caso. */
+  hediondo_condicional: boolean;
+  acao_condicional: boolean;
   /** Pena mínima canônica em meses (dias/anos já convertidos). */
   pena_min_meses: number;
   /** Pena máxima canônica em meses (dias/anos já convertidos). */

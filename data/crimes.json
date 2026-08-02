@@ -13,7 +13,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "Matar alguém. 6-20 anos reclusão"
+    "obs": "Matar alguém. 6-20 anos reclusão",
+    "hediondo_condicao": "Só quando praticado em atividade típica de grupo de extermínio. Fundamento: Lei 8.072, art. 1º, I."
   },
   {
     "id": 2,
@@ -216,7 +217,7 @@
     "pena_max": 360,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -317,7 +318,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos reclusão. Redação dada pela Lei 13.968/2019"
+    "obs": "6 meses a 2 anos reclusão. Redação dada pela Lei 13.968/2019",
+    "hediondo_condicao": "Só na modalidade praticada por rede de computadores ou transmissão em tempo real. Fundamento: Lei 8.072, art. 1º, X."
   },
   {
     "id": 21,
@@ -381,7 +383,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "Dobra a pena se realizado por meio de rede de computadores, rede social, ou transmitido em tempo real"
+    "obs": "Dobra a pena se realizado por meio de rede de computadores, rede social, ou transmitido em tempo real",
+    "hediondo_condicao": "Só na modalidade praticada por rede de computadores ou transmissão em tempo real. Fundamento: Lei 8.072, art. 1º, X."
   },
   {
     "id": 25,
@@ -541,7 +544,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2-8 anos reclusão. Incapacidade permanente para o trabalho, enfermidade incurável, perda/inutilização de membro/sentido/função, deformidade permanente, aborto"
+    "obs": "2-8 anos reclusão. Incapacidade permanente para o trabalho, enfermidade incurável, perda/inutilização de membro/sentido/função, deformidade permanente, aborto",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 35,
@@ -557,7 +561,8 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "4-12 anos reclusão. Dolo na lesão + culpa no resultado morte"
+    "obs": "4-12 anos reclusão. Dolo na lesão + culpa no resultado morte",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 36,
@@ -680,7 +685,7 @@
     "pena_max": 60,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -1165,7 +1170,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "4-8 anos reclusão + multa. Agenciar, aliciar, recrutar, transportar, transferir, comprar, alojar ou acolher pessoa para fins de exploração. +1/3 a +1/2 se contra criança/adolescente/pessoa idosa ou com deficiência"
+    "obs": "4-8 anos reclusão + multa. Agenciar, aliciar, recrutar, transportar, transferir, comprar, alojar ou acolher pessoa para fins de exploração. +1/3 a +1/2 se contra criança/adolescente/pessoa idosa ou com deficiência",
+    "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
     "id": 74,
@@ -1277,7 +1283,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-4 anos detenção + multa. Divulgar, sem justa causa, informações sigilosas ou reservadas, assim definidas em lei, contidas ou não em sistemas de informações da administração pública"
+    "obs": "1-4 anos detenção + multa. Divulgar, sem justa causa, informações sigilosas ou reservadas, assim definidas em lei, contidas ou não em sistemas de informações da administração pública",
+    "acao_condicao": "Incondicionada quando resulta prejuízo para a Administração Pública (CP, art. 153, §2º); nas demais hipóteses, condicionada a representação."
   },
   {
     "id": 81,
@@ -1287,7 +1294,7 @@
     "pena_min": 3,
     "pena_max": 12,
     "tipo_pena": "Detenção",
-    "acao": "Ação Penal Privada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
@@ -1448,7 +1455,7 @@
     "pena_max": 120,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -1495,7 +1502,7 @@
     "pena_min": 6,
     "pena_max": 24,
     "tipo_pena": "Detenção",
-    "acao": "Ação Penal Privada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
@@ -1576,7 +1583,7 @@
     "pena_max": 180,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -1592,7 +1599,7 @@
     "pena_max": 180,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -1624,7 +1631,7 @@
     "pena_max": 192,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -1640,7 +1647,7 @@
     "pena_max": 240,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -1656,7 +1663,7 @@
     "pena_max": 216,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Preterdoloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -1853,7 +1860,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1 a 6 meses detenção + multa. Suprimir ou deslocar tapume, marco ou qualquer sinal indicativo de linha divisória"
+    "obs": "1 a 6 meses detenção + multa. Suprimir ou deslocar tapume, marco ou qualquer sinal indicativo de linha divisória",
+    "acao_condicao": "Privada quando a propriedade é particular e não há emprego de violência (CP, art. 161, §3º); nos demais casos, pública incondicionada."
   },
   {
     "id": 117,
@@ -1869,7 +1877,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "Detenção de 1 a 6 meses e multa (mesma pena do caput do art. 161). Desviar ou represar águas alheias (§1º, I)"
+    "obs": "Detenção de 1 a 6 meses e multa (mesma pena do caput do art. 161). Desviar ou represar águas alheias (§1º, I)",
+    "acao_condicao": "Privada quando a propriedade é particular e não há emprego de violência (CP, art. 161, §3º); nos demais casos, pública incondicionada."
   },
   {
     "id": 118,
@@ -1885,7 +1894,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "Detenção de 1 a 6 meses e multa (mesma pena do caput). Invadir terreno/edifício alheio para esbulho possessório (§1º, II)"
+    "obs": "Detenção de 1 a 6 meses e multa (mesma pena do caput). Invadir terreno/edifício alheio para esbulho possessório (§1º, II)",
+    "acao_condicao": "Privada quando a propriedade é particular e não há emprego de violência (CP, art. 161, §3º); nos demais casos, pública incondicionada."
   },
   {
     "id": 119,
@@ -5163,7 +5173,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3-10 anos reclusão + 1.200-2.000 dias-multa"
+    "obs": "3-10 anos reclusão + 1.200-2.000 dias-multa",
+    "hediondo_condicao": "Maquinário: o STJ tem decisões nos dois sentidos sobre a equiparação — é escolha do projeto, não leitura de texto. Fundamento: CF, art. 5º, XLIII (equiparado)."
   },
   {
     "id": 323,
@@ -5211,7 +5222,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-6 anos reclusão + 300-700 dias-multa"
+    "obs": "2-6 anos reclusão + 300-700 dias-multa",
+    "hediondo_condicao": "Informante/colaborador: a equiparação é reconhecida por parte da jurisprudência e negada por outra — decisão do projeto, não leitura de texto. Fundamento: CF, art. 5º, XLIII (equiparado)."
   },
   {
     "id": 326,
@@ -5254,7 +5266,7 @@
     "pena_max": 300,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -6219,7 +6231,8 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-4 anos detenção. Aquele que se omite quando tinha o dever de evitar ou apurar"
+    "obs": "1-4 anos detenção. Aquele que se omite quando tinha o dever de evitar ou apurar",
+    "hediondo_condicao": "Omissão perante a tortura: pena própria de detenção, e a doutrina diverge sobre estender a equiparação. Fundamento: CF, art. 5º, XLIII (equiparado)."
   },
   {
     "id": 389,
@@ -6267,7 +6280,8 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3-8 anos reclusão + multa. §1º: mesma pena para quem impede/embaraça investigação. §2º: aumento de 1/3 a 2/3 se emprego de arma. §3º: aumento até metade se na atuação da Justiça Militar/Segurança Pública/Eleitoral. §4º: aumento de 1/6 a 2/3 se com participação de criança/adolescente; contra servidor público; infraestrutura pública"
+    "obs": "3-8 anos reclusão + multa. §1º: mesma pena para quem impede/embaraça investigação. §2º: aumento de 1/3 a 2/3 se emprego de arma. §3º: aumento até metade se na atuação da Justiça Militar/Segurança Pública/Eleitoral. §4º: aumento de 1/6 a 2/3 se com participação de criança/adolescente; contra servidor público; infraestrutura pública",
+    "hediondo_condicao": "Só quando a organização é direcionada à prática de crime hediondo ou equiparado — circunstância do caso. Fundamento: Lei 8.072, art. 1º, § único, V."
   },
   {
     "id": 392,
@@ -7350,7 +7364,7 @@
     "pena_max": 96,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -7366,7 +7380,7 @@
     "pena_max": 96,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -7382,7 +7396,7 @@
     "pena_max": 72,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -7398,7 +7412,7 @@
     "pena_max": 48,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -7494,7 +7508,7 @@
     "pena_max": 120,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -8709,13 +8723,14 @@
     "pena_min": 12,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
+    "acao": "Ação Penal Privada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-4 anos reclusão + multa. Se reprodução com intuito de lucro"
+    "obs": "1-4 anos reclusão + multa. Se reprodução com intuito de lucro",
+    "acao_condicao": "Privada, salvo quando praticado em prejuízo de entidade de direito público, empresa pública, sociedade de economia mista ou fundação (Lei 9.609, art. 12, §3º)."
   },
   {
     "id": 545,
@@ -8725,13 +8740,14 @@
     "pena_min": 12,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
+    "acao": "Ação Penal Privada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-4 anos reclusão + multa"
+    "obs": "1-4 anos reclusão + multa",
+    "acao_condicao": "Privada, salvo quando praticado em prejuízo de entidade de direito público, empresa pública, sociedade de economia mista ou fundação (Lei 9.609, art. 12, §3º)."
   },
   {
     "id": 546,
@@ -9333,7 +9349,7 @@
     "pena_min": 12,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
@@ -9494,7 +9510,7 @@
     "pena_max": 192,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -9894,7 +9910,7 @@
     "pena_max": 192,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -10086,7 +10102,7 @@
     "pena_max": 60,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -10187,7 +10203,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2-8 anos reclusão"
+    "obs": "2-8 anos reclusão",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 637,
@@ -10203,7 +10220,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2-8 anos reclusão"
+    "obs": "2-8 anos reclusão",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 638,
@@ -10219,7 +10237,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2-8 anos reclusão"
+    "obs": "2-8 anos reclusão",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 639,
@@ -10235,7 +10254,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2-8 anos reclusão"
+    "obs": "2-8 anos reclusão",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 640,
@@ -10251,7 +10271,8 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "2-8 anos reclusão. Resultado preterdoloso: dolo na lesão, culpa no aborto"
+    "obs": "2-8 anos reclusão. Resultado preterdoloso: dolo na lesão, culpa no aborto",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 641,
@@ -10267,7 +10288,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa",
+    "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
     "id": 642,
@@ -10283,7 +10305,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa",
+    "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
     "id": 643,
@@ -10299,7 +10322,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa",
+    "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
     "id": 644,
@@ -10315,7 +10339,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa",
+    "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
     "id": 645,
@@ -10331,7 +10356,8 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa",
+    "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
     "id": 646,
@@ -10843,7 +10869,8 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "3-8 anos reclusão + multa. Aumento de 1/2 a 2/3"
+    "obs": "3-8 anos reclusão + multa. Aumento de 1/2 a 2/3",
+    "hediondo_condicao": "Só quando a organização é direcionada à prática de crime hediondo ou equiparado — circunstância do caso. Fundamento: Lei 8.072, art. 1º, § único, V."
   },
   {
     "id": 678,
@@ -10859,7 +10886,8 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3-8 anos reclusão + multa. Aumento de 1/6 a 2/3"
+    "obs": "3-8 anos reclusão + multa. Aumento de 1/6 a 2/3",
+    "hediondo_condicao": "Só quando a organização é direcionada à prática de crime hediondo ou equiparado — circunstância do caso. Fundamento: Lei 8.072, art. 1º, § único, V."
   },
   {
     "id": 679,
@@ -12950,7 +12978,7 @@
     "pena_max": 72,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -12966,7 +12994,7 @@
     "pena_max": 72,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
@@ -13158,7 +13186,7 @@
     "pena_max": 180,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
@@ -21073,7 +21101,8 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "20-40 anos reclusão. Incluído pela Lei 15.358/2026. NÃO consta do rol do art. 1º da Lei 8.072/90, que arrola o homicídio qualificado do §2º — o §2º-D é parágrafo autônomo. Hediondez a rever se sobrevier alteração do rol"
+    "obs": "20-40 anos reclusão. Incluído pela Lei 15.358/2026. NÃO consta do rol do art. 1º da Lei 8.072/90, que arrola o homicídio qualificado do §2º — o §2º-D é parágrafo autônomo. Hediondez a rever se sobrevier alteração do rol",
+    "hediondo_condicao": "O rol remete ao §2º; o §2º-D é parágrafo próprio, criado depois. Alcance a definir. Fundamento: Lei 8.072, art. 1º, I."
   },
   {
     "id": 1317,
@@ -21201,7 +21230,8 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "20-40 anos reclusão. Lesão seguida de morte (§3º) cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026"
+    "obs": "20-40 anos reclusão. Lesão seguida de morte (§3º) cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026",
+    "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
     "id": 1325,
@@ -21356,7 +21386,7 @@
     "pena_max": 48,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Não",
     "violencia": "Não",
@@ -21948,7 +21978,7 @@
     "pena_max": 36,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
-    "hediondo": "Não",
+    "hediondo": "Sim",
     "elemento": "Culposo",
     "tentativa": "Não",
     "violencia": "Não",

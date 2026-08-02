@@ -124,6 +124,11 @@ def auditar_hediondez(catalogo: list[dict]) -> list[dict]:
         if any(re.search(f["lei"], registro["lei"] or "") for f in fora):
             n_fora += 1
             continue
+        # Registro que já DECLARA a condição está modelado: a hediondez dele é
+        # circunstância do caso, e o catálogo diz isso em texto. Acusá-lo seria
+        # cobrar uma resposta que ele deliberadamente não dá.
+        if registro.get("hediondo_condicao"):
+            continue
         excecao = next((e for e in tabela["excecoes"] if _casa(e, registro)), None)
         regra = next((r for r in tabela["regras"] if _casa(r, registro)), None)
         atual = registro.get("hediondo")
@@ -261,6 +266,8 @@ def auditar_acao_penal(catalogo: list[dict], indice_fontes: dict) -> list[dict]:
             esperado = _ROTULO_ACAO["condicionada"]
         else:
             continue                      # silêncio da lei = regra do art. 100
+        if registro.get("acao_condicao"):
+            continue                      # a espécie depende do caso, e está declarada
         atual = (registro.get("acao") or "").strip()
         especie_atual = _EQUIVALENTES.get(atual.lower(), atual.lower())
         especie_esperada = "privada" if esperado == _ROTULO_ACAO["privada"] else "condicionada"
