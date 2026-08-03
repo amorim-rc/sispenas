@@ -161,6 +161,16 @@ def auditar_hediondez(catalogo: list[dict]) -> list[dict]:
             "detalhe": f"catálogo diz {atual}; {fundamento} indica {esperado}",
         })
 
+    # As pendências declaradas na própria tabela — o que se sabe que falta
+    # decidir. Sem isto elas viveriam só no arquivo, e a rodada semanal deixaria
+    # de lembrar que existem: silêncio de novo confundido com "está tudo certo".
+    for pend in tabela.get("pendentes", []):
+        achados.append({
+            "campo": "hediondez", "tipo": "PENDENCIA-DECLARADA", "gravidade": 1,
+            "detalhe": f"{pend['fundamento']} — {pend['descricao']} "
+                       f"(ação prevista: {pend['acao']})",
+        })
+
     if n_fora:
         achados.append({
             "campo": "hediondez", "tipo": "FORA-DE-ALCANCE", "gravidade": 0,
