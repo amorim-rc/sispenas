@@ -103,6 +103,15 @@
       "impacto": "Nenhum sobre o cálculo: fração e alcance estão registrados. O que falta é descrição — quem consulta o modificador nem sempre vê a lista completa de hipóteses.",
       "origem": "Revisão de 02/08/2026, Bloco 3, nota geral sobre dispositivos truncados.",
       "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "nomes-de-outro-artigo-remanescentes",
+      "assunto": "13 registros que a varredura NOME-DE-OUTRO-ARTIGO ainda aponta",
+      "questao": "O nome de cada um veio mesmo de outro artigo, ou é coincidência de vocabulário entre tipos vizinhos?",
+      "o_que_falta": "Leitura de cada um contra o compilado, um a um — a heurística sinaliza, não conclui. Os nove casos confirmados nesta release foram corrigidos (Lei 9.605 arts. 68 e 69, com os nomes trocados entre si; Lei 7.716 arts. 9º a 14, todos com o nome do artigo SEGUINTE; e CE art. 315, com o nome do art. 323). Restam ids 474, 475, 498, 499, 500, 539, 569, 570, 642, 776, 777, 789 e 791, com vantagem de vocabulário menor — vários são provavelmente falso positivo, porque artigos do mesmo capítulo descrevem condutas parecidas (o art. 337-J da Lei 14.133 e o art. 335 do CP são os dois sobre afastamento de licitante).",
+      "impacto": "Nenhum confirmado. A pena de todos os 13 foi conferida contra o compilado pelo conferidor semanal e bate; o risco é só de rótulo. Mas o rótulo é o que a busca mostra, e o caso do art. 313 do Código Eleitoral mostrou que o nome errado pode arrastar a pena errada.",
+      "origem": "Varredura 2 sugerida pela revisão de 02/08/2026, implementada como achado permanente da auditoria.",
+      "registrado_em": "2026-08-03"
     }
   ]
 }

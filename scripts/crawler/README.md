@@ -24,9 +24,10 @@ segura, o achado vira pergunta na issue em vez de virar dado.
 | `corrigir.py` | Correção mecânica de linha existente: moldura e espécie de pena. |
 | `criar.py` | Linha nova. **Não roda no automático** — ver "o que o robô não faz". |
 | `propor.py` | Escolhe o diploma da rodada, aplica, escreve a entrada de changelog, sobe a versão e monta o corpo do PR. |
-| `auditar.py` | Audita os campos que a conferência de penas não alcança: hediondez (contra `data/hediondos.json`), ação penal, causas de aumento ausentes e nomes suspeitos. |
+| `auditar.py` | Audita os campos que a conferência de penas não alcança: hediondez (contra `data/hediondos.json`), ação penal, causas de aumento ausentes e nomes — inclusive o nome que descreve MELHOR outro artigo do mesmo diploma, ponto cego da conferência de molduras. Repete também as pendências de `data/pendencias.json`. |
 | `dou_watcher.py` | Filtro semanal da Seção 1 do DOU, para achar lei penal **nova e autônoma**. |
-| `excecoes.json` | O que já foi julgado e decidido. Sem isso o relatório repetiria para sempre os mesmos achados. |
+| `excecoes.json` | O que já foi julgado e decidido na conferência de PENAS. Sem isso o relatório repetiria para sempre os mesmos achados. |
+| `excecoes-auditoria.json` | O mesmo, para a auditoria de classificação. Arquivo próprio porque as chaves são outras: ora o id do registro, ora o dispositivo do compilado. |
 | `../verificar_documentacao.py` | Saúde da prosa: documento vence por prazo ou porque algo de que ele fala mudou depois da última conferência. |
 | `tempo.py` | A data de Brasília. O runner roda em UTC, e sem isso a rodada das 21h se datava de amanhã. |
 

@@ -159,3 +159,68 @@ class TestNome:
         assert not auditar.auditar_nomes(
             [registro(id=7, artigo="Art. 129, §1º", crime="Lesão corporal grave")],
             {"CP": "cp"})
+
+class TestNomeDeOutroArtigo:
+    """O ponto cego da conferência de penas: ela confere a moldura contra o
+    artigo que o REGISTRO DIZ ser. Se o rótulo veio de outro artigo, a pena pode
+    ter vindo junto — e quando os dois artigos têm pena idêntica, nada acusa."""
+
+    def _diploma(self, monkeypatch, artigos):
+        class Falso:
+            def __init__(self, t, pena="Pena - detenção, de um a três anos."):
+                self.texto, self.epigrafe = t, None
+                self.citacao, self.incisos = False, []
+                self.situacao, self.pena_texto = "vigente", pena
+        monkeypatch.setattr(auditar, "dispositivos_de",
+                            lambda fid: {k: Falso(v) for k, v in artigos.items()})
+        return {"Lei 9.605/98": "ambiental-9605"}
+
+    def _catalogo(self, artigo, crime):
+        return [registro(id=7, lei="Lei 9.605/98", artigo=artigo, crime=crime)]
+
+    def test_nome_trocado_entre_artigos_de_pena_identica(self, monkeypatch):
+        """Caso real: os arts. 68 e 69 da Lei 9.605 estavam com os nomes
+        trocados entre si, e ambos cominam detenção de um a três anos e multa."""
+        indice = self._diploma(monkeypatch, {
+            "Art. 68|caput": "Deixar, aquele que tiver o dever legal ou contratual de "
+                             "fazê-lo, de cumprir obrigação de relevante interesse ambiental",
+            "Art. 69|caput": "Obstar ou dificultar a ação fiscalizadora do Poder Público "
+                             "no trato de questões ambientais",
+        })
+        achados = auditar.auditar_nomes_trocados(
+            self._catalogo("Art. 68", "Obstar/dificultar a ação fiscalizadora do Poder "
+                                      "Público no trato de questões ambientais"), indice)
+        assert achados and achados[0]["tipo"] == "NOME-DE-OUTRO-ARTIGO"
+        assert "Art. 69|caput" in achados[0]["detalhe"]
+
+    def test_nome_correto_nao_e_acusado(self, monkeypatch):
+        indice = self._diploma(monkeypatch, {
+            "Art. 68|caput": "Deixar, aquele que tiver o dever legal ou contratual de "
+                             "fazê-lo, de cumprir obrigação de relevante interesse ambiental",
+            "Art. 69|caput": "Obstar ou dificultar a ação fiscalizadora do Poder Público "
+                             "no trato de questões ambientais",
+        })
+        assert not auditar.auditar_nomes_trocados(
+            self._catalogo("Art. 68", "Deixar de cumprir obrigação de relevante interesse "
+                                      "ambiental, tendo o dever legal de fazê-lo"), indice)
+
+    def test_artigo_sem_pena_nao_entra_na_comparacao(self, monkeypatch):
+        """Um rótulo de tipo penal só pode ter vindo de outro TIPO. O artigo de
+        definições do mesmo diploma casa por assunto e não por conduta — era
+        metade das acusações, todas falsas."""
+        class Falso:
+            def __init__(self, t, pena):
+                self.texto, self.epigrafe = t, None
+                self.citacao, self.incisos = False, []
+                self.situacao, self.pena_texto = "vigente", pena
+        monkeypatch.setattr(auditar, "dispositivos_de", lambda fid: {
+            "Art. 17|caput": Falso("Recolher, transportar, guardar ou distribuir partes do "
+                                   "corpo humano de que trata esta Lei", "Pena - reclusão."),
+            "Art. 4|caput": Falso("A retirada de tecidos, órgãos e partes do corpo de "
+                                  "pessoas falecidas para transplantes ou tratamento", ""),
+        })
+        assert not auditar.auditar_nomes_trocados(
+            [registro(id=7, lei="Lei 9.434/97", artigo="Art. 17",
+                      crime="Recolher tecidos, órgãos ou partes do corpo humano de pessoas "
+                            "falecidas para transplante sem autorização")],
+            {"Lei 9.434/97": "transplantes-9434"})

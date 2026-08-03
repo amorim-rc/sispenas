@@ -495,6 +495,83 @@ def auditar_nomes(catalogo: list[dict], indice_fontes: dict) -> list[dict]:
     return achados
 
 
+def auditar_nomes_trocados(catalogo: list[dict], indice_fontes: dict) -> list[dict]:
+    """O nome deste registro descreve MELHOR outro artigo do mesmo diploma?
+
+    Este é o ponto cego da conferência de penas, e custou caro: ela confere a
+    moldura contra o artigo que o REGISTRO DIZ ser. Nome trocado esconde pena
+    trocada — o art. 313 do Código Eleitoral publicou por meses reclusão de 2 a 6
+    anos, que é a pena do art. 348, de onde o nome tinha vindo, para um artigo
+    que comina apenas dias-multa.
+
+    E quando os dois artigos têm pena IDÊNTICA, nem a divergência aparece: o art.
+    33 da Lei 9.605 passou com o nome do art. 34 porque os dois cominam detenção
+    de um a três anos, ou multa, ou ambas.
+
+    A comparação é de vocabulário, como em `auditar_nomes`, mas em vez de
+    perguntar "o nome conversa com o dispositivo?" pergunta "há outro dispositivo
+    com quem ele converse MAIS?". Exige vantagem de duas palavras para acusar:
+    artigos vizinhos de um mesmo capítulo compartilham vocabulário, e um limiar
+    apertado transformaria o relatório em ruído.
+    """
+    achados: list[dict] = []
+    cache: dict[str, dict] = {}
+    for registro in catalogo:
+        fid = indice_fontes.get(registro["lei"])
+        k = chave(registro["artigo"])
+        if not fid or not k:
+            continue
+        if fid not in cache:
+            cache[fid] = dispositivos_de(fid)
+        disp = cache[fid]
+        proprio = disp.get(k)
+        if proprio is None or proprio.citacao:
+            continue
+        # Só o CAPUT, pelo mesmo motivo de `auditar_nomes`: o parágrafo começa
+        # pela hipótese ("Se resulta:") e não repete a conduta, então o nome do
+        # registro nunca conversa com ele — e qualquer caput do diploma pareceria
+        # melhor. Comparar parágrafos produzia quarenta acusações inúteis.
+        if not k.endswith("|caput") or len(proprio.texto or "") < 60:
+            continue
+        nome = _radicais(registro["crime"])
+        if len(nome) < 3:
+            continue                       # nome enxuto casa com qualquer coisa
+        meu = len(nome & _radicais(f"{proprio.epigrafe or ''} {proprio.texto or ''}"))
+        melhor, melhor_chave, melhor_texto = meu, None, ""
+        for chave_outra, d in disp.items():
+            if chave_outra == k or d.citacao or d.situacao != "vigente":
+                continue
+            if not chave_outra.endswith("|caput") or len(d.texto or "") < 60:
+                continue
+            # E só artigos que COMINAM PENA. Um nome de tipo penal pode casar por
+            # assunto com o artigo de definições, de competência ou de direitos
+            # do mesmo diploma — "A retirada de tecidos, órgãos e partes do corpo
+            # de pessoas falecidas…" é o art. 4º da Lei 9.434, e não é crime
+            # nenhum. Um rótulo só pode ter vindo de outro TIPO.
+            if not (d.pena_texto or "").strip():
+                continue
+            # Do outro artigo conta só o TEXTO, nunca a epígrafe. As epígrafes do
+            # compilado carregam títulos de seção inteiros ("DOS CRIMES CONTRA OS
+            # DESENHOS INDUSTRIAIS", "Do Direito à Saúde"), e um nome de tipo casa
+            # com esses títulos por assunto, não por conduta — eram metade das
+            # acusações, todas falsas.
+            n = len(nome & _radicais(d.texto or ""))
+            if n > melhor:
+                melhor, melhor_chave = n, chave_outra
+                melhor_texto = (d.epigrafe or d.texto or "")[:90]
+        if melhor_chave is None or melhor - meu < 2 or melhor < 3:
+            continue
+        achados.append({
+            "campo": "nome", "tipo": "NOME-DE-OUTRO-ARTIGO", "gravidade": 2,
+            "id": registro["id"], "lei": registro["lei"], "artigo": registro["artigo"],
+            "crime": registro["crime"][:90],
+            "detalhe": f"o nome tem {melhor} palavras em comum com `{melhor_chave}` e apenas "
+                       f"{meu} com o próprio dispositivo — {melhor_texto}. RECONFIRA A PENA: "
+                       "ela pode ter vindo junto com o nome",
+        })
+    return achados
+
+
 # ── Relatório ───────────────────────────────────────────────────────────────
 TITULOS = {
     "hediondez": "Hediondez (Lei 8.072, art. 1º)",
@@ -518,9 +595,12 @@ LIMITES = {
     "modificadores": "Lista o que a lei tem e o catálogo de modificadores não. Não propõe "
                      "modelagem: definir o escopo — sobre quais tipos o aumento incide — "
                      "não se lê do dispositivo isolado.",
-    "nome": "Heurística de palavras em comum. Falso positivo é esperado em nome enxuto "
-            "('Furto') diante de texto longo; serve para leitura, nunca para troca "
-            "automática.",
+    "nome": "Heurística de palavras em comum, em duas direções. NOME-SUSPEITO acusa o "
+            "rótulo que não conversa com o próprio dispositivo; NOME-DE-OUTRO-ARTIGO acusa "
+            "o que conversa MAIS com outro artigo do mesmo diploma — o ponto cego da "
+            "conferência de penas, que confere a moldura contra o artigo que o registro diz "
+            "ser. Falso positivo é esperado: artigos de um mesmo capítulo descrevem condutas "
+            "parecidas. Serve para leitura, nunca para troca automática.",
     "pendencias": "Não são achados: é `data/pendencias.json`, a lista do que o projeto "
                   "examinou e deixou em aberto de propósito. Cada entrada diz o que falta "
                   "ver para decidir. Sai daqui quando a decisão for tomada e publicada.",
@@ -571,6 +651,7 @@ def rodar(so: str | None = None) -> list[dict]:
         achados += auditar_modificadores(indice_fontes)
     if so in (None, "nome"):
         achados += auditar_nomes(catalogo, indice_fontes)
+        achados += auditar_nomes_trocados(catalogo, indice_fontes)
     if so in (None, "pendencias"):
         achados += auditar_pendencias()
 
