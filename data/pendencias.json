@@ -49,6 +49,15 @@
       "impacto": "O catálogo usa a nomenclatura anterior à Lei 14.423/2022, inclusive em tipos cujo próprio texto legal já diz 'pessoa idosa' (art. 100, III).",
       "origem": "Revisão de 02/08/2026, item 1.4.",
       "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "cp-151-p1-iv-revogacao-tacita",
+      "assunto": "CP, art. 151, §1º, IV (instalar ou utilizar estação ou aparelho radioelétrico sem autorização)",
+      "questao": "O dispositivo foi tacitamente revogado pelo art. 183 da Lei 9.472/97?",
+      "o_que_falta": "Levantamento da jurisprudência atual do STJ sobre rádio clandestina. Há corrente relevante sustentando que o art. 183 da Lei 9.472/97 — desenvolvimento clandestino de atividades de telecomunicação, detenção de 2 a 4 anos — revogou tacitamente o inciso. Não se decide pelo texto: os dois dispositivos convivem nos compilados.",
+      "impacto": "Se acolhida a revogação, o registro (id 647) deveria constar como revogado, e não apenas ter a ação penal conferida. A ação penal dele foi confirmada como INCONDICIONADA, por ser uma das duas hipóteses que o §4º ressalva — essa parte é leitura literal e independe da controvérsia.",
+      "origem": "Revisão de 02/08/2026, item 2.6, grau B.",
+      "registrado_em": "2026-08-03"
     }
   ]
 }

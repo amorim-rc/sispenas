@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "proposito": "Achados da AUDITORIA DE CLASSIFICAÇÃO já examinados e decididos. É o irmão de excecoes.json, que faz o mesmo pela conferência de penas: sem a lista, os mesmos itens voltam em toda rodada e o alerta vira ruído.",
+    "por_que_arquivo_proprio": "Os dois auditores classificam achados por chaves diferentes. A conferência de penas casa por diploma + dispositivo; a auditoria casa às vezes por dispositivo (MODIFICADOR-AUSENTE, que nem chega a ter registro no catálogo) e às vezes por id do registro (ACAO-COM-RESSALVA, NOME-SUSPEITO, HEDIONDEZ-DIVERGENTE). Misturar os dois formatos num arquivo só faria cada leitor adivinhar qual campo vale.",
+    "regras": [
+      "Toda exceção declara TIPO de achado, MOTIVO e DATA: é memória do julgamento, não silenciador.",
+      "Casa por `tipo` mais um alvo: `ids` (registros do catálogo) ou `fonte` + `dispositivos` (chaves do compilado). Sem alvo nenhum a entrada é inválida e o auditor a ignora.",
+      "Divergência real NUNCA vira exceção — vira correção no dado. Exceção é para o achado que a heurística não consegue resolver sozinha, e cujo julgamento já foi feito."
+    ]
+  },
+  "excecoes": [
+    {
+      "tipo": "ACAO-COM-RESSALVA",
+      "ids": [76, 77, 78, 79, 80, 285, 646, 647, 1351],
+      "motivo": "Os arts. 151, 153 e 345 do CP distribuem a espécie de ação penal POR PARÁGRAFO: o §4º do art. 151 excepciona nominalmente o §1º, IV e o §3º; o §2º do art. 153 torna incondicionada só a hipótese de prejuízo à Administração; o parágrafo único do art. 345 reserva a queixa ao fato sem violência. A auditoria lê o artigo inteiro e não sabe em qual hipótese cada registro cai — por isso acusa a ressalva, não a divergência. Os nove registros foram lidos um a um contra o compilado na revisão de 02/08/2026 (Bloco 2) e corrigidos: quatro passaram a condicionada, um saiu de privada para condicionada, dois foram confirmados incondicionados e dois guardam a condição em `acao_condicao`.",
+      "data": "2026-08-03"
+    }
+  ]
+}

@@ -55,10 +55,36 @@ FONTES = RAIZ / "data" / "fontes.json"
 HEDIONDOS = RAIZ / "data" / "hediondos.json"
 MODIFICADORES = RAIZ / "data" / "modificadores.json"
 PENDENCIAS = RAIZ / "data" / "pendencias.json"
+EXCECOES = Path(__file__).resolve().parent / "excecoes-auditoria.json"
 
 
 def carregar(caminho: Path) -> dict:
     return json.loads(caminho.read_text(encoding="utf-8"))
+
+
+def carregar_excecoes() -> list[dict]:
+    if not EXCECOES.exists():
+        return []
+    return carregar(EXCECOES).get("excecoes", [])
+
+
+def dispensado(excecoes: list[dict], achado: dict) -> bool:
+    """Este achado já foi examinado e decidido?
+
+    Casa sempre pelo TIPO do achado, mais um alvo: `ids` (registros do catálogo)
+    ou `fonte` + `dispositivos` (chaves do compilado, para o que ainda não tem
+    registro). Sem alvo a entrada é inválida e não dispensa nada — silenciar um
+    tipo inteiro apagaria também o achado novo.
+    """
+    for e in excecoes:
+        if e.get("tipo") != achado.get("tipo"):
+            continue
+        if achado.get("id") is not None and achado["id"] in (e.get("ids") or []):
+            return True
+        if (achado.get("fonte") and e.get("fonte") == achado["fonte"]
+                and achado.get("dispositivo") in (e.get("dispositivos") or [])):
+            return True
+    return False
 
 
 def dispositivos_de(fonte_id: str) -> dict:
@@ -502,6 +528,25 @@ def rodar(so: str | None = None) -> list[dict]:
         achados += auditar_nomes(catalogo, indice_fontes)
     if so in (None, "pendencias"):
         achados += auditar_pendencias()
+
+    # O que já foi julgado sai do relatório — mas só o que foi julgado. A
+    # dispensa casa por tipo E alvo, nunca por tipo sozinho: achado NOVO no
+    # mesmo dispositivo continua aparecendo. Pendência declarada não se
+    # dispensa; ela existe justamente para ser repetida.
+    excecoes = carregar_excecoes()
+    dispensados = [a for a in achados if dispensado(excecoes, a)]
+    achados = [a for a in achados if a not in dispensados]
+    if dispensados:
+        por_tipo: dict[str, int] = {}
+        for a in dispensados:
+            por_tipo[a["tipo"]] = por_tipo.get(a["tipo"], 0) + 1
+        achados.append({
+            "campo": "pendencias", "tipo": "JA-JULGADO", "gravidade": 0,
+            "detalhe": f"{len(dispensados)} achado(s) omitido(s) por decisão já tomada "
+                       f"({', '.join(f'{n} {t}' for t, n in sorted(por_tipo.items()))}) "
+                       "— ver scripts/crawler/excecoes-auditoria.json, que guarda o motivo "
+                       "e a data de cada uma",
+        })
     return achados
 
 
