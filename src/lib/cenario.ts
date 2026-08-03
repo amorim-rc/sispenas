@@ -20,6 +20,13 @@ export function cenarioFromCrime(c: Crime): Cenario {
     reincidenteEspecifico: false,
     hediondo: c.hediondo === 'Sim',
     resultadoMorte: c.resultado_morte === true,
+    // Feminicídio deriva do NOME do tipo, pela mesma razão que `resultado_morte`
+    // (convenção C5): o `obs` descreve os demais parágrafos do artigo e produziria
+    // falso positivo. É o que aciona a alínea "d" do art. 112, VI da LEP.
+    feminicidio: /feminic[íi]dio/i.test(c.crime ?? ''),
+    // Circunstância do caso concreto: parte-se de "não", e quem conhece os autos
+    // marca na simulação.
+    comandoOrgcrimUltraviolenta: false,
     violencia: c.violencia === 'Sim',
     graveAmeaca: c.grave_ameaca === 'Sim',
     confessou: false,

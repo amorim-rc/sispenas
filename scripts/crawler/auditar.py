@@ -16,12 +16,17 @@ campos que decidem benefício e que ninguém vigiava:
 - **nome do tipo** — comparado com a epígrafe e com o texto do dispositivo, para
   achar registro que descreve outro crime.
 
+E um quinto bloco que não é auditoria de dado: as **pendências jurídicas**
+declaradas em `data/pendencias.json` — o que o projeto examinou e deixou em
+aberto de propósito, repetido toda semana para não apodrecer no arquivo.
+
 **Nenhuma conclusão jurídica.** Cada achado é uma pergunta, e os que viram
 proposta de mudança saem em PR, para revisão — nunca aplicados direto.
 
 Uso:
     python scripts/crawler/auditar.py                # relatório de tudo
     python scripts/crawler/auditar.py --so hediondez
+    python scripts/crawler/auditar.py --so pendencias
     python scripts/crawler/auditar.py --json crawler/relatorios/auditoria.json
 
 Saídas: 0 = nada a rever; 2 = erro; 3 = há achados.
@@ -49,6 +54,7 @@ CATALOGO = RAIZ / "static" / "data" / "crimes.json"
 FONTES = RAIZ / "data" / "fontes.json"
 HEDIONDOS = RAIZ / "data" / "hediondos.json"
 MODIFICADORES = RAIZ / "data" / "modificadores.json"
+PENDENCIAS = RAIZ / "data" / "pendencias.json"
 
 
 def carregar(caminho: Path) -> dict:
@@ -340,6 +346,25 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
     return achados
 
 
+# ── 5. Pendências jurídicas declaradas ──────────────────────────────────────
+def auditar_pendencias() -> list[dict]:
+    """Repete, toda semana, o que se sabe que falta decidir.
+
+    O oposto de um achado: não é a máquina descobrindo divergência, é o projeto
+    lembrando de uma pergunta que examinou e deixou aberta de propósito. Sem
+    isto, a pendência vive só num arquivo que ninguém abre, e o silêncio da
+    rodada semanal volta a ser confundido com "está tudo certo".
+    """
+    if not PENDENCIAS.exists():
+        return []
+    itens = carregar(PENDENCIAS).get("pendencias", [])
+    return [{
+        "campo": "pendencias", "tipo": "PENDENCIA-ABERTA", "gravidade": 1,
+        "detalhe": f"**{p['assunto']}** — {p['questao']} _Falta ver:_ {p['o_que_falta']} "
+                   f"_Enquanto isso:_ {p['impacto']} (registrada em {p['registrado_em']})",
+    } for p in itens]
+
+
 # ── 4. Nome do tipo ─────────────────────────────────────────────────────────
 _PALAVRA = re.compile(r"[a-zà-ÿ]{5,}", re.I)
 _VAZIAS = {"artigo", "pessoa", "outrem", "alguem", "alguém", "contra", "mediante",
@@ -407,6 +432,7 @@ TITULOS = {
     "acao_penal": "Ação penal",
     "modificadores": "Causas de aumento e diminuição",
     "nome": "Nome do tipo",
+    "pendencias": "Pendências jurídicas em aberto",
 }
 LIMITES = {
     "hediondez": "O rol é fechado, mas três incisos dependem de circunstância do caso "
@@ -424,6 +450,9 @@ LIMITES = {
     "nome": "Heurística de palavras em comum. Falso positivo é esperado em nome enxuto "
             "('Furto') diante de texto longo; serve para leitura, nunca para troca "
             "automática.",
+    "pendencias": "Não são achados: é `data/pendencias.json`, a lista do que o projeto "
+                  "examinou e deixou em aberto de propósito. Cada entrada diz o que falta "
+                  "ver para decidir. Sai daqui quando a decisão for tomada e publicada.",
 }
 
 
@@ -471,13 +500,16 @@ def rodar(so: str | None = None) -> list[dict]:
         achados += auditar_modificadores(indice_fontes)
     if so in (None, "nome"):
         achados += auditar_nomes(catalogo, indice_fontes)
+    if so in (None, "pendencias"):
+        achados += auditar_pendencias()
     return achados
 
 
 def main() -> int:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description="Audita hediondez, ação penal, modificadores e nomes.")
-    p.add_argument("--so", choices=["hediondez", "acao", "modificadores", "nome"])
+    p.add_argument("--so", choices=["hediondez", "acao", "modificadores", "nome",
+                                    "pendencias"])
     p.add_argument("--json", metavar="ARQUIVO")
     p.add_argument("--saida", default=str(RAIZ / "crawler" / "relatorios"))
     args = p.parse_args()

@@ -53,6 +53,13 @@ export interface CenarioReverso {
   /** Pena concreta em meses, usada quando `base === 'fixa'`. */
   penaFixaMeses: number;
   reincidenteEspecifico: boolean;
+  /**
+   * Comando de organização criminosa ultraviolenta (art. 112, VI, "b", LEP).
+   * É circunstância do RÉU — o mesmo tipo penal responde de um jeito para quem
+   * comandava a facção e de outro para quem não comandava —, e por isso entra
+   * como alavanca global da varredura, ao lado da reincidência.
+   */
+  comandoOrgcrimUltraviolenta: boolean;
   confessou: boolean;
   reparouDano: boolean;
   bonsAntecedentes: boolean;
@@ -63,6 +70,7 @@ export function cenarioReversoPadrao(): CenarioReverso {
     base: 'minima',
     penaFixaMeses: 24,
     reincidenteEspecifico: false,
+    comandoOrgcrimUltraviolenta: false,
     confessou: false,
     reparouDano: false,
     bonsAntecedentes: true,
@@ -105,6 +113,7 @@ export function cenarioParaCrime(c: Crime, rev: CenarioReverso): Cenario {
     penaConcreta: penaConcretaPresumida(c, rev),
     primario: !rev.reincidenteEspecifico,
     reincidenteEspecifico: rev.reincidenteEspecifico,
+    comandoOrgcrimUltraviolenta: rev.comandoOrgcrimUltraviolenta,
     confessou: rev.confessou,
     reparouDano: rev.reparouDano,
     bonsAntecedentes: rev.bonsAntecedentes,

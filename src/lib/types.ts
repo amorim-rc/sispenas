@@ -97,6 +97,20 @@ export interface Cenario {
   reincidenteEspecifico: boolean;
   hediondo: boolean;
   resultadoMorte: boolean;
+  /**
+   * O tipo é feminicídio (art. 121-A do CP). Atributo do TIPO, lido do catálogo
+   * como `resultadoMorte`: o art. 112, VI, "d" da LEP (alínea incluída pela Lei
+   * 15.358/2026) exige 75% da pena e VEDA o livramento condicional ao primário
+   * condenado por feminicídio.
+   */
+  feminicidio: boolean;
+  /**
+   * O condenado exercia comando, individual ou coletivo, de organização
+   * criminosa ultraviolenta estruturada para a prática de crime hediondo ou
+   * equiparado — art. 112, VI, "b" da LEP, na redação da Lei 15.358/2026.
+   * Circunstância do CASO, não do tipo: só quem conhece os autos marca.
+   */
+  comandoOrgcrimUltraviolenta: boolean;
   violencia: boolean;
   graveAmeaca: boolean;
   confessou: boolean;

@@ -333,6 +333,14 @@ export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDe
             <label>
               <input
                 type="checkbox"
+                checked={rev.comandoOrgcrimUltraviolenta}
+                onChange={(e) => setRevCampo('comandoOrgcrimUltraviolenta', e.target.checked)}
+              />{' '}
+              Comando de facção (art. 112, VI, &quot;b&quot;)
+            </label>
+            <label>
+              <input
+                type="checkbox"
                 checked={rev.confessou}
                 onChange={(e) => setRevCampo('confessou', e.target.checked)}
               />{' '}

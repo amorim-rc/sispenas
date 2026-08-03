@@ -66,8 +66,8 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 
 | Benefício | Fundamento | Critério |
 |-----------|-----------|----------|
-| **Progressão de regime** | Art. 112, LEP | Frações de 16% a 70% conforme reincidência/hediondez/resultado morte |
-| **Livramento condicional** | Art. 83, CP | 1/3 (primário), 1/2 (reincidente), 2/3 (hediondo); vedado reincidente específico hediondo |
+| **Progressão de regime** | Art. 112, LEP | Frações de 16% a 85% conforme reincidência/hediondez/resultado morte |
+| **Livramento condicional** | Art. 83, CP | 1/3 (primário), 1/2 (reincidente), 2/3 (hediondo); vedado ao reincidente específico em hediondo e nas quatro hipóteses do art. 112 da LEP |
 | **Prescrição** | Art. 109, CP | Tabela por pena (abstrata e concreta) |
 | **Saída temporária** | Art. 122, LEP | Regime semiaberto; 1/6 (primário) ou 1/4 (reincidente); vedada em hediondo com resultado morte (Lei 14.843/2024) |
 | **Detração** | Art. 42, CP | Desconto de prisão provisória (qualitativo) |
@@ -87,10 +87,31 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 | II | Reincidente, sem violência/grave ameaça | 20% |
 | III | Primário, com violência/grave ameaça | 25% |
 | IV | Reincidente, com violência/grave ameaça | 30% |
-| V | Primário, hediondo/equiparado | 40% |
-| VI | Primário, hediondo com resultado morte (livramento vedado) | 50% |
-| VII | Reincidente, hediondo | 60% |
-| VIII | Reincidente específico, hediondo com resultado morte | 70% |
+| V | Primário, hediondo/equiparado | 70% |
+| VI, "a" | Primário, hediondo com resultado morte (livramento vedado) | 75% |
+| VI, "b" | Comando de organização criminosa **ultraviolenta** estruturada para crime hediondo (livramento vedado) | 75% |
+| VI, "c" | Constituição de milícia privada | 75% |
+| VI, "d" | Primário, feminicídio (livramento vedado) | 75% |
+| VII | Reincidente, hediondo | 80% |
+| VIII | Reincidente específico, hediondo com resultado morte (livramento vedado) | 85% |
+
+Os incisos V a VIII foram reescritos pela **Lei 15.358/2026**, que também acrescentou a
+alínea "d", pôs "ultraviolenta" e a vedação do livramento na alínea "b" e revogou o
+inciso VI-A (feminicídio a 55%, da Lei 14.994/2024).
+
+**Quatro incisos vedam o livramento condicional na própria letra** — VI, "a", "b" e "d",
+e VIII. A vedação é regra de cálculo do motor, não apenas texto de nota: enquanto ficou
+só escrita, o livramento seguia sendo oferecido aos 2/3 a quem a LEP o proíbe.
+
+:::warning[Pendência conhecida — incisos I a IV]
+A **Lei 15.402/2026** (de 08/05/2026, posterior à 15.358) reescreveu o *caput* e os
+incisos I, II e III do art. 112: o *caput* passou a fixar 1/6 da pena como regra, "observadas
+as seguintes exceções", e os três incisos ganharam redação nova, com ressalva dos crimes do
+Título XII da Parte Especial do Código Penal. O inciso IV não foi tocado e passou a repetir
+o conteúdo do novo inciso II. **O motor ainda aplica a estrutura do Pacote Anticrime nos
+incisos I a IV.** Modelar a redação nova exige decidir o que fazer com a duplicação entre II
+e IV e com a ressalva do Título XII — juízo que não foi feito. Ver `data/pendencias.json`.
+:::
 
 ## Tabela de prescrição (Art. 109 CP)
 

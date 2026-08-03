@@ -1,11 +1,54 @@
 // Benefícios de EXECUÇÃO penal — dependem da pena concreta e do tempo cumprido.
 // LEP (Lei 7.210/84), Código Penal e Lei 8.072/90.
 
+import type {Cenario} from '../../types';
 import type {BeneficioDef} from '../types';
 import {num, bool} from '../types';
 import {formatPena, formatFracao} from '../../format';
 
 const ANO = 12;
+
+/**
+ * As quatro hipóteses em que o próprio art. 112 da LEP diz, na letra do inciso,
+ * "vedado o livramento condicional": VI, "a", "b" e "d", e VIII. Devolve o
+ * fundamento, ou `null` quando nenhuma incide.
+ *
+ * A vedação vive aqui, e não apenas no texto de `vedacoes`, porque é regra de
+ * CÁLCULO. Enquanto ficou só escrita, o motor seguia oferecendo o livramento aos
+ * 2/3 a quem a LEP o proíbe — o texto dizia uma coisa e o número dizia outra.
+ *
+ * A ordem espelha a da progressão: a alínea "b" (comando de facção) não depende
+ * do resultado morte e por isso é testada antes da "a".
+ */
+export function vedacaoLivramentoArt112(c: Cenario): string | null {
+  if (c.hediondo && c.resultadoMorte && c.reincidenteEspecifico) {
+    return (
+      'Art. 112, VIII, LEP: reincidente em crime hediondo ou equiparado com resultado ' +
+      'morte — 85% da pena, vedado o livramento condicional.'
+    );
+  }
+  if (c.comandoOrgcrimUltraviolenta && c.hediondo) {
+    return (
+      'Art. 112, VI, "b", LEP (redação da Lei 15.358/2026): condenado por exercer o ' +
+      'comando, individual ou coletivo, de organização criminosa ultraviolenta ' +
+      'estruturada para a prática de crime hediondo ou equiparado — vedado o livramento ' +
+      'condicional.'
+    );
+  }
+  if (c.feminicidio && !c.reincidenteEspecifico) {
+    return (
+      'Art. 112, VI, "d", LEP (alínea incluída pela Lei 15.358/2026): primário condenado ' +
+      'pela prática de feminicídio — vedado o livramento condicional.'
+    );
+  }
+  if (c.hediondo && c.resultadoMorte) {
+    return (
+      'Art. 112, VI, "a", LEP: primário condenado por crime hediondo ou equiparado com ' +
+      'resultado morte — vedado o livramento condicional.'
+    );
+  }
+  return null;
+}
 
 export const progressao: BeneficioDef = {
   id: 'progressao',
@@ -95,6 +138,36 @@ export const progressao: BeneficioDef = {
       fundamento: 'Art. 112, VI, "a", LEP (redação da Lei 15.358/2026)',
     },
     {
+      id: 'fracaoComandoOrgcrim',
+      rotulo: 'Comando de organização criminosa ultraviolenta',
+      tipo: 'fracao',
+      padrao: 0.75,
+      min: 0,
+      max: 1,
+      passo: 0.01,
+      ajuda:
+        'Inciso VI, "b": 75% da pena para quem exerceu comando, individual ou coletivo, de ' +
+        'organização criminosa ULTRAVIOLENTA estruturada para a prática de crime hediondo ou ' +
+        'equiparado, vedado o livramento condicional. A Lei 15.358/2026 acrescentou ' +
+        '"ultraviolenta" e a vedação do livramento — antes a alínea alcançava a organização ' +
+        'criminosa comum e não vedava o benefício.',
+      fundamento: 'Art. 112, VI, "b", LEP (redação da Lei 15.358/2026)',
+    },
+    {
+      id: 'fracaoFeminicidioPrimario',
+      rotulo: 'Primário, feminicídio',
+      tipo: 'fracao',
+      padrao: 0.75,
+      min: 0,
+      max: 1,
+      passo: 0.01,
+      ajuda:
+        'Inciso VI, "d": 75% da pena para o primário condenado por feminicídio, vedado o ' +
+        'livramento condicional. A alínea substitui o inciso VI-A (55%, Lei 14.994/2024), ' +
+        'revogado pela Lei 15.358/2026.',
+      fundamento: 'Art. 112, VI, "d", LEP (incluída pela Lei 15.358/2026)',
+    },
+    {
       id: 'fracaoReincidenteHediondo',
       rotulo: 'Reincidente, hediondo/equiparado',
       tipo: 'fracao',
@@ -124,9 +197,21 @@ export const progressao: BeneficioDef = {
     if (c.hediondo && c.resultadoMorte && c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteHediondoMorte');
       inciso = 'VIII — reincidente específico, hediondo com resultado morte (livramento vedado)';
+    } else if (c.comandoOrgcrimUltraviolenta && c.hediondo) {
+      // Alínea "b" antes da "a": o comando de facção ultraviolenta não depende do
+      // resultado morte, e sem esta ordem o comandante condenado por crime hediondo
+      // SEM morte cairia no inciso V (70%, livramento aos 2/3) — perdendo tanto o
+      // percentual quanto a vedação que a Lei 15.358/2026 impôs.
+      fracao = num(p, 'fracaoComandoOrgcrim');
+      inciso =
+        'VI, "b" — comando de organização criminosa ultraviolenta estruturada para crime ' +
+        'hediondo (livramento vedado)';
+    } else if (c.feminicidio && !c.reincidenteEspecifico) {
+      fracao = num(p, 'fracaoFeminicidioPrimario');
+      inciso = 'VI, "d" — primário, feminicídio (livramento vedado)';
     } else if (c.hediondo && c.resultadoMorte) {
       fracao = num(p, 'fracaoPrimarioHediondoMorte');
-      inciso = 'VI — primário, hediondo com resultado morte (livramento vedado)';
+      inciso = 'VI, "a" — primário, hediondo com resultado morte (livramento vedado)';
     } else if (c.hediondo && c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteHediondo');
       inciso = 'VII — reincidente, hediondo';
@@ -178,7 +263,10 @@ export const livramento: BeneficioDef = {
   ],
   vedacoes: [
     'Reincidência específica em crime hediondo ou equiparado (art. 83, V, CP).',
-    'Condenado por hediondo com resultado morte (art. 112, VI, "a" e VIII, LEP — livramento vedado).',
+    'Condenado por hediondo com resultado morte, primário ou reincidente (art. 112, VI, "a" e VIII, LEP).',
+    'Comando de organização criminosa ultraviolenta estruturada para crime hediondo ou equiparado (art. 112, VI, "b", LEP, na redação da Lei 15.358/2026).',
+    'Primário condenado por feminicídio (art. 112, VI, "d", LEP, incluída pela Lei 15.358/2026).',
+    'Crimes de domínio social estruturado e de favorecimento (art. 2º, §4º, III, e art. 3º, parágrafo único, da Lei 15.358/2026).',
     'Súmula 441, STJ: a falta grave não interrompe o prazo para obtenção do livramento condicional.',
   ],
   parametros: [
@@ -234,6 +322,19 @@ export const livramento: BeneficioDef = {
       ajuda: 'Art. 83, V, parte final: vedação absoluta ao reincidente específico em crimes hediondos ou equiparados.',
       fundamento: 'Art. 83, V, CP',
     },
+    {
+      id: 'vedadoArt112',
+      rotulo: 'Vedar nas hipóteses do art. 112 da LEP',
+      tipo: 'booleano',
+      padrao: true,
+      ajuda:
+        'Quatro incisos da LEP dizem, na própria letra, "vedado o livramento condicional": ' +
+        'VI, "a" (hediondo com resultado morte, primário), VI, "b" (comando de organização ' +
+        'criminosa ultraviolenta), VI, "d" (feminicídio, se primário) e VIII (reincidente em ' +
+        'hediondo com resultado morte). Desmarcar simula a tese de que a vedação, por estar ' +
+        'em dispositivo de progressão, não alcançaria o livramento do art. 83 do CP.',
+      fundamento: 'Art. 112, VI, "a", "b" e "d", e VIII, LEP',
+    },
   ],
   avaliar: (c, p) => {
     const minimo = num(p, 'penaMinimaMeses');
@@ -255,6 +356,14 @@ export const livramento: BeneficioDef = {
         status: 'incabivel',
         resumo: 'Vedado ao reincidente específico em crime hediondo.',
         detalhes: ['Art. 83, V, CP: vedado para reincidente específico em crimes hediondos ou equiparados.'],
+      };
+    }
+    const vedacao112 = bool(p, 'vedadoArt112') ? vedacaoLivramentoArt112(c) : null;
+    if (vedacao112) {
+      return {
+        status: 'incabivel',
+        resumo: 'Vedado pelo inciso do art. 112 da LEP aplicável à progressão.',
+        detalhes: [vedacao112],
       };
     }
     let fracao: number;

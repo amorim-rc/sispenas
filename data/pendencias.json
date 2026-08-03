@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "descricao": "Questões jurídicas ABERTAS: o que se sabe que falta decidir, e o que precisa ser visto para decidir. Não é dado publicado — é a lista do que deliberadamente NÃO foi publicado.",
+    "por_que": "A revisão jurídica de 02/08/2026 classificou cada resposta em A (aplicável), M (aplicar com a divergência anotada) e B (não publicar). Os itens B foram aplicados a lugar nenhum — e, sem registro, some a informação mais cara do trabalho: a de que a pergunta foi feita, examinada e deixada em aberto de propósito. Sem isto, a próxima leitura recomeça do zero, ou pior, publica um palpite.",
+    "como_funciona": "`scripts/crawler/auditar.py` lê este arquivo e repete cada pendência no relatório semanal, como faz com o bloco `pendentes` de data/hediondos.json. Resolver uma pendência é aplicar a mudança e REMOVER a entrada daqui, citando a versão no changelog.",
+    "campos": {
+      "id": "estável, kebab-case",
+      "assunto": "o dispositivo ou o instituto",
+      "questao": "a pergunta, em uma frase",
+      "o_que_falta": "o que precisa ser visto para responder — o mais importante do registro",
+      "impacto": "o que fica errado ou incompleto enquanto a pendência existe",
+      "origem": "de onde veio a pergunta",
+      "registrado_em": "data"
+    }
+  },
+  "pendencias": [
+    {
+      "id": "lep-112-incisos-i-iv-lei-15402",
+      "assunto": "LEP, art. 112, caput e incisos I a IV (Lei 15.402/2026)",
+      "questao": "Como modelar a redação que a Lei 15.402/2026 deu ao caput e aos incisos I, II e III do art. 112 da LEP?",
+      "o_que_falta": "Decidir três coisas de leitura, nenhuma delas mecânica: (a) o caput voltou a fixar 1/6 da pena como REGRA GERAL, 'observadas as seguintes exceções' — os incisos deixaram de esgotar as hipóteses e passaram a excepcionar um piso; (b) o inciso IV, que a lei não tocou, ficou repetindo o conteúdo do novo inciso II (reincidente com violência ou grave ameaça, 30%); (c) os novos incisos I e II ressalvam 'os crimes previstos no Título XII da Parte Especial do Código Penal', e é preciso definir como o motor reconhece esses crimes — o catálogo não tem campo de título.",
+      "impacto": "O motor de progressão aplica, nos incisos I a IV, a estrutura do Pacote Anticrime (16/20/25/30% por primariedade × violência). Desde 08/05/2026 essa não é mais a redação vigente. Os percentuais V a VIII, esses sim, estão atualizados pela Lei 15.358/2026.",
+      "origem": "Conferência do art. 112 no compilado durante a aplicação do Bloco 5 da revisão de 02/08/2026. A revisão não viu a Lei 15.402/2026 — ela trata do art. 112 apenas pela ótica da Lei 15.358/2026.",
+      "registrado_em": "2026-08-03"
+    }
+  ]
+}

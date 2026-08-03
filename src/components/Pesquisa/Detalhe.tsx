@@ -247,6 +247,11 @@ export default function Detalhe({
               {crime.hediondo_condicional && <span className={styles.checkNota}> — depende do caso neste tipo</span>}
             </label>
             <label><input type="checkbox" checked={cen.resultadoMorte} onChange={(e) => set('resultadoMorte', e.target.checked)} /> Resultado morte</label>
+            <label>
+              <input type="checkbox" checked={cen.comandoOrgcrimUltraviolenta} onChange={(e) => set('comandoOrgcrimUltraviolenta', e.target.checked)} />
+              {' '}Comando de facção
+              <Ajuda texto={'Art. 112, VI, "b", da LEP, na redação da Lei 15.358/2026: condenado por exercer o comando, individual ou coletivo, de organização criminosa ultraviolenta estruturada para a prática de crime hediondo ou equiparado. Eleva a progressão a 75% e veda o livramento condicional. É circunstância do caso, não do tipo.'} />
+            </label>
             <label><input type="checkbox" checked={cen.violencia} onChange={(e) => set('violencia', e.target.checked)} /> Violência</label>
             <label><input type="checkbox" checked={cen.graveAmeaca} onChange={(e) => set('graveAmeaca', e.target.checked)} /> Grave ameaça</label>
             <label><input type="checkbox" checked={cen.confessou} onChange={(e) => set('confessou', e.target.checked)} /> Confissão formal</label>

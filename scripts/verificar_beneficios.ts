@@ -9,7 +9,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import type {Crime} from '../src/lib/types';
+import type {Cenario, Crime} from '../src/lib/types';
 import {CATALOGO, avaliarBeneficio, valoresPadrao} from '../src/lib/beneficios';
 import {
   avaliarCatalogo,
@@ -244,6 +244,95 @@ console.log('\n3. Casos-âncora de direito penal');
     naoHediondos.every((c) => status('graca', c) !== 'incabivel'),
     'graça não é vedada em nenhum tipo não hediondo',
   );
+
+  // ── Art. 112 da LEP: os percentuais e as quatro vedações de livramento ──
+  // Um caso-âncora por hipótese. Os cenários são montados à mão porque duas
+  // delas dependem de circunstância do RÉU (reincidência, comando de facção),
+  // que não se lê do tipo penal.
+  {
+    const progressaoDef = CATALOGO.find((b) => b.id === 'progressao')!;
+    const livramentoDef = CATALOGO.find((b) => b.id === 'livramento')!;
+    const avaliar = (def: (typeof CATALOGO)[number], c: Crime, ajustes: Partial<Cenario>) =>
+      avaliarBeneficio(def, {...cenarioFromCrime(c), ...ajustes}, valoresPadrao(def));
+
+    // Inciso V — hediondo primário, sem resultado morte: 70%, livramento aos 2/3.
+    const trafico = achar(/11\.343/, /^Art\. 33, caput/);
+    if (trafico) {
+      const r = avaliar(progressaoDef, trafico, {});
+      ok(/70%/.test(r.resumo), `tráfico (art. 33, caput): progressão a 70% — inciso V (obtido "${r.resumo}")`);
+      ok(
+        avaliar(livramentoDef, trafico, {}).status === 'cabivel',
+        'tráfico (art. 33, caput): livramento condicional cabível — o inciso V não o veda',
+      );
+    }
+
+    // Inciso VI, "a" — hediondo com resultado morte, primário: 75%, livramento VEDADO.
+    const latrocinioTipo = achar(/^CP$/i, /^Art\. 157, §3º/, /latroc/i);
+    if (latrocinioTipo) {
+      const r = avaliar(progressaoDef, latrocinioTipo, {});
+      ok(/75%/.test(r.resumo), `latrocínio: progressão a 75% — inciso VI, "a" (obtido "${r.resumo}")`);
+      ok(
+        avaliar(livramentoDef, latrocinioTipo, {}).status === 'incabivel',
+        'latrocínio, primário: livramento condicional VEDADO (art. 112, VI, "a", LEP)',
+      );
+    }
+
+    // Inciso VI, "b" — comando de facção ultraviolenta: 75%, livramento VEDADO.
+    // A hipótese não depende do resultado morte: sem ela, este mesmo réu cairia
+    // no inciso V (70%) e teria livramento aos 2/3.
+    if (trafico) {
+      const r = avaliar(progressaoDef, trafico, {comandoOrgcrimUltraviolenta: true});
+      ok(
+        /75%/.test(r.resumo),
+        `tráfico + comando de facção ultraviolenta: progressão a 75% — inciso VI, "b" (obtido "${r.resumo}")`,
+      );
+      ok(
+        avaliar(livramentoDef, trafico, {comandoOrgcrimUltraviolenta: true}).status === 'incabivel',
+        'comando de facção ultraviolenta: livramento condicional VEDADO (art. 112, VI, "b", LEP)',
+      );
+    }
+
+    // Inciso VI, "d" — feminicídio primário: 75%, livramento VEDADO. Substitui o
+    // inciso VI-A (55%, Lei 14.994/2024), revogado pela Lei 15.358/2026.
+    const feminicidio = achar(/^CP$/i, /^Art\. 121-A, caput/);
+    if (feminicidio) {
+      ok(feminicidio.hediondo === 'Sim', 'feminicídio: hediondo no catálogo (art. 1º, I-B, Lei 8.072/90)');
+      const r = avaliar(progressaoDef, feminicidio, {});
+      ok(
+        /75%/.test(r.resumo),
+        `feminicídio, primário: progressão a 75% — inciso VI, "d" (obtido "${r.resumo}")`,
+      );
+      ok(
+        avaliar(livramentoDef, feminicidio, {}).status === 'incabivel',
+        'feminicídio, primário: livramento condicional VEDADO (art. 112, VI, "d", LEP)',
+      );
+    }
+
+    // Inciso VIII — reincidente em hediondo com resultado morte: 85%, vedado.
+    if (latrocinioTipo) {
+      const ajuste = {primario: false, reincidenteEspecifico: true};
+      const r = avaliar(progressaoDef, latrocinioTipo, ajuste);
+      ok(
+        /85%/.test(r.resumo),
+        `latrocínio, reincidente específico: progressão a 85% — inciso VIII (obtido "${r.resumo}")`,
+      );
+      ok(
+        avaliar(livramentoDef, latrocinioTipo, ajuste).status === 'incabivel',
+        'latrocínio, reincidente específico: livramento condicional VEDADO (art. 112, VIII, LEP)',
+      );
+    }
+
+    // Os dois tipos da Lei 15.358/2026: o §4º, III do art. 2º veda o livramento
+    // por dispositivo próprio, e o art. 3º o herda pelo parágrafo único.
+    const dominio = achar(/15\.358/, /^Art\. 2º/);
+    if (dominio) {
+      ok(dominio.hediondo === 'Sim', 'domínio social estruturado: hediondo (art. 1º, § único, VIII, Lei 8.072/90)');
+      ok(
+        dominio.pena_min_meses === 240 && dominio.pena_max_meses === 480,
+        'domínio social estruturado: moldura de 20 a 40 anos',
+      );
+    }
+  }
 
   // Detração e remição independem de pena: alcançam todo o catálogo.
   for (const id of ['detracao', 'remicao']) {
