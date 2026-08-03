@@ -11214,7 +11214,7 @@
     "id": 701,
     "lei": "CPM (DL 1.001/69)",
     "artigo": "Art. 205, §2º",
-    "crime": "Homicídio simples — Se o homicídio é cometido",
+    "crime": "Homicídio qualificado",
     "pena_min": 144,
     "pena_max": 360,
     "tipo_pena": "Reclusão",
@@ -11224,7 +11224,7 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "Se o homicídio é cometido. 12-30 anos reclusão"
+    "obs": "12-30 anos reclusão. Sete incisos: I - motivo fútil; II - paga, promessa de recompensa, cupidez, satisfação de desejo sexual ou outro motivo torpe; III - veneno, asfixia, tortura, fogo, explosivo ou outro meio dissimulado, cruel ou de perigo comum; IV - traição, emboscada, surpresa ou outro recurso insidioso; V - para assegurar execução, ocultação, impunidade ou vantagem de outro crime; VI - prevalecendo-se o agente da situação de serviço; VII - contra autoridade ou agente dos arts. 142 e 144 da CF, integrante do sistema prisional ou da Força Nacional, ou contra cônjuge, companheiro ou parente até o terceiro grau (incluído pela Lei 14.688/2023). O nome anterior colava a epígrafe do caput ao início do §2º"
   },
   {
     "id": 702,
@@ -17860,7 +17860,7 @@
     "id": 1116,
     "lei": "CPM (DL 1.001/69)",
     "artigo": "Art. 232, §3º",
-    "crime": "Estupro — Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prát",
+    "crime": "Estupro de vulnerável militar — vítima menor de 14 anos ou sem discernimento",
     "pena_min": 96,
     "pena_max": 180,
     "tipo_pena": "Reclusão",
@@ -17870,7 +17870,9 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prát. 8-15 anos reclusão"
+    "obs": "8-15 anos reclusão. Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prática do ato, ou por qualquer outra causa não pode oferecer resistência. §3º incluído pela Lei 14.688/2023 e declarado inconstitucional em 2025 — ver a nota de vigência",
+    "vigencia_ate": "2025-08-29",
+    "vigencia_nota": "Declarado INCONSTITUCIONAL pelo STF na ADI 7555 (Rel. Min. Cármen Lúcia, Plenário, julgamento virtual encerrado em 29/08/2025), com eficácia ex nunc a contar da publicação da ata de julgamento. Fundamento: proteção deficiente — o §3º cominava 8 a 15 anos e não previa agravamento por lesão grave ou morte, enquanto o art. 217-A do CP comina 10 a 20 e 12 a 30 anos nessas hipóteses. Ao estupro de vulnerável praticado por militar no exercício da função ou em lugar sujeito à administração militar aplica-se toda a disciplina do ART. 217-A DO CP, inclusive os §§ 1º a 5º, por força do art. 9º, II do CPM. Na mesma ação o STF declarou a não recepção dos incisos I a III do art. 236 do CPM (presunção de violência)."
   },
   {
     "id": 1117,
@@ -21515,12 +21517,12 @@
     "pena_max": 180,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "5 a 15 anos reclusão. Forma de tráfico de drogas do art. 290, com pena própria muito superior à do caput. Equiparado a hediondo. §5º dado pela Lei 14.688/2023"
+    "obs": "5 a 15 anos reclusão. Tratando-se de tráfico de drogas, a pena do art. 290 é de reclusão de 5 a 15 anos. §5º incluído pela Lei 14.688/2023. NÃO é hediondo por identidade: o inciso VI do parágrafo único do art. 1º da Lei 8.072/90 projeta sobre o CPM apenas os crimes 'previstos no art. 1º desta Lei', e o tráfico não está no art. 1º — é equiparado pelo art. 2º, dispositivo diverso, por força do art. 5º, XLIII da Constituição. Se a equiparação constitucional alcança o tipo militar é outra pergunta, com fundamento próprio; ver data/pendencias.json"
   },
   {
     "id": 1346,

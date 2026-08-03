@@ -9,7 +9,8 @@
     ],
     "conferido_em": "2026-08-03",
     "ultima_alteracao_conhecida": "Lei 15.358/2026 (inciso VIII do parágrafo único — com o §3º do art. 2º vetado, ver `pendentes`) e Lei 15.384/2026 (inciso I-C)",
-    "como_atualizar": "Quando o conferidor acusar mudança de impressão, reler os dois dispositivos no compilado, ajustar as regras abaixo e regravar `impressao_do_texto` com o valor que o relatório informar."
+    "como_atualizar": "Quando o conferidor acusar mudança de impressão, reler os dois dispositivos no compilado, ajustar as regras abaixo e regravar `impressao_do_texto` com o valor que o relatório informar.",
+    "criterio_de_identidade": "Identidade exige correspondência de CONDUTA e BEM JURÍDICO com a hipótese específica arrolada no art. 1º — não basta o nomen juris. Três razões: (a) a hediondez é consequência gravosa, e impô-la por leitura extensiva prejudica o réu; (b) o rol é taxativo e identifica crimes por dispositivo e, muitas vezes, por hipótese DENTRO do dispositivo — o roubo não é hediondo, são hediondas apenas as formas do art. 157, §2º, V, §2º-A, I, §2º-B e §3º; se bastasse o nome, todo roubo militar seria hediondo, invertendo a lógica do rol que o inciso VI manda espelhar; (c) o inciso VI é o único do rol que não remete a dispositivo, e por isso deve ser lido do modo mais estrito possível: ele não cria hipóteses, projeta as existentes. CONSEQUÊNCIA PRÁTICA: a comparação é hipótese a hipótese, não artigo a artigo — um artigo do CPM pode ter parágrafos com identidade e parágrafos sem. Matéria SEM jurisprudência consolidada do STF ou do STJ: o inciso é de 2023. É classificação argumentativa, não fato assentado."
   },
   "impressao_do_texto": "f383fa3226b2b752",
   "regras": [
@@ -237,6 +238,25 @@
       "artigo": "^Art\\. 157, §5º",
       "condicional": true,
       "nota": "latrocínio praticado por organização ultraviolenta: parágrafo criado depois do rol, que cita o §3º"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VI (identidade com o CPM)",
+      "lei": "^CPM",
+      "artigo": "^Art\\. 232",
+      "nota": "estupro militar na redação unificada da Lei 14.688/2023 — conduta e bem jurídico idênticos ao art. 213 do CP, que o inciso V do art. 1º arrola no caput e nos §§ 1º e 2º. Alcança o caput e os §§ 1º, 2º e 3º; o §3º corresponde ao art. 217-A (inciso VI) e está fora de vigência desde a ADI 7555, mas segue regendo fato anterior"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VI (identidade com o CPM)",
+      "lei": "^CPM",
+      "artigo": "^Art\\. 244, caput",
+      "nota": "extorsão mediante sequestro — o inciso IV do art. 1º abrange o art. 159 do CP em todas as formas, de modo que a figura simples do CPM tem correspondente na figura simples arrolada. A pena militar (6 a 15 anos) é menor que a do art. 159 (8 a 15): assimetria da mesma natureza da que fundamentou a ADI 7555, sem ação julgada"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VI (identidade com o CPM)",
+      "lei": "^CPM",
+      "artigo": "^Art\\. 205, §2º",
+      "condicional": true,
+      "nota": "homicídio qualificado militar. Os incisos I a V e VII têm correspondente direto no art. 121, §2º do CP; o inciso VI (prevalecendo-se o agente da situação de serviço) NÃO tem — é hipótese própria do CPM, e nela não há o que projetar. Como o catálogo tem um registro só para o §2º inteiro, a identidade depende do inciso do caso"
     }
   ],
   "excecoes": [
@@ -257,13 +277,19 @@
       "artigo": "^Art\\. 121, §1º",
       "hediondo": "Não",
       "fundamento": "Homicídio privilegiado não está no rol; a hediondez alcança o qualificado (§2º)."
+    },
+    {
+      "lei": "^CPM",
+      "artigo": "^Art\\. 290, §5º",
+      "hediondo": "Não",
+      "fundamento": "Lei 8.072, art. 1º, § único, VI, a contrario: o inciso projeta sobre o CPM apenas os crimes 'previstos no art. 1º desta Lei', e o tráfico não está no art. 1º — é EQUIPARADO pelo art. 2º, dispositivo diverso. Não há identidade possível com uma hipótese que o rol não contém."
     }
   ],
   "pendentes": [
     {
       "fundamento": "Lei 8.072, art. 1º, § único, VI",
-      "descricao": "Crimes do Código Penal Militar 'que apresentem identidade com os crimes previstos no art. 1º desta Lei' (Lei 14.688/2023). A identidade é juízo de correspondência entre tipos, não remissão a dispositivo — a tabela não pode resolvê-la sozinha, e o catálogo hoje marca 7 tipos do CPM como hediondos.",
-      "acao": "auditoria própria, com leitura do CPM ao lado do art. 1º"
+      "descricao": "Os sete registros do CPM que o catálogo marcava como hediondos foram decididos na revisão de 02/08/2026 e saíram do `fora_de_alcance`: arts. 232 (caput e §§ 1º, 2º e 3º) e 244, caput, confirmados; art. 290, §5º, retirado (tráfico não está no art. 1º); art. 205, §2º, confirmado como condicional, porque o inciso VI do parágrafo — prevalecendo-se da situação de serviço — não tem correspondente no art. 121, §2º do CP. Falta o inverso: varrer o Livro II do CPM contra os doze incisos do art. 1º para achar o que DEVERIA estar marcado e não está. Candidatos levantados: roubo qualificado pelo resultado (art. 242 e parágrafos, contra o inciso II, 'c'), extorsão qualificada pelo resultado (inciso III) e sequestro de menor de 18 (inciso XI).",
+      "acao": "varredura artigo a artigo do Livro II do CPM, registrando também os 'não há correspondente' — que são tão úteis quanto os positivos"
     },
     {
       "fundamento": "Lei 8.072, art. 1º, § único, VIII",
@@ -274,7 +300,13 @@
   "fora_de_alcance": [
     {
       "lei": "^CPM",
-      "motivo": "O inciso VI do parágrafo único (Lei 14.688/2023) declara hediondos os crimes do CPM 'que apresentem identidade com os crimes previstos no art. 1º desta Lei'. Identidade é juízo de correspondência entre tipos, não remissão a dispositivo: a tabela não a resolve, e acusar 360 registros militares seria ruído. O CPM fica fora desta auditoria até ter tabela própria — ver `pendentes`."
+      "exceto": [
+        "^Art\\. 205, §2º",
+        "^Art\\. 232",
+        "^Art\\. 244, caput",
+        "^Art\\. 290, §5º"
+      ],
+      "motivo": "O inciso VI do parágrafo único (Lei 14.688/2023) declara hediondos os crimes do CPM 'que apresentem identidade com os crimes previstos no art. 1º desta Lei'. Identidade é juízo de correspondência entre tipos, não remissão a dispositivo: a tabela não a resolve sozinha, e acusar os registros militares em bloco seria ruído. Os dispositivos já julgados saem desta lista pelo `exceto` e passam a ser auditados normalmente — hoje, os sete que o catálogo marcava como hediondos. O resto do Livro II do CPM segue de fora, até a varredura artigo a artigo — ver `pendentes`."
     }
   ]
 }

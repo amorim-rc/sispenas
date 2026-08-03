@@ -96,6 +96,21 @@ console.log('0. Integração catálogo → motor de benefícios');
     !todos.some((c) => c.perdao_judicial_previsto && /^CPM/.test(c.lei)),
     'nenhum tipo do CPM recebeu perdão judicial por casamento indevido de "^CP"',
   );
+  // Vigência: o registro que já não vige continua no catálogo, para o fato
+  // anterior, mas tem de dizer desde quando e o que se aplica no lugar.
+  ok(
+    todos.every((c) => c.vigente !== undefined),
+    'todo registro tem o campo "vigente"',
+  );
+  const naoVigentes = todos.filter((c) => c.vigente === false);
+  ok(
+    naoVigentes.every((c) => !!c.vigencia_ate && !!c.vigencia_nota),
+    `${naoVigentes.length} registro(s) não vigente(s), todos com data e nota do que houve`,
+  );
+  ok(
+    naoVigentes.every((c) => c.tem_pena_privativa || (c.sancoes_nao_privativas ?? []).length > 0 || c.tem_multa),
+    'registro não vigente continua declarando sua sanção — é consultável para fato anterior',
+  );
 }
 
 // ── 1. Invariantes estruturais do registro ──────────────────────────────

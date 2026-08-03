@@ -159,6 +159,15 @@ export default function Detalhe({
               <Ajuda texto={`A hediondez aqui depende de circunstância do caso, não do tipo. ${crime.hediondo_condicao} Marque "Hediondo/equiparado" nas circunstâncias abaixo para simular a hipótese.`} />
             </span>
           )}
+          {/* Dispositivo que já não vige, e que continua no catálogo porque os
+              fatos anteriores seguem regidos por ele. A etiqueta diz DESDE
+              QUANDO; a nota diz o que houve e o que se aplica no lugar. */}
+          {crime.vigente === false && (
+            <span className={`${styles.tag} ${styles.tagNaoVigente}`}>
+              Não vigente desde {crime.vigencia_ate}
+              <Ajuda texto={`${crime.vigencia_nota} O registro permanece consultável: fatos anteriores a esta data continuam regidos por ele.`} />
+            </span>
+          )}
           <span className={styles.tag}>{crime.elemento}</span>
           <span className={styles.tag}>
             {crime.acao}

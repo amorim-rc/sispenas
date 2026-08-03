@@ -58,6 +58,24 @@
       "impacto": "Se acolhida a revogação, o registro (id 647) deveria constar como revogado, e não apenas ter a ação penal conferida. A ação penal dele foi confirmada como INCONDICIONADA, por ser uma das duas hipóteses que o §4º ressalva — essa parte é leitura literal e independe da controvérsia.",
       "origem": "Revisão de 02/08/2026, item 2.6, grau B.",
       "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "cpm-290-p5-equiparacao-trafico",
+      "assunto": "CPM, art. 290, §5º (tráfico de drogas em lugar sujeito à administração militar)",
+      "questao": "A equiparação constitucional do tráfico (art. 5º, XLIII, da CF) alcança o tipo militar, ainda que a hediondez POR IDENTIDADE não alcance?",
+      "o_que_falta": "Decisão do projeto, com fundamento próprio. A revisão respondeu o que foi perguntado — não há identidade, porque o inciso VI projeta apenas os crimes 'previstos no art. 1º' e o tráfico não está lá. Mas a convenção C6 manda registrar os EQUIPARADOS como hediondos, e a Constituição equipara pela conduta ('o tráfico ilícito de entorpecentes e drogas afins'), não pelo dispositivo. Se a leitura por conduta valer, o art. 290, §5º volta a ser hediondo — por fundamento diverso, e com consequências que não são idênticas às da hediondez por rol.",
+      "impacto": "A marcação por identidade foi retirada e o registro consta como não hediondo. Se a equiparação por conduta prevalecer, as vedações de graça, indulto e anistia voltam a incidir, e as frações de progressão sobem.",
+      "origem": "Revisão de 02/08/2026, Bloco 4. A revisão sugere que a equiparação, se adotada, ocupe CAMPO DISTINTO do `hediondo`, justamente porque as consequências não coincidem.",
+      "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "cpm-244-assimetria-protecao-deficiente",
+      "assunto": "CPM, art. 244, caput (extorsão mediante sequestro militar)",
+      "questao": "A moldura de 6 a 15 anos resiste ao mesmo argumento de proteção deficiente que derrubou o art. 232, §3º?",
+      "o_que_falta": "Nada a ver: não há ação julgada. É marcação de RISCO, não de defeito. O art. 159 do CP comina 8 a 15 anos para a mesma conduta, e foi exatamente essa assimetria — pena militar menor que a comum para conduta idêntica — que fundamentou a ADI 7555 quanto ao art. 232, §3º do CPM.",
+      "impacto": "Nenhum hoje: o registro publica a moldura que a lei comina e está marcado como hediondo por identidade, o que é correto. Fica registrado para que uma eventual ADI não pegue o catálogo de surpresa.",
+      "origem": "Revisão de 02/08/2026, Bloco 4, ponto de vigilância grau M.",
+      "registrado_em": "2026-08-03"
     }
   ]
 }

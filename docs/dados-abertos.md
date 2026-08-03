@@ -78,6 +78,7 @@ os dados saber o que pode mudar sem quebrar uma conta.
 | `elemento` | Doloso, culposo ou preterdoloso. Crime culposo admite substituição por pena restritiva qualquer que seja a pena, e não admite tentativa. |
 | `tentativa` | Habilita a redução do art. 14, II na terceira fase da dosimetria. |
 | `violencia`, `grave_ameaca` | Vedam substituição por restritivas de direitos, ANPP e arrependimento posterior. |
+| `vigencia_ate`, `vigencia_nota` | Opcionais. Data em que o dispositivo deixou de vigorar e o que houve — declaração de inconstitucionalidade com eficácia *ex nunc*, revogação —, com o dispositivo que passa a reger a conduta. O registro **não sai do catálogo**: fato anterior continua regido por ele, e uma consulta a 2024 precisa da lei de 2024. |
 | `obs` | **Descritivo.** Observação de leitura humana — origem da redação, formas do artigo, remissões. Não define a pena; o que dele ainda se extrai é a presença e o regime da multa. |
 
 ### Derivados — recalculados a cada build, não edite
@@ -94,6 +95,7 @@ os dados saber o que pode mudar sem quebrar uma conta.
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente`, `duplicata_ids` | Detecção de registro repetido. `duplicata_divergente` marcaria o mesmo dispositivo com penas conflitantes; **hoje não há nenhum**. |
 | `derivado_auto` | Marca o registro cujos campos passaram por preenchimento automático. |
 | `hediondo_condicional`, `acao_condicional` | A classificação depende de circunstância do CASO, não do tipo: o texto da condição está em `hediondo_condicao` e `acao_condicao`, na fonte. Nesses registros o campo fica no padrão seguro, e a interface mostra a hipótese. |
+| `vigente` | `false` quando o registro declara `vigencia_ate`. Deriva da presença do campo, não de uma comparação com a data de hoje: o arquivo derivado é publicado e conferido pela CI, e um campo que virasse sozinho num dia qualquer quebraria o build sem ninguém ter tocado em nada. |
 | `fonte` | A página do texto compilado contra a qual este registro é conferido. |
 | `conferido_em` | Data da última conferência deste registro contra a lei (AAAA-MM-DD). |
 | `conferido_resultado` | `conferido` (a moldura bate), `sem_moldura_na_lei` (o dispositivo não traz moldura própria: pena por referência ou sanção não privativa), `divergente` (virou achado) ou `dispensado` (exceção já julgada). |

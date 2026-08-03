@@ -35,6 +35,15 @@ export interface Crime {
   hediondo_condicao?: string;
   /** Mesma ideia para a ação penal (art. 161, §3º: privada se a propriedade é particular). */
   acao_condicao?: string;
+  /**
+   * Data em que o dispositivo deixou de vigorar (AAAA-MM-DD) — declaração de
+   * inconstitucionalidade com eficácia ex nunc, revogação. O registro NÃO sai do
+   * catálogo: os fatos anteriores continuam regidos por ele, e a consulta a um
+   * fato de 2024 precisa da lei de 2024.
+   */
+  vigencia_ate?: string;
+  /** O que houve e qual dispositivo passa a reger a conduta. Obrigatória quando há `vigencia_ate`. */
+  vigencia_nota?: string;
   elemento: string;
   tentativa: SimNao;
   violencia: SimNao;
@@ -49,6 +58,8 @@ export interface Crime {
   /** Derivados de `hediondo_condicao`/`acao_condicao`: a classificação depende do caso. */
   hediondo_condicional: boolean;
   acao_condicional: boolean;
+  /** Derivado de `vigencia_ate`: false quando o dispositivo já não vigora. */
+  vigente: boolean;
   /** Pena mínima canônica em meses (dias/anos já convertidos). */
   pena_min_meses: number;
   /** Pena máxima canônica em meses (dias/anos já convertidos). */

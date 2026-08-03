@@ -151,9 +151,27 @@ def auditar_hediondez(catalogo: list[dict]) -> list[dict]:
         })
 
     fora = [f for f in tabela.get("fora_de_alcance", [])]
+
+    def esta_fora(registro: dict) -> bool:
+        """Diploma fora da auditoria — salvo os dispositivos já decididos.
+
+        O `exceto` existe porque "fora de alcance" não é tudo ou nada. O CPM
+        entrou inteiro na lista quando nenhum dos seus artigos tinha juízo de
+        identidade feito; à medida que cada um é decidido, ele volta a ser
+        auditado contra a tabela, e só o resto continua de fora. Sem isso, o
+        trabalho de decidir não produziria vigilância nenhuma.
+        """
+        for f in fora:
+            if not re.search(f["lei"], registro["lei"] or ""):
+                continue
+            if any(re.search(e, registro["artigo"] or "") for e in f.get("exceto", [])):
+                return False
+            return True
+        return False
+
     n_fora = 0
     for registro in catalogo:
-        if any(re.search(f["lei"], registro["lei"] or "") for f in fora):
+        if esta_fora(registro):
             n_fora += 1
             continue
         # Registro que já DECLARA a condição está modelado: a hediondez dele é
@@ -465,7 +483,9 @@ LIMITES = {
                  "(grupo de extermínio, organização direcionada a crime hediondo, lesão "
                  "contra vítima qualificada) — nesses, `Não` é resposta legítima e não é "
                  "acusado. O inciso VI do parágrafo único (crimes do CPM com identidade "
-                 "com os do rol) exige juízo de correspondência e está fora da tabela.",
+                 "com os do rol) exige juízo de correspondência artigo a artigo: os "
+                 "dispositivos já julgados constam da tabela e são auditados; o resto do "
+                 "CPM segue fora dela, pelo `fora_de_alcance`.",
     "acao_penal": "Só enxerga a fórmula quando ela está no MESMO artigo do tipo. Regra de "
                   "ação penal em artigo de encerramento de capítulo (art. 145 do CP, por "
                   "exemplo) ou em outro diploma (Lei 9.099 para a lesão leve) não é "
