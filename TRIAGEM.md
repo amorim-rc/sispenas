@@ -28,6 +28,7 @@ Ela só nasce quando há o que dizer, e reúne quatro blocos:
 | **Achados de pena** | Moldura ou espécie de pena divergindo do compilado; dispositivo revogado; dispositivo com pena própria ausente do catálogo | Ler o artigo no Planalto. O que for mecânico já veio em PR (item 3); o resto é decisão de modelagem |
 | **Cobertura** | Quantos registros foram conferidos, quantos não têm moldura própria, quantos não foram localizados | Nada, em regra. Se "não localizado" subir, é sinal de rótulo errado no catálogo ou de mudança na página |
 | **Auditoria de classificação** | Hediondez, ação penal, causas de aumento ausentes e nomes suspeitos | Juízo jurídico. Hediondez e ação penal já vêm propostas em PR; aumentos e nomes ficam só aqui |
+| **Saúde da documentação** | Documento que passou da cadência (90 dias) ou de que algum arquivo dependente mudou depois da última conferência | Reler. Se nada mudar, atualizar `conferido_em` em `data/documentacao.json`; se corrigir, o commit já responde |
 | **DOU da semana** | Atos normativos da Seção 1 que citam diploma monitorado ou trazem vocabulário penal | Ler a ementa. Se criar crime em diploma novo, o PR da semana já traz a entrada de `data/fontes.json` para conferir |
 
 **Fechar a issue significa "triado"** — não "resolvido". O que virar tarefa vira commit ou

@@ -1,0 +1,129 @@
+{
+  "_meta": {
+    "descricao": "Saúde da documentação: cada arquivo explicativo do projeto, de que ele fala e quando foi conferido pela última vez. É o equivalente, para o texto, do que data/conferencia.json é para o catálogo.",
+    "por_que": "A conferência semanal vigia o dado e não vigiava a prosa. Na revisão de 01/08/2026 apareceram cinco documentos defasados, um deles grave: a convenção C7 do CONTRIBUTING mandava escrever a pena no `obs`, regra invertida desde a v1.2.17 — quem a seguisse produziria erro de dado. Nada avisou; só apareceu porque alguém mandou reler.",
+    "como_funciona": "Um documento vence por DOIS motivos: (a) passou da cadência, ou (b) um arquivo de que ele fala mudou DEPOIS da última conferência. O segundo é o que pega o caso do C7 — o prazo ainda não tinha corrido, mas o transform_data já havia invertido a regra. Editar o próprio documento também conta como conferência: a data efetiva é a maior entre `conferido_em` e o último commit do arquivo.",
+    "manutencao": "Ao reler um documento e não achar o que corrigir, atualize `conferido_em` aqui — é a única escrituração manual. Se você o corrigiu, o commit já responde por ele.",
+    "verificador": "python scripts/verificar_documentacao.py"
+  },
+  "cadencia_padrao_dias": 90,
+  "documentos": [
+    {
+      "arquivo": "README.md",
+      "sobre": "Porta de entrada: o que é o projeto, tamanho do catálogo, como rodar, e a comparação com a proposta original de 2008.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "data/crimes.json",
+        "data/fontes.json",
+        "package.json"
+      ]
+    },
+    {
+      "arquivo": "CONTRIBUTING.md",
+      "sobre": "As convenções C1 a C8 do catálogo e o fluxo de release. É o documento que outra pessoa segue ao editar dado.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "scripts/transform_data.py",
+        "scripts/validar-changelog.mjs",
+        ".github/workflows/ci.yml",
+        "src/data/changelog/create-changelog-entry.md"
+      ]
+    },
+    {
+      "arquivo": "CLAUDE.md",
+      "sobre": "Instruções para agentes de IA: fluxo de release, convenções que quebram em silêncio, verificação obrigatória.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "CONTRIBUTING.md",
+        "scripts/transform_data.py",
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "arquivo": "TRIAGEM.md",
+      "sobre": "A segunda-feira do mantenedor: o que a rodada automática produz, o que cada coisa exige e o que espera decisão.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        ".github/workflows/conferidor.yml",
+        "scripts/crawler/propor.py",
+        "scripts/crawler/auditar.py"
+      ]
+    },
+    {
+      "arquivo": "docs/metodologia.md",
+      "sobre": "Unidade de análise, campos do catálogo e como os benefícios são calculados.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "scripts/transform_data.py",
+        "src/lib/types.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/catalogo-tipos-penais.md",
+      "sobre": "Como o catálogo é estruturado, derivado e garantido — fonte × derivado, campos, invariantes.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "scripts/transform_data.py",
+        "src/lib/types.ts",
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "arquivo": "docs/dados-abertos.md",
+      "sobre": "Contrato dos dados publicados, campo a campo, e como cada registro é coletado e revisado.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "scripts/transform_data.py",
+        "src/lib/types.ts",
+        "scripts/crawler/conferir.py",
+        "scripts/crawler/dou_watcher.py"
+      ]
+    },
+    {
+      "arquivo": "docs/beneficios-penais.md",
+      "sobre": "Os patamares legais de cada benefício e o fundamento de cada um.",
+      "conferido_em": "2026-07-22",
+      "depende_de": [
+        "src/lib/beneficios",
+        "scripts/verificar_beneficios.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/roadmap.md",
+      "sobre": "O que vem em cada versão e por que a versão é MAIOR, MENOR ou correção.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "package.json"
+      ]
+    },
+    {
+      "arquivo": "scripts/crawler/README.md",
+      "sobre": "O pipeline de conferência: módulos, o que o robô faz e não faz, e as armadilhas com teste.",
+      "conferido_em": "2026-08-02",
+      "depende_de": [
+        "scripts/crawler/conferir.py",
+        "scripts/crawler/propor.py",
+        "scripts/crawler/auditar.py",
+        "scripts/crawler/parsear.py",
+        "scripts/pena_parser.py"
+      ]
+    },
+    {
+      "arquivo": "src/data/changelog/create-changelog-entry.md",
+      "sobre": "Como escrever uma entrada do feed de notas de atualização.",
+      "conferido_em": "2026-08-01",
+      "depende_de": [
+        "src/data/changelog/types.ts",
+        "scripts/montar-nota-release.mjs"
+      ]
+    },
+    {
+      "arquivo": "crawler/DECISOES-F0.md",
+      "sobre": "Registro do spike que abriu o conferidor: por que o fetcher é como é.",
+      "conferido_em": "2026-08-01",
+      "depende_de": [
+        "scripts/crawler/baixar.py"
+      ]
+    }
+  ]
+}

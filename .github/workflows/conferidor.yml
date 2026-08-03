@@ -89,6 +89,18 @@ jobs:
           python3 scripts/crawler/auditar.py > /dev/null
           echo "codigo=$?" >> "$GITHUB_OUTPUT"
 
+      # A prosa envelhece como o dado, e sem aviso: a convenção C7 do
+      # CONTRIBUTING ficou meses mandando o contrário do que o transformador
+      # faz. Aqui o documento vence por prazo OU porque algo de que ele fala
+      # mudou depois da última conferência.
+      - name: Verificar a saúde da documentação
+        id: docs
+        continue-on-error: true
+        run: |
+          set +e
+          python3 scripts/verificar_documentacao.py --saida crawler/relatorios/documentacao.md > /dev/null
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+
       - name: Guardar relatório e snapshots
         if: always()
         uses: actions/upload-artifact@v5
@@ -106,6 +118,7 @@ jobs:
         if: >-
           steps.conferir.outputs.codigo == '3' || steps.dou.outputs.codigo == '3'
           || steps.auditoria.outputs.codigo == '3'
+          || steps.docs.outputs.codigo == '3'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -129,6 +142,8 @@ jobs:
             [ -f "$DOU" ] && cat "$DOU"
             echo
             [ -f "crawler/relatorios/auditoria-$HOJE.md" ] && cat "crawler/relatorios/auditoria-$HOJE.md"
+            echo
+            [ -f "crawler/relatorios/documentacao.md" ] && cat "crawler/relatorios/documentacao.md"
           } > corpo.md
           # O corpo da issue tem limite de 65.536 caracteres.
           if [ "$(wc -c < corpo.md)" -gt 60000 ]; then

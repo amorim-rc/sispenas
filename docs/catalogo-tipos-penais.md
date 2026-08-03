@@ -43,6 +43,8 @@ data/crimes.json  ──►  scripts/transform_data.py  ──►  static/data/c
 | `tipo_pena` | `Reclusão`, `Detenção`, `Prisão simples`, `Multa`. |
 | `acao` | Ação penal (pública incondicionada, condicionada, privada). |
 | `hediondo` | `Sim` / `Não` — inclui os **equiparados** (tráfico, tortura, terrorismo). |
+| `hediondo_condicao` | Opcional. Quando a hediondez depende do CASO — o homicídio só é hediondo se praticado em atividade de grupo de extermínio —, aqui fica a hipótese, em texto, e `hediondo` permanece `Não`. |
+| `acao_condicao` | Opcional, mesma ideia para a ação penal (art. 161, §3º: privada se a propriedade é particular). |
 | `elemento` | `Doloso`, `Culposo`, `Preterdoloso`. |
 | `tentativa` | O tipo admite tentativa? |
 | `violencia` / `grave_ameaca` | Elementares que vedam vários benefícios. |

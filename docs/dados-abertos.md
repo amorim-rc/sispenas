@@ -24,6 +24,7 @@ O catálogo completo é publicado como dado aberto em formato JSON:
   "tipo_pena": "Reclusão",
   "acao": "Pública Incondicionada",
   "hediondo": "Não",
+  "hediondo_condicao": null,
   "elemento": "Doloso",
   "tentativa": "Sim",
   "violencia": "Sim",
@@ -92,6 +93,7 @@ os dados saber o que pode mudar sem quebrar uma conta.
 | `perdao_judicial_previsto` | Só é `true` nas hipóteses expressamente previstas em lei — não há perdão judicial genérico. |
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente`, `duplicata_ids` | Detecção de registro repetido. `duplicata_divergente` marcaria o mesmo dispositivo com penas conflitantes; **hoje não há nenhum**. |
 | `derivado_auto` | Marca o registro cujos campos passaram por preenchimento automático. |
+| `hediondo_condicional`, `acao_condicional` | A classificação depende de circunstância do CASO, não do tipo: o texto da condição está em `hediondo_condicao` e `acao_condicao`, na fonte. Nesses registros o campo fica no padrão seguro, e a interface mostra a hipótese. |
 | `fonte` | A página do texto compilado contra a qual este registro é conferido. |
 | `conferido_em` | Data da última conferência deste registro contra a lei (AAAA-MM-DD). |
 | `conferido_resultado` | `conferido` (a moldura bate), `sem_moldura_na_lei` (o dispositivo não traz moldura própria: pena por referência ou sanção não privativa), `divergente` (virou achado) ou `dispensado` (exceção já julgada). |
