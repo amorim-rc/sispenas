@@ -208,12 +208,14 @@ elemento culposo.
 | `tentativa` | Sim / Não / — | pressuposto do art. 15 do CP |
 | `violencia` | Sim / Não / — | |
 | `grave_ameaca` | Sim / Não / — | |
+| `vigencia_ate` | data | opcional (AAAA-MM-DD). Desde quando o dispositivo NÃO vigora mais |
+| `vigencia_nota` | texto | **obrigatória** com `vigencia_ate`: o que houve e qual dispositivo passa a reger a conduta |
 | `obs` | texto | descrição / notas. **A faixa de pena é lida daqui** (ex.: "15 dias a 6 meses", "1-5 anos") |
 
 Campos derivados (não escreva à mão): `pena_privativa`, `tem_multa`, `multa_regime`,
 `pena_*_meses`, `pena_*_rotulo`, `pena_faixa_rotulo`, `infracao_menor_potencial`,
-`tem_pena_privativa`, `resultado_morte`, `perdao_judicial_previsto`, `chave_dispositivo`,
-`duplicata*`. Ver [Catálogo de tipos penais](docs/catalogo-tipos-penais.md).
+`tem_pena_privativa`, `resultado_morte`, `perdao_judicial_previsto`, `vigente`,
+`chave_dispositivo`, `duplicata*`. Ver [Catálogo de tipos penais](docs/catalogo-tipos-penais.md).
 
 ### Unidades de pena (dias / meses / anos)
 

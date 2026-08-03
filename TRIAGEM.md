@@ -27,7 +27,9 @@ Ela só nasce quando há o que dizer, e reúne quatro blocos:
 |---|---|---|
 | **Achados de pena** | Moldura ou espécie de pena divergindo do compilado; dispositivo revogado; dispositivo com pena própria ausente do catálogo | Ler o artigo no Planalto. O que for mecânico já veio em PR (item 3); o resto é decisão de modelagem |
 | **Cobertura** | Quantos registros foram conferidos, quantos não têm moldura própria, quantos não foram localizados | Nada, em regra. Se "não localizado" subir, é sinal de rótulo errado no catálogo ou de mudança na página |
-| **Auditoria de classificação** | Hediondez, ação penal, causas de aumento ausentes e nomes suspeitos | Juízo jurídico. Hediondez e ação penal já vêm propostas em PR; aumentos e nomes ficam só aqui |
+| **Auditoria de classificação** | Hediondez, ação penal, causas de aumento ausentes e nomes — inclusive o nome que descreve MELHOR outro artigo do mesmo diploma | Juízo jurídico. Hediondez e ação penal já vêm propostas em PR; aumentos e nomes ficam só aqui. `NOME-DE-OUTRO-ARTIGO` pede reconferência da PENA junto com o nome: quando os dois artigos cominam a mesma moldura, a troca é invisível para a conferência |
+| **Pendências em aberto** | O que `data/pendencias.json` declara: perguntas examinadas e deliberadamente não respondidas | Nada, em regra — são repetidas para não se perderem. Resolver uma é aplicar a mudança e REMOVER a entrada, citando a versão no changelog |
+| **Já julgado** | Uma linha dizendo quantos achados foram omitidos por decisão anterior | Nada. Se o número subir sem motivo, abrir `scripts/crawler/excecoes-auditoria.json` e conferir se alguma exceção está ampla demais |
 | **Saúde da documentação** | Documento que passou da cadência (90 dias) ou de que algum arquivo dependente mudou depois da última conferência | Reler. Se nada mudar, atualizar `conferido_em` em `data/documentacao.json`; se corrigir, o commit já responde |
 | **DOU da semana** | Atos normativos da Seção 1 que citam diploma monitorado ou trazem vocabulário penal | Ler a ementa. Se criar crime em diploma novo, o PR da semana já traz a entrada de `data/fontes.json` para conferir |
 

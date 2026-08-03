@@ -4,7 +4,7 @@
     "gerado_por": "scripts/inventario_diplomas.py",
     "unidade": "preceito secundário: cada cominação de pena vigente no texto compilado do Planalto. Tipos do catálogo desdobram incisos e condutas, então tipos_catalogados pode legitimamente exceder preceitos_esperados.",
     "fonte": "Textos compilados oficiais de planalto.gov.br (ccivil_03), texto vigente (revogações riscadas excluídas), conferidos em 2026-07-19.",
-    "total_preceitos_esperados": 1172
+    "total_preceitos_esperados": 1174
   },
   "diplomas": [
     {
@@ -263,6 +263,22 @@
       "rotulos_catalogo": [
         "Lei 12.850/13"
       ]
+    },
+    {
+      "id": "lei15358",
+      "nome": "Marco Legal do Combate ao Crime Organizado (Lei Antifacção)",
+      "norma": "Lei nº 15.358, de 24 de março de 2026",
+      "situacao": "vigente",
+      "fonte_url": "https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/L15358.htm",
+      "conferido_em": "2026-08-03",
+      "artigos_penais": "arts. 2º–3º",
+      "preceitos_medidos": 2,
+      "preceitos_esperados": 2,
+      "tipos_catalogados": 2,
+      "rotulos_catalogo": [
+        "Lei 15.358/26"
+      ],
+      "obs": "O §1º do art. 2º é causa de aumento e o §5º é causa de diminuição — ambos em data/modificadores.json. O §3º do art. 2º foi vetado, e as remissões a ele (art. 4º desta Lei e art. 1º, par. ún., VIII, da Lei 8.072/90) são inócuas."
     },
     {
       "id": "lei11101",

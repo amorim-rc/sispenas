@@ -45,7 +45,7 @@ relatório para decisão humana. Acuidade jurídica continua sendo o valor centr
 
 ### O que já está pronto
 
-- [x] Registro de fontes (`data/fontes.json`): 62 diplomas, 69 rótulos, nenhum órfão
+- [x] Registro de fontes (`data/fontes.json`): 63 diplomas, 70 rótulos, nenhum órfão
 - [x] Coletor com detecção de codificação e **sentinela de frescor** por diploma
 - [x] Parser estrutural do texto compilado (dispositivo, pena, situação, anotação)
 - [x] Extrator de moldura compartilhado com o catálogo, para que os dois lados leiam

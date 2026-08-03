@@ -1,7 +1,7 @@
 # O conferidor
 
 Toda segunda-feira, 05:00 de Brasília, o repositório se pergunta se o catálogo
-ainda corresponde à lei. Baixa os textos compilados dos 62 diplomas de
+ainda corresponde à lei. Baixa os textos compilados dos 63 diplomas de
 `data/fontes.json`, estrutura cada dispositivo, lê as molduras penais, compara
 com `static/data/crimes.json` e olha o DOU da semana em busca de lei penal nova.
 

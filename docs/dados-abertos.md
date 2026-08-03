@@ -122,7 +122,7 @@ história da norma emenda por emenda.
 
 Toda segunda-feira, de madrugada, o repositório repete sozinho o mesmo procedimento:
 
-1. **Baixar.** Busca a página compilada dos 62 diplomas que têm tipo penal no catálogo.
+1. **Baixar.** Busca a página compilada dos 63 diplomas que têm tipo penal no catálogo.
    Cada diploma tem uma **sentinela**: um trecho que comprovadamente existe na versão
    atual da página (em geral a emenda mais recente já incorporada). Se a sentinela não
    aparecer, a rodada falha em vez de continuar — é a proteção contra comparar o catálogo

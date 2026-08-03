@@ -52,6 +52,19 @@
       ],
       "motivo": "'Se o crime for culposo, a pena será reduzida à metade' não é causa de diminuição: a culpa é elemento do TIPO, não circunstância do fato. A lei cria modalidade culposa derivada, com moldura própria (metade da dolosa), e o modelo correto é TIPO AUTÔNOMO — registrado como diminuição, o motor aplicaria a redução depois das demais causas, quando ela define a moldura de partida. Os arts. 38, 38-A e 40 ganharam registro culposo próprio no catálogo (ids 1418, 1419 e 1420). O art. 40-A não: seu CAPUT foi vetado, e o §3º ficou remetendo a um tipo que não existe — não há moldura para reduzir à metade.",
       "data": "2026-08-03"
+    },
+    {
+      "tipo": "NOME-SUSPEITO",
+      "ids": [
+        474,
+        670,
+        671,
+        1415,
+        1416,
+        1417
+      ],
+      "motivo": "Artigos cujo CAPUT é norma de cominação, não descrição de conduta: o art. 100 do Estatuto da Pessoa Idosa diz 'Constitui crime punível com...' e o art. 2º da Lei 8.137/90 diz 'Constitui crime da mesma natureza:', com as condutas nos incisos. A auditoria compara o nome do registro com o texto do caput, e nesses casos não há o que comparar — nenhum dos seis registros erra o nome. Foi este o falso alarme que a revisão de 02/08/2026 examinou no item 1.4 e classificou como tal.",
+      "data": "2026-08-03"
     }
   ]
 }

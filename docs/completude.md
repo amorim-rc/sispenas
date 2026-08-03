@@ -17,9 +17,9 @@ conferência do catálogo) e de
 
 | Indicador | Valor |
 |---|---|
-| Tipos penais catalogados | **1412** |
-| Diplomas com tipo penal vigente | 62 |
-| — com coleta iniciada | 60 |
+| Tipos penais catalogados | **1417** |
+| Diplomas com tipo penal vigente | 63 |
+| — com coleta iniciada | 61 |
 | Diplomas revogados/não recepcionados | [11](/docs/acervo-historico) |
 
 ## Índice por diploma
@@ -30,18 +30,18 @@ conferência do catálogo) e de
 
 | Diploma | Tipos coletados | Situação |
 |---|---:|---|
-| Código Penal — Parte Especial | 509 | concluído ❓ |
+| Código Penal — Parte Especial | 508 | concluído ❓ |
 | Código Penal Militar — Parte Especial | 360 | 🔶 em coleta |
 | Código Eleitoral | 60 | concluído ❓ |
-| Crimes contra o meio ambiente | 53 | concluído ❓ |
+| Crimes contra o meio ambiente | 56 | concluído ❓ |
 | Lei das Contravenções Penais | 52 | concluído ❓ |
 | Estatuto da Criança e do Adolescente (crimes) | 30 | concluído ❓ |
 | Abuso de autoridade | 25 | concluído ❓ |
 | Crimes contra o sistema financeiro nacional | 23 | concluído ❓ |
 | Crimes de preconceito (racismo) | 18 | concluído ❓ |
+| Crimes contra a ordem tributária, econômica e relações de consumo | 18 | concluído ❓ |
 | Estatuto da Pessoa Idosa (crimes) | 16 | concluído ❓ |
-| Lei de Drogas | 16 | concluído ❓ |
-| Crimes contra a ordem tributária, econômica e relações de consumo | 16 | concluído ❓ |
+| Lei de Drogas | 15 | concluído ❓ |
 | Código de Defesa do Consumidor (infrações penais) | 14 | concluído ❓ |
 | Código de Trânsito Brasileiro (crimes de trânsito) | 14 | concluído ❓ |
 | Loterias (contravenções) | 13 | concluído ❓ |
@@ -69,6 +69,7 @@ conferência do catálogo) e de
 | Mercado de valores mobiliários (crimes) | 3 | concluído ❓ |
 | Estatuto do Índio (crimes) | 3 | concluído ❓ |
 | Programas de computador (crimes) | 3 | concluído ❓ |
+| Marco Legal do Combate ao Crime Organizado (Lei Antifacção) | 2 | concluído ❓ |
 | Crimes contra a ordem econômica (combustíveis) | 2 | concluído ❓ |
 | Lei do Inquilinato (disposições penais) | 2 | concluído ❓ |
 | Comissões Parlamentares de Inquérito (crimes) | 2 | concluído ❓ |
