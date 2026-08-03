@@ -55054,7 +55054,7 @@
   "tentativa": "Sim",
   "violencia": "Não",
   "grave_ameaca": "Não",
-  "obs": "5 a 15 anos reclusão. Tratando-se de tráfico de drogas, a pena do art. 290 é de reclusão de 5 a 15 anos. §5º incluído pela Lei 14.688/2023. NÃO é hediondo por identidade: o inciso VI do parágrafo único do art. 1º da Lei 8.072/90 projeta sobre o CPM apenas os crimes 'previstos no art. 1º desta Lei', e o tráfico não está no art. 1º — é equiparado pelo art. 2º, dispositivo diverso, por força do art. 5º, XLIII da Constituição. Se a equiparação constitucional alcança o tipo militar é outra pergunta, com fundamento próprio; ver data/pendencias.json",
+  "obs": "5 a 15 anos reclusão. Tratando-se de tráfico de drogas, a pena do art. 290 é de reclusão de 5 a 15 anos. §5º incluído pela Lei 14.688/2023. NÃO é hediondo por identidade: o inciso VI do parágrafo único do art. 1º da Lei 8.072/90 projeta sobre o CPM apenas os crimes 'previstos no art. 1º desta Lei', e o tráfico não está no art. 1º — é equiparado pelo art. 2º, dispositivo diverso, por força do art. 5º, XLIII da Constituição. Se a equiparação constitucional alcança o tipo militar é outra pergunta, com fundamento próprio; ver REVISAO-PENDENTE.md, na raiz do repositório",
   "pena_privativa": "Reclusão",
   "tem_multa": false,
   "multa_regime": "nenhuma",

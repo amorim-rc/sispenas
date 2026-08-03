@@ -110,7 +110,8 @@ as seguintes exceções", e os três incisos ganharam redação nova, com ressal
 Título XII da Parte Especial do Código Penal. O inciso IV não foi tocado e passou a repetir
 o conteúdo do novo inciso II. **O motor ainda aplica a estrutura do Pacote Anticrime nos
 incisos I a IV.** Modelar a redação nova exige decidir o que fazer com a duplicação entre II
-e IV e com a ressalva do Título XII — juízo que não foi feito. Ver `data/pendencias.json`.
+e IV e com a ressalva do Título XII — juízo que não foi feito. A pergunta está aberta em
+`REVISAO-PENDENTE.md`, na raiz do repositório.
 :::
 
 ## Tabela de prescrição (Art. 109 CP)

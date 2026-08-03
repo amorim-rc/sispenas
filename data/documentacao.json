@@ -38,7 +38,7 @@
         "CONTRIBUTING.md",
         "scripts/transform_data.py",
         ".github/workflows/ci.yml",
-        "data/pendencias.json",
+        "REVISAO-PENDENTE.md",
         "scripts/crawler/excecoes-auditoria.json"
       ]
     },
@@ -50,7 +50,7 @@
         ".github/workflows/conferidor.yml",
         "scripts/crawler/propor.py",
         "scripts/crawler/auditar.py",
-        "data/pendencias.json",
+        "REVISAO-PENDENTE.md",
         "scripts/crawler/excecoes-auditoria.json"
       ]
     },
@@ -91,7 +91,7 @@
       "depende_de": [
         "src/lib/beneficios",
         "scripts/verificar_beneficios.ts",
-        "data/pendencias.json"
+        "REVISAO-PENDENTE.md"
       ]
     },
     {
@@ -130,6 +130,16 @@
       "conferido_em": "2026-08-03",
       "depende_de": [
         "scripts/crawler/baixar.py"
+      ]
+    },
+    {
+      "arquivo": "REVISAO-PENDENTE.md",
+      "sobre": "As perguntas jurídicas em aberto, com o texto legal de cada caso e o que o catálogo publica hoje. Autossuficiente: quem responde não precisa do repositório.",
+      "conferido_em": "2026-08-03",
+      "depende_de": [
+        "data/crimes.json",
+        "data/modificadores.json",
+        "data/hediondos.json"
       ]
     }
   ]

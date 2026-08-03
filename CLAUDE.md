@@ -69,9 +69,12 @@ falham o build mas dizem o que ficou aberto.
 
 Duas saídas evitam que uma pergunta sem resposta vire dado publicado:
 
-- **`data/pendencias.json`** — a questão jurídica examinada e deixada em aberto de
-  propósito. Cada entrada diz a pergunta, o que falta ver para respondê-la e o que fica
-  incompleto enquanto isso. O auditor a repete toda semana.
+- **`REVISAO-PENDENTE.md`**, na raiz — a questão jurídica examinada e deixada em aberto
+  de propósito. É PROSA, não estrutura de dados, e o arquivo é **autossuficiente**:
+  transcreve o texto legal de cada caso, diz o que o catálogo publica hoje e o que se
+  quer decidir, para que um jurista responda sem abrir o repositório. Cada pergunta é
+  um `## N. Título`, com `**O que falta ver.**`; o auditor lê esses dois e repete a
+  lista toda semana. Resolver uma é aplicar a mudança e REMOVER a seção.
 - **`scripts/crawler/excecoes-auditoria.json`** — o achado da auditoria que já foi julgado
   e não precisa voltar. Casa por tipo de achado MAIS um alvo, nunca por tipo sozinho, e
   declara motivo e data. Divergência real nunca vira exceção: vira correção no dado.

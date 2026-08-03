@@ -16,9 +16,9 @@ campos que decidem benefício e que ninguém vigiava:
 - **nome do tipo** — comparado com a epígrafe e com o texto do dispositivo, para
   achar registro que descreve outro crime.
 
-E um quinto bloco que não é auditoria de dado: as **pendências jurídicas**
-declaradas em `data/pendencias.json` — o que o projeto examinou e deixou em
-aberto de propósito, repetido toda semana para não apodrecer no arquivo.
+E um quinto bloco que não é auditoria de dado: as **pendências jurídicas** de
+`REVISAO-PENDENTE.md`, na raiz — o que o projeto examinou e deixou em aberto de
+propósito, repetido toda semana para não apodrecer no arquivo.
 
 **Nenhuma conclusão jurídica.** Cada achado é uma pergunta, e os que viram
 proposta de mudança saem em PR, para revisão — nunca aplicados direto.
@@ -54,7 +54,7 @@ CATALOGO = RAIZ / "static" / "data" / "crimes.json"
 FONTES = RAIZ / "data" / "fontes.json"
 HEDIONDOS = RAIZ / "data" / "hediondos.json"
 MODIFICADORES = RAIZ / "data" / "modificadores.json"
-PENDENCIAS = RAIZ / "data" / "pendencias.json"
+PENDENCIAS = RAIZ / "REVISAO-PENDENTE.md"
 EXCECOES = Path(__file__).resolve().parent / "excecoes-auditoria.json"
 
 
@@ -416,6 +416,10 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
 
 
 # ── 5. Pendências jurídicas declaradas ──────────────────────────────────────
+_PERGUNTA = re.compile(r"^## (\d+)\.\s+(.+?)\s*$", re.M)
+_FALTA_VER = re.compile(r"^\*\*O que falta ver\.?\*\*\s*(.+?)(?=\n\n)", re.M | re.S)
+
+
 def auditar_pendencias() -> list[dict]:
     """Repete, toda semana, o que se sabe que falta decidir.
 
@@ -423,15 +427,29 @@ def auditar_pendencias() -> list[dict]:
     lembrando de uma pergunta que examinou e deixou aberta de propósito. Sem
     isto, a pendência vive só num arquivo que ninguém abre, e o silêncio da
     rodada semanal volta a ser confundido com "está tudo certo".
+
+    A fonte é `REVISAO-PENDENTE.md`, na raiz — PROSA, não estrutura de dados, e
+    de propósito: quem responde estas perguntas é jurista, não precisa (nem deve
+    precisar) abrir o repositório para entendê-las. O arquivo é autossuficiente,
+    transcreve o texto legal de cada caso e diz o que o catálogo publica hoje.
+    Daqui sai só o suficiente para lembrar que a pergunta existe.
     """
     if not PENDENCIAS.exists():
         return []
-    itens = carregar(PENDENCIAS).get("pendencias", [])
-    return [{
-        "campo": "pendencias", "tipo": "PENDENCIA-ABERTA", "gravidade": 1,
-        "detalhe": f"**{p['assunto']}** — {p['questao']} _Falta ver:_ {p['o_que_falta']} "
-                   f"_Enquanto isso:_ {p['impacto']} (registrada em {p['registrado_em']})",
-    } for p in itens]
+    texto = PENDENCIAS.read_text(encoding="utf-8").replace("\r\n", "\n")
+    achados = []
+    perguntas = list(_PERGUNTA.finditer(texto))
+    for i, m in enumerate(perguntas):
+        corpo = texto[m.end():perguntas[i + 1].start() if i + 1 < len(perguntas) else len(texto)]
+        falta = _FALTA_VER.search(corpo)
+        detalhe = f"**{m.group(1)}. {m.group(2)}**"
+        if falta:
+            detalhe += " _Falta ver:_ " + re.sub(r"\s+", " ", falta.group(1)).strip()
+        achados.append({
+            "campo": "pendencias", "tipo": "PENDENCIA-ABERTA", "gravidade": 1,
+            "detalhe": detalhe,
+        })
+    return achados
 
 
 # ── 4. Nome do tipo ─────────────────────────────────────────────────────────
@@ -601,9 +619,11 @@ LIMITES = {
             "conferência de penas, que confere a moldura contra o artigo que o registro diz "
             "ser. Falso positivo é esperado: artigos de um mesmo capítulo descrevem condutas "
             "parecidas. Serve para leitura, nunca para troca automática.",
-    "pendencias": "Não são achados: é `data/pendencias.json`, a lista do que o projeto "
-                  "examinou e deixou em aberto de propósito. Cada entrada diz o que falta "
-                  "ver para decidir. Sai daqui quando a decisão for tomada e publicada.",
+    "pendencias": "Não são achados: é `REVISAO-PENDENTE.md`, na raiz, com o que o projeto "
+                  "examinou e deixou em aberto de propósito. Aqui sai só o título e o que "
+                  "falta ver; o arquivo traz o texto legal de cada caso e é autossuficiente "
+                  "— quem responde não precisa abrir o repositório. Sai daqui quando a "
+                  "decisão for tomada e publicada.",
 }
 
 
