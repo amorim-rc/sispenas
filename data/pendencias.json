@@ -22,6 +22,33 @@
       "impacto": "O motor de progressão aplica, nos incisos I a IV, a estrutura do Pacote Anticrime (16/20/25/30% por primariedade × violência). Desde 08/05/2026 essa não é mais a redação vigente. Os percentuais V a VIII, esses sim, estão atualizados pela Lei 15.358/2026.",
       "origem": "Conferência do art. 112 no compilado durante a aplicação do Bloco 5 da revisão de 02/08/2026. A revisão não viu a Lei 15.402/2026 — ela trata do art. 112 apenas pela ótica da Lei 15.358/2026.",
       "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "lei-7643-cetaceos-vigencia",
+      "assunto": "Lei 7.643/87 (pesca e molestamento de cetáceos), art. 1º c/c art. 2º",
+      "questao": "O art. 29 da Lei 9.605/98 derrogou a Lei 7.643/87 quanto à pesca e ao molestamento de cetáceos?",
+      "o_que_falta": "Levantamento de jurisprudência. Há corrente sustentando a derrogação pela lei ambiental posterior e corrente sustentando a especialidade da lei anterior. Não se decide pelo texto: as duas leis convivem no compilado, nenhuma revoga a outra expressamente.",
+      "impacto": "O catálogo publica o tipo como vigente, com moldura de 2 a 5 anos de reclusão. Se a derrogação for a leitura correta, a conduta responde pelo art. 29 da Lei 9.605/98 (detenção de 6 meses a 1 ano e multa) — moldura muito menor, com efeito direto sobre todos os benefícios. Há ainda a multa cominada em OTN, índice extinto, sem critério legal de conversão.",
+      "origem": "Revisão de 02/08/2026, item 1.7, grau B.",
+      "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "granularizacao-por-incisos",
+      "assunto": "Artigos cujo caput comina a pena e cujas condutas estão nos incisos",
+      "questao": "Cadastrar um registro por inciso, ou manter um registro guarda-chuva por artigo?",
+      "o_que_falta": "Decisão de metodologia, não de direito. A revisão recomenda o desdobramento — cada inciso é conduta autônoma sob a mesma pena — e ele já foi feito no art. 2º da Lei 8.137/90, porque ali dois incisos já tinham registro próprio e o caput virara duplicata. Ficaram de fora, por não haver a mesma urgência: CE art. 313, parágrafo único (presidente e mesários, sujeito ativo distinto); Estatuto da Pessoa Idosa, art. 100, II a V; Lei 8.245/91, art. 44, I a IV; Lei 9.504/97, art. 72, I a III; e Lei 9.605/98, art. 33, parágrafo único, I a III.",
+      "impacto": "Esses cinco artigos ocupam um registro só, com nome de conjunto. A moldura publicada está certa; o que falta é granularidade — quem procura pela conduta específica não a encontra pelo nome.",
+      "origem": "Revisão de 02/08/2026, itens 1.2, 1.4, 1.11, 1.12 e 1.13.",
+      "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "nomenclatura-estatuto-pessoa-idosa",
+      "assunto": "Lei 10.741/03 — Estatuto da Pessoa Idosa (Lei 14.423/2022)",
+      "questao": "Padronizar 'idoso' para 'pessoa idosa' no rótulo do diploma e nos nomes dos tipos?",
+      "o_que_falta": "Decisão de apresentação com efeito colateral técnico: o campo `lei` é a chave que liga o catálogo a data/fontes.json e ao conferidor, e trocá-lo exige mexer nos dois lados na mesma passada. Os nomes dos tipos são varredura à parte.",
+      "impacto": "O catálogo usa a nomenclatura anterior à Lei 14.423/2022, inclusive em tipos cujo próprio texto legal já diz 'pessoa idosa' (art. 100, III).",
+      "origem": "Revisão de 02/08/2026, item 1.4.",
+      "registrado_em": "2026-08-03"
     }
   ]
 }

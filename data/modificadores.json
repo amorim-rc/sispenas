@@ -1271,6 +1271,29 @@
         ]
       },
       "obs": "Quem pratica atos preparatórios com propósito inequívoco de consumar as condutas do art. 2º sujeita-se à pena do crime CONSUMADO, reduzida de 1/3 até a metade. Não é tentativa (art. 14, II, do CP): a lei antecipa a punição do ato preparatório e fixa a redução própria — por isso é modificador de terceira fase com moldura de partida integral, e não se soma à diminuição da tentativa. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-drogas-art40",
+      "nome": "Aumento nos crimes de tráfico e condutas afins (+1/6 a 2/3)",
+      "dispositivo": "Lei 11.343/06, art. 40",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.167,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 11.343/06",
+        "artigos": [
+          "Art. 33",
+          "Art. 34",
+          "Art. 35",
+          "Art. 36",
+          "Art. 37"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 2/3 nos crimes dos arts. 33 a 37 — o alcance é dos cinco artigos, não só do art. 33. Sete hipóteses: I - transnacionalidade; II - agente prevalecendo-se de função pública ou no desempenho de missão de educação, guarda ou vigilância; III - prática em transporte público, estabelecimento prisional, unidade de ensino ou hospitalar, sedes de entidades e locais de grande aglomeração; IV - prática com violência, grave ameaça, emprego de arma de fogo ou processo de intimidação difusa; V - caracterização de tráfico entre Estados ou entre estes e o Distrito Federal; VI - envolvimento ou direcionamento a criança, adolescente ou pessoa com capacidade reduzida; VII - financiamento ou custeio da prática do crime."
     }
   ]
 }

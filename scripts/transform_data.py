@@ -57,6 +57,18 @@ CORRECOES = {
     # o tipo-base não comina multa.
     167: {"tem_multa": False, "multa_regime": "nenhuma"},
     898: {"tem_multa": False, "multa_regime": "nenhuma"},
+    # Art. 310 do Código Eleitoral: "detenção até seis meses OU pagamento de 90 a
+    # 120 dias-multa". A cominação é alternativa, mas a heurística lê "dias-multa"
+    # antes de "ou" e conclui cumulativa. A diferença não é de rótulo: com multa
+    # alternativa, a multa isolada basta para punir o fato.
+    792: {"tem_multa": True, "multa_regime": "alternativa"},
+    # Dois registros cujo `obs` EXPLICA que o artigo não comina multa. A palavra
+    # está lá — a heurística só sabe procurá-la, não negá-la. Art. 338 do CP
+    # ("reclusão, de um a quatro anos, sem prejuízo de nova expulsão") e art. 72
+    # da Lei 9.504/97 ("puníveis com reclusão, de cinco a dez anos"): a multa que
+    # os dois publicavam veio junto com o nome importado de outro artigo.
+    750: {"tem_multa": False, "multa_regime": "nenhuma"},
+    537: {"tem_multa": False, "multa_regime": "nenhuma"},
 }
 
 # ── O catálogo contém APENAS tipos penais ───────────────────────────────────
