@@ -358,6 +358,27 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
     Só LISTA. Modelar um modificador exige decidir o escopo — sobre quais tipos
     ele incide —, e isso não se lê do dispositivo isolado.
     """
+    def _num(artigo: str) -> str:
+        """"2º-A" e "2-A" são o mesmo artigo. "359-M-B" não é "359-M".
+
+        O marcador ordinal é decoração de escrita: o catálogo de modificadores o
+        usa ("art. 2º, §4º") e a chave do parser não ("Art. 2|§ 4º"). Sem
+        normalizar, cada dispositivo com ordinal aparecia como MODIFICADOR-AUSENTE
+        mesmo já estando modelado — foi o que fez o art. 2º, §4º da Lei 12.850
+        constar da lista de 109, tendo linha própria desde a v1.2.0.
+        """
+        return re.sub(r"[ºo°]", "", artigo.strip().lower())
+
+    def _diploma(rotulo: str) -> str:
+        """"CPM (DL 1.001/69)" e "CPM" são o mesmo diploma.
+
+        O catálogo de modificadores escreve o diploma curto ("CPM, art. 160,
+        parágrafo único"); `fontes.json` guarda o rótulo longo, com o número do
+        decreto-lei entre parênteses. Sem cortar o parêntese, os 18 aumentos do
+        CPM e os 3 da LCP apareciam como ausentes depois de cadastrados.
+        """
+        return re.split(r"\s*\(", rotulo.strip(), maxsplit=1)[0].strip().lower()
+
     mods = carregar(MODIFICADORES)["modificadores"]
     ja_modelados = set()
     for m in mods:
@@ -365,7 +386,7 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
         mm = re.search(r"art\.?\s*([\w-]+)", disp, re.I)
         lei = re.match(r"([^,]+)", disp)
         if mm and lei:
-            ja_modelados.add((lei.group(1).strip().lower(), mm.group(1).lower()))
+            ja_modelados.add((_diploma(lei.group(1)), _num(mm.group(1))))
 
     achados: list[dict] = []
     fontes = {f["id"]: f for f in carregar(FONTES)["fontes"]}
@@ -377,9 +398,13 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
             texto = d.texto or ""
             if not _MAJORANTE.search(texto) or not _FRACAO.search(texto):
                 continue
-            artigo = k.split("|")[0].replace("Art. ", "").lower()
-            chave_mod = (fontes[fid]["rotulos"][0].lower(), artigo)
-            if chave_mod in ja_modelados or (fid, k) in vistos:
+            artigo = _num(k.split("|")[0].replace("Art. ", ""))
+            # Todos os rótulos do diploma, não só o primeiro: o art. 326-B do
+            # Código Eleitoral entrou no catálogo pela lei que o criou
+            # ("Lei 14.192/21"), que é rótulo do mesmo diploma.
+            modelado = any((_diploma(r), artigo) in ja_modelados
+                           for r in fontes[fid]["rotulos"])
+            if modelado or (fid, k) in vistos:
                 continue
             vistos.add((fid, k))
             achados.append({

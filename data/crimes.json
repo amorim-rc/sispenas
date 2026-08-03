@@ -5736,7 +5736,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção ou multa ou ambas. Se culposo: 6m-1a detenção"
+    "obs": "1-3 anos detenção ou multa ou ambas cumulativamente. A modalidade culposa do parágrafo único tem moldura própria e registro próprio no catálogo"
   },
   {
     "id": 359,
@@ -22675,5 +22675,53 @@
     "artigo": "Art. 2º, V",
     "crime": "Utilizar ou divulgar programa de processamento de dados que permita ao sujeito passivo possuir informação contábil diversa da fornecida à Fazenda",
     "obs": "6 meses a 2 anos detenção + multa"
+  },
+  {
+    "lei": "Lei 9.605/98",
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Culposo",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1418,
+    "artigo": "Art. 38, parágrafo único",
+    "crime": "Destruição ou dano culposo a floresta de preservação permanente",
+    "pena_min": 6,
+    "pena_max": 18,
+    "obs": "6 meses a 1 ano e 6 meses detenção, ou multa, ou ambas cumulativamente — metade da pena do caput (1 a 3 anos). A lei diz 'se o crime for culposo, a pena será reduzida à metade'. Isso NÃO é causa de diminuição de terceira fase: a culpa é elemento do TIPO, não circunstância do fato. O que a lei cria é modalidade culposa derivada, com moldura própria — metade da dolosa. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade define a moldura de partida."
+  },
+  {
+    "lei": "Lei 9.605/98",
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Culposo",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1419,
+    "artigo": "Art. 38-A, parágrafo único",
+    "crime": "Destruição ou dano culposo a vegetação do Bioma Mata Atlântica",
+    "pena_min": 6,
+    "pena_max": 18,
+    "obs": "6 meses a 1 ano e 6 meses detenção, ou multa, ou ambas cumulativamente — metade da pena do caput (1 a 3 anos). A lei diz 'se o crime for culposo, a pena será reduzida à metade'. Isso NÃO é causa de diminuição de terceira fase: a culpa é elemento do TIPO, não circunstância do fato. O que a lei cria é modalidade culposa derivada, com moldura própria — metade da dolosa. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade define a moldura de partida."
+  },
+  {
+    "lei": "Lei 9.605/98",
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Culposo",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1420,
+    "artigo": "Art. 40, §3º",
+    "crime": "Dano culposo a Unidade de Conservação",
+    "pena_min": 6,
+    "pena_max": 30,
+    "obs": "6 meses a 2 anos e 6 meses reclusão — metade da pena do caput (1 a 5 anos). A lei diz 'se o crime for culposo, a pena será reduzida à metade'. Isso NÃO é causa de diminuição de terceira fase: a culpa é elemento do TIPO, não circunstância do fato. O que a lei cria é modalidade culposa derivada, com moldura própria — metade da dolosa. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade define a moldura de partida."
   }
 ]

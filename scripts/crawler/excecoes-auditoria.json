@@ -11,8 +11,46 @@
   "excecoes": [
     {
       "tipo": "ACAO-COM-RESSALVA",
-      "ids": [76, 77, 78, 79, 80, 285, 646, 647, 1351],
+      "ids": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        285,
+        646,
+        647,
+        1351
+      ],
       "motivo": "Os arts. 151, 153 e 345 do CP distribuem a espécie de ação penal POR PARÁGRAFO: o §4º do art. 151 excepciona nominalmente o §1º, IV e o §3º; o §2º do art. 153 torna incondicionada só a hipótese de prejuízo à Administração; o parágrafo único do art. 345 reserva a queixa ao fato sem violência. A auditoria lê o artigo inteiro e não sabe em qual hipótese cada registro cai — por isso acusa a ressalva, não a divergência. Os nove registros foram lidos um a um contra o compilado na revisão de 02/08/2026 (Bloco 2) e corrigidos: quatro passaram a condicionada, um saiu de privada para condicionada, dois foram confirmados incondicionados e dois guardam a condição em `acao_condicao`.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "MODIFICADOR-AUSENTE",
+      "fonte": "ctb",
+      "dispositivos": [
+        "Art. 165|parágrafo único",
+        "Art. 165-A|parágrafo único",
+        "Art. 173|parágrafo único",
+        "Art. 174|§ 2º",
+        "Art. 175|parágrafo único",
+        "Art. 191|parágrafo único",
+        "Art. 203|parágrafo único",
+        "Art. 253-A|§ 2º"
+      ],
+      "motivo": "Infrações ADMINISTRATIVAS de trânsito, não crimes. Os oito estão no capítulo de infrações do CTB, não no dos crimes de trânsito: 'aplica-se em dobro a multa prevista no caput' é a multa administrativa cobrada pelo órgão de trânsito, e a 'reincidência no período de 12 meses' é reincidência administrativa, conceito sem relação com a do art. 63 do CP. Nada disso entra na terceira fase da dosimetria do art. 68. O extrator os capturou porque procurou o padrão 'aplica-se em dobro a multa' sem distinguir multa penal de multa administrativa. Os dois dispositivos PENAIS do CTB — arts. 302, §1º e 303, §1º — foram cadastrados como modificadores.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "MODIFICADOR-AUSENTE",
+      "fonte": "ambiental-9605",
+      "dispositivos": [
+        "Art. 38|parágrafo único",
+        "Art. 38-A|parágrafo único",
+        "Art. 40|§ 3º",
+        "Art. 40-A|§ 3º"
+      ],
+      "motivo": "'Se o crime for culposo, a pena será reduzida à metade' não é causa de diminuição: a culpa é elemento do TIPO, não circunstância do fato. A lei cria modalidade culposa derivada, com moldura própria (metade da dolosa), e o modelo correto é TIPO AUTÔNOMO — registrado como diminuição, o motor aplicaria a redução depois das demais causas, quando ela define a moldura de partida. Os arts. 38, 38-A e 40 ganharam registro culposo próprio no catálogo (ids 1418, 1419 e 1420). O art. 40-A não: seu CAPUT foi vetado, e o §3º ficou remetendo a um tipo que não existe — não há moldura para reduzir à metade.",
       "data": "2026-08-03"
     }
   ]

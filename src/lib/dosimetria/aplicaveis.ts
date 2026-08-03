@@ -97,7 +97,19 @@ function jaEmbutida(m: Modificador, c: Crime): boolean {
   const artMod = numeroArtigo(m.dispositivo);
   const artCrime = numeroArtigo(c.artigo);
   if (artMod === null || artCrime === null) return false;
-  const mesmaLei = m.dispositivo.startsWith('CP') && leiBase(c.lei).startsWith('CP');
+  // Restrito ao Código Penal de propósito. A supressão é heurística — "mesmo
+  // artigo, logo já embutido" —, e ela só se sustenta onde o catálogo de fato
+  // desdobrou as majorantes em linhas com moldura calculada, que é o caso do
+  // CP. Generalizá-la para os demais diplomas silenciaria dezenas de aumentos
+  // que NÃO têm linha própria. Quem tem de decidir isso é o modificador, pelo
+  // `ignora_embutida` — declaração, não adivinhação.
+  //
+  // O `!CPM` importa desde que o CPM ganhou modificadores próprios: sem ele,
+  // "CPM (DL 1.001/69)" satisfaz `startsWith('CP')` e um aumento do Código
+  // Penal suprimiria o crime militar de mesmo número.
+  const leiCrime = leiBase(c.lei);
+  const mesmaLei = m.dispositivo.startsWith('CP') && leiCrime.startsWith('CP') &&
+    !leiCrime.startsWith('CPM');
   return mesmaLei && artMod === artCrime;
 }
 

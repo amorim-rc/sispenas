@@ -76,6 +76,33 @@
       "impacto": "Nenhum hoje: o registro publica a moldura que a lei comina e está marcado como hediondo por identidade, o que é correto. Fica registrado para que uma eventual ADI não pegue o catálogo de surpresa.",
       "origem": "Revisão de 02/08/2026, Bloco 4, ponto de vigilância grau M.",
       "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "substituicao-de-moldura-258-cp-277-cpm",
+      "assunto": "CP, art. 258, 4ª hipótese, e CPM, art. 277, 4ª hipótese",
+      "questao": "Como representar o dispositivo que SUBSTITUI a moldura em vez de majorar a pena?",
+      "o_que_falta": "Decisão de modelagem no catálogo de modificadores. As três primeiras hipóteses dos dois artigos são majorações e foram cadastradas. A quarta — crime CULPOSO de perigo comum com resultado morte — manda aplicar 'a pena cominada ao homicídio culposo, aumentada de 1/3': não majora a pena do tipo, troca a moldura por outra. `data/modificadores.json` só sabe expressar fração sobre a pena existente; representar substituição exige natureza nova (a revisão sugere 'outro — substituição de moldura') e tratamento próprio no motor de dosimetria.",
+      "impacto": "As três majorações estão no catálogo; a quarta hipótese está descrita no `obs` do modificador da terceira, mas não é calculável. Quem simular crime culposo de perigo comum com resultado morte não verá a moldura do homicídio culposo aumentada de 1/3.",
+      "origem": "Revisão de 02/08/2026, Bloco 3, notas ao art. 258 do CP e ao art. 277 do CPM.",
+      "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "cp-157-p2b-qualificadora-ou-majorante",
+      "assunto": "CP, art. 157, §2º-B (roubo com arma de fogo de uso restrito ou proibido)",
+      "questao": "É causa de aumento de terceira fase ou qualificadora com moldura própria?",
+      "o_que_falta": "Escolha entre duas leituras defensáveis. Literalmente, o §2º-B manda aplicar em dobro a pena do caput, o que é operação de terceira fase. Parte da doutrina o trata como QUALIFICADORA, porque o efeito prático é criar moldura própria. A diferença só aparece na ordem de aplicação com outras causas de aumento.",
+      "impacto": "O catálogo mantém o §2º-B como TIPO, com a moldura já dobrada — e é hediondo pelo art. 1º, II, 'b' da Lei 8.072/90, marcação que se perderia se ele virasse modificador. Enquanto a escolha não for feita, o dispositivo não é oferecido como causa de aumento sobre o caput.",
+      "origem": "Revisão de 02/08/2026, Bloco 3, nota ao art. 157, §2º-B, grau M.",
+      "registrado_em": "2026-08-03"
+    },
+    {
+      "id": "dispositivos-truncados-bloco3",
+      "assunto": "Cerca de 30 causas de aumento com os incisos truncados",
+      "questao": "Quais são as hipóteses de cada uma, quando o alcance depende delas?",
+      "o_que_falta": "Releitura dispositivo a dispositivo no compilado. O extrator cortou boa parte das entradas no ponto em que começam os incisos ('se o crime é cometido:'). Natureza, fração e alcance foram classificados assim mesmo — é o que o cadastro exige —, e as hipóteses foram transcritas onde couberam no `obs`. Onde a hipótese importa para o ALCANCE, e não só para a descrição, a revisão marcou grau B.",
+      "impacto": "Nenhum sobre o cálculo: fração e alcance estão registrados. O que falta é descrição — quem consulta o modificador nem sempre vê a lista completa de hipóteses.",
+      "origem": "Revisão de 02/08/2026, Bloco 3, nota geral sobre dispositivos truncados.",
+      "registrado_em": "2026-08-03"
     }
   ]
 }
