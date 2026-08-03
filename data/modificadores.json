@@ -1213,6 +1213,64 @@
         ]
       },
       "obs": "Aumento de 1/6 a 2/3 se há participação de criança ou adolescente; concurso de funcionário público valendo-se da condição; produto destinado ao exterior; conexão com outras organizações; ou transnacionalidade. Constava indevidamente como tipo penal autônomo, sob um §4º-A que a lei não tem."
+    },
+    {
+      "id": "aumento-roubo-orgcrim-157",
+      "nome": "Roubo por organização criminosa ultraviolenta (triplo)",
+      "dispositivo": "CP, art. 157, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 2.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 157, caput"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Aplica-se em TRIPLO a pena do caput (aumento de 200%) se a violência ou grave ameaça é cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada, no contexto do art. 2º da Lei 15.358/2026. O dispositivo manda desprezar as demais causas de aumento, e por isso incide só sobre o caput — não sobre as formas circunstanciadas do §2º. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-dominio-social-liderar-financiar",
+      "nome": "Domínio social estruturado com liderança, financiamento ou vítima qualificada (2/3 ao dobro)",
+      "dispositivo": "Lei 15.358/26, art. 2º, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 15.358/26",
+        "artigos": [
+          "Art. 2º"
+        ]
+      },
+      "obs": "Aumento de 2/3 ao dobro em onze hipóteses (incisos I a XI): comando ou liderança; financiamento; violência contra membro do Judiciário, do Ministério Público, agente de segurança do art. 144 da CF, criança, adolescente, pessoa idosa, pessoa com deficiência ou pessoa vulnerável; conexão com outras facções; concurso de funcionário público; infiltração no setor público; arma de uso restrito ou proibido; recrutamento de criança ou adolescente; transnacionalidade; extração ilegal de recursos minerais; e emprego de drones, vigilância eletrônica ou contrainteligência. O art. 4º da Lei declara hediondo também este §1º — como ele apenas majora a pena do caput, que já é hediondo, a hediondez fica registrada no caput. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "diminuicao-dominio-social-atos-preparatorios",
+      "nome": "Atos preparatórios do domínio social estruturado (−1/3 a −1/2)",
+      "dispositivo": "Lei 15.358/26, art. 2º, §5º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 15.358/26",
+        "artigos": [
+          "Art. 2º"
+        ]
+      },
+      "obs": "Quem pratica atos preparatórios com propósito inequívoco de consumar as condutas do art. 2º sujeita-se à pena do crime CONSUMADO, reduzida de 1/3 até a metade. Não é tentativa (art. 14, II, do CP): a lei antecipa a punição do ato preparatório e fixa a redução própria — por isso é modificador de terceira fase com moldura de partida integral, e não se soma à diminuição da tentativa. Incluído pela Lei 15.358/2026."
     }
   ]
 }

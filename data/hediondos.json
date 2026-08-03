@@ -7,8 +7,8 @@
       "Art. 1|caput",
       "Art. 1|parágrafo único"
     ],
-    "conferido_em": "2026-08-01",
-    "ultima_alteracao_conhecida": "Lei 15.358/2026 (inciso VIII do parágrafo único) e Lei 15.384/2026 (inciso I-C)",
+    "conferido_em": "2026-08-03",
+    "ultima_alteracao_conhecida": "Lei 15.358/2026 (inciso VIII do parágrafo único — com o §3º do art. 2º vetado, ver `pendentes`) e Lei 15.384/2026 (inciso I-C)",
     "como_atualizar": "Quando o conferidor acusar mudança de impressão, reler os dois dispositivos no compilado, ajustar as regras abaixo e regravar `impressao_do_texto` com o valor que o relatório informar."
   },
   "impressao_do_texto": "f383fa3226b2b752",
@@ -168,6 +168,18 @@
       "artigo": "^Art\\. 241-B"
     },
     {
+      "fundamento": "Lei 8.072, art. 1º, § único, VIII",
+      "lei": "Lei 15\\.358",
+      "artigo": "^Art\\. 2º, caput",
+      "nota": "domínio social estruturado. O inciso declara hediondos 'o caput e os §§ 1º e 3º do art. 2º': o §1º é causa de aumento sobre este caput e o §3º foi VETADO — ver `pendentes`"
+    },
+    {
+      "fundamento": "Lei 8.072, art. 1º, § único, VIII",
+      "lei": "Lei 15\\.358",
+      "artigo": "^Art\\. 3º",
+      "nota": "favorecimento ao domínio social estruturado"
+    },
+    {
       "fundamento": "CF, art. 5º, XLIII (equiparado)",
       "lei": "Lei 9\\.455",
       "artigo": "^Art\\. 1º?(,\\s*(caput|[IVX]+))?$|^Art\\. 1º?, §[13]",
@@ -255,8 +267,8 @@
     },
     {
       "fundamento": "Lei 8.072, art. 1º, § único, VIII",
-      "descricao": "Domínio social estruturado e favorecimento (Lei 15.358/2026), que remete ao 'marco legal do combate ao crime organizado'. Falta mapear qual diploma e quais dispositivos, e se o catálogo já os registra.",
-      "acao": "identificar o diploma e acrescentá-lo a data/fontes.json"
+      "descricao": "O diploma é a Lei 15.358/2026 (Marco Legal do Combate ao Crime Organizado), já em data/fontes.json, e os dois tipos estão no catálogo. Resta um defeito da lei: o inciso VIII — e o art. 4º da própria Lei 15.358, de redação idêntica — declara hediondos 'o caput e os §§ 1º e 3º do art. 2º', mas o §3º foi VETADO (VEP-216/26) e não existe no texto sancionado. A remissão é INÓCUA: não há dispositivo a cadastrar. O §1º, por sua vez, é causa de aumento sobre o caput, que já é hediondo — declará-lo hediondo em separado é redundante, e a hediondez fica registrada no caput.",
+      "acao": "nenhuma no catálogo: está anotado para que a conferência não volte a procurar um §3º inexistente. Reabrir só se lei posterior ajustar a remissão ou restaurar o parágrafo vetado."
     }
   ],
   "fora_de_alcance": [
