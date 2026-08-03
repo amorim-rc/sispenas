@@ -58,7 +58,13 @@ TOLERANCIA_MESES = 1 / 30 + 1e-6
 
 
 # ── Normalização de dispositivo ─────────────────────────────────────────────
-_ART = re.compile(r"Art\.?\s*(\d+)(?:\s*[-–—]\s*([A-Z]))?", re.I)
+# O sufixo de letra vem COLADO ao número e pode repetir-se, com ou sem o
+# marcador ordinal no meio: o catálogo escreve "Art. 121-A", "Art. 2º-A" e
+# "Art. 359-M-B". A forma com ordinal era a que faltava, e por ela o art. 2º-A
+# da Lei 7.716 (injúria racial) e o art. 7º-B da Lei 8.906 (prerrogativa de
+# advogado) caíam na chave do artigo-base e ficavam sem conferência. Espelha o
+# `_ARTIGO` de parsear.py — os dois lados têm de reduzir à MESMA chave.
+_ART = re.compile(r"Art\.?\s*(\d+)\s*(?-i:[ºo°])?((?:[-–—](?-i:[A-Z]))*)", re.I)
 _PAR = re.compile(r"§\s*(\d+)\s*[ºo°]?\s*(?:[-–—]\s*([A-Z]))?", re.I)
 
 
@@ -72,7 +78,8 @@ def chave(artigo: str) -> str | None:
     ma = _ART.search(artigo or "")
     if not ma:
         return None
-    base = f"Art. {ma.group(1)}" + (f"-{ma.group(2)}" if ma.group(2) else "")
+    sufixo = re.sub(r"[–—]", "-", ma.group(2)).strip("-").upper()
+    base = f"Art. {ma.group(1)}" + (f"-{sufixo}" if sufixo else "")
     mp = _PAR.search(artigo)
     if mp:
         marcador = f"§ {mp.group(1)}º" + (f"-{mp.group(2)}" if mp.group(2) else "")

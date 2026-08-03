@@ -82,6 +82,54 @@ def test_cp_artigos_com_sufixo_sao_proprios(carregar):
     assert "20 (vinte) a 40 (quarenta) anos" in a121a["pena_texto"]
 
 
+# ── Sufixo de letra: depois do ordinal, e em dobro ──────────────────────────
+def test_sufixo_depois_do_ordinal_nao_cola_no_artigo_base(carregar):
+    """"Art. 2º-A" da Lei 7.716 é a injúria racial, não o art. 2º.
+
+    O marcador ordinal vem ANTES da letra, e o parser antigo o consumia primeiro:
+    lia "Art. 2" e devolvia "-A Injuriar alguém…" como corpo do art. 2º — que, no
+    compilado, está vetado. Consequência a jusante: a majorante do parágrafo
+    único aparecia na auditoria como "art. 2º, parágrafo único", identificador
+    que a lei não tem, e a revisão jurídica teve de levantar a suspeita à mão.
+    """
+    ds = como_dicionarios(parsear(carregar("racismo-art2a")))
+    artigos = {d["artigo"] for d in ds}
+    assert {"Art. 2", "Art. 2-A"} <= artigos
+    assert "Injuriar alguém" in por_marcador(ds, "Art. 2-A")["caput"]["texto"]
+    assert "Injuriar" not in (por_marcador(ds, "Art. 2")["caput"]["texto"] or "")
+    pu = por_marcador(ds, "Art. 2-A")["parágrafo único"]
+    assert "aumentada de metade" in pu["texto"]
+
+
+def test_sufixo_duplo_e_artigo_proprio(carregar):
+    """"Art. 359-M-B" não é o "Art. 359-M" com corpo começando em "B.".
+
+    O golpe de Estado (359-M) e a redução por contexto de multidão (359-M-B) são
+    dispositivos diferentes; colados, a redução virava parte do tipo.
+    """
+    ds = como_dicionarios(parsear(carregar("cp-art359m")))
+    artigos = {d["artigo"] for d in ds}
+    assert {"Art. 359-M", "Art. 359-M-A", "Art. 359-M-B"} <= artigos
+    assert "Tentar depor" in por_marcador(ds, "Art. 359-M")["caput"]["texto"]
+    assert "contexto de multidão" in por_marcador(ds, "Art. 359-M-B")["caput"]["texto"]
+
+
+@pytest.mark.parametrize("texto, artigo, comeco", [
+    # Hífen como PONTUAÇÃO, seguido de artigo definido: não é sufixo. O parser
+    # antigo criava "Art. 13-O" e comia o "O" do texto.
+    ("Art. 13 - O resultado, de que depende a existência do crime", "Art. 13", "O resultado"),
+    ("Art. 100 - A ação penal é pública", "Art. 100", "A ação penal"),
+    # Ordinal em minúscula ("Art. 4o") continua sendo ordinal.
+    ("Art. 4o Poderá ser ajuizada ação cautelar", "Art. 4", "Poderá ser ajuizada"),
+    # Sufixo legítimo, colado ao número.
+    ("Art. 121-A. Matar mulher por razões da condição do sexo feminino", "Art. 121-A", "Matar mulher"),
+])
+def test_hifen_de_pontuacao_nao_vira_sufixo(texto, artigo, comeco):
+    ds = como_dicionarios(parsear(f"<html><body><p>{texto}:</p></body></html>"))
+    assert ds[0]["artigo"] == artigo
+    assert ds[0]["texto"].startswith(comeco)
+
+
 # ── Maria da Penha: versões sobrepostas SEM riscado ─────────────────────────
 def test_mp24a_vale_a_redacao_mais_recente(carregar):
     """A pena de 2018 (detenção 3m-2a) aparece ANTES da de 2024 (reclusão 2-5),

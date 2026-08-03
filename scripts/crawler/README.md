@@ -86,6 +86,16 @@ Cada uma tem teste e fixture; nenhuma volta em silêncio.
    "Página parece desatualizada" quase sempre é erro de decodificação.
 8. **`Art . 190`**, com espaço antes do ponto, é como a Lei 6.766 escreve do
    art. 37 em diante.
+9. **Sufixo de letra.** Vem colado ao número, pode repetir-se (`359-M-B`) e pode
+   vir depois do ordinal (`2º-A`). Sem as duas formas, o `2º-A` da Lei 7.716
+   (injúria racial) virava corpo do art. 2º, que está vetado, e o `359-M-B` do
+   CP virava corpo do golpe de Estado. Em contrapartida, `Art. 13 - O resultado`
+   **não** tem sufixo: ali o hífen é pontuação e o `O` é artigo definido — foi
+   assim que nasceram artigos inexistentes como `Art. 13-O` e `Art. 100-A`. A
+   regra que separa os dois casos é o espaço em volta do hífen, e ela precisa
+   valer igual em `parsear.py` e na `chave()` de `conferir.py`: os dois lados
+   têm de reduzir ao MESMO identificador, senão o registro existe e não é
+   conferido.
 
 ## Acrescentar um diploma
 

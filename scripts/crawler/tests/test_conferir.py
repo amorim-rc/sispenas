@@ -35,7 +35,15 @@ class TestChave:
 
     def test_artigo_com_sufixo(self):
         assert chave("Art. 121-A, caput") == "Art. 121-A|caput"
-        assert chave("Art. 359-M-A") == "Art. 359-M|caput"
+        # Sufixo duplo e sufixo depois do ordinal: as duas formas que o parser
+        # antes achatava no artigo-base, deixando sem conferência a injúria
+        # racial (Lei 7.716, art. 2º-A) e a violação de prerrogativa de advogado
+        # (Lei 8.906, art. 7º-B).
+        assert chave("Art. 359-M-A") == "Art. 359-M-A|caput"
+        assert chave("Art. 2º-A") == "Art. 2-A|caput"
+        assert chave("Art. 7º-B, caput") == "Art. 7-B|caput"
+        # Hífen de pontuação não é sufixo.
+        assert chave("Art. 13 - O resultado") == "Art. 13|caput"
 
     def test_sem_artigo(self):
         assert chave("") is None
