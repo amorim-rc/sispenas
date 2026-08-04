@@ -1,32 +1,467 @@
 # Revisão pendente — catálogo de tipos penais brasileiro
 
-Duas listas, e a diferença entre elas importa:
+Este arquivo tem **duas partes com destinos diferentes**:
 
-- **O que está respondido e falta aplicar** — a segunda rodada de revisão
-  (03/08/2026) decidiu, e a versão 1.9.0 não alcançou. Não há pergunta aqui: há
-  trabalho, com a resposta ao lado. Ninguém precisa reabrir o mérito.
-- **O que continua em aberto** — as perguntas. Esta parte é **autossuficiente**:
-  traz o texto legal de cada caso, o que o catálogo publica hoje e o que se quer
-  decidir. Quem responde não precisa abrir o repositório.
+- **As perguntas**, abaixo. Cada uma é um bloco **autossuficiente e pronto para
+  submeter** a uma conversa nova — traz o texto legal transcrito, o que o
+  catálogo publica hoje, o que se quer decidir e em que formato a resposta é
+  útil. Quem responde não precisa do repositório, de nenhum arquivo e de nenhuma
+  ferramenta.
+- **O anexo**, no fim: o que já foi respondido e falta aplicar. **Não submeta** —
+  é trabalho, não pergunta, e reabrir o mérito só gasta rodada.
 
-## O que é este catálogo
+## Como submeter
 
-Um catálogo aberto de **tipos penais brasileiros vigentes**: 1.417 registros, um
-por conduta com pena própria. Ele alimenta o cálculo de **benefícios penais**
-(transação, ANPP, sursis, regime inicial, progressão, livramento, prescrição) e a
-**dosimetria pelas três fases** do art. 68 do Código Penal.
+1. Copie o bloco **Instruções ao revisor** (logo abaixo) e **uma** pergunta.
+2. Cole numa conversa nova. Uma pergunta por conversa: elas não dependem umas
+   das outras, e misturá-las piora as duas respostas.
+3. Cada pergunta traz **Formato da resposta**. Respeitá-lo é o que permite
+   aplicar o resultado sem retrabalho.
 
-Ao lado dele há um **catálogo de modificadores**: agravantes, atenuantes e causas
-de aumento e de diminuição, cada uma com a fração que aplica e o alcance sobre
-que tipos incide. Causa de aumento **não** é tipo penal e não entra no catálogo
-de tipos — é aplicada sobre ele no cálculo.
+Cada pergunta declara também se é **submetível**:
 
-As penas são conferidas semanalmente contra o texto compilado oficial do
-`planalto.gov.br`, e **não há divergência de pena pendente**.
+| Marca | O que significa |
+|---|---|
+| ✅ | Submeta. Tudo o que a resposta exige está no bloco. |
+| ⚠️ | Submeta, mas a resposta depende de jurisprudência ou de andamento processual **recentes**. Um modelo sem acesso a fonte atual vai errar ou inventar — e as Instruções mandam ele dizer isso. Trate a resposta como hipótese e confirme antes de publicar. |
+| ⛔ | Não submeta. A pergunta é de método interno e depende de dados que só o repositório tem. |
 
 ---
 
-# Parte I — respondido, falta aplicar
+## Instruções ao revisor
+
+> Copie deste marcador até o fim do bloco, junto com a pergunta escolhida.
+
+```text
+Você vai responder UMA pergunta de revisão jurídica sobre um catálogo aberto de
+tipos penais brasileiros. Tudo o que a pergunta exige está no texto dela: o
+dispositivo legal transcrito, o que o catálogo publica hoje e o que se quer
+decidir. Você não tem acesso ao sistema, e não precisa.
+
+O catálogo tem 1.417 registros, um por conduta com pena própria — formas
+simples, qualificadas, privilegiadas e culposas, e cada inciso que gere pena
+autônoma. Cada registro traz diploma, artigo, nome do tipo, pena mínima e máxima,
+espécie de pena, ação penal, hediondez, elemento (doloso/culposo) e se admite
+tentativa, violência ou grave ameaça. Ele alimenta o cálculo de benefícios penais
+(transação, ANPP, sursis, regime inicial, progressão, livramento, prescrição) e a
+dosimetria pelas três fases do art. 68 do Código Penal — por isso cada campo tem
+consequência prática.
+
+Ao lado dele há um catálogo de modificadores: agravantes, atenuantes e causas de
+aumento e de diminuição, cada uma com a fração que aplica e o alcance sobre que
+tipos incide. Causa de aumento NÃO é tipo penal e não entra no catálogo de tipos:
+é aplicada sobre ele no cálculo.
+
+Cinco regras, e a primeira vale mais que as outras quatro:
+
+1. ONDE NÃO HOUVER CERTEZA, DIGA QUE NÃO HÁ. Um dado errado publicado é pior que
+   um dado ausente. "Não sei dizer sem ver X" é resposta útil, e é o motivo de
+   várias destas perguntas existirem. Não preencha lacuna com plausibilidade.
+
+2. Declare o GRAU DE CONFIANÇA da resposta:
+   A — decidível pelo texto legal transcrito na pergunta;
+   M — depende de leitura doutrinária defensável (será aplicada, com a
+       divergência anotada ao lado);
+   B — continua em aberto (não será publicada; diga exatamente o que falta ver).
+
+3. Cite o FUNDAMENTO: dispositivo, súmula ou precedente. A resposta será
+   registrada junto com ele. Se citar precedente, diga o tribunal, o número e a
+   data — e, se não tiver certeza deles, diga isso em vez de arriscar.
+
+4. Sua base de conhecimento tem data de corte. Se a resposta depender de
+   jurisprudência recente, de andamento processual ou de lei posterior ao seu
+   corte, DIGA-O explicitamente e responda de forma condicional ("se X, então…;
+   se não-X, então…"). Uma resposta condicional correta vale mais que uma
+   categórica errada.
+
+5. Respeite o FORMATO DA RESPOSTA pedido no fim da pergunta. Se algo não couber
+   nele, escreva fora, depois — mas não no lugar dele.
+```
+
+---
+
+# As perguntas
+
+## 1 ✅ — Reincidente em crime do Título XII: 20% pelo inciso III, ou 1/6 pelo *caput*?
+
+**Contexto.** A Lei 15.402, de 8 de maio de 2026, deu ao art. 112 da Lei de
+Execução Penal esta redação:
+
+> **Art. 112.** A pena privativa de liberdade será executada de forma progressiva
+> com a transferência para regime menos rigoroso, a ser determinada pelo juiz,
+> quando o preso tiver cumprido ao menos 1/6 (um sexto) da pena no regime
+> anterior e seu mérito indicar a progressão, **observadas as seguintes
+> exceções**:
+>
+> **I** – se o apenado for primário e for condenado pela prática de crime mediante
+> o exercício de violência ou grave ameaça, **salvo em relação aos crimes previstos
+> no Título XII da Parte Especial** do Decreto-Lei nº 2.848, de 1940 (Código
+> Penal), deverão ser cumpridos ao menos 25% (vinte e cinco por cento) da pena;
+>
+> **II** – se o apenado for reincidente e for condenado pela prática de crime
+> mediante o exercício de violência ou grave ameaça, **salvo em relação aos crimes
+> previstos no Título XII da Parte Especial** do Código Penal, deverão ser
+> cumpridos ao menos 30% (trinta por cento) da pena;
+>
+> **III** – se o apenado for **reincidente em crime diverso dos crimes referidos
+> nos incisos I e II** do *caput* deste artigo, deverão ser cumpridos ao menos 20%
+> (vinte por cento) da pena;
+
+O Título XII da Parte Especial do Código Penal são os **arts. 359-A a 359-T** —
+crimes contra o Estado Democrático de Direito.
+
+**O que já foi decidido, e não se discute aqui.** O *caput* voltou a fixar
+patamar próprio, e os incisos passaram a ser exceções a ele; para o **primário**
+condenado por crime do Título XII sobra o *caput*, por exclusão expressa dos
+incisos I e II — leitura literal.
+
+**Pergunta.** E o **reincidente** em crime do Título XII? O texto comporta duas
+leituras, e a diferença é de 3,33 pontos percentuais:
+
+1. **Inciso III — 20%.** Ele alcança o "reincidente em crime diverso dos crimes
+   referidos nos incisos I e II". Os do Título XII estão expressamente **fora** do
+   alcance de I e II, logo são "diversos" deles. É a leitura mais fiel à letra:
+   "referidos" é o que o dispositivo diz, e I e II só se referem aos do Título XII
+   para excluí-los.
+2. ***Caput* — 1/6, ou 16,67%.** "Crimes referidos nos incisos I e II" significaria
+   crimes praticados com violência ou grave ameaça, categoria a que os do Título
+   XII pertencem materialmente, ainda que ressalvados. Não sendo "diversos", não
+   caem no inciso III e restam no *caput*. É a leitura mais fiel à finalidade da
+   reforma.
+
+**O que o sistema faz hoje.** Devolve o resultado como *condicional*, com as duas
+leituras escritas e o cálculo pelo *caput*, que é o mais favorável ao apenado.
+Nenhuma foi escolhida em silêncio.
+
+**Formato da resposta.**
+
+```
+Leitura adotada: [inciso III, 20% | caput, 1/6 | continua em aberto]
+Grau: [A | M | B]
+Fundamento:
+Argumento contrário que deve ser registrado ao lado:
+Se B — o que falta ver:
+```
+
+---
+
+## 2 ⚠️ — O crime de rádio clandestina do art. 151, §1º, IV do CP ainda existe?
+
+**Contexto.** O art. 151 do Código Penal pune, no §1º, IV:
+
+> **§ 1º** Na mesma pena incorre: […]
+> **IV** – quem instala ou utiliza estação ou aparelho radioelétrico, sem
+> observância de disposição legal.
+
+A pena, a mesma do *caput*, é **detenção de um a seis meses, ou multa**.
+
+Dez anos depois veio a Lei Geral de Telecomunicações:
+
+> **Art. 183 (Lei 9.472/97).** Desenvolver clandestinamente atividades de
+> telecomunicação:
+>     ↳ Pena – detenção de dois a quatro anos, aumentada da metade se houver dano
+>     a terceiro, e multa de R$ 10.000,00.
+
+E antes de ambos existia o art. 70 da Lei 4.117/62 (Código Brasileiro de
+Telecomunicações), que também punia a atividade clandestina.
+
+**O que o catálogo publica hoje.** Os dois como tipos plenamente vigentes.
+
+**A resposta parcial que já existe (grau M).** Não excluir e não publicar como
+plenamente vigente — marcar como **vigência controvertida, de aplicação
+residual**, com nota informando que a conduta é hoje processada pelo art. 183.
+O argumento decisivo é negativo: duas décadas de jurisprudência sobre rádio
+clandestina litigam art. 70 da Lei 4.117/62 contra art. 183 da Lei 9.472/97, e o
+art. 151, §1º, IV **não aparece**. Para um tipo penal, sumir do contencioso da
+matéria que ele regula é evidência forte de superação.
+
+**Por que a diferença importa mais que a classificação.** Pelo art. 151, §1º, IV
+a pena é detenção de um a seis meses ou multa — infração de menor potencial
+ofensivo, JECrim, transação penal, prescrição em três anos. Pelo art. 183,
+detenção de dois a quatro anos e multa, sem transação, na Justiça Federal. Quem
+calcule benefícios pelo dispositivo do Código Penal chega a um resultado
+radicalmente favorável e errado.
+
+**Pergunta.** Confirme ou refute a resposta parcial. Se houver **precedente**
+enfrentando diretamente a vigência do art. 151, §1º, IV — em qualquer sentido —,
+indique-o: é o que converteria M em A.
+
+**Atenção:** esta resposta depende de jurisprudência. Se você não tiver base
+segura sobre o estado dela, diga-o e responda em termos condicionais.
+
+**Formato da resposta.**
+
+```
+Classificação: [revogado tacitamente | vigência controvertida | plenamente vigente]
+Grau: [A | M | B]
+Fundamento:
+Há precedente que enfrente diretamente o art. 151, §1º, IV? [sim, qual | não localizo | não sei]
+Texto sugerido para a nota do registro (2 a 3 linhas, para o usuário final):
+```
+
+---
+
+## 3 ✅ — Que crimes do Código Penal Militar são hediondos por identidade, e ainda não estão marcados?
+
+**Contexto.** A Lei 8.072/90 tem um rol fechado de crimes hediondos no art. 1º. O
+**inciso VI do parágrafo único** (incluído pela Lei 14.688/2023) declara hediondos
+também os crimes do Código Penal Militar *"que apresentem identidade com os crimes
+previstos no art. 1º desta Lei"*.
+
+**O critério já foi adotado e está registrado no catálogo:** identidade exige
+correspondência de **conduta e bem jurídico** com a hipótese específica arrolada
+no art. 1º, não bastando o *nomen juris*. Três razões: a hediondez é consequência
+gravosa e sua imposição por leitura extensiva é vedada; o rol é taxativo e
+identifica crimes por dispositivo e, muitas vezes, por hipótese **dentro** do
+dispositivo — o roubo não é hediondo, são hediondas apenas as formas do art. 157,
+§2º, V, §2º-A, I, §2º-B e §3º; e o inciso VI é o único do rol que não remete a
+dispositivo, devendo por isso ser lido do modo mais estrito.
+
+**O que já foi julgado**, e não se rediscute aqui:
+
+| Dispositivo do CPM | Decisão |
+|---|---|
+| Art. 232, *caput* e §§ 1º, 2º e 3º (estupro) | hediondo — corresponde ao art. 213 do CP, arrolado no inciso V |
+| Art. 244, *caput* (extorsão mediante sequestro) | hediondo — o inciso IV abrange o art. 159 do CP em todas as formas |
+| Art. 290, §5º (tráfico) | **não** por identidade — o tráfico não está no art. 1º, é equiparado pelo art. 2º |
+| Art. 205, §2º (homicídio qualificado) | **condicional** — os incisos I a V e VII têm correspondente no art. 121, §2º do CP; o inciso VI (prevalecendo-se o agente da situação de serviço) não tem |
+
+**Pergunta.** Falta o inverso: **o que deveria estar marcado e não está.** Três
+candidatos levantados, nenhum conferido:
+
+1. **Roubo qualificado pelo resultado.** O inciso II, "c" do rol arrola o art.
+   157, §3º do CP (roubo com lesão grave ou morte). O CPM tem figura
+   correspondente no capítulo do roubo — conferir o **art. 242** e parágrafos.
+2. **Extorsão qualificada pelo resultado.** Inciso III do rol (art. 158, §3º do
+   CP). Conferir a figura correspondente no CPM.
+3. **Sequestro ou cárcere privado contra menor de 18.** Inciso XI do rol (art.
+   148, §1º, IV do CP). Conferir a figura correspondente no CPM.
+
+**Respostas negativas já seguras**, que não precisam ser repetidas: lesão
+gravíssima não é hedionda nem no CP; genocídio está no parágrafo único, inciso I,
+que remete à Lei 2.889/56, e o inciso VI só alcança crimes "previstos no art. 1º";
+roubo simples não é hediondo.
+
+**Formato da resposta.** Uma linha por candidato, mais as demais hipóteses do rol
+que você entenda terem correspondente no CPM:
+
+```
+dispositivo do CPM | há identidade? (sim/não/não sei) | inciso do rol | fundamento | grau
+```
+
+E, ao fim, a lista dos **"não há correspondente"** que você puder afirmar com
+segurança. Ela vale tanto quanto a positiva: sem ela, a próxima varredura
+recomeça do zero.
+
+---
+
+## 4 ✅ — Artigo do Código Penal deve constar sob o rótulo do CP ou da lei que o criou?
+
+**Contexto.** Alguns artigos do Código Penal foram inseridos por leis próprias, e
+o catálogo os rotula pela **lei criadora**, não pelo diploma:
+
+| Campo `lei` do registro | Campo `artigo` | Conteúdo |
+|---|---|---|
+| `Lei 14.478/22` | `Art. 171-A (CP)` | fraude com ativos virtuais |
+| `Lei 14.811/24` | `Art. 146-A (CP)` | *bullying* |
+| `Lei 14.192/21` | `Art. 326-B (CE)` | violência política contra a mulher |
+
+A convenção é deliberada: o vínculo entre rótulo e diploma vive num registro de
+fontes, e a conferência semanal o resolve antes de buscar o texto oficial. Ela
+funciona — esses registros são conferidos normalmente.
+
+**O que mudou, e abriu a pergunta.** O capítulo dos crimes em licitação do Código
+Penal (arts. 337-E a 337-P, inseridos pela Lei 14.133/2021) estava **partido em
+dois rótulos**: os arts. 337-E a 337-L sob `Lei 14.133/21` e os arts. 337-M a
+337-O sob `CP`. Foram unificados sob `CP`, com a lei introdutora na observação —
+o mesmo crime não podia aparecer sob diplomas diferentes conforme o artigo. Com
+isso o critério deixou de ser uniforme: três registros continuam sob a lei
+criadora.
+
+**Pergunta.** Qual critério adotar, e por quê?
+
+1. **Sempre o diploma.** O art. 171-A é artigo do Código Penal, e publicá-lo sob
+   "Lei 14.478/22" sugere ao leitor que pertence a outra lei. A lei criadora é
+   informação histórica e cabe na observação.
+2. **Manter a lei criadora onde ela é o nome corrente.** Quem procura o crime de
+   *bullying* procura pela Lei 14.811, não pelo art. 146-A; o rótulo funciona como
+   caminho de acesso, e o campo `artigo` já traz "(CP)" para desfazer a
+   ambiguidade.
+
+Considere que o campo `lei` é usado em três lugares com finalidades diferentes:
+identificar o diploma, exibir ao usuário, e casar o registro com o texto oficial
+para conferência automática. Se a resposta for a leitura 1, vale separar
+"identidade canônica" de "caminho de busca"?
+
+**Formato da resposta.**
+
+```
+Critério adotado: [sempre o diploma | lei criadora onde for o nome corrente | outro]
+Grau: [A | M | B]
+Fundamento:
+O que fazer com os três registros hoje sob a lei criadora:
+Vale manter o nome antigo como caminho de busca? [sim/não, e por quê]
+```
+
+---
+
+## 5 ⚠️ — As ações diretas contra a Lei 15.402/2026 continuam sem cautelar?
+
+**Contexto.** A Lei 15.402, de 8 de maio de 2026, reescreveu o *caput* e os
+incisos I a III do art. 112 da Lei de Execução Penal — os patamares de progressão
+de regime. O catálogo **a aplica**.
+
+Contra ela tramitam as **ADIs 7966, 7967, 7968 e 7969**, distribuídas por
+prevenção ao Min. Alexandre de Moraes, por inconstitucionalidade formal (vício na
+apreciação do veto) e material.
+
+**O quadro conhecido, até julho de 2026:** não há medida cautelar com eficácia
+*erga omnes*. O que houve, em 09/05/2026, foi o afastamento pontual da lei em
+oito Execuções Penais sob relatoria do Ministro, relativas aos condenados pelos
+atos de 08/01/2023. A cautelar das ADIs não fora apreciada nem monocraticamente
+nem pelo colegiado.
+
+**Por que o catálogo aplica a lei.** Não aplicá-la estenderia a todo o catálogo
+uma restrição que existe em oito processos, e o texto compilado oficial traz a
+redação nova sem ressalva.
+
+**Pergunta.** O quadro mudou? Uma cautelar com eficácia geral inverteria a
+resposta para todas as frações do *caput* e dos incisos I a III.
+
+**Atenção:** esta é a única pergunta do arquivo que **envelhece sozinha**. Se
+você não tiver base segura sobre o andamento das quatro ações, diga-o — e
+responda a segunda parte, que independe disso.
+
+**Segunda parte, que independe do andamento.** Suponha que sobrevenha cautelar
+com eficácia geral suspendendo a Lei 15.402/2026. Um catálogo que calcula
+progressão de regime deve, nesse caso: (a) voltar a aplicar a redação anterior
+para todos; (b) manter as duas tabelas e marcar a nova como suspensa; ou (c)
+outra coisa? E o que fazer com o período entre a vigência e a suspensão?
+
+**Formato da resposta.**
+
+```
+Andamento conhecido: [descrição | não tenho base segura]
+Data da informação:
+Se houver cautelar com eficácia geral, o que o catálogo deve fazer:
+O que fazer com os fatos ocorridos entre 08/05/2026 e a suspensão:
+Grau: [A | M | B]
+```
+
+---
+
+## 6 ✅ — Como verificar um catálogo em que a maioria dos artigos compartilha moldura?
+
+**Contexto.** A conferência automática de penas tem um ponto cego conhecido: ela
+confere a moldura do registro contra o artigo que o **registro diz** ser. Se o
+nome veio de outro artigo, a pena pode ter vindo junto — e quando os dois artigos
+cominam a **mesma** pena, nada acusa.
+
+O ponto cego produziu erro real, três vezes: os arts. 33 e 34 da Lei 9.605/98
+(detenção de 1 a 3 anos nos dois); os arts. 68 e 69 da mesma lei, com os nomes
+**trocados entre si**; e seis artigos seguidos da Lei 7.716/89, cada um com o nome
+do artigo **seguinte**, e a pena certa no artigo errado.
+
+**O que a medição mostrou, e derruba a solução óbvia.** A ideia inicial era varrer
+"pares de artigos com pena idêntica no mesmo diploma". Medido: são **179 grupos,
+envolvendo 994 dos 1.417 registros** — 70% do catálogo. Molduras repetidas são a
+**norma** num código penal, não a exceção. Como filtro de risco, isso não filtra
+nada.
+
+Restringindo a artigos **adjacentes** (números consecutivos, ou o mesmo número com
+sufixo de letra) e com moldura idêntica, sobram **157 pares**, assim distribuídos:
+CPM 38, CP 34, Lei 9.605/98 10, ECA 9, Código Eleitoral 8, Lei 13.869/19 8, Lei
+7.716/89 8, e mais 30 espalhados em seis diplomas.
+
+**O que já existe.** Uma verificação automática que compara o nome de cada
+registro com o texto do seu artigo **e com o dos demais artigos do mesmo
+diploma**, e acusa quando o rótulo conversa mais com outro. Foi ela que achou os
+arts. 68 e 69. Hoje ela está limpa: nenhum registro acusado.
+
+**Pergunta.** Os 157 pares adjacentes ainda merecem leitura humana, ou a
+verificação de nome já os cobre? Dito de outro modo: existe erro possível que
+sobreviva à verificação de nome — por exemplo, dois artigos vizinhos cujos nomes
+sejam ambos plausíveis para ambos, como "furto" e "furto qualificado"? Se existir,
+como estreitar os 157 até uma lista que valha a pena ler?
+
+**O que NÃO é a pergunta.** Não peça a lista dos 157 nem a leitura de nenhum
+deles — o que se quer é o **critério** que separa o par arriscado do par
+inofensivo.
+
+**Formato da resposta.**
+
+```
+A verificação de nome cobre o risco? [sim, integralmente | não, sobra X]
+Grau: [A | M | B]
+Se não cobre — que padrão de erro escapa dela:
+Critério proposto para estreitar os 157 pares:
+Ordem de prioridade sugerida entre os diplomas:
+```
+
+---
+
+## 7 ⛔ — Quantos registros têm nome sem correspondente textual em lugar nenhum?
+
+> **Não submeta esta pergunta.** Ela é de método interno e depende de uma
+> varredura sobre o acervo, não de juízo jurídico. Fica registrada aqui para não
+> se perder.
+
+**Contexto.** Nos treze registros examinados na segunda rodada, todos os rótulos
+errados tinham vindo de **algum** artigo real — menos um. O art. 26 da Lei das
+Contravenções Penais publicava "abrir valas ou escavações que ponham em perigo a
+vida, a integridade física ou o patrimônio de outrem, sem as devidas
+sinalizações", texto que não corresponde a **nenhum** artigo da LCP.
+
+Um rótulo sem origem legal identificável sugere que aquele registro não foi
+extraído, e sim **redigido**.
+
+**O que fazer.** Rodar a verificação de similaridade não contra os artigos do
+mesmo diploma, mas contra **todo** o acervo, e listar os registros cujo nome não
+tem correspondente forte em lugar nenhum. Se o caso for isolado, ótimo. Se não
+for, o problema é de **método de povoamento**, e vale mais que os treze casos da
+segunda rodada somados.
+
+O resultado dessa varredura, sim, vira pergunta submissível.
+
+---
+
+## 8 ⛔ — Quais causas de aumento truncadas têm o alcance dependente dos incisos?
+
+> **Não submeta ainda.** Falta anexar os textos integrais, sem os quais a
+> resposta seria palpite. A varredura descrita abaixo produz esse anexo.
+
+**Contexto.** Cerca de trinta causas de aumento foram cadastradas a partir de
+dispositivos cujo texto vem cortado no ponto em que começam os incisos —
+"*Aumenta-se a pena de 1/3 até metade se o crime é cometido:*", e a lista fica de
+fora. Isso não impediu classificar natureza, fração e alcance, que é o que o
+cálculo exige.
+
+**O critério, já estabelecido.** Os incisos **restringem** o alcance quando
+descrevem a quais condutas ou a quais parágrafos a causa se aplica; **não
+restringem** quando descrevem circunstâncias do fato, do agente ou da vítima.
+Três padrões, reconhecíveis pela fórmula introdutória:
+
+- **"se o crime é cometido: [circunstâncias]"** → alcança o artigo inteiro;
+- **"na hipótese do §X, aumenta-se…"** → alcance restrito ao parágrafo citado (já
+  identificado: CP, art. 154-A, §4º);
+- **"nos crimes previstos nos arts. X e Y…"** → lista explícita (já identificados:
+  Lei 10.826/03, arts. 19 e 20; Lei 9.605/98, art. 53; Lei 13.260/16, art. 7º).
+
+**Um já foi conferido e está resolvido:** o CPM, art. 206, §1º não herda o
+problema do art. 121, §4º do CP. Os dois incisos dele — inobservância de regra
+técnica e omissão de socorro — são ambos do homicídio **culposo** militar, que é
+o próprio art. 206. Não há duas regras com alcances distintos.
+
+**A varredura que falta.** Procurar, nos incisos truncados, referência interna —
+"§", "parágrafo", "art.", "inciso", "*caput*", "desta Lei". Um inciso que mencione
+dispositivo é candidato a restringir alcance; um que só descreva circunstância não
+é. Isso separa em minutos os que exigem leitura integral dos que não exigem, e
+provavelmente reduz trinta casos a menos de cinco. Os que sobrarem viram pergunta
+submissível, com os textos anexados.
+
+---
+
+# Anexo — respondido, NÃO submeter
 
 ## A. Desdobrar por inciso os artigos que cominam no *caput*
 
@@ -253,247 +688,3 @@ remanescente, e o número publicado passa a ser menor que o devido.
 que o cenário não tem — quanto já foi cumprido.
 
 ---
-
-# Parte II — o que continua em aberto
-
-## 1. Reincidente em crime do Título XII: 20% pelo inciso III, ou 1/6 pelo *caput*?
-
-**Contexto.** A Lei 15.402/2026 deu ao art. 112 da Lei de Execução Penal esta
-redação:
-
-> **Art. 112.** …quando o preso tiver cumprido ao menos 1/6 (um sexto) da pena no
-> regime anterior e seu mérito indicar a progressão, **observadas as seguintes
-> exceções**:
->
-> **I** – se o apenado for primário e for condenado pela prática de crime mediante
-> o exercício de violência ou grave ameaça, **salvo em relação aos crimes previstos
-> no Título XII da Parte Especial** do Código Penal, deverão ser cumpridos ao menos
-> 25% da pena;
->
-> **II** – se o apenado for reincidente e for condenado pela prática de crime
-> mediante o exercício de violência ou grave ameaça, salvo em relação aos crimes
-> previstos no Título XII da Parte Especial do Código Penal, deverão ser cumpridos
-> ao menos 30% da pena;
->
-> **III** – se o apenado for **reincidente em crime diverso dos crimes referidos
-> nos incisos I e II** do *caput* deste artigo, deverão ser cumpridos ao menos 20%
-> da pena;
-
-**O que já foi decidido e aplicado.** O *caput* voltou a ser regra geral. Para o
-**primário** condenado por crime do Título XII (arts. 359-A a 359-T, contra o
-Estado Democrático de Direito) sobra o *caput*, por exclusão expressa dos incisos
-I e II — leitura literal, sem controvérsia.
-
-**Pergunta.** E o **reincidente** em crime do Título XII? Duas leituras:
-
-1. **Inciso III, 20%** — ele alcança o "reincidente em crime diverso dos crimes
-   referidos nos incisos I e II"; os do Título XII estão expressamente **fora** do
-   alcance de I e II, logo são "diversos" deles. É a leitura mais fiel à letra:
-   "referidos" é o que o dispositivo diz.
-2. ***Caput*, 1/6 ≈ 16,67%** — "crimes referidos nos incisos I e II" significaria
-   crimes praticados com violência ou grave ameaça, categoria a que os do Título
-   XII pertencem materialmente, ainda que ressalvados. Não sendo "diversos", não
-   caem no III e restam no *caput*. É a leitura mais fiel à finalidade da reforma.
-
-**O que o sistema faz hoje.** Devolve o resultado como **condicional**, com as
-duas leituras escritas e o cálculo pelo *caput*, que é o mais favorável. Nenhuma
-foi escolhida em silêncio.
-
-**O que falta ver.** Decisões de varas e tribunais de execução posteriores a maio
-de 2026 sobre reincidente em crime do Título XII. É o único insumo que fecha a
-questão.
-
-## 2. Há registros cujo nome não corresponde a artigo nenhum?
-
-**Contexto.** Uma verificação automática compara o nome de cada registro com o
-texto do seu artigo e com o dos demais artigos do mesmo diploma. Nos treze casos
-examinados na segunda rodada, todos os rótulos errados tinham vindo de **algum**
-artigo real — menos um.
-
-O art. 26 da Lei das Contravenções Penais publicava o nome "abrir valas ou
-escavações que ponham em perigo a vida, a integridade física ou o patrimônio de
-outrem, sem as devidas sinalizações". Esse texto **não corresponde a nenhum
-artigo da LCP** — nem ao 26 (violação de lugar ou objeto), nem ao 62
-(embriaguez), nem aos arts. 29 a 31, que tratam de perigo em construções e
-animais. O nome foi corrigido; a pergunta que ele levanta, não.
-
-**Pergunta.** Um rótulo sem origem legal identificável sugere que aquele registro
-não foi extraído, e sim **redigido**. Quantos outros registros estão nessa
-situação?
-
-**O teste proposto:** rodar a verificação de similaridade não contra os artigos do
-mesmo diploma, mas contra **todo** o acervo, e listar os registros cujo nome não
-tem correspondente forte em lugar nenhum. Se o caso for isolado, ótimo. Se não
-for, o problema é de **método de povoamento**, e vale mais que os treze casos da
-segunda rodada somados.
-
-**O que falta ver.** Nada de direito. É uma varredura a escrever, e a pergunta
-para o revisor é se o resultado dela — uma lista de nomes sem fonte — deve virar
-correção em massa ou triagem caso a caso.
-
-## 3. Quais causas de aumento truncadas têm o alcance dependente dos incisos?
-
-**Contexto.** Cerca de trinta causas de aumento foram cadastradas a partir de
-dispositivos cujo texto vem cortado no ponto em que começam os incisos —
-"*Aumenta-se a pena de 1/3 até metade se o crime é cometido:*", e a lista fica de
-fora. Isso não impediu classificar natureza, fração e alcance, que é o que o
-cálculo exige.
-
-**O critério, já estabelecido.** Os incisos **restringem** o alcance quando
-descrevem a quais condutas ou a quais parágrafos a causa se aplica; **não
-restringem** quando descrevem circunstâncias do fato, do agente ou da vítima.
-Três padrões, reconhecíveis pela fórmula introdutória:
-
-- **"se o crime é cometido: [circunstâncias]"** → alcança o artigo inteiro;
-- **"na hipótese do §X, aumenta-se…"** → alcance restrito ao parágrafo citado (já
-  identificado: CP, art. 154-A, §4º);
-- **"nos crimes previstos nos arts. X e Y…"** → lista explícita (já identificados:
-  Lei 10.826/03, arts. 19 e 20; Lei 9.605/98, art. 53; Lei 13.260/16, art. 7º).
-
-Os oito exemplos examinados — CP 121-A §2º, 147-A §1º, 149 §2º, 154-A §5º, 232-A
-§2º, CPM 206 §1º, ECA 240 §2º, CE 323 §2º — trazem todos a fórmula do primeiro
-padrão, o que sugere que nenhum restringe o alcance. Mas isso é inferência a
-partir da fórmula, não leitura do texto.
-
-**Um deles já foi conferido e está resolvido:** o CPM, art. 206, §1º não herda o
-problema do art. 121, §4º do CP. Os dois incisos dele — inobservância de regra
-técnica e omissão de socorro — são ambos do homicídio **culposo** militar, que é
-o próprio art. 206. Não há duas regras com alcances distintos, e não há
-desdobramento a fazer.
-
-**Pergunta.** Nos demais, o alcance depende mesmo dos incisos?
-
-**O que falta ver.** Uma varredura por referência interna nos incisos truncados,
-procurando "§", "parágrafo", "art.", "inciso", "*caput*", "desta Lei". Um inciso
-que mencione dispositivo é candidato a restringir alcance; um que só descreva
-circunstância não é. Isso separa em minutos os que exigem leitura integral dos
-que não exigem, e provavelmente reduz trinta casos a menos de cinco.
-
-## 4. Pares de artigos com pena idêntica no mesmo diploma
-
-**Contexto.** Quando dois artigos do mesmo diploma cominam a **mesma** pena,
-trocar os nomes entre eles não produz divergência nenhuma para a conferência de
-molduras: ela confere a pena do registro contra o artigo que o registro **diz**
-ser. É o ponto cego que já produziu, e a lista de pares conhecidos cresce a cada
-rodada:
-
-- Lei 9.605/98, arts. 33 e 34 — detenção de 1 a 3 anos, ou multa, ou ambas;
-- Lei 9.605/98, arts. 68 e 69 — detenção de 1 a 3 anos e multa;
-- Estatuto da Pessoa Idosa, arts. 96 e 100 — reclusão de 6 meses a 1 ano e multa;
-- Lei 9.279/96, arts. 184 e 190 — detenção de 1 a 3 meses ou multa;
-- LCP, arts. 26 e 62 — prisão simples de 15 dias a 3 meses ou multa;
-- Código Eleitoral, arts. 303 e 304 — pagamento de 250 a 300 dias-multa.
-
-**O que já existe.** Uma verificação de nome que compara cada registro com os
-demais artigos do mesmo diploma e acusa quando o rótulo conversa mais com outro
-— foi ela que achou os arts. 68 e 69 da Lei 9.605.
-
-**Pergunta.** Vale gerar a lista completa de pares de pena idêntica e conferir
-todos os registros neles, mesmo os que a verificação de nome não acusa? Nos pares
-acima, um dos dois artigos estava errado em quatro casos de seis.
-
-**O que falta ver.** Nada de direito — é decisão de prioridade. A varredura é
-barata; a leitura de cada par, não.
-
-## 5. Artigo do Código Penal deve constar sob o rótulo do CP ou da lei que o criou?
-
-**Contexto.** Alguns artigos do Código Penal foram inseridos por leis próprias, e
-o catálogo os rotula pela **lei criadora**, não pelo diploma:
-
-| Registro | Campo `lei` | Artigo |
-|---|---|---|
-| id 581 | `Lei 14.478/22` | `Art. 171-A (CP)` — fraude com ativos virtuais |
-| ids 483, 484 | `Lei 14.811/24` | `Art. 146-A (CP)` — bullying |
-| id 563 | `Lei 14.192/21` | `Art. 326-B (CE)` — violência política contra a mulher |
-
-A convenção é deliberada e está documentada: o vínculo diploma → rótulos vive em
-`data/fontes.json`, e a conferência semanal resolve o rótulo antes de buscar o
-texto. **Ela funciona** — os quatro registros são conferidos normalmente.
-
-**O que mudou.** Na versão 1.9.0 o mesmo padrão foi **desfeito** para o capítulo
-dos crimes em licitação: os arts. 337-E a 337-L estavam sob `Lei 14.133/21` e os
-arts. 337-M a 337-O sob `CP`, partindo em dois o mesmo capítulo do Código. Foram
-unificados sob `CP`, com a lei introdutora na nota.
-
-**Pergunta.** O critério deve ser uniforme? Duas leituras:
-
-1. **Sempre o diploma.** O art. 171-A é artigo do Código Penal, e publicá-lo sob
-   "Lei 14.478/22" sugere ao leitor que ele pertence a outra lei. A lei criadora
-   é informação histórica e cabe na observação. Foi a leitura adotada no capítulo
-   de licitação.
-2. **Manter a lei criadora onde ela é o nome corrente.** Quem procura o crime de
-   *bullying* procura pela Lei 14.811, não pelo art. 146-A; o rótulo funciona como
-   caminho de acesso, e o `artigo` já traz "(CP)" entre parênteses para desfazer a
-   ambiguidade.
-
-**O que falta ver.** Nada de direito. É decisão de apresentação com efeito
-técnico: o campo `lei` é a chave que liga o registro ao texto oficial, e mudá-lo
-exige mexer em `data/fontes.json` na mesma passada. Se a resposta for a leitura 1,
-os quatro registros mudam e três rótulos saem do registro de fontes.
-
-## 6. Que crimes do Código Penal Militar são hediondos por identidade?
-
-**Contexto.** A Lei dos Crimes Hediondos tem um rol fechado no art. 1º. O inciso
-VI do parágrafo único (incluído pela Lei 14.688/2023) declara hediondos também os
-crimes do Código Penal Militar *"que apresentem identidade com os crimes previstos
-no art. 1º desta Lei"*.
-
-**O critério já foi decidido e está registrado** em `data/hediondos.json`:
-identidade exige correspondência de **conduta e bem jurídico** com a hipótese
-específica arrolada no art. 1º, não bastando o *nomen juris*. Se bastasse o nome,
-todo roubo militar seria hediondo — quando o rol torna hediondas apenas quatro
-formas do art. 157 do CP. É matéria sem jurisprudência consolidada do STF ou do
-STJ: o inciso é de 2023.
-
-**O que já foi julgado.** Os sete registros militares que o catálogo marcava:
-arts. 232 (*caput* e §§ 1º, 2º e 3º) e 244, *caput*, confirmados; art. 290, §5º,
-retirado (o tráfico não está no art. 1º — ver a Parte I, item F); art. 205, §2º,
-confirmado como **condicional**, porque o inciso VI daquele parágrafo
-(prevalecendo-se o agente da situação de serviço) não tem correspondente no art.
-121, §2º do CP, enquanto os incisos I a V e VII têm.
-
-**Pergunta.** Falta o inverso: **o que DEVERIA estar marcado e não está.** Exige
-varredura artigo a artigo do Livro II do CPM contra os doze incisos do art. 1º.
-
-Candidatos levantados, todos por conferir:
-
-- **roubo qualificado pelo resultado** — o inciso II, "c" do rol arrola o art.
-  157, §3º do CP; conferir o art. 242 do CPM e seus parágrafos;
-- **extorsão qualificada pelo resultado** — inciso III do rol (art. 158, §3º);
-- **sequestro ou cárcere privado contra menor de 18** — inciso XI (art. 148, §1º,
-  IV).
-
-**Respostas negativas já seguras:** lesão gravíssima não é hedionda nem no CP;
-genocídio está no parágrafo único, inciso I, que remete à Lei 2.889/56, e o inciso
-VI só alcança crimes "previstos no art. 1º"; roubo simples não é hediondo.
-
-**O que falta ver.** O texto integral do Livro II do CPM. E o resultado deve
-registrar também os **"não há correspondente"**, que são tão úteis quanto os
-positivos — sem eles, a próxima varredura recomeça do zero.
-
-## 7. As ADIs contra a Lei 15.402/2026 continuam sem cautelar?
-
-**Contexto.** A Lei 15.402/2026 reescreveu o *caput* e os incisos I a III do art.
-112 da Lei de Execução Penal, e o sistema **a aplica** — ver a pergunta 1 e a
-documentação de benefícios.
-
-Contra ela tramitam as **ADIs 7966, 7967, 7968 e 7969**, distribuídas por
-prevenção ao Min. Alexandre de Moraes, por inconstitucionalidade formal (vício na
-apreciação do veto) e material.
-
-**O quadro conhecido, até julho de 2026:** não há medida cautelar com eficácia
-*erga omnes*. O que houve, em 09/05/2026, foi o afastamento pontual da lei em
-oito Execuções Penais sob relatoria do Ministro, relativas aos condenados pelos
-atos de 08/01/2023. A cautelar das ADIs não fora apreciada nem monocraticamente
-nem pelo colegiado.
-
-**Por isso o catálogo aplica a lei:** não aplicá-la estenderia ao catálogo inteiro
-uma restrição que existe em oito processos, e o texto compilado do Planalto — que
-é a fonte da casa — traz a redação nova sem ressalva.
-
-**Pergunta.** O quadro mudou? Uma cautelar com eficácia geral inverte a resposta
-para todas as frações dos incisos I a III e do *caput*.
-
-**O que falta ver.** O andamento das quatro ações. É a única pergunta deste
-arquivo que **envelhece sozinha**: convém reconferi-la antes de citar o dado de
-progressão em qualquer trabalho.

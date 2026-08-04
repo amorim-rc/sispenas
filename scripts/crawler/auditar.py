@@ -416,8 +416,15 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
 
 
 # ── 5. Pendências jurídicas declaradas ──────────────────────────────────────
-_PERGUNTA = re.compile(r"^## (\d+)\.\s+(.+?)\s*$", re.M)
-_FALTA_VER = re.compile(r"^\*\*O que falta ver\.?\*\*\s*(.+?)(?=\n\n)", re.M | re.S)
+# "## 3 ✅ — Que crimes do CPM são hediondos por identidade?" — número, marca de
+# submissibilidade e título. As seções do ANEXO usam letra ("## A. …") e por isso
+# não casam: o anexo é trabalho já respondido, não pergunta a fazer.
+_PERGUNTA = re.compile(r"^## (\d+)\s*(✅|⚠️|⛔)?\s*—\s*(.+?)\s*$", re.M)
+_MARCAS = {
+    "✅": "submeta — tudo o que a resposta exige está no bloco",
+    "⚠️": "submeta, mas a resposta depende de informação recente; confira antes de publicar",
+    "⛔": "NÃO submeta — depende de varredura interna, não de juízo jurídico",
+}
 
 
 def auditar_pendencias() -> list[dict]:
@@ -429,27 +436,23 @@ def auditar_pendencias() -> list[dict]:
     rodada semanal volta a ser confundido com "está tudo certo".
 
     A fonte é `REVISAO-PENDENTE.md`, na raiz — PROSA, não estrutura de dados, e
-    de propósito: quem responde estas perguntas é jurista, não precisa (nem deve
-    precisar) abrir o repositório para entendê-las. O arquivo é autossuficiente,
-    transcreve o texto legal de cada caso e diz o que o catálogo publica hoje.
-    Daqui sai só o suficiente para lembrar que a pergunta existe.
+    de propósito: cada pergunta é um bloco pronto para colar numa conversa nova,
+    com o texto legal transcrito, o que o catálogo publica hoje e o formato em
+    que a resposta é aplicável. Quem responde não precisa do repositório.
+
+    Daqui sai só o suficiente para lembrar que a pergunta existe — e a MARCA de
+    submissibilidade, que é o que o mantenedor precisa saber sem abrir o arquivo:
+    quais dão para mandar hoje, quais dependem de informação recente e quais
+    ainda pedem uma varredura antes de virarem pergunta.
     """
     if not PENDENCIAS.exists():
         return []
     texto = PENDENCIAS.read_text(encoding="utf-8").replace("\r\n", "\n")
-    achados = []
-    perguntas = list(_PERGUNTA.finditer(texto))
-    for i, m in enumerate(perguntas):
-        corpo = texto[m.end():perguntas[i + 1].start() if i + 1 < len(perguntas) else len(texto)]
-        falta = _FALTA_VER.search(corpo)
-        detalhe = f"**{m.group(1)}. {m.group(2)}**"
-        if falta:
-            detalhe += " _Falta ver:_ " + re.sub(r"\s+", " ", falta.group(1)).strip()
-        achados.append({
-            "campo": "pendencias", "tipo": "PENDENCIA-ABERTA", "gravidade": 1,
-            "detalhe": detalhe,
-        })
-    return achados
+    return [{
+        "campo": "pendencias", "tipo": "PENDENCIA-ABERTA", "gravidade": 1,
+        "detalhe": f"**{m.group(1)}. {m.group(3)}** — _"
+                   f"{_MARCAS.get(m.group(2) or '', 'sem marca de submissibilidade')}_",
+    } for m in _PERGUNTA.finditer(texto)]
 
 
 # ── 4. Nome do tipo ─────────────────────────────────────────────────────────
@@ -620,9 +623,10 @@ LIMITES = {
             "ser. Falso positivo é esperado: artigos de um mesmo capítulo descrevem condutas "
             "parecidas. Serve para leitura, nunca para troca automática.",
     "pendencias": "Não são achados: é `REVISAO-PENDENTE.md`, na raiz, com o que o projeto "
-                  "examinou e deixou em aberto de propósito. Aqui sai só o título e o que "
-                  "falta ver; o arquivo traz o texto legal de cada caso e é autossuficiente "
-                  "— quem responde não precisa abrir o repositório. Sai daqui quando a "
+                  "examinou e deixou em aberto de propósito. Cada pergunta lá é um bloco "
+                  "PRONTO PARA SUBMETER a uma conversa nova — traz o texto legal transcrito, "
+                  "o que o catálogo publica hoje e o formato em que a resposta é aplicável. "
+                  "Aqui saem o título e a marca de submissibilidade. Sai daqui quando a "
                   "decisão for tomada e publicada.",
 }
 
