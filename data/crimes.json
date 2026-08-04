@@ -5568,7 +5568,7 @@
     "artigo": "Art. 310",
     "crime": "Entrega de veículo a pessoa não habilitada/sem condições de dirigir",
     "pena_min": 6,
-    "pena_max": 36,
+    "pena_max": 12,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -5576,7 +5576,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos detenção + multa + suspensão/proibição. Confiar/entregar a direção de veículo a pessoa não habilitada, com habilitação cassada/suspensa, ou sem condições de conduzi-lo com segurança"
+    "obs": "6 meses a 1 ano detenção OU multa. Permitir, confiar ou entregar a direção de veículo automotor a pessoa não habilitada, com habilitação cassada ou com o direito de dirigir suspenso, ou, ainda, a quem, por seu estado de saúde, física ou mental, ou por embriaguez, não esteja em condições de conduzi-lo com segurança. O registro publicava 6 meses a 3 anos, com multa cumulativa e suspensão da habilitação; nada disso está no art. 310, que comina detenção de seis meses a um ano OU multa, sem pena de suspensão."
   },
   {
     "id": 349,

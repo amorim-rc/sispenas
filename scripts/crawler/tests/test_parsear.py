@@ -278,3 +278,18 @@ def test_redacoes_sucessivas_da_mesma_pena_nao_se_distribuem(carregar):
     assert art.pena_texto is not None
     assert "3 (três) a 10 (dez) anos" in art.pena_texto
     assert not any(i.get("pena_texto") for i in art.incisos)
+
+
+def test_pena_no_plural_e_pena():
+    """O Código de Trânsito comina "PenaS - detenção…, e suspensão…" nos seus
+    doze crimes, porque o preceito traz mais de uma espécie de sanção. O `\b`
+    depois de "Pena" não casava o plural, e o conferidor nunca leu a pena de
+    NENHUM crime de trânsito — homicídio culposo na direção, embriaguez ao
+    volante, fuga do local do sinistro. Doze dispositivos entre os mais
+    consultados do país, e o relatório semanal não dizia nada sobre eles."""
+    html = ("<p>Art. 302. Praticar homicídio culposo na direção de veículo automotor:</p>"
+            "<p>Penas - detenção, de dois a quatro anos, e suspensão ou proibição de se "
+            "obter a permissão ou a habilitação para dirigir veículo automotor.</p>")
+    d = {x.chave: x for x in parsear(html)}["Art. 302|caput"]
+    assert d.pena_texto is not None
+    assert "de dois a quatro anos" in d.pena_texto

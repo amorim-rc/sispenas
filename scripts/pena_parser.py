@@ -105,7 +105,7 @@ _EXTENSO = {
 _TIPOS = ("reclusão", "detenção", "prisão simples", "impedimento", "suspensão")
 # "multa, de duzentos mil réis a dois contos de réis" — intervalo que NÃO é pena
 # privativa. Reconhecido para ser descartado, não para ser lido.
-_SO_MULTA = re.compile(r"^\s*pena\s*[-–—:]?\s*multa\b", re.IGNORECASE)
+_SO_MULTA = re.compile(r"^\s*penas?\s*[-–—:]?\s*multa\b", re.IGNORECASE)
 # Preceito PECUNIÁRIO escrito à moda de 1965: "Pena - pagamento de 250 a 300
 # dias-multa". O Código Eleitoral comina assim dezenas de tipos, e a fórmula não
 # começa pela palavra "multa" — começa por "pagamento".
@@ -118,7 +118,7 @@ _SO_MULTA = re.compile(r"^\s*pena\s*[-–—:]?\s*multa\b", re.IGNORECASE)
 # para artigos que não cominam prisão nenhuma. O erro inverte a classe inteira
 # de benefícios do registro, e era invisível justamente por ser silêncio.
 _SO_PECUNIARIA = re.compile(
-    r"^\s*pena\s*[-–—:]?\s*(?:o\s+)?pagamento\s+de\b.{0,80}?\bmulta\b",
+    r"^\s*penas?\s*[-–—:]?\s*(?:o\s+)?pagamento\s+de\b.{0,80}?\bmulta\b",
     re.IGNORECASE | re.DOTALL)
 _ATE = re.compile(
     rf"at[ée]\s+(\d+|{'|'.join(_EXTENSO)})\s*\(?[^)]*\)?\s*{_U}", re.IGNORECASE)

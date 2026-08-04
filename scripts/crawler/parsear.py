@@ -158,7 +158,15 @@ _PROSA = re.compile(r"\s+[A-Za-zÀ-ÿ]")
 _PAR_UNICO = re.compile(r"^Par[áa]grafo\s+[úu]nico", re.I)
 _INCISO = re.compile(r"^([IVXLC]+)\s*[-–—]\s", re.I)
 _ALINEA = re.compile(r"^([a-z])\)\s")
-_PENA = re.compile(r"^Pena\b", re.I)
+# "PenaS", no plural, quando o preceito comina mais de uma espécie de sanção. O
+# Código de Trânsito escreve assim TODOS os seus doze crimes — "Penas - detenção,
+# de dois a quatro anos, e suspensão ou proibição de se obter a permissão…" —, e
+# o `\b` depois de "Pena" não casa "Penas". Resultado: nenhum crime de trânsito
+# jamais teve a pena lida pelo conferidor. Homicídio culposo na direção, lesão
+# corporal culposa, embriaguez ao volante, fuga do local do sinistro: doze
+# dispositivos entre os mais consultados do país, e o relatório semanal dizia
+# deles exatamente nada.
+_PENA = re.compile(r"^Penas?\b", re.I)
 _VETADO = re.compile(r"\(VETADO\)", re.I)
 # "(Revogado)" às vezes vem no TEXTO do parágrafo, não no link da anotação —
 # caso do art. 67, § único da Lei 9.605, onde o link diz "Redação dada".
