@@ -75,6 +75,14 @@
       ],
       "motivo": "Falsos positivos CONFIRMADOS na revisão de 03/08/2026, item 11 — lidos um a um contra o compilado. id 474 (Estatuto da Pessoa Idosa, art. 100, I): o nome descreve fielmente o inciso, e o match com o art. 96 vem de conduta vizinha e de pena idêntica. id 539 (Lei 9.279/96, art. 184): o nome descreve o inciso I, e o match com o art. 190 vem de os dois artigos usarem os mesmos verbos — um para patente, outro para marca — e cominarem a mesma pena. id 642 (CP, art. 149-A, II): o match com o art. 149 vem da expressão comum, mas os tipos são distintos — o 149 pune a redução efetiva, o 149-A, II pune o tráfico com essa finalidade, e se consuma antes de qualquer redução. Nos três, a pena confere e a espécie confirma a origem.",
       "data": "2026-08-03"
+    },
+    {
+      "tipo": "PENA-IMPORTADA-DIVERGE",
+      "ids": [
+        626
+      ],
+      "motivo": "CP, art. 289, §4º — 'Nas mesmas penas incorre quem desvia e faz circular moeda, cuja circulação não estava ainda autorizada'. As 'mesmas penas' são as do §3º imediatamente anterior (reclusão de 3 a 15 anos e multa, para o funcionário público ou dirigente de banco de emissão), não as do caput (3 a 12 anos). O §4º completa o §3º: pune o mesmo círculo de agentes. O catálogo publica 3 a 15 anos e está CERTO. É o falso positivo que a própria verificação declara como limite — ela compara com o caput porque não sabe resolver a qual pena a remissão aponta.",
+      "data": "2026-08-04"
     }
   ]
 }

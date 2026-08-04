@@ -48,6 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from conferir import SNAPSHOTS, chave  # noqa: E402
 from parsear import parsear  # noqa: E402
+from pena_parser import ler_penas  # noqa: E402
 from tempo import hoje  # noqa: E402
 
 CATALOGO = RAIZ / "static" / "data" / "crimes.json"
@@ -415,6 +416,68 @@ def auditar_modificadores(indice_fontes: dict) -> list[dict]:
     return achados
 
 
+# ── 4-bis. Pena importada por remissão ──────────────────────────────────────
+_MESMA_PENA = re.compile(r"\b(?:na|nas)\s+mesmas?\s+penas?\s+incorre", re.I)
+
+
+def auditar_pena_por_remissao(catalogo: list[dict], indice_fontes: dict) -> list[dict]:
+    """Dispositivo que importa a pena de outro — e o catálogo publica outra coisa.
+
+    "Na mesma pena incorre" não deixa moldura no texto do parágrafo. `ler_penas`
+    devolve vazio, e o conferidor PULA o dispositivo: o registro entra na conta
+    dos "com pena definida por referência" e nunca é confrontado. São 137 hoje —
+    um oitavo do catálogo, declarado como não conferido e, na prática, invisível.
+
+    Foi por aí que três dos quatro incisos do §1º do art. 151 do CP publicaram 1
+    a 3 anos de detenção. A pena deles é a do CAPUT, que é de 1 a 6 meses ou
+    multa; a de 1 a 3 anos é a do §3º. Seis vezes o máximo, doze vezes o mínimo,
+    e a diferença tira o tipo do rol de menor potencial ofensivo — some a
+    transação penal.
+
+    ACHADO PARA LEITURA, nunca correção automática: "as mesmas penas" tanto pode
+    remeter ao caput quanto ao parágrafo imediatamente anterior. O §4º do art.
+    289 do CP importa a pena do §3º, não a do caput, e está certo — comparar
+    sempre com o caput acusaria um registro correto.
+    """
+    achados: list[dict] = []
+    cache: dict[str, dict] = {}
+    for registro in catalogo:
+        fid = indice_fontes.get(registro["lei"])
+        k = chave(registro["artigo"])
+        if not fid or not k:
+            continue
+        if fid not in cache:
+            cache[fid] = dispositivos_de(fid)
+        disp = cache[fid]
+        d = disp.get(k)
+        if d is None or d.citacao or k.endswith("|caput"):
+            continue
+        if not _MESMA_PENA.search(f"{d.texto or ''} {d.pena_texto or ''}"):
+            continue
+        if ler_penas(d.pena_texto or ""):
+            continue                      # tem moldura própria: o differ já confere
+        caput = disp.get(f"{k.split('|')[0]}|caput")
+        if caput is None:
+            continue
+        molduras = ler_penas(caput.pena_texto or caput.texto or "")
+        if not molduras or molduras[0]["so_multa"]:
+            continue
+        lmin, lmax = molduras[0]["min_meses"], molduras[0]["max_meses"]
+        cmin, cmax = registro["pena_min_meses"], registro["pena_max_meses"]
+        if abs(cmin - lmin) <= 0.5 and abs(cmax - lmax) <= 0.5:
+            continue
+        achados.append({
+            "campo": "pena_remissao", "tipo": "PENA-IMPORTADA-DIVERGE", "gravidade": 2,
+            "id": registro["id"], "lei": registro["lei"], "artigo": registro["artigo"],
+            "crime": registro["crime"][:90],
+            "detalhe": f"o dispositivo diz 'na mesma pena incorre' e não traz moldura própria; "
+                       f"o catálogo publica {cmin:g}–{cmax:g} meses e o CAPUT comina "
+                       f"{lmin:g}–{lmax:g}. Confira a qual pena o dispositivo remete — pode ser "
+                       "a do caput ou a do parágrafo anterior",
+        })
+    return achados
+
+
 # ── 5. Pendências jurídicas declaradas ──────────────────────────────────────
 # "## 3 ✅ — Que crimes do CPM são hediondos por identidade?" — número, marca de
 # submissibilidade e título. As seções do ANEXO usam letra ("## A. …") e por isso
@@ -599,6 +662,7 @@ TITULOS = {
     "acao_penal": "Ação penal",
     "modificadores": "Causas de aumento e diminuição",
     "nome": "Nome do tipo",
+    "pena_remissao": "Pena importada por remissão",
     "pendencias": "Pendências jurídicas em aberto",
 }
 LIMITES = {
@@ -622,6 +686,13 @@ LIMITES = {
             "conferência de penas, que confere a moldura contra o artigo que o registro diz "
             "ser. Falso positivo é esperado: artigos de um mesmo capítulo descrevem condutas "
             "parecidas. Serve para leitura, nunca para troca automática.",
+    "pena_remissao": "O dispositivo diz \"na mesma pena incorre\" e não deixa moldura no "
+                     "próprio texto — por isso o conferidor de penas o PULA, e o registro "
+                     "entra na conta dos \"com pena definida por referência\", que hoje tem "
+                     "137 linhas e não é verificada. A comparação aqui é com o CAPUT, e ela "
+                     "erra quando a remissão é ao parágrafo anterior: o §4º do art. 289 do CP "
+                     "importa a pena do §3º e está certo. Serve para leitura, nunca para "
+                     "troca automática.",
     "pendencias": "Não são achados: é `REVISAO-PENDENTE.md`, na raiz, com o que o projeto "
                   "examinou e deixou em aberto de propósito. Cada pergunta lá é um bloco "
                   "PRONTO PARA SUBMETER a uma conversa nova — traz o texto legal transcrito, "
@@ -676,6 +747,8 @@ def rodar(so: str | None = None) -> list[dict]:
     if so in (None, "nome"):
         achados += auditar_nomes(catalogo, indice_fontes)
         achados += auditar_nomes_trocados(catalogo, indice_fontes)
+    if so in (None, "remissao"):
+        achados += auditar_pena_por_remissao(catalogo, indice_fontes)
     if so in (None, "pendencias"):
         achados += auditar_pendencias()
 
@@ -704,7 +777,7 @@ def main() -> int:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description="Audita hediondez, ação penal, modificadores e nomes.")
     p.add_argument("--so", choices=["hediondez", "acao", "modificadores", "nome",
-                                    "pendencias"])
+                                    "remissao", "pendencias"])
     p.add_argument("--json", metavar="ARQUIVO")
     p.add_argument("--saida", default=str(RAIZ / "crawler" / "relatorios"))
     args = p.parse_args()

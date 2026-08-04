@@ -224,3 +224,53 @@ class TestNomeDeOutroArtigo:
                       crime="Recolher tecidos, órgãos ou partes do corpo humano de pessoas "
                             "falecidas para transplante sem autorização")],
             {"Lei 9.434/97": "transplantes-9434"})
+
+
+class TestPenaImportadaPorRemissao:
+    """"Na mesma pena incorre" não deixa moldura no texto do parágrafo, e o
+    conferidor de penas PULA o dispositivo: o registro entra na conta dos "com
+    pena definida por referência" — 137 linhas — e nunca é confrontado.
+
+    Foi por aí que três dos quatro incisos do §1º do art. 151 do CP publicaram 1
+    a 3 anos de detenção, quando a pena deles é a do CAPUT: 1 a 6 meses ou multa.
+    A de 1 a 3 anos é a do §3º. Seis vezes o máximo, doze vezes o mínimo — e o
+    tipo saía do rol de menor potencial ofensivo, sumindo com a transação penal.
+    """
+
+    class Falso:
+        def __init__(self, texto, pena=""):
+            self.texto, self.epigrafe = texto, None
+            self.citacao, self.incisos = False, []
+            self.situacao, self.pena_texto = "vigente", pena
+
+    def _diploma(self, monkeypatch, pena_do_paragrafo=""):
+        disp = {
+            "Art. 151|caput": self.Falso(
+                "Devassar indevidamente o conteúdo de correspondência fechada, dirigida a "
+                "outrem:", "Pena - detenção, de um a seis meses, ou multa."),
+            "Art. 151|§ 1º": self.Falso("Na mesma pena incorre:", pena_do_paragrafo),
+        }
+        monkeypatch.setattr(auditar, "dispositivos_de", lambda fid: disp)
+        return {"CP": "cp"}
+
+    def _linha(self, mn, mx, artigo="Art. 151, §1º, IV"):
+        return {**registro(id=647, artigo=artigo,
+                           crime="Instalar ou utilizar estação ou aparelho radioelétrico"),
+                "pena_min_meses": mn, "pena_max_meses": mx}
+
+    def test_acusa_quando_a_moldura_publicada_nao_e_a_do_caput(self, monkeypatch):
+        indice = self._diploma(monkeypatch)
+        achados = auditar.auditar_pena_por_remissao([self._linha(12, 36)], indice)
+        assert achados and achados[0]["tipo"] == "PENA-IMPORTADA-DIVERGE"
+        assert "1–6" in achados[0]["detalhe"]
+
+    def test_nao_acusa_quando_bate_com_o_caput(self, monkeypatch):
+        indice = self._diploma(monkeypatch)
+        assert not auditar.auditar_pena_por_remissao([self._linha(1, 6)], indice)
+
+    def test_paragrafo_com_moldura_propria_fica_com_o_differ(self, monkeypatch):
+        """Quem tem pena no próprio texto já é conferido pelo differ — acusar
+        aqui duplicaria o achado."""
+        indice = self._diploma(monkeypatch, "Pena - detenção, de um a três anos.")
+        assert not auditar.auditar_pena_por_remissao([self._linha(12, 36)], indice)
+
