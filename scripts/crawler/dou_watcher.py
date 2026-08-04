@@ -12,16 +12,21 @@ Como funciona, em três passos:
    sentido formal). Restam ~5 por semana — poucos o bastante para baixar o
    texto INTEGRAL de cada um, em vez de filtrar pelo resumo truncado que a
    listagem traz.
-2. **Dois filtros, união e não interseção**: (A) cita um diploma monitorado —
-   o padrão vem de `fontes.json`, então crescer o registro é crescer o watcher;
-   (B) tem vocabulário penal ("reclusão", "detenção", "pena de", "revoga"…).
-3. **Saída para leitura humana.** Uma seção na issue semanal, com o que casou.
-   Nada entra em lugar nenhum automaticamente.
+2. **Triagem em três níveis, pelo PRECEITO SECUNDÁRIO** — a fórmula "Pena -",
+   "reclusão, de", "detenção, de". Um ato que fale de pena sem cominar nenhuma
+   não cria nem altera crime. Ver `classificar`.
+3. **Saída para leitura humana.** Uma seção na issue semanal. Nada entra em
+   lugar nenhum automaticamente.
 
-**Falso positivo é aceitável; falso negativo, não.** Uma lei tributária que
-menciona "pena de multa" entrar na lista custa dez segundos de leitura; uma lei
-penal nova passar batida custa meses de catálogo desatualizado. Por isso o
-filtro é largo e a lista, curta.
+**Falso positivo é aceitável; falso negativo, não.** Uma lei penal nova passar
+batida custa meses de catálogo desatualizado. Mas o inverso tem um limite que a
+medição encontrou: contra 14 dias reais de Seção 1 — 3.569 atos, 16 normativos —
+o filtro anterior devolvia SEIS candidatas e **nenhuma** trazia preceito
+secundário. Ler seis textos por semana para não achar nada é o jeito mais rápido
+de parar de ler, e um filtro que ninguém lê é um filtro que não existe.
+
+Por isso o corte NÃO apaga: o descartado sai nomeado, em uma linha, com o motivo.
+Três segundos de leitura, e a decisão do filtro fica auditável.
 
 Uso:
     python scripts/crawler/dou_watcher.py                    # 8 dias até hoje
@@ -171,9 +176,66 @@ def vocabulario_penal(texto: str) -> list[str]:
     return [t for t in VOCABULARIO if t in baixo]
 
 
+# A ementa que ANUNCIA o crime, para o caso de o texto integral não abrir. É a
+# rede de segurança do nível 1: sem o corpo do ato, não há "Pena -" a encontrar.
+_EMENTA_CRIMINALIZA = re.compile(
+    r"tipifica|criminaliza|institui o crime|torna crime|define o crime|"
+    r"disp[õo]e sobre o crime", re.IGNORECASE)
+# Revogação de dispositivo — "Revogam-se os arts. 12 e 13". Sozinha não diz nada;
+# junto da citação de diploma monitorado, diz que um tipo pode ter saído.
+_REVOGA_DISPOSITIVO = re.compile(
+    r"revoga(?:m)?-se\s+(?:o|os|a|as)?\s*(?:art|inciso|par[áa]grafo|al[íi]nea)",
+    re.IGNORECASE)
+
+
+def classificar(texto: str, ementa: str, citados: list[str]) -> tuple[str, str]:
+    """(nível, por quê) — o que fazer com este ato.
+
+    A triagem tinha um filtro só, largo: casava quem citasse diploma monitorado
+    OU tivesse vocabulário penal. Medido contra 14 dias reais de Seção 1 (3.569
+    atos, 16 normativos), ele devolvia SEIS candidatas e **nenhuma** trazia
+    preceito secundário. Uma lei sobre saúde mental na criança entrava por
+    alterar o ECA; uma sobre fundo garantidor, pela palavra "revoga"; uma sobre
+    honorários de advogado, por citar o Estatuto da OAB. Ler seis textos por
+    semana para não achar nada é o jeito mais rápido de parar de ler.
+
+    O discriminador que funciona já existia no módulo, usado só para propor
+    fonte nova: a fórmula do PRECEITO SECUNDÁRIO — "Pena -", "reclusão, de".
+    Contra os mesmos 14 dias ela devolve zero; contra a Lei 15.358/2026, que
+    criou dois tipos, ela acerta. É o que separa lei penal de lei que fala de
+    pena.
+
+    Três níveis, e o terceiro não some — é contado e nomeado no relatório:
+
+    - **novo**: tem preceito secundário e NÃO cita diploma monitorado. É o ponto
+      cego declarado do conferidor: tipo penal em página que ninguém vigia.
+    - **monitorado**: tem preceito secundário, ou revoga dispositivo, E cita
+      diploma que já vigiamos. O conferidor vai ver a mudança na página dele na
+      rodada seguinte — o que se ganha aqui é a antecedência e o aviso de que a
+      sentinela daquela fonte talvez precise mudar.
+    - **descartado**: o resto. Citação sem preceito penal, ou palavra solta.
+    """
+    forte = bool(_TIPIFICA.search(texto)) or bool(_EMENTA_CRIMINALIZA.search(ementa))
+    if forte and not citados:
+        return "novo", "traz preceito secundário e não se apoia em diploma monitorado"
+    if forte and citados:
+        return "monitorado", "traz preceito secundário e altera diploma monitorado"
+    if citados and _REVOGA_DISPOSITIVO.search(texto):
+        return "monitorado", "revoga dispositivo de diploma monitorado"
+    if citados:
+        return "descartado", "cita diploma monitorado sem preceito penal"
+    return "descartado", "vocabulário penal isolado, sem preceito secundário"
+
+
 def triar(itens: list[dict], padrao: re.Pattern, numeros: dict[str, str],
           buscar_texto=texto_integral) -> list[dict]:
-    """Atos normativos que casam o filtro A (citação) ou o B (vocabulário)."""
+    """Atos normativos triados em três níveis (ver `classificar`).
+
+    Devolve TODOS os que tocam em matéria penal de algum modo, com o nível
+    anotado. Quem decide o que aparece por extenso no relatório é
+    `montar_relatorio` — aqui nada é jogado fora, para que o corte seja
+    auditável e o `--json` continue trazendo a janela inteira.
+    """
     candidatas: list[dict] = []
     for item in itens:
         if not ESPECIES.match((item.get("artType") or "").strip()):
@@ -188,8 +250,10 @@ def triar(itens: list[dict], padrao: re.Pattern, numeros: dict[str, str],
         termos = vocabulario_penal(texto)
         if not citados and not termos:
             continue
+        nivel, porque = classificar(texto, resumo, citados)
         candidatas.append({
-            "integral": integral,
+            "nivel": nivel,
+            "porque": porque,
             "titulo": (item.get("title") or "").strip(),
             "especie": (item.get("artType") or "").strip(),
             "data": item.get("pubDate") or "",
@@ -255,38 +319,77 @@ def propor_fonte(candidata: dict, integral: str, ja_monitorados: set[str]) -> di
 
 
 # ── Relatório ───────────────────────────────────────────────────────────────
+TITULO_NIVEL = {
+    "novo": "Possível tipo penal em diploma NÃO monitorado",
+    "monitorado": "Mexe em diploma que o conferidor já vigia",
+}
+
+
 def montar_relatorio(candidatas: list[dict], inicio: date, fim: date) -> str:
     L = [f"## DOU — normas possivelmente penais ({inicio:%d/%m} a {fim:%d/%m})", ""]
-    if not candidatas:
-        L += ["Nenhum ato normativo da Seção 1 casou o filtro penal nesta janela.", ""]
+    ler = [c for c in candidatas if c["nivel"] in TITULO_NIVEL]
+    descartados = [c for c in candidatas if c["nivel"] == "descartado"]
+
+    if not ler and not descartados:
+        L += ["Nenhum ato normativo da Seção 1 tocou em matéria penal nesta janela.", ""]
         return "\n".join(L) + "\n"
 
-    L += [
-        f"**{len(candidatas)}** ato(s) normativo(s) a olhar. O filtro é largo de "
-        "propósito: perder lei penal nova custa caro, ler um falso positivo custa "
-        "dez segundos.", "",
-        "Se alguma criar ou alterar crime em diploma que o conferidor ainda não "
-        "vigia, acrescente o diploma em `data/fontes.json` — dali em diante ele "
-        "passa a ser conferido toda semana.", "",
-    ]
-    for c in candidatas:
-        L.append(f"### {c['titulo']}")
+    if not ler:
+        L += [f"**Nada a ler.** {len(descartados)} ato(s) tocaram em matéria penal de "
+              "algum modo e nenhum trouxe preceito secundário — a lista está no fim, "
+              "para conferência.", ""]
+    else:
+        L += [f"**{len(ler)}** ato(s) a olhar, de {len(candidatas)} que tocaram em "
+              "matéria penal. O corte é o **preceito secundário**: um ato que fale de "
+              "pena sem cominar nenhuma não cria nem altera crime.", ""]
+
+    for nivel in ("novo", "monitorado"):
+        do_nivel = [c for c in ler if c["nivel"] == nivel]
+        if not do_nivel:
+            continue
+        L += [f"### {TITULO_NIVEL[nivel]} — {len(do_nivel)}", ""]
+        if nivel == "novo":
+            L += ["É o ponto cego do conferidor: crime em página que ninguém vigia. "
+                  "Acrescente o diploma em `data/fontes.json` e ele passa a ser "
+                  "conferido toda semana.", ""]
+        else:
+            L += ["O conferidor vai ver a mudança na página do diploma na rodada "
+                  "seguinte. O que se ganha aqui é a antecedência — e o aviso de que a "
+                  "**sentinela** daquela fonte talvez precise apontar para esta lei.", ""]
+        for c in do_nivel:
+            L += [f"#### {c['titulo']}", "",
+                  f"- {c['especie']}, {c['data']} — <{c['url']}>",
+                  f"- **Por que entrou:** {c['porque']}"]
+            if c["diplomas_citados"]:
+                L.append(f"- **Diplomas citados:** {', '.join(c['diplomas_citados'])}")
+            if not c["integral"]:
+                L.append("- ⚠️ texto integral não pôde ser lido; a triagem usou só a ementa")
+            L.append(f"- Ementa: {c['ementa']}")
+            if c.get("fonte_proposta"):
+                L += ["- Entrada proposta para `data/fontes.json` (o PR da semana já a "
+                      "traz aplicada, para conferir):", "", "```json",
+                      json.dumps(c["fonte_proposta"], ensure_ascii=False, indent=2),
+                      "```"]
+            L.append("")
+
+    # O descarte é NOMEADO. O princípio do módulo é que falso negativo não se
+    # tolera; um corte que apagasse o item da vista trocaria ruído por cegueira.
+    # Uma linha por ato custa três segundos de leitura e mantém o corte auditável.
+    if descartados:
+        L += [f"### Descartados — {len(descartados)}", "",
+              "Tocaram em matéria penal e não trouxeram preceito secundário. "
+              "Ficam aqui nomeados, não escondidos:", ""]
+        for c in descartados:
+            cit = f" (cita {', '.join(c['diplomas_citados'])})" if c["diplomas_citados"] else ""
+            L.append(f"- [{c['titulo']}]({c['url']}) — {c['porque']}{cit}")
         L.append("")
-        L.append(f"- {c['especie']}, {c['data']} — <{c['url']}>")
-        if c["diplomas_citados"]:
-            L.append(f"- **Cita diploma monitorado:** {', '.join(c['diplomas_citados'])}")
-        if c["termos"]:
-            L.append(f"- **Vocabulário penal:** {', '.join(c['termos'])}")
-        if not c["integral"]:
-            L.append("- ⚠️ texto integral não pôde ser lido; a triagem usou só a ementa")
-        L.append(f"- Ementa: {c['ementa']}")
-        if c.get("fonte_proposta"):
-            L += ["- **Parece criar tipo penal.** Entrada proposta para "
-                  "`data/fontes.json` (o PR da semana já a traz aplicada, para conferir):",
-                  "", "```json",
-                  json.dumps(c["fonte_proposta"], ensure_ascii=False, indent=2),
-                  "```"]
-        L.append("")
+
+    tocados = sorted({d for c in candidatas for d in c["diplomas_citados"]})
+    if tocados:
+        L += ["> _Sentinelas a conferir:_ os diplomas " + ", ".join(f"`{d}`" for d in tocados)
+              + " foram citados nesta janela. Se alguma dessas leis os alterou, a "
+              "`sentinela` deles em `data/fontes.json` deve passar a apontar para a "
+              "emenda nova — é ela que prova que a página baixada está fresca.", ""]
     return "\n".join(L) + "\n"
 
 
