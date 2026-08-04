@@ -56,6 +56,15 @@ RANGE_2U = re.compile(rf"(\d+)\s*{_U}\s*a\s*(\d+)\s*{_U}", re.IGNORECASE)
 RANGE_1U = re.compile(rf"(\d+)\s*(?:a|-|–|—)\s*(\d+)\s*{_U}", re.IGNORECASE)
 ABBR = re.compile(r"(\d+)\s*([dma])\s*(?:-|a|–|—)\s*(\d+)\s*([dma])", re.IGNORECASE)
 _ABBR_U = {"d": "dias", "m": "meses", "a": "anos"}
+# Moldura escrita com "e" no lugar de "a", à moda dos diplomas dos anos 40 e 60:
+# "Penas: de seis (6) meses e um (1) ano de prisão simples" (DL 6.259/44, art.
+# 47), "prisão simples, de 15 (quinze) dias e 3 (três) meses" (Lei 7.437/85).
+#
+# É perigoso, e por isso vem por último e com trava: "2 anos e 6 meses" NÃO é
+# moldura, é uma duração composta. O que separa os dois casos é a direção —
+# intervalo cresce, duração composta decresce. Só se aceita quando o segundo
+# valor é MAIOR que o primeiro.
+RANGE_2U_E = re.compile(rf"(\d+)\s*{_U}\s*e\s*(\d+)\s*{_U}", re.IGNORECASE)
 
 
 def parse_pena_range(obs: str):
@@ -90,7 +99,16 @@ def parse_pena_range(obs: str):
     if m:
         candidatos.append((m.start(), (int(m.group(1)), _ABBR_U[m.group(2).lower()],
                                        int(m.group(3)), _ABBR_U[m.group(4).lower()])))
-    return min(candidatos)[1] if candidatos else None
+    if candidatos:
+        return min(candidatos)[1]
+
+    m = RANGE_2U_E.search(text)
+    if m:
+        umin, umax = _norm_unidade(m.group(2)), _norm_unidade(m.group(4))
+        vmin, vmax = int(m.group(1)), int(m.group(3))
+        if _meses(vmin, umin) < _meses(vmax, umax):
+            return vmin, umin, vmax, umax
+    return None
 
 
 # ── Leitura do texto do Planalto (usada pelo conferidor) ────────────────────

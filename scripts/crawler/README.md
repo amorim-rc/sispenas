@@ -28,6 +28,7 @@ segura, o achado vira pergunta na issue em vez de virar dado.
 | `dou_watcher.py` | Filtro semanal da Seção 1 do DOU, para achar lei penal **nova e autônoma**. Tria em três níveis pelo preceito secundário; o descartado sai nomeado, não some. |
 | `excecoes.json` | O que já foi julgado e decidido na conferência de PENAS. Sem isso o relatório repetiria para sempre os mesmos achados. |
 | `excecoes-auditoria.json` | O mesmo, para a auditoria de classificação. Arquivo próprio porque as chaves são outras: ora o id do registro, ora o dispositivo do compilado. |
+| `cobertura-limites.json` | Quantos registros o conferidor aceita **não** garantir, por motivo. Crescer é regressão e vira achado; encolher vira convite a apertar. É a trava contra a falha que mais dói aqui — a silenciosa: registro que sai da conferência não aparece como divergente, aparece como nada. |
 | `../verificar_documentacao.py` | Saúde da prosa: documento vence por prazo ou porque algo de que ele fala mudou depois da última conferência. |
 | `tempo.py` | A data de Brasília. O runner roda em UTC, e sem isso a rodada das 21h se datava de amanhã. |
 
@@ -37,6 +38,7 @@ segura, o achado vira pergunta na issue em vez de virar dado.
 python scripts/crawler/baixar.py --todas          # ou --fonte cp
 python scripts/crawler/conferir.py                # relatório de tudo
 python scripts/crawler/conferir.py --carimbar     # + trilha em data/conferencia.json
+python scripts/crawler/conferir.py --atualizar-limites   # regrava a trava de cobertura
 python scripts/crawler/propor.py                  # o PR que sairia (não escreve)
 python scripts/crawler/dou_watcher.py --dias 8
 python -m pytest scripts/crawler/tests            # sem rede, contra fixtures

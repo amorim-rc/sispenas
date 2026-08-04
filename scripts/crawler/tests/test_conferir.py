@@ -141,3 +141,88 @@ class TestDistancia:
         m = {"min_meses": 12.0, "max_meses": 48.0}
         assert distancia(m, 12.0, 48.0) == 0.0
         assert distancia(m, 6.0, 48.0) == 6.0
+
+
+class TestTravaDeCobertura:
+    """O que o conferidor não garante não pode crescer em silêncio.
+
+    Um registro que SAI da conferência não aparece como divergente: aparece
+    como nada. Foi assim que três incisos do art. 151 do CP e os doze crimes do
+    Código de Trânsito ficaram anos sem uma única comparação com a lei. Contar
+    o silêncio é o que o torna visível — e travar a conta é o que impede a
+    próxima lacuna do parser de reabrir o mesmo buraco.
+    """
+
+    def _limites(self, tmp_path, monkeypatch, limites):
+        import json
+        import conferir
+        arq = tmp_path / "cobertura-limites.json"
+        arq.write_text(json.dumps({"limites": limites}), encoding="utf-8")
+        monkeypatch.setattr(conferir, "LIMITES", arq)
+
+    def test_estavel_nao_reclama(self, tmp_path, monkeypatch):
+        from conferir import conferir_limites
+        self._limites(tmp_path, monkeypatch, {"ilegivel": 2, "pena_derivada": 85})
+        assert conferir_limites({"ilegivel": 2, "pena_derivada": 85}) == ([], [])
+
+    def test_crescer_e_regressao(self, tmp_path, monkeypatch):
+        from conferir import conferir_limites
+        self._limites(tmp_path, monkeypatch, {"ilegivel": 2})
+        regressoes, _ = conferir_limites({"ilegivel": 5})
+        assert len(regressoes) == 1
+        assert "3 a mais" in regressoes[0]
+
+    def test_encolher_convida_a_apertar(self, tmp_path, monkeypatch):
+        from conferir import conferir_limites
+        self._limites(tmp_path, monkeypatch, {"ilegivel": 2})
+        regressoes, folgas = conferir_limites({"ilegivel": 0})
+        assert regressoes == []
+        assert "dá para baixar" in folgas[0]
+
+    def test_motivo_nao_declarado_e_regressao(self, tmp_path, monkeypatch):
+        """Um motivo novo que aparece sozinho é exatamente o caso perigoso: sem
+        esta regra, bastaria o classificador inventar um rótulo para que uma
+        leva de registros saísse da conferência por baixo de todos os tetos."""
+        from conferir import conferir_limites
+        self._limites(tmp_path, monkeypatch, {"ilegivel": 2})
+        regressoes, _ = conferir_limites({"ilegivel": 2, "motivo_novo": 9})
+        assert any("nem consta dos limites" in r for r in regressoes)
+
+    def test_sem_arquivo_de_limites_nao_quebra(self, tmp_path, monkeypatch):
+        import conferir
+        monkeypatch.setattr(conferir, "LIMITES", tmp_path / "nao-existe.json")
+        assert conferir.conferir_limites({"ilegivel": 99}) == ([], [])
+
+
+class TestClassificacaoDoNaoConferido:
+    """"Indeterminado" não é motivo: é a confissão de que ninguém sabe."""
+
+    class _Disp:
+        def __init__(self, texto="", pena_texto=""):
+            self.texto, self.pena_texto = texto, pena_texto
+
+    def test_pena_importada(self):
+        from conferir import _por_referencia
+        d = self._Disp(texto="Na mesma pena incorre quem:")
+        assert _por_referencia(d, {}) == "pena_importada"
+
+    def test_pena_derivada(self):
+        from conferir import _por_referencia
+        d = self._Disp(texto="A pena é aumentada de 1/3 (um terço) até a metade se")
+        assert _por_referencia(d, {}) == "pena_derivada"
+
+    def test_norma_explicativa_nao_e_preceito(self):
+        from conferir import _por_referencia
+        d = self._Disp(texto="Equipara-se à coisa móvel a energia elétrica ou qualquer "
+                             "outra que tenha valor econômico")
+        assert _por_referencia(d, {}) == "sem_preceito_proprio"
+
+    def test_texto_com_pena_que_nao_foi_lida_e_o_alarme(self):
+        from conferir import _por_referencia
+        d = self._Disp(pena_texto="Pena - reclusão em fórmula que o parser não conhece")
+        assert _por_referencia(d, {}) == "ilegivel"
+
+    def test_registro_sem_pena_privativa_vem_antes_de_tudo(self):
+        from conferir import _por_referencia
+        d = self._Disp(pena_texto="Pena - reclusão, de 1 a 4 anos")
+        assert _por_referencia(d, {"tem_pena_privativa": False}) == "sancao_nao_privativa"
