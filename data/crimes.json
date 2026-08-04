@@ -1242,8 +1242,8 @@
     "lei": "CP",
     "artigo": "Art. 151, §1º, II",
     "crime": "Violação de comunicação telegráfica, radioelétrica ou telefônica",
-    "pena_min": 12,
-    "pena_max": 36,
+    "pena_min": 1,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Condicionada",
     "hediondo": "Não",
@@ -1251,7 +1251,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção ou multa. Indevidamente divulgar, transmitir a outrem ou utilizar abusivamente comunicação telegráfica ou radioelétrica dirigida a terceiro. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
+    "obs": "1-6 meses detenção ou multa — a pena do CAPUT, que o §1º importa ('Na mesma pena incorre'). O registro publicava 1 a 3 anos, que é a pena do §3º (abuso de função em serviço postal, telegráfico, radioelétrico ou telefônico), e com ela vinha a multa cumulativa; a do caput é ALTERNATIVA. Indevidamente divulgar, transmitir a outrem ou utilizar abusivamente comunicação telegráfica ou radioelétrica dirigida a terceiro, ou conversação telefônica entre outras pessoas. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
   },
   {
     "id": 79,
@@ -10317,8 +10317,8 @@
     "lei": "CP",
     "artigo": "Art. 151, §1º, III",
     "crime": "Impedir a comunicação telegráfica, radioelétrica ou telefônica",
-    "pena_min": 12,
-    "pena_max": 36,
+    "pena_min": 1,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Condicionada",
     "hediondo": "Não",
@@ -10326,15 +10326,15 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
+    "obs": "1-6 meses detenção ou multa — a pena do CAPUT, que o §1º importa ('Na mesma pena incorre'). O registro publicava 1 a 3 anos, que é a pena do §3º (abuso de função em serviço postal, telegráfico, radioelétrico ou telefônico), e com ela vinha a multa cumulativa; a do caput é ALTERNATIVA. Impedir a comunicação ou a conversação referidas no inciso anterior. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
   },
   {
     "id": 647,
     "lei": "CP",
     "artigo": "Art. 151, §1º, IV",
     "crime": "Instalar ou utilizar estação ou aparelho radioelétrico sem autorização legal",
-    "pena_min": 12,
-    "pena_max": 36,
+    "pena_min": 1,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10342,7 +10342,9 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa"
+    "obs": "1-6 meses detenção ou multa — a pena do CAPUT, que o §1º importa ('Na mesma pena incorre'). O registro publicava 1 a 3 anos, que é a pena do §3º (abuso de função em serviço postal, telegráfico, radioelétrico ou telefônico), e com ela vinha a multa cumulativa; a do caput é ALTERNATIVA. Instalar ou utilizar estação ou aparelho radioelétrico, sem observância de disposição legal. É uma das duas hipóteses que o §4º ressalva da exigência de representação — a ação penal, enquanto o dispositivo vigeu, era pública incondicionada.",
+    "vigencia_ate": "1962-08-27",
+    "vigencia_nota": "REVOGADO TACITAMENTE pelo art. 70 da Lei 4.117/62 (Código Brasileiro de Telecomunicações, na redação do Decreto-Lei 236/1967), que pune 'a instalação ou utilização de telecomunicações, sem observância do disposto nesta Lei e nos regulamentos' com detenção de 1 a 2 anos, aumentada da metade se houver dano a terceiro. É a MESMA conduta, com pena maior, em lei posterior e especial que regulou integralmente a matéria (LINDB, art. 2º, §1º). NÃO HÁ REPRISTINAÇÃO: o art. 215, I da Lei 9.472/97 revogou a Lei 4.117/62 'salvo quanto a matéria penal não tratada nesta Lei e quanto aos preceitos relativos à radiodifusão' — ressalva que alcança o art. 70 do CBT, não o Código Penal —, e o art. 2º, §3º da LINDB exige disposição expressa para restaurar a lei revogada. A instalação ou operação clandestina de estação de rádio é hoje processada pelo ART. 183 DA LEI 9.472/97 — detenção de 2 a 4 anos e multa, competência da Justiça Federal (Súmula 606 do STJ). Os dois dispositivos estão no catálogo: o art. 70 do CBT e o art. 183. Este registro é mantido para consulta histórica e não deve fundamentar cálculo de benefício. Grau M: a tese contrária — resíduo, por o art. 151 tutelar bem jurídico individual e o art. 70 o serviço público de telecomunicações — é defensável em tese, mas quando os tribunais aplicam o art. 151 a caso de rádio, usam o inciso II (interceptação), não o IV."
   },
   {
     "id": 648,
