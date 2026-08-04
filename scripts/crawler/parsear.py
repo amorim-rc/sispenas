@@ -392,18 +392,28 @@ def parsear(documento: str) -> list[Dispositivo]:
                         or ((_REVOGADO_TXT.search(texto)
                              or (anotacao and anotacao.acao == "revogado"))
                             and len(corpo_util) < 80))
+            # O "(VETADO)" de um parágrafo não veta o artigo inteiro: só marca
+            # quando o próprio dispositivo ficou sem corpo (art. 9º da Lei de
+            # Abuso tem § vetado e caput em pleno vigor).
+            #
+            # E é ALTERNATIVO a "vigente", não somado a ele. Somados, os dois
+            # marcadores nasciam com a MESMA `ordem`, o desempate de `max` fica
+            # com o primeiro, e o genérico vencia o específico: o art. 359-O do
+            # CP — comunicação enganosa em massa, vetado na Lei 14.197/2021 —
+            # saía como vigente, e o catálogo publicou por meses um crime que
+            # não existe. O veto DERRUBADO continua funcionando, porque ali os
+            # dois marcadores estão em parágrafos diferentes e o posterior vence.
+            vetado = bool(_VETADO.search(texto)) and len(corpo_util) < 40
             if revogado:
                 # Artigo revogado perde o corpo: sobra o cabeçalho + a anotação.
                 d._versoes_situacao.append((ordem, "revogado"))
                 d.anotacao = anotacao
+            elif vetado:
+                d._versoes_situacao.append((ordem, "vetado"))
+                d.anotacao = anotacao
             else:
                 d._versoes_situacao.append((ordem, "vigente"))
                 d._versoes_texto.append((ordem, corpo, anotacao))
-            # O "(VETADO)" de um parágrafo não veta o artigo inteiro: só marca
-            # quando o próprio dispositivo ficou sem corpo (art. 9º da Lei de
-            # Abuso tem § vetado e caput em pleno vigor).
-            if _VETADO.search(texto) and len(corpo_util) < 40:
-                d._versoes_situacao.append((ordem, "vetado"))
             d.vigencia_pendente = d.vigencia_pendente or pendente
             continue
 

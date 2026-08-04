@@ -26,16 +26,31 @@ const TITULOS_CP: {titulo: string; de: number; ate: number}[] = [
   {titulo: 'IX', de: 286, ate: 288},   // paz pública
   {titulo: 'X', de: 289, ate: 311},    // fé pública
   {titulo: 'XI', de: 312, ate: 359},   // administração pública
-  // O Título XII (Lei 14.197/2021) NÃO tem faixa numérica própria: são os arts.
-  // 359-A a 359-T, todos com sufixo de letra sobre o mesmo número 359. Sem a
-  // regra de sufixo abaixo, eles caem no Título XI e recebem o aumento dos
-  // crimes funcionais (art. 327, §2º), que não os alcança.
+  // O Título XII (Lei 14.197/2021) NÃO tem faixa numérica própria: divide o
+  // número 359 com o Título XI, e o que os separa é a LETRA do sufixo — ver
+  // `ehTituloXII`.
 ];
 
-/** Arts. 359-A a 359-T: crimes contra o Estado Democrático de Direito. */
+/**
+ * Arts. 359-I a 359-T: crimes contra o Estado Democrático de Direito.
+ *
+ * O corte é na letra **I**, e errá-lo custa caro nos dois sentidos. Os arts.
+ * 359-A a 359-H são os crimes contra as FINANÇAS PÚBLICAS (Lei 10.028/2000),
+ * Capítulo IV do Título XI — administração pública. O Título XII só começa
+ * depois deles, com o art. 359-I (atentado à soberania), e vai até o 359-T.
+ *
+ * Tratar os oito de finanças públicas como Título XII faz duas coisas erradas ao
+ * mesmo tempo: dá-lhes a ressalva dos incisos I e II do art. 112 da LEP — 1/6 em
+ * vez de 25% ou 30% de progressão — e tira deles o aumento dos crimes funcionais
+ * do art. 327, §2º, que os alcança justamente por serem do Título XI.
+ *
+ * O sufixo pode ter duas letras (`359-M-A`, `359-M-B`, do Capítulo II do Título
+ * XII): vale a PRIMEIRA.
+ */
 export function ehTituloXII(lei: string, artigo: string): boolean {
-  return leiBase(lei).startsWith('CP') && !leiBase(lei).startsWith('CPM')
-    && /Art\.?\s*359\s*-\s*[A-Z]/i.test(artigo);
+  if (!leiBase(lei).startsWith('CP') || leiBase(lei).startsWith('CPM')) return false;
+  const m = /Art\.?\s*359\s*-\s*([A-Z])/i.exec(artigo);
+  return m ? m[1].toUpperCase() >= 'I' : false;
 }
 
 /** Número do artigo de um registro do catálogo ("Art. 121, §2º, I" → 121). */

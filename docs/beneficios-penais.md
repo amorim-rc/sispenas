@@ -87,7 +87,7 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 | I | Primário, com violência/grave ameaça, **salvo Título XII** | 25% |
 | II | Reincidente, com violência/grave ameaça, **salvo Título XII** | 30% |
 | III | Reincidente em crime diverso dos dos incisos I e II | 20% |
-| IV | *(repete o inciso II — ver abaixo)* | 30% |
+| IV | Reincidente, com violência/grave ameaça — **sem** a ressalva do Título XII (redação de 2019; a nova foi vetada) | 30% |
 | V | Primário, hediondo/equiparado | 70% |
 | VI, "a" | Primário, hediondo com resultado morte (livramento vedado) | 75% |
 | VI, "b" | Comando de organização criminosa **ultraviolenta** estruturada para crime hediondo (livramento vedado) | 75% |
@@ -95,7 +95,7 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 | VI, "d" | Primário, feminicídio (livramento vedado) | 75% |
 | VII | Reincidente, hediondo | 80% |
 | VIII | Reincidente específico, hediondo com resultado morte (livramento vedado) | 85% |
-| IX e X | *(vetados)* | — |
+| IX e X | *(vetados — nunca existiram)* | — |
 
 Os incisos V a VIII vêm da **Lei 15.358/2026**, que também acrescentou a alínea "d", pôs
 "ultraviolenta" e a vedação do livramento na alínea "b" e revogou o inciso VI-A. O *caput*
@@ -145,14 +145,23 @@ violentos, categoria a que eles materialmente pertencem. A diferença é de 3,33
 é matéria que os tribunais de execução vão fixar.
 :::
 
-:::warning[O inciso IV ficou repetindo o inciso II]
-A Lei 15.402/2026 não tocou o inciso IV, que mantém a redação de 2019 — 30% para o
-reincidente em crime com violência ou grave ameaça — e passou a repetir o conteúdo do
-novo inciso II, **sem a ressalva do Título XII**. O sistema adota a leitura de **revogação
-tácita** (LINDB, art. 2º, §1º: o inciso II regula integralmente a mesma matéria). A
-leitura contrária — o IV sobreviveria como norma residual, reintroduzindo os reincidentes
-violentos do Título XII a 30% — esvazia a ressalva do inciso II e agrava a situação do
-apenado; entre duas leituras textualmente possíveis, prevalece a que não agrava.
+:::warning[O inciso IV, e o que o veto fez com ele]
+A Lei 15.402/2026 **propôs redação nova para os incisos IV a X** — e **todos os
+sete foram vetados**. O que sobra, no texto consolidado, é: o inciso IV na redação
+de 2019 (30% para o reincidente em crime com violência ou grave ameaça, **sem** a
+ressalva do Título XII), os incisos V a VIII na redação da Lei 15.358/2026, e os
+incisos IX e X como "(VETADO)".
+
+Isso importa porque o inciso IV passou a repetir o conteúdo do novo inciso II — e
+a sobrevivência dele **não é descuido de técnica legislativa**: é o resultado
+deliberado do processo de veto. O argumento de revogação tácita, que essa
+sobreposição sugeriria, fica enfraquecido, e abre-se uma terceira leitura para o
+reincidente em crime violento do Título XII: ele cairia no inciso IV, que não o
+ressalva, a 30%.
+
+**O sistema não escolhe.** Para o reincidente em crime do Título XII o resultado
+sai como *condicional*, com as leituras concorrentes escritas. Ver
+`REVISAO-PENDENTE.md`, pergunta 1.
 :::
 
 :::note[Sob controle de constitucionalidade]

@@ -28,6 +28,14 @@
       "data": "2026-08-03",
       "versao": "v1.8.0",
       "motivo": "Lei 8.137/90, art. 2º, caput — duplicata estrutural. O caput não descreve conduta: diz 'Constitui crime da mesma natureza:' e comina a pena; as condutas estão nos incisos I a V. Com os incisos I e II já cadastrados (ids 670 e 671), o registro do caput somava pena ao catálogo sem tipo por trás. Desdobrado nos incisos III, IV e V, que faltavam (ids 1415, 1416 e 1417)."
+    },
+    {
+      "ids": [
+        578
+      ],
+      "data": "2026-08-04",
+      "versao": "v1.9.1",
+      "motivo": "CP, art. 359-O — o dispositivo foi VETADO na Lei 14.197/2021 e nunca foi promulgado. O compilado traz apenas '(VETADO)' no corpo do artigo. O catálogo publicava 'Comunicação enganosa em massa', reclusão de 1 a 5 anos e multa: um crime que não existe. O art. 359-Q, também vetado, nunca chegou a ter registro."
     }
   ]
 }

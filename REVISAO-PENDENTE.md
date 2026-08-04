@@ -82,7 +82,12 @@ Cinco regras, e a primeira vale mais que as outras quatro:
 
 # As perguntas
 
-## 1 ✅ — Reincidente em crime do Título XII: 20% pelo inciso III, ou 1/6 pelo *caput*?
+## 1 ⚠️ — Reincidente em crime do Título XII: 20% pelo inciso III, 1/6 pelo *caput*, ou 30% pelo inciso IV?
+
+> **Já foi respondida uma vez, com grau B.** A resposta está resumida no fim do
+> bloco. Duas coisas mudaram desde então e justificam ressubmeter: a extensão do
+> Título XII foi corrigida, e apareceu uma **terceira leitura** que a primeira
+> rodada não tinha diante de si.
 
 **Contexto.** A Lei 15.402, de 8 de maio de 2026, deu ao art. 112 da Lei de
 Execução Penal esta redação:
@@ -106,40 +111,86 @@ Execução Penal esta redação:
 > **III** – se o apenado for **reincidente em crime diverso dos crimes referidos
 > nos incisos I e II** do *caput* deste artigo, deverão ser cumpridos ao menos 20%
 > (vinte por cento) da pena;
+>
+> **IV – (VETADO); V – (VETADO); VI – (VETADO); VII – (VETADO); VIII – (VETADO);
+> IX – (VETADO); X – (VETADO).**
 
-O Título XII da Parte Especial do Código Penal são os **arts. 359-A a 359-T** —
-crimes contra o Estado Democrático de Direito.
+**Dois fatos conferidos contra o texto compilado oficial, depois da primeira
+resposta:**
 
-**O que já foi decidido, e não se discute aqui.** O *caput* voltou a fixar
-patamar próprio, e os incisos passaram a ser exceções a ele; para o **primário**
-condenado por crime do Título XII sobra o *caput*, por exclusão expressa dos
-incisos I e II — leitura literal.
+1. **O Título XII começa no art. 359-I, não no 359-A.** Os arts. 359-A a 359-H são
+   os crimes contra as **finanças públicas** (Lei 10.028/2000), Capítulo IV do
+   Título XI — administração pública. O Título XII (Lei 14.197/2021) vai do art.
+   **359-I** (atentado à soberania) ao **359-T**. A primeira rodada trabalhou com
+   a premissa errada, apontada pelo próprio revisor.
+2. **A Lei 15.402 propôs redação nova para os incisos IV a X, e os SETE foram
+   vetados.** No texto consolidado sobrevivem: o **inciso IV na redação de 2019**
+   — "30% da pena, se o apenado for reincidente em crime cometido com violência à
+   pessoa ou grave ameaça", **sem** a ressalva do Título XII —, os incisos V a
+   VIII na redação da Lei 15.358/2026, e os incisos IX e X como "(VETADO)".
 
-**Pergunta.** E o **reincidente** em crime do Título XII? O texto comporta duas
-leituras, e a diferença é de 3,33 pontos percentuais:
+**O que já foi decidido, e não se discute aqui.** O *caput* voltou a ser regra
+geral, e os incisos passaram a ser exceções a ele; para o **primário** condenado
+por crime do Título XII sobra o *caput*, por exclusão expressa dos incisos I e II.
+
+**Pergunta.** E o **reincidente** em crime do Título XII? Agora são três leituras:
 
 1. **Inciso III — 20%.** Ele alcança o "reincidente em crime diverso dos crimes
    referidos nos incisos I e II". Os do Título XII estão expressamente **fora** do
-   alcance de I e II, logo são "diversos" deles. É a leitura mais fiel à letra:
-   "referidos" é o que o dispositivo diz, e I e II só se referem aos do Título XII
-   para excluí-los.
-2. ***Caput* — 1/6, ou 16,67%.** "Crimes referidos nos incisos I e II" significaria
-   crimes praticados com violência ou grave ameaça, categoria a que os do Título
-   XII pertencem materialmente, ainda que ressalvados. Não sendo "diversos", não
-   caem no inciso III e restam no *caput*. É a leitura mais fiel à finalidade da
-   reforma.
+   alcance de I e II, logo são "diversos" deles.
+2. ***Caput* — 1/6, ou 16,67%.** "Crimes referidos nos incisos I e II" significa
+   "os crimes a que os incisos se referem", isto é, a classe que eles delimitam.
+   A ressalva delimita a classe, não é referência autônoma a quem fica fora dela.
+   Não sendo "diversos", restam no *caput*.
+3. **Inciso IV — 30%.** Ele sobreviveu na redação de 2019, alcança o reincidente
+   em crime com violência ou grave ameaça e **não traz a ressalva do Título XII**.
+   O reincidente violento do Título XII cairia nele.
 
-**O que o sistema faz hoje.** Devolve o resultado como *condicional*, com as duas
+**A terceira leitura é nova, e o veto é o que a torna séria.** A primeira resposta
+tratou o inciso IV como resíduo de técnica legislativa, e por isso o deu por
+tacitamente revogado pelo novo inciso II. Mas o legislador **tentou** reescrever o
+inciso IV, e foi o **veto** que o manteve na redação antiga. A sobrevivência dele
+é resultado deliberado do processo legislativo, não descuido — o que enfraquece o
+argumento de revogação tácita e dá ao inciso IV vida própria justamente onde o
+inciso II se cala.
+
+**O que o sistema faz hoje.** Devolve o resultado como *condicional*, com as
 leituras escritas e o cálculo pelo *caput*, que é o mais favorável ao apenado.
-Nenhuma foi escolhida em silêncio.
+
+**A primeira resposta, em resumo (grau B, não escolhe).** Vantagem ligeira para o
+inciso III: "salvo" delimita a classe, e não cria referência autônoma; o
+legislador foi expresso duas vezes e não repetiu a ressalva no inciso III; e o
+inciso III é a regra residual dos reincidentes — sob a leitura do *caput*, a
+reincidência deixaria de operar em todo o Título XII. Contra: "referido" é
+"mencionado", e o Título XII é literalmente mencionado nos incisos I e II; o
+resultado "reincidência irrelevante" foi a regra geral no Brasil de 1984 a 2019, e
+o *caput* restaura esse regime; e norma ambígua que agrava a execução resolve-se em
+favor do apenado.
+
+**Uma observação da primeira rodada que continua valendo.** A leitura 2, na versão
+"o Título XII pertence materialmente à categoria violência/grave ameaça", não se
+sustenta: só os arts. 359-L, 359-M e 359-P trazem violência ou grave ameaça como
+elementar — a espionagem do art. 359-K, não. Aplicada literalmente, ela partiria o
+Título em dois e inverteria a gravidade. Ela só é coerente na versão "referidos =
+mencionados", que alcança o Título inteiro.
+
+**O que falta ver, já descontado o que foi conferido.** O texto integral da lei
+está transcrito acima e não traz outra chave. Restam:
+
+- a **tramitação** — exposição de motivos, parecer, emendas e sobretudo as
+  **razões do veto** aos incisos IV a X. Se as razões disserem por que o inciso IV
+  foi mantido, isso decide;
+- pronunciamento do **STJ** (Terceira Seção) ou do **STF**;
+- o desfecho das **ADIs 7966 a 7969** (ver a pergunta 5).
 
 **Formato da resposta.**
 
 ```
-Leitura adotada: [inciso III, 20% | caput, 1/6 | continua em aberto]
+Leitura adotada: [inciso III, 20% | caput, 1/6 | inciso IV, 30% | continua em aberto]
 Grau: [A | M | B]
 Fundamento:
-Argumento contrário que deve ser registrado ao lado:
+O veto aos incisos IV a X muda sua análise anterior? [sim, como | não, por quê]
+Argumento(s) contrário(s) que devem ser registrados ao lado:
 Se B — o que falta ver:
 ```
 
@@ -458,6 +509,55 @@ dispositivo é candidato a restringir alcance; um que só descreva circunstânci
 é. Isso separa em minutos os que exigem leitura integral dos que não exigem, e
 provavelmente reduz trinta casos a menos de cinco. Os que sobrarem viram pergunta
 submissível, com os textos anexados.
+
+---
+
+## 9 ✅ — "Reincidente em crime diverso": diverso em relação a qual condenação?
+
+**Contexto.** O inciso III do art. 112 da Lei de Execução Penal, na redação da Lei
+15.402/2026, diz:
+
+> **III** – se o apenado for **reincidente em crime diverso dos crimes referidos
+> nos incisos I e II** do *caput* deste artigo, deverão ser cumpridos ao menos 20%
+> (vinte por cento) da pena;
+
+Os incisos I e II tratam de crime cometido "mediante o exercício de violência ou
+grave ameaça", ressalvados os do Título XII da Parte Especial do Código Penal.
+
+**A ambiguidade.** "Reincidente em crime diverso" pode significar:
+
+1. **O crime da condenação em execução** — o que está sendo cumprido agora não é
+   violento (nem do Título XII), qualquer que tenha sido o crime anterior;
+2. **O crime anterior**, que gerou a reincidência — a reincidência se deu em crime
+   não violento, qualquer que seja o crime em execução;
+3. **Ambos** — nem o anterior nem o atual são violentos.
+
+**Por que importa para um catálogo.** O sistema calcula a progressão a partir dos
+atributos do **tipo penal em execução** — violência e grave ameaça são campos do
+registro. Se a leitura correta for a 2 ou a 3, o cálculo passa a depender de um
+dado que o tipo penal não carrega: qual foi o crime anterior. Isso não é detalhe
+de implementação — muda o que se pode afirmar. Um catálogo que não sabe o crime
+anterior, sob as leituras 2 e 3, não pode dizer qual inciso se aplica; teria de
+devolver a resposta como condicional, pedindo o dado.
+
+Note que a redação anterior (Lei 13.964/2019) não tinha esse problema: os incisos
+II e IV diziam "reincidente em crime cometido sem violência" e "com violência",
+ligando o adjetivo ao crime **em execução** de forma mais direta.
+
+**Pergunta.** Qual das três leituras, e por quê? E, se for a 2 ou a 3, confirme
+que o cálculo depende de dado externo ao tipo penal — é o que o sistema precisa
+saber para não afirmar o que não sabe.
+
+**Formato da resposta.**
+
+```
+Leitura adotada: [1 — crime em execução | 2 — crime anterior | 3 — ambos]
+Grau: [A | M | B]
+Fundamento:
+A redação de 2019 ajuda a interpretar a de 2026? [sim, como | não]
+O cálculo depende de dado que o tipo penal não carrega? [sim/não]
+Argumento contrário a registrar:
+```
 
 ---
 

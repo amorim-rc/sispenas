@@ -130,6 +130,31 @@ def test_hifen_de_pontuacao_nao_vira_sufixo(texto, artigo, comeco):
     assert ds[0]["texto"].startswith(comeco)
 
 
+def test_artigo_vetado_nao_e_vigente(carregar):
+    """O art. 359-O do CP — comunicação enganosa em massa — foi VETADO na Lei
+    14.197/2021 e nunca promulgado. O compilado traz só "(VETADO)" no corpo.
+
+    O parser já sabia marcar "vetado", mas o marcador nascia com a MESMA `ordem`
+    do "vigente" que o precedia, e o desempate de `max` fica com o primeiro: o
+    genérico vencia o específico. O artigo saía vigente, `ler_penas` não achava
+    pena, o conferidor pulava o dispositivo — e o catálogo publicou por meses um
+    crime que não existe, com reclusão de 1 a 5 anos."""
+    ds = como_dicionarios(parsear(carregar("cp-art359o-vetado")))
+    por = por_marcador(ds, "Art. 359-O")
+    assert por["caput"]["situacao"] == "vetado"
+    assert not (por["caput"]["texto"] or "").strip()
+    # O vizinho, com pena própria, segue vigente.
+    assert por_marcador(ds, "Art. 359-N")["caput"]["situacao"] == "vigente"
+
+
+def test_veto_derrubado_continua_vigente(carregar):
+    """A ordem inversa existe: "Art. 9º (VETADO)." seguido do artigo promulgado.
+    Ali os dois marcadores estão em parágrafos DIFERENTES, e o posterior vence —
+    é o art. 9º da Lei de Abuso de Autoridade, em pleno vigor."""
+    ds = como_dicionarios(parsear(carregar("abuso-art9-veto-derrubado")))
+    assert por_marcador(ds, "Art. 9")["caput"]["situacao"] == "vigente"
+
+
 # ── Maria da Penha: versões sobrepostas SEM riscado ─────────────────────────
 def test_mp24a_vale_a_redacao_mais_recente(carregar):
     """A pena de 2018 (detenção 3m-2a) aparece ANTES da de 2024 (reclusão 2-5),
