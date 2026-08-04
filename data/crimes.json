@@ -7568,7 +7568,7 @@
     "id": 474,
     "lei": "Lei 10.741/03",
     "artigo": "Art. 100, I",
-    "crime": "Obstar acesso de idoso a cargo público por motivo de idade",
+    "crime": "Obstar o acesso de pessoa idosa a cargo público por motivo de idade",
     "pena_min": 6,
     "pena_max": 12,
     "tipo_pena": "Reclusão",
@@ -7578,13 +7578,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 1 ano reclusão + multa. Obstar o acesso de alguém a qualquer cargo público por motivo de idade. O caput do art. 100 não descreve conduta ('Constitui crime punível com...'): as condutas estão nos incisos I a V, cada uma autônoma sob a mesma pena. Os incisos II a V ainda não estão no catálogo"
+    "obs": "6 meses a 1 ano reclusão + multa. Obstar o acesso de alguém a qualquer cargo público por motivo de idade. O caput do art. 100 não descreve conduta: as condutas estão nos incisos I a V, cada uma autônoma sob a mesma pena. ATENÇÃO: os arts. 96 e 100 cominam a MESMA pena — reclusão de 6 meses a 1 ano e multa —, e por isso a conferência de molduras não distingue um do outro"
   },
   {
     "id": 475,
     "lei": "Lei 10.741/03",
     "artigo": "Art. 101",
-    "crime": "Negar/dificultar a qualquer pessoa o acesso a ações e serviços de saúde por motivo de idade",
+    "crime": "Deixar de cumprir, retardar ou frustrar a execução de ordem judicial em ação de que a pessoa idosa seja parte ou interveniente",
     "pena_min": 6,
     "pena_max": 12,
     "tipo_pena": "Detenção",
@@ -7594,7 +7594,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 1 ano detenção + multa"
+    "obs": "6 meses a 1 ano detenção + multa. O nome anterior descrevia negativa de atendimento à saúde, que é o art. 100, III. A espécie de pena desmentia o comparador apontado pela auditoria: o art. 96 comina RECLUSÃO, e este registro publica detenção — sinal de que a moldura veio do art. 101 e só o rótulo estava errado. Não confundir com o art. 100, IV, que também pune descumprimento de ordem judicial, mas na ação civil da própria Lei e com reclusão"
   },
   {
     "id": 476,
@@ -7886,7 +7886,7 @@
   },
   {
     "id": 494,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-E",
     "crime": "Admitir/possibilitar/dar causa a ato ilegal no processo licitatório",
     "pena_min": 48,
@@ -7898,11 +7898,11 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 8 anos reclusão + multa"
+    "obs": "4 a 8 anos reclusão + multa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 495,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-F",
     "crime": "Frustrar/fraudar mediante ajuste/combinação ou qualquer outro expediente o caráter competitivo de licitação",
     "pena_min": 48,
@@ -7914,11 +7914,11 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 496,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-G",
     "crime": "Patrocinar interesse ilegítimo de particular em processo de licitação",
     "pena_min": 6,
@@ -7930,11 +7930,11 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos reclusão + multa"
+    "obs": "6 meses a 3 anos reclusão + multa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 497,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-H",
     "crime": "Modificar/pagar contrato administrativo sem autorização legal",
     "pena_min": 48,
@@ -7946,13 +7946,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 8 anos reclusão + multa. Pagar antecipadamente/modificar regras de contrato sem autorização legal"
+    "obs": "4 a 8 anos reclusão + multa. Pagar antecipadamente/modificar regras de contrato sem autorização legal. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 498,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-I",
-    "crime": "Obstar/impedir/dificultar a inscrição ou participação de licitante",
+    "crime": "Perturbação de processo licitatório",
     "pena_min": 6,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -7962,13 +7962,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos detenção + multa"
+    "obs": "6 meses a 3 anos detenção + multa. Impedir, perturbar ou fraudar a realização de qualquer ato de processo licitatório. O nome anterior descrevia o art. 337-N (impedimento indevido), que tem registro próprio e comina reclusão de 6 meses a 2 anos. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 499,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-J",
-    "crime": "Afastar licitante por meio de violência/grave ameaça/fraude/oferecimento de vantagem",
+    "crime": "Violação de sigilo em licitação",
     "pena_min": 24,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -7978,13 +7978,13 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "2 a 3 anos detenção + multa, além da pena correspondente à violência"
+    "obs": "2 a 3 anos detenção + multa. Devassar o sigilo de proposta apresentada em processo licitatório ou proporcionar a terceiro o ensejo de devassá-lo. O nome anterior descrevia o art. 337-K, e com ele veio a ressalva sobre a pena correspondente à violência, que é daquele artigo e não deste. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 500,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-K",
-    "crime": "Fraudar em prejuízo da Fazenda Pública licitação ou contrato (sobrepreço, superfaturamento)",
+    "crime": "Afastamento de licitante",
     "pena_min": 36,
     "pena_max": 60,
     "tipo_pena": "Reclusão",
@@ -7994,13 +7994,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3 a 5 anos reclusão + multa"
+    "obs": "3 a 5 anos reclusão + multa, ALÉM da pena correspondente à violência — cúmulo material obrigatório. Afastar ou tentar afastar licitante por meio de violência, grave ameaça, fraude ou oferecimento de vantagem de qualquer tipo. Incorre na mesma pena quem se abstém ou desiste de licitar em razão de vantagem oferecida (parágrafo único). O nome anterior descrevia o art. 337-L. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 501,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-L",
-    "crime": "Fraudar licitação/contrato para obtenção de benefício ilegítimo",
+    "crime": "Fraude em licitação ou contrato",
     "pena_min": 48,
     "pena_max": 96,
     "tipo_pena": "Reclusão",
@@ -8010,7 +8010,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 8 anos reclusão + multa"
+    "obs": "4 a 8 anos reclusão + multa. Fraudar, em prejuízo da Administração Pública, licitação ou contrato dela decorrente, mediante entrega de mercadoria ou serviço em desacordo com o edital; fornecimento de mercadoria falsificada, deteriorada ou vencida como verdadeira; entrega de uma mercadoria por outra; alteração da substância, qualidade ou quantidade; ou qualquer meio fraudulento que torne a proposta ou a execução injustamente mais onerosa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 502,
@@ -9090,7 +9090,7 @@
     "id": 569,
     "lei": "Lei 9.434/97",
     "artigo": "Art. 17",
-    "crime": "Recolher tecidos/órgãos/partes de cadáver para transplante, inclusive para tecidos, sem autorização do cônjuge ou parente",
+    "crime": "Recolher, transportar, guardar ou distribuir partes do corpo humano obtidas em desacordo com esta Lei",
     "pena_min": 6,
     "pena_max": 24,
     "tipo_pena": "Reclusão",
@@ -9100,13 +9100,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos reclusão"
+    "obs": "6 meses a 2 anos reclusão + multa de 100 a 250 dias-multa. O art. 17 pune a cadeia POSTERIOR — recolher, transportar, guardar, distribuir — de material já obtido irregularmente; a remoção em si é dos arts. 14 a 16. O nome anterior descrevia remoção de tecidos de cadáver, e a multa não constava"
   },
   {
     "id": 570,
     "lei": "Lei 9.434/97",
     "artigo": "Art. 18",
-    "crime": "Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial",
+    "crime": "Realizar transplante ou enxerto em desacordo com o art. 10 desta Lei e seu parágrafo único",
     "pena_min": 6,
     "pena_max": 24,
     "tipo_pena": "Detenção",
@@ -9116,7 +9116,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos detenção + multa. Quando não se tratar de tecidos regeneráveis entre cônjuges ou parentes consanguíneos"
+    "obs": "6 meses a 2 anos detenção. O nome anterior descrevia apenas uma das hipóteses possíveis — transplante entre vivos não parentes sem autorização judicial — como se fosse o tipo inteiro; o art. 18 alcança qualquer transplante em desacordo com o art. 10"
   },
   {
     "id": 571,
@@ -10264,7 +10264,7 @@
     "id": 642,
     "lei": "CP",
     "artigo": "Art. 149-A, II",
-    "crime": "Tráfico de pessoas — para submissão a trabalho em condições análogas à de escravo",
+    "crime": "Tráfico de pessoas com a finalidade de submissão a trabalho em condições análogas à de escravo",
     "pena_min": 48,
     "pena_max": 96,
     "tipo_pena": "Reclusão",
@@ -10274,7 +10274,7 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "4-8 anos reclusão + multa",
+    "obs": "4-8 anos reclusão + multa. Crime de INTENÇÃO, com resultado cortado: consuma-se com o tráfico praticado para essa finalidade, independentemente de a redução chegar a ocorrer. Não se confunde com o art. 149, que pune a redução efetiva e comina reclusão de 2 a 8 anos",
     "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
@@ -12414,7 +12414,7 @@
     "id": 776,
     "lei": "LCP (DL 3.688/41)",
     "artigo": "Art. 25",
-    "crime": "Ter em seu poder, depois de intimado pela autoridade, animal perigoso, sem as devidas cautelas",
+    "crime": "Ter em poder instrumento de furto, em razão da condição do agente",
     "pena_min": 2,
     "pena_max": 12,
     "tipo_pena": "Prisão simples",
@@ -12424,13 +12424,15 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 meses a 1 ano prisão simples + multa"
+    "obs": "2 meses a 1 ano prisão simples + multa. Ter alguém em seu poder, depois de condenado por crime de furto ou roubo, ou enquanto sujeito à liberdade vigiada, ou quando conhecido como vadio ou mendigo, gazuas, chaves falsas ou alteradas ou instrumentos usualmente empregados na prática de furto, sem provar destinação legítima. O nome anterior descrevia o art. 31 (animal perigoso), cuja pena é prisão simples de 10 dias a 2 meses",
+    "vigencia_ate": "1988-10-05",
+    "vigencia_nota": "NÃO RECEPCIONADO pela Constituição de 1988. STF, RE 583.523/RS, Rel. Min. Gilmar Mendes, Tribunal Pleno, julgado em 03/10/2013, repercussão geral — Tema 113, unânime: o art. 25 da Lei de Contravenções Penais viola os princípios da dignidade da pessoa humana (CF, art. 1º, III) e da isonomia (CF, art. 5º, caput e I), por punir a posse do instrumento EM RAZÃO DA CONDIÇÃO DO AGENTE — condenado anterior, sujeito a liberdade vigiada, vadio ou mendigo. É direito penal do autor. A conduta é atípica desde 05/10/1988, e não há dispositivo que a substitua. O registro permanece consultável porque a atipicidade precisa ser ARGUIDA: quem defende alguém denunciado com base nele precisa encontrar o precedente."
   },
   {
     "id": 777,
     "lei": "LCP (DL 3.688/41)",
     "artigo": "Art. 26",
-    "crime": "Abrir valas ou escavações que ponham em perigo a vida, a integridade física ou o patrimônio de outrem, sem as devidas sinalizações",
+    "crime": "Violação de lugar ou objeto",
     "pena_min": 0.5,
     "pena_max": 3,
     "tipo_pena": "Prisão simples",
@@ -12440,7 +12442,7 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "15 dias a 3 meses prisão simples + multa"
+    "obs": "15 dias a 3 meses prisão simples ou multa. Abrir alguém, no exercício de profissão de serralheiro ou ofício análogo, a pedido ou por incumbência de pessoa de cuja legitimidade não se tenha certificado previamente, fechadura ou qualquer outro aparelho destinado à defesa de lugar ou objeto. O nome anterior — abrir valas ou escavações que ponham em perigo a vida — não corresponde a artigo nenhum da LCP"
   },
   {
     "id": 778,
@@ -12622,17 +12624,17 @@
     "id": 789,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 303",
-    "crime": "Usar de meios publicitários no dia da eleição a fim de fazer propaganda de partido ou candidato",
-    "pena_min": 6,
-    "pena_max": 24,
-    "tipo_pena": "Detenção",
+    "crime": "Majorar os preços de utilidades e serviços necessários à realização de eleições",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
-    "tentativa": "Sim",
+    "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos detenção + multa"
+    "obs": "Pagamento de 250 a 300 dias-multa, SEM pena privativa de liberdade. Transporte e alimentação de eleitores, impressão, publicidade e divulgação de matéria eleitoral. O registro publicava detenção de 6 meses a 2 anos — moldura que não é deste artigo nem do art. 304, que comina os mesmos 250 a 300 dias-multa"
   },
   {
     "id": 790,
@@ -12654,17 +12656,17 @@
     "id": 791,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 306",
-    "crime": "Votar ou instigar/solicitar votos em seção eleitoral diversa daquela em que é inscrito o eleitor ou por qualquer forma impedir/perturbar a votação",
-    "pena_min": 1,
-    "pena_max": 6,
-    "tipo_pena": "Detenção",
+    "crime": "Não observar a ordem em que os eleitores devem ser chamados a votar",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
-    "tentativa": "Sim",
+    "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção + multa"
+    "obs": "Pagamento de 15 a 30 dias-multa, SEM pena privativa de liberdade. O registro publicava detenção de 1 a 6 meses — moldura que não é deste artigo nem do art. 311, apontado pela auditoria"
   },
   {
     "id": 792,

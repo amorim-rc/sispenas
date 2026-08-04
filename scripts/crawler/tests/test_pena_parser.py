@@ -113,6 +113,41 @@ class TestEspecieDePena:
         assert lida["so_multa"] is True
         assert lida["tipo"] is None
 
+    def test_pagamento_de_dias_multa_e_pena_pecuniaria(self):
+        """A fórmula de 1965 do Código Eleitoral: "Pena - pagamento de 250 a 300
+        dias-multa". Não começa pela palavra "multa" — começa por "pagamento" —,
+        e enquanto não era reconhecida `ler_penas` devolvia vazio: o conferidor
+        PULAVA o dispositivo, e o registro ia para a conta dos indeterminados.
+
+        Foi por esse silêncio que três artigos do CE publicaram pena privativa de
+        liberdade — o 313 com reclusão de 2 a 6 anos, o 303 com detenção de 6
+        meses a 2 anos e o 306 com 1 a 6 meses — para artigos que não cominam
+        prisão nenhuma. Reconhecida a fórmula, o caso vira DIVERGENTE-moldura."""
+        for texto in ("Pena - pagamento de 250 a 300 dias-multa.",
+                      "Pena - pagamento de 15 a 30 dias-multa.",
+                      "Pena – pagamento de 90 a 120 dias-multa."):
+            lida = ler_pena(texto)
+            assert lida is not None and lida["so_multa"] is True, texto
+            assert lida["tipo"] is None
+
+    def test_pagamento_de_dias_multa_junto_de_privativa_nao_e_so_multa(self):
+        """A mesma lei escreve as duas formas. Onde há prisão, a moldura é dela:
+        o art. 310 do CE comina "detenção até seis meses OU pagamento de 90 a 120
+        dias-multa", e o art. 348, "reclusão de dois a seis anos e pagamento de
+        15 a 30 dias-multa"."""
+        lida = ler_pena("Pena - detenção até seis meses ou pagamento de 90 a 120 dias-multa.")
+        assert lida["so_multa"] is False and lida["tipo"] == "detenção"
+        assert lida["max_meses"] == 6.0
+        lida = ler_pena("Pena - reclusão de dois a seis anos e pagamento de 15 a 30 dias-multa.")
+        assert lida["so_multa"] is False and (lida["min_meses"], lida["max_meses"]) == (24.0, 72.0)
+
+    def test_remissao_de_moldura_a_outra_lei_nao_e_pena_lida(self):
+        """O art. 23-B da Lei 9.434/97 comina "as previstas no inciso XXIII do
+        caput do art. 10 da Lei nº 6.437/1977" — que são sanções ADMINISTRATIVAS
+        sanitárias. Não é pena criminal, e o parser não pode inventar uma."""
+        assert ler_pena("Pena – as previstas no inciso XXIII do caput do art. 10 "
+                        "da Lei nº 6.437, de 20 de agosto de 1977.") is None
+
     def test_multa_seguida_de_pena_privativa_continua_sendo_pena(self):
         """A ordem inversa existe e não pode ser confundida com só-multa."""
         lida = ler_pena("Pena - multa e detenção, de um a três anos.")
