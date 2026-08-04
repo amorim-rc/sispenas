@@ -83,7 +83,6 @@ Cinco regras, e a primeira vale mais que as outras quatro:
 # As perguntas
 
 ## 1 ⚠️ — Reincidente em crime do Título XII: 20% pelo inciso III, 1/6 pelo *caput*, ou 30% pelo inciso IV?
-
 > **Já foi respondida uma vez, com grau B.** A resposta está resumida no fim do
 > bloco. Duas coisas mudaram desde então e justificam ressubmeter: a extensão do
 > Título XII foi corrigida, e apareceu uma **terceira leitura** que a primeira
@@ -196,64 +195,7 @@ Se B — o que falta ver:
 
 ---
 
-## 2 ⚠️ — O crime de rádio clandestina do art. 151, §1º, IV do CP ainda existe?
-
-**Contexto.** O art. 151 do Código Penal pune, no §1º, IV:
-
-> **§ 1º** Na mesma pena incorre: […]
-> **IV** – quem instala ou utiliza estação ou aparelho radioelétrico, sem
-> observância de disposição legal.
-
-A pena, a mesma do *caput*, é **detenção de um a seis meses, ou multa**.
-
-Dez anos depois veio a Lei Geral de Telecomunicações:
-
-> **Art. 183 (Lei 9.472/97).** Desenvolver clandestinamente atividades de
-> telecomunicação:
->     ↳ Pena – detenção de dois a quatro anos, aumentada da metade se houver dano
->     a terceiro, e multa de R$ 10.000,00.
-
-E antes de ambos existia o art. 70 da Lei 4.117/62 (Código Brasileiro de
-Telecomunicações), que também punia a atividade clandestina.
-
-**O que o catálogo publica hoje.** Os dois como tipos plenamente vigentes.
-
-**A resposta parcial que já existe (grau M).** Não excluir e não publicar como
-plenamente vigente — marcar como **vigência controvertida, de aplicação
-residual**, com nota informando que a conduta é hoje processada pelo art. 183.
-O argumento decisivo é negativo: duas décadas de jurisprudência sobre rádio
-clandestina litigam art. 70 da Lei 4.117/62 contra art. 183 da Lei 9.472/97, e o
-art. 151, §1º, IV **não aparece**. Para um tipo penal, sumir do contencioso da
-matéria que ele regula é evidência forte de superação.
-
-**Por que a diferença importa mais que a classificação.** Pelo art. 151, §1º, IV
-a pena é detenção de um a seis meses ou multa — infração de menor potencial
-ofensivo, JECrim, transação penal, prescrição em três anos. Pelo art. 183,
-detenção de dois a quatro anos e multa, sem transação, na Justiça Federal. Quem
-calcule benefícios pelo dispositivo do Código Penal chega a um resultado
-radicalmente favorável e errado.
-
-**Pergunta.** Confirme ou refute a resposta parcial. Se houver **precedente**
-enfrentando diretamente a vigência do art. 151, §1º, IV — em qualquer sentido —,
-indique-o: é o que converteria M em A.
-
-**Atenção:** esta resposta depende de jurisprudência. Se você não tiver base
-segura sobre o estado dela, diga-o e responda em termos condicionais.
-
-**Formato da resposta.**
-
-```
-Classificação: [revogado tacitamente | vigência controvertida | plenamente vigente]
-Grau: [A | M | B]
-Fundamento:
-Há precedente que enfrente diretamente o art. 151, §1º, IV? [sim, qual | não localizo | não sei]
-Texto sugerido para a nota do registro (2 a 3 linhas, para o usuário final):
-```
-
----
-
-## 3 ✅ — Que crimes do Código Penal Militar são hediondos por identidade, e ainda não estão marcados?
-
+## 2 ✅ — Que crimes do Código Penal Militar são hediondos por identidade, e ainda não estão marcados?
 **Contexto.** A Lei 8.072/90 tem um rol fechado de crimes hediondos no art. 1º. O
 **inciso VI do parágrafo único** (incluído pela Lei 14.688/2023) declara hediondos
 também os crimes do Código Penal Militar *"que apresentem identidade com os crimes
@@ -306,8 +248,7 @@ recomeça do zero.
 
 ---
 
-## 4 ✅ — Artigo do Código Penal deve constar sob o rótulo do CP ou da lei que o criou?
-
+## 3 ✅ — Artigo do Código Penal deve constar sob o rótulo do CP ou da lei que o criou?
 **Contexto.** Alguns artigos do Código Penal foram inseridos por leis próprias, e
 o catálogo os rotula pela **lei criadora**, não pelo diploma:
 
@@ -356,8 +297,7 @@ Vale manter o nome antigo como caminho de busca? [sim/não, e por quê]
 
 ---
 
-## 5 ⚠️ — As ações diretas contra a Lei 15.402/2026 continuam sem cautelar?
-
+## 4 ⚠️ — As ações diretas contra a Lei 15.402/2026 continuam sem cautelar?
 **Contexto.** A Lei 15.402, de 8 de maio de 2026, reescreveu o *caput* e os
 incisos I a III do art. 112 da Lei de Execução Penal — os patamares de progressão
 de regime. O catálogo **a aplica**.
@@ -401,8 +341,7 @@ Grau: [A | M | B]
 
 ---
 
-## 6 ✅ — Como verificar um catálogo em que a maioria dos artigos compartilha moldura?
-
+## 5 ✅ — Como verificar um catálogo em que a maioria dos artigos compartilha moldura?
 **Contexto.** A conferência automática de penas tem um ponto cego conhecido: ela
 confere a moldura do registro contra o artigo que o **registro diz** ser. Se o
 nome veio de outro artigo, a pena pode ter vindo junto — e quando os dois artigos
@@ -451,8 +390,7 @@ Ordem de prioridade sugerida entre os diplomas:
 
 ---
 
-## 7 ⛔ — Quantos registros têm nome sem correspondente textual em lugar nenhum?
-
+## 6 ⛔ — Quantos registros têm nome sem correspondente textual em lugar nenhum?
 > **Não submeta esta pergunta.** Ela é de método interno e depende de uma
 > varredura sobre o acervo, não de juízo jurídico. Fica registrada aqui para não
 > se perder.
@@ -476,8 +414,7 @@ O resultado dessa varredura, sim, vira pergunta submissível.
 
 ---
 
-## 8 ⛔ — Quais causas de aumento truncadas têm o alcance dependente dos incisos?
-
+## 7 ⛔ — Quais causas de aumento truncadas têm o alcance dependente dos incisos?
 > **Não submeta ainda.** Falta anexar os textos integrais, sem os quais a
 > resposta seria palpite. A varredura descrita abaixo produz esse anexo.
 
@@ -512,8 +449,7 @@ submissível, com os textos anexados.
 
 ---
 
-## 9 ✅ — "Reincidente em crime diverso": diverso em relação a qual condenação?
-
+## 8 ✅ — "Reincidente em crime diverso": diverso em relação a qual condenação?
 **Contexto.** O inciso III do art. 112 da Lei de Execução Penal, na redação da Lei
 15.402/2026, diz:
 
@@ -557,6 +493,115 @@ Fundamento:
 A redação de 2019 ajuda a interpretar a de 2026? [sim, como | não]
 O cálculo depende de dado que o tipo penal não carrega? [sim/não]
 Argumento contrário a registrar:
+```
+
+---
+
+## 9 ✅ — Registro revogado deve continuar entrando na busca por benefício?
+**Contexto.** O catálogo mantém consultáveis três registros que já não vigoram, e
+cada um por um motivo diferente:
+
+| Registro | Situação | Desde |
+|---|---|---|
+| CP, art. 151, §1º, IV — instalar estação de rádio sem autorização | revogado tacitamente pelo art. 70 da Lei 4.117/62 | 1962 |
+| LCP, art. 25 — ter instrumento de furto em razão da condição do agente | **não recepcionado** pela Constituição (STF, RE 583.523, Tema 113) | 1988 |
+| CPM, art. 232, §3º — estupro de vulnerável militar | inconstitucional, eficácia ***ex nunc*** (STF, ADI 7555) | 2025 |
+
+Todos trazem a data e a nota do que houve, e a interface os marca. A razão de
+mantê-los é boa: a atipicidade **precisa ser arguida** — quem defende alguém
+denunciado com base em dispositivo revogado precisa encontrar o precedente —, e
+no caso de eficácia *ex nunc* o fato anterior continua regido pelo dispositivo.
+
+**O problema.** A ferramenta tem uma tela de "busca por benefício": escolhido um
+instituto, ela varre o catálogo inteiro e conta em quantos tipos penais ele é
+cabível. Os três registros entram nessa varredura e nessas contagens.
+
+Para o art. 151, §1º, IV isso é grave em uma direção específica: quem calcular
+benefícios por ele obtém menor potencial ofensivo, transação penal e prescrição
+em três anos — resultado radicalmente favorável e errado. Para o art. 232, §3º do
+CPM é o contrário: excluí-lo apagaria o cálculo legítimo do fato anterior a 2025.
+
+**Pergunta.** Um registro que não vigora deve:
+
+1. **sair da varredura de benefícios**, permanecendo consultável na busca por
+   tipo penal — o número publicado de "tipos alcançados" passa a ser de tipos
+   vigentes;
+2. **permanecer**, porque a ferramenta é de pesquisa e o alcance histórico é dado
+   legítimo;
+3. **depender do motivo** — sai quando a perda de vigência é total (revogação, não
+   recepção) e permanece quando é *ex nunc*, porque ali há um universo de fatos
+   ainda regidos por ele.
+
+E, se for a 1 ou a 3: o que a ferramenta deve exibir a quem simula benefício
+partindo de um tipo revogado — recusar o cálculo, ou calcular com aviso?
+
+**O que falta ver.** Nada de direito. É decisão de metodologia sobre o que o
+número publicado significa.
+
+**Formato da resposta.**
+
+```
+Opção adotada: [1 | 2 | 3 | outra]
+Grau: [A | M | B]
+Fundamento:
+O que exibir a quem simula benefício partindo de tipo revogado:
+O número de "tipos alcançados" deve contar os revogados? [sim/não, e por quê]
+```
+
+---
+
+## 10 ⚠️ — O art. 183 da Lei 9.472/97 é norma penal em branco: como registrar a dependência?
+**Contexto.** O art. 183 da Lei Geral de Telecomunicações pune:
+
+> **Art. 183.** Desenvolver clandestinamente atividades de telecomunicação:
+>     ↳ Pena – detenção de dois a quatro anos, aumentada da metade se houver dano
+>     a terceiro, e multa de R$ 10.000,00.
+>
+> **Parágrafo único.** Incorre na mesma pena quem, direta ou indiretamente,
+> concorrer para o crime.
+>
+> **Art. 184, parágrafo único.** Considera-se clandestina a atividade desenvolvida
+> sem a competente **outorga**, permissão ou autorização de serviço, de uso de
+> radiofrequência e de exploração de satélite.
+
+O que é "clandestino", portanto, depende de **quais atividades exigem outorga** —
+e isso é definido por regulamentação da Anatel, não por lei.
+
+**Por que isso importa para um catálogo.** Quando a regulamentação deixa de exigir
+outorga para uma atividade, a conduta correspondente deixa de ser crime, e a
+alteração **retroage** em favor do réu como *abolitio criminis*. Há precedente do
+STJ reconhecendo exatamente isso a partir de uma resolução da Anatel que dispensou
+outorga para serviço de comunicação multimídia de radiação restrita.
+
+O catálogo registra o art. 183 com moldura fixa e não tem como saber quando a
+regulamentação muda. A conferência semanal vigia o **texto compilado da lei** —
+que não muda quando a Anatel muda.
+
+**Pergunta.** Duas partes:
+
+1. **De direito:** a alteração regulamentar que retira a exigência de outorga
+   opera como *abolitio criminis* retroativa em relação ao art. 183, ou como mera
+   alteração do complemento de norma penal em branco — que, na leitura clássica,
+   só retroage quando altera a própria valoração da conduta, e não quando muda
+   circunstância temporária? Se houver precedente vinculante ou consolidado,
+   indique-o.
+2. **De modelagem:** quais outros tipos do catálogo dependem de complemento
+   infralegal do mesmo modo, e o que um catálogo deve publicar ao lado deles? Um
+   campo de "dependência regulatória", com o órgão e o ato, muda o que se pode
+   afirmar sobre esses tipos — ou basta uma nota?
+
+**Atenção:** a primeira parte depende de jurisprudência; a segunda, não. Responda
+a segunda mesmo que não tenha base segura para a primeira.
+
+**Formato da resposta.**
+
+```
+1. Alteração regulamentar retroage como abolitio criminis? [sim | não | depende, de quê]
+   Grau: [A | M | B]
+   Fundamento / precedente:
+2. Outros tipos com a mesma estrutura que você identifique:
+   O catálogo deve ter campo próprio de dependência regulatória? [sim/não, e por quê]
+   O que exibir ao usuário ao lado desses tipos:
 ```
 
 ---
