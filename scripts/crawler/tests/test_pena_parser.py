@@ -165,3 +165,70 @@ class TestEspecieDePena:
         assert molduras[0]["tipos"] == ["reclusão", "detenção"]
         assert (molduras[0]["min_meses"], molduras[0]["max_meses"]) == (12.0, 36.0)
 
+
+
+class TestNumeroCompostoEntreParenteses:
+    """O parêntese repete o algarismo; só a UNIDADE dentro dele interessa.
+
+    `_limpar` apagava os numerais um a um e deixava o conectivo órfão: "de 24
+    (vinte e quatro) a 30" virava "de 24 e a 30", que nenhum RANGE reconhece. A
+    moldura sumia, o dispositivo caía na conta dos indeterminados e ninguém
+    conferia — foi assim que o LATROCÍNIO nunca foi confrontado com a lei.
+    """
+
+    def test_composto_entre_parenteses_nao_apaga_a_moldura(self):
+        lida = ler_pena("a pena é de reclusão, de 24 (vinte e quatro) a 30 "
+                        "(trinta) anos, e multa.")
+        assert (lida["min_meses"], lida["max_meses"]) == (288.0, 360.0)
+
+    def test_composto_por_extenso_sem_parenteses_continua_valendo(self):
+        lida = ler_pena("Pena - reclusão, de vinte e quatro a trinta anos.")
+        assert (lida["min_meses"], lida["max_meses"]) == (288.0, 360.0)
+
+    def test_unidade_dentro_do_parentese_sobrevive(self):
+        """O art. 121, § 2º-D fecha o parêntese depois da unidade — "40
+        (quarenta anos)". Tirar o "e" não pode levar o "anos" junto."""
+        lida = ler_pena("Pena – reclusão, de 20 (vinte) a 40 (quarenta anos).")
+        assert (lida["min_meses"], lida["max_meses"]) == (240.0, 480.0)
+
+
+class TestFormulaDeGrausDoCPM:
+    """"Pena - morte, grau máximo; reclusão, de vinte anos, grau mínimo."
+
+    O CPM comina assim os crimes de guerra. Não é intervalo, e trinta e poucos
+    registros ficavam sem conferência nenhuma. Lê-se o PISO, que a lei escreve;
+    o teto é a morte, e o que o catálogo publica no lugar dela é modelagem do
+    projeto — não há o que confrontar.
+    """
+
+    def test_le_o_piso_e_declara_o_teto_inverificavel(self):
+        from pena_parser import ler_penas
+        m, = ler_penas("Pena - morte, grau máximo; reclusão, de vinte anos, grau mínimo.")
+        assert m["min_meses"] == 240.0
+        assert m["piso_apenas"] is True
+
+    def test_a_morte_entra_como_especie(self):
+        """O catálogo grava "Morte" no tipo de pena — a espécie mais grave que o
+        preceito comina. Ler só a espécie do piso fazia o differ acusar "lei
+        reclusão × catálogo Morte" em três dezenas de artigos corretos."""
+        from pena_parser import ler_penas
+        m, = ler_penas("Pena - morte, grau máximo; reclusão, de vinte anos, grau mínimo.")
+        assert m["tipos"] == ["morte", "reclusão"]
+
+    def test_graus_por_papel_do_agente_sao_duas_molduras(self):
+        """O art. 368 do CPM comina piso diferente para os cabeças e para os
+        co-autores. São duas molduras: a segunda vira candidata a linha nova, e
+        a decisão é humana."""
+        from pena_parser import ler_penas
+        molduras = ler_penas(
+            "Pena - aos cabeças, morte, grau máximo; reclusão, de vinte anos, grau "
+            "mínimo. Aos co-autores, morte, grau máximo; reclusão, de quinze anos, "
+            "grau mínimo.")
+        assert [m["min_meses"] for m in molduras] == [240.0, 180.0]
+        assert all(m["tipos"] == ["morte", "reclusão"] for m in molduras)
+
+    def test_moldura_normal_nao_vira_piso_aberto(self):
+        from pena_parser import ler_penas
+        m, = ler_penas("Pena - reclusão, de doze a trinta anos;")
+        assert m["piso_apenas"] is False
+        assert (m["min_meses"], m["max_meses"]) == (144.0, 360.0)

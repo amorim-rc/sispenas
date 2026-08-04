@@ -122,6 +122,30 @@ _SO_PECUNIARIA = re.compile(
     re.IGNORECASE | re.DOTALL)
 _ATE = re.compile(
     rf"at[ée]\s+(\d+|{'|'.join(_EXTENSO)})\s*\(?[^)]*\)?\s*{_U}", re.IGNORECASE)
+# Fórmula de GRAUS do CPM em tempo de guerra (arts. 355 e ss.):
+#
+#     "Pena - morte, grau máximo; reclusão, de vinte anos, grau mínimo."
+#
+# Não é intervalo: são os dois extremos da moldura escritos como graus, e o
+# máximo é a pena de morte — que não se converte em meses. Nenhum RANGE casa, e
+# trinta e poucos registros do Livro II do CPM ficavam sem conferência nenhuma.
+#
+# O PISO é legível e é o que se confere: "reclusão, de vinte anos" = 240 meses.
+# O teto fica declarado inverificável (`piso_apenas`), porque a lei diz "morte"
+# e o catálogo publica 30 anos — o limite do art. 58 do CPM. Essa conversão é
+# modelagem do projeto, não leitura da lei, e o conferidor não tem o que
+# confrontar ali. Meia conferência é o que a lei permite; fingir a outra metade
+# seria pior que não ter nenhuma.
+_GRAU_MINIMO = re.compile(
+    rf"(reclus[ãa]o|deten[çc][ãa]o)\s*,?\s*de\s+(\d+|{'|'.join(_EXTENSO)})\s*"
+    rf"\(?[^)]*\)?\s*{_U}?\s*,?\s*grau\s+m[ií]nimo", re.IGNORECASE)
+# A espécie do grau MÁXIMO, que na quase totalidade destes artigos é a morte. O
+# catálogo grava "Morte" no tipo de pena — a espécie mais grave que o preceito
+# comina —, então ler só a espécie do piso faria o differ acusar "lei reclusão ×
+# catálogo Morte" em três dezenas de artigos corretos. As duas espécies estão no
+# preceito, e as duas contam.
+_GRAU_MAXIMO = re.compile(
+    r"(morte|reclus[ãa]o|deten[çc][ãa]o)\s*,?\s*grau\s+m[áa]ximo", re.IGNORECASE)
 
 
 _NUM_EXTENSO = re.compile("|".join(rf"\b{p}\b" for p in _EXTENSO), re.IGNORECASE)
@@ -135,6 +159,15 @@ def _limpar(texto: str) -> str:
     DENTRO dele, e apagá-la deixaria "de 20 a 40", sem unidade, ilegível. Então:
     parêntese com dígitos (anotação, remissão) sai fora; parêntese de palavras
     perde os numerais e devolve o resto ("anos").
+
+    O "e" do número COMPOSTO tem de sair junto. `_NUM_EXTENSO` casa palavra a
+    palavra, então "(vinte e quatro)" perdia os dois numerais e devolvia o
+    conectivo órfão: "de 24 (vinte e quatro) a 30" virava "de 24 e a 30", que
+    nenhum RANGE reconhece — a moldura simplesmente sumia, e o dispositivo
+    entrava na conta dos indeterminados sem uma palavra.
+    Foi por aí que o LATROCÍNIO (art. 157, § 3º, II do CP) nunca foi conferido.
+    O parêntese aqui só repete o algarismo que veio antes; o único resíduo que
+    interessa é a UNIDADE, e unidade nenhuma tem conectivo dentro.
     """
     t = re.sub(r"dias?\s*[-\s]?\s*multa", " multa ", texto or "", flags=re.IGNORECASE)
 
@@ -142,7 +175,7 @@ def _limpar(texto: str) -> str:
         conteudo = m.group(1)
         if re.search(r"\d", conteudo):
             return " "
-        resto = _NUM_EXTENSO.sub("", conteudo).strip()
+        resto = re.sub(r"\be\b", " ", _NUM_EXTENSO.sub("", conteudo), flags=re.I).strip()
         return f" {resto} " if resto else " "
 
     return re.sub(r"\(([^()]*)\)", trata, t)
@@ -212,12 +245,27 @@ def ler_penas(texto: str) -> list[dict]:
             inicio = max(0 if i == 0 else marcas[i - 1].end(), marcas[i].start() - 70)
             lida = ler_pena(bruto[inicio:fim])
         if lida and not lida["so_multa"]:
-            tipos = [m.group(0).lower() for m in marcas[i:j + 1]]
-            lida["tipos"] = tipos
-            # Com espécie alternativa, `tipo` fica com as duas: escolher uma é
-            # decisão de modelagem, e os geradores recusam o que não é uma das
-            # três espécies do catálogo.
-            lida["tipo"] = " ou ".join(tipos)
+            # A fórmula de graus já resolveu as próprias espécies, e uma delas é
+            # a MORTE, que `_TIPO_RE` não conhece. Reescrever aqui pela varredura
+            # de espécies apagaria justamente a mais grave.
+            #
+            # A morte também não está no TRECHO: ela é o grau máximo e vem ANTES
+            # da espécie do piso, então o fatiamento por espécie a deixa para
+            # trás. É preciso procurá-la no preceito inteiro. Num mesmo preceito
+            # o grau máximo é sempre a mesma espécie, ainda que os pisos variem
+            # por papel do agente ("aos cabeças… aos co-autores…", art. 368).
+            if lida.get("piso_apenas"):
+                gm = _GRAU_MAXIMO.search(_extenso_para_numero(_limpar(bruto)))
+                if gm and gm.group(1).lower() not in lida["tipos"]:
+                    lida["tipos"].insert(0, gm.group(1).lower())
+                    lida["tipo"] = " ou ".join(lida["tipos"])
+            else:
+                tipos = [m.group(0).lower() for m in marcas[i:j + 1]]
+                lida["tipos"] = tipos
+                # Com espécie alternativa, `tipo` fica com as duas: escolher uma
+                # é decisão de modelagem, e os geradores recusam o que não é uma
+                # das três espécies do catálogo.
+                lida["tipo"] = " ou ".join(tipos)
             lida["contexto"] = trecho[:120]
             molduras.append(lida)
         i = j + 1
@@ -243,15 +291,30 @@ def ler_pena(texto: str) -> dict | None:
     # Procurar a espécie antes do teste de multa é o que permitia isso.
     if (_SO_MULTA.match(bruto) or _SO_PECUNIARIA.match(bruto)) and not _TIPO_RE.search(bruto):
         return {"tipo": None, "min_meses": 0.0, "max_meses": 0.0,
-                "so_multa": True, "teto_apenas": False}
+                "so_multa": True, "teto_apenas": False, "piso_apenas": False}
     tipo = next((t for t in _TIPOS if t in bruto.lower()), None)
     if tipo is None:
         # Sem tipo de pena privativa: ou é só multa, ou não é preceito de pena.
         return ({"tipo": None, "min_meses": 0.0, "max_meses": 0.0,
-                 "so_multa": True, "teto_apenas": False}
+                 "so_multa": True, "teto_apenas": False, "piso_apenas": False}
                 if (_SO_MULTA.match(bruto) or _SO_PECUNIARIA.match(bruto)) else None)
 
     limpo = _extenso_para_numero(_limpar(bruto))
+    # Antes do intervalo: a fórmula de graus não é intervalo, e deixá-la cair
+    # nos RANGE arriscaria casar dois graus vizinhos como se fossem mínimo e
+    # máximo de uma mesma moldura.
+    g = _GRAU_MINIMO.search(limpo)
+    if g:
+        valor = g.group(2)
+        valor = int(valor) if valor.isdigit() else _EXTENSO[valor.lower()]
+        gm = _GRAU_MAXIMO.search(limpo)
+        especies = [g.group(1).lower()]
+        if gm and gm.group(1).lower() not in especies:
+            especies.insert(0, gm.group(1).lower())
+        return {"tipo": " ou ".join(especies), "tipos": especies,
+                "min_meses": _meses(valor, _norm_unidade(g.group(3) or "anos")),
+                "max_meses": 0.0, "so_multa": False,
+                "teto_apenas": False, "piso_apenas": True}
     faixa = parse_pena_range(limpo)
     if faixa:
         vmin, umin, vmax, umax = faixa
@@ -264,7 +327,8 @@ def ler_pena(texto: str) -> dict | None:
         if minimo > maximo:
             return None
         return {"tipo": tipo, "tipos": [tipo], "min_meses": minimo,
-                "max_meses": maximo, "so_multa": False, "teto_apenas": False}
+                "max_meses": maximo, "so_multa": False, "teto_apenas": False,
+                "piso_apenas": False}
 
     m = _ATE.search(limpo)
     if m:
@@ -272,5 +336,5 @@ def ler_pena(texto: str) -> dict | None:
         valor = int(valor) if valor.isdigit() else _EXTENSO[valor.lower()]
         return {"tipo": tipo, "tipos": [tipo], "min_meses": 0.0,
                 "max_meses": _meses(valor, _norm_unidade(m.group(2))),
-                "so_multa": False, "teto_apenas": True}
+                "so_multa": False, "teto_apenas": True, "piso_apenas": False}
     return None

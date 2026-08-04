@@ -136,6 +136,58 @@ def indexar_catalogo() -> dict[str, dict[str, list[dict]]]:
     return indice
 
 
+def molduras_de(disp) -> list[dict]:
+    """As molduras de um dispositivo — descendo aos incisos quando preciso.
+
+    Um parágrafo pode ser só CHAPEAU, com a pena de cada hipótese no inciso:
+
+        Art. 157, § 3º  Se da violência resulta:
+        I - lesão corporal grave, a pena é de reclusão de 7 a 18 anos, e multa;
+        II - morte, a pena é de reclusão, de 24 a 30 anos, e multa.
+
+    Ler só o preceito do parágrafo devolve lista vazia, e o conferidor pula os
+    dois registros sem dizer nada. O LATROCÍNIO — a pena mais grave do Código
+    Penal fora dos crimes contra a humanidade — nunca tinha sido conferido.
+
+    A descida só acontece quando o dispositivo NÃO tem moldura própria: onde o
+    caput comina a pena e os incisos apenas qualificam a conduta, quem manda é o
+    caput. E o catálogo desce ao inciso pela mesma `chave`, então as molduras
+    dos incisos entram como molduras do parágrafo — que é o que o casamento por
+    proximidade já sabe consumir quando um preceito comina mais de uma pena.
+    """
+    proprias = ler_penas(disp.pena_texto or disp.texto)
+    if proprias:
+        return proprias
+    molduras: list[dict] = []
+    for inc in getattr(disp, "incisos", []) or []:
+        if inc.get("situacao") == "revogado":
+            continue
+        molduras += ler_penas(inc.get("pena_texto") or inc.get("texto") or "")
+    return molduras
+
+
+def distancia(moldura: dict, cmin: float, cmax: float) -> float:
+    """Quão longe esta moldura da lei está da que o registro publica.
+
+    Serve para casar N linhas do catálogo com N molduras do preceito. Só entram
+    na conta as pontas que a LEI escreveu: uma moldura de teto aberto ("até
+    cinco anos") não tem piso a comparar, e uma de piso aberto (a fórmula de
+    graus do CPM, cujo teto é a morte) não tem teto.
+
+    Somar a ponta ausente como zero fazia o casamento errar por muito: no art.
+    400 do CPM, o registro do homicídio qualificado (240–360) ficava a 360 da
+    moldura certa — o inciso III, de piso 240 — e a apenas 96 da do inciso I,
+    que é de outro crime. O differ então acusava divergência entre dois
+    dispositivos que nada têm com o outro.
+    """
+    d = 0.0
+    if not moldura.get("piso_apenas"):
+        d += abs(moldura["max_meses"] - cmax)
+    if not moldura.get("teto_apenas"):
+        d += abs(moldura["min_meses"] - cmin)
+    return d
+
+
 def moldura_catalogo(linha: dict) -> tuple[float, float]:
     """Moldura canônica, em meses.
 
@@ -192,7 +244,7 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
             })
             continue
 
-        molduras = ler_penas(disp.pena_texto or disp.texto)
+        molduras = molduras_de(disp)
         if not molduras:
             continue
         # Um preceito pode cominar DUAS penas (dolosa e culposa, no mesmo
@@ -209,8 +261,7 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
             for linha in linhas:
                 cmin, cmax = moldura_catalogo(linha)
                 i = min(range(len(molduras)),
-                        key=lambda j: abs(molduras[j]["min_meses"] - cmin)
-                        + abs(molduras[j]["max_meses"] - cmax))
+                        key=lambda j: distancia(molduras[j], cmin, cmax))
                 usadas.add(i)
             for j, m in enumerate(molduras):
                 if j in usadas:
@@ -229,8 +280,7 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
 
         for linha in linhas:
             cmin, cmax = moldura_catalogo(linha)
-            pena = min(molduras,
-                       key=lambda m: abs(m["min_meses"] - cmin) + abs(m["max_meses"] - cmax))
+            pena = min(molduras, key=lambda m: distancia(m, cmin, cmax))
             pena = dict(pena, multiplas=len(molduras) > 1)
             if dispensado(excecoes, fonte["id"], k, [linha["id"]]):
                 continue
@@ -246,6 +296,11 @@ def conferir_fonte(fonte: dict, do_catalogo: dict[str, list[dict]],
             lmin, lmax = pena["min_meses"], pena["max_meses"]
             if pena["teto_apenas"]:
                 difere = abs(cmax - lmax) > TOLERANCIA_MESES
+            elif pena.get("piso_apenas"):
+                # Fórmula de graus do CPM: a lei escreve o piso e diz "morte" no
+                # teto. Confere-se o que a lei escreveu; o teto que o catálogo
+                # publica vem da modelagem do projeto, não do compilado.
+                difere = abs(cmin - lmin) > TOLERANCIA_MESES
             else:
                 difere = (abs(cmin - lmin) > TOLERANCIA_MESES
                           or abs(cmax - lmax) > TOLERANCIA_MESES)
@@ -387,8 +442,7 @@ def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]],
             if disp is None:
                 resultado["nao_localizado"] += [(fonte["id"], k, x["id"]) for x in linhas]
                 continue
-            molduras = [m for m in ler_penas(disp.pena_texto or disp.texto)
-                        if not m["so_multa"]]
+            molduras = [m for m in molduras_de(disp) if not m["so_multa"]]
             for linha in linhas:
                 # Já julgado e decidido: não é conferido nem divergente — é
                 # dispensado, e o relatório precisa dizê-lo em vez de somar ao
@@ -397,14 +451,20 @@ def cobertura(fontes: list[dict], indice: dict[str, dict[str, list[dict]]],
                         or dispensado(excecoes, fonte["id"], k)):
                     resultado["dispensado"].append((fonte["id"], k, linha["id"]))
                     continue
-                if not molduras:
+                # Registro sem pena privativa não se confronta com moldura de
+                # prisão. A questão aparece desde que o conferidor passou a
+                # descer aos incisos: o art. 11 da Lei 6.091 pune o inciso I com
+                # detenção e o II só com dias-multa, e o registro do inciso II
+                # ia comparar-se à moldura do I. Ele entra onde sempre esteve —
+                # entre os que a lei não dá moldura privativa para conferir.
+                if not molduras or not linha.get("tem_pena_privativa", True):
                     resultado["sem_moldura_na_lei"].append(
                         (fonte["id"], k, linha["id"], _por_referencia(disp, linha)))
                     continue
                 cmin, cmax = moldura_catalogo(linha)
-                pena = min(molduras, key=lambda m: abs(m["min_meses"] - cmin)
-                           + abs(m["max_meses"] - cmax))
-                bate_max = abs(cmax - pena["max_meses"]) <= TOLERANCIA_MESES
+                pena = min(molduras, key=lambda m: distancia(m, cmin, cmax))
+                bate_max = (pena.get("piso_apenas")
+                            or abs(cmax - pena["max_meses"]) <= TOLERANCIA_MESES)
                 bate_min = pena["teto_apenas"] or abs(cmin - pena["min_meses"]) <= TOLERANCIA_MESES
                 especie = any(t in (linha.get("tipo_pena") or "").lower()
                               for t in pena.get("tipos") or [])

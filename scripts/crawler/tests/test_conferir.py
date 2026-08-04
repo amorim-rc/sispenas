@@ -84,3 +84,60 @@ def test_moldura_usa_os_campos_canonicos():
 
 def test_moldura_cai_para_os_campos_crus_quando_nao_ha_derivado():
     assert moldura_catalogo({"pena_min": 24, "pena_max": 60}) == (24.0, 60.0)
+
+
+class TestMoldurasDeChapeau:
+    """O conferidor desce ao inciso quando o dispositivo não tem pena própria."""
+
+    def test_desce_ao_inciso_quando_o_dispositivo_nao_tem_moldura(self, carregar):
+        from parsear import parsear
+        from conferir import molduras_de
+        d = {x.chave: x for x in parsear(carregar("cp-art197-pena-por-inciso"))}
+        molduras = molduras_de(d["Art. 197|caput"])
+        assert [(m["min_meses"], m["max_meses"]) for m in molduras] == [(1.0, 12.0),
+                                                                       (3.0, 12.0)]
+
+    def test_pena_do_proprio_dispositivo_manda_sobre_a_do_inciso(self, carregar):
+        """Onde o caput comina a pena e os incisos só qualificam a conduta, quem
+        manda é o caput: descer ali produziria molduras que ninguém cominou."""
+        from parsear import parsear
+        from conferir import molduras_de
+        d = {x.chave: x for x in parsear(carregar("lavagem-art1-redacao"))}
+        molduras = molduras_de(d["Art. 1|caput"])
+        assert len(molduras) == 1
+        assert (molduras[0]["min_meses"], molduras[0]["max_meses"]) == (36.0, 120.0)
+
+    def test_le_o_texto_do_inciso_quando_a_pena_vem_embutida(self, carregar):
+        """No CP, art. 157, § 3º, a pena não é linha "Pena –": está dentro do
+        inciso ("morte, a pena é de reclusão, de 24 a 30 anos"). É preciso ler o
+        texto do inciso, não só a linha de pena dele."""
+        from parsear import parsear
+        from conferir import molduras_de
+        d = {x.chave: x for x in parsear(carregar("cpm-art400-graus"))}
+        molduras = molduras_de(d["Art. 400|caput"])
+        assert len(molduras) == 2
+
+
+class TestDistancia:
+    """Só entram na conta as pontas que a LEI escreveu."""
+
+    def test_ponta_aberta_nao_conta_como_zero(self):
+        """A moldura de piso aberto (fórmula de graus do CPM) tem max_meses 0.
+        Somá-lo como se fosse a pena punha o registro do art. 400 a 360 da
+        moldura certa e a 96 da de outro crime — e o differ acusava divergência
+        entre dispositivos que nada têm um com o outro."""
+        from conferir import distancia
+        piso = {"min_meses": 240.0, "max_meses": 0.0, "piso_apenas": True}
+        outra = {"min_meses": 144.0, "max_meses": 360.0, "piso_apenas": False}
+        assert distancia(piso, 240.0, 360.0) < distancia(outra, 240.0, 360.0)
+
+    def test_teto_aberto_ignora_o_piso(self):
+        from conferir import distancia
+        teto = {"min_meses": 0.0, "max_meses": 60.0, "teto_apenas": True}
+        assert distancia(teto, 12.0, 60.0) == 0.0
+
+    def test_moldura_fechada_compara_as_duas_pontas(self):
+        from conferir import distancia
+        m = {"min_meses": 12.0, "max_meses": 48.0}
+        assert distancia(m, 12.0, 48.0) == 0.0
+        assert distancia(m, 6.0, 48.0) == 6.0
