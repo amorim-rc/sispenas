@@ -57,6 +57,18 @@ CORRECOES = {
     # o tipo-base não comina multa.
     167: {"tem_multa": False, "multa_regime": "nenhuma"},
     898: {"tem_multa": False, "multa_regime": "nenhuma"},
+    # Art. 310 do Código Eleitoral: "detenção até seis meses OU pagamento de 90 a
+    # 120 dias-multa". A cominação é alternativa, mas a heurística lê "dias-multa"
+    # antes de "ou" e conclui cumulativa. A diferença não é de rótulo: com multa
+    # alternativa, a multa isolada basta para punir o fato.
+    792: {"tem_multa": True, "multa_regime": "alternativa"},
+    # Dois registros cujo `obs` EXPLICA que o artigo não comina multa. A palavra
+    # está lá — a heurística só sabe procurá-la, não negá-la. Art. 338 do CP
+    # ("reclusão, de um a quatro anos, sem prejuízo de nova expulsão") e art. 72
+    # da Lei 9.504/97 ("puníveis com reclusão, de cinco a dez anos"): a multa que
+    # os dois publicavam veio junto com o nome importado de outro artigo.
+    750: {"tem_multa": False, "multa_regime": "nenhuma"},
+    537: {"tem_multa": False, "multa_regime": "nenhuma"},
 }
 
 # ── O catálogo contém APENAS tipos penais ───────────────────────────────────
@@ -305,6 +317,32 @@ def classificar_contradicao(grupo: list) -> str:
     return "pena"
 
 
+def validar_vigencia(crimes: list) -> list:
+    """Dispositivo que deixou de vigorar precisa dizer O QUE ACONTECEU.
+
+    `vigencia_ate` sozinho é pior que nada: o registro sai do ar sem explicar por
+    quê, e quem consulta um fato anterior não sabe se ainda pode se apoiar nele.
+    A nota tem de trazer o motivo e, quando houver, o dispositivo que passa a
+    reger a conduta.
+    """
+    problemas = []
+    for c in crimes:
+        ate = c.get("vigencia_ate")
+        if ate and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(ate)):
+            problemas.append(
+                f"id {c['id']}: `vigencia_ate` = {ate!r} não é uma data AAAA-MM-DD")
+        if ate and not (c.get("vigencia_nota") or "").strip():
+            problemas.append(
+                f"id {c['id']}: declara `vigencia_ate` sem `vigencia_nota` — um "
+                "registro que deixou de vigorar tem de dizer o que houve e qual "
+                "dispositivo passa a reger a conduta")
+        if c.get("vigencia_nota") and not ate:
+            problemas.append(
+                f"id {c['id']}: tem `vigencia_nota` sem `vigencia_ate` — se o "
+                "dispositivo continua vigente, a nota é `obs`")
+    return problemas
+
+
 def validar_condicionais(crimes: list) -> list:
     """Classificação circunstanciada não pode ser afirmada como se fosse do tipo.
 
@@ -508,7 +546,8 @@ def main():
 
     # Invariantes estruturais: falham sempre, independentemente de --estrito.
     problemas = (validar_ids(crimes) + validar_tipos_penais(crimes)
-                 + validar_moldura(crimes) + validar_condicionais(crimes))
+                 + validar_moldura(crimes) + validar_condicionais(crimes)
+                 + validar_vigencia(crimes))
     if problemas:
         for p in problemas:
             print(f"ERRO: {p}", file=sys.stderr)
@@ -560,6 +599,19 @@ def main():
         # marca é quem conhece o caso, na simulação.
         c["hediondo_condicional"] = bool(c.get("hediondo_condicao"))
         c["acao_condicional"] = bool(c.get("acao_condicao"))
+
+        # VIGÊNCIA. Um dispositivo pode deixar de valer sem sair do catálogo:
+        # declarado inconstitucional com eficácia ex nunc (CPM, art. 232, §3º —
+        # ADI 7555) ou revogado. O registro CONTINUA consultável, porque os fatos
+        # anteriores seguem regidos por ele; o que muda é que a aplicação passa a
+        # dizê-lo. Excluir seria apagar a lei que valia quando o fato ocorreu.
+        #
+        # O derivado é a ausência do campo, não uma comparação com a data de
+        # hoje: o arquivo derivado é commitado e conferido pela CI, e um campo
+        # que muda sozinho num dia qualquer quebraria o build sem ninguém ter
+        # tocado em nada. Vacatio legis é outro problema, do conferidor
+        # (scripts/crawler/vigencia.py), e não se modela aqui.
+        c["vigente"] = not c.get("vigencia_ate")
 
         # Trilha de auditoria: quando este registro foi confrontado com a lei,
         # com que resultado e contra qual página. Vem da última rodada do

@@ -66,8 +66,8 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 
 | Benefício | Fundamento | Critério |
 |-----------|-----------|----------|
-| **Progressão de regime** | Art. 112, LEP | Frações de 16% a 70% conforme reincidência/hediondez/resultado morte |
-| **Livramento condicional** | Art. 83, CP | 1/3 (primário), 1/2 (reincidente), 2/3 (hediondo); vedado reincidente específico hediondo |
+| **Progressão de regime** | Art. 112, LEP | Frações de 16% a 85% conforme reincidência/hediondez/resultado morte |
+| **Livramento condicional** | Art. 83, CP | 1/3 (primário), 1/2 (reincidente), 2/3 (hediondo); vedado ao reincidente específico em hediondo e nas quatro hipóteses do art. 112 da LEP |
 | **Prescrição** | Art. 109, CP | Tabela por pena (abstrata e concreta) |
 | **Saída temporária** | Art. 122, LEP | Regime semiaberto; 1/6 (primário) ou 1/4 (reincidente); vedada em hediondo com resultado morte (Lei 14.843/2024) |
 | **Detração** | Art. 42, CP | Desconto de prisão provisória (qualitativo) |
@@ -83,14 +83,95 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 
 | Inciso | Situação | Fração |
 |--------|----------|--------|
-| I | Primário, sem violência/grave ameaça | 16% |
-| II | Reincidente, sem violência/grave ameaça | 20% |
-| III | Primário, com violência/grave ameaça | 25% |
-| IV | Reincidente, com violência/grave ameaça | 30% |
-| V | Primário, hediondo/equiparado | 40% |
-| VI | Primário, hediondo com resultado morte (livramento vedado) | 50% |
-| VII | Reincidente, hediondo | 60% |
-| VIII | Reincidente específico, hediondo com resultado morte | 70% |
+| *caput* | Regra geral — **1/6 da pena no regime anterior** | 16,67% |
+| I | Primário, com violência/grave ameaça, **salvo Título XII** | 25% |
+| II | Reincidente, com violência/grave ameaça, **salvo Título XII** | 30% |
+| III | Reincidente em crime diverso dos dos incisos I e II | 20% |
+| IV | Reincidente, com violência/grave ameaça — **sem** a ressalva do Título XII (redação de 2019; a nova foi vetada) | 30% |
+| V | Primário, hediondo/equiparado | 70% |
+| VI, "a" | Primário, hediondo com resultado morte (livramento vedado) | 75% |
+| VI, "b" | Comando de organização criminosa **ultraviolenta** estruturada para crime hediondo (livramento vedado) | 75% |
+| VI, "c" | Constituição de milícia privada | 75% |
+| VI, "d" | Primário, feminicídio (livramento vedado) | 75% |
+| VII | Reincidente, hediondo | 80% |
+| VIII | Reincidente específico, hediondo com resultado morte (livramento vedado) | 85% |
+| IX e X | *(vetados — nunca existiram)* | — |
+
+Os incisos V a VIII vêm da **Lei 15.358/2026**, que também acrescentou a alínea "d", pôs
+"ultraviolenta" e a vedação do livramento na alínea "b" e revogou o inciso VI-A. O *caput*
+e os incisos I a III vêm da **Lei 15.402/2026**, de 08/05/2026.
+
+**Quatro incisos vedam o livramento condicional na própria letra** — VI, "a", "b" e "d",
+e VIII. A vedação é regra de cálculo do motor, não apenas texto de nota.
+
+### Duas tabelas, com corte pela data do fato
+
+A Lei 15.402/2026 não é uniformemente mais benéfica. Para o **primário condenado por
+crime sem violência**, a hipótese saiu do inciso I (16%) e passou a cair no *caput*
+(1/6 = **16,67%**): a lei nova é mais **gravosa** para esse grupo e, portanto, **não
+retroage** (CF, art. 5º, XL; CP, art. 2º, parágrafo único). A retroatividade da lei mais
+benéfica apura-se **por situação concreta**, não em bloco.
+
+| Perfil | Fato até 07/05/2026 | Fato a partir de 08/05/2026 |
+|---|---|---|
+| Primário, sem violência | 16% da pena (inciso I de 2019) | 1/6 da pena no regime anterior (*caput*) |
+| Reincidente, sem violência | 20% (inciso II de 2019) | 20% (inciso III) |
+| Primário, com violência | 25% (inciso III de 2019) | 25% (inciso I) |
+| Reincidente, com violência | 30% (inciso IV de 2019) | 30% (inciso II) |
+| Título XII, primário | 25% ou 30% conforme violência | 1/6 pelo *caput* |
+
+Marque **"fato anterior a 08/05/2026"** na simulação para calcular pela tabela do Pacote
+Anticrime.
+
+:::note[A base de cálculo do *caput* não é a dos incisos]
+O *caput* conta **1/6 da pena no regime anterior**; os incisos contam percentual **da
+pena total**. São operações distintas dentro do mesmo artigo. Na **primeira** progressão
+as duas bases coincidem, e é ela que o sistema calcula; nas seguintes, a base do *caput*
+é o remanescente. Progressão sucessiva não é modelada.
+:::
+
+:::note[Título XII — o critério é topográfico]
+Os incisos I e II ressalvam "os crimes previstos no Título XII da Parte Especial do
+Código Penal" — arts. 359-A a 359-T, contra o Estado Democrático de Direito. A ressalva
+**não pergunta se houve violência**: o art. 359-L (abolição violenta) e o art. 359-M
+(golpe de Estado) são violentos por definição típica e ainda assim entram. Para o
+primário sobra o *caput*, por exclusão expressa.
+
+Para o **reincidente** há duas leituras sustentáveis, e o sistema devolve o resultado
+como *condicional*, com as duas escritas: pelo **inciso III** (20%), porque os crimes do
+Título XII estão fora do alcance de I e II e são portanto "diversos" deles; ou pelo
+***caput*** (16,67%), porque "crimes referidos nos incisos I e II" significaria crimes
+violentos, categoria a que eles materialmente pertencem. A diferença é de 3,33 pontos, e
+é matéria que os tribunais de execução vão fixar.
+:::
+
+:::warning[O inciso IV, e o que o veto fez com ele]
+A Lei 15.402/2026 **propôs redação nova para os incisos IV a X** — e **todos os
+sete foram vetados**. O que sobra, no texto consolidado, é: o inciso IV na redação
+de 2019 (30% para o reincidente em crime com violência ou grave ameaça, **sem** a
+ressalva do Título XII), os incisos V a VIII na redação da Lei 15.358/2026, e os
+incisos IX e X como "(VETADO)".
+
+Isso importa porque o inciso IV passou a repetir o conteúdo do novo inciso II — e
+a sobrevivência dele **não é descuido de técnica legislativa**: é o resultado
+deliberado do processo de veto. O argumento de revogação tácita, que essa
+sobreposição sugeriria, fica enfraquecido, e abre-se uma terceira leitura para o
+reincidente em crime violento do Título XII: ele cairia no inciso IV, que não o
+ressalva, a 30%.
+
+**O sistema não escolhe.** Para o reincidente em crime do Título XII o resultado
+sai como *condicional*, com as leituras concorrentes escritas. Ver
+`REVISAO-PENDENTE.md`, pergunta 1.
+:::
+
+:::note[Sob controle de constitucionalidade]
+Contra a Lei 15.402/2026 tramitam as **ADIs 7966, 7967, 7968 e 7969**, por vício formal
+na apreciação do veto e por inconstitucionalidade material. **Não há cautelar com eficácia
+*erga omnes***: o que houve, em 09/05/2026, foi o afastamento pontual da lei em oito
+Execuções Penais. A lei está em vigor e o catálogo a aplica — não aplicá-la estenderia ao
+catálogo inteiro uma restrição que existe em oito processos. Reconferir o andamento das
+quatro ações antes de citar o dado.
+:::
 
 ## Tabela de prescrição (Art. 109 CP)
 

@@ -26,7 +26,32 @@ const TITULOS_CP: {titulo: string; de: number; ate: number}[] = [
   {titulo: 'IX', de: 286, ate: 288},   // paz pública
   {titulo: 'X', de: 289, ate: 311},    // fé pública
   {titulo: 'XI', de: 312, ate: 359},   // administração pública
+  // O Título XII (Lei 14.197/2021) NÃO tem faixa numérica própria: divide o
+  // número 359 com o Título XI, e o que os separa é a LETRA do sufixo — ver
+  // `ehTituloXII`.
 ];
+
+/**
+ * Arts. 359-I a 359-T: crimes contra o Estado Democrático de Direito.
+ *
+ * O corte é na letra **I**, e errá-lo custa caro nos dois sentidos. Os arts.
+ * 359-A a 359-H são os crimes contra as FINANÇAS PÚBLICAS (Lei 10.028/2000),
+ * Capítulo IV do Título XI — administração pública. O Título XII só começa
+ * depois deles, com o art. 359-I (atentado à soberania), e vai até o 359-T.
+ *
+ * Tratar os oito de finanças públicas como Título XII faz duas coisas erradas ao
+ * mesmo tempo: dá-lhes a ressalva dos incisos I e II do art. 112 da LEP — 1/6 em
+ * vez de 25% ou 30% de progressão — e tira deles o aumento dos crimes funcionais
+ * do art. 327, §2º, que os alcança justamente por serem do Título XI.
+ *
+ * O sufixo pode ter duas letras (`359-M-A`, `359-M-B`, do Capítulo II do Título
+ * XII): vale a PRIMEIRA.
+ */
+export function ehTituloXII(lei: string, artigo: string): boolean {
+  if (!leiBase(lei).startsWith('CP') || leiBase(lei).startsWith('CPM')) return false;
+  const m = /Art\.?\s*359\s*-\s*([A-Z])/i.exec(artigo);
+  return m ? m[1].toUpperCase() >= 'I' : false;
+}
 
 /** Número do artigo de um registro do catálogo ("Art. 121, §2º, I" → 121). */
 export function numeroArtigo(artigo: string): number | null {
@@ -36,6 +61,7 @@ export function numeroArtigo(artigo: string): number | null {
 
 function tituloDoCrime(c: Crime): string | null {
   if (!c.lei.startsWith('CP')) return null;
+  if (ehTituloXII(c.lei, c.artigo)) return 'XII';
   const n = numeroArtigo(c.artigo);
   if (n === null) return null;
   return TITULOS_CP.find((t) => n >= t.de && n <= t.ate)?.titulo ?? null;
@@ -97,7 +123,19 @@ function jaEmbutida(m: Modificador, c: Crime): boolean {
   const artMod = numeroArtigo(m.dispositivo);
   const artCrime = numeroArtigo(c.artigo);
   if (artMod === null || artCrime === null) return false;
-  const mesmaLei = m.dispositivo.startsWith('CP') && leiBase(c.lei).startsWith('CP');
+  // Restrito ao Código Penal de propósito. A supressão é heurística — "mesmo
+  // artigo, logo já embutido" —, e ela só se sustenta onde o catálogo de fato
+  // desdobrou as majorantes em linhas com moldura calculada, que é o caso do
+  // CP. Generalizá-la para os demais diplomas silenciaria dezenas de aumentos
+  // que NÃO têm linha própria. Quem tem de decidir isso é o modificador, pelo
+  // `ignora_embutida` — declaração, não adivinhação.
+  //
+  // O `!CPM` importa desde que o CPM ganhou modificadores próprios: sem ele,
+  // "CPM (DL 1.001/69)" satisfaz `startsWith('CP')` e um aumento do Código
+  // Penal suprimiria o crime militar de mesmo número.
+  const leiCrime = leiBase(c.lei);
+  const mesmaLei = m.dispositivo.startsWith('CP') && leiCrime.startsWith('CP') &&
+    !leiCrime.startsWith('CPM');
   return mesmaLei && artMod === artCrime;
 }
 

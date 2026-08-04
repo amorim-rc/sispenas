@@ -35,6 +35,15 @@ export interface Crime {
   hediondo_condicao?: string;
   /** Mesma ideia para a ação penal (art. 161, §3º: privada se a propriedade é particular). */
   acao_condicao?: string;
+  /**
+   * Data em que o dispositivo deixou de vigorar (AAAA-MM-DD) — declaração de
+   * inconstitucionalidade com eficácia ex nunc, revogação. O registro NÃO sai do
+   * catálogo: os fatos anteriores continuam regidos por ele, e a consulta a um
+   * fato de 2024 precisa da lei de 2024.
+   */
+  vigencia_ate?: string;
+  /** O que houve e qual dispositivo passa a reger a conduta. Obrigatória quando há `vigencia_ate`. */
+  vigencia_nota?: string;
   elemento: string;
   tentativa: SimNao;
   violencia: SimNao;
@@ -49,6 +58,8 @@ export interface Crime {
   /** Derivados de `hediondo_condicao`/`acao_condicao`: a classificação depende do caso. */
   hediondo_condicional: boolean;
   acao_condicional: boolean;
+  /** Derivado de `vigencia_ate`: false quando o dispositivo já não vigora. */
+  vigente: boolean;
   /** Pena mínima canônica em meses (dias/anos já convertidos). */
   pena_min_meses: number;
   /** Pena máxima canônica em meses (dias/anos já convertidos). */
@@ -97,6 +108,34 @@ export interface Cenario {
   reincidenteEspecifico: boolean;
   hediondo: boolean;
   resultadoMorte: boolean;
+  /**
+   * O tipo é feminicídio (art. 121-A do CP). Atributo do TIPO, lido do catálogo
+   * como `resultadoMorte`: o art. 112, VI, "d" da LEP (alínea incluída pela Lei
+   * 15.358/2026) exige 75% da pena e VEDA o livramento condicional ao primário
+   * condenado por feminicídio.
+   */
+  feminicidio: boolean;
+  /**
+   * O condenado exercia comando, individual ou coletivo, de organização
+   * criminosa ultraviolenta estruturada para a prática de crime hediondo ou
+   * equiparado — art. 112, VI, "b" da LEP, na redação da Lei 15.358/2026.
+   * Circunstância do CASO, não do tipo: só quem conhece os autos marca.
+   */
+  comandoOrgcrimUltraviolenta: boolean;
+  /**
+   * O crime é do Título XII da Parte Especial do CP — arts. 359-A a 359-T,
+   * contra o Estado Democrático de Direito. Atributo do TIPO, topográfico: os
+   * incisos I e II do art. 112 da LEP, na redação da Lei 15.402/2026, ressalvam
+   * esses crimes, e a ressalva não olha se houve violência.
+   */
+  tituloXII: boolean;
+  /**
+   * O fato é ANTERIOR a 08/05/2026, data em que a Lei 15.402/2026 entrou em
+   * vigor. Circunstância do CASO, e das mais consequentes: para o primário
+   * condenado por crime sem violência a lei nova é mais GRAVOSA (16% viraram
+   * 1/6 = 16,67%), e lei mais gravosa não retroage.
+   */
+  fatoAnteriorA15402: boolean;
   violencia: boolean;
   graveAmeaca: boolean;
   confessou: boolean;

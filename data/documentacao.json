@@ -11,17 +11,18 @@
     {
       "arquivo": "README.md",
       "sobre": "Porta de entrada: o que é o projeto, tamanho do catálogo, como rodar, e a comparação com a proposta original de 2008.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "data/crimes.json",
         "data/fontes.json",
-        "package.json"
+        "package.json",
+        "data/diplomas.json"
       ]
     },
     {
       "arquivo": "CONTRIBUTING.md",
       "sobre": "As convenções C1 a C8 do catálogo e o fluxo de release. É o documento que outra pessoa segue ao editar dado.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "scripts/transform_data.py",
         "scripts/validar-changelog.mjs",
@@ -32,27 +33,32 @@
     {
       "arquivo": "CLAUDE.md",
       "sobre": "Instruções para agentes de IA: fluxo de release, convenções que quebram em silêncio, verificação obrigatória.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "CONTRIBUTING.md",
         "scripts/transform_data.py",
-        ".github/workflows/ci.yml"
+        ".github/workflows/ci.yml",
+        "REVISAO-PENDENTE.md",
+        "scripts/crawler/excecoes-auditoria.json"
       ]
     },
     {
       "arquivo": "TRIAGEM.md",
       "sobre": "A segunda-feira do mantenedor: o que a rodada automática produz, o que cada coisa exige e o que espera decisão.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         ".github/workflows/conferidor.yml",
         "scripts/crawler/propor.py",
-        "scripts/crawler/auditar.py"
+        "scripts/crawler/auditar.py",
+        "REVISAO-PENDENTE.md",
+        "scripts/crawler/excecoes-auditoria.json",
+        "scripts/crawler/dou_watcher.py"
       ]
     },
     {
       "arquivo": "docs/metodologia.md",
       "sobre": "Unidade de análise, campos do catálogo e como os benefícios são calculados.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "scripts/transform_data.py",
         "src/lib/types.ts"
@@ -61,7 +67,7 @@
     {
       "arquivo": "docs/catalogo-tipos-penais.md",
       "sobre": "Como o catálogo é estruturado, derivado e garantido — fonte × derivado, campos, invariantes.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "scripts/transform_data.py",
         "src/lib/types.ts",
@@ -71,7 +77,7 @@
     {
       "arquivo": "docs/dados-abertos.md",
       "sobre": "Contrato dos dados publicados, campo a campo, e como cada registro é coletado e revisado.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "scripts/transform_data.py",
         "src/lib/types.ts",
@@ -82,16 +88,18 @@
     {
       "arquivo": "docs/beneficios-penais.md",
       "sobre": "Os patamares legais de cada benefício e o fundamento de cada um.",
-      "conferido_em": "2026-07-22",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "src/lib/beneficios",
-        "scripts/verificar_beneficios.ts"
+        "scripts/verificar_beneficios.ts",
+        "REVISAO-PENDENTE.md",
+        "src/lib/dosimetria"
       ]
     },
     {
       "arquivo": "docs/roadmap.md",
       "sobre": "O que vem em cada versão e por que a versão é MAIOR, MENOR ou correção.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "package.json"
       ]
@@ -99,19 +107,21 @@
     {
       "arquivo": "scripts/crawler/README.md",
       "sobre": "O pipeline de conferência: módulos, o que o robô faz e não faz, e as armadilhas com teste.",
-      "conferido_em": "2026-08-02",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "scripts/crawler/conferir.py",
         "scripts/crawler/propor.py",
         "scripts/crawler/auditar.py",
         "scripts/crawler/parsear.py",
-        "scripts/pena_parser.py"
+        "scripts/pena_parser.py",
+        "scripts/crawler/excecoes-auditoria.json",
+        "scripts/crawler/dou_watcher.py"
       ]
     },
     {
       "arquivo": "src/data/changelog/create-changelog-entry.md",
       "sobre": "Como escrever uma entrada do feed de notas de atualização.",
-      "conferido_em": "2026-08-01",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "src/data/changelog/types.ts",
         "scripts/montar-nota-release.mjs"
@@ -120,9 +130,19 @@
     {
       "arquivo": "crawler/DECISOES-F0.md",
       "sobre": "Registro do spike que abriu o conferidor: por que o fetcher é como é.",
-      "conferido_em": "2026-08-01",
+      "conferido_em": "2026-08-04",
       "depende_de": [
         "scripts/crawler/baixar.py"
+      ]
+    },
+    {
+      "arquivo": "REVISAO-PENDENTE.md",
+      "sobre": "As perguntas jurídicas em aberto, com o texto legal de cada caso e o que o catálogo publica hoje. Autossuficiente: quem responde não precisa do repositório.",
+      "conferido_em": "2026-08-04",
+      "depende_de": [
+        "data/crimes.json",
+        "data/modificadores.json",
+        "data/hediondos.json"
       ]
     }
   ]

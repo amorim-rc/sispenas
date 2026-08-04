@@ -9,7 +9,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import type {Crime} from '../src/lib/types';
+import type {Cenario, Crime} from '../src/lib/types';
 import {CATALOGO, avaliarBeneficio, valoresPadrao} from '../src/lib/beneficios';
 import {
   avaliarCatalogo,
@@ -95,6 +95,21 @@ console.log('0. Integração catálogo → motor de benefícios');
   ok(
     !todos.some((c) => c.perdao_judicial_previsto && /^CPM/.test(c.lei)),
     'nenhum tipo do CPM recebeu perdão judicial por casamento indevido de "^CP"',
+  );
+  // Vigência: o registro que já não vige continua no catálogo, para o fato
+  // anterior, mas tem de dizer desde quando e o que se aplica no lugar.
+  ok(
+    todos.every((c) => c.vigente !== undefined),
+    'todo registro tem o campo "vigente"',
+  );
+  const naoVigentes = todos.filter((c) => c.vigente === false);
+  ok(
+    naoVigentes.every((c) => !!c.vigencia_ate && !!c.vigencia_nota),
+    `${naoVigentes.length} registro(s) não vigente(s), todos com data e nota do que houve`,
+  );
+  ok(
+    naoVigentes.every((c) => c.tem_pena_privativa || (c.sancoes_nao_privativas ?? []).length > 0 || c.tem_multa),
+    'registro não vigente continua declarando sua sanção — é consultável para fato anterior',
   );
 }
 
@@ -244,6 +259,141 @@ console.log('\n3. Casos-âncora de direito penal');
     naoHediondos.every((c) => status('graca', c) !== 'incabivel'),
     'graça não é vedada em nenhum tipo não hediondo',
   );
+
+  // ── Art. 112 da LEP: os percentuais e as quatro vedações de livramento ──
+  // Um caso-âncora por hipótese. Os cenários são montados à mão porque duas
+  // delas dependem de circunstância do RÉU (reincidência, comando de facção),
+  // que não se lê do tipo penal.
+  {
+    const progressaoDef = CATALOGO.find((b) => b.id === 'progressao')!;
+    const livramentoDef = CATALOGO.find((b) => b.id === 'livramento')!;
+    const avaliar = (def: (typeof CATALOGO)[number], c: Crime, ajustes: Partial<Cenario>) =>
+      avaliarBeneficio(def, {...cenarioFromCrime(c), ...ajustes}, valoresPadrao(def));
+
+    // Inciso V — hediondo primário, sem resultado morte: 70%, livramento aos 2/3.
+    const trafico = achar(/11\.343/, /^Art\. 33, caput/);
+    if (trafico) {
+      const r = avaliar(progressaoDef, trafico, {});
+      ok(/70%/.test(r.resumo), `tráfico (art. 33, caput): progressão a 70% — inciso V (obtido "${r.resumo}")`);
+      ok(
+        avaliar(livramentoDef, trafico, {}).status === 'cabivel',
+        'tráfico (art. 33, caput): livramento condicional cabível — o inciso V não o veda',
+      );
+    }
+
+    // Inciso VI, "a" — hediondo com resultado morte, primário: 75%, livramento VEDADO.
+    const latrocinioTipo = achar(/^CP$/i, /^Art\. 157, §3º/, /latroc/i);
+    if (latrocinioTipo) {
+      const r = avaliar(progressaoDef, latrocinioTipo, {});
+      ok(/75%/.test(r.resumo), `latrocínio: progressão a 75% — inciso VI, "a" (obtido "${r.resumo}")`);
+      ok(
+        avaliar(livramentoDef, latrocinioTipo, {}).status === 'incabivel',
+        'latrocínio, primário: livramento condicional VEDADO (art. 112, VI, "a", LEP)',
+      );
+    }
+
+    // Inciso VI, "b" — comando de facção ultraviolenta: 75%, livramento VEDADO.
+    // A hipótese não depende do resultado morte: sem ela, este mesmo réu cairia
+    // no inciso V (70%) e teria livramento aos 2/3.
+    if (trafico) {
+      const r = avaliar(progressaoDef, trafico, {comandoOrgcrimUltraviolenta: true});
+      ok(
+        /75%/.test(r.resumo),
+        `tráfico + comando de facção ultraviolenta: progressão a 75% — inciso VI, "b" (obtido "${r.resumo}")`,
+      );
+      ok(
+        avaliar(livramentoDef, trafico, {comandoOrgcrimUltraviolenta: true}).status === 'incabivel',
+        'comando de facção ultraviolenta: livramento condicional VEDADO (art. 112, VI, "b", LEP)',
+      );
+    }
+
+    // Inciso VI, "d" — feminicídio primário: 75%, livramento VEDADO. Substitui o
+    // inciso VI-A (55%, Lei 14.994/2024), revogado pela Lei 15.358/2026.
+    const feminicidio = achar(/^CP$/i, /^Art\. 121-A, caput/);
+    if (feminicidio) {
+      ok(feminicidio.hediondo === 'Sim', 'feminicídio: hediondo no catálogo (art. 1º, I-B, Lei 8.072/90)');
+      const r = avaliar(progressaoDef, feminicidio, {});
+      ok(
+        /75%/.test(r.resumo),
+        `feminicídio, primário: progressão a 75% — inciso VI, "d" (obtido "${r.resumo}")`,
+      );
+      ok(
+        avaliar(livramentoDef, feminicidio, {}).status === 'incabivel',
+        'feminicídio, primário: livramento condicional VEDADO (art. 112, VI, "d", LEP)',
+      );
+    }
+
+    // Inciso VIII — reincidente em hediondo com resultado morte: 85%, vedado.
+    if (latrocinioTipo) {
+      const ajuste = {primario: false, reincidenteEspecifico: true};
+      const r = avaliar(progressaoDef, latrocinioTipo, ajuste);
+      ok(
+        /85%/.test(r.resumo),
+        `latrocínio, reincidente específico: progressão a 85% — inciso VIII (obtido "${r.resumo}")`,
+      );
+      ok(
+        avaliar(livramentoDef, latrocinioTipo, ajuste).status === 'incabivel',
+        'latrocínio, reincidente específico: livramento condicional VEDADO (art. 112, VIII, LEP)',
+      );
+    }
+
+    // ── As DUAS tabelas do art. 112, com corte pela data do fato ──────────
+    // A Lei 15.402/2026 reescreveu o caput e os incisos I a III. Para o primário
+    // condenado por crime SEM violência ela é mais GRAVOSA — os 16% do inciso I
+    // viraram 1/6 do caput, que é 16,67% —, e lei mais gravosa não retroage. A
+    // retroatividade se apura por situação concreta, não em bloco: por isso são
+    // duas tabelas, não uma substituição.
+    if (furto) {
+      const antes = avaliar(progressaoDef, furto, {fatoAnteriorA15402: true});
+      const depois = avaliar(progressaoDef, furto, {});
+      ok(/16%/.test(antes.resumo),
+        `furto, primário, fato até 07/05/2026: 16% — inciso I de 2019 (obtido "${antes.resumo}")`);
+      ok(/16\.67%|16,67%/.test(depois.resumo),
+        `furto, primário, fato desde 08/05/2026: 1/6 pelo caput (obtido "${depois.resumo}")`);
+      // Reincidente sem violência: 20% nas duas, mas por dispositivos diferentes
+      // — o inciso II de 2019 e o inciso III da redação nova.
+      const rAntes = avaliar(progressaoDef, furto, {fatoAnteriorA15402: true, reincidenteEspecifico: true});
+      const rDepois = avaliar(progressaoDef, furto, {reincidenteEspecifico: true});
+      ok(/20%/.test(rAntes.resumo) && /20%/.test(rDepois.resumo),
+        'furto, reincidente: 20% antes e depois — muda o fundamento, não o percentual');
+      ok(
+        rAntes.detalhes.some((d) => d.includes('II —')) &&
+          rDepois.detalhes.some((d) => d.includes('III —')),
+        'furto, reincidente: o inciso citado acompanha a redação aplicável',
+      );
+    }
+
+    // Título XII — a ressalva é TOPOGRÁFICA: não pergunta se houve violência.
+    // O art. 359-M (golpe de Estado) é violento por definição típica e ainda
+    // assim cai no caput, porque os incisos I e II o excluem expressamente.
+    const golpe = achar(/^CP$/i, /^Art\. 359-M/);
+    if (golpe) {
+      const r = avaliar(progressaoDef, golpe, {});
+      ok(/16\.67%|16,67%/.test(r.resumo),
+        `golpe de Estado, primário: 1/6 pelo caput — Título XII ressalvado (obtido "${r.resumo}")`);
+      const rein = avaliar(progressaoDef, golpe, {reincidenteEspecifico: true});
+      ok(rein.status === 'condicional',
+        'Título XII, reincidente: condicional — o caput e o inciso III comportam leituras diferentes');
+      ok(
+        rein.detalhes.some((d) => d.includes('DUAS LEITURAS')),
+        'Título XII, reincidente: as duas leituras aparecem no resultado, nenhuma escolhida em silêncio',
+      );
+      // E o aumento dos crimes funcionais (art. 327, §2º, Título XI) não pode
+      // alcançá-lo: `numeroArtigo("Art. 359-M")` é 359, que caía na faixa do XI.
+      ok(golpe.artigo.startsWith('Art. 359-M'), 'golpe de Estado localizado pelo artigo com sufixo');
+    }
+
+    // Os dois tipos da Lei 15.358/2026: o §4º, III do art. 2º veda o livramento
+    // por dispositivo próprio, e o art. 3º o herda pelo parágrafo único.
+    const dominio = achar(/15\.358/, /^Art\. 2º/);
+    if (dominio) {
+      ok(dominio.hediondo === 'Sim', 'domínio social estruturado: hediondo (art. 1º, § único, VIII, Lei 8.072/90)');
+      ok(
+        dominio.pena_min_meses === 240 && dominio.pena_max_meses === 480,
+        'domínio social estruturado: moldura de 20 a 40 anos',
+      );
+    }
+  }
 
   // Detração e remição independem de pena: alcançam todo o catálogo.
   for (const id of ['detracao', 'remicao']) {

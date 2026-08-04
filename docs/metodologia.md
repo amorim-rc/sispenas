@@ -22,6 +22,14 @@ Cada tipo penal registra, entre outros: `lei`, `artigo`, `crime`, `pena_min` e
 `pena_max` (em **meses**), `tipo_pena`, `acao`, `hediondo`, `elemento`, `tentativa`,
 `violencia`, `grave_ameaca` e `obs`.
 
+Três campos são opcionais e existem para não afirmar o que a lei não afirma:
+`hediondo_condicao` e `acao_condicao` guardam, em texto, a hipótese de que a
+classificação depende — o homicídio só é hediondo se praticado em atividade típica de
+grupo de extermínio, e o exercício arbitrário das próprias razões só é de ação privada
+se não houver violência. E `vigencia_ate`, com a nota obrigatória `vigencia_nota`,
+registra a data em que o dispositivo deixou de vigorar, sem tirá-lo do catálogo: fato
+anterior continua regido por ele.
+
 ### Campos derivados automaticamente
 
 Para viabilizar filtros combinados e o cálculo de benefícios, alguns campos são
@@ -33,6 +41,7 @@ Para viabilizar filtros combinados e o cálculo de benefícios, alguns campos s�
 | `tem_multa` | se há pena de multa (cumulativa, alternativa ou isolada) | regex sobre `obs` |
 | `multa_regime` | `cumulativa` / `alternativa` / `isolada` / `nenhuma` | conectores no texto |
 | `infracao_menor_potencial` | pena máxima ≤ 2 anos | `pena_max ≤ 24` |
+| `vigente` | o dispositivo ainda vigora? | ausência de `vigencia_ate` |
 
 :::warning[Multa é uma dimensão independente]
 No Direito Penal brasileiro a multa é, na maioria dos casos, **cumulada** com a pena

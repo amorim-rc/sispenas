@@ -128,7 +128,29 @@ def ler_anotacao(texto: str) -> Anotacao | None:
 # sem aceitar essa forma o parser perdia 25 artigos, grudando as penas deles no
 # último dispositivo reconhecido (foi assim que o art. 36-A, que trata de
 # administração de imóveis, ganhou "pena" de detenção).
-_ARTIGO = re.compile(r"^Art\s*\.?\s*(\d+)(?:\s*[-–—]\s*([A-Z]))?\s*(?:[.\-–—º°]|\s)", re.I)
+#
+# O sufixo de letra é COLADO ao número, sem espaço, e pode repetir-se: o
+# "Art. 359-M-B" do CP tem duas letras. Duas armadilhas resolvidas aqui:
+#
+# 1. **Sufixo depois do ordinal.** A Lei 7.716 escreve "Art. 2º-A"; o marcador
+#    ordinal vem ANTES da letra. Sem aceitá-lo nessa ordem, o parser lia "Art. 2"
+#    e devolvia "-A Injuriar alguém…" como corpo do art. 2º — foi por isso que a
+#    majorante da injúria racial apareceu na auditoria como "art. 2º, parágrafo
+#    único", identificador que a lei não tem.
+# 2. **Sufixo duplo.** "Art. 359-M-B." virava "Art. 359-M" com corpo "B. Quando
+#    os crimes…", isto é, a redução por contexto de multidão colada ao golpe de
+#    Estado, que é outro crime.
+#
+# O sufixo NÃO admite espaço em volta do hífen, e é essa exigência que separa
+# "Art. 2º-A" de "Art. 155 - A subtração…", em que o hífen é pontuação e o "A"
+# é artigo definido.
+# O marcador ordinal e a letra do sufixo ficam FORA do `re.I` — `(?-i:…)`. Com o
+# `o` do ordinal insensível a caixa, "Art. 13 O disposto nesta lei…" perdia o
+# artigo definido, e o texto começava em "disposto"; com a letra insensível, um
+# hífen seguido de minúscula viraria sufixo. Só "Art" é que se lê em qualquer
+# caixa.
+_ARTIGO = re.compile(
+    r"^Art\s*\.?\s*(\d+)\s*(?-i:[ºo°])?((?:[-–—](?-i:[A-Z]))*)\s*(?:[.\-–—º°]|\s)", re.I)
 # "§ 1º", "§ 1o", "§ 2°", "§ 2º-D", "Parágrafo único".
 _PAR_NUMERO = re.compile(r"^§\s*(\d+)\s*[ºo°]?", re.I)
 _PAR_SUFIXO = re.compile(r"^(\s*)[-–—]\s?([A-Z])(?![a-zà-ÿ])")
@@ -357,7 +379,9 @@ def parsear(documento: str) -> list[Dispositivo]:
 
         m = _ARTIGO.match(texto)
         if m:
-            artigo, sufixo = m.group(1), m.group(2)
+            # group(2) vem com os hífens ("-M-B"); a chave usa "359-M-B".
+            artigo = m.group(1)
+            sufixo = re.sub(r"[–—]", "-", m.group(2)).strip("-").upper() or None
             marcador = "caput"
             d = obter(artigo, sufixo, marcador)
             d.epigrafe = d.epigrafe or epigrafe_pendente
@@ -368,18 +392,28 @@ def parsear(documento: str) -> list[Dispositivo]:
                         or ((_REVOGADO_TXT.search(texto)
                              or (anotacao and anotacao.acao == "revogado"))
                             and len(corpo_util) < 80))
+            # O "(VETADO)" de um parágrafo não veta o artigo inteiro: só marca
+            # quando o próprio dispositivo ficou sem corpo (art. 9º da Lei de
+            # Abuso tem § vetado e caput em pleno vigor).
+            #
+            # E é ALTERNATIVO a "vigente", não somado a ele. Somados, os dois
+            # marcadores nasciam com a MESMA `ordem`, o desempate de `max` fica
+            # com o primeiro, e o genérico vencia o específico: o art. 359-O do
+            # CP — comunicação enganosa em massa, vetado na Lei 14.197/2021 —
+            # saía como vigente, e o catálogo publicou por meses um crime que
+            # não existe. O veto DERRUBADO continua funcionando, porque ali os
+            # dois marcadores estão em parágrafos diferentes e o posterior vence.
+            vetado = bool(_VETADO.search(texto)) and len(corpo_util) < 40
             if revogado:
                 # Artigo revogado perde o corpo: sobra o cabeçalho + a anotação.
                 d._versoes_situacao.append((ordem, "revogado"))
                 d.anotacao = anotacao
+            elif vetado:
+                d._versoes_situacao.append((ordem, "vetado"))
+                d.anotacao = anotacao
             else:
                 d._versoes_situacao.append((ordem, "vigente"))
                 d._versoes_texto.append((ordem, corpo, anotacao))
-            # O "(VETADO)" de um parágrafo não veta o artigo inteiro: só marca
-            # quando o próprio dispositivo ficou sem corpo (art. 9º da Lei de
-            # Abuso tem § vetado e caput em pleno vigor).
-            if _VETADO.search(texto) and len(corpo_util) < 40:
-                d._versoes_situacao.append((ordem, "vetado"))
             d.vigencia_pendente = d.vigencia_pendente or pendente
             continue
 

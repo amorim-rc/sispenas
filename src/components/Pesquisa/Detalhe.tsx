@@ -159,6 +159,15 @@ export default function Detalhe({
               <Ajuda texto={`A hediondez aqui depende de circunstância do caso, não do tipo. ${crime.hediondo_condicao} Marque "Hediondo/equiparado" nas circunstâncias abaixo para simular a hipótese.`} />
             </span>
           )}
+          {/* Dispositivo que já não vige, e que continua no catálogo porque os
+              fatos anteriores seguem regidos por ele. A etiqueta diz DESDE
+              QUANDO; a nota diz o que houve e o que se aplica no lugar. */}
+          {crime.vigente === false && (
+            <span className={`${styles.tag} ${styles.tagNaoVigente}`}>
+              Não vigente desde {crime.vigencia_ate}
+              <Ajuda texto={`${crime.vigencia_nota} O registro permanece consultável: fatos anteriores a esta data continuam regidos por ele.`} />
+            </span>
+          )}
           <span className={styles.tag}>{crime.elemento}</span>
           <span className={styles.tag}>
             {crime.acao}
@@ -247,11 +256,21 @@ export default function Detalhe({
               {crime.hediondo_condicional && <span className={styles.checkNota}> — depende do caso neste tipo</span>}
             </label>
             <label><input type="checkbox" checked={cen.resultadoMorte} onChange={(e) => set('resultadoMorte', e.target.checked)} /> Resultado morte</label>
+            <label>
+              <input type="checkbox" checked={cen.comandoOrgcrimUltraviolenta} onChange={(e) => set('comandoOrgcrimUltraviolenta', e.target.checked)} />
+              {' '}Comando de facção
+              <Ajuda texto={'Art. 112, VI, "b", da LEP, na redação da Lei 15.358/2026: condenado por exercer o comando, individual ou coletivo, de organização criminosa ultraviolenta estruturada para a prática de crime hediondo ou equiparado. Eleva a progressão a 75% e veda o livramento condicional. É circunstância do caso, não do tipo.'} />
+            </label>
             <label><input type="checkbox" checked={cen.violencia} onChange={(e) => set('violencia', e.target.checked)} /> Violência</label>
             <label><input type="checkbox" checked={cen.graveAmeaca} onChange={(e) => set('graveAmeaca', e.target.checked)} /> Grave ameaça</label>
             <label><input type="checkbox" checked={cen.confessou} onChange={(e) => set('confessou', e.target.checked)} /> Confissão formal</label>
             <label><input type="checkbox" checked={cen.bonsAntecedentes} onChange={(e) => set('bonsAntecedentes', e.target.checked)} /> Bons antecedentes</label>
             <label><input type="checkbox" checked={cen.culposo} onChange={(e) => set('culposo', e.target.checked)} /> Culposo</label>
+            <label>
+              <input type="checkbox" checked={cen.fatoAnteriorA15402} onChange={(e) => set('fatoAnteriorA15402', e.target.checked)} />
+              {' '}Fato anterior a 08/05/2026
+              <Ajuda texto={'A Lei 15.402/2026 reescreveu o caput e os incisos I a III do art. 112 da LEP. Para o primário condenado por crime SEM violência ela é mais gravosa — os 16% do inciso I viraram 1/6 do caput, que é 16,67% —, e lei mais gravosa não retroage. Marque para calcular pela tabela do Pacote Anticrime, que é a lei do fato anterior.'} />
+            </label>
             <label><input type="checkbox" checked={cen.reparouDano} onChange={(e) => set('reparouDano', e.target.checked)} /> Reparou o dano</label>
           </div>
         </div>

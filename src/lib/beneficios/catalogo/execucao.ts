@@ -1,11 +1,54 @@
 // Benefícios de EXECUÇÃO penal — dependem da pena concreta e do tempo cumprido.
 // LEP (Lei 7.210/84), Código Penal e Lei 8.072/90.
 
+import type {Cenario} from '../../types';
 import type {BeneficioDef} from '../types';
 import {num, bool} from '../types';
 import {formatPena, formatFracao} from '../../format';
 
 const ANO = 12;
+
+/**
+ * As quatro hipóteses em que o próprio art. 112 da LEP diz, na letra do inciso,
+ * "vedado o livramento condicional": VI, "a", "b" e "d", e VIII. Devolve o
+ * fundamento, ou `null` quando nenhuma incide.
+ *
+ * A vedação vive aqui, e não apenas no texto de `vedacoes`, porque é regra de
+ * CÁLCULO. Enquanto ficou só escrita, o motor seguia oferecendo o livramento aos
+ * 2/3 a quem a LEP o proíbe — o texto dizia uma coisa e o número dizia outra.
+ *
+ * A ordem espelha a da progressão: a alínea "b" (comando de facção) não depende
+ * do resultado morte e por isso é testada antes da "a".
+ */
+export function vedacaoLivramentoArt112(c: Cenario): string | null {
+  if (c.hediondo && c.resultadoMorte && c.reincidenteEspecifico) {
+    return (
+      'Art. 112, VIII, LEP: reincidente em crime hediondo ou equiparado com resultado ' +
+      'morte — 85% da pena, vedado o livramento condicional.'
+    );
+  }
+  if (c.comandoOrgcrimUltraviolenta && c.hediondo) {
+    return (
+      'Art. 112, VI, "b", LEP (redação da Lei 15.358/2026): condenado por exercer o ' +
+      'comando, individual ou coletivo, de organização criminosa ultraviolenta ' +
+      'estruturada para a prática de crime hediondo ou equiparado — vedado o livramento ' +
+      'condicional.'
+    );
+  }
+  if (c.feminicidio && !c.reincidenteEspecifico) {
+    return (
+      'Art. 112, VI, "d", LEP (alínea incluída pela Lei 15.358/2026): primário condenado ' +
+      'pela prática de feminicídio — vedado o livramento condicional.'
+    );
+  }
+  if (c.hediondo && c.resultadoMorte) {
+    return (
+      'Art. 112, VI, "a", LEP: primário condenado por crime hediondo ou equiparado com ' +
+      'resultado morte — vedado o livramento condicional.'
+    );
+  }
+  return null;
+}
 
 export const progressao: BeneficioDef = {
   id: 'progressao',
@@ -36,8 +79,30 @@ export const progressao: BeneficioDef = {
       min: 0,
       max: 1,
       passo: 0.01,
-      ajuda: 'Inciso I: 16% da pena para o apenado primário, crime sem violência à pessoa ou grave ameaça.',
-      fundamento: 'Art. 112, I, LEP',
+      ajuda:
+        'Redação de 2019, aplicável a FATO ANTERIOR a 08/05/2026: 16% da pena para o ' +
+        'primário em crime sem violência à pessoa ou grave ameaça. A Lei 15.402/2026 ' +
+        'substituiu o inciso, e a hipótese passou a cair no caput — 1/6, que é 16,67%. ' +
+        'Para este grupo a lei nova é mais GRAVOSA e, por isso, não retroage.',
+      fundamento: 'Art. 112, I, LEP (redação da Lei 13.964/2019)',
+    },
+    {
+      id: 'fracaoCaputRegimeAnterior',
+      rotulo: 'Regra geral do caput (Lei 15.402/2026)',
+      tipo: 'fracao',
+      padrao: 1 / 6,
+      min: 0,
+      max: 1,
+      passo: 1 / 48,
+      ajuda:
+        'O caput voltou a fixar patamar próprio — "ao menos 1/6 da pena no regime ' +
+        'anterior" —, e os incisos passaram a ser exceções a ele, não a lista exaustiva ' +
+        'de hipóteses. Alcança o primário em crime sem violência e os crimes do Título ' +
+        'XII, que os incisos I e II ressalvam. ATENÇÃO À BASE: o caput manda contar sobre ' +
+        'a pena NO REGIME ANTERIOR, e os incisos, sobre a pena total. Na primeira ' +
+        'progressão as duas coincidem; nas seguintes, não — e este cálculo é o da ' +
+        'primeira.',
+      fundamento: 'Art. 112, caput, LEP (redação da Lei 15.402/2026)',
     },
     {
       id: 'fracaoReincidenteSemViolencia',
@@ -95,6 +160,36 @@ export const progressao: BeneficioDef = {
       fundamento: 'Art. 112, VI, "a", LEP (redação da Lei 15.358/2026)',
     },
     {
+      id: 'fracaoComandoOrgcrim',
+      rotulo: 'Comando de organização criminosa ultraviolenta',
+      tipo: 'fracao',
+      padrao: 0.75,
+      min: 0,
+      max: 1,
+      passo: 0.01,
+      ajuda:
+        'Inciso VI, "b": 75% da pena para quem exerceu comando, individual ou coletivo, de ' +
+        'organização criminosa ULTRAVIOLENTA estruturada para a prática de crime hediondo ou ' +
+        'equiparado, vedado o livramento condicional. A Lei 15.358/2026 acrescentou ' +
+        '"ultraviolenta" e a vedação do livramento — antes a alínea alcançava a organização ' +
+        'criminosa comum e não vedava o benefício.',
+      fundamento: 'Art. 112, VI, "b", LEP (redação da Lei 15.358/2026)',
+    },
+    {
+      id: 'fracaoFeminicidioPrimario',
+      rotulo: 'Primário, feminicídio',
+      tipo: 'fracao',
+      padrao: 0.75,
+      min: 0,
+      max: 1,
+      passo: 0.01,
+      ajuda:
+        'Inciso VI, "d": 75% da pena para o primário condenado por feminicídio, vedado o ' +
+        'livramento condicional. A alínea substitui o inciso VI-A (55%, Lei 14.994/2024), ' +
+        'revogado pela Lei 15.358/2026.',
+      fundamento: 'Art. 112, VI, "d", LEP (incluída pela Lei 15.358/2026)',
+    },
+    {
       id: 'fracaoReincidenteHediondo',
       rotulo: 'Reincidente, hediondo/equiparado',
       tipo: 'fracao',
@@ -124,37 +219,105 @@ export const progressao: BeneficioDef = {
     if (c.hediondo && c.resultadoMorte && c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteHediondoMorte');
       inciso = 'VIII — reincidente específico, hediondo com resultado morte (livramento vedado)';
+    } else if (c.comandoOrgcrimUltraviolenta && c.hediondo) {
+      // Alínea "b" antes da "a": o comando de facção ultraviolenta não depende do
+      // resultado morte, e sem esta ordem o comandante condenado por crime hediondo
+      // SEM morte cairia no inciso V (70%, livramento aos 2/3) — perdendo tanto o
+      // percentual quanto a vedação que a Lei 15.358/2026 impôs.
+      fracao = num(p, 'fracaoComandoOrgcrim');
+      inciso =
+        'VI, "b" — comando de organização criminosa ultraviolenta estruturada para crime ' +
+        'hediondo (livramento vedado)';
+    } else if (c.feminicidio && !c.reincidenteEspecifico) {
+      fracao = num(p, 'fracaoFeminicidioPrimario');
+      inciso = 'VI, "d" — primário, feminicídio (livramento vedado)';
     } else if (c.hediondo && c.resultadoMorte) {
       fracao = num(p, 'fracaoPrimarioHediondoMorte');
-      inciso = 'VI — primário, hediondo com resultado morte (livramento vedado)';
+      inciso = 'VI, "a" — primário, hediondo com resultado morte (livramento vedado)';
     } else if (c.hediondo && c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteHediondo');
       inciso = 'VII — reincidente, hediondo';
     } else if (c.hediondo) {
       fracao = num(p, 'fracaoPrimarioHediondo');
       inciso = 'V — primário, hediondo/equiparado';
+    } else if (c.fatoAnteriorA15402) {
+      // Tabela do Pacote Anticrime, para fato até 07/05/2026. Ela não é "a
+      // antiga": continua sendo a lei do caso, porque a Lei 15.402/2026 é mais
+      // gravosa para o primário sem violência (16% viraram 16,67%) e lei mais
+      // gravosa não retroage. A retroatividade da lei benéfica se apura por
+      // SITUAÇÃO CONCRETA, não em bloco.
+      if (comViolencia && c.reincidenteEspecifico) {
+        fracao = num(p, 'fracaoReincidenteViolencia');
+        inciso = 'IV — reincidente, crime com violência/grave ameaça (redação de 2019)';
+      } else if (comViolencia) {
+        fracao = num(p, 'fracaoPrimarioViolencia');
+        inciso = 'III — primário, crime com violência/grave ameaça (redação de 2019)';
+      } else if (c.reincidenteEspecifico) {
+        fracao = num(p, 'fracaoReincidenteSemViolencia');
+        inciso = 'II — reincidente, sem violência/grave ameaça (redação de 2019)';
+      } else {
+        fracao = num(p, 'fracaoPrimarioSemViolencia');
+        inciso = 'I — primário, sem violência/grave ameaça (redação de 2019)';
+      }
+    } else if (c.tituloXII) {
+      // Os incisos I e II ressalvam expressamente os crimes do Título XII, e a
+      // ressalva é TOPOGRÁFICA: não pergunta se houve violência. Para o
+      // primário sobra o caput, e isso é leitura literal. Para o REINCIDENTE o
+      // texto comporta duas saídas — ver o resumo devolvido abaixo.
+      fracao = num(p, 'fracaoCaputRegimeAnterior');
+      inciso = c.reincidenteEspecifico
+        ? 'caput — crime do Título XII, reincidente (LEITURA EM DISPUTA: 1/6 pelo ' +
+          'caput, ou 20% pelo inciso III)'
+        : 'caput — crime do Título XII, primário (os incisos I e II o ressalvam)';
     } else if (comViolencia && c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteViolencia');
-      inciso = 'IV — reincidente, crime com violência/grave ameaça';
+      inciso = 'II — reincidente, crime com violência/grave ameaça';
     } else if (comViolencia) {
       fracao = num(p, 'fracaoPrimarioViolencia');
-      inciso = 'III — primário, crime com violência/grave ameaça';
+      inciso = 'I — primário, crime com violência/grave ameaça';
     } else if (c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteSemViolencia');
-      inciso = 'II — reincidente, sem violência/grave ameaça';
+      inciso = 'III — reincidente em crime diverso dos dos incisos I e II';
     } else {
-      fracao = num(p, 'fracaoPrimarioSemViolencia');
-      inciso = 'I — primário, sem violência/grave ameaça';
+      fracao = num(p, 'fracaoCaputRegimeAnterior');
+      inciso = 'caput — primário, crime sem violência/grave ameaça';
     }
     const tempo = c.penaConcreta * fracao;
+    const peloCaput = inciso.startsWith('caput');
+    const detalhes = [
+      `Percentual aplicável: ${inciso}.`,
+      `Tempo necessário sobre a pena de ${formatPena(c.penaConcreta)}: ${formatPena(tempo)}.`,
+      'Requisito subjetivo: boa conduta carcerária (art. 112, §1º).',
+    ];
+    if (peloCaput) {
+      detalhes.push(
+        'O caput conta 1/6 da pena NO REGIME ANTERIOR, e não da pena total como os ' +
+          'incisos. Na primeira progressão as duas bases coincidem — é o que está ' +
+          'calculado acima; nas seguintes, a base é o remanescente.',
+      );
+    }
+    if (!c.fatoAnteriorA15402 && !c.hediondo) {
+      detalhes.push(
+        'Redação da Lei 15.402/2026, em vigor desde 08/05/2026. Para fato anterior, ' +
+          'marque a circunstância correspondente: para o primário em crime sem ' +
+          'violência a lei nova é mais gravosa (16% → 16,67%) e não retroage.',
+      );
+    }
+    if (c.tituloXII && c.reincidenteEspecifico) {
+      detalhes.push(
+        'DUAS LEITURAS SUSTENTÁVEIS, e a diferença é de 3,33 pontos. Pelo inciso III ' +
+          '(20%): ele alcança o "reincidente em crime diverso dos referidos nos incisos ' +
+          'I e II", e os do Título XII estão expressamente fora do alcance de I e II. ' +
+          'Pelo caput (1/6): "crimes referidos nos incisos I e II" significaria crimes ' +
+          'com violência ou grave ameaça, categoria a que os do Título XII pertencem ' +
+          'materialmente — não sendo diversos, restariam no caput. Está calculado pelo ' +
+          'caput, que é o resultado mais favorável; a questão é dos tribunais de execução.',
+      );
+    }
     return {
-      status: 'cabivel',
-      resumo: `Fração de ${(fracao * 100).toFixed(0)}% → ${formatPena(tempo)} de cumprimento.`,
-      detalhes: [
-        `Percentual aplicável: ${inciso}.`,
-        `Tempo necessário sobre a pena de ${formatPena(c.penaConcreta)}: ${formatPena(tempo)}.`,
-        'Requisito subjetivo: boa conduta carcerária (art. 112, §1º).',
-      ],
+      status: c.tituloXII && c.reincidenteEspecifico ? 'condicional' : 'cabivel',
+      resumo: `Fração de ${(fracao * 100).toFixed(2).replace(/\.?0+$/, '')}% → ${formatPena(tempo)} de cumprimento.`,
+      detalhes,
     };
   },
 };
@@ -178,7 +341,10 @@ export const livramento: BeneficioDef = {
   ],
   vedacoes: [
     'Reincidência específica em crime hediondo ou equiparado (art. 83, V, CP).',
-    'Condenado por hediondo com resultado morte (art. 112, VI, "a" e VIII, LEP — livramento vedado).',
+    'Condenado por hediondo com resultado morte, primário ou reincidente (art. 112, VI, "a" e VIII, LEP).',
+    'Comando de organização criminosa ultraviolenta estruturada para crime hediondo ou equiparado (art. 112, VI, "b", LEP, na redação da Lei 15.358/2026).',
+    'Primário condenado por feminicídio (art. 112, VI, "d", LEP, incluída pela Lei 15.358/2026).',
+    'Crimes de domínio social estruturado e de favorecimento (art. 2º, §4º, III, e art. 3º, parágrafo único, da Lei 15.358/2026).',
     'Súmula 441, STJ: a falta grave não interrompe o prazo para obtenção do livramento condicional.',
   ],
   parametros: [
@@ -234,6 +400,19 @@ export const livramento: BeneficioDef = {
       ajuda: 'Art. 83, V, parte final: vedação absoluta ao reincidente específico em crimes hediondos ou equiparados.',
       fundamento: 'Art. 83, V, CP',
     },
+    {
+      id: 'vedadoArt112',
+      rotulo: 'Vedar nas hipóteses do art. 112 da LEP',
+      tipo: 'booleano',
+      padrao: true,
+      ajuda:
+        'Quatro incisos da LEP dizem, na própria letra, "vedado o livramento condicional": ' +
+        'VI, "a" (hediondo com resultado morte, primário), VI, "b" (comando de organização ' +
+        'criminosa ultraviolenta), VI, "d" (feminicídio, se primário) e VIII (reincidente em ' +
+        'hediondo com resultado morte). Desmarcar simula a tese de que a vedação, por estar ' +
+        'em dispositivo de progressão, não alcançaria o livramento do art. 83 do CP.',
+      fundamento: 'Art. 112, VI, "a", "b" e "d", e VIII, LEP',
+    },
   ],
   avaliar: (c, p) => {
     const minimo = num(p, 'penaMinimaMeses');
@@ -255,6 +434,14 @@ export const livramento: BeneficioDef = {
         status: 'incabivel',
         resumo: 'Vedado ao reincidente específico em crime hediondo.',
         detalhes: ['Art. 83, V, CP: vedado para reincidente específico em crimes hediondos ou equiparados.'],
+      };
+    }
+    const vedacao112 = bool(p, 'vedadoArt112') ? vedacaoLivramentoArt112(c) : null;
+    if (vedacao112) {
+      return {
+        status: 'incabivel',
+        resumo: 'Vedado pelo inciso do art. 112 da LEP aplicável à progressão.',
+        detalhes: [vedacao112],
       };
     }
     let fracao: number;

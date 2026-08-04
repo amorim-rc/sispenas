@@ -21,7 +21,8 @@
       "condicao": "pré-requisito do tipo penal para o modificador ser oferecido (ex.: admite_tentativa, sem_violencia)",
       "obs": "notas de aplicação e ressalvas jurisprudenciais"
     },
-    "contabilizacao": "Um modificador só é OFERECIDO a um tipo quando a causa correspondente NÃO está já embutida no rol de preceitos derivados dele (as embutidas — §4º/§6º/§7º — permanecem como linhas próprias, com moldura já calculada). Evita dupla contagem no número de cenários de condenação."
+    "contabilizacao": "Um modificador só é OFERECIDO a um tipo quando a causa correspondente NÃO está já embutida no rol de preceitos derivados dele (as embutidas — §4º/§6º/§7º — permanecem como linhas próprias, com moldura já calculada). Evita dupla contagem no número de cenários de condenação.",
+    "fracoes_de_teto": "Três formulações legais não têm mínimo determinado: 'até o dobro', 'até o triplo' e 'em até um terço'. A escolha do projeto é registrar `fracao_min: 0` e a fração máxima em `fracao_max` — aumento de 0 a 100% para 'até o dobro', 0 a 200% para 'até o triplo', 0 a 33,3% para 'em até um terço'. Ela MUDA o piso da pena majorada: com mínimo 0, a moldura majorada parte da pena intermediária sem acréscimo, o que é o mais favorável ao réu e o único piso que a lei autoriza — não há mínimo legal a inventar, e a doutrina resolve o caso concreto pela menor fração compatível com a individualização. A alternativa (adotar um piso implícito, como 1/6) publicaria como legal um número que a lei não diz. Contraste deliberado: onde as frações são FIXAS — art. 135, parágrafo único do CP, 'metade' se lesão grave e 'triplo' se morte —, min e max são iguais, e é por isso que o art. 135 e o art. 135-A, de redação parecida, têm representações diferentes."
   },
   "modificadores": [
     {
@@ -1213,6 +1214,2235 @@
         ]
       },
       "obs": "Aumento de 1/6 a 2/3 se há participação de criança ou adolescente; concurso de funcionário público valendo-se da condição; produto destinado ao exterior; conexão com outras organizações; ou transnacionalidade. Constava indevidamente como tipo penal autônomo, sob um §4º-A que a lei não tem."
+    },
+    {
+      "id": "aumento-roubo-orgcrim-157",
+      "nome": "Roubo por organização criminosa ultraviolenta (triplo)",
+      "dispositivo": "CP, art. 157, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 2.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 157, caput"
+        ]
+      },
+      "ignora_embutida": true,
+      "obs": "Aplica-se em TRIPLO a pena do caput (aumento de 200%) se a violência ou grave ameaça é cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada, no contexto do art. 2º da Lei 15.358/2026. O dispositivo manda desprezar as demais causas de aumento, e por isso incide só sobre o caput — não sobre as formas circunstanciadas do §2º. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-dominio-social-liderar-financiar",
+      "nome": "Domínio social estruturado com liderança, financiamento ou vítima qualificada (2/3 ao dobro)",
+      "dispositivo": "Lei 15.358/26, art. 2º, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.667,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 15.358/26",
+        "artigos": [
+          "Art. 2º"
+        ]
+      },
+      "obs": "Aumento de 2/3 ao dobro em onze hipóteses (incisos I a XI): comando ou liderança; financiamento; violência contra membro do Judiciário, do Ministério Público, agente de segurança do art. 144 da CF, criança, adolescente, pessoa idosa, pessoa com deficiência ou pessoa vulnerável; conexão com outras facções; concurso de funcionário público; infiltração no setor público; arma de uso restrito ou proibido; recrutamento de criança ou adolescente; transnacionalidade; extração ilegal de recursos minerais; e emprego de drones, vigilância eletrônica ou contrainteligência. O art. 4º da Lei declara hediondo também este §1º — como ele apenas majora a pena do caput, que já é hediondo, a hediondez fica registrada no caput. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "diminuicao-dominio-social-atos-preparatorios",
+      "nome": "Atos preparatórios do domínio social estruturado (−1/3 a −1/2)",
+      "dispositivo": "Lei 15.358/26, art. 2º, §5º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 15.358/26",
+        "artigos": [
+          "Art. 2º"
+        ]
+      },
+      "obs": "Quem pratica atos preparatórios com propósito inequívoco de consumar as condutas do art. 2º sujeita-se à pena do crime CONSUMADO, reduzida de 1/3 até a metade. Não é tentativa (art. 14, II, do CP): a lei antecipa a punição do ato preparatório e fixa a redução própria — por isso é modificador de terceira fase com moldura de partida integral, e não se soma à diminuição da tentativa. Incluído pela Lei 15.358/2026."
+    },
+    {
+      "id": "aumento-drogas-art40",
+      "nome": "Aumento nos crimes de tráfico e condutas afins (+1/6 a 2/3)",
+      "dispositivo": "Lei 11.343/06, art. 40",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.167,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 11.343/06",
+        "artigos": [
+          "Art. 33",
+          "Art. 34",
+          "Art. 35",
+          "Art. 36",
+          "Art. 37"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 2/3 nos crimes dos arts. 33 a 37 — o alcance é dos cinco artigos, não só do art. 33. Sete hipóteses: I - transnacionalidade; II - agente prevalecendo-se de função pública ou no desempenho de missão de educação, guarda ou vigilância; III - prática em transporte público, estabelecimento prisional, unidade de ensino ou hospitalar, sedes de entidades e locais de grande aglomeração; IV - prática com violência, grave ameaça, emprego de arma de fogo ou processo de intimidação difusa; V - caracterização de tráfico entre Estados ou entre estes e o Distrito Federal; VI - envolvimento ou direcionamento a criança, adolescente ou pessoa com capacidade reduzida; VII - financiamento ou custeio da prática do crime."
+    },
+    {
+      "id": "aumento-homicidio-culposo-121-p4",
+      "nome": "Homicídio culposo com inobservância de regra técnica, omissão de socorro ou fuga (+1/3)",
+      "dispositivo": "CP, art. 121, §4º, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 121, §3º"
+        ]
+      },
+      "obs": "Aumento de 1/3 no homicídio CULPOSO se o crime resulta de inobservância de regra técnica de profissão, arte ou ofício, ou se o agente deixa de prestar imediato socorro à vítima, não procura diminuir as consequências do seu ato ou foge para evitar prisão em flagrante. O §4º comporta DUAS causas com alcances diferentes, e um registro único faria o motor aplicar a majorante culposa ao homicídio doloso — ver `aumento-homicidio-doloso-vitima-121-p4`.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-homicidio-doloso-vitima-121-p4",
+      "nome": "Homicídio doloso contra menor de 14 ou maior de 60 (+1/3)",
+      "dispositivo": "CP, art. 121, §4º, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 121, caput",
+          "Art. 121, §2º"
+        ]
+      },
+      "obs": "Aumento de 1/3 no homicídio DOLOSO se praticado contra pessoa menor de 14 ou maior de 60 anos. Segunda parte do §4º, com alcance distinto da primeira (que é do homicídio culposo).",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-homicidio-milicia-121-p6",
+      "nome": "Homicídio por milícia privada ou grupo de extermínio (+1/3 a 1/2)",
+      "dispositivo": "CP, art. 121, §6º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 121"
+        ]
+      },
+      "obs": "Aumento de 1/3 até a metade se o homicídio é praticado por milícia privada, sob o pretexto de prestação de serviço de segurança, ou por grupo de extermínio. Alcança todas as formas do art. 121."
+    },
+    {
+      "id": "aumento-feminicidio-121a-p2",
+      "nome": "Feminicídio com circunstância qualificada da vítima (+1/3 a 1/2)",
+      "dispositivo": "CP, art. 121-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 121-A"
+        ]
+      },
+      "obs": "Aumento de 1/3 até a metade se o feminicídio é praticado durante a gestação ou nos 3 meses posteriores ao parto; contra menor de 14, maior de 60 ou pessoa com deficiência; na presença física ou virtual de descendente ou ascendente da vítima; em descumprimento de medida protetiva; ou nas circunstâncias dos incisos anteriores cumuladas. Os incisos já têm linha própria no catálogo, com a moldura calculada."
+    },
+    {
+      "id": "aumento-vicaricidio-121b-pu",
+      "nome": "Vicaricídio com circunstância qualificada (+1/3 a 1/2)",
+      "dispositivo": "CP, art. 121-B, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 121-B"
+        ]
+      },
+      "obs": "Aumento de 1/3 até a metade nas hipóteses do parágrafo único do art. 121-B (vicaricídio, incluído pela Lei 15.384/2026)."
+    },
+    {
+      "id": "aumento-induzimento-suicidio-rede-122-p4",
+      "nome": "Induzimento a suicídio por rede de computadores (até o dobro)",
+      "dispositivo": "CP, art. 122, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 122"
+        ]
+      },
+      "obs": "A pena é aumentada ATÉ O DOBRO se a conduta é realizada por meio da rede de computadores, de rede social ou transmitida em tempo real. Fração de TETO: a lei não fixa mínimo, e o piso é registrado como 0 — a doutrina resolve pela menor fração compatível com a individualização. É a hipótese do inciso X do rol de hediondos."
+    },
+    {
+      "id": "aumento-perigo-trabalhadores-132-pu",
+      "nome": "Perigo a trabalhadores transportados (+1/6 a 1/3)",
+      "dispositivo": "CP, art. 132, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 132"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 1/3 se a exposição da vida ou da saúde de outrem a perigo decorre de transporte de pessoas para a prestação de serviços em estabelecimentos de qualquer natureza, em desacordo com as normas legais.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-omissao-socorro-lesao-135-pu",
+      "nome": "Omissão de socorro com lesão grave (+1/2)",
+      "dispositivo": "CP, art. 135, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 135"
+        ]
+      },
+      "obs": "A pena é aumentada de METADE se da omissão de socorro resulta lesão corporal de natureza grave. Fração fixa, não de teto — desdobrada da hipótese de morte, que triplica.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-omissao-socorro-morte-135-pu",
+      "nome": "Omissão de socorro com resultado morte (triplo)",
+      "dispositivo": "CP, art. 135, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 2.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 135"
+        ]
+      },
+      "obs": "A pena é TRIPLICADA (aumento de 200%) se da omissão de socorro resulta a morte.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-negativa-atendimento-lesao-135a-pu",
+      "nome": "Negativa de atendimento médico-hospitalar com lesão grave (até o dobro)",
+      "dispositivo": "CP, art. 135-A, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 135-A"
+        ]
+      },
+      "obs": "A pena é aumentada ATÉ O DOBRO se da negativa de atendimento resulta lesão corporal de natureza grave. Fração de teto, sem mínimo legal — diferente do art. 135, cujas frações são fixas.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-negativa-atendimento-morte-135a-pu",
+      "nome": "Negativa de atendimento médico-hospitalar com resultado morte (até o triplo)",
+      "dispositivo": "CP, art. 135-A, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 135-A"
+        ]
+      },
+      "obs": "A pena é aumentada ATÉ O TRIPLO se da negativa de atendimento resulta a morte. Fração de teto, sem mínimo legal.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-maus-tratos-menor14-136-p3",
+      "nome": "Maus-tratos contra menor de 14 anos (+1/3)",
+      "dispositivo": "CP, art. 136, §3º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 136"
+        ]
+      },
+      "obs": "Aumento de 1/3 se o crime é praticado contra pessoa menor de 14 anos. Alcança o caput e os §§ 1º e 2º."
+    },
+    {
+      "id": "aumento-perseguicao-147a-p1",
+      "nome": "Perseguição contra vítima qualificada ou em concurso (+1/2)",
+      "dispositivo": "CP, art. 147-A, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 147-A"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o crime é cometido contra criança, adolescente ou idoso; contra mulher por razões da condição do sexo feminino; ou mediante concurso de duas ou mais pessoas ou com emprego de arma."
+    },
+    {
+      "id": "aumento-violencia-psicologica-ia-147b-pu",
+      "nome": "Violência psicológica com uso de inteligência artificial (+1/2)",
+      "dispositivo": "CP, art. 147-B, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 147-B"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o crime é cometido mediante uso de inteligência artificial ou de qualquer outro recurso tecnológico que altere imagem ou som da vítima.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-trabalho-escravo-149-p2",
+      "nome": "Redução a condição análoga à de escravo com vítima qualificada (+1/2)",
+      "dispositivo": "CP, art. 149, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 149"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o crime é cometido contra criança ou adolescente, ou por motivo de preconceito de raça, cor, etnia, religião ou origem.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-trafico-pessoas-149a-p1",
+      "nome": "Tráfico de pessoas com circunstância qualificada (+1/3 a 1/2)",
+      "dispositivo": "CP, art. 149-A, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 149-A"
+        ]
+      },
+      "obs": "Aumento de 1/3 até a metade se o crime é cometido por funcionário público no exercício das funções; contra criança, adolescente, idoso ou pessoa com deficiência; por prevalecimento de relações de parentesco, domésticas, de coabitação, hospitalidade, dependência econômica, autoridade ou superioridade hierárquica; ou se a vítima é retirada do território nacional.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "diminuicao-trafico-pessoas-primario-149a-p2",
+      "nome": "Tráfico de pessoas por agente primário sem vínculo com organização criminosa (−1/3 a −2/3)",
+      "dispositivo": "CP, art. 149-A, §2º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 149-A"
+        ]
+      },
+      "obs": "A pena é reduzida de 1/3 a 2/3 se o agente for primário e não integrar organização criminosa.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-invasao-dispositivo-prejuizo-154a-p2",
+      "nome": "Invasão de dispositivo informático com prejuízo econômico (+1/3 a 2/3)",
+      "dispositivo": "CP, art. 154-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 154-A, caput"
+        ]
+      },
+      "obs": "Aumento de 1/3 a 2/3 se da invasão resulta prejuízo econômico. Incide sobre o caput.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-invasao-dispositivo-divulgacao-154a-p4",
+      "nome": "Divulgação do material obtido por invasão de dispositivo (+1/3 a 2/3)",
+      "dispositivo": "CP, art. 154-A, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 154-A, §3º"
+        ]
+      },
+      "obs": "Aumento de 1/3 a 2/3 se houver divulgação, comercialização ou transmissão a terceiro do material obtido. ALCANCE RESTRITO: incide só sobre a hipótese do §3º (obtenção de conteúdo de comunicações, segredos ou controle remoto), não sobre o artigo inteiro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-invasao-dispositivo-vitima-154a-p5",
+      "nome": "Invasão de dispositivo contra autoridade (+1/3 a 1/2)",
+      "dispositivo": "CP, art. 154-A, §5º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 154-A"
+        ]
+      },
+      "obs": "Aumento de 1/3 à metade se o crime for praticado contra o Presidente da República, governadores, prefeitos, o Presidente do STF, presidentes de casa legislativa ou dirigente máximo da administração direta e indireta."
+    },
+    {
+      "id": "aumento-apropriacao-indebita-168-p1",
+      "nome": "Apropriação indébita com qualidade do agente (+1/3)",
+      "dispositivo": "CP, art. 168, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 168, caput"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 quando o agente recebeu a coisa em depósito necessário; na qualidade de tutor, curador, síndico, liquidatário, inventariante, testamenteiro ou depositário judicial; ou em razão de ofício, emprego ou profissão.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-frustracao-direito-trabalhista-203-p2",
+      "nome": "Frustração de direito trabalhista contra vítima vulnerável (+1/6 a 1/3)",
+      "dispositivo": "CP, art. 203, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 203"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 1/3 se a vítima é menor de 18 anos, idosa, gestante, indígena ou pessoa com deficiência física ou mental. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-aliciamento-trabalhadores-207-p2",
+      "nome": "Aliciamento de trabalhadores com vítima vulnerável (+1/6 a 1/3)",
+      "dispositivo": "CP, art. 207, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 207"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 1/3 se a vítima é menor de 18 anos, idosa, gestante, indígena ou pessoa com deficiência física ou mental. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-ultraje-culto-violencia-208-pu",
+      "nome": "Ultraje a culto com emprego de violência (+1/3)",
+      "dispositivo": "CP, art. 208, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 208"
+        ]
+      },
+      "obs": "Se há emprego de violência, a pena é aumentada de 1/3, SEM PREJUÍZO da pena correspondente à violência — o aumento e a pena da violência se somam.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-impedimento-funeral-violencia-209-pu",
+      "nome": "Impedimento de funeral com emprego de violência (+1/3)",
+      "dispositivo": "CP, art. 209, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 209"
+        ]
+      },
+      "obs": "Se há emprego de violência, a pena é aumentada de 1/3, sem prejuízo da pena correspondente à violência.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-importunacao-sexual-menor18-216a-p2",
+      "nome": "Assédio sexual contra menor de 18 anos (até +1/3)",
+      "dispositivo": "CP, art. 216-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.0,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 216-A"
+        ]
+      },
+      "obs": "A pena é aumentada EM ATÉ 1/3 se a vítima é menor de 18 anos. Fração de teto: a lei não fixa mínimo, e o piso é registrado como 0.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-registro-nao-autorizado-218c-p1",
+      "nome": "Divulgação de cena de sexo ou estupro em contexto de violência doméstica (+1/3 a 2/3)",
+      "dispositivo": "CP, art. 218-C, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 218-C"
+        ]
+      },
+      "obs": "Aumento de 1/3 a 2/3 se o crime é praticado por agente que mantém ou tenha mantido relação íntima de afeto com a vítima, ou com o fim de vingança ou humilhação.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-registro-intimo-232a-p2",
+      "nome": "Divulgação de imagem de nudez ou ato sexual de vulnerável (+1/6 a 1/3)",
+      "dispositivo": "CP, art. 232-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 232-A"
+        ]
+      },
+      "obs": "Aumento de 1/6 a 1/3 nas hipóteses do §2º do art. 232-A.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-perigo-comum-lesao-dolosa-258",
+      "nome": "Crime doloso de perigo comum com lesão grave (+1/2)",
+      "dispositivo": "CP, art. 258, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 250",
+          "Art. 251",
+          "Art. 252",
+          "Art. 253",
+          "Art. 254",
+          "Art. 255",
+          "Art. 256",
+          "Art. 257",
+          "Art. 259"
+        ]
+      },
+      "obs": "Se do crime DOLOSO de perigo comum resulta lesão corporal de natureza grave, a pena é aumentada de metade. Alcance de CAPÍTULO: os crimes de perigo comum do Capítulo I do Título VIII (arts. 250 a 259).",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-perigo-comum-morte-dolosa-258",
+      "nome": "Crime doloso de perigo comum com resultado morte (dobro)",
+      "dispositivo": "CP, art. 258, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 250",
+          "Art. 251",
+          "Art. 252",
+          "Art. 253",
+          "Art. 254",
+          "Art. 255",
+          "Art. 256",
+          "Art. 257",
+          "Art. 259"
+        ]
+      },
+      "obs": "Se do crime DOLOSO de perigo comum resulta a morte, a pena é aplicada em dobro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-perigo-comum-lesao-culposa-258",
+      "nome": "Crime culposo de perigo comum com lesão corporal (+1/2)",
+      "dispositivo": "CP, art. 258, 3ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 250",
+          "Art. 251",
+          "Art. 252",
+          "Art. 253",
+          "Art. 254",
+          "Art. 255",
+          "Art. 256",
+          "Art. 257",
+          "Art. 259"
+        ]
+      },
+      "obs": "No crime CULPOSO de perigo comum, se do fato resulta lesão corporal, a pena aumenta-se de metade. A QUARTA hipótese do art. 258 — crime culposo com resultado morte — não é majoração: manda aplicar a pena do homicídio culposo aumentada de 1/3, isto é, SUBSTITUI a moldura. O catálogo de modificadores não expressa substituição de moldura; ver REVISAO-PENDENTE.md, na raiz do repositório.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-omissao-notificacao-268-pu",
+      "nome": "Infração de medida sanitária por profissional de saúde (+1/3)",
+      "dispositivo": "CP, art. 268, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 268"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o agente é funcionário da saúde pública ou exerce a profissão de médico, farmacêutico, dentista ou enfermeiro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-falsa-identidade-311-p1",
+      "nome": "Adulteração de sinal identificador por funcionário público (+1/3)",
+      "dispositivo": "CP, art. 311, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 311"
+        ]
+      },
+      "obs": "Se o agente comete o crime no exercício da função pública ou em razão dela, a pena é aumentada de 1/3.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-fraude-licitacao-311a-p3",
+      "nome": "Fraude em certame de interesse público por funcionário público (+1/3)",
+      "dispositivo": "CP, art. 311-A, §3º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 311-A"
+        ]
+      },
+      "obs": "Aumenta-se a pena de 1/3 se o fato é cometido por funcionário público.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-corrupcao-passiva-317-p1",
+      "nome": "Corrupção passiva com ato de ofício praticado ou omitido (+1/3)",
+      "dispositivo": "CP, art. 317, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 317"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se, em consequência da vantagem ou promessa, o funcionário retarda ou deixa de praticar ato de ofício, ou o pratica infringindo dever funcional."
+    },
+    {
+      "id": "aumento-trafico-influencia-332-pu",
+      "nome": "Tráfico de influência com alegação de destinação a funcionário (+1/2)",
+      "dispositivo": "CP, art. 332, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 332"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o agente alega ou insinua que a vantagem é também destinada ao funcionário.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-corrupcao-ativa-333-pu",
+      "nome": "Corrupção ativa com ato de ofício praticado ou omitido (+1/3)",
+      "dispositivo": "CP, art. 333, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 333"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se, em razão da vantagem ou promessa, o funcionário retarda ou omite ato de ofício, ou o pratica infringindo dever funcional.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-descaminho-transporte-334-p3",
+      "nome": "Descaminho em transporte aéreo, marítimo ou fluvial (dobro)",
+      "dispositivo": "CP, art. 334, §3º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 334"
+        ]
+      },
+      "obs": "A pena aplica-se em dobro se o crime de descaminho é praticado em transporte aéreo, marítimo ou fluvial.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-contrabando-transporte-334a-p3",
+      "nome": "Contrabando em transporte aéreo, marítimo ou fluvial (dobro)",
+      "dispositivo": "CP, art. 334-A, §3º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 334-A"
+        ]
+      },
+      "obs": "A pena aplica-se em dobro se o crime de contrabando é praticado em transporte aéreo, marítimo ou fluvial.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-corrupcao-ativa-internacional-337b-pu",
+      "nome": "Corrupção ativa em transação comercial internacional com ato praticado ou omitido (+1/3)",
+      "dispositivo": "CP, art. 337-B, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 337-B"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se, em razão da vantagem ou promessa, o funcionário público estrangeiro retarda ou omite o ato de ofício, ou o pratica infringindo dever funcional.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-trafico-influencia-internacional-337c-pu",
+      "nome": "Tráfico de influência em transação comercial internacional (+1/2)",
+      "dispositivo": "CP, art. 337-C, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 337-C"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o agente alega ou insinua que a vantagem é também destinada a funcionário público estrangeiro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-fraude-contratacao-publica-337o-p2",
+      "nome": "Fraude em contratação pública com fim de benefício (dobro)",
+      "dispositivo": "CP, art. 337-O, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 337-O"
+        ]
+      },
+      "obs": "A pena é aplicada em dobro se o crime é praticado com o fim de obter benefício, direto ou indireto, próprio ou de outrem.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "diminuicao-denunciacao-contravencao-339-p2",
+      "nome": "Denunciação caluniosa por imputação de contravenção (−1/2)",
+      "dispositivo": "CP, art. 339, §2º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 339"
+        ]
+      },
+      "obs": "A pena é diminuída de metade se a imputação é de prática de contravenção.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-atentado-soberania-guerra-359i-p1",
+      "nome": "Atentado à soberania com declaração de guerra (+1/2 ao dobro)",
+      "dispositivo": "CP, art. 359-I, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CP",
+        "artigos": [
+          "Art. 359-I"
+        ]
+      },
+      "obs": "Aumenta-se a pena de metade até o dobro se, em decorrência da conduta, é declarada guerra.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-violencia-superior-comandante-160-pu",
+      "nome": "Violência contra superior — vítima qualificada (+1/2)",
+      "dispositivo": "CPM, art. 160, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 160"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o fato é praticado contra o comandante da unidade a que pertence o agente, oficial general, oficial de dia, de serviço ou de quarto, ou contra sentinela, vigia ou plantão.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-desrespeito-superior-publico-162-pu",
+      "nome": "Desrespeito a superior diante da tropa ou em público (+1/2)",
+      "dispositivo": "CPM, art. 162, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 162"
+        ]
+      },
+      "obs": "A pena é aumentada da metade se o fato é praticado diante da tropa ou em público.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-motim-graduado-190-p3",
+      "nome": "Motim ou revolta por graduado (+1/3)",
+      "dispositivo": "CPM, art. 190, §3º, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 190"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se se tratar de sargento, subtenente ou suboficial. Fração fixa por posto — desdobrada da hipótese do oficial, que aumenta de metade.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-motim-oficial-190-p3",
+      "nome": "Motim ou revolta por oficial (+1/2)",
+      "dispositivo": "CPM, art. 190, §3º, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 190"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se se tratar de oficial.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-aliciacao-comando-196-p2",
+      "nome": "Aliciação para motim por agente em função de comando (+1/2)",
+      "dispositivo": "CPM, art. 196, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 196"
+        ]
+      },
+      "obs": "Se o agente exercia função de comando, a pena é aumentada de metade.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-homicidio-culposo-militar-206-p1",
+      "nome": "Homicídio culposo militar com regra técnica ou omissão de socorro (+1/3)",
+      "dispositivo": "CPM, art. 206, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 206"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o crime resulta da inobservância de regra técnica de profissão, arte ou ofício, ou se o agente deixa de prestar imediato socorro à vítima, não procura diminuir as consequências do seu ato ou foge para evitar prisão em flagrante.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-homicidio-culposo-militar-vitimas-206-p2",
+      "nome": "Homicídio culposo militar com multiplicidade de vítimas (+1/6 a 1/2)",
+      "dispositivo": "CPM, art. 206, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 206"
+        ]
+      },
+      "obs": "Se, em consequência de uma só ação ou omissão culposa, ocorre morte de mais de uma pessoa ou também lesões corporais em outras pessoas, a pena é aumentada de 1/6 até metade.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "diminuicao-induzimento-suicidio-tentado-207-p3",
+      "nome": "Induzimento a suicídio apenas tentado, com lesão grave (−1/3 a −2/3)",
+      "dispositivo": "CPM, art. 207, §3º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 207"
+        ]
+      },
+      "obs": "Se o suicídio é apenas tentado e da tentativa resulta lesão grave, a pena é reduzida de 1/3 a 2/3.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-lesao-culposa-militar-210-p1",
+      "nome": "Lesão culposa militar com regra técnica ou omissão de socorro (+1/3)",
+      "dispositivo": "CPM, art. 210, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 210"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o crime resulta da inobservância de regra técnica de profissão, arte ou ofício, ou se o agente deixa de prestar imediato socorro à vítima ou foge para evitar prisão em flagrante.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-lesao-culposa-militar-vitimas-210-p2",
+      "nome": "Lesão culposa militar com multiplicidade de vítimas (+1/6 a 1/2)",
+      "dispositivo": "CPM, art. 210, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 210"
+        ]
+      },
+      "obs": "Se, em consequência de uma só ação ou omissão culposa, ocorrem lesões em várias pessoas, a pena é aumentada de 1/6 até metade.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-abandono-vitima-qualificada-213-p3",
+      "nome": "Vítima menor de 14, maior de 60 ou com deficiência (+1/3)",
+      "dispositivo": "CPM, art. 213, §3º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 213"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o crime é praticado contra pessoa menor de 14 anos, maior de 60 anos ou com deficiência.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-furto-militar-servico-226-p2",
+      "nome": "Crime patrimonial militar cometido em serviço (+1/3)",
+      "dispositivo": "CPM, art. 226, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 226"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o fato é cometido por militar em serviço.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-uso-indevido-veiculo-241-pu",
+      "nome": "Uso indevido de veículo, embarcação, aeronave ou arma (+1/2)",
+      "dispositivo": "CPM, art. 241, parágrafo único, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 241"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se a coisa usada é veículo motorizado, embarcação, aeronave ou arma. Fração fixa — desdobrada da hipótese do animal de sela ou tiro, que aumenta de 1/3.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-uso-indevido-animal-241-pu",
+      "nome": "Uso indevido de animal de sela ou de tiro (+1/3)",
+      "dispositivo": "CPM, art. 241, parágrafo único, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 241"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se a coisa usada é animal de sela ou de tiro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-dano-navio-guerra-lesao-263-p1",
+      "nome": "Dano em navio de guerra com lesão grave (+1/2)",
+      "dispositivo": "CPM, art. 263, §1º, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 263"
+        ]
+      },
+      "obs": "Se resulta lesão grave, a pena correspondente é aumentada da metade. ALCANCE: o próprio art. 263 — o §1º é parágrafo dele, e 'a pena correspondente' é a do caput (reclusão de 3 a 10 anos). A revisão deixara o alcance em aberto por não ter conferido a estrutura do capítulo; os arts. 259 a 266 têm, cada um, moldura própria, e não há artigo de encerramento que estenda o §1º aos demais.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-dano-navio-guerra-morte-263-p1",
+      "nome": "Dano em navio de guerra com resultado morte (dobro)",
+      "dispositivo": "CPM, art. 263, §1º, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 263"
+        ]
+      },
+      "obs": "Se resulta a morte, a pena correspondente é aplicada em dobro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-usura-superior-267-p2",
+      "nome": "Usura militar por superior ou servidor público (+1/3)",
+      "dispositivo": "CPM, art. 267, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 267"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o crime é cometido por superior, por militar em função de comando ou por servidor público.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-perigo-comum-militar-lesao-dolosa-277",
+      "nome": "Crime doloso de perigo comum militar com lesão grave (+1/2)",
+      "dispositivo": "CPM, art. 277, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 268",
+          "Art. 269",
+          "Art. 270",
+          "Art. 271",
+          "Art. 272",
+          "Art. 273",
+          "Art. 274",
+          "Art. 275",
+          "Art. 276",
+          "Art. 278"
+        ]
+      },
+      "obs": "Se do crime DOLOSO de perigo comum resulta, além da vontade do agente, lesão grave, a pena é aumentada de metade. ALCANCE: os crimes de perigo comum do Capítulo I do Título VI — arts. 268 a 276 e 278. O art. 277 é artigo de encerramento, colocado depois do art. 276 ('praticar qualquer dos fatos previstos nos artigos anteriores dêste capítulo'), na mesma posição que o art. 258 ocupa no CP; os arts. 279 a 281, do mesmo capítulo, são crimes de trânsito com estrutura própria.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-perigo-comum-militar-morte-dolosa-277",
+      "nome": "Crime doloso de perigo comum militar com resultado morte (dobro)",
+      "dispositivo": "CPM, art. 277, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 268",
+          "Art. 269",
+          "Art. 270",
+          "Art. 271",
+          "Art. 272",
+          "Art. 273",
+          "Art. 274",
+          "Art. 275",
+          "Art. 276",
+          "Art. 278"
+        ]
+      },
+      "obs": "Se do crime doloso de perigo comum resulta morte, a pena é aplicada em dobro.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-perigo-comum-militar-lesao-culposa-277",
+      "nome": "Crime culposo de perigo comum militar com lesão corporal (+1/2)",
+      "dispositivo": "CPM, art. 277, 3ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 268",
+          "Art. 269",
+          "Art. 270",
+          "Art. 271",
+          "Art. 272",
+          "Art. 273",
+          "Art. 274",
+          "Art. 275",
+          "Art. 276",
+          "Art. 278"
+        ]
+      },
+      "obs": "No caso de CULPA, se do fato resulta lesão corporal, a pena aumenta-se de metade. A quarta hipótese do art. 277 — culpa com resultado morte — manda aplicar a pena cominada ao homicídio culposo aumentada de 1/3, o que é SUBSTITUIÇÃO de moldura, não majoração; ver REVISAO-PENDENTE.md, na raiz do repositório.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-entorpecente-militar-servico-290-p4",
+      "nome": "Entorpecente em lugar sujeito à administração militar, por militar em serviço (+1/2)",
+      "dispositivo": "CPM, art. 290, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 290, caput"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se as condutas do caput são cometidas por militar em serviço.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-corrupcao-ativa-militar-308-p1",
+      "nome": "Corrupção ativa militar com ato de ofício praticado ou omitido (+1/3)",
+      "dispositivo": "CPM, art. 308, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 308"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se, em consequência da vantagem ou promessa, o agente retarda ou omite ato de ofício, ou o pratica infringindo dever funcional.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-trafico-influencia-militar-336-pu",
+      "nome": "Tráfico de influência militar com alegação de destinação (+1/2)",
+      "dispositivo": "CPM, art. 336, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CPM (DL 1.001/69)",
+        "artigos": [
+          "Art. 336"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o agente alega ou insinua que a vantagem é também destinada a militar ou funcionário.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-homicidio-transito-302-p1",
+      "nome": "Homicídio culposo no trânsito com circunstância qualificada (+1/3 a 1/2)",
+      "dispositivo": "CTB, art. 302, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CTB",
+        "artigos": [
+          "Art. 302, caput"
+        ]
+      },
+      "obs": "Aumento de 1/3 à metade se o agente não possui Permissão para Dirigir ou CNH; pratica o crime em faixa de pedestres ou na calçada; deixa de prestar socorro à vítima; ou conduz veículo de transporte de passageiros no exercício da profissão. Os oito dispositivos do CTB que a auditoria também apontava são de infração ADMINISTRATIVA, não penal — ver scripts/crawler/excecoes-auditoria.json.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-lesao-transito-303-p1",
+      "nome": "Lesão corporal culposa no trânsito com circunstância qualificada (+1/3 a 1/2)",
+      "dispositivo": "CTB, art. 303, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CTB",
+        "artigos": [
+          "Art. 303, caput"
+        ]
+      },
+      "obs": "Aumenta-se a pena de 1/3 à metade se ocorrer qualquer das hipóteses do §1º do art. 302 — o alcance vem por remissão.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-fauna-29-p4",
+      "nome": "Crime contra a fauna com circunstância qualificada (+1/2)",
+      "dispositivo": "Lei 9.605/98, art. 29, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 29"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se o crime é praticado contra espécie rara ou ameaçada de extinção; em período proibido à caça; durante a noite; com abuso de licença; em unidade de conservação; ou com métodos capazes de provocar destruição em massa. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-fauna-caca-profissional-29-p5",
+      "nome": "Crime contra a fauna por caça profissional (até o triplo)",
+      "dispositivo": "Lei 9.605/98, art. 29, §5º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 29"
+        ]
+      },
+      "obs": "A pena é aumentada ATÉ O TRIPLO se o crime decorre do exercício de caça profissional. Fração de teto, sem mínimo legal.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-maus-tratos-animais-32-p2",
+      "nome": "Maus-tratos a animais com resultado morte (+1/6 a 1/3)",
+      "dispositivo": "Lei 9.605/98, art. 32, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 32"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/6 a 1/3 se ocorre morte do animal. Alcança o caput e o §1º-A.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-flora-53",
+      "nome": "Crimes contra a flora com circunstância qualificada (+1/6 a 1/3)",
+      "dispositivo": "Lei 9.605/98, art. 53",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 38",
+          "Art. 38-A",
+          "Art. 39",
+          "Art. 40",
+          "Art. 41",
+          "Art. 42",
+          "Art. 44",
+          "Art. 45",
+          "Art. 46",
+          "Art. 48",
+          "Art. 49",
+          "Art. 50",
+          "Art. 50-A",
+          "Art. 51",
+          "Art. 52"
+        ]
+      },
+      "obs": "Nos crimes da Seção II (crimes contra a flora), a pena é aumentada de 1/6 a 1/3 se do fato resulta a diminuição de águas naturais, a erosão do solo ou a modificação do regime climático; ou se o crime é cometido em período de queda das sementes, de formação de vegetações, contra espécies raras ou ameaçadas, em época de seca ou inundação, ou durante a noite, em domingo ou feriado. ALCANCE DE SEÇÃO.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-poluicao-nuclear-56-p2",
+      "nome": "Substância nuclear ou radioativa (+1/6 a 1/3)",
+      "dispositivo": "Lei 9.605/98, art. 56, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 56"
+        ]
+      },
+      "obs": "Se o produto ou a substância for nuclear ou radioativa, a pena é aumentada de 1/6 a 1/3. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-estudo-ambiental-falso-69a-p2",
+      "nome": "Estudo ambiental falso com dano significativo (+1/3 a 2/3)",
+      "dispositivo": "Lei 9.605/98, art. 69-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.605/98",
+        "artigos": [
+          "Art. 69-A"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 a 2/3 se há dano significativo ao meio ambiente em decorrência do uso da informação falsa, incompleta ou enganosa.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-porte-arma-reincidente-lcp-19",
+      "nome": "Porte de arma por condenado anterior (+1/3 a 1/2)",
+      "dispositivo": "LCP, art. 19, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "LCP (DL 3.688/41)",
+        "artigos": [
+          "Art. 19"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 até metade se o agente já foi condenado, em sentença irrecorrível, por violência contra pessoa. RESSALVA DE VIGÊNCIA: o art. 19 está tacitamente revogado quanto à ARMA DE FOGO pela Lei 10.826/2003, subsistindo para armas brancas e outros instrumentos — o §1º herda a ressalva.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-vias-de-fato-idoso-lcp-21",
+      "nome": "Vias de fato contra maior de 60 anos (+1/3 a 1/2)",
+      "dispositivo": "LCP, art. 21, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "LCP (DL 3.688/41)",
+        "artigos": [
+          "Art. 21"
+        ]
+      },
+      "obs": "Aumenta-se a pena de 1/3 até a metade se a vítima é maior de 60 anos. O compilado empilha DUAS redações do mesmo dispositivo — o antigo parágrafo único e o §1º que o renumerou —, com texto idêntico; é uma norma só, e o registro usa a designação vigente.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-jogo-azar-empregados-lcp-50",
+      "nome": "Jogo de azar com empregados ou participação de menor (+1/3)",
+      "dispositivo": "LCP, art. 50, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "LCP (DL 3.688/41)",
+        "artigos": [
+          "Art. 50"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se existe entre os empregados ou participa do jogo pessoa menor de 18 anos.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-calunia-eleitoral-323-p2",
+      "nome": "Divulgação de fatos inverídicos com circunstância qualificada (+1/3 a 1/2)",
+      "dispositivo": "CE, art. 323, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CE (Lei 4.737/65)",
+        "artigos": [
+          "Art. 323"
+        ]
+      },
+      "obs": "Aumenta-se a pena de 1/3 até metade se o crime é cometido por meio da imprensa, rádio ou televisão, ou contra mulher e menospreze ou discrimine sua condição de mulher.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "diminuicao-denunciacao-eleitoral-contravencao-326a-p2",
+      "nome": "Denunciação caluniosa eleitoral por imputação de contravenção (−1/2)",
+      "dispositivo": "CE, art. 326-A, §2º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "CE (Lei 4.737/65)",
+        "artigos": [
+          "Art. 326-A"
+        ]
+      },
+      "obs": "A pena é diminuída de metade se a imputação é de prática de contravenção. Espelho eleitoral do art. 339, §2º do CP — mesma estrutura, mesma fração.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-divulgacao-fato-inveridico-mulher-326b-pu",
+      "nome": "Divulgação de fato inverídico contra mulher (+1/3)",
+      "dispositivo": "Lei 14.192/21, art. 326-B do CE, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.192/21",
+        "artigos": [
+          "Art. 326-B"
+        ]
+      },
+      "obs": "Aumenta-se a pena em 1/3 se o crime é cometido contra mulher, menosprezando ou discriminando sua condição de mulher.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-producao-cena-sexo-menor-240-p2",
+      "nome": "Produção de cena de sexo com criança ou adolescente, por agente qualificado (+1/3)",
+      "dispositivo": "ECA, art. 240, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "ECA",
+        "artigos": [
+          "Art. 240"
+        ]
+      },
+      "obs": "Aumenta-se a pena de 1/3 se o agente comete o crime no exercício de cargo ou função pública; prevalecendo-se de relações domésticas, de coabitação ou hospitalidade; ou prevalecendo-se de relações de parentesco, tutela, curatela, emprego ou autoridade. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "diminuicao-posse-material-pornografico-241b-p1",
+      "nome": "Posse de material pornográfico infantil em pequena quantidade (−1/3 a −2/3)",
+      "dispositivo": "ECA, art. 241-B, §1º",
+      "natureza": "diminuicao",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "ECA",
+        "artigos": [
+          "Art. 241-B"
+        ]
+      },
+      "obs": "A pena é diminuída de 1/3 a 2/3 se de pequena quantidade o material. O compilado traz 'diminuída de 1 (um) a 2/3 (dois terços)', o que lido literalmente seria redução de 100% a 66% — absurdo, porque zeraria a pena. É defeito de redação conhecido: lê-se 'de um [terço] a dois terços'. Registrado 1/3 a 2/3, com a divergência entre a letra e a leitura corrente anotada aqui para que a conferência automática não 'corrija' de volta.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-submissao-trabalho-infantil-243-pu",
+      "nome": "Venda de bebida ou produto que cause dependência a criança (+1/3 a 1/2)",
+      "dispositivo": "ECA, art. 243, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "ECA",
+        "artigos": [
+          "Art. 243"
+        ]
+      },
+      "obs": "A pena será aumentada de 1/3 até a metade se a criança ou o adolescente sofrer lesão corporal grave ou morrer em razão do consumo.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-abandono-pcd-88-p1",
+      "nome": "Discriminação de pessoa com deficiência sob cuidado do agente (+1/3)",
+      "dispositivo": "Lei 13.146/15, art. 88, §1º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.146/15",
+        "artigos": [
+          "Art. 88"
+        ]
+      },
+      "obs": "Aumenta-se a pena em 1/3 se a vítima encontrar-se sob cuidado e responsabilidade do agente.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-apropriacao-pcd-89-pu",
+      "nome": "Apropriação de bens de pessoa com deficiência por agente qualificado (+1/3)",
+      "dispositivo": "Lei 13.146/15, art. 89, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.146/15",
+        "artigos": [
+          "Art. 89"
+        ]
+      },
+      "obs": "Aumenta-se a pena em 1/3 se o crime é cometido por tutor, curador, síndico, liquidatário, inventariante, testamenteiro ou depositário judicial, ou por quem se apropriou em razão de ofício ou de profissão.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-retencao-cartao-pcd-91-pu",
+      "nome": "Retenção de cartão ou documento de pessoa com deficiência por tutor ou curador (+1/3)",
+      "dispositivo": "Lei 13.146/15, art. 91, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.146/15",
+        "artigos": [
+          "Art. 91"
+        ]
+      },
+      "obs": "Aumenta-se a pena em 1/3 se o crime é cometido por tutor ou curador.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-discriminacao-idoso-96-p2",
+      "nome": "Discriminação de pessoa idosa sob cuidados do agente (+1/3)",
+      "dispositivo": "Lei 10.741/03, art. 96, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 10.741/03",
+        "artigos": [
+          "Art. 96"
+        ]
+      },
+      "obs": "A pena será aumentada de 1/3 se a vítima se encontrar sob os cuidados ou responsabilidade do agente. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-abandono-idoso-lesao-97-pu",
+      "nome": "Omissão de socorro a pessoa idosa com lesão grave (+1/2)",
+      "dispositivo": "Lei 10.741/03, art. 97, parágrafo único, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 10.741/03",
+        "artigos": [
+          "Art. 97"
+        ]
+      },
+      "obs": "A pena é aumentada de metade se da omissão resulta lesão corporal de natureza grave. Cópia estrutural do art. 135, parágrafo único do CP — frações FIXAS, não de teto.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-abandono-idoso-morte-97-pu",
+      "nome": "Omissão de socorro a pessoa idosa com resultado morte (triplo)",
+      "dispositivo": "Lei 10.741/03, art. 97, parágrafo único, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 2.0,
+      "fracao_max": 2.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 10.741/03",
+        "artigos": [
+          "Art. 97"
+        ]
+      },
+      "obs": "A pena é TRIPLICADA se da omissão resulta a morte.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-arma-numeracao-suprimida-19",
+      "nome": "Comércio ilegal ou tráfico de arma com numeração suprimida (+1/2)",
+      "dispositivo": "Lei 10.826/03, art. 19",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 10.826/03",
+        "artigos": [
+          "Art. 17",
+          "Art. 18"
+        ]
+      },
+      "obs": "Nos crimes dos arts. 17 e 18, a pena é aumentada da metade se a arma de fogo, acessório ou munição for de uso proibido ou restrito. ALCANCE POR LISTA EXPLÍCITA.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-arma-agente-qualificado-20",
+      "nome": "Crime de arma de fogo por agente com qualidade especial (+1/2)",
+      "dispositivo": "Lei 10.826/03, art. 20",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 10.826/03",
+        "artigos": [
+          "Art. 14",
+          "Art. 15",
+          "Art. 16",
+          "Art. 17",
+          "Art. 18"
+        ]
+      },
+      "obs": "Nos crimes dos arts. 14, 15, 16, 17 e 18, a pena é aumentada da metade se forem praticados por integrante dos órgãos e empresas referidas nos arts. 6º, 7º e 8º desta Lei. ALCANCE POR LISTA EXPLÍCITA.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-fraude-esportiva-servidor-167-pu",
+      "nome": "Fraude em competição esportiva por agente qualificado (+1/3 a 1/2)",
+      "dispositivo": "Lei 14.597/23, art. 167, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.597/23",
+        "artigos": [
+          "Art. 167"
+        ]
+      },
+      "obs": "A pena será aumentada de 1/3 até a metade se o agente for servidor público, dirigente esportivo, árbitro, atleta ou pessoa com função na competição.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-violencia-esportiva-organizador-201-p6",
+      "nome": "Violência em evento esportivo por organizador ou incitador (+1/3 a 1/2)",
+      "dispositivo": "Lei 14.597/23, art. 201, §6º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 14.597/23",
+        "artigos": [
+          "Art. 201"
+        ]
+      },
+      "obs": "A pena será aumentada de 1/3 até a metade para quem promover tumulto, praticar ou incitar a violência, ou invadir local restrito aos competidores. Alcança o caput e o §1º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-falencia-contabilidade-paralela-168-p2",
+      "nome": "Crime falimentar com contabilidade paralela (+1/3 a 1/2)",
+      "dispositivo": "Lei 11.101/05, art. 168, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 11.101/05",
+        "artigos": [
+          "Art. 168"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 até metade se o devedor manteve ou movimentou recursos ou valores paralelamente à contabilidade exigida pela legislação.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-terrorismo-lesao-7",
+      "nome": "Crime de terrorismo com lesão corporal grave (+1/3)",
+      "dispositivo": "Lei 13.260/16, art. 7º, 1ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.260/16",
+        "artigos": [
+          "Art. 2º",
+          "Art. 3º",
+          "Art. 5º",
+          "Art. 6º"
+        ]
+      },
+      "obs": "Salvo quando for ELEMENTAR da prática de qualquer crime previsto nesta Lei, se de sua execução resulta lesão corporal grave, a pena é aumentada de 1/3. ALCANCE DE LEI INTEIRA, com cláusula anti-bis in idem expressa: o aumento não incide quando o resultado já é elementar do tipo.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-terrorismo-morte-7",
+      "nome": "Crime de terrorismo com resultado morte (+1/2)",
+      "dispositivo": "Lei 13.260/16, art. 7º, 2ª parte",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.5,
+      "fracao_max": 0.5,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 13.260/16",
+        "artigos": [
+          "Art. 2º",
+          "Art. 3º",
+          "Art. 5º",
+          "Art. 6º"
+        ]
+      },
+      "obs": "Se da execução resulta morte, a pena é aumentada de metade — salvo quando o resultado for elementar do tipo.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-incitacao-genocidio-imprensa-3-p2",
+      "nome": "Incitação ao genocídio pela imprensa (+1/3)",
+      "dispositivo": "Lei 2.889/56, art. 3º, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 2.889/56",
+        "artigos": [
+          "Art. 3º"
+        ]
+      },
+      "obs": "A pena será aumentada de 1/3 quando a incitação for cometida pela imprensa.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-insider-trading-27d-p2",
+      "nome": "Uso indevido de informação privilegiada por agente com dever legal (+1/3)",
+      "dispositivo": "Lei 6.385/76, art. 27-D, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 6.385/76",
+        "artigos": [
+          "Art. 27-D"
+        ]
+      },
+      "obs": "A pena é aumentada em 1/3 se o agente comete o crime valendo-se de informação relevante de que tenha conhecimento e da qual deva manter sigilo.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-gestao-fraudulenta-instituicao-19-pu",
+      "nome": "Crime contra o SFN em detrimento de instituição financeira oficial (+1/3)",
+      "dispositivo": "Lei 7.492/86, art. 19, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 7.492/86",
+        "artigos": [
+          "Art. 19"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se o crime é cometido em detrimento de instituição financeira oficial ou por ela credenciada para o repasse de financiamento.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-esterilizacao-ilegal-15-pu",
+      "nome": "Esterilização cirúrgica ilegal com circunstância qualificada (+1/3)",
+      "dispositivo": "Lei 9.263/96, art. 15, parágrafo único",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.263/96",
+        "artigos": [
+          "Art. 15"
+        ]
+      },
+      "obs": "A pena é aumentada de 1/3 se a esterilização for praticada durante períodos de parto ou aborto; com manifestação de vontade do esterilizado expressa durante ocorrência de alterações na capacidade de discernimento; através de histerectomia e ooforectomia; em pessoa absolutamente incapaz; ou por meio de cesária indicada para fim exclusivo de esterilização.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-quebra-sigilo-funcionario-10a-p2",
+      "nome": "Promoção de escuta ambiental ilegal por funcionário público (dobro)",
+      "dispositivo": "Lei 9.296/96, art. 10-A, §2º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 1.0,
+      "fracao_max": 1.0,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.296/96",
+        "artigos": [
+          "Art. 10-A"
+        ]
+      },
+      "obs": "A pena será aplicada em dobro ao funcionário público que descumprir determinação de sigilo das investigações ou revelar o conteúdo das gravações enquanto mantido o sigilo judicial.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-tortura-agente-vitima-1-p4",
+      "nome": "Tortura por agente público ou contra vítima vulnerável (+1/6 a 1/3)",
+      "dispositivo": "Lei 9.455/97, art. 1º, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.16666666666666666,
+      "fracao_max": 0.3333333333333333,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.455/97",
+        "artigos": [
+          "Art. 1º"
+        ]
+      },
+      "obs": "Aumenta-se a pena de 1/6 até 1/3 se o crime é cometido por agente público; contra criança, gestante, portador de deficiência, adolescente ou maior de 60 anos; ou mediante sequestro. Alcança o caput e os §§ 1º e 2º.",
+      "ignora_embutida": true
+    },
+    {
+      "id": "aumento-lavagem-habitual-orgcrim-1-p4",
+      "nome": "Lavagem de dinheiro habitual ou por organização criminosa (+1/3 a 2/3)",
+      "dispositivo": "Lei 9.613/98, art. 1º, §4º",
+      "natureza": "aumento",
+      "fase": 3,
+      "sobre": "pena_provisoria",
+      "fracao_min": 0.3333333333333333,
+      "fracao_max": 0.667,
+      "piso_minimo": false,
+      "escopo": {
+        "tipo": "tipos_por_artigo",
+        "lei": "Lei 9.613/98",
+        "artigos": [
+          "Art. 1º"
+        ]
+      },
+      "obs": "A pena será aumentada de 1/3 a 2/3 se os crimes definidos nesta Lei forem cometidos de forma reiterada ou por intermédio de organização criminosa. Alcança o caput e os §§ 1º e 2º. A redação vigente já contempla o ativo virtual."
     }
   ]
 }

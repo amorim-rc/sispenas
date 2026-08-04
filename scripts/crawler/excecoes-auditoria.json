@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "proposito": "Achados da AUDITORIA DE CLASSIFICAÇÃO já examinados e decididos. É o irmão de excecoes.json, que faz o mesmo pela conferência de penas: sem a lista, os mesmos itens voltam em toda rodada e o alerta vira ruído.",
+    "por_que_arquivo_proprio": "Os dois auditores classificam achados por chaves diferentes. A conferência de penas casa por diploma + dispositivo; a auditoria casa às vezes por dispositivo (MODIFICADOR-AUSENTE, que nem chega a ter registro no catálogo) e às vezes por id do registro (ACAO-COM-RESSALVA, NOME-SUSPEITO, HEDIONDEZ-DIVERGENTE). Misturar os dois formatos num arquivo só faria cada leitor adivinhar qual campo vale.",
+    "regras": [
+      "Toda exceção declara TIPO de achado, MOTIVO e DATA: é memória do julgamento, não silenciador.",
+      "Casa por `tipo` mais um alvo: `ids` (registros do catálogo) ou `fonte` + `dispositivos` (chaves do compilado). Sem alvo nenhum a entrada é inválida e o auditor a ignora.",
+      "Divergência real NUNCA vira exceção — vira correção no dado. Exceção é para o achado que a heurística não consegue resolver sozinha, e cujo julgamento já foi feito."
+    ]
+  },
+  "excecoes": [
+    {
+      "tipo": "ACAO-COM-RESSALVA",
+      "ids": [
+        76,
+        77,
+        78,
+        79,
+        80,
+        285,
+        646,
+        647,
+        1351
+      ],
+      "motivo": "Os arts. 151, 153 e 345 do CP distribuem a espécie de ação penal POR PARÁGRAFO: o §4º do art. 151 excepciona nominalmente o §1º, IV e o §3º; o §2º do art. 153 torna incondicionada só a hipótese de prejuízo à Administração; o parágrafo único do art. 345 reserva a queixa ao fato sem violência. A auditoria lê o artigo inteiro e não sabe em qual hipótese cada registro cai — por isso acusa a ressalva, não a divergência. Os nove registros foram lidos um a um contra o compilado na revisão de 02/08/2026 (Bloco 2) e corrigidos: quatro passaram a condicionada, um saiu de privada para condicionada, dois foram confirmados incondicionados e dois guardam a condição em `acao_condicao`.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "MODIFICADOR-AUSENTE",
+      "fonte": "ctb",
+      "dispositivos": [
+        "Art. 165|parágrafo único",
+        "Art. 165-A|parágrafo único",
+        "Art. 173|parágrafo único",
+        "Art. 174|§ 2º",
+        "Art. 175|parágrafo único",
+        "Art. 191|parágrafo único",
+        "Art. 203|parágrafo único",
+        "Art. 253-A|§ 2º"
+      ],
+      "motivo": "Infrações ADMINISTRATIVAS de trânsito, não crimes. Os oito estão no capítulo de infrações do CTB, não no dos crimes de trânsito: 'aplica-se em dobro a multa prevista no caput' é a multa administrativa cobrada pelo órgão de trânsito, e a 'reincidência no período de 12 meses' é reincidência administrativa, conceito sem relação com a do art. 63 do CP. Nada disso entra na terceira fase da dosimetria do art. 68. O extrator os capturou porque procurou o padrão 'aplica-se em dobro a multa' sem distinguir multa penal de multa administrativa. Os dois dispositivos PENAIS do CTB — arts. 302, §1º e 303, §1º — foram cadastrados como modificadores.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "MODIFICADOR-AUSENTE",
+      "fonte": "ambiental-9605",
+      "dispositivos": [
+        "Art. 38|parágrafo único",
+        "Art. 38-A|parágrafo único",
+        "Art. 40|§ 3º",
+        "Art. 40-A|§ 3º"
+      ],
+      "motivo": "'Se o crime for culposo, a pena será reduzida à metade' não é causa de diminuição: a culpa é elemento do TIPO, não circunstância do fato. A lei cria modalidade culposa derivada, com moldura própria (metade da dolosa), e o modelo correto é TIPO AUTÔNOMO — registrado como diminuição, o motor aplicaria a redução depois das demais causas, quando ela define a moldura de partida. Os arts. 38, 38-A e 40 ganharam registro culposo próprio no catálogo (ids 1418, 1419 e 1420). O art. 40-A não: seu CAPUT foi vetado, e o §3º ficou remetendo a um tipo que não existe — não há moldura para reduzir à metade.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "NOME-SUSPEITO",
+      "ids": [
+        474,
+        670,
+        671,
+        1415,
+        1416,
+        1417
+      ],
+      "motivo": "Artigos cujo CAPUT é norma de cominação, não descrição de conduta: o art. 100 do Estatuto da Pessoa Idosa diz 'Constitui crime punível com...' e o art. 2º da Lei 8.137/90 diz 'Constitui crime da mesma natureza:', com as condutas nos incisos. A auditoria compara o nome do registro com o texto do caput, e nesses casos não há o que comparar — nenhum dos seis registros erra o nome. Foi este o falso alarme que a revisão de 02/08/2026 examinou no item 1.4 e classificou como tal.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "NOME-DE-OUTRO-ARTIGO",
+      "ids": [
+        474,
+        539,
+        642
+      ],
+      "motivo": "Falsos positivos CONFIRMADOS na revisão de 03/08/2026, item 11 — lidos um a um contra o compilado. id 474 (Estatuto da Pessoa Idosa, art. 100, I): o nome descreve fielmente o inciso, e o match com o art. 96 vem de conduta vizinha e de pena idêntica. id 539 (Lei 9.279/96, art. 184): o nome descreve o inciso I, e o match com o art. 190 vem de os dois artigos usarem os mesmos verbos — um para patente, outro para marca — e cominarem a mesma pena. id 642 (CP, art. 149-A, II): o match com o art. 149 vem da expressão comum, mas os tipos são distintos — o 149 pune a redução efetiva, o 149-A, II pune o tráfico com essa finalidade, e se consuma antes de qualquer redução. Nos três, a pena confere e a espécie confirma a origem.",
+      "data": "2026-08-03"
+    },
+    {
+      "tipo": "PENA-IMPORTADA-DIVERGE",
+      "ids": [
+        626
+      ],
+      "motivo": "CP, art. 289, §4º — 'Nas mesmas penas incorre quem desvia e faz circular moeda, cuja circulação não estava ainda autorizada'. As 'mesmas penas' são as do §3º imediatamente anterior (reclusão de 3 a 15 anos e multa, para o funcionário público ou dirigente de banco de emissão), não as do caput (3 a 12 anos). O §4º completa o §3º: pune o mesmo círculo de agentes. O catálogo publica 3 a 15 anos e está CERTO. É o falso positivo que a própria verificação declara como limite — ela compara com o caput porque não sabe resolver a qual pena a remissão aponta.",
+      "data": "2026-08-04"
+    }
+  ]
+}

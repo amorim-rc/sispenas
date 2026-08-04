@@ -45,6 +45,8 @@ data/crimes.json  ──►  scripts/transform_data.py  ──►  static/data/c
 | `hediondo` | `Sim` / `Não` — inclui os **equiparados** (tráfico, tortura, terrorismo). |
 | `hediondo_condicao` | Opcional. Quando a hediondez depende do CASO — o homicídio só é hediondo se praticado em atividade de grupo de extermínio —, aqui fica a hipótese, em texto, e `hediondo` permanece `Não`. |
 | `acao_condicao` | Opcional, mesma ideia para a ação penal (art. 161, §3º: privada se a propriedade é particular). |
+| `vigencia_ate` | Opcional. Data (AAAA-MM-DD) em que o dispositivo deixou de vigorar. Deriva `vigente: false`. |
+| `vigencia_nota` | **Obrigatória quando há `vigencia_ate`.** O que houve e qual dispositivo passa a reger a conduta. Um registro que sai do ar sem dizer por quê é pior que um registro errado: quem consulta um fato anterior não sabe se ainda pode se apoiar nele. |
 | `elemento` | `Doloso`, `Culposo`, `Preterdoloso`. |
 | `tentativa` | O tipo admite tentativa? |
 | `violencia` / `grave_ameaca` | Elementares que vedam vários benefícios. |

@@ -1,7 +1,7 @@
 # O conferidor
 
 Toda segunda-feira, 05:00 de Brasília, o repositório se pergunta se o catálogo
-ainda corresponde à lei. Baixa os textos compilados dos 62 diplomas de
+ainda corresponde à lei. Baixa os textos compilados dos 63 diplomas de
 `data/fontes.json`, estrutura cada dispositivo, lê as molduras penais, compara
 com `static/data/crimes.json` e olha o DOU da semana em busca de lei penal nova.
 
@@ -24,9 +24,10 @@ segura, o achado vira pergunta na issue em vez de virar dado.
 | `corrigir.py` | Correção mecânica de linha existente: moldura e espécie de pena. |
 | `criar.py` | Linha nova. **Não roda no automático** — ver "o que o robô não faz". |
 | `propor.py` | Escolhe o diploma da rodada, aplica, escreve a entrada de changelog, sobe a versão e monta o corpo do PR. |
-| `auditar.py` | Audita os campos que a conferência de penas não alcança: hediondez (contra `data/hediondos.json`), ação penal, causas de aumento ausentes e nomes suspeitos. |
-| `dou_watcher.py` | Filtro semanal da Seção 1 do DOU, para achar lei penal **nova e autônoma**. |
-| `excecoes.json` | O que já foi julgado e decidido. Sem isso o relatório repetiria para sempre os mesmos achados. |
+| `auditar.py` | Audita os campos que a conferência de penas não alcança: hediondez (contra `data/hediondos.json`), ação penal, causas de aumento ausentes e nomes — inclusive o nome que descreve MELHOR outro artigo do mesmo diploma, ponto cego da conferência de molduras. Repete também os títulos das perguntas de `REVISAO-PENDENTE.md`. |
+| `dou_watcher.py` | Filtro semanal da Seção 1 do DOU, para achar lei penal **nova e autônoma**. Tria em três níveis pelo preceito secundário; o descartado sai nomeado, não some. |
+| `excecoes.json` | O que já foi julgado e decidido na conferência de PENAS. Sem isso o relatório repetiria para sempre os mesmos achados. |
+| `excecoes-auditoria.json` | O mesmo, para a auditoria de classificação. Arquivo próprio porque as chaves são outras: ora o id do registro, ora o dispositivo do compilado. |
 | `../verificar_documentacao.py` | Saúde da prosa: documento vence por prazo ou porque algo de que ele fala mudou depois da última conferência. |
 | `tempo.py` | A data de Brasília. O runner roda em UTC, e sem isso a rodada das 21h se datava de amanhã. |
 
@@ -86,6 +87,16 @@ Cada uma tem teste e fixture; nenhuma volta em silêncio.
    "Página parece desatualizada" quase sempre é erro de decodificação.
 8. **`Art . 190`**, com espaço antes do ponto, é como a Lei 6.766 escreve do
    art. 37 em diante.
+9. **Sufixo de letra.** Vem colado ao número, pode repetir-se (`359-M-B`) e pode
+   vir depois do ordinal (`2º-A`). Sem as duas formas, o `2º-A` da Lei 7.716
+   (injúria racial) virava corpo do art. 2º, que está vetado, e o `359-M-B` do
+   CP virava corpo do golpe de Estado. Em contrapartida, `Art. 13 - O resultado`
+   **não** tem sufixo: ali o hífen é pontuação e o `O` é artigo definido — foi
+   assim que nasceram artigos inexistentes como `Art. 13-O` e `Art. 100-A`. A
+   regra que separa os dois casos é o espaço em volta do hífen, e ela precisa
+   valer igual em `parsear.py` e na `chave()` de `conferir.py`: os dois lados
+   têm de reduzir ao MESMO identificador, senão o registro existe e não é
+   conferido.
 
 ## Acrescentar um diploma
 

@@ -1213,13 +1213,13 @@
     "pena_min": 1,
     "pena_max": 6,
     "tipo_pena": "Detenção",
-    "acao": "Pública Incondicionada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção ou multa"
+    "obs": "1-6 meses detenção ou multa. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
   },
   {
     "id": 77,
@@ -1229,29 +1229,29 @@
     "pena_min": 1,
     "pena_max": 6,
     "tipo_pena": "Detenção",
-    "acao": "Pública Incondicionada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção ou multa. Apossar-se indevidamente de correspondência alheia, embora não fechada, e sonegá-la ou destruí-la"
+    "obs": "1-6 meses detenção ou multa. Apossar-se indevidamente de correspondência alheia, embora não fechada, e sonegá-la ou destruí-la. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
   },
   {
     "id": 78,
     "lei": "CP",
     "artigo": "Art. 151, §1º, II",
     "crime": "Violação de comunicação telegráfica, radioelétrica ou telefônica",
-    "pena_min": 12,
-    "pena_max": 36,
+    "pena_min": 1,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
-    "acao": "Pública Incondicionada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção ou multa. Indevidamente divulgar, transmitir a outrem ou utilizar abusivamente comunicação telegráfica ou radioelétrica dirigida a terceiro"
+    "obs": "1-6 meses detenção ou multa — a pena do CAPUT, que o §1º importa ('Na mesma pena incorre'). O registro publicava 1 a 3 anos, que é a pena do §3º (abuso de função em serviço postal, telegráfico, radioelétrico ou telefônico), e com ela vinha a multa cumulativa; a do caput é ALTERNATIVA. Indevidamente divulgar, transmitir a outrem ou utilizar abusivamente comunicação telegráfica ou radioelétrica dirigida a terceiro, ou conversação telefônica entre outras pessoas. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
   },
   {
     "id": 79,
@@ -1261,13 +1261,13 @@
     "pena_min": 1,
     "pena_max": 6,
     "tipo_pena": "Detenção",
-    "acao": "Ação Penal Privada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção ou multa. Divulgar, sem justa causa, conteúdo de documento particular/correspondência confidencial, de que é destinatário/detentor, e cuja divulgação possa produzir dano"
+    "obs": "1-6 meses detenção ou multa. Divulgar, sem justa causa, conteúdo de documento particular/correspondência confidencial, de que é destinatário/detentor, e cuja divulgação possa produzir dano. Art. 153, §1º do CP (antigo parágrafo único, renumerado pela Lei 9.983/2000): \"Somente se procede mediante representação\". Representação é ação pública condicionada; queixa é ação privada — institutos distintos, com titularidade e prazos diferentes."
   },
   {
     "id": 80,
@@ -1284,7 +1284,7 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "1-4 anos detenção + multa. Divulgar, sem justa causa, informações sigilosas ou reservadas, assim definidas em lei, contidas ou não em sistemas de informações da administração pública",
-    "acao_condicao": "Incondicionada quando resulta prejuízo para a Administração Pública (CP, art. 153, §2º); nas demais hipóteses, condicionada a representação."
+    "acao_condicao": "Incondicionada quando resulta prejuízo para a Administração Pública (CP, art. 153, §2º); nas demais hipóteses, condicionada a representação (§1º). Há corrente sustentando que o §1º-A é SEMPRE incondicionado, porque o bem jurídico é a Administração e não haveria ofendido apto a representar — o argumento é forte na prática, mas esvazia o §2º, que só tem sentido útil se, sem prejuízo, a ação não for incondicionada."
   },
   {
     "id": 81,
@@ -4561,13 +4561,14 @@
     "pena_min": 0.5,
     "pena_max": 1,
     "tipo_pena": "Detenção",
-    "acao": "Ação Penal Privada",
+    "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "15 dias a 1 mês detenção + multa. Fazer justiça pelas próprias mãos para satisfazer pretensão, embora legítima. Ação penal privada, salvo se emprego de violência: pública incondicionada"
+    "obs": "15 dias a 1 mês detenção + multa. Fazer justiça pelas próprias mãos para satisfazer pretensão, embora legítima. Ação penal privada, salvo se emprego de violência: pública incondicionada. O registro anterior afirmava ação privada, que é metade do artigo: o parágrafo único reserva a queixa ao fato SEM violência.",
+    "acao_condicao": "Privada quando o fato NÃO é cometido com violência (CP, art. 345, parágrafo único); havendo emprego de violência, pública incondicionada — e a pena da violência é aplicada além da do art. 345."
   },
   {
     "id": 286,
@@ -5258,22 +5259,6 @@
     "obs": "Detenção de 6 meses a 3 anos (art. 39, Lei 11.343/06)"
   },
   {
-    "id": 328,
-    "lei": "Lei 11.343/06",
-    "artigo": "Art. 40",
-    "crime": "Tráfico com majorantes (1/6 a 2/3): transnacional, transporte público, função pública, etc.",
-    "pena_min": 70,
-    "pena_max": 300,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "Aumento de 1/6 a 2/3 sobre Arts. 33-37. I - transnacionalidade; II - prevalecendo-se de função pública; III - em transporte público; IV - em presídio; V - com emprego de violência/grave ameaça/arma; VI - com envolvimento de menor; VII - financiamento/custeio da prática"
-  },
-  {
     "id": 329,
     "lei": "Lei 10.826/03",
     "artigo": "Art. 12",
@@ -5693,7 +5678,7 @@
     "id": 355,
     "lei": "Lei 9.605/98",
     "artigo": "Art. 33",
-    "crime": "Pesca em período ou local proibido",
+    "crime": "Provocar o perecimento de espécimes da fauna aquática por emissão de efluentes ou carreamento de materiais",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -5703,7 +5688,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção ou multa ou ambas. Provocar perecimento de espécimes da fauna aquática pela emissão de efluentes ou carreamento de materiais"
+    "obs": "1-3 anos detenção ou multa ou ambas cumulativamente. Provocar, pela emissão de efluentes ou carreamento de materiais, o perecimento de espécimes da fauna aquática existentes em rios, lagos, açudes, lagoas, baías ou águas jurisdicionais brasileiras. O nome anterior ('pesca em período ou local proibido') é o art. 34 — que tem pena IDÊNTICA, e por isso a troca era invisível para a conferência de penas"
   },
   {
     "id": 356,
@@ -5751,7 +5736,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção ou multa ou ambas. Se culposo: 6m-1a detenção"
+    "obs": "1-3 anos detenção ou multa ou ambas cumulativamente. A modalidade culposa do parágrafo único tem moldura própria e registro próprio no catálogo"
   },
   {
     "id": 359,
@@ -6141,7 +6126,7 @@
     "id": 383,
     "lei": "Lei 9.605/98",
     "artigo": "Art. 68",
-    "crime": "Obstar/dificultar a ação fiscalizadora do Poder Público no trato de questões ambientais",
+    "crime": "Deixar de cumprir obrigação de relevante interesse ambiental, tendo o dever legal ou contratual de fazê-lo",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -6151,13 +6136,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa"
+    "obs": "1-3 anos detenção + multa. O parágrafo único traz a modalidade culposa, com moldura própria (3 meses a 1 ano, sem prejuízo da multa), ainda não cadastrada. O nome anterior descrevia o art. 69, que tem pena IDÊNTICA — por isso a troca era invisível para a conferência de molduras"
   },
   {
     "id": 384,
     "lei": "Lei 9.605/98",
     "artigo": "Art. 69",
-    "crime": "Descumprir obrigação de relevante interesse ambiental",
+    "crime": "Obstar ou dificultar a ação fiscalizadora do Poder Público no trato de questões ambientais",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -6167,7 +6152,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa"
+    "obs": "1-3 anos detenção + multa. O nome anterior descrevia o art. 68, que tem pena idêntica"
   },
   {
     "id": 385,
@@ -6396,22 +6381,6 @@
     "obs": "2-5 anos reclusão + multa. I - omitir informação/prestar declaração falsa; II - inserir dados inexatos em livro fiscal; III - falsificar nota fiscal/fatura/duplicata; IV - elaborar/distribuir/fornecer/emitir documento falso; V - negar/deixar de fornecer nota fiscal. §único: extinta punibilidade pelo pagamento integral antes da denúncia"
   },
   {
-    "id": 399,
-    "lei": "Lei 8.137/90",
-    "artigo": "Art. 2º",
-    "crime": "Sonegação fiscal formal (condutas que dificultam a fiscalização, sem exigir resultado)",
-    "pena_min": 6,
-    "pena_max": 24,
-    "tipo_pena": "Detenção",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos detenção + multa. I - fazer declaração falsa; II - deixar de recolher tributo descontado/cobrado na qualidade de sujeito passivo (apropriação indébita tributária); III - exigir/pagar/receber percentagem sobre despacho aduaneiro; IV - deixar de aplicar incentivo fiscal; V - utilizar programa de processamento de dados que permita reduzir tributo"
-  },
-  {
     "id": 400,
     "lei": "Lei 8.137/90",
     "artigo": "Art. 4º",
@@ -6591,7 +6560,7 @@
     "id": 411,
     "lei": "Lei 7.492/86",
     "artigo": "Art. 10",
-    "crime": "Empréstimo/adiantamento vedado ou em condições mais vantajosas que as de mercado",
+    "crime": "Inserir elemento falso ou omitir elemento exigido em demonstrativos contábeis de instituição financeira, seguradora ou integrante do sistema de distribuição de valores mobiliários",
     "pena_min": 12,
     "pena_max": 60,
     "tipo_pena": "Reclusão",
@@ -6601,7 +6570,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1 a 5 anos reclusão + multa"
+    "obs": "1 a 5 anos reclusão + multa. O nome anterior descrevia o art. 17 (empréstimo ou adiantamento vedado a controlador, administrador e afins), cuja pena é reclusão de 2 a 6 anos e multa"
   },
   {
     "id": 412,
@@ -6751,7 +6720,7 @@
     "id": 421,
     "lei": "Lei 7.716/89",
     "artigo": "Art. 9º",
-    "crime": "Impedir acesso a salões de cabeleireiro/barbearia/termas/casas de massagem ou similares por preconceito",
+    "crime": "Impedir acesso ou recusar atendimento em estabelecimento esportivo, casa de diversões ou clube social por preconceito",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Reclusão",
@@ -6761,13 +6730,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos reclusão"
+    "obs": "1-3 anos reclusão. Estabelecimentos esportivos, casas de diversões ou clubes sociais abertos ao público. O nome anterior descrevia o art. 10"
   },
   {
     "id": 422,
     "lei": "Lei 7.716/89",
     "artigo": "Art. 10",
-    "crime": "Impedir acesso a entrada social de edifícios por preconceito (elevador/escada)",
+    "crime": "Impedir acesso ou recusar atendimento em salão de cabeleireiro, barbearia, termas ou casa de massagem por preconceito",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Reclusão",
@@ -6777,13 +6746,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos reclusão"
+    "obs": "1-3 anos reclusão. O nome anterior descrevia o art. 11"
   },
   {
     "id": 423,
     "lei": "Lei 7.716/89",
     "artigo": "Art. 11",
-    "crime": "Impedir acesso/uso de transportes públicos por preconceito",
+    "crime": "Impedir acesso a entradas sociais de edifícios, elevadores ou escadas por preconceito",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Reclusão",
@@ -6793,13 +6762,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos reclusão"
+    "obs": "1-3 anos reclusão. Entradas sociais em edifícios públicos ou residenciais e elevadores ou escada de acesso. O nome anterior descrevia o art. 12"
   },
   {
     "id": 424,
     "lei": "Lei 7.716/89",
     "artigo": "Art. 12",
-    "crime": "Impedir ingresso nas Forças Armadas por preconceito",
+    "crime": "Impedir acesso ou uso de transportes públicos por preconceito",
     "pena_min": 12,
     "pena_max": 36,
     "tipo_pena": "Reclusão",
@@ -6809,13 +6778,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1 a 3 anos reclusão"
+    "obs": "1-3 anos reclusão. Aviões, navios, barcas, barcos, ônibus, trens, metrô ou qualquer outro meio de transporte concedido. O nome anterior descrevia o art. 13"
   },
   {
     "id": 425,
     "lei": "Lei 7.716/89",
     "artigo": "Art. 13",
-    "crime": "Impedir/obstar casamento ou convivência familiar e social por preconceito",
+    "crime": "Impedir ou obstar o acesso ao serviço em qualquer ramo das Forças Armadas por preconceito",
     "pena_min": 24,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
@@ -6825,13 +6794,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 a 4 anos reclusão"
+    "obs": "2-4 anos reclusão. O nome anterior descrevia o art. 14"
   },
   {
     "id": 426,
     "lei": "Lei 7.716/89",
     "artigo": "Art. 14",
-    "crime": "Impedir o exercício de qualquer direito por preconceito",
+    "crime": "Impedir ou obstar, por qualquer meio ou forma, o casamento ou a convivência familiar e social por preconceito",
     "pena_min": 24,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
@@ -6841,7 +6810,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 a 4 anos reclusão. (residual)"
+    "obs": "2-4 anos reclusão. O nome anterior ('impedir o exercício de qualquer direito') não corresponde a nenhum artigo da Lei 7.716/89"
   },
   {
     "id": 427,
@@ -7598,8 +7567,8 @@
   {
     "id": 474,
     "lei": "Lei 10.741/03",
-    "artigo": "Art. 100",
-    "crime": "Obstar acesso de idoso a cargo público por motivo de idade",
+    "artigo": "Art. 100, I",
+    "crime": "Obstar o acesso de pessoa idosa a cargo público por motivo de idade",
     "pena_min": 6,
     "pena_max": 12,
     "tipo_pena": "Reclusão",
@@ -7609,13 +7578,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 1 ano reclusão + multa"
+    "obs": "6 meses a 1 ano reclusão + multa. Obstar o acesso de alguém a qualquer cargo público por motivo de idade. O caput do art. 100 não descreve conduta: as condutas estão nos incisos I a V, cada uma autônoma sob a mesma pena. ATENÇÃO: os arts. 96 e 100 cominam a MESMA pena — reclusão de 6 meses a 1 ano e multa —, e por isso a conferência de molduras não distingue um do outro"
   },
   {
     "id": 475,
     "lei": "Lei 10.741/03",
     "artigo": "Art. 101",
-    "crime": "Negar/dificultar a qualquer pessoa o acesso a ações e serviços de saúde por motivo de idade",
+    "crime": "Deixar de cumprir, retardar ou frustrar a execução de ordem judicial em ação de que a pessoa idosa seja parte ou interveniente",
     "pena_min": 6,
     "pena_max": 12,
     "tipo_pena": "Detenção",
@@ -7625,7 +7594,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 1 ano detenção + multa"
+    "obs": "6 meses a 1 ano detenção + multa. O nome anterior descrevia negativa de atendimento à saúde, que é o art. 100, III. A espécie de pena desmentia o comparador apontado pela auditoria: o art. 96 comina RECLUSÃO, e este registro publica detenção — sinal de que a moldura veio do art. 101 e só o rótulo estava errado. Não confundir com o art. 100, IV, que também pune descumprimento de ordem judicial, mas na ação civil da própria Lei e com reclusão"
   },
   {
     "id": 476,
@@ -7917,7 +7886,7 @@
   },
   {
     "id": 494,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-E",
     "crime": "Admitir/possibilitar/dar causa a ato ilegal no processo licitatório",
     "pena_min": 48,
@@ -7929,11 +7898,11 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 8 anos reclusão + multa"
+    "obs": "4 a 8 anos reclusão + multa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 495,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-F",
     "crime": "Frustrar/fraudar mediante ajuste/combinação ou qualquer outro expediente o caráter competitivo de licitação",
     "pena_min": 48,
@@ -7945,11 +7914,11 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-8 anos reclusão + multa"
+    "obs": "4-8 anos reclusão + multa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 496,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-G",
     "crime": "Patrocinar interesse ilegítimo de particular em processo de licitação",
     "pena_min": 6,
@@ -7961,11 +7930,11 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos reclusão + multa"
+    "obs": "6 meses a 3 anos reclusão + multa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 497,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-H",
     "crime": "Modificar/pagar contrato administrativo sem autorização legal",
     "pena_min": 48,
@@ -7977,13 +7946,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 8 anos reclusão + multa. Pagar antecipadamente/modificar regras de contrato sem autorização legal"
+    "obs": "4 a 8 anos reclusão + multa. Pagar antecipadamente/modificar regras de contrato sem autorização legal. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 498,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-I",
-    "crime": "Obstar/impedir/dificultar a inscrição ou participação de licitante",
+    "crime": "Perturbação de processo licitatório",
     "pena_min": 6,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -7993,13 +7962,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 3 anos detenção + multa"
+    "obs": "6 meses a 3 anos detenção + multa. Impedir, perturbar ou fraudar a realização de qualquer ato de processo licitatório. O nome anterior descrevia o art. 337-N (impedimento indevido), que tem registro próprio e comina reclusão de 6 meses a 2 anos. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 499,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-J",
-    "crime": "Afastar licitante por meio de violência/grave ameaça/fraude/oferecimento de vantagem",
+    "crime": "Violação de sigilo em licitação",
     "pena_min": 24,
     "pena_max": 36,
     "tipo_pena": "Detenção",
@@ -8009,13 +7978,13 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "2 a 3 anos detenção + multa, além da pena correspondente à violência"
+    "obs": "2 a 3 anos detenção + multa. Devassar o sigilo de proposta apresentada em processo licitatório ou proporcionar a terceiro o ensejo de devassá-lo. O nome anterior descrevia o art. 337-K, e com ele veio a ressalva sobre a pena correspondente à violência, que é daquele artigo e não deste. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 500,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-K",
-    "crime": "Fraudar em prejuízo da Fazenda Pública licitação ou contrato (sobrepreço, superfaturamento)",
+    "crime": "Afastamento de licitante",
     "pena_min": 36,
     "pena_max": 60,
     "tipo_pena": "Reclusão",
@@ -8025,13 +7994,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3 a 5 anos reclusão + multa"
+    "obs": "3 a 5 anos reclusão + multa, ALÉM da pena correspondente à violência — cúmulo material obrigatório. Afastar ou tentar afastar licitante por meio de violência, grave ameaça, fraude ou oferecimento de vantagem de qualquer tipo. Incorre na mesma pena quem se abstém ou desiste de licitar em razão de vantagem oferecida (parágrafo único). O nome anterior descrevia o art. 337-L. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 501,
-    "lei": "Lei 14.133/21",
+    "lei": "CP",
     "artigo": "Art. 337-L",
-    "crime": "Fraudar licitação/contrato para obtenção de benefício ilegítimo",
+    "crime": "Fraude em licitação ou contrato",
     "pena_min": 48,
     "pena_max": 96,
     "tipo_pena": "Reclusão",
@@ -8041,7 +8010,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4 a 8 anos reclusão + multa"
+    "obs": "4 a 8 anos reclusão + multa. Fraudar, em prejuízo da Administração Pública, licitação ou contrato dela decorrente, mediante entrega de mercadoria ou serviço em desacordo com o edital; fornecimento de mercadoria falsificada, deteriorada ou vencida como verdadeira; entrega de uma mercadoria por outra; alteração da substância, qualidade ou quantidade; ou qualquer meio fraudulento que torne a proposta ou a execução injustamente mais onerosa. Capítulo II-B do Título XI da Parte Especial do CP, incluído pela Lei 14.133/2021. O art. 337-P manda que a multa destes crimes siga a metodologia do Código e não seja inferior a 2% do valor do contrato licitado ou celebrado com contratação direta"
   },
   {
     "id": 502,
@@ -8607,7 +8576,7 @@
     "id": 537,
     "lei": "Lei 9.504/97",
     "artigo": "Art. 72",
-    "crime": "Inserção de dados falsos no sistema eleitoral (inserir/alterar dados no sistema de informações do Cadastro Nacional de Eleitores)",
+    "crime": "Crimes contra o sistema eletrônico de votação e apuração",
     "pena_min": 60,
     "pena_max": 120,
     "tipo_pena": "Reclusão",
@@ -8617,7 +8586,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "5 a 10 anos reclusão + multa"
+    "obs": "5 a 10 anos reclusão. Três condutas (incisos I a III): obter acesso a sistema de tratamento automático de dados do serviço eleitoral para alterar a apuração ou a contagem de votos; desenvolver ou introduzir comando, instrução ou programa capaz de destruir, alterar ou transmitir dados; e causar dano físico ao equipamento de votação ou totalização. O artigo não trata do Cadastro Nacional de Eleitores nem comina multa"
   },
   {
     "id": 538,
@@ -8817,7 +8786,7 @@
     "id": 550,
     "lei": "Lei 8.245/91",
     "artigo": "Art. 44",
-    "crime": "Cobrar antecipadamente o aluguel (salvo nos casos do Art. 42)",
+    "crime": "Crimes contra a locação — condutas do art. 44 da Lei 8.245/91",
     "pena_min": 3,
     "pena_max": 12,
     "tipo_pena": "Detenção",
@@ -8827,7 +8796,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "3 meses a 1 ano detenção ou multa"
+    "obs": "3 meses a 1 ano detenção, substituível por prestação de serviços à comunidade já na própria cominação. Quatro condutas (incisos I a IV): recusar recibo discriminado em habitação coletiva multifamiliar; não usar o imóvel retomado para o fim declarado; não iniciar a demolição ou reparação no prazo; e executar o despejo em desacordo com o art. 65, §2º. O nome anterior ('cobrar antecipadamente o aluguel') é conduta do art. 43, III, que é CONTRAVENÇÃO punida com prisão simples — espécie diversa"
   },
   {
     "id": 551,
@@ -9121,7 +9090,7 @@
     "id": 569,
     "lei": "Lei 9.434/97",
     "artigo": "Art. 17",
-    "crime": "Recolher tecidos/órgãos/partes de cadáver para transplante, inclusive para tecidos, sem autorização do cônjuge ou parente",
+    "crime": "Recolher, transportar, guardar ou distribuir partes do corpo humano obtidas em desacordo com esta Lei",
     "pena_min": 6,
     "pena_max": 24,
     "tipo_pena": "Reclusão",
@@ -9131,13 +9100,13 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos reclusão"
+    "obs": "6 meses a 2 anos reclusão + multa de 100 a 250 dias-multa. O art. 17 pune a cadeia POSTERIOR — recolher, transportar, guardar, distribuir — de material já obtido irregularmente; a remoção em si é dos arts. 14 a 16. O nome anterior descrevia remoção de tecidos de cadáver, e a multa não constava"
   },
   {
     "id": 570,
     "lei": "Lei 9.434/97",
     "artigo": "Art. 18",
-    "crime": "Realizar transplante de tecidos, órgãos ou partes de corpo entre pessoas vivas não parentas ou conjugais sem autorização judicial",
+    "crime": "Realizar transplante ou enxerto em desacordo com o art. 10 desta Lei e seu parágrafo único",
     "pena_min": 6,
     "pena_max": 24,
     "tipo_pena": "Detenção",
@@ -9147,7 +9116,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos detenção + multa. Quando não se tratar de tecidos regeneráveis entre cônjuges ou parentes consanguíneos"
+    "obs": "6 meses a 2 anos detenção. O nome anterior descrevia apenas uma das hipóteses possíveis — transplante entre vivos não parentes sem autorização judicial — como se fosse o tipo inteiro; o art. 18 alcança qualquer transplante em desacordo com o art. 10"
   },
   {
     "id": 571,
@@ -9260,22 +9229,6 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "2-6 meses prisão simples + multa (art. 48)"
-  },
-  {
-    "id": 578,
-    "lei": "CP",
-    "artigo": "Art. 359-O",
-    "crime": "Comunicação enganosa em massa (espalhar desinformação por qualquer meio de comunicação para comprometer processo eleitoral)",
-    "pena_min": 12,
-    "pena_max": 60,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Não",
-    "grave_ameaca": "Não",
-    "obs": "1-5 anos reclusão + multa. Lei 14.197/21. Se cometido por agente público: aumento de 1/3"
   },
   {
     "id": 579,
@@ -10295,7 +10248,7 @@
     "id": 642,
     "lei": "CP",
     "artigo": "Art. 149-A, II",
-    "crime": "Tráfico de pessoas — para submissão a trabalho em condições análogas à de escravo",
+    "crime": "Tráfico de pessoas com a finalidade de submissão a trabalho em condições análogas à de escravo",
     "pena_min": 48,
     "pena_max": 96,
     "tipo_pena": "Reclusão",
@@ -10305,7 +10258,7 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "4-8 anos reclusão + multa",
+    "obs": "4-8 anos reclusão + multa. Crime de INTENÇÃO, com resultado cortado: consuma-se com o tráfico praticado para essa finalidade, independentemente de a redução chegar a ocorrer. Não se confunde com o art. 149, que pune a redução efetiva e comina reclusão de 2 a 8 anos",
     "hediondo_condicao": "Hediondo apenas quando cometido contra criança ou adolescente (art. 1º, XII) — o tipo, sozinho, não decide. Fundamento: Lei 8.072, art. 1º, XII."
   },
   {
@@ -10364,24 +10317,24 @@
     "lei": "CP",
     "artigo": "Art. 151, §1º, III",
     "crime": "Impedir a comunicação telegráfica, radioelétrica ou telefônica",
-    "pena_min": 12,
-    "pena_max": 36,
+    "pena_min": 1,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
-    "acao": "Pública Incondicionada",
+    "acao": "Pública Condicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa"
+    "obs": "1-6 meses detenção ou multa — a pena do CAPUT, que o §1º importa ('Na mesma pena incorre'). O registro publicava 1 a 3 anos, que é a pena do §3º (abuso de função em serviço postal, telegráfico, radioelétrico ou telefônico), e com ela vinha a multa cumulativa; a do caput é ALTERNATIVA. Impedir a comunicação ou a conversação referidas no inciso anterior. Art. 151, §4º do CP: 'Somente se procede mediante representação, salvo nos casos do §1º, IV, e do §3º.' A representação é a regra do artigo; a incondicionalidade é exceção nominada em duas hipóteses, e esta não é uma delas."
   },
   {
     "id": 647,
     "lei": "CP",
     "artigo": "Art. 151, §1º, IV",
     "crime": "Instalar ou utilizar estação ou aparelho radioelétrico sem autorização legal",
-    "pena_min": 12,
-    "pena_max": 36,
+    "pena_min": 1,
+    "pena_max": 6,
     "tipo_pena": "Detenção",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
@@ -10389,7 +10342,9 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-3 anos detenção + multa"
+    "obs": "1-6 meses detenção ou multa — a pena do CAPUT, que o §1º importa ('Na mesma pena incorre'). O registro publicava 1 a 3 anos, que é a pena do §3º (abuso de função em serviço postal, telegráfico, radioelétrico ou telefônico), e com ela vinha a multa cumulativa; a do caput é ALTERNATIVA. Instalar ou utilizar estação ou aparelho radioelétrico, sem observância de disposição legal. É uma das duas hipóteses que o §4º ressalva da exigência de representação — a ação penal, enquanto o dispositivo vigeu, era pública incondicionada.",
+    "vigencia_ate": "1962-08-27",
+    "vigencia_nota": "REVOGADO TACITAMENTE pelo art. 70 da Lei 4.117/62 (Código Brasileiro de Telecomunicações, na redação do Decreto-Lei 236/1967), que pune 'a instalação ou utilização de telecomunicações, sem observância do disposto nesta Lei e nos regulamentos' com detenção de 1 a 2 anos, aumentada da metade se houver dano a terceiro. É a MESMA conduta, com pena maior, em lei posterior e especial que regulou integralmente a matéria (LINDB, art. 2º, §1º). NÃO HÁ REPRISTINAÇÃO: o art. 215, I da Lei 9.472/97 revogou a Lei 4.117/62 'salvo quanto a matéria penal não tratada nesta Lei e quanto aos preceitos relativos à radiodifusão' — ressalva que alcança o art. 70 do CBT, não o Código Penal —, e o art. 2º, §3º da LINDB exige disposição expressa para restaurar a lei revogada. A instalação ou operação clandestina de estação de rádio é hoje processada pelo ART. 183 DA LEI 9.472/97 — detenção de 2 a 4 anos e multa, competência da Justiça Federal (Súmula 606 do STJ). Os dois dispositivos estão no catálogo: o art. 70 do CBT e o art. 183. Este registro é mantido para consulta histórica e não deve fundamentar cálculo de benefício. Grau M: a tese contrária — resíduo, por o art. 151 tutelar bem jurídico individual e o art. 70 o serviço público de telecomunicações — é defensável em tese, mas quando os tribunais aplicam o art. 151 a caso de rádio, usam o inciso II (interceptação), não o IV."
   },
   {
     "id": 648,
@@ -11245,7 +11200,7 @@
     "id": 701,
     "lei": "CPM (DL 1.001/69)",
     "artigo": "Art. 205, §2º",
-    "crime": "Homicídio simples — Se o homicídio é cometido",
+    "crime": "Homicídio qualificado",
     "pena_min": 144,
     "pena_max": 360,
     "tipo_pena": "Reclusão",
@@ -11255,7 +11210,7 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "Se o homicídio é cometido. 12-30 anos reclusão"
+    "obs": "12-30 anos reclusão. Sete incisos: I - motivo fútil; II - paga, promessa de recompensa, cupidez, satisfação de desejo sexual ou outro motivo torpe; III - veneno, asfixia, tortura, fogo, explosivo ou outro meio dissimulado, cruel ou de perigo comum; IV - traição, emboscada, surpresa ou outro recurso insidioso; V - para assegurar execução, ocultação, impunidade ou vantagem de outro crime; VI - prevalecendo-se o agente da situação de serviço; VII - contra autoridade ou agente dos arts. 142 e 144 da CF, integrante do sistema prisional ou da Força Nacional, ou contra cônjuge, companheiro ou parente até o terceiro grau (incluído pela Lei 14.688/2023). O nome anterior colava a epígrafe do caput ao início do §2º"
   },
   {
     "id": 702,
@@ -12029,7 +11984,7 @@
     "id": 750,
     "lei": "CP",
     "artigo": "Art. 338",
-    "crime": "Sonegação de contribuição previdenciária (suprimir/reduzir contribuição social previdenciária mediante condutas fraudulentas)",
+    "crime": "Reingresso de estrangeiro expulso",
     "pena_min": 12,
     "pena_max": 48,
     "tipo_pena": "Reclusão",
@@ -12039,7 +11994,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1 a 4 anos reclusão + multa. Lei 9.983/00"
+    "obs": "1 a 4 anos reclusão. Reingressar no território nacional o estrangeiro que dele foi expulso, sem prejuízo de nova expulsão após o cumprimento da pena. A Lei de Migração (Lei 13.445/2017) não revogou o dispositivo. O nome anterior descrevia o art. 337-A (sonegação de contribuição previdenciária), e trouxe junto uma multa que o art. 338 não comina"
   },
   {
     "id": 751,
@@ -12445,7 +12400,7 @@
     "id": 776,
     "lei": "LCP (DL 3.688/41)",
     "artigo": "Art. 25",
-    "crime": "Ter em seu poder, depois de intimado pela autoridade, animal perigoso, sem as devidas cautelas",
+    "crime": "Ter em poder instrumento de furto, em razão da condição do agente",
     "pena_min": 2,
     "pena_max": 12,
     "tipo_pena": "Prisão simples",
@@ -12455,13 +12410,15 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2 meses a 1 ano prisão simples + multa"
+    "obs": "2 meses a 1 ano prisão simples + multa. Ter alguém em seu poder, depois de condenado por crime de furto ou roubo, ou enquanto sujeito à liberdade vigiada, ou quando conhecido como vadio ou mendigo, gazuas, chaves falsas ou alteradas ou instrumentos usualmente empregados na prática de furto, sem provar destinação legítima. O nome anterior descrevia o art. 31 (animal perigoso), cuja pena é prisão simples de 10 dias a 2 meses",
+    "vigencia_ate": "1988-10-05",
+    "vigencia_nota": "NÃO RECEPCIONADO pela Constituição de 1988. STF, RE 583.523/RS, Rel. Min. Gilmar Mendes, Tribunal Pleno, julgado em 03/10/2013, repercussão geral — Tema 113, unânime: o art. 25 da Lei de Contravenções Penais viola os princípios da dignidade da pessoa humana (CF, art. 1º, III) e da isonomia (CF, art. 5º, caput e I), por punir a posse do instrumento EM RAZÃO DA CONDIÇÃO DO AGENTE — condenado anterior, sujeito a liberdade vigiada, vadio ou mendigo. É direito penal do autor. A conduta é atípica desde 05/10/1988, e não há dispositivo que a substitua. O registro permanece consultável porque a atipicidade precisa ser ARGUIDA: quem defende alguém denunciado com base nele precisa encontrar o precedente."
   },
   {
     "id": 777,
     "lei": "LCP (DL 3.688/41)",
     "artigo": "Art. 26",
-    "crime": "Abrir valas ou escavações que ponham em perigo a vida, a integridade física ou o patrimônio de outrem, sem as devidas sinalizações",
+    "crime": "Violação de lugar ou objeto",
     "pena_min": 0.5,
     "pena_max": 3,
     "tipo_pena": "Prisão simples",
@@ -12471,7 +12428,7 @@
     "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "15 dias a 3 meses prisão simples + multa"
+    "obs": "15 dias a 3 meses prisão simples ou multa. Abrir alguém, no exercício de profissão de serralheiro ou ofício análogo, a pedido ou por incumbência de pessoa de cuja legitimidade não se tenha certificado previamente, fechadura ou qualquer outro aparelho destinado à defesa de lugar ou objeto. O nome anterior — abrir valas ou escavações que ponham em perigo a vida — não corresponde a artigo nenhum da LCP"
   },
   {
     "id": 778,
@@ -12653,17 +12610,17 @@
     "id": 789,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 303",
-    "crime": "Usar de meios publicitários no dia da eleição a fim de fazer propaganda de partido ou candidato",
-    "pena_min": 6,
-    "pena_max": 24,
-    "tipo_pena": "Detenção",
+    "crime": "Majorar os preços de utilidades e serviços necessários à realização de eleições",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
-    "tentativa": "Sim",
+    "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "6 meses a 2 anos detenção + multa"
+    "obs": "Pagamento de 250 a 300 dias-multa, SEM pena privativa de liberdade. Transporte e alimentação de eleitores, impressão, publicidade e divulgação de matéria eleitoral. O registro publicava detenção de 6 meses a 2 anos — moldura que não é deste artigo nem do art. 304, que comina os mesmos 250 a 300 dias-multa"
   },
   {
     "id": 790,
@@ -12685,23 +12642,23 @@
     "id": 791,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 306",
-    "crime": "Votar ou instigar/solicitar votos em seção eleitoral diversa daquela em que é inscrito o eleitor ou por qualquer forma impedir/perturbar a votação",
-    "pena_min": 1,
-    "pena_max": 6,
-    "tipo_pena": "Detenção",
+    "crime": "Não observar a ordem em que os eleitores devem ser chamados a votar",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
-    "tentativa": "Sim",
+    "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "1-6 meses detenção + multa"
+    "obs": "Pagamento de 15 a 30 dias-multa, SEM pena privativa de liberdade. O registro publicava detenção de 1 a 6 meses — moldura que não é deste artigo nem do art. 311, apontado pela auditoria"
   },
   {
     "id": 792,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 310",
-    "crime": "Violar ou tentar violar o sigilo do voto",
+    "crime": "Praticar, ou permitir membro da mesa receptora que se pratique, irregularidade que determine a anulação de votação",
     "pena_min": 0,
     "pena_max": 6,
     "tipo_pena": "Detenção",
@@ -12711,7 +12668,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "até 6 meses detenção + multa"
+    "obs": "até 6 meses detenção ou pagamento de 90 a 120 dias-multa. Praticar, ou permitir membro da mesa receptora que seja praticada, qualquer irregularidade que determine a anulação de votação, salvo no caso do art. 311. A cominação é ALTERNATIVA: a multa isolada basta para punir o fato — o que importa para a transação penal e para a substituição. O nome anterior descrevia o art. 312 (violação do sigilo do voto), cuja pena é detenção até dois anos"
   },
   {
     "id": 793,
@@ -12733,23 +12690,23 @@
     "id": 794,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 313",
-    "crime": "Falsificar no todo ou em parte documento público ou alterar documento público verdadeiro para fins eleitorais",
-    "pena_min": 24,
-    "pena_max": 72,
-    "tipo_pena": "Reclusão",
+    "crime": "Deixar o juiz ou os membros da Junta de expedir o boletim de apuração imediatamente após a apuração de cada urna",
+    "pena_min": 0,
+    "pena_max": 0,
+    "tipo_pena": "Multa",
     "acao": "Pública Incondicionada",
     "hediondo": "Não",
     "elemento": "Doloso",
-    "tentativa": "Sim",
+    "tentativa": "Não",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-6 anos reclusão + multa"
+    "obs": "Pagamento de 90 a 120 dias-multa, SEM pena privativa de liberdade. Deixar o juiz e os membros da Junta de expedir o boletim de apuração imediatamente após a apuração de cada urna e antes de passar à subsequente, sob qualquer pretexto e ainda que dispensada a expedição pelos fiscais, delegados ou candidatos presentes. O parágrafo único estende a mesma pena ao presidente e aos mesários, nas seções em que a contagem é feita pela mesa receptora. O registro publicava reclusão de 2 a 6 anos porque o nome veio do art. 348 (falsificação de documento público para fins eleitorais), e a pena veio junto com o nome"
   },
   {
     "id": 795,
     "lei": "CE (Lei 4.737/65)",
     "artigo": "Art. 315",
-    "crime": "Divulgar na propaganda eleitoral fatos inverídicos em relação a partidos ou candidatos, capazes de exercer influência sobre o eleitorado",
+    "crime": "Alterar nos mapas ou nos boletins de apuração a votação obtida por candidato, ou lançar votação que não corresponda às cédulas apuradas",
     "pena_min": 0,
     "pena_max": 60,
     "tipo_pena": "Reclusão",
@@ -12759,7 +12716,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "até 5 anos reclusão + multa"
+    "obs": "até 5 anos reclusão + pagamento de 5 a 15 dias-multa. O nome anterior descrevia o art. 323 (divulgação de fatos inverídicos na propaganda eleitoral), cuja pena é detenção de 2 meses a 1 ano ou 120 a 150 dias-multa — e que já tem registro próprio no catálogo"
   },
   {
     "id": 796,
@@ -14706,7 +14663,7 @@
   {
     "id": 917,
     "lei": "Lei 7.643/87",
-    "artigo": "Art. 2º",
+    "artigo": "Art. 1º c/c Art. 2º",
     "crime": "Pesca ou molestamento intencional de cetáceo em águas jurisdicionais brasileiras",
     "pena_min": 24,
     "pena_max": 60,
@@ -14717,7 +14674,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "2-5 anos reclusão + multa"
+    "obs": "2-5 anos reclusão + multa. O art. 1º proíbe a pesca e o molestamento intencional de cetáceos em águas jurisdicionais brasileiras; o art. 2º é a norma sancionadora ('a infração ao disposto nesta lei será punida com...'). Atribuir a conduta ao artigo que só comina invertia os dois. A multa está expressa em OTN, índice extinto — o valor não é conversível sem critério legal. Ver data/pendencias.json quanto à vigência frente ao art. 29 da Lei 9.605/98"
   },
   {
     "id": 918,
@@ -17891,7 +17848,7 @@
     "id": 1116,
     "lei": "CPM (DL 1.001/69)",
     "artigo": "Art. 232, §3º",
-    "crime": "Estupro — Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prát",
+    "crime": "Estupro de vulnerável militar — vítima menor de 14 anos ou sem discernimento",
     "pena_min": 96,
     "pena_max": 180,
     "tipo_pena": "Reclusão",
@@ -17901,7 +17858,9 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prát. 8-15 anos reclusão"
+    "obs": "8-15 anos reclusão. Se a vítima é menor de 14 anos ou, por enfermidade ou deficiência mental, não tem o necessário discernimento para a prática do ato, ou por qualquer outra causa não pode oferecer resistência. §3º incluído pela Lei 14.688/2023 e declarado inconstitucional em 2025 — ver a nota de vigência",
+    "vigencia_ate": "2025-08-29",
+    "vigencia_nota": "Declarado INCONSTITUCIONAL pelo STF na ADI 7555 (Rel. Min. Cármen Lúcia, Plenário, julgamento virtual encerrado em 29/08/2025), com eficácia ex nunc a contar da publicação da ata de julgamento. Fundamento: proteção deficiente — o §3º cominava 8 a 15 anos e não previa agravamento por lesão grave ou morte, enquanto o art. 217-A do CP comina 10 a 20 e 12 a 30 anos nessas hipóteses. Ao estupro de vulnerável praticado por militar no exercício da função ou em lugar sujeito à administração militar aplica-se toda a disciplina do ART. 217-A DO CP, inclusive os §§ 1º a 5º, por força do art. 9º, II do CPM. Na mesma ação o STF declarou a não recepção dos incisos I a III do art. 236 do CPM (presunção de violência)."
   },
   {
     "id": 1117,
@@ -21198,7 +21157,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Sim",
-    "obs": "1-3 anos reclusão. Ameaçar alguém de mal injusto e grave no contexto da atuação de organização criminosa ultraviolenta (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026"
+    "obs": "1-3 anos reclusão. Ameaçar alguém de mal injusto e grave no contexto da atuação de organização criminosa ultraviolenta (art. 2º da Lei 15.358/2026). Incluído pela Lei 15.358/2026"
   },
   {
     "id": 1323,
@@ -21230,7 +21189,7 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Não",
-    "obs": "20-40 anos reclusão. Lesão seguida de morte (§3º) cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026",
+    "obs": "20-40 anos reclusão. Lesão seguida de morte (§3º) cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 15.358/2026). Incluído pela Lei 15.358/2026",
     "hediondo_condicao": "Lesão gravíssima e seguida de morte, só nas hipóteses das alíneas a, b e c (vítima qualificada ou dependências de instituição de ensino). Fundamento: Lei 8.072, art. 1º, I-A."
   },
   {
@@ -21247,7 +21206,7 @@
     "tentativa": "Sim",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "12-20 anos reclusão. Sequestro ou cárcere privado cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026"
+    "obs": "12-20 anos reclusão. Sequestro ou cárcere privado cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 15.358/2026). Incluído pela Lei 15.358/2026"
   },
   {
     "id": 1326,
@@ -21263,23 +21222,7 @@
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "4-10 anos reclusão + multa. Furto cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026"
-  },
-  {
-    "id": 1327,
-    "lei": "CP",
-    "artigo": "Art. 157, §4º",
-    "crime": "Roubo por integrante de organização criminosa ultraviolenta (pena do caput em triplo)",
-    "pena_min": 216,
-    "pena_max": 360,
-    "tipo_pena": "Reclusão",
-    "acao": "Pública Incondicionada",
-    "hediondo": "Não",
-    "elemento": "Doloso",
-    "tentativa": "Sim",
-    "violencia": "Sim",
-    "grave_ameaca": "Sim",
-    "obs": "18 a 30 anos reclusão. Aplica-se em triplo a pena prevista no caput, desprezadas as demais causas de aumento, se a violência ou grave ameaça é cometida por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). Incluído pela Lei 15.358/2026"
+    "obs": "4-10 anos reclusão + multa. Furto cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 15.358/2026). Incluído pela Lei 15.358/2026"
   },
   {
     "id": 1328,
@@ -21295,7 +21238,7 @@
     "tentativa": "Não",
     "violencia": "Sim",
     "grave_ameaca": "Sim",
-    "obs": "20-40 anos reclusão + multa. Roubo do qual resulta morte (§3º, II), cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 12.850/13). HEDIONDO (art. 1º, II, da Lei 8.072/90). Incluído pela Lei 15.358/2026"
+    "obs": "20-40 anos reclusão + multa. Roubo do qual resulta morte (§3º, II), cometido por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada (art. 2º da Lei 15.358/2026). HEDIONDO (art. 1º, II, da Lei 8.072/90). Incluído pela Lei 15.358/2026"
   },
   {
     "id": 1329,
@@ -21562,12 +21505,12 @@
     "pena_max": 180,
     "tipo_pena": "Reclusão",
     "acao": "Pública Incondicionada",
-    "hediondo": "Sim",
+    "hediondo": "Não",
     "elemento": "Doloso",
     "tentativa": "Sim",
     "violencia": "Não",
     "grave_ameaca": "Não",
-    "obs": "5 a 15 anos reclusão. Forma de tráfico de drogas do art. 290, com pena própria muito superior à do caput. Equiparado a hediondo. §5º dado pela Lei 14.688/2023"
+    "obs": "5 a 15 anos reclusão. Tratando-se de tráfico de drogas, a pena do art. 290 é de reclusão de 5 a 15 anos. §5º incluído pela Lei 14.688/2023. NÃO é hediondo por identidade: o inciso VI do parágrafo único do art. 1º da Lei 8.072/90 projeta sobre o CPM apenas os crimes 'previstos no art. 1º desta Lei', e o tráfico não está no art. 1º — é equiparado pelo art. 2º, dispositivo diverso, por força do art. 5º, XLIII da Constituição. Se a equiparação constitucional alcança o tipo militar é outra pergunta, com fundamento próprio; ver REVISAO-PENDENTE.md, na raiz do repositório"
   },
   {
     "id": 1346,
@@ -22640,5 +22583,133 @@
     "violencia": "Não",
     "grave_ameaca": "Não",
     "obs": "1 a 6 meses prisão simples + multa. Fazer, nas mesmas circunstâncias do caput, declarações inverídicas sobre identidade pessoal, estado, profissão, domicílio e residência, se o fato não constitui infração penal mais grave"
+  },
+  {
+    "id": 1413,
+    "lei": "Lei 15.358/26",
+    "artigo": "Art. 2º, caput",
+    "crime": "Domínio social estruturado",
+    "pena_min": 240,
+    "pena_max": 480,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Sim",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Sim",
+    "grave_ameaca": "Sim",
+    "obs": "20-40 anos reclusão, sem prejuízo das sanções correspondentes à ameaça, à violência ou a outros crimes previstos na legislação penal. Dez condutas (incisos I a X) praticadas por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada — o §2º define a facção como agrupamento de 3 ou mais pessoas que emprega violência, grave ameaça ou coação para impor controle territorial ou social. HEDIONDO por força do art. 4º desta Lei e do art. 1º, parágrafo único, VIII, da Lei 8.072/90. Insuscetível de anistia, graça, indulto, fiança e livramento condicional (§4º); vedado o auxílio-reclusão aos dependentes (§6º). O §1º é causa de aumento e o §5º causa de diminuição — ambos em data/modificadores.json, não aqui"
+  },
+  {
+    "id": 1414,
+    "lei": "Lei 15.358/26",
+    "artigo": "Art. 3º, caput",
+    "crime": "Favorecimento ao domínio social estruturado",
+    "pena_min": 144,
+    "pena_max": 240,
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Sim",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "obs": "12-20 anos reclusão e multa. Seis condutas (incisos I a VI): promover, fundar ou aderir à organização criminosa ultraviolenta, grupo paramilitar ou milícia privada; distribuir material de incitação; prover material explosivo ou arma de fogo; ceder local ou bem; fornecer informações em apoio; e alegar falsamente pertencer à organização para obter vantagem ou intimidar terceiros. HEDIONDO por força do art. 4º desta Lei e do art. 1º, parágrafo único, VIII, da Lei 8.072/90. O parágrafo único estende a este artigo os §§ 4º a 8º do art. 2º — insuscetibilidade de anistia, graça, indulto, fiança e livramento condicional, entre outras"
+  },
+  {
+    "lei": "Lei 8.137/90",
+    "pena_min": 6,
+    "pena_max": 24,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1415,
+    "artigo": "Art. 2º, III",
+    "crime": "Exigir, pagar ou receber percentagem sobre parcela dedutível ou deduzida de imposto ou contribuição como incentivo fiscal",
+    "obs": "6 meses a 2 anos detenção + multa. Para si ou para o contribuinte beneficiário"
+  },
+  {
+    "lei": "Lei 8.137/90",
+    "pena_min": 6,
+    "pena_max": 24,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1416,
+    "artigo": "Art. 2º, IV",
+    "crime": "Deixar de aplicar, ou aplicar em desacordo, incentivo fiscal ou parcelas de imposto liberadas por órgão de desenvolvimento",
+    "obs": "6 meses a 2 anos detenção + multa"
+  },
+  {
+    "lei": "Lei 8.137/90",
+    "pena_min": 6,
+    "pena_max": 24,
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Doloso",
+    "tentativa": "Sim",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1417,
+    "artigo": "Art. 2º, V",
+    "crime": "Utilizar ou divulgar programa de processamento de dados que permita ao sujeito passivo possuir informação contábil diversa da fornecida à Fazenda",
+    "obs": "6 meses a 2 anos detenção + multa"
+  },
+  {
+    "lei": "Lei 9.605/98",
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Culposo",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1418,
+    "artigo": "Art. 38, parágrafo único",
+    "crime": "Destruição ou dano culposo a floresta de preservação permanente",
+    "pena_min": 6,
+    "pena_max": 18,
+    "obs": "6 meses a 1 ano e 6 meses detenção, ou multa, ou ambas cumulativamente — metade da pena do caput (1 a 3 anos). A lei diz 'se o crime for culposo, a pena será reduzida à metade'. Isso NÃO é causa de diminuição de terceira fase: a culpa é elemento do TIPO, não circunstância do fato. O que a lei cria é modalidade culposa derivada, com moldura própria — metade da dolosa. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade define a moldura de partida."
+  },
+  {
+    "lei": "Lei 9.605/98",
+    "tipo_pena": "Detenção",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Culposo",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1419,
+    "artigo": "Art. 38-A, parágrafo único",
+    "crime": "Destruição ou dano culposo a vegetação do Bioma Mata Atlântica",
+    "pena_min": 6,
+    "pena_max": 18,
+    "obs": "6 meses a 1 ano e 6 meses detenção, ou multa, ou ambas cumulativamente — metade da pena do caput (1 a 3 anos). A lei diz 'se o crime for culposo, a pena será reduzida à metade'. Isso NÃO é causa de diminuição de terceira fase: a culpa é elemento do TIPO, não circunstância do fato. O que a lei cria é modalidade culposa derivada, com moldura própria — metade da dolosa. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade define a moldura de partida."
+  },
+  {
+    "lei": "Lei 9.605/98",
+    "tipo_pena": "Reclusão",
+    "acao": "Pública Incondicionada",
+    "hediondo": "Não",
+    "elemento": "Culposo",
+    "tentativa": "Não",
+    "violencia": "Não",
+    "grave_ameaca": "Não",
+    "id": 1420,
+    "artigo": "Art. 40, §3º",
+    "crime": "Dano culposo a Unidade de Conservação",
+    "pena_min": 6,
+    "pena_max": 30,
+    "obs": "6 meses a 2 anos e 6 meses reclusão — metade da pena do caput (1 a 5 anos). A lei diz 'se o crime for culposo, a pena será reduzida à metade'. Isso NÃO é causa de diminuição de terceira fase: a culpa é elemento do TIPO, não circunstância do fato. O que a lei cria é modalidade culposa derivada, com moldura própria — metade da dolosa. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade define a moldura de partida."
   }
 ]

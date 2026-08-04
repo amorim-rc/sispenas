@@ -4,5 +4,38 @@
     "regra": "id novo = max(id em uso, id aposentado) + 1. Imposto por scripts/transform_data.py (validar_ids) e usado por scripts/crawler/criar.py.",
     "reinicio": "A numeração foi REINICIADA em 31/07/2026 (v1.4.0), de 1 a 1412, enquanto o projeto ainda é protótipo e nenhuma URL de tipo havia sido citada fora daqui. A lista abaixo recomeça vazia de propósito: os ids anteriores a essa data não significam nada no esquema novo, e guardá-los só bloquearia números sem motivo. Daqui em diante, todo registro retirado entra aqui."
   },
-  "aposentados": []
+  "aposentados": [
+    {
+      "ids": [
+        1327
+      ],
+      "data": "2026-08-03",
+      "versao": "v1.8.0",
+      "motivo": "CP, art. 157, §4º (incluído pela Lei 15.358/2026) não é tipo penal: manda aplicar em triplo a pena do caput do art. 157, desprezadas as demais causas de aumento. É causa de aumento (C1), e passou a data/modificadores.json com o id `aumento-roubo-orgcrim-157`. O registro publicava a moldura já calculada (18 a 30 anos) como se fosse crime autônomo."
+    },
+    {
+      "ids": [
+        328
+      ],
+      "data": "2026-08-03",
+      "versao": "v1.8.0",
+      "motivo": "Lei 11.343/06, art. 40 — causa de aumento, não tipo penal (C1). O registro publicava uma pena CALCULADA (5 anos e 10 meses a 25 anos): 5 anos + 1/6 e 15 anos + 2/3, com a premissa embutida de que a majorante só incide sobre o art. 33, quando o caput diz 'arts. 33 a 37'. Aparecia na busca como se existisse um crime com essa moldura. Passou a data/modificadores.json com o id `aumento-drogas-art40`."
+    },
+    {
+      "ids": [
+        399
+      ],
+      "data": "2026-08-03",
+      "versao": "v1.8.0",
+      "motivo": "Lei 8.137/90, art. 2º, caput — duplicata estrutural. O caput não descreve conduta: diz 'Constitui crime da mesma natureza:' e comina a pena; as condutas estão nos incisos I a V. Com os incisos I e II já cadastrados (ids 670 e 671), o registro do caput somava pena ao catálogo sem tipo por trás. Desdobrado nos incisos III, IV e V, que faltavam (ids 1415, 1416 e 1417)."
+    },
+    {
+      "ids": [
+        578
+      ],
+      "data": "2026-08-04",
+      "versao": "v1.9.1",
+      "motivo": "CP, art. 359-O — o dispositivo foi VETADO na Lei 14.197/2021 e nunca foi promulgado. O compilado traz apenas '(VETADO)' no corpo do artigo. O catálogo publicava 'Comunicação enganosa em massa', reclusão de 1 a 5 anos e multa: um crime que não existe. O art. 359-Q, também vetado, nunca chegou a ter registro."
+    }
+  ]
 }

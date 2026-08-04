@@ -51,13 +51,37 @@ ignoradas:
 
 ```
 python scripts/transform_data.py --estrito --max-contradicoes=0
-npm run typecheck
-npm run verificar
-npm run build
+python scripts/validar_modificadores.py
+python scripts/verificar_documentacao.py
+python -m pytest scripts/crawler/tests
+node scripts/validar-changelog.mjs
+npm run typecheck && npm run verificar && npm run build
 ```
 
 A CI trava em `--max-contradicoes=0` e exige o derivado sincronizado com a fonte. Extraia
 PDFs de leis com `pdftotext -layout -enc UTF-8` (o poppler não renderiza página aqui).
+
+Mexeu no conferidor ou nos dados que ele lê? Rode também
+`python scripts/crawler/auditar.py` e `python scripts/crawler/conferir.py`, que não
+falham o build mas dizem o que ficou aberto.
+
+## O que NÃO entra no catálogo, e onde entra
+
+Duas saídas evitam que uma pergunta sem resposta vire dado publicado:
+
+- **`REVISAO-PENDENTE.md`**, na raiz — a questão jurídica examinada e deixada em aberto
+  de propósito. É PROSA, não estrutura de dados, e o arquivo é **autossuficiente**:
+  transcreve o texto legal de cada caso, diz o que o catálogo publica hoje e o que se
+  quer decidir, para que um jurista responda sem abrir o repositório. Cada pergunta é
+  um bloco PRONTO PARA SUBMETER: cabeçalho `## N ✅|⚠️|⛔ — Título`, contexto, texto
+  legal e um **Formato da resposta** que torna o resultado aplicável sem retrabalho.
+  O arquivo abre com um bloco de **Instruções ao revisor**, para colar junto. O
+  auditor lê o cabeçalho e repete a lista toda semana. Resolver uma é aplicar a
+  mudança e REMOVER a seção. O **anexo**, no fim, é o que já foi respondido e falta
+  aplicar — trabalho, não pergunta: não se submete e não se reabre.
+- **`scripts/crawler/excecoes-auditoria.json`** — o achado da auditoria que já foi julgado
+  e não precisa voltar. Casa por tipo de achado MAIS um alvo, nunca por tipo sozinho, e
+  declara motivo e data. Divergência real nunca vira exceção: vira correção no dado.
 
 Trabalhe em branch própria, commits pequenos e descritivos; **não faça push nem abra PR sem
 o usuário pedir**.

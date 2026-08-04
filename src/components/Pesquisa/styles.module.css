@@ -186,6 +186,14 @@
   border: 1px dashed #e91e63;
   color: #e91e63;
 }
+/* Dispositivo que já não vige. Não é alerta de erro — o registro está certo e
+   continua valendo para fato anterior —, então o tom é de aviso, não de perigo,
+   e o texto riscado ficaria ilegível numa etiqueta desta altura. */
+.tagNaoVigente {
+  background: transparent;
+  border: 1px solid var(--ifm-color-warning-dark);
+  color: var(--ifm-color-warning-dark);
+}
 .checkDestacado {
   background: var(--ifm-color-emphasis-100);
   border-radius: 6px;

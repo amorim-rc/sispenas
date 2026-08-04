@@ -106,6 +106,20 @@ _TIPOS = ("reclusão", "detenção", "prisão simples", "impedimento", "suspens�
 # "multa, de duzentos mil réis a dois contos de réis" — intervalo que NÃO é pena
 # privativa. Reconhecido para ser descartado, não para ser lido.
 _SO_MULTA = re.compile(r"^\s*pena\s*[-–—:]?\s*multa\b", re.IGNORECASE)
+# Preceito PECUNIÁRIO escrito à moda de 1965: "Pena - pagamento de 250 a 300
+# dias-multa". O Código Eleitoral comina assim dezenas de tipos, e a fórmula não
+# começa pela palavra "multa" — começa por "pagamento".
+#
+# Enquanto ela não era reconhecida, `ler_penas` devolvia lista vazia e o
+# conferidor PULAVA o dispositivo: o registro entrava na conta dos
+# "indeterminados" e nunca era confrontado. Foi por esse buraco que três artigos
+# do CE publicaram por meses pena privativa de liberdade — o 313 com reclusão de
+# 2 a 6 anos, o 303 com detenção de 6 meses a 2 anos e o 306 com 1 a 6 meses —
+# para artigos que não cominam prisão nenhuma. O erro inverte a classe inteira
+# de benefícios do registro, e era invisível justamente por ser silêncio.
+_SO_PECUNIARIA = re.compile(
+    r"^\s*pena\s*[-–—:]?\s*(?:o\s+)?pagamento\s+de\b.{0,80}?\bmulta\b",
+    re.IGNORECASE | re.DOTALL)
 _ATE = re.compile(
     rf"at[ée]\s+(\d+|{'|'.join(_EXTENSO)})\s*\(?[^)]*\)?\s*{_U}", re.IGNORECASE)
 
@@ -227,7 +241,7 @@ def ler_pena(texto: str) -> dict | None:
     # emissora por até dois dias") era lido como pena de "suspensão" de dois
     # dias, e virou um "crime" no catálogo — sendo infração administrativa.
     # Procurar a espécie antes do teste de multa é o que permitia isso.
-    if _SO_MULTA.match(bruto) and not _TIPO_RE.search(bruto):
+    if (_SO_MULTA.match(bruto) or _SO_PECUNIARIA.match(bruto)) and not _TIPO_RE.search(bruto):
         return {"tipo": None, "min_meses": 0.0, "max_meses": 0.0,
                 "so_multa": True, "teto_apenas": False}
     tipo = next((t for t in _TIPOS if t in bruto.lower()), None)
@@ -235,7 +249,7 @@ def ler_pena(texto: str) -> dict | None:
         # Sem tipo de pena privativa: ou é só multa, ou não é preceito de pena.
         return ({"tipo": None, "min_meses": 0.0, "max_meses": 0.0,
                  "so_multa": True, "teto_apenas": False}
-                if _SO_MULTA.match(bruto) else None)
+                if (_SO_MULTA.match(bruto) or _SO_PECUNIARIA.match(bruto)) else None)
 
     limpo = _extenso_para_numero(_limpar(bruto))
     faixa = parse_pena_range(limpo)
