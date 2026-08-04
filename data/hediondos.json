@@ -289,8 +289,8 @@
   "pendentes": [
     {
       "fundamento": "Lei 8.072, art. 1º, § único, VI",
-      "descricao": "Os sete registros do CPM que o catálogo marcava como hediondos foram decididos na revisão de 02/08/2026 e saíram do `fora_de_alcance`: arts. 232 (caput e §§ 1º, 2º e 3º) e 244, caput, confirmados; art. 290, §5º, retirado (tráfico não está no art. 1º); art. 205, §2º, confirmado como condicional, porque o inciso VI do parágrafo — prevalecendo-se da situação de serviço — não tem correspondente no art. 121, §2º do CP. Falta o inverso: varrer o Livro II do CPM contra os doze incisos do art. 1º para achar o que DEVERIA estar marcado e não está. Candidatos levantados: roubo qualificado pelo resultado (art. 242 e parágrafos, contra o inciso II, 'c'), extorsão qualificada pelo resultado (inciso III) e sequestro de menor de 18 (inciso XI).",
-      "acao": "varredura artigo a artigo do Livro II do CPM, registrando também os 'não há correspondente' — que são tão úteis quanto os positivos"
+      "descricao": "Os sete registros militares que o catálogo marcava foram julgados na revisão de 02/08/2026 e constam das `regras` e `excecoes` acima. Falta o inverso — varrer o Livro II do CPM contra os doze incisos do art. 1º para achar o que DEVERIA estar marcado e não está. A pergunta, com o critério adotado, os candidatos levantados e as respostas negativas já seguras, vive em REVISAO-PENDENTE.md (Parte II, pergunta 6) — aqui fica só o ponteiro, para que a pergunta tenha um lugar só.",
+      "acao": "ver REVISAO-PENDENTE.md, Parte II, pergunta 6"
     },
     {
       "fundamento": "Lei 8.072, art. 1º, § único, VIII",

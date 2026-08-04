@@ -65,6 +65,16 @@
       ],
       "motivo": "Artigos cujo CAPUT é norma de cominação, não descrição de conduta: o art. 100 do Estatuto da Pessoa Idosa diz 'Constitui crime punível com...' e o art. 2º da Lei 8.137/90 diz 'Constitui crime da mesma natureza:', com as condutas nos incisos. A auditoria compara o nome do registro com o texto do caput, e nesses casos não há o que comparar — nenhum dos seis registros erra o nome. Foi este o falso alarme que a revisão de 02/08/2026 examinou no item 1.4 e classificou como tal.",
       "data": "2026-08-03"
+    },
+    {
+      "tipo": "NOME-DE-OUTRO-ARTIGO",
+      "ids": [
+        474,
+        539,
+        642
+      ],
+      "motivo": "Falsos positivos CONFIRMADOS na revisão de 03/08/2026, item 11 — lidos um a um contra o compilado. id 474 (Estatuto da Pessoa Idosa, art. 100, I): o nome descreve fielmente o inciso, e o match com o art. 96 vem de conduta vizinha e de pena idêntica. id 539 (Lei 9.279/96, art. 184): o nome descreve o inciso I, e o match com o art. 190 vem de os dois artigos usarem os mesmos verbos — um para patente, outro para marca — e cominarem a mesma pena. id 642 (CP, art. 149-A, II): o match com o art. 149 vem da expressão comum, mas os tipos são distintos — o 149 pune a redução efetiva, o 149-A, II pune o tráfico com essa finalidade, e se consuma antes de qualquer redução. Nos três, a pena confere e a espécie confirma a origem.",
+      "data": "2026-08-03"
     }
   ]
 }

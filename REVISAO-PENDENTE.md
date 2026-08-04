@@ -194,6 +194,64 @@ o motor liga a marcação quando o modificador correspondente é aplicado. O mes
 mecanismo serve ao art. 121 (inciso I), ao art. 155 (§4º-A), ao art. 148 (§1º,
 IV) e ao art. 149-A.
 
+## I. Marcação de risco no art. 244 do CPM, e a varredura que ela pede
+
+**Resposta dada (grau M).** Manter a marcação de risco — o risco é **real, porém
+menor** que o do art. 232, §3º —, com nota registrando que a assimetria é
+**quantitativa** e que os máximos coincidem. Isso calibra a expectativa de quem lê.
+
+A favor do risco: a *ratio* da ADI 7555 é transponível (o que fundamentou a
+inconstitucionalidade não foi nada específico do estupro, foi proteção deficiente
+por moldura militar inferior à comum para conduta equivalente); a PGR sustentou, e
+o STF acatou, que a prática por militar ofende adicionalmente hierarquia e
+disciplina, o que justificaria pena **maior**, nunca menor; e o legitimado está
+mobilizado — a ADI 7555 nasceu de representação do MPM.
+
+Contra: lá a assimetria era **estrutural** — o §3º do art. 232 não previa
+qualificação por lesão grave ou morte, faltando um regime inteiro de agravamento;
+aqui é de dois anos no mínimo, com máximos idênticos (15 anos). E faltou o
+elemento de vulnerabilidade, que pesou na aferição do dever estatal de proteção.
+
+**Falta:** a nota no registro do art. 244 do CPM.
+
+**E o produto mais útil desta pergunta não é a resposta** — é o **levantamento
+sistemático dos pares CPM/CP com moldura militar inferior à comum para conduta
+equivalente**. O CPM é de 1969 e não acompanhou as reformas do CP; o art. 244 é o
+par que se enxerga porque está no catálogo, não necessariamente o único. Se um
+desses pares cair, os outros caem em sequência, e o catálogo já saberá quais são.
+É consulta a rodar, comparando cada tipo militar com seu correspondente comum.
+
+## J. Multa dos crimes em licitação — o art. 337-P
+
+**Texto do dispositivo, conferido no compilado:**
+
+> **Art. 337-P.** A pena de multa cominada aos crimes previstos neste Capítulo
+> seguirá a metodologia de cálculo prevista neste Código e **não poderá ser
+> inferior a 2% (dois por cento) do valor do contrato licitado ou celebrado com
+> contratação direta**.
+
+**O que o catálogo faz hoje.** Os oito registros do Capítulo II-B trazem a regra
+no campo de observação, em texto. Ela não é calculável: o catálogo modela a multa
+como presença e regime (cumulativa, alternativa, isolada), sem piso vinculado a
+valor externo.
+
+**Falta:** decidir se vale um campo para piso de multa vinculado a base externa —
+é o mesmo problema, por outro caminho, da multa em índice extinto do item C.
+
+## K. Progressão sucessiva
+
+**O que o motor faz hoje.** Calcula **uma** progressão. Enquanto os incisos do
+art. 112 contavam percentual da pena total, isso bastava para a primeira e para
+as seguintes, porque a base não mudava.
+
+Com o *caput* da Lei 15.402/2026 deixou de bastar: ele conta 1/6 **da pena no
+regime anterior**. Na primeira progressão as duas bases coincidem — é o que o
+sistema calcula, e o resultado o diz —; da segunda em diante a base é o
+remanescente, e o número publicado passa a ser menor que o devido.
+
+**Falta:** modelar a cadeia fechado → semiaberto → aberto, o que exige um dado
+que o cenário não tem — quanto já foi cumprido.
+
 ---
 
 # Parte II — o que continua em aberto
@@ -336,3 +394,106 @@ acima, um dos dois artigos estava errado em quatro casos de seis.
 
 **O que falta ver.** Nada de direito — é decisão de prioridade. A varredura é
 barata; a leitura de cada par, não.
+
+## 5. Artigo do Código Penal deve constar sob o rótulo do CP ou da lei que o criou?
+
+**Contexto.** Alguns artigos do Código Penal foram inseridos por leis próprias, e
+o catálogo os rotula pela **lei criadora**, não pelo diploma:
+
+| Registro | Campo `lei` | Artigo |
+|---|---|---|
+| id 581 | `Lei 14.478/22` | `Art. 171-A (CP)` — fraude com ativos virtuais |
+| ids 483, 484 | `Lei 14.811/24` | `Art. 146-A (CP)` — bullying |
+| id 563 | `Lei 14.192/21` | `Art. 326-B (CE)` — violência política contra a mulher |
+
+A convenção é deliberada e está documentada: o vínculo diploma → rótulos vive em
+`data/fontes.json`, e a conferência semanal resolve o rótulo antes de buscar o
+texto. **Ela funciona** — os quatro registros são conferidos normalmente.
+
+**O que mudou.** Na versão 1.9.0 o mesmo padrão foi **desfeito** para o capítulo
+dos crimes em licitação: os arts. 337-E a 337-L estavam sob `Lei 14.133/21` e os
+arts. 337-M a 337-O sob `CP`, partindo em dois o mesmo capítulo do Código. Foram
+unificados sob `CP`, com a lei introdutora na nota.
+
+**Pergunta.** O critério deve ser uniforme? Duas leituras:
+
+1. **Sempre o diploma.** O art. 171-A é artigo do Código Penal, e publicá-lo sob
+   "Lei 14.478/22" sugere ao leitor que ele pertence a outra lei. A lei criadora
+   é informação histórica e cabe na observação. Foi a leitura adotada no capítulo
+   de licitação.
+2. **Manter a lei criadora onde ela é o nome corrente.** Quem procura o crime de
+   *bullying* procura pela Lei 14.811, não pelo art. 146-A; o rótulo funciona como
+   caminho de acesso, e o `artigo` já traz "(CP)" entre parênteses para desfazer a
+   ambiguidade.
+
+**O que falta ver.** Nada de direito. É decisão de apresentação com efeito
+técnico: o campo `lei` é a chave que liga o registro ao texto oficial, e mudá-lo
+exige mexer em `data/fontes.json` na mesma passada. Se a resposta for a leitura 1,
+os quatro registros mudam e três rótulos saem do registro de fontes.
+
+## 6. Que crimes do Código Penal Militar são hediondos por identidade?
+
+**Contexto.** A Lei dos Crimes Hediondos tem um rol fechado no art. 1º. O inciso
+VI do parágrafo único (incluído pela Lei 14.688/2023) declara hediondos também os
+crimes do Código Penal Militar *"que apresentem identidade com os crimes previstos
+no art. 1º desta Lei"*.
+
+**O critério já foi decidido e está registrado** em `data/hediondos.json`:
+identidade exige correspondência de **conduta e bem jurídico** com a hipótese
+específica arrolada no art. 1º, não bastando o *nomen juris*. Se bastasse o nome,
+todo roubo militar seria hediondo — quando o rol torna hediondas apenas quatro
+formas do art. 157 do CP. É matéria sem jurisprudência consolidada do STF ou do
+STJ: o inciso é de 2023.
+
+**O que já foi julgado.** Os sete registros militares que o catálogo marcava:
+arts. 232 (*caput* e §§ 1º, 2º e 3º) e 244, *caput*, confirmados; art. 290, §5º,
+retirado (o tráfico não está no art. 1º — ver a Parte I, item F); art. 205, §2º,
+confirmado como **condicional**, porque o inciso VI daquele parágrafo
+(prevalecendo-se o agente da situação de serviço) não tem correspondente no art.
+121, §2º do CP, enquanto os incisos I a V e VII têm.
+
+**Pergunta.** Falta o inverso: **o que DEVERIA estar marcado e não está.** Exige
+varredura artigo a artigo do Livro II do CPM contra os doze incisos do art. 1º.
+
+Candidatos levantados, todos por conferir:
+
+- **roubo qualificado pelo resultado** — o inciso II, "c" do rol arrola o art.
+  157, §3º do CP; conferir o art. 242 do CPM e seus parágrafos;
+- **extorsão qualificada pelo resultado** — inciso III do rol (art. 158, §3º);
+- **sequestro ou cárcere privado contra menor de 18** — inciso XI (art. 148, §1º,
+  IV).
+
+**Respostas negativas já seguras:** lesão gravíssima não é hedionda nem no CP;
+genocídio está no parágrafo único, inciso I, que remete à Lei 2.889/56, e o inciso
+VI só alcança crimes "previstos no art. 1º"; roubo simples não é hediondo.
+
+**O que falta ver.** O texto integral do Livro II do CPM. E o resultado deve
+registrar também os **"não há correspondente"**, que são tão úteis quanto os
+positivos — sem eles, a próxima varredura recomeça do zero.
+
+## 7. As ADIs contra a Lei 15.402/2026 continuam sem cautelar?
+
+**Contexto.** A Lei 15.402/2026 reescreveu o *caput* e os incisos I a III do art.
+112 da Lei de Execução Penal, e o sistema **a aplica** — ver a pergunta 1 e a
+documentação de benefícios.
+
+Contra ela tramitam as **ADIs 7966, 7967, 7968 e 7969**, distribuídas por
+prevenção ao Min. Alexandre de Moraes, por inconstitucionalidade formal (vício na
+apreciação do veto) e material.
+
+**O quadro conhecido, até julho de 2026:** não há medida cautelar com eficácia
+*erga omnes*. O que houve, em 09/05/2026, foi o afastamento pontual da lei em
+oito Execuções Penais sob relatoria do Ministro, relativas aos condenados pelos
+atos de 08/01/2023. A cautelar das ADIs não fora apreciada nem monocraticamente
+nem pelo colegiado.
+
+**Por isso o catálogo aplica a lei:** não aplicá-la estenderia ao catálogo inteiro
+uma restrição que existe em oito processos, e o texto compilado do Planalto — que
+é a fonte da casa — traz a redação nova sem ressalva.
+
+**Pergunta.** O quadro mudou? Uma cautelar com eficácia geral inverte a resposta
+para todas as frações dos incisos I a III e do *caput*.
+
+**O que falta ver.** O andamento das quatro ações. É a única pergunta deste
+arquivo que **envelhece sozinha**: convém reconferi-la antes de citar o dado de
+progressão em qualquer trabalho.
