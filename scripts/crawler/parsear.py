@@ -158,7 +158,15 @@ _PROSA = re.compile(r"\s+[A-Za-zÀ-ÿ]")
 _PAR_UNICO = re.compile(r"^Par[áa]grafo\s+[úu]nico", re.I)
 _INCISO = re.compile(r"^([IVXLC]+)\s*[-–—]\s", re.I)
 _ALINEA = re.compile(r"^([a-z])\)\s")
-_PENA = re.compile(r"^Pena\b", re.I)
+# "PenaS", no plural, quando o preceito comina mais de uma espécie de sanção. O
+# Código de Trânsito escreve assim TODOS os seus doze crimes — "Penas - detenção,
+# de dois a quatro anos, e suspensão ou proibição de se obter a permissão…" —, e
+# o `\b` depois de "Pena" não casa "Penas". Resultado: nenhum crime de trânsito
+# jamais teve a pena lida pelo conferidor. Homicídio culposo na direção, lesão
+# corporal culposa, embriaguez ao volante, fuga do local do sinistro: doze
+# dispositivos entre os mais consultados do país, e o relatório semanal dizia
+# deles exatamente nada.
+_PENA = re.compile(r"^Penas?\b", re.I)
 _VETADO = re.compile(r"\(VETADO\)", re.I)
 # "(Revogado)" às vezes vem no TEXTO do parágrafo, não no link da anotação —
 # caso do art. 67, § único da Lei 9.605, onde o link diz "Redação dada".
@@ -242,6 +250,48 @@ class Dispositivo:
     @property
     def chave(self) -> str:
         return f"{self.rotulo_artigo}|{self.marcador}"
+
+
+def _distribuir_penas_por_inciso(d: Dispositivo) -> None:
+    """Dispositivo que é só CHAPEAU: cada inciso traz a sua própria pena.
+
+        Art. 157, § 3º  Se da violência resulta:
+        I - lesão corporal grave, a pena é de reclusão de 7 a 18 anos, e multa;
+        II - morte, a pena é de reclusão, de 24 a 30 anos, e multa.
+
+    Antes, as duas linhas "Pena" caíam no § 3º e a de ORDEM MAIOR vencia: o
+    parágrafo ficava com a pena do último inciso e a do primeiro sumia. Pior que
+    silêncio — é leitura errada, e quem "corrigisse" o catálogo por ela trocaria
+    a pena da lesão grave pela do latrocínio. Foi o que fez o conferidor acusar
+    os arts. 400 e 408 do CPM, ambos corretos no catálogo.
+
+    A regra de desempate é conservadora, porque o caso COMUM é o oposto: em
+    "Constitui crime …: I - …; V - … / Pena - reclusão" (Lei 8.137, art. 1º) os
+    incisos são modalidades da conduta e a pena única é do artigo. Só se
+    distribui quando há DUAS OU MAIS penas atrás de incisos DIFERENTES.
+
+    E a pena com anotação de ALTERAÇÃO fica de fora da conta, porque ela é a
+    redação nova de uma pena que já estava ali — não o preceito próprio de um
+    inciso. Sem essa ressalva o art. 1º da Lei 9.613 se parte em duas: o
+    Planalto imprime a pena original depois do inciso VIII antigo e a redação
+    da Lei 12.683 depois do "VIII - (revogado)", que é outro inciso na
+    estrutura; as duas cominam a mesma coisa, e distribuí-las inventaria um
+    segundo crime de lavagem. Mesmo caso no art. 4º da Lei 8.137.
+    """
+    def e_redacao_nova(anotacao) -> bool:
+        return bool(anotacao and anotacao.acao in ("redacao", "renumerado"))
+
+    # A ressalva vale para DECIDIR, não para mover: reconhecido o chapeau, a
+    # redação nova de uma pena de inciso vai para o inciso dela como as outras.
+    # Duas versões no mesmo inciso resolvem pela ordem — o Planalto imprime a
+    # nova depois da antiga.
+    if len({v[3] for v in d._versoes_pena
+            if v[3] is not None and not e_redacao_nova(v[2])}) < 2:
+        return
+    for ordem, texto, anotacao, idx in sorted(d._versoes_pena, key=lambda v: v[0]):
+        if idx is not None and idx < len(d.incisos):
+            d.incisos[idx]["pena_texto"] = texto
+    d._versoes_pena = [v for v in d._versoes_pena if v[3] is None]
 
 
 def _consolidar(d: Dispositivo) -> None:
@@ -356,6 +406,10 @@ def parsear(documento: str) -> list[Dispositivo]:
     marcador = "caput"
     epigrafe_pendente: str | None = None
     atual: Dispositivo | None = None
+    # Índice do último inciso/alínea lido dentro do dispositivo corrente. Uma
+    # linha "Pena" que vem DEPOIS de um inciso pode pertencer a ele — ver
+    # `_distribuir_penas_por_inciso`.
+    inciso_atual: int | None = None
 
     def obter(art, suf, marc) -> Dispositivo:
         nonlocal atual
@@ -383,6 +437,7 @@ def parsear(documento: str) -> list[Dispositivo]:
             artigo = m.group(1)
             sufixo = re.sub(r"[–—]", "-", m.group(2)).strip("-").upper() or None
             marcador = "caput"
+            inciso_atual = None
             d = obter(artigo, sufixo, marcador)
             d.epigrafe = d.epigrafe or epigrafe_pendente
             epigrafe_pendente = None
@@ -426,6 +481,7 @@ def parsear(documento: str) -> list[Dispositivo]:
         mp = ler_paragrafo(texto)
         if mp or _PAR_UNICO.match(texto):
             marcador = (_norm_marcador(mp[0], mp[1]) if mp else "parágrafo único")
+            inciso_atual = None
             d = obter(artigo, sufixo, marcador)
             corpo = texto[(mp[2] if mp else _PAR_UNICO.match(texto).end()):].strip(" .-–—")
             corpo_util = re.sub(r"\([^)]*\)", "", corpo).strip()
@@ -448,7 +504,7 @@ def parsear(documento: str) -> list[Dispositivo]:
             continue
 
         if _PENA.match(texto) and atual is not None:
-            atual._versoes_pena.append((ordem, texto, anotacao))
+            atual._versoes_pena.append((ordem, texto, anotacao, inciso_atual))
             atual.vigencia_pendente = atual.vigencia_pendente or pendente
             continue
 
@@ -459,12 +515,15 @@ def parsear(documento: str) -> list[Dispositivo]:
                 "texto": texto[mi.end():].strip(),
                 "situacao": "revogado" if anotacao and anotacao.acao == "revogado" else "vigente",
                 "anotacao": anotacao.texto if anotacao else None,
+                "pena_texto": None,
             })
+            inciso_atual = len(atual.incisos) - 1
             continue
 
         epigrafe_pendente = _epigrafe(texto) or epigrafe_pendente
 
     for d in dispositivos:
+        _distribuir_penas_por_inciso(d)
         _consolidar(d)
     _marcar_citacoes(dispositivos)
     return dispositivos

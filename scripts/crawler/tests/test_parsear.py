@@ -236,3 +236,60 @@ def test_contravencao_revogada_mantem_o_texto(carregar):
     contravenções revogadas entraram no catálogo como vigentes."""
     d = {x.chave: x for x in parsear(carregar("lcp-art65-revogado"))}
     assert d["Art. 65|caput"].situacao == "revogado"
+
+
+# ── Pena que pertence ao INCISO, não ao dispositivo ─────────────────────────
+# Quando o dispositivo é só chapeau, cada inciso traz a sua pena. Antes, as duas
+# linhas "Pena" caíam no mesmo dispositivo e a de ordem maior vencia: sobrava a
+# pena do ÚLTIMO inciso e a do primeiro sumia. Pior que silêncio — é leitura
+# errada, e uma "correção" feita por ela trocaria a pena de um crime pela de
+# outro.
+def test_chapeau_com_pena_em_cada_inciso(carregar):
+    """CP, art. 197: o caput constrange "mediante violência ou grave ameaça:" e
+    os incisos I e II cominam penas DIFERENTES (1 mês–1 ano e 3 meses–1 ano)."""
+    d = {x.chave: x for x in parsear(carregar("cp-art197-pena-por-inciso"))}
+    art = d["Art. 197|caput"]
+    assert art.pena_texto is None, "o chapeau não tem pena própria"
+    penas = [i["pena_texto"] for i in art.incisos]
+    assert "de um mês a um ano" in penas[0]
+    assert "de três meses a um ano" in penas[1]
+
+
+def test_chapeau_do_cpm_com_inciso_sem_pena_no_meio(carregar):
+    """CPM, art. 400: o inciso II não comina pena — manda o juiz REDUZIR a do
+    inciso I. A distribuição não pode empurrar a pena do III para ele."""
+    d = {x.chave: x for x in parsear(carregar("cpm-art400-graus"))}
+    art = d["Art. 400|caput"]
+    assert art.pena_texto is None
+    por_marca = {i["marcador"]: i.get("pena_texto") for i in art.incisos}
+    assert "de doze a trinta anos" in por_marca["I"]
+    assert por_marca["II"] is None
+    assert "grau mínimo" in por_marca["III"]
+
+
+def test_redacoes_sucessivas_da_mesma_pena_nao_se_distribuem(carregar):
+    """Lei 9.613, art. 1º: o Planalto imprime a pena original depois do inciso
+    VIII antigo e a redação da Lei 12.683 depois do "VIII - (revogado)" — que é
+    outro inciso na estrutura. As duas cominam a MESMA coisa; distribuí-las
+    inventaria um segundo crime de lavagem. A pena continua sendo do artigo, e
+    vale a redação mais recente."""
+    d = {x.chave: x for x in parsear(carregar("lavagem-art1-redacao"))}
+    art = d["Art. 1|caput"]
+    assert art.pena_texto is not None
+    assert "3 (três) a 10 (dez) anos" in art.pena_texto
+    assert not any(i.get("pena_texto") for i in art.incisos)
+
+
+def test_pena_no_plural_e_pena():
+    """O Código de Trânsito comina "PenaS - detenção…, e suspensão…" nos seus
+    doze crimes, porque o preceito traz mais de uma espécie de sanção. O `\b`
+    depois de "Pena" não casava o plural, e o conferidor nunca leu a pena de
+    NENHUM crime de trânsito — homicídio culposo na direção, embriaguez ao
+    volante, fuga do local do sinistro. Doze dispositivos entre os mais
+    consultados do país, e o relatório semanal não dizia nada sobre eles."""
+    html = ("<p>Art. 302. Praticar homicídio culposo na direção de veículo automotor:</p>"
+            "<p>Penas - detenção, de dois a quatro anos, e suspensão ou proibição de se "
+            "obter a permissão ou a habilitação para dirigir veículo automotor.</p>")
+    d = {x.chave: x for x in parsear(html)}["Art. 302|caput"]
+    assert d.pena_texto is not None
+    assert "de dois a quatro anos" in d.pena_texto

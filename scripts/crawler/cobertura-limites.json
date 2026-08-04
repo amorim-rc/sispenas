@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "descricao": "Quantos registros o conferidor aceita NÃO garantir, por motivo. Crescer é regressão e vira achado da rodada; encolher é convite a baixar o número. Regrave com `python scripts/crawler/conferir.py --atualizar-limites` e commite junto da mudança que justificou.",
+    "por_que": "O erro que originou esta trava foi um SILÊNCIO: três incisos do art. 151 do CP publicaram por anos seis vezes a pena que a lei comina, e nenhuma rodada disse nada, porque um dispositivo cuja pena está em outro dispositivo nunca tem pena escrita. Contar o silêncio é o que o torna visível.",
+    "motivos": {
+      "sancao_nao_privativa": "o registro não tem pena privativa (multa ou outra sanção)",
+      "pena_importada": "a lei manda aplicar a pena de outro dispositivo — copiável",
+      "pena_derivada": "a lei manda calcular sobre uma base (aumento, diminuição) — derivável",
+      "sem_preceito_proprio": "o dispositivo não comina pena: é norma explicativa ou extensiva",
+      "ilegivel": "A LEI ESCREVEU A PENA E O PARSER NÃO LEU — lacuna a fechar",
+      "nao_localizado": "o dispositivo do registro não foi achado no compilado"
+    },
+    "gerado_em": "2026-08-04"
+  },
+  "limites": {
+    "ilegivel": 2,
+    "nao_localizado": 0,
+    "pena_derivada": 85,
+    "pena_importada": 64,
+    "sancao_nao_privativa": 30,
+    "sem_preceito_proprio": 11
+  }
+}

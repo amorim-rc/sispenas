@@ -606,6 +606,80 @@ a segunda mesmo que não tenha base segura para a primeira.
 
 ---
 
+## 11 ✅ — Um registro publica um crime que o dispositivo não cria: retirar ou realocar?
+
+**Contexto.** O catálogo tem um registro por dispositivo de lei. Um deles aponta
+para o **§ 4º do art. 180 do Código Penal**, chama-se "Receptação de veículo
+automotor ou componente (qualificada)" e publica reclusão de 3 a 8 anos.
+
+O art. 180 tem esta estrutura:
+
+> **Art. 180.** Adquirir, receber, transportar, conduzir ou ocultar, em proveito
+> próprio ou alheio, coisa que sabe ser produto de crime […]:
+>     ↳ Pena – reclusão, de 2 a 6 anos, e multa.
+>
+> **§ 1º** *(Receptação qualificada.)* Adquirir, receber, transportar, conduzir,
+> ocultar, ter em depósito, desmontar, montar, remontar, vender, expor à venda,
+> ou de qualquer forma utilizar, em proveito próprio ou alheio, no exercício de
+> atividade comercial ou industrial, coisa que deve saber ser produto de crime:
+>     ↳ Pena – reclusão, de três a oito anos, e multa.
+>
+> **§ 2º** Equipara-se à atividade comercial […] qualquer forma de comércio
+> irregular ou clandestino […].
+>
+> **§ 3º** Adquirir ou receber coisa que, por sua natureza ou pela desproporção
+> entre o valor e o preço […], deve presumir-se obtida por meio criminoso:
+>     ↳ Pena – detenção, de um mês a um ano, ou multa, ou ambas as penas.
+>
+> **§ 4º** **A receptação é punível, ainda que desconhecido ou isento de pena o
+> autor do crime de que proveio a coisa.**
+
+O § 4º não descreve conduta e não comina pena: é regra sobre a punibilidade da
+receptação, qualquer que seja ela. A moldura de 3 a 8 anos que o registro publica
+é a do § 1º — que **já tem registro próprio** no catálogo, com o nome
+"Receptação qualificada (atividade comercial/industrial)".
+
+Nada no art. 180 trata especificamente de veículo automotor. A receptação de
+veículo com sinal identificador adulterado é alcançada pelo § 1º quando há
+atividade comercial, e a adulteração em si é o art. 311 do CP.
+
+**Por que não corrigi sozinho.** O identificador do registro é a URL pública dele
+(`?tipo=N`), e o projeto nunca reaproveita número retirado. Apagar um registro é
+quebrar um endereço que alguém pode ter citado — decisão de política, não de
+leitura da lei.
+
+**Pergunta.** Três partes:
+
+1. **De direito:** confirma-se que o § 4º do art. 180 não é tipo penal autônomo,
+   e que não existe no art. 180 figura específica de receptação de veículo
+   automotor? Se houver leitura em contrário — jurisprudência que trate o § 4º
+   como qualificadora, ou redação anterior que tenha criado tal figura e depois
+   caído —, indique-a.
+2. **De consequência prática:** hoje o registro oferece a quem consulta um crime
+   com moldura de 3 a 8 anos sob um rótulo que não existe na lei. Que efeito isso
+   tem para quem usa a ferramenta para calcular pena ou benefício, e ele é
+   diferente do efeito de simplesmente não ter esse registro?
+3. **De política de catálogo:** dado que o endereço é público, o correto é
+   **retirar** o registro, **realocá-lo** para o art. 311 (adulteração de sinal
+   identificador de veículo), ou **mantê-lo** como remissão sem moldura, apontando
+   para o § 1º? Considere que uma quarta via é possível: manter o registro e
+   marcá-lo como não-tipo, do mesmo modo como o catálogo já marca dispositivo que
+   deixou de vigorar.
+
+**Formato da resposta.**
+
+```
+1. O §4º é tipo penal autônomo? [sim | não]
+   Existe figura de receptação de veículo no art. 180? [sim, qual | não]
+   Grau: [A | M | B]
+   Fundamento:
+2. Efeito prático de manter como está:
+3. Destino recomendado: [retirar | realocar para o art. 311 | manter como remissão | marcar como não-tipo]
+   Por quê:
+```
+
+---
+
 # Anexo — respondido, NÃO submeter
 
 ## A. Desdobrar por inciso os artigos que cominam no *caput*
