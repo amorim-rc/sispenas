@@ -26,7 +26,17 @@ const TITULOS_CP: {titulo: string; de: number; ate: number}[] = [
   {titulo: 'IX', de: 286, ate: 288},   // paz pública
   {titulo: 'X', de: 289, ate: 311},    // fé pública
   {titulo: 'XI', de: 312, ate: 359},   // administração pública
+  // O Título XII (Lei 14.197/2021) NÃO tem faixa numérica própria: são os arts.
+  // 359-A a 359-T, todos com sufixo de letra sobre o mesmo número 359. Sem a
+  // regra de sufixo abaixo, eles caem no Título XI e recebem o aumento dos
+  // crimes funcionais (art. 327, §2º), que não os alcança.
 ];
+
+/** Arts. 359-A a 359-T: crimes contra o Estado Democrático de Direito. */
+export function ehTituloXII(lei: string, artigo: string): boolean {
+  return leiBase(lei).startsWith('CP') && !leiBase(lei).startsWith('CPM')
+    && /Art\.?\s*359\s*-\s*[A-Z]/i.test(artigo);
+}
 
 /** Número do artigo de um registro do catálogo ("Art. 121, §2º, I" → 121). */
 export function numeroArtigo(artigo: string): number | null {
@@ -36,6 +46,7 @@ export function numeroArtigo(artigo: string): number | null {
 
 function tituloDoCrime(c: Crime): string | null {
   if (!c.lei.startsWith('CP')) return null;
+  if (ehTituloXII(c.lei, c.artigo)) return 'XII';
   const n = numeroArtigo(c.artigo);
   if (n === null) return null;
   return TITULOS_CP.find((t) => n >= t.de && n <= t.ate)?.titulo ?? null;

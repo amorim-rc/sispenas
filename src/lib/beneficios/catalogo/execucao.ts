@@ -79,8 +79,30 @@ export const progressao: BeneficioDef = {
       min: 0,
       max: 1,
       passo: 0.01,
-      ajuda: 'Inciso I: 16% da pena para o apenado primário, crime sem violência à pessoa ou grave ameaça.',
-      fundamento: 'Art. 112, I, LEP',
+      ajuda:
+        'Redação de 2019, aplicável a FATO ANTERIOR a 08/05/2026: 16% da pena para o ' +
+        'primário em crime sem violência à pessoa ou grave ameaça. A Lei 15.402/2026 ' +
+        'substituiu o inciso, e a hipótese passou a cair no caput — 1/6, que é 16,67%. ' +
+        'Para este grupo a lei nova é mais GRAVOSA e, por isso, não retroage.',
+      fundamento: 'Art. 112, I, LEP (redação da Lei 13.964/2019)',
+    },
+    {
+      id: 'fracaoCaputRegimeAnterior',
+      rotulo: 'Regra geral do caput (Lei 15.402/2026)',
+      tipo: 'fracao',
+      padrao: 1 / 6,
+      min: 0,
+      max: 1,
+      passo: 1 / 48,
+      ajuda:
+        'O caput voltou a fixar patamar próprio — "ao menos 1/6 da pena no regime ' +
+        'anterior" —, e os incisos passaram a ser exceções a ele, não a lista exaustiva ' +
+        'de hipóteses. Alcança o primário em crime sem violência e os crimes do Título ' +
+        'XII, que os incisos I e II ressalvam. ATENÇÃO À BASE: o caput manda contar sobre ' +
+        'a pena NO REGIME ANTERIOR, e os incisos, sobre a pena total. Na primeira ' +
+        'progressão as duas coincidem; nas seguintes, não — e este cálculo é o da ' +
+        'primeira.',
+      fundamento: 'Art. 112, caput, LEP (redação da Lei 15.402/2026)',
     },
     {
       id: 'fracaoReincidenteSemViolencia',
@@ -218,28 +240,84 @@ export const progressao: BeneficioDef = {
     } else if (c.hediondo) {
       fracao = num(p, 'fracaoPrimarioHediondo');
       inciso = 'V — primário, hediondo/equiparado';
+    } else if (c.fatoAnteriorA15402) {
+      // Tabela do Pacote Anticrime, para fato até 07/05/2026. Ela não é "a
+      // antiga": continua sendo a lei do caso, porque a Lei 15.402/2026 é mais
+      // gravosa para o primário sem violência (16% viraram 16,67%) e lei mais
+      // gravosa não retroage. A retroatividade da lei benéfica se apura por
+      // SITUAÇÃO CONCRETA, não em bloco.
+      if (comViolencia && c.reincidenteEspecifico) {
+        fracao = num(p, 'fracaoReincidenteViolencia');
+        inciso = 'IV — reincidente, crime com violência/grave ameaça (redação de 2019)';
+      } else if (comViolencia) {
+        fracao = num(p, 'fracaoPrimarioViolencia');
+        inciso = 'III — primário, crime com violência/grave ameaça (redação de 2019)';
+      } else if (c.reincidenteEspecifico) {
+        fracao = num(p, 'fracaoReincidenteSemViolencia');
+        inciso = 'II — reincidente, sem violência/grave ameaça (redação de 2019)';
+      } else {
+        fracao = num(p, 'fracaoPrimarioSemViolencia');
+        inciso = 'I — primário, sem violência/grave ameaça (redação de 2019)';
+      }
+    } else if (c.tituloXII) {
+      // Os incisos I e II ressalvam expressamente os crimes do Título XII, e a
+      // ressalva é TOPOGRÁFICA: não pergunta se houve violência. Para o
+      // primário sobra o caput, e isso é leitura literal. Para o REINCIDENTE o
+      // texto comporta duas saídas — ver o resumo devolvido abaixo.
+      fracao = num(p, 'fracaoCaputRegimeAnterior');
+      inciso = c.reincidenteEspecifico
+        ? 'caput — crime do Título XII, reincidente (LEITURA EM DISPUTA: 1/6 pelo ' +
+          'caput, ou 20% pelo inciso III)'
+        : 'caput — crime do Título XII, primário (os incisos I e II o ressalvam)';
     } else if (comViolencia && c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteViolencia');
-      inciso = 'IV — reincidente, crime com violência/grave ameaça';
+      inciso = 'II — reincidente, crime com violência/grave ameaça';
     } else if (comViolencia) {
       fracao = num(p, 'fracaoPrimarioViolencia');
-      inciso = 'III — primário, crime com violência/grave ameaça';
+      inciso = 'I — primário, crime com violência/grave ameaça';
     } else if (c.reincidenteEspecifico) {
       fracao = num(p, 'fracaoReincidenteSemViolencia');
-      inciso = 'II — reincidente, sem violência/grave ameaça';
+      inciso = 'III — reincidente em crime diverso dos dos incisos I e II';
     } else {
-      fracao = num(p, 'fracaoPrimarioSemViolencia');
-      inciso = 'I — primário, sem violência/grave ameaça';
+      fracao = num(p, 'fracaoCaputRegimeAnterior');
+      inciso = 'caput — primário, crime sem violência/grave ameaça';
     }
     const tempo = c.penaConcreta * fracao;
+    const peloCaput = inciso.startsWith('caput');
+    const detalhes = [
+      `Percentual aplicável: ${inciso}.`,
+      `Tempo necessário sobre a pena de ${formatPena(c.penaConcreta)}: ${formatPena(tempo)}.`,
+      'Requisito subjetivo: boa conduta carcerária (art. 112, §1º).',
+    ];
+    if (peloCaput) {
+      detalhes.push(
+        'O caput conta 1/6 da pena NO REGIME ANTERIOR, e não da pena total como os ' +
+          'incisos. Na primeira progressão as duas bases coincidem — é o que está ' +
+          'calculado acima; nas seguintes, a base é o remanescente.',
+      );
+    }
+    if (!c.fatoAnteriorA15402 && !c.hediondo) {
+      detalhes.push(
+        'Redação da Lei 15.402/2026, em vigor desde 08/05/2026. Para fato anterior, ' +
+          'marque a circunstância correspondente: para o primário em crime sem ' +
+          'violência a lei nova é mais gravosa (16% → 16,67%) e não retroage.',
+      );
+    }
+    if (c.tituloXII && c.reincidenteEspecifico) {
+      detalhes.push(
+        'DUAS LEITURAS SUSTENTÁVEIS, e a diferença é de 3,33 pontos. Pelo inciso III ' +
+          '(20%): ele alcança o "reincidente em crime diverso dos referidos nos incisos ' +
+          'I e II", e os do Título XII estão expressamente fora do alcance de I e II. ' +
+          'Pelo caput (1/6): "crimes referidos nos incisos I e II" significaria crimes ' +
+          'com violência ou grave ameaça, categoria a que os do Título XII pertencem ' +
+          'materialmente — não sendo diversos, restariam no caput. Está calculado pelo ' +
+          'caput, que é o resultado mais favorável; a questão é dos tribunais de execução.',
+      );
+    }
     return {
-      status: 'cabivel',
-      resumo: `Fração de ${(fracao * 100).toFixed(0)}% → ${formatPena(tempo)} de cumprimento.`,
-      detalhes: [
-        `Percentual aplicável: ${inciso}.`,
-        `Tempo necessário sobre a pena de ${formatPena(c.penaConcreta)}: ${formatPena(tempo)}.`,
-        'Requisito subjetivo: boa conduta carcerária (art. 112, §1º).',
-      ],
+      status: c.tituloXII && c.reincidenteEspecifico ? 'condicional' : 'cabivel',
+      resumo: `Fração de ${(fracao * 100).toFixed(2).replace(/\.?0+$/, '')}% → ${formatPena(tempo)} de cumprimento.`,
+      detalhes,
     };
   },
 };

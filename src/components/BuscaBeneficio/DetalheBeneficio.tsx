@@ -341,6 +341,14 @@ export default function DetalheBeneficio({def, crimes: todos}: {def: BeneficioDe
             <label>
               <input
                 type="checkbox"
+                checked={rev.fatoAnteriorA15402}
+                onChange={(e) => setRevCampo('fatoAnteriorA15402', e.target.checked)}
+              />{' '}
+              Fato anterior a 08/05/2026
+            </label>
+            <label>
+              <input
+                type="checkbox"
                 checked={rev.confessou}
                 onChange={(e) => setRevCampo('confessou', e.target.checked)}
               />{' '}

@@ -266,6 +266,11 @@ export default function Detalhe({
             <label><input type="checkbox" checked={cen.confessou} onChange={(e) => set('confessou', e.target.checked)} /> Confissão formal</label>
             <label><input type="checkbox" checked={cen.bonsAntecedentes} onChange={(e) => set('bonsAntecedentes', e.target.checked)} /> Bons antecedentes</label>
             <label><input type="checkbox" checked={cen.culposo} onChange={(e) => set('culposo', e.target.checked)} /> Culposo</label>
+            <label>
+              <input type="checkbox" checked={cen.fatoAnteriorA15402} onChange={(e) => set('fatoAnteriorA15402', e.target.checked)} />
+              {' '}Fato anterior a 08/05/2026
+              <Ajuda texto={'A Lei 15.402/2026 reescreveu o caput e os incisos I a III do art. 112 da LEP. Para o primário condenado por crime SEM violência ela é mais gravosa — os 16% do inciso I viraram 1/6 do caput, que é 16,67% —, e lei mais gravosa não retroage. Marque para calcular pela tabela do Pacote Anticrime, que é a lei do fato anterior.'} />
+            </label>
             <label><input type="checkbox" checked={cen.reparouDano} onChange={(e) => set('reparouDano', e.target.checked)} /> Reparou o dano</label>
           </div>
         </div>

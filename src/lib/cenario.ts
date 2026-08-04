@@ -1,6 +1,7 @@
 // Construção do cenário de cálculo a partir de um tipo penal do catálogo.
 
 import type {Cenario, Crime} from './types';
+import {ehTituloXII} from './dosimetria/aplicaveis';
 
 /**
  * Cenário inicial de um tipo penal: penas cominadas + características objetivas
@@ -27,6 +28,13 @@ export function cenarioFromCrime(c: Crime): Cenario {
     // Circunstância do caso concreto: parte-se de "não", e quem conhece os autos
     // marca na simulação.
     comandoOrgcrimUltraviolenta: false,
+    // Topográfico, e por isso lido do próprio registro: basta o tipo estar nos
+    // arts. 359-A a 359-T do CP. O art. 112 da LEP os ressalva sem perguntar se
+    // a conduta foi violenta — o art. 359-L (abolição violenta) e o art. 359-M
+    // (golpe de Estado) são violentos por definição típica e ainda assim entram.
+    tituloXII: ehTituloXII(c.lei ?? '', c.artigo ?? ''),
+    // Parte-se da lei vigente. Quem simula fato anterior marca na simulação.
+    fatoAnteriorA15402: false,
     violencia: c.violencia === 'Sim',
     graveAmeaca: c.grave_ameaca === 'Sim',
     confessou: false,

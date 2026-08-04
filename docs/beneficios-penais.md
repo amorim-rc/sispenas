@@ -83,10 +83,11 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 
 | Inciso | Situação | Fração |
 |--------|----------|--------|
-| I | Primário, sem violência/grave ameaça | 16% |
-| II | Reincidente, sem violência/grave ameaça | 20% |
-| III | Primário, com violência/grave ameaça | 25% |
-| IV | Reincidente, com violência/grave ameaça | 30% |
+| *caput* | Regra geral — **1/6 da pena no regime anterior** | 16,67% |
+| I | Primário, com violência/grave ameaça, **salvo Título XII** | 25% |
+| II | Reincidente, com violência/grave ameaça, **salvo Título XII** | 30% |
+| III | Reincidente em crime diverso dos dos incisos I e II | 20% |
+| IV | *(repete o inciso II — ver abaixo)* | 30% |
 | V | Primário, hediondo/equiparado | 70% |
 | VI, "a" | Primário, hediondo com resultado morte (livramento vedado) | 75% |
 | VI, "b" | Comando de organização criminosa **ultraviolenta** estruturada para crime hediondo (livramento vedado) | 75% |
@@ -94,24 +95,73 @@ trocada por pena máxima ou por um valor fixo aplicado a todos os tipos.
 | VI, "d" | Primário, feminicídio (livramento vedado) | 75% |
 | VII | Reincidente, hediondo | 80% |
 | VIII | Reincidente específico, hediondo com resultado morte (livramento vedado) | 85% |
+| IX e X | *(vetados)* | — |
 
-Os incisos V a VIII foram reescritos pela **Lei 15.358/2026**, que também acrescentou a
-alínea "d", pôs "ultraviolenta" e a vedação do livramento na alínea "b" e revogou o
-inciso VI-A (feminicídio a 55%, da Lei 14.994/2024).
+Os incisos V a VIII vêm da **Lei 15.358/2026**, que também acrescentou a alínea "d", pôs
+"ultraviolenta" e a vedação do livramento na alínea "b" e revogou o inciso VI-A. O *caput*
+e os incisos I a III vêm da **Lei 15.402/2026**, de 08/05/2026.
 
 **Quatro incisos vedam o livramento condicional na própria letra** — VI, "a", "b" e "d",
-e VIII. A vedação é regra de cálculo do motor, não apenas texto de nota: enquanto ficou
-só escrita, o livramento seguia sendo oferecido aos 2/3 a quem a LEP o proíbe.
+e VIII. A vedação é regra de cálculo do motor, não apenas texto de nota.
 
-:::warning[Pendência conhecida — incisos I a IV]
-A **Lei 15.402/2026** (de 08/05/2026, posterior à 15.358) reescreveu o *caput* e os
-incisos I, II e III do art. 112: o *caput* passou a fixar 1/6 da pena como regra, "observadas
-as seguintes exceções", e os três incisos ganharam redação nova, com ressalva dos crimes do
-Título XII da Parte Especial do Código Penal. O inciso IV não foi tocado e passou a repetir
-o conteúdo do novo inciso II. **O motor ainda aplica a estrutura do Pacote Anticrime nos
-incisos I a IV.** Modelar a redação nova exige decidir o que fazer com a duplicação entre II
-e IV e com a ressalva do Título XII — juízo que não foi feito. A pergunta está aberta em
-`REVISAO-PENDENTE.md`, na raiz do repositório.
+### Duas tabelas, com corte pela data do fato
+
+A Lei 15.402/2026 não é uniformemente mais benéfica. Para o **primário condenado por
+crime sem violência**, a hipótese saiu do inciso I (16%) e passou a cair no *caput*
+(1/6 = **16,67%**): a lei nova é mais **gravosa** para esse grupo e, portanto, **não
+retroage** (CF, art. 5º, XL; CP, art. 2º, parágrafo único). A retroatividade da lei mais
+benéfica apura-se **por situação concreta**, não em bloco.
+
+| Perfil | Fato até 07/05/2026 | Fato a partir de 08/05/2026 |
+|---|---|---|
+| Primário, sem violência | 16% da pena (inciso I de 2019) | 1/6 da pena no regime anterior (*caput*) |
+| Reincidente, sem violência | 20% (inciso II de 2019) | 20% (inciso III) |
+| Primário, com violência | 25% (inciso III de 2019) | 25% (inciso I) |
+| Reincidente, com violência | 30% (inciso IV de 2019) | 30% (inciso II) |
+| Título XII, primário | 25% ou 30% conforme violência | 1/6 pelo *caput* |
+
+Marque **"fato anterior a 08/05/2026"** na simulação para calcular pela tabela do Pacote
+Anticrime.
+
+:::note[A base de cálculo do *caput* não é a dos incisos]
+O *caput* conta **1/6 da pena no regime anterior**; os incisos contam percentual **da
+pena total**. São operações distintas dentro do mesmo artigo. Na **primeira** progressão
+as duas bases coincidem, e é ela que o sistema calcula; nas seguintes, a base do *caput*
+é o remanescente. Progressão sucessiva não é modelada.
+:::
+
+:::note[Título XII — o critério é topográfico]
+Os incisos I e II ressalvam "os crimes previstos no Título XII da Parte Especial do
+Código Penal" — arts. 359-A a 359-T, contra o Estado Democrático de Direito. A ressalva
+**não pergunta se houve violência**: o art. 359-L (abolição violenta) e o art. 359-M
+(golpe de Estado) são violentos por definição típica e ainda assim entram. Para o
+primário sobra o *caput*, por exclusão expressa.
+
+Para o **reincidente** há duas leituras sustentáveis, e o sistema devolve o resultado
+como *condicional*, com as duas escritas: pelo **inciso III** (20%), porque os crimes do
+Título XII estão fora do alcance de I e II e são portanto "diversos" deles; ou pelo
+***caput*** (16,67%), porque "crimes referidos nos incisos I e II" significaria crimes
+violentos, categoria a que eles materialmente pertencem. A diferença é de 3,33 pontos, e
+é matéria que os tribunais de execução vão fixar.
+:::
+
+:::warning[O inciso IV ficou repetindo o inciso II]
+A Lei 15.402/2026 não tocou o inciso IV, que mantém a redação de 2019 — 30% para o
+reincidente em crime com violência ou grave ameaça — e passou a repetir o conteúdo do
+novo inciso II, **sem a ressalva do Título XII**. O sistema adota a leitura de **revogação
+tácita** (LINDB, art. 2º, §1º: o inciso II regula integralmente a mesma matéria). A
+leitura contrária — o IV sobreviveria como norma residual, reintroduzindo os reincidentes
+violentos do Título XII a 30% — esvazia a ressalva do inciso II e agrava a situação do
+apenado; entre duas leituras textualmente possíveis, prevalece a que não agrava.
+:::
+
+:::note[Sob controle de constitucionalidade]
+Contra a Lei 15.402/2026 tramitam as **ADIs 7966, 7967, 7968 e 7969**, por vício formal
+na apreciação do veto e por inconstitucionalidade material. **Não há cautelar com eficácia
+*erga omnes***: o que houve, em 09/05/2026, foi o afastamento pontual da lei em oito
+Execuções Penais. A lei está em vigor e o catálogo a aplica — não aplicá-la estenderia ao
+catálogo inteiro uma restrição que existe em oito processos. Reconferir o andamento das
+quatro ações antes de citar o dado.
 :::
 
 ## Tabela de prescrição (Art. 109 CP)

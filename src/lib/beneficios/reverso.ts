@@ -60,6 +60,8 @@ export interface CenarioReverso {
    * como alavanca global da varredura, ao lado da reincidência.
    */
   comandoOrgcrimUltraviolenta: boolean;
+  /** Fato anterior a 08/05/2026 — antes da Lei 15.402/2026 (art. 112 da LEP). */
+  fatoAnteriorA15402: boolean;
   confessou: boolean;
   reparouDano: boolean;
   bonsAntecedentes: boolean;
@@ -71,6 +73,7 @@ export function cenarioReversoPadrao(): CenarioReverso {
     penaFixaMeses: 24,
     reincidenteEspecifico: false,
     comandoOrgcrimUltraviolenta: false,
+    fatoAnteriorA15402: false,
     confessou: false,
     reparouDano: false,
     bonsAntecedentes: true,
@@ -114,6 +117,7 @@ export function cenarioParaCrime(c: Crime, rev: CenarioReverso): Cenario {
     primario: !rev.reincidenteEspecifico,
     reincidenteEspecifico: rev.reincidenteEspecifico,
     comandoOrgcrimUltraviolenta: rev.comandoOrgcrimUltraviolenta,
+    fatoAnteriorA15402: rev.fatoAnteriorA15402,
     confessou: rev.confessou,
     reparouDano: rev.reparouDano,
     bonsAntecedentes: rev.bonsAntecedentes,

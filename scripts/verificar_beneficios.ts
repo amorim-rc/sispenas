@@ -337,6 +337,52 @@ console.log('\n3. Casos-âncora de direito penal');
       );
     }
 
+    // ── As DUAS tabelas do art. 112, com corte pela data do fato ──────────
+    // A Lei 15.402/2026 reescreveu o caput e os incisos I a III. Para o primário
+    // condenado por crime SEM violência ela é mais GRAVOSA — os 16% do inciso I
+    // viraram 1/6 do caput, que é 16,67% —, e lei mais gravosa não retroage. A
+    // retroatividade se apura por situação concreta, não em bloco: por isso são
+    // duas tabelas, não uma substituição.
+    if (furto) {
+      const antes = avaliar(progressaoDef, furto, {fatoAnteriorA15402: true});
+      const depois = avaliar(progressaoDef, furto, {});
+      ok(/16%/.test(antes.resumo),
+        `furto, primário, fato até 07/05/2026: 16% — inciso I de 2019 (obtido "${antes.resumo}")`);
+      ok(/16\.67%|16,67%/.test(depois.resumo),
+        `furto, primário, fato desde 08/05/2026: 1/6 pelo caput (obtido "${depois.resumo}")`);
+      // Reincidente sem violência: 20% nas duas, mas por dispositivos diferentes
+      // — o inciso II de 2019 e o inciso III da redação nova.
+      const rAntes = avaliar(progressaoDef, furto, {fatoAnteriorA15402: true, reincidenteEspecifico: true});
+      const rDepois = avaliar(progressaoDef, furto, {reincidenteEspecifico: true});
+      ok(/20%/.test(rAntes.resumo) && /20%/.test(rDepois.resumo),
+        'furto, reincidente: 20% antes e depois — muda o fundamento, não o percentual');
+      ok(
+        rAntes.detalhes.some((d) => d.includes('II —')) &&
+          rDepois.detalhes.some((d) => d.includes('III —')),
+        'furto, reincidente: o inciso citado acompanha a redação aplicável',
+      );
+    }
+
+    // Título XII — a ressalva é TOPOGRÁFICA: não pergunta se houve violência.
+    // O art. 359-M (golpe de Estado) é violento por definição típica e ainda
+    // assim cai no caput, porque os incisos I e II o excluem expressamente.
+    const golpe = achar(/^CP$/i, /^Art\. 359-M/);
+    if (golpe) {
+      const r = avaliar(progressaoDef, golpe, {});
+      ok(/16\.67%|16,67%/.test(r.resumo),
+        `golpe de Estado, primário: 1/6 pelo caput — Título XII ressalvado (obtido "${r.resumo}")`);
+      const rein = avaliar(progressaoDef, golpe, {reincidenteEspecifico: true});
+      ok(rein.status === 'condicional',
+        'Título XII, reincidente: condicional — o caput e o inciso III comportam leituras diferentes');
+      ok(
+        rein.detalhes.some((d) => d.includes('DUAS LEITURAS')),
+        'Título XII, reincidente: as duas leituras aparecem no resultado, nenhuma escolhida em silêncio',
+      );
+      // E o aumento dos crimes funcionais (art. 327, §2º, Título XI) não pode
+      // alcançá-lo: `numeroArtigo("Art. 359-M")` é 359, que caía na faixa do XI.
+      ok(golpe.artigo.startsWith('Art. 359-M'), 'golpe de Estado localizado pelo artigo com sufixo');
+    }
+
     // Os dois tipos da Lei 15.358/2026: o §4º, III do art. 2º veda o livramento
     // por dispositivo próprio, e o art. 3º o herda pelo parágrafo único.
     const dominio = achar(/15\.358/, /^Art\. 2º/);

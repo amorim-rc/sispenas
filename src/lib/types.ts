@@ -122,6 +122,20 @@ export interface Cenario {
    * Circunstância do CASO, não do tipo: só quem conhece os autos marca.
    */
   comandoOrgcrimUltraviolenta: boolean;
+  /**
+   * O crime é do Título XII da Parte Especial do CP — arts. 359-A a 359-T,
+   * contra o Estado Democrático de Direito. Atributo do TIPO, topográfico: os
+   * incisos I e II do art. 112 da LEP, na redação da Lei 15.402/2026, ressalvam
+   * esses crimes, e a ressalva não olha se houve violência.
+   */
+  tituloXII: boolean;
+  /**
+   * O fato é ANTERIOR a 08/05/2026, data em que a Lei 15.402/2026 entrou em
+   * vigor. Circunstância do CASO, e das mais consequentes: para o primário
+   * condenado por crime sem violência a lei nova é mais GRAVOSA (16% viraram
+   * 1/6 = 16,67%), e lei mais gravosa não retroage.
+   */
+  fatoAnteriorA15402: boolean;
   violencia: boolean;
   graveAmeaca: boolean;
   confessou: boolean;
