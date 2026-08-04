@@ -51,7 +51,8 @@
         "scripts/crawler/propor.py",
         "scripts/crawler/auditar.py",
         "REVISAO-PENDENTE.md",
-        "scripts/crawler/excecoes-auditoria.json"
+        "scripts/crawler/excecoes-auditoria.json",
+        "scripts/crawler/dou_watcher.py"
       ]
     },
     {
@@ -91,7 +92,8 @@
       "depende_de": [
         "src/lib/beneficios",
         "scripts/verificar_beneficios.ts",
-        "REVISAO-PENDENTE.md"
+        "REVISAO-PENDENTE.md",
+        "src/lib/dosimetria"
       ]
     },
     {
@@ -112,7 +114,8 @@
         "scripts/crawler/auditar.py",
         "scripts/crawler/parsear.py",
         "scripts/pena_parser.py",
-        "scripts/crawler/excecoes-auditoria.json"
+        "scripts/crawler/excecoes-auditoria.json",
+        "scripts/crawler/dou_watcher.py"
       ]
     },
     {
