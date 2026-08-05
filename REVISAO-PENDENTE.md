@@ -38,7 +38,7 @@ tipos penais brasileiros. Tudo o que a pergunta exige está no texto dela: o
 dispositivo legal transcrito, o que o catálogo publica hoje e o que se quer
 decidir. Você não tem acesso ao sistema, e não precisa.
 
-O catálogo tem 1.417 registros, um por conduta com pena própria — formas
+O catálogo tem cerca de 1.400 registros, um por conduta com pena própria — formas
 simples, qualificadas, privilegiadas e culposas, e cada inciso que gere pena
 autônoma. Cada registro traz diploma, artigo, nome do tipo, pena mínima e máxima,
 espécie de pena, ação penal, hediondez, elemento (doloso/culposo) e se admite
@@ -180,7 +180,7 @@ está transcrito acima e não traz outra chave. Restam:
   **razões do veto** aos incisos IV a X. Se as razões disserem por que o inciso IV
   foi mantido, isso decide;
 - pronunciamento do **STJ** (Terceira Seção) ou do **STF**;
-- o desfecho das **ADIs 7966 a 7969** (ver a pergunta 5).
+- o desfecho das **ADIs 7966 a 7969** (ver a pergunta 4).
 
 **Formato da resposta.**
 
@@ -220,11 +220,26 @@ dispositivo, devendo por isso ser lido do modo mais estrito.
 | Art. 205, §2º (homicídio qualificado) | **condicional** — os incisos I a V e VII têm correspondente no art. 121, §2º do CP; o inciso VI (prevalecendo-se o agente da situação de serviço) não tem |
 
 **Pergunta.** Falta o inverso: **o que deveria estar marcado e não está.** Três
-candidatos levantados, nenhum conferido:
+candidatos levantados, nenhum conferido.
+
+**Antes deles, um aviso sobre o que "não está marcado" pode significar.** O
+catálogo tem um registro por dispositivo com pena própria, e nem toda figura do
+CPM tem registro. Do art. 242 (roubo), por exemplo, só o *caput* está cadastrado.
+Então a resposta a cada candidato pode ser de dois tipos, e eles pedem trabalho
+diferente:
+
+- **existe a figura na lei e existe o registro** → é caso de marcar hediondez;
+- **existe a figura na lei e NÃO existe registro** → antes de marcar, o registro
+  precisa ser criado, e a pergunta que importa passa a ser qual é a moldura.
+
+Se você identificar o segundo caso, diga-o — vale tanto quanto o primeiro, e é
+o único jeito de a lacuna aparecer.
 
 1. **Roubo qualificado pelo resultado.** O inciso II, "c" do rol arrola o art.
    157, §3º do CP (roubo com lesão grave ou morte). O CPM tem figura
    correspondente no capítulo do roubo — conferir o **art. 242** e parágrafos.
+   *No catálogo há apenas o `Art. 242, caput`: se a figura qualificada existir na
+   lei, este é caso de registro ausente, não de marcação.*
 2. **Extorsão qualificada pelo resultado.** Inciso III do rol (art. 158, §3º do
    CP). Conferir a figura correspondente no CPM.
 3. **Sequestro ou cárcere privado contra menor de 18.** Inciso XI do rol (art.
@@ -239,7 +254,7 @@ roubo simples não é hediondo.
 que você entenda terem correspondente no CPM:
 
 ```
-dispositivo do CPM | há identidade? (sim/não/não sei) | inciso do rol | fundamento | grau
+dispositivo do CPM | há identidade? (sim/não/não sei) | o registro existe, ou falta criar? | inciso do rol | fundamento | grau
 ```
 
 E, ao fim, a lista dos **"não há correspondente"** que você puder afirmar com
@@ -354,7 +369,7 @@ do artigo **seguinte**, e a pena certa no artigo errado.
 
 **O que a medição mostrou, e derruba a solução óbvia.** A ideia inicial era varrer
 "pares de artigos com pena idêntica no mesmo diploma". Medido: são **179 grupos,
-envolvendo 994 dos 1.417 registros** — 70% do catálogo. Molduras repetidas são a
+envolvendo 994 dos então 1.417 registros** — 70% do catálogo. Molduras repetidas são a
 **norma** num código penal, não a exceção. Como filtro de risco, isso não filtra
 nada.
 
@@ -506,6 +521,20 @@ cada um por um motivo diferente:
 | CP, art. 151, §1º, IV — instalar estação de rádio sem autorização | revogado tacitamente pelo art. 70 da Lei 4.117/62 | 1962 |
 | LCP, art. 25 — ter instrumento de furto em razão da condição do agente | **não recepcionado** pela Constituição (STF, RE 583.523, Tema 113) | 1988 |
 | CPM, art. 232, §3º — estupro de vulnerável militar | inconstitucional, eficácia ***ex nunc*** (STF, ADI 7555) | 2025 |
+
+> **Atenção — a primeira linha da tabela está em disputa dentro deste arquivo.**
+> O registro do art. 151, §1º, IV hoje traz `vigencia_ate: 1962-08-27` e nota de
+> revogação tácita, como a tabela diz. Mas o **item E do anexo**, já respondido
+> (grau M), conclui o contrário: que ele **não** deve ser publicado como revogado
+> em data certa, e sim como **vigência controvertida — aplicação residual**,
+> porque "o dispositivo não deixou de vigorar em data certa; é outra categoria".
+> Os dois estados não podem valer ao mesmo tempo.
+>
+> Isso **não impede** responder a esta pergunta: o que se pergunta aqui é o
+> critério geral sobre registros que não vigoram, e ele vale igual. Mas trate a
+> primeira linha como *um caso cuja classificação ainda não está fechada* — e, se
+> o seu critério depender de a perda de vigência ser total ou parcial, diga o que
+> acontece nas duas hipóteses.
 
 Todos trazem a data e a nota do que houve, e a interface os marca. A razão de
 mantê-los é boa: a atipicidade **precisa ser arguida** — quem defende alguém
@@ -704,7 +733,7 @@ incisos. Nenhum endereço público quebra, e nenhuma dupla contagem acontece.
 | Lei 9.279/96, art. 184, I e II | 2 |
 | Lei 9.605/98, art. 68, parágrafo único — modalidade **culposa** com moldura própria (3 meses a 1 ano) | 1 |
 
-Dezessete registros sobre 1.417 — pouco mais de 1%. O custo de **não** desdobrar
+Dezessete registros sobre cerca de 1.400 — pouco mais de 1%. O custo de **não** desdobrar
 já está acontecendo: quem busca "negar emprego a pessoa idosa por motivo de
 idade" não encontra nada, porque só o inciso I do art. 100 está cadastrado.
 
@@ -771,9 +800,22 @@ transação, prescrição em três anos. Pelo art. 183, detenção de dois a qua
 e multa, sem transação, na Justiça Federal. Quem calcule benefícios pelo
 dispositivo do CP chega a um resultado radicalmente favorável e errado.
 
-**Falta:** a marcação. Hoje o registro consta como plenamente vigente. Note que
-`vigencia_ate` não serve — o dispositivo não deixou de vigorar em data certa; é
-outra categoria.
+**Falta:** a marcação — mas o estado descrito abaixo mudou, e a divergência
+precisa ser resolvida antes.
+
+> **Desatualizado em 04/08/2026.** Este item dizia "hoje o registro consta como
+> plenamente vigente". Não consta mais: o registro traz `vigencia_ate:
+> 1962-08-27` e nota de **revogação tácita**. Ou seja, alguma marcação foi
+> aplicada — e foi aplicada justamente com o campo que esta resposta diz não
+> servir, e com uma classificação (revogado em data certa) diferente da que ela
+> recomenda (vigência controvertida, aplicação residual).
+>
+> **A decidir, e é decisão de modelagem, não de direito:** o catálogo aceita
+> "vigência controvertida" como estado distinto de "revogado"? Hoje não aceita —
+> `vigencia_ate` é uma data, e as três situações que ele já carrega (revogação
+> tácita, não recepção, inconstitucionalidade *ex nunc*) são juridicamente
+> distintas entre si. Enquanto o campo for uma data só, esta resposta não tem
+> como ser aplicada como escrita. Ver a pergunta 9, que trata do critério geral.
 
 ## F. Tráfico militar — equiparado a hediondo
 
