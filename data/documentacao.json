@@ -11,7 +11,7 @@
     {
       "arquivo": "README.md",
       "sobre": "Porta de entrada: o que é o projeto, tamanho do catálogo, como rodar, e a comparação com a proposta original de 2008.",
-      "conferido_em": "2026-08-04",
+      "conferido_em": "2026-08-06",
       "depende_de": [
         "data/crimes.json",
         "data/fontes.json",
@@ -22,7 +22,7 @@
     {
       "arquivo": "CONTRIBUTING.md",
       "sobre": "As convenções C1 a C8 do catálogo e o fluxo de release. É o documento que outra pessoa segue ao editar dado.",
-      "conferido_em": "2026-08-04",
+      "conferido_em": "2026-08-06",
       "depende_de": [
         "scripts/transform_data.py",
         "scripts/validar-changelog.mjs",
@@ -56,7 +56,7 @@
     {
       "arquivo": "docs/metodologia.md",
       "sobre": "Unidade de análise, campos do catálogo e como os benefícios são calculados.",
-      "conferido_em": "2026-08-04",
+      "conferido_em": "2026-08-06",
       "depende_de": [
         "scripts/transform_data.py",
         "src/lib/types.ts"
@@ -65,7 +65,7 @@
     {
       "arquivo": "docs/catalogo-tipos-penais.md",
       "sobre": "Como o catálogo é estruturado, derivado e garantido — fonte × derivado, campos, invariantes.",
-      "conferido_em": "2026-08-04",
+      "conferido_em": "2026-08-06",
       "depende_de": [
         "scripts/transform_data.py",
         "src/lib/types.ts",
@@ -75,7 +75,7 @@
     {
       "arquivo": "docs/dados-abertos.md",
       "sobre": "Contrato dos dados publicados, campo a campo, e como cada registro é coletado e revisado.",
-      "conferido_em": "2026-08-04",
+      "conferido_em": "2026-08-06",
       "depende_de": [
         "scripts/transform_data.py",
         "src/lib/types.ts",
