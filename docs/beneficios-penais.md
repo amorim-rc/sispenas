@@ -160,8 +160,10 @@ reincidente em crime violento do Título XII: ele cairia no inciso IV, que não 
 ressalva, a 30%.
 
 **O sistema não escolhe.** Para o reincidente em crime do Título XII o resultado
-sai como *condicional*, com as leituras concorrentes escritas. Ver
-`REVISAO-PENDENTE.md`, pergunta 1.
+sai como *condicional*, com as leituras concorrentes escritas. A escolha depende
+das razões do veto aos incisos IV a X e de pronunciamento do STJ ou do STF, e
+enquanto não houver um nem outro, calcular pelo *caput* — o mais favorável ao
+apenado — é o que o catálogo pode afirmar.
 :::
 
 :::note[Sob controle de constitucionalidade]

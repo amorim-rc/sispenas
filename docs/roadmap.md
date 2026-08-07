@@ -70,13 +70,28 @@ Nada além do que já está entregue: a trilha de auditoria por registro (`fonte
 `conferido_em`) foi antecipada para a v1.5.0, e a rotina de revogação depende do acervo
 histórico ter destino próprio — está na [v2.2.0](#v220--acervo-histórico).
 
+### O que a versão fechou
+
+A vigilância automática só vale sobre uma base conferida, e a base ainda não estava.
+O que a máquina não alcançava — moldura derivada de outro dispositivo, nome trocado
+entre artigos vizinhos de mesma pena, conduta com pena própria e sem registro — foi
+lido à mão contra o texto compilado e aplicado aqui: 67 molduras corrigidas, 425 nomes
+relidos, 96 registros criados, 7 registros que não eram tipo penal retirados. Com isso
+saiu também o `REVISAO-PENDENTE.md`, que existia para guardar a pergunta jurídica sem
+resposta: as que dependiam do texto legal foram respondidas, e o que sobrou é coleta,
+que pertence ao conferidor.
+
+A numeração dos `id` foi reiniciada de 1 a 1505, por decisão do mantenedor — é o que
+quebra o contrato das URLs e o que obriga a versão a ser MAIOR.
+
 :::note[Por que MAIOR]
 Não é o tamanho da mudança, é a **natureza** dela: o catálogo deixa de ser um acervo
 mantido à mão, que só revelava defasagem por acaso, e passa a ser continuamente
 confrontado com a fonte oficial. Muda o procedimento (a conferência vira rotina
 semanal, não expedição), muda a arquitetura (entra um pipeline de coleta, parsing e
 diferença) e muda o que o produto promete: não mais "conferimos quando olhamos", e sim
-"vigiamos toda semana". É salto de ordem, não incremento.
+"vigiamos toda semana". É salto de ordem, não incremento. O reinício da numeração, por
+si só, já bastaria: `?tipo=N` é contrato público.
 :::
 
 :::caution[Consequência a resolver: a URL de um tipo removido]

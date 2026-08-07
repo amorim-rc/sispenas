@@ -38,10 +38,13 @@ ignoradas:
 - `data/crimes.json` é a **fonte**; `static/data/crimes.json` é **derivado** por
   `scripts/transform_data.py` — teste sempre contra o derivado.
 - `id` é **append-only**: é a URL pública (`?tipo=N`). Nunca reatribua nem renumere. A
-  numeração foi reiniciada UMA vez (v1.4.0, com o projeto ainda em protótipo); desde
-  então id retirado entra em `data/ids-aposentados.json` e `--estrito` reprova
-  reaproveitamento — inclusive o caso silencioso de remover o topo da numeração e o
-  `max + 1` devolver um número já usado.
+  numeração foi reiniciada DUAS vezes, as duas por decisão explícita do dono do projeto
+  — v1.4.0 (protótipo) e v2.0.0 (fim da revisão da base). Fora disso, id retirado entra
+  em `data/ids-aposentados.json` e `--estrito` reprova reaproveitamento — inclusive o
+  caso silencioso de remover o topo da numeração e o `max + 1` devolver um número já
+  usado. Reiniciar exige remapear TUDO que é indexado por id: `data/conferencia.json`,
+  as tabelas `CORRECOES_*` do `transform_data.py`, os `ids` das exceções da auditoria e
+  os links `?tipo=N` das notas já publicadas.
 - `resultado_morte` deriva do **nome** do tipo, nunca do `obs`.
 - Editar `.md` com Python/`sed` no Windows introduz **CRLF** (quebra os admonitions
   `:::note[...]`); use `write_bytes` ou confira o EOL.
@@ -67,21 +70,15 @@ falham o build mas dizem o que ficou aberto.
 
 ## O que NÃO entra no catálogo, e onde entra
 
-Duas saídas evitam que uma pergunta sem resposta vire dado publicado:
-
-- **`REVISAO-PENDENTE.md`**, na raiz — a questão jurídica examinada e deixada em aberto
-  de propósito. É PROSA, não estrutura de dados, e o arquivo é **autossuficiente**:
-  transcreve o texto legal de cada caso, diz o que o catálogo publica hoje e o que se
-  quer decidir, para que um jurista responda sem abrir o repositório. Cada pergunta é
-  um bloco PRONTO PARA SUBMETER: cabeçalho `## N ✅|⚠️|⛔ — Título`, contexto, texto
-  legal e um **Formato da resposta** que torna o resultado aplicável sem retrabalho.
-  O arquivo abre com um bloco de **Instruções ao revisor**, para colar junto. O
-  auditor lê o cabeçalho e repete a lista toda semana. Resolver uma é aplicar a
-  mudança e REMOVER a seção. O **anexo**, no fim, é o que já foi respondido e falta
-  aplicar — trabalho, não pergunta: não se submete e não se reabre.
 - **`scripts/crawler/excecoes-auditoria.json`** — o achado da auditoria que já foi julgado
   e não precisa voltar. Casa por tipo de achado MAIS um alvo, nunca por tipo sozinho, e
   declara motivo e data. Divergência real nunca vira exceção: vira correção no dado.
+- **A questão jurídica em aberto não vira dado.** Havia um `REVISAO-PENDENTE.md` na raiz
+  para isso; ele saiu na v2.0.0, quando a revisão da base fechou as perguntas que ele
+  guardava. Se a próxima aparecer, o lugar dela é o mesmo de sempre: **o registro diz o
+  que se sabe e cala o que não se sabe** — moldura condicional, `hediondo_condicao`,
+  `acao_condicao`, `pena_por_remissao`, `vigencia_ate` — e a discussão vai para a issue,
+  não para o campo. Nunca preencha lacuna com plausibilidade.
 
 Trabalhe em branch própria, commits pequenos e descritivos; **não faça push nem abra PR sem
 o usuário pedir**.
