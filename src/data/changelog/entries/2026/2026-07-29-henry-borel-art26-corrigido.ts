@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a omissão de comunicação (art. 26)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=580',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=575',
     },
   ],
 };

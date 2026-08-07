@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a violência institucional (art. 15-A)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1340',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1329',
     },
   ],
 };

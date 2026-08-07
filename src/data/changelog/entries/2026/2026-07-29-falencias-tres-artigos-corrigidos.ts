@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a apropriação de bens da massa (art. 173)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=490',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=486',
     },
   ],
 };

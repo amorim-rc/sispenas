@@ -20,7 +20,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o art. 313 do Código Eleitoral',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=794',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=784',
     },
   ],
 };

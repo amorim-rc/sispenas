@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o novo crime do art. 244-C',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1334',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1323',
     },
   ],
 };

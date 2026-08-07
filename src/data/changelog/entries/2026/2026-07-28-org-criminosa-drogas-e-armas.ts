@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o aumento no tráfico de drogas',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=317',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=315',
     },
   ],
 };

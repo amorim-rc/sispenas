@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver a obstrução de ações contra o crime organizado (art. 21-A)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1341',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1330',
     },
   ],
 };

@@ -17,7 +17,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver um crime com pena contada em dias',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=504',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=500',
     },
   ],
 };

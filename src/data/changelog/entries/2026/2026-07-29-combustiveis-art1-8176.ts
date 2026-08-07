@@ -15,7 +15,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o crime do art. 1º da Lei 8.176/91',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=547',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=543',
     },
   ],
 };
