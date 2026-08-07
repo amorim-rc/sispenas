@@ -199,6 +199,28 @@ export default function Detalhe({
         </div>
       )}
 
+      {/* O tipo que importa a moldura de outro dispositivo (art. 304 do CP:
+          "pena cominada à falsificação") não tem número a exibir — mas tem de
+          dizer ONDE a pena está, senão a tela sugere um crime sem pena. */}
+      {crime.pena_por_remissao && (
+        <div className={styles.sancoes}>
+          <h4 className={styles.sancoesTitulo}>
+            Pena por remissão
+            <Ajuda texto="Este tipo não comina moldura própria: aplica a pena de outro dispositivo. Como a moldura depende de qual dispositivo-fonte incide no caso, o catálogo não publica um número — e o tipo fica fora das estatísticas de alcance da Busca por benefício." />
+          </h4>
+          <p>
+            Aplica a pena cominada em <strong>{crime.pena_por_remissao.dispositivo_fonte}</strong>
+            {crime.pena_por_remissao.operador !== 'nenhum' && crime.pena_por_remissao.fracao && (
+              <>
+                , com {crime.pena_por_remissao.operador === 'aumento' ? 'aumento' : 'diminuição'} de{' '}
+                {crime.pena_por_remissao.fracao}
+              </>
+            )}
+            .
+          </p>
+        </div>
+      )}
+
       <div className={styles.simulador}>
         <div className={styles.simColuna}>
           <h4 className={styles.simTitulo}>Pena cominada — simulação legislativa</h4>

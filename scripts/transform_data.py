@@ -42,6 +42,13 @@ PENA_PRIVATIVA_MAP = {
     "Detenção": "Detenção",
     "Prisão simples": "Prisão simples",
     "Multa": "Nenhuma",
+    # Pena cominada que não é privativa de liberdade nem pecuniária (art. 28 da
+    # Lei 11.343/06; art. 8º da Lei 7.437/85). Criado em 06/08/2026 para que o
+    # campo vazio volte a significar apenas "não preenchido".
+    "Outras penas": "Nenhuma",
+    # A pena de morte do CPM em tempo de guerra (art. 56) não é privativa de
+    # liberdade. A moldura em meses do registro é a graduação do art. 81, §2º.
+    "Morte": "Nenhuma",
     "—": "Nenhuma",
     "": "Nenhuma",
     None: "Nenhuma",
@@ -56,19 +63,19 @@ CORRECOES = {
     # Art. 227 CP (caput): a multa só incide na hipótese do §3º (fim de lucro);
     # o tipo-base não comina multa.
     167: {"tem_multa": False, "multa_regime": "nenhuma"},
-    898: {"tem_multa": False, "multa_regime": "nenhuma"},
+    888: {"tem_multa": False, "multa_regime": "nenhuma"},
     # Art. 310 do Código Eleitoral: "detenção até seis meses OU pagamento de 90 a
     # 120 dias-multa". A cominação é alternativa, mas a heurística lê "dias-multa"
     # antes de "ou" e conclui cumulativa. A diferença não é de rótulo: com multa
     # alternativa, a multa isolada basta para punir o fato.
-    792: {"tem_multa": True, "multa_regime": "alternativa"},
+    782: {"tem_multa": True, "multa_regime": "alternativa"},
     # Dois registros cujo `obs` EXPLICA que o artigo não comina multa. A palavra
     # está lá — a heurística só sabe procurá-la, não negá-la. Art. 338 do CP
     # ("reclusão, de um a quatro anos, sem prejuízo de nova expulsão") e art. 72
     # da Lei 9.504/97 ("puníveis com reclusão, de cinco a dez anos"): a multa que
     # os dois publicavam veio junto com o nome importado de outro artigo.
-    750: {"tem_multa": False, "multa_regime": "nenhuma"},
-    537: {"tem_multa": False, "multa_regime": "nenhuma"},
+    740: {"tem_multa": False, "multa_regime": "nenhuma"},
+    533: {"tem_multa": False, "multa_regime": "nenhuma"},
 }
 
 # ── O catálogo contém APENAS tipos penais ───────────────────────────────────
@@ -104,10 +111,10 @@ CORRECOES_MORTE = {
     # o nomen juris não contém "homicídio" nem "morte", e a heurística deriva do
     # NOME. Sem estas linhas o crime deixaria de constar como resultado morte —
     # com efeito direto sobre livramento condicional e progressão.
-    1318: True,
-    1319: True,
-    1320: True,
-    1321: True,
+    1308: True,
+    1309: True,
+    1310: True,
+    1311: True,
 }
 
 # ── Perdão judicial (art. 107, IX, CP) ──────────────────────────────────────
@@ -194,6 +201,13 @@ def validar_tipos_penais(crimes: list) -> list:
 
     A exceção legítima é o tipo penal cujas sanções não são privativas de
     liberdade — art. 28 da Lei 11.343/06 —, que declara `sancoes_nao_privativas`.
+
+    A segunda exceção é o tipo que NÃO COMINA moldura própria porque importa a
+    de outro dispositivo — art. 304 do CP ("pena cominada à falsificação"), art.
+    315 do CPM, arts. 2º e 3º da Lei 2.889/56. Ele declara `pena_por_remissao`.
+    Sem esse estado, a moldura vazia era indistinguível de campo não preenchido,
+    e a alternativa — publicar a moldura de um dos dispositivos-fonte — afirmava
+    como certa uma pena que depende de qual falsificação foi usada.
     """
     problemas = []
     for c in crimes:
@@ -209,7 +223,8 @@ def validar_tipos_penais(crimes: list) -> list:
         # Tipo que comina SÓ multa (multa isolada) é sanção válida — ex.: o caput
         # do art. 146-A (bullying), "Pena: multa, se não constitui crime mais grave".
         tem_multa_isolada = c.get("tipo_pena") == "Multa"
-        if not tem_pena and not tem_sancao and not tem_multa_isolada:
+        tem_remissao = bool(c.get("pena_por_remissao"))
+        if not tem_pena and not tem_sancao and not tem_multa_isolada and not tem_remissao:
             problemas.append(
                 f"id={c.get('id')} ({c.get('lei')} {c.get('artigo')}): sem pena cominada, sem "
                 f"`sancoes_nao_privativas` e sem multa — se for tipo penal, declare a sanção; se não, remova"
@@ -315,6 +330,42 @@ def classificar_contradicao(grupo: list) -> str:
     if len({g["hediondo"] for g in grupo}) > 1:
         return "hediondez"
     return "pena"
+
+
+OPERADORES_REMISSAO = {"nenhum", "aumento", "diminuicao"}
+
+
+def validar_pena_por_remissao(crimes: list) -> list:
+    """Quem importa a moldura de outro dispositivo tem de dizer DE ONDE.
+
+    O estado só é honesto se disser o dispositivo-fonte: sem ele, `pena_min` e
+    `pena_max` zerados voltam a ser indistinguíveis de campo não preenchido — que
+    é exatamente o defeito que o campo existe para eliminar. E quem declara
+    remissão não pode publicar moldura própria: seriam duas respostas para a
+    mesma pergunta.
+    """
+    problemas = []
+    for c in crimes:
+        rem = c.get("pena_por_remissao")
+        if rem is None:
+            continue
+        if not isinstance(rem, dict) or not (rem.get("dispositivo_fonte") or "").strip():
+            problemas.append(
+                f"id {c['id']}: `pena_por_remissao` sem `dispositivo_fonte` — "
+                "diga de qual dispositivo a moldura vem")
+            continue
+        if rem.get("operador") not in OPERADORES_REMISSAO:
+            problemas.append(
+                f"id {c['id']}: operador {rem.get('operador')!r} inválido — "
+                f"use um de {sorted(OPERADORES_REMISSAO)}")
+        if rem.get("operador") != "nenhum" and not rem.get("fracao"):
+            problemas.append(
+                f"id {c['id']}: operador {rem.get('operador')!r} exige `fracao`")
+        if c.get("pena_min") or c.get("pena_max"):
+            problemas.append(
+                f"id {c['id']}: declara `pena_por_remissao` E moldura própria "
+                f"({c.get('pena_min')}-{c.get('pena_max')}) — só uma das duas")
+    return problemas
 
 
 def validar_vigencia(crimes: list) -> list:
@@ -547,7 +598,8 @@ def main():
     # Invariantes estruturais: falham sempre, independentemente de --estrito.
     problemas = (validar_ids(crimes) + validar_tipos_penais(crimes)
                  + validar_moldura(crimes) + validar_condicionais(crimes)
-                 + validar_vigencia(crimes))
+                 + validar_vigencia(crimes)
+                 + validar_pena_por_remissao(crimes))
     if problemas:
         for p in problemas:
             print(f"ERRO: {p}", file=sys.stderr)
@@ -576,8 +628,11 @@ def main():
         # alcance dos benefícios, que se medem por patamar de pena.
         c["tem_pena_privativa"] = bool(pmax or c["pena_min_meses"])
         c.setdefault("sancoes_nao_privativas", [])
+        c.setdefault("pena_por_remissao", None)
         if not c["tem_pena_privativa"]:
-            c["pena_faixa_rotulo"] = "sem pena privativa"
+            c["pena_faixa_rotulo"] = (
+                "pena do dispositivo remetido"
+                if c["pena_por_remissao"] else "sem pena privativa")
 
         # Resultado morte — derivado do nome do tipo, sobreponível por revisão.
         morte = bool(RESULTADO_MORTE.search(c.get("crime") or ""))
