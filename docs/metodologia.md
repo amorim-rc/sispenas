@@ -22,13 +22,16 @@ Cada tipo penal registra, entre outros: `lei`, `artigo`, `crime`, `pena_min` e
 `pena_max` (em **meses**), `tipo_pena`, `acao`, `hediondo`, `elemento`, `tentativa`,
 `violencia`, `grave_ameaca` e `obs`.
 
-Três campos são opcionais e existem para não afirmar o que a lei não afirma:
+Quatro campos são opcionais e existem para não afirmar o que a lei não afirma:
 `hediondo_condicao` e `acao_condicao` guardam, em texto, a hipótese de que a
 classificação depende — o homicídio só é hediondo se praticado em atividade típica de
 grupo de extermínio, e o exercício arbitrário das próprias razões só é de ação privada
-se não houver violência. E `vigencia_ate`, com a nota obrigatória `vigencia_nota`,
+se não houver violência. `vigencia_ate`, com a nota obrigatória `vigencia_nota`,
 registra a data em que o dispositivo deixou de vigorar, sem tirá-lo do catálogo: fato
-anterior continua regido por ele.
+anterior continua regido por ele. E `pena_por_remissao` diz de onde a moldura vem,
+quando o tipo não comina uma: o art. 304 do Código Penal pune o uso de documento falso
+com "a pena cominada à falsificação", e qual é ela depende de qual falsificação foi
+usada.
 
 ### Campos derivados automaticamente
 

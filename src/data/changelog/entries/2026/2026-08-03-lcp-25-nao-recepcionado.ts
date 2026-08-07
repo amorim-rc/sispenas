@@ -19,7 +19,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o art. 25 da Lei das Contravenções Penais',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=776',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=766',
     },
   ],
 };

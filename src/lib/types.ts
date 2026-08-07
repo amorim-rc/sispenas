@@ -14,6 +14,22 @@ export interface SancaoNaoPrivativa {
   sancao: string;
 }
 
+/**
+ * Moldura que o tipo não comina, e sim importa de outro dispositivo — o art.
+ * 304 do CP pune o uso com "a pena cominada à falsificação". Publicar a moldura
+ * de um dos dispositivos-fonte afirmaria como certa uma pena que depende de
+ * qual falsificação foi usada; deixar em branco seria indistinguível de campo
+ * não preenchido. Daí o estado próprio.
+ */
+export interface PenaPorRemissao {
+  /** Dispositivo de onde a moldura vem (ex.: "CP, arts. 297 a 302"). */
+  dispositivo_fonte: string;
+  /** O que se faz com a moldura importada. */
+  operador: 'nenhum' | 'aumento' | 'diminuicao';
+  /** Fração aplicada pelo operador (ex.: "1/2"); `null` quando não há operador. */
+  fracao: string | null;
+}
+
 export interface Crime {
   id: number;
   lei: string;
@@ -81,6 +97,12 @@ export interface Crime {
   tem_pena_privativa: boolean;
   /** Sanções próprias dos tipos sem pena privativa (art. 28, I a III, Lei 11.343/06). */
   sancoes_nao_privativas: SancaoNaoPrivativa[];
+  /**
+   * Tipo que não comina moldura própria porque importa a de outro dispositivo
+   * — art. 304 do CP ("pena cominada à falsificação"), art. 315 do CPM, arts.
+   * 2º e 3º da Lei 2.889/56. `null` quando a moldura é do próprio tipo.
+   */
+  pena_por_remissao: PenaPorRemissao | null;
   /** Qualificado pelo resultado morte (art. 112, VI e VIII, LEP). */
   resultado_morte: boolean;
   /** True se `resultado_morte` veio da heurística, não de revisão manual. */

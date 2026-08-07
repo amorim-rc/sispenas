@@ -1,5 +1,653 @@
 [
   {
+    "id": "2026-08-06-reinicio-da-numeracao",
+    "date": "2026-08-06",
+    "title": "A numeração dos tipos penais recomeça em 1, e os links antigos mudam",
+    "summary": "O identificador de cada tipo penal é a URL pública dele. Com a revisão da base — nove registros retirados, noventa e seis criados —, a numeração recomeçou de 1 a 1505. É a segunda vez que isso acontece, e a última decidida sem aviso: daqui em diante o identificador volta a ser imutável.",
+    "body": [
+      "Quem tenha guardado um endereço da forma /pesquisa/tipos?tipo=N precisa refazê-lo: o número passou a apontar para outro crime. Os links das notas de atualização já publicadas foram remapeados para o crime de que falam, e a trilha de conferência de cada registro acompanhou o novo número.",
+      "A regra que volta a valer, sem exceção, é a de sempre: identificador retirado entra em ids-aposentados.json e nunca é reatribuído. Ela existe porque o modo de falhar é silencioso — um link antigo que passa a abrir outro crime não dá erro, só mostra a resposta errada.",
+      "O reinício é o que torna esta versão MAIOR. Não é o tamanho da revisão: é que o contrato das URLs quebrou, e quem consome os dados abertos precisa saber disso antes de atualizar."
+    ],
+    "tipo": "estrutural",
+    "areas": [
+      "Tipos penais",
+      "Interface",
+      "Documentação"
+    ],
+    "version": "v2.0.0"
+  },
+  {
+    "id": "2026-08-06-registros-que-nao-eram-tipo-penal",
+    "date": "2026-08-06",
+    "title": "Sete registros publicavam pena de um dispositivo que não cria crime",
+    "summary": "O catálogo contém apenas tipos penais. Sete registros não eram: dois eram regra de punibilidade, dois eram causa de aumento, um era agravante sem quantum e dois eram cópia de outro registro do mesmo dispositivo. Todos publicavam uma moldura, e uma moldura publicada entra em todo cálculo de benefício.",
+    "body": [
+      "O §4º do art. 180 do Código Penal diz que a receptação é punível ainda que desconhecido ou isento de pena o autor do crime de que proveio a coisa. Não descreve conduta e não comina pena. O registro publicava reclusão de três a oito anos — que é a moldura do §1º, e o §1º já tinha registro próprio — sob o nome \"receptação de veículo automotor\", figura que o art. 180 não tem. O §2º do art. 138, que diz ser punível a calúnia contra os mortos, era o mesmo caso.",
+      "Os arts. 258 e 263 do Código Penal são causas de aumento sobre os crimes de perigo comum e de perigo no transporte: aumentam de metade se resulta lesão grave, dobram se resulta morte. Já estavam no catálogo de modificadores, e o registro de tipo era o que sobrava. Ao migrá-los, corrigiu-se também o alcance: o art. 285 estende o regime do art. 258 aos crimes contra a saúde pública, salvo o art. 267, e isso não estava registrado.",
+      "O §3º do art. 2º da Lei 12.850/13 agrava a pena de quem exerce o comando da organização criminosa, sem dizer quanto: é agravante da segunda fase, resolvida pelo art. 59 do Código Penal, e não tem moldura própria para publicar.",
+      "Dois registros do art. 127 do Código Penal eram duplicata um do outro — o aborto qualificado pelo resultado aparecia duas vezes, sob rótulos diferentes do mesmo dispositivo. Sobrou um de cada hipótese, com a moldura conferida: a lesão grave sobre a base do art. 125 e a do art. 126 passaram a ter registros separados, porque são bases diferentes."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Dosimetria",
+      "Benefícios"
+    ],
+    "version": "v2.0.0"
+  },
+  {
+    "id": "2026-08-06-piso-da-parte-geral-do-cpm",
+    "date": "2026-08-06",
+    "title": "Setenta e oito crimes militares apareciam sem pena mínima",
+    "summary": "O Código Penal Militar comina dezenas de tipos como \"reclusão, até seis anos\" ou \"detenção, até três meses\", sem dizer o mínimo. O catálogo publicava esses registros com mínimo zero. O mínimo existe: está no art. 58 da Parte Geral, e vale para todo o Código.",
+    "body": [
+      "O art. 58 do Código Penal Militar diz que o mínimo da pena de reclusão é de um ano e o máximo de trinta anos, e que o mínimo da detenção é de trinta dias e o máximo de dez anos. Quando a cominação do tipo traz só o teto, o piso não é zero nem é ausente: é o da Parte Geral.",
+      "A diferença muda benefício. Mínimo zero satisfaz qualquer patamar: o registro entrava como cabível em transação penal, em acordo de não persecução e em suspensão condicional do processo por um piso que a lei não comina. Com o piso corrigido, o furto militar do art. 240 passa de zero a seis anos para um a seis, e o furto de uso do art. 241, de zero a seis meses para trinta dias a seis meses.",
+      "A regra vale também para as molduras derivadas de tempo de guerra. O piso do art. 58 integra a moldura do artigo base antes de o fator incidir: o dobro do furto militar parte de dois anos, não de zero. E o teto da reclusão corta o produto quando o dobro o ultrapassa — é o que acontece no roubo e na extorsão de guerra, cujo máximo derivado bate exatamente nos trinta anos do art. 58. Essa regra de corte fica onde está, sem se estender a outros dispositivos.",
+      "Foi corrigida junto a espécie de pena dos crimes de guerra que cominam morte no grau máximo: são trinta e seis dispositivos, e trinta e três já constam com a espécie certa. A moldura em meses continua sendo a graduação do art. 81, §2º, que faz a pena de morte corresponder, para esse efeito, à reclusão por trinta anos."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Benefícios"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver o furto militar em tempo de paz",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=700"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-06-pena-por-remissao",
+    "date": "2026-08-06",
+    "title": "O crime que não comina pena própria passa a dizer de onde a pena vem",
+    "summary": "O art. 304 do Código Penal pune o uso de documento falso com \"a pena cominada à falsificação\". A moldura depende de qual falsificação foi usada — e o catálogo não tinha como dizer isso. Publicava a de um dos artigos remetidos, como se fosse certa. Agora há um campo para o estado.",
+    "body": [
+      "Eram duas saídas ruins. Publicar a moldura de um dos dispositivos-fonte afirma como certa uma pena que depende do caso: o art. 304 remete aos arts. 297 a 302, cujas faixas vão de detenção de um mês a reclusão de seis anos. Deixar os campos em branco é indistinguível de campo não preenchido, e um registro sem pena satisfaz qualquer patamar de benefício.",
+      "O campo novo, pena_por_remissao, diz o dispositivo-fonte e, quando há, o operador e a fração. Quatro registros o declaram: o art. 304 do Código Penal, o art. 315 do Código Penal Militar e os arts. 2º e 3º da Lei 2.889/56, cujas penas são metade das do art. 1º. Os dois últimos ganharam, junto, os dez registros que trazem cada uma dessas metades já calculada, um por alínea do art. 1º.",
+      "Na tela, esses registros deixam de mostrar uma faixa e passam a dizer de onde a pena vem. Eles ficam fora das estatísticas de alcance dos benefícios, que se medem por patamar de pena — estar lá dentro com pena zero era o defeito.",
+      "O conferidor semanal já contava 138 registros com pena definida por referência. Os quatro que a revisão leu são os que tinham moldura publicada sem sustentação no próprio artigo; os demais continuam com a moldura que a lei lhes dá diretamente."
+    ],
+    "tipo": "estrutural",
+    "areas": [
+      "Tipos penais",
+      "Benefícios",
+      "Interface"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver o uso de documento falso",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=237"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-06-noventa-e-seis-registros-novos",
+    "date": "2026-08-06",
+    "title": "Noventa e seis condutas que tinham pena própria e não tinham registro",
+    "summary": "O catálogo tem um registro por conduta com pena própria. Faltavam noventa e seis: incisos que descrevem crime completo sob a moldura do caput, molduras derivadas que a lei manda calcular sobre mais de uma base, e os crimes militares de tempo de guerra.",
+    "body": [
+      "Dezessete vêm de artigos que cominam a pena no caput e descrevem as condutas nos incisos. Quem procurava \"negar emprego a pessoa idosa por motivo de idade\" não encontrava nada, porque só o inciso I do art. 100 do Estatuto da Pessoa Idosa estava cadastrado. O critério para desdobrar não é ter incisos: é o inciso descrever conduta completa, poder ser praticado isoladamente e a prática de dois gerar concurso de crimes.",
+      "Trinta e nove vêm da regra do registro por moldura-base. Quando uma causa de aumento ou de diminuição alcança o caput e também os parágrafos, ela não produz uma moldura, produz uma por base — e publicar só a do caput esconde as outras. A delação premiada da extorsão mediante sequestro alcança quatro molduras; a incitação ao genocídio, cinco; o art. 141, §2º do Código Penal triplica a pena da calúnia, da difamação e da injúria, que são três faixas diferentes.",
+      "Vinte e dois são crimes militares de tempo de guerra. Os arts. 391, 404 e 405 do Código Penal Militar não repetem a descrição da conduta: mandam aplicar a pena do tipo de tempo de paz com um fator — metade a mais na deserção, o dobro no furto, no roubo e na extorsão. Cada divisão do tipo de paz gera uma moldura de guerra própria, e agora cada uma tem registro. Os tipos de paz correspondentes passaram a dizer \"(tempo de paz)\" no nome, para que o par fique visível na busca.",
+      "Os demais fecham lacunas apontadas pela própria revisão: o roubo e a extorsão qualificados do Código Penal Militar, o latrocínio militar, a hipótese do §2º do art. 5º da Lei Antiterrorismo e o inciso VI do §2º do art. 205 do CPM — a única qualificadora do homicídio militar sem correspondente no Código Penal, que por isso não é hedionda e precisava sair do registro que cobria as outras seis."
+    ],
+    "tipo": "novidade",
+    "areas": [
+      "Tipos penais",
+      "Benefícios"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver a negativa de emprego por motivo de idade",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1410"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-06-nomes-conferidos-nos-pares-adjacentes",
+    "date": "2026-08-06",
+    "title": "Os 425 registros de maior risco de troca de nome foram relidos contra a lei",
+    "summary": "Quando dois artigos vizinhos cominam a mesma pena, trocar os nomes não produz divergência nenhuma para a conferência de molduras: a pena confere dos dois lados. Esse ponto cego já produziu erro três vezes. Os 425 registros que formam pares adjacentes de mesma moldura foram relidos contra o texto do próprio dispositivo.",
+    "body": [
+      "A varredura mediu antes de agir. Pares de artigos com pena idêntica no mesmo diploma são 179 grupos e envolvem 70% do catálogo — molduras repetidas são a norma num código penal, não a exceção, e como filtro de risco isso não filtra nada. Restringindo a artigos adjacentes, com número consecutivo ou o mesmo número com sufixo de letra, sobraram os pares que valiam leitura humana.",
+      "Os seis incisos do §2º do art. 171 do Código Penal estavam deslocados em bloco: o registro do inciso II descrevia a defraudação de penhor, que é o inciso III; o do inciso III descrevia a fraude na entrega de coisa, que é o IV; o do inciso IV descrevia a fraude no pagamento por cheque, que é o VI. Cada nome estava um degrau à frente do seu artigo, e como todos compartilham a moldura do caput, nada acusava.",
+      "O mesmo deslocamento apareceu nos incisos do §1º do art. 16 do Estatuto do Desarmamento e nos do §1º do art. 29 da Lei de Crimes Ambientais, onde os três registros descreviam as hipóteses de aumento do §4º. E no art. 312 do Código Penal, um registro apontado ao §3º publicava o peculato-furto, que é o §1º e já tinha registro próprio — era duplicata pelo nome.",
+      "A maior parte das correções, porém, não é de troca: é de precisão. Nomes montados por abreviação (\"Induzimento a suicídio\") passaram a dizer a conduta que o dispositivo descreve (\"Induzimento, instigação ou auxílio a suicídio ou a automutilação\"), e os incisos que só se distinguem pelo nome — como os do §2º do art. 121-A, que compartilham texto de cabeça e moldura — passaram a trazer a circunstância inteira. É o grupo de risco máximo de troca, e o nome é a única coisa que os separa."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Interface"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver o estelionato do art. 171, §2º, II",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=590"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-06-molduras-conferidas-uma-a-uma",
+    "date": "2026-08-06",
+    "title": "As molduras que a conferência automática não alcançava foram lidas à mão",
+    "summary": "O conferidor semanal compara a pena publicada com a pena que a lei comina — mas só consegue fazê-lo quando a moldura está escrita no artigo. Sobravam 259 registros cuja pena é derivada de outro dispositivo, e por isso nunca passavam pela conferência. Todos foram lidos contra o texto compilado, um a um. Sessenta e sete estavam errados.",
+    "body": [
+      "O caso maior é o das causas de aumento e diminuição que alcançam mais de uma moldura-base. O §3º do art. 122 do Código Penal duplica a pena do caput e também a dos §§ 1º e 2º: são três molduras num dispositivo só. O catálogo publicava uma delas, ou um intervalo que juntava as três e não correspondia a nenhuma. O mesmo acontecia nos §§ 4º e 10 e 12 do art. 129, no §3º dos arts. 133 e 136, no §4º do art. 159 e no parágrafo único do art. 299.",
+      "Um intervalo que junta molduras diferentes não é conservador: é errado nas duas pontas. O §10 do art. 129 estava publicado como 16 a 192 meses, que era o menor mínimo de uma das bases com o maior máximo de outra — número que a lei não comina em hipótese nenhuma. Agora cada base tem seu registro, com a conta feita a partir dela.",
+      "Sete registros da Lei 2.889/56 e da Lei 1.579/52 publicavam moldura de outro artigo. O art. 4º, I da lei das comissões parlamentares de inquérito manda aplicar a pena do art. 329 do Código Penal, que é detenção de dois meses a dois anos; o catálogo publicava reclusão de um a cinco anos. O inciso II remete ao art. 342, e a moldura publicada era a redação anterior à Lei 12.850/2013. No genocídio, quatro das cinco alíneas do art. 1º traziam faixas que não correspondiam a nenhum dos artigos remetidos.",
+      "Dezesseis observações que contradiziam a moldura corrigida foram reescritas. O texto ao lado do registro dizia \"1 a 3 anos\" onde a pena publicada passou a ser de um ano e quatro meses a cinco anos e quatro meses, e num caso descrevia um aumento — de um terço na faixa de pedestres — que o artigo simplesmente não tem."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Benefícios"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver o falso testemunho perante CPI",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=548"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-06-fim-do-arquivo-de-pendencias",
+    "date": "2026-08-06",
+    "title": "O arquivo de perguntas jurídicas em aberto saiu, porque as perguntas foram respondidas",
+    "summary": "O REVISAO-PENDENTE.md guardava as questões que o projeto examinou e deixou abertas de propósito, para não preencher lacuna com plausibilidade. A revisão da base respondeu as que dependiam do texto legal e aplicou as que já estavam respondidas. O arquivo foi removido, e com ele o bloco de pendências do relatório semanal.",
+    "body": [
+      "O que era pergunta virou dado: a hediondez por identidade no Código Penal Militar, o desdobramento por inciso, a nomenclatura do Estatuto da Pessoa Idosa, o destino do §4º do art. 180, a multa cominada em índice extinto e o critério para verificar um catálogo em que a maioria dos artigos compartilha moldura.",
+      "O método que o arquivo protegia continua valendo, e agora vive nos campos do próprio registro. Onde a classificação depende do caso, o registro diz isso em hediondo_condicao e acao_condicao. Onde a moldura vem de outro dispositivo, diz em pena_por_remissao. Onde o dispositivo deixou de vigorar mas ainda rege fatos anteriores, diz em vigencia_ate e vigencia_nota. Nenhum deles preenche lacuna com plausibilidade — é para isso que existem.",
+      "O que sobrou em aberto não é pergunta de direito, é trabalho de coleta: dispositivos com moldura própria que ainda não têm registro, apontados um a um pela revisão. Eles pertencem ao conferidor, que é quem varre a lei atrás do que falta, e é lá que serão tratados."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Documentação"
+    ],
+    "version": "v2.0.0"
+  },
+  {
+    "id": "2026-08-06-estatuto-da-pessoa-idosa",
+    "date": "2026-08-06",
+    "title": "O Estatuto da Pessoa Idosa passa a usar a nomenclatura vigente em todo o diploma",
+    "summary": "A Lei 14.423/2022 mudou a denominação oficial: \"Estatuto do Idoso\" deixou de ser o nome da lei. A v1.9.0 aplicou a mudança a dois registros; os sete restantes ficaram para trás. Agora o diploma inteiro está uniforme.",
+    "body": [
+      "O nome do tipo, no catálogo, é rótulo editorial, não transcrição legal — todos já são paráfrase do dispositivo. Construí-lo com a nomenclatura vigente não falseia nada. A linha que não se atravessa é outra: o texto legal transcrito na observação preserva a letra do que a lei diz, e não foi tocado.",
+      "Os sete registros passaram, junto, a nomear a conduta em vez de recitá-la: \"Deixar de prestar assistência ao idoso quando obrigado por lei\" virou \"Omissão de socorro à pessoa idosa\", e a descrição inteira continua na observação, onde sempre esteve."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Interface"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver a omissão de socorro à pessoa idosa",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=467"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-06-adi-7555-transitou-em-julgado",
+    "date": "2026-08-06",
+    "title": "O estupro de vulnerável militar rege apenas os fatos até 22 de novembro de 2025",
+    "summary": "A ADI 7555, que declarou inconstitucional o §3º do art. 232 do Código Penal Militar, transitou em julgado em 22/11/2025. O registro permanece consultável, com a data de corte: como a eficácia é ex nunc, o dispositivo continua regendo os crimes cometidos até essa data.",
+    "body": [
+      "O Supremo declarou a inconstitucionalidade por proteção deficiente: o §3º cominava reclusão de oito a quinze anos e não previa agravamento por lesão grave ou morte, enquanto o art. 217-A do Código Penal comina dez a vinte e, nessas hipóteses, doze a trinta anos. O registro trazia como data de corte o encerramento do julgamento virtual, em 29/08/2025; a data que interessa a quem calcula é a do trânsito em julgado.",
+      "Para os fatos posteriores, o estupro de vulnerável praticado por militar passa a ser regido pelo caput e pelos §§ 1º a 5º do art. 217-A do Código Penal, por força do art. 9º, II do Código Penal Militar. O cálculo deve partir dos registros do Código Penal, que já existem: o catálogo não cria registros militares para essa hipótese.",
+      "Apagar o registro seria pior que mantê-lo. A eficácia ex nunc significa que existe um universo de fatos ainda regidos pelo dispositivo, e quem defende alguém denunciado com base nele precisa encontrar a decisão. Por isso ele continua na busca por tipo penal, com a nota do que houve — e fora do cálculo para fato posterior à data de corte.",
+      "Na mesma ação o Supremo declarou a não recepção dos incisos I a III do art. 236 do Código Penal Militar, que são regra de presunção de violência, não tipo penal, e por isso não têm registro no catálogo."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Benefícios"
+    ],
+    "version": "v2.0.0",
+    "links": [
+      {
+        "label": "Ver o registro do art. 232, §3º do CPM",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1106"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-04-titulo-xii-comeca-no-359-i",
+    "date": "2026-08-04",
+    "title": "Oito crimes contra as finanças públicas estavam sendo tratados como crimes contra o Estado Democrático de Direito",
+    "summary": "O Título XII do Código Penal começa no art. 359-I, não no 359-A. A versão anterior classificava pelo sufixo de letra sem cortar na letra certa, e os oito crimes contra as finanças públicas caíam no título errado — com efeito em dois cálculos ao mesmo tempo.",
+    "body": [
+      "Os arts. 359-A a 359-H do Código Penal são os crimes contra as finanças públicas, inseridos em 2000: contratação de operação de crédito sem autorização, ordenação de despesa não autorizada, aumento de despesa com pessoal no último ano do mandato. Eles pertencem ao Título XI, dos crimes contra a Administração Pública.",
+      "O Título XII — crimes contra o Estado Democrático de Direito, de 2021 — só começa depois deles, no art. 359-I, e vai até o 359-T.",
+      "Os dois títulos dividem o mesmo número de artigo e se distinguem apenas pela letra do sufixo. A versão anterior tratava qualquer artigo 359 com letra como sendo do Título XII, e com isso fazia duas coisas erradas ao mesmo tempo: dava aos oito crimes de finanças públicas a ressalva de progressão de regime que a lei reserva ao Título XII — um sexto da pena em vez de 25 ou 30 por cento — e tirava deles o aumento dos crimes funcionais, que os alcança justamente por serem do Título XI.",
+      "O erro foi apontado pela revisão jurídica e confirmado contra o texto oficial. O corte agora é na letra I, e o sufixo duplo dos arts. 359-M-A e 359-M-B continua sendo lido pela primeira letra."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Benefícios",
+      "Dosimetria"
+    ],
+    "version": "v1.9.1"
+  },
+  {
+    "id": "2026-08-04-radio-clandestina-fora-do-codigo-penal",
+    "date": "2026-08-04",
+    "title": "Instalar rádio clandestina deixou de ser crime do Código Penal em 1962",
+    "summary": "O inciso quarto do parágrafo primeiro do art. 151 pune quem instala estação de rádio sem observância de disposição legal. Ele foi revogado tacitamente pelo Código Brasileiro de Telecomunicações e nunca voltou a vigorar. Passa a constar como acervo histórico, com a nota do que houve.",
+    "body": [
+      "O dispositivo entrou no Código Penal em 1940 e foi alcançado pelo art. 70 da Lei 4.117 de 1962, o Código Brasileiro de Telecomunicações, que pune a instalação ou utilização de telecomunicações sem observância da lei e dos regulamentos com pena maior. É a mesma conduta, em lei posterior e especial que regulou inteiramente a matéria.",
+      "A Lei 4.117 foi ela própria revogada em 1997 pela Lei Geral de Telecomunicações, e daí vem a dúvida que a revisão jurídica examinou: o dispositivo do Código Penal teria voltado a vigorar? Não. A revogação de 1997 ressalvou expressamente a matéria penal não tratada na nova lei, de modo que o art. 70 do Código de Telecomunicações permanece; e, ainda que não permanecesse, a Lei de Introdução exige disposição expressa para restaurar lei revogada. Nenhuma restauração foi escrita.",
+      "Quem hoje instala ou opera rádio clandestina responde pelo art. 183 da Lei 9.472 de 1997 — detenção de dois a quatro anos e multa, perante a Justiça Federal, na forma da Súmula 606 do Superior Tribunal de Justiça. Os dois dispositivos de telecomunicações já estavam no catálogo; o que faltava era dizer que o do Código Penal não convive com eles.",
+      "O registro continua consultável, com a data e a nota. A atipicidade precisa ser arguida: quem defende alguém denunciado com base no dispositivo revogado precisa encontrar por que ele não vale mais, e apagar o registro é apagar essa resposta.",
+      "A classificação recebeu grau intermediário, e a leitura contrária está anotada junto: sustenta-se que restaria um resíduo de aplicação, porque o art. 151 tutela a inviolabilidade das comunicações de uma pessoa e o art. 70 tutela o serviço público de telecomunicações. Na prática, quando os tribunais aplicam o art. 151 a caso envolvendo rádio, aplicam o inciso da interceptação, não o da instalação."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Acervo histórico"
+    ],
+    "version": "v1.9.2"
+  },
+  {
+    "id": "2026-08-04-pena-importada-por-remissao",
+    "date": "2026-08-04",
+    "title": "Três violações de comunicação apareciam com pena seis vezes maior do que a lei comina",
+    "summary": "O parágrafo primeiro do art. 151 do Código Penal não escreve a própria pena: diz \"Na mesma pena incorre\" e importa a do caput, que é de um a seis meses. Três dos quatro incisos estavam publicados com um a três anos — a pena de outro parágrafo do mesmo artigo.",
+    "body": [
+      "O art. 151 pune a violação de correspondência com detenção de um a seis meses, ou multa. O parágrafo primeiro estende essa mesma pena a quem sonega ou destrói correspondência alheia, divulga ou impede comunicação telegráfica, radioelétrica ou telefônica, ou instala estação de rádio sem autorização. Nenhum dos quatro incisos comina pena própria: todos vivem da remissão feita na cabeça do parágrafo.",
+      "O catálogo publicava um a seis meses apenas no primeiro inciso. Nos outros três aparecia detenção de um a três anos com multa cumulativa — que é a pena do parágrafo terceiro, o do funcionário de serviço postal ou telefônico que abusa da função. A diferença não é de grau: um a seis meses é infração de menor potencial ofensivo, cabe transação penal e prescreve em três anos; um a três anos não é nada disso.",
+      "A causa foi um silêncio, não uma leitura errada. A conferência semanal lê a pena escrita no dispositivo e, quando não encontra nenhuma, passa adiante sem dizer nada — e um dispositivo cuja pena está em outro dispositivo nunca tem pena escrita. Os três registros atravessaram todas as rodadas de conferência sem serem olhados uma única vez.",
+      "A auditoria ganhou uma checagem para isso: quando um dispositivo diz que incorre na mesma pena de outro, ela compara a moldura publicada com a do artigo de origem e reporta a divergência. A checagem não corrige nada sozinha, e por um motivo declarado: \"as mesmas penas\" tanto pode remeter ao caput quanto ao parágrafo imediatamente anterior. O parágrafo quarto do art. 289 importa a pena do terceiro, não a do caput, e está correto — está registrado como exceção examinada.",
+      "A ação penal dos dois incisos intermediários também foi corrigida para condicionada à representação, que é a regra do artigo; a incondicionalidade é exceção nominada no parágrafo quarto para duas hipóteses, e essas não são nenhuma delas."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Benefícios"
+    ],
+    "version": "v1.9.2"
+  },
+  {
+    "id": "2026-08-04-o-que-a-conferencia-nao-garante",
+    "date": "2026-08-04",
+    "title": "O que a conferência não garante agora tem nome, endereço e limite",
+    "summary": "A ferramenta publicava quantos registros ficavam sem conferência, mas não quais nem por quê — e um dos três motivos chamava-se \"indeterminado\". Cada registro não conferido passa a sair identificado, classificado por motivo, e o total de cada motivo passa a ser um limite que não pode crescer sem que alguém decida.",
+    "body": [
+      "A falha que mais dói neste projeto não é ler a lei errado: é não ler e não dizer nada. Um registro que a conferência não alcança não aparece como divergente — aparece como nada, e um número agregado no rodapé do relatório não dá a ninguém como agir sobre ele. Foi debaixo de um número desses que três incisos do art. 151 do Código Penal publicaram por anos seis vezes a pena que a lei comina.",
+      "Os motivos agora são cinco, e a diferença entre eles é o que se pode fazer a seguir. Registro sem pena privativa: não há moldura a comparar. Pena importada de outro dispositivo: é copiável, basta resolver a remissão. Pena derivada por cálculo, como aumento ou diminuição: é derivável, e o motor de dosimetria do projeto já sabe fazer a conta. Dispositivo que não é preceito, como norma explicativa ou extensiva: não há pena ali para ler. E o quinto, que é o alarme: a lei escreveu a pena e a ferramenta não conseguiu ler.",
+      "Os quatro primeiros são limites declarados. O quinto tende a zero, e hoje tem dois casos, ambos nomeados. Um deles é um erro de digitação no próprio texto oficial de um decreto-lei de 1944, e não há o que fazer com ele além de dizer que existe.",
+      "Sobre esses números foi posta uma trava. O tamanho aceito de cada grupo fica escrito num arquivo, como já acontece com as exceções de auditoria. Se um grupo cresce, a rodada acusa regressão e sai com erro mesmo que nenhuma divergência tenha sido encontrada — porque um registro que sai da conferência é justamente aquilo que ninguém veria de outro modo. Se encolhe, a rodada avisa que dá para apertar o limite. E o arquivo não se atualiza sozinho: se ele se regravasse quando a cobertura piora, a trava não travaria nada."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Documentação"
+    ],
+    "version": "v1.9.3"
+  },
+  {
+    "id": "2026-08-04-latrocinio-e-os-crimes-de-guerra",
+    "date": "2026-08-04",
+    "title": "O latrocínio e trinta e três crimes militares passaram a ser conferidos contra a lei",
+    "summary": "Três lacunas de leitura tiravam da conferência dispositivos cuja pena está escrita no texto oficial em formato que a ferramenta não reconhecia. Uma delas era pior que silêncio: fazia a conferência ler a pena de um crime e atribuí-la a outro.",
+    "body": [
+      "A primeira lacuna era um conectivo. Quando a lei escreve o número por extenso entre parênteses e o número é composto — \"de 24 (vinte e quatro) a 30 (trinta) anos\" —, a limpeza do texto removia os dois numerais e deixava o \"e\" para trás. O que sobrava não era mais um intervalo, e a moldura desaparecia. Vítima concreta: o latrocínio, no art. 157, parágrafo 3º, inciso II do Código Penal, nunca havia sido confrontado com a lei.",
+      "A segunda era a fórmula de graus com que o Código Penal Militar comina os crimes de tempo de guerra: \"morte, grau máximo; reclusão, de vinte anos, grau mínimo\". Não é um intervalo, e trinta e três registros do Livro II ficavam de fora. Agora se confere o piso, que a lei escreve. O teto continua sem conferência, e por um motivo declarado: a lei diz \"morte\", e o número que o catálogo publica no lugar dela é uma escolha do projeto, não uma leitura da lei.",
+      "A terceira era estrutural e a mais grave. Quando o dispositivo é só um cabeçalho — \"Se da violência resulta:\" — e cada inciso traz a sua própria pena, todas as penas eram atribuídas ao mesmo dispositivo e a última vencia. Sobrava a pena do último inciso e a do primeiro sumia. Isso não é silêncio, é leitura errada: quem corrigisse o catálogo por ela trocaria a pena da lesão corporal grave pela do latrocínio. Dois artigos do Código Penal Militar chegaram a ser acusados de divergência sendo ambos corretos.",
+      "A distribuição das penas pelos incisos é deliberadamente conservadora, porque o caso comum é o oposto: onde a lei enumera modalidades da conduta e comina uma pena só ao final, ela é do artigo. E a redação nova de uma pena não conta como pena de inciso — sem essa ressalva, o crime de lavagem de dinheiro se partiria em dois, já que o texto oficial imprime a pena antiga depois de um inciso e a nova depois de outro.",
+      "Cobertura da conferência: de 82,0% para 86,3% do catálogo."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Tipos penais",
+      "Documentação"
+    ],
+    "version": "v1.9.3"
+  },
+  {
+    "id": "2026-08-04-crimes-de-transito-nunca-conferidos",
+    "date": "2026-08-04",
+    "title": "A conferência semanal nunca tinha lido a pena de um crime de trânsito sequer",
+    "summary": "O Código de Trânsito escreve \"Penas\", no plural, porque cada um dos seus crimes comina prisão e mais a suspensão da habilitação. A conferência procurava a palavra no singular. Doze dispositivos, entre eles homicídio culposo na direção e embriaguez ao volante, atravessaram todas as rodadas sem uma única comparação com a lei.",
+    "body": [
+      "A ferramenta confronta o catálogo com o texto oficial das leis toda semana e publica quanto do catálogo foi de fato conferido. O número era honesto no que afirmava, mas escondia isto: um dispositivo cuja pena não é lida não aparece como divergente. Aparece como nada.",
+      "A causa era um único caractere. A conferência reconhecia a linha de pena pela palavra \"Pena\" seguida de fim de palavra, e \"Penas\" não passa nesse teste. Todos os doze crimes do Código de Trânsito são escritos no plural, porque o preceito comina mais de uma sanção ao mesmo tempo: detenção e suspensão ou proibição de obter a habilitação.",
+      "Lido o Código de Trânsito pela primeira vez, uma divergência real apareceu. O art. 310 — entregar a direção a pessoa não habilitada ou sem condições de dirigir — comina detenção de seis meses a um ano, ou multa. O catálogo publicava seis meses a três anos, com multa cumulativa e suspensão da habilitação. Nada disso está no artigo: três vezes o máximo, e uma multa alternativa transformada em cumulativa. Corrigido contra o texto oficial.",
+      "Os outros onze crimes de trânsito conferem com a lei."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais",
+      "Benefícios"
+    ],
+    "version": "v1.9.3"
+  },
+  {
+    "id": "2026-08-04-artigo-vetado-publicado-como-crime",
+    "date": "2026-08-04",
+    "title": "O catálogo publicava um crime que foi vetado e nunca existiu",
+    "summary": "O art. 359-O do Código Penal — comunicação enganosa em massa — foi vetado na lei que o propôs. O catálogo o publicava com reclusão de 1 a 5 anos. O leitor de textos legais sabia reconhecer o veto, mas a marca perdia para a marca genérica de vigente num empate.",
+    "body": [
+      "A Lei 14.197/2021, que criou os crimes contra o Estado Democrático de Direito, propunha um tipo de comunicação enganosa em massa — espalhar desinformação para comprometer o processo eleitoral. O dispositivo foi vetado e nunca promulgado. O texto oficial consolidado traz, no lugar dele, apenas a palavra vetado entre parênteses.",
+      "O catálogo publicava esse artigo como tipo penal vigente, com reclusão de um a cinco anos e multa. Um usuário que o consultasse concluiria que a conduta é crime.",
+      "O leitor de textos legais do sistema sabia reconhecer o veto e marcá-lo. O problema era o desempate: a marca de vetado e a marca genérica de vigente nasciam com a mesma posição no documento, e a regra de desempate ficava com a primeira — a genérica vencia a específica. O artigo saía como vigente; sem pena a ler, a conferência semanal pulava o dispositivo; e o erro ficou invisível por ser silêncio.",
+      "Corrigido o desempate, a conferência acusou o registro na primeira execução. O veto DERRUBADO continua funcionando: quando o Congresso restaura um dispositivo vetado, as duas marcas estão em parágrafos diferentes e a posterior prevalece — é o caso do art. 9º da Lei de Abuso de Autoridade, em pleno vigor.",
+      "Varri o acervo inteiro com a regra corrigida: era o único registro do catálogo apontando para dispositivo vetado."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.9.1"
+  },
+  {
+    "id": "2026-08-03-sufixo-de-letra-nos-artigos",
+    "date": "2026-08-03",
+    "title": "A injúria racial estava colada num artigo vetado, por causa de uma letra",
+    "summary": "Artigos com sufixo de letra, como 2º-A e 359-M-B, não eram reconhecidos em todas as formas pelo leitor de textos legais. O efeito ia de um crime inteiro colado no artigo errado a oitenta e oito artigos que não existem.",
+    "body": [
+      "O sistema lê os textos compilados oficiais e os quebra em dispositivos, para comparar cada um com o catálogo. O reconhecedor de artigo aceitava um sufixo de letra colado ao número, como em 121-A. Faltavam duas formas.",
+      "A primeira é o sufixo depois do marcador ordinal, como em 2º-A. O marcador era consumido primeiro, o artigo virava o de número 2 e o resto do identificador ia para dentro do texto. Na Lei de Racismo, o art. 2º está vetado, e a injúria racial inteira aparecia colada nele, inclusive a majorante do parágrafo único, que passou a constar sob um identificador que a lei não tem e que a revisão jurídica precisou levantar à mão.",
+      "A segunda é o sufixo duplo, como em 359-M-B. A redução de pena por contexto de multidão aparecia colada ao crime de golpe de Estado, que é outro artigo.",
+      "Na direção oposta, o mesmo padrão inventava artigos. Um artigo escrito com hífen de pontuação seguido de artigo definido, como em Art. 13 - O resultado, virava um inexistente Art. 13-O, e o texto passava a começar em resultado. Eram oitenta e oito artigos assim.",
+      "Corrigido dos dois lados, no leitor e na função que reduz o artigo do catálogo à mesma chave, porque corrigir só um faz o registro existir e não ser conferido. Quarenta dispositivos que existiam e não eram vistos apareceram, entre eles os arts. 3º-A a 3º-C da Lei de Organizações Criminosas e os arts. 8º-A a 8º-F da Lei de Drogas."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver como o catálogo é conferido",
+        "href": "https://amorim-rc.github.io/sispenas/docs/metodologia"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-revisao-pendente-segunda-rodada",
+    "date": "2026-08-03",
+    "title": "A segunda rodada de revisão respondeu as onze perguntas, e oito viraram trabalho a fazer",
+    "summary": "O arquivo de perguntas em aberto passa a ter duas listas: o que está respondido e falta aplicar, com a resposta ao lado, e o que continua sendo pergunta. A diferença importa — ninguém precisa reabrir o mérito do primeiro grupo.",
+    "body": [
+      "A revisão jurídica de agosto respondeu as onze perguntas que a versão anterior deixou em aberto. Três foram aplicadas nesta versão: a redação do art. 112 da Lei de Execução Penal, os treze registros com nome de outro artigo e a conferência que revelou a contravenção não recepcionada.",
+      "As outras oito estão respondidas e pedem mudanças que esta versão não alcançou: desdobrar por inciso os artigos que cominam a pena no caput e descrevem as condutas nos incisos; padronizar a nomenclatura do Estatuto da Pessoa Idosa; publicar a multa cominada em índice extinto com a unidade original e uma ressalva; marcar o crime de rádio clandestina como de vigência controvertida; separar a hediondez por rol da equiparação por conduta em dois eixos; criar a categoria da pena definida por remissão a outro dispositivo; e tratar o roubo com arma de uso restrito como causa de aumento, com a hediondez ligada à circunstância em vez de a um tipo artificial.",
+      "Elas não viraram pergunta de novo. O arquivo de revisão pendente passa a ter duas partes: a primeira traz cada uma com a resposta, o fundamento e o que falta fazer; a segunda, só o que continua em aberto — hoje sete questões, entre elas a única controvérsia jurídica real que a rodada deixou, sobre a fração de progressão do reincidente em crime contra o Estado Democrático de Direito.",
+      "A separação é o ponto. Trabalho pendente e pergunta pendente têm donos diferentes e prazos diferentes, e misturá-los faz o segundo grupo desaparecer dentro do primeiro.",
+      "E o arquivo passou a ser o lugar ÚNICO das perguntas. A varredura dos crimes militares hediondos por identidade vivia na tabela de crimes hediondos, e agora só um ponteiro fica lá; a marcação de risco de um artigo militar, a regra de multa dos crimes em licitação, a progressão sucessiva e o andamento das ações diretas contra a lei de maio estavam em nota de rodapé ou em lugar nenhum. Uma pergunta guardada em dois lugares é uma pergunta que ninguém responde, e uma guardada em nenhum é uma que se perde."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Documentação"
+    ],
+    "version": "v1.9.0"
+  },
+  {
+    "id": "2026-08-03-pendencias-declaradas",
+    "date": "2026-08-03",
+    "title": "As perguntas que ficaram sem resposta agora são um documento, não um arquivo de dados",
+    "summary": "Uma revisão jurídica classificou cada resposta em três graus, e o terceiro era não publicar. O que não vira dado costuma sumir. Agora há um documento para isso, escrito para ser respondido por quem não conhece o sistema.",
+    "body": [
+      "A revisão de agosto de 2026 respondeu cerca de cento e cinquenta perguntas acumuladas, e classificou cada resposta em três graus de confiança: aplicável, aplicável com a divergência anotada, e questão aberta sem resposta segura. As do terceiro grupo não podiam virar dado publicado.",
+      "O problema é que uma pergunta examinada e deixada em aberto não deixa rastro. Sem registro, a próxima leitura recomeça do zero, ou publica um palpite. É a informação mais cara do trabalho, e a mais fácil de perder.",
+      "As onze perguntas que sobraram estão em REVISAO-PENDENTE.md, na raiz do repositório. Cada uma traz o contexto, o texto legal transcrito do compilado oficial, o que o catálogo publica hoje e o que se quer decidir — o documento é autossuficiente, e quem responde não precisa abrir nenhum arquivo, sistema ou base de dados.",
+      "Isso é uma escolha, não uma comodidade. Quem tem condição de responder se o art. 29 da Lei de Crimes Ambientais derrogou a lei de proteção aos cetáceos, ou se o roubo com arma de uso restrito é qualificadora ou causa de aumento, é jurista — e uma pergunta que exige leitura de código para ser entendida é uma pergunta que não vai ser respondida.",
+      "Entre elas: qual redação do art. 112 da Lei de Execução Penal vale, depois de ele ser reescrito duas vezes em 2026; se o crime de rádio clandestina do Código Penal sobreviveu à Lei Geral de Telecomunicações; se a equiparação constitucional do tráfico alcança o tipo militar; como representar o dispositivo que troca a moldura da pena em vez de aumentá-la; e treze registros cujo nome se parece mais com outro artigo do mesmo diploma que com o próprio.",
+      "A conferência semanal repete os títulos de todas elas no relatório, como já fazia com as pendências da tabela de crimes hediondos. Uma pergunta que ninguém repete é uma pergunta que se perde, e o silêncio de uma rodada semanal passa facilmente por está tudo certo."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Documentação"
+    ],
+    "version": "v1.8.0"
+  },
+  {
+    "id": "2026-08-03-pena-so-em-dias-multa",
+    "date": "2026-08-03",
+    "title": "Dois crimes eleitorais publicavam anos de prisão para artigos que só cominam multa",
+    "summary": "A conferência semanal não sabia ler a fórmula de 1965 do Código Eleitoral — Pena, pagamento de 250 a 300 dias-multa — e por isso pulava esses artigos em silêncio. Reconhecida a fórmula, o erro vira divergência como qualquer outro, e a varredura do catálogo inteiro não achou mais nenhum.",
+    "body": [
+      "O art. 303 do Código Eleitoral publicava detenção de 6 meses a 2 anos; a lei comina pagamento de 250 a 300 dias-multa. O art. 306 publicava 1 a 6 meses; a lei comina 15 a 30 dias-multa. Nenhum dos dois tem pena de prisão. Somados ao art. 313, corrigido na versão anterior, são três em três dos artigos auditados desse diploma.",
+      "A diferença não é de grau. Um crime apenado só com multa não tem regime, não tem progressão, não tem livramento condicional, prescreve em dois anos e admite transação penal de plano. Enquanto o registro publicasse prisão, todo cálculo de benefício derivado dele estava errado.",
+      "A causa é mais interessante que o efeito. O leitor de penas do sistema reconhecia a fórmula moderna — Pena, multa —, mas não a de 1965, que começa por pagamento. Sem reconhecê-la, ele devolvia vazio, e a conferência semanal PULAVA o dispositivo: o registro caía na conta dos indeterminados e nunca era confrontado com a lei. Não era um erro de leitura, era silêncio — e a cobertura publicada dizia conferido sobre um universo que não incluía esses artigos.",
+      "Reconhecida a fórmula, o caso passa a ser acusado como qualquer divergência de moldura. Varri o catálogo inteiro com a regra nova: zero registros restantes publicam prisão onde a lei só impõe pena pecuniária, nos 63 diplomas. O Código Eleitoral tem oito tipos assim, e os oito estão corretos.",
+      "Na mesma passada, onze nomes de tipo foram corrigidos. Três registros consecutivos do capítulo dos crimes em licitação do Código Penal carregavam o nome do artigo vizinho — o mesmo deslocamento em cadeia já visto na Lei de Racismo —, e o capítulo estava partido em dois diplomas, com metade dos artigos sob o Código Penal e metade sob a lei que os introduziu. Unificados."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.9.0",
+    "links": [
+      {
+        "label": "Ver o art. 303 do Código Eleitoral",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=779"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-nomes-que-vieram-de-outro-artigo",
+    "date": "2026-08-03",
+    "title": "Dezoito tipos penais estavam com o nome de outro artigo, e um deles com a pena junto",
+    "summary": "O nome do crime é o que a busca mostra. Quando ele vem do artigo errado, a conferência automática de penas não percebe: ela confere a moldura contra o artigo que o registro diz ser. Dezoito registros foram corrigidos, e num deles a pena publicada não tinha nada a ver com a que a lei comina.",
+    "body": [
+      "O caso mais grave é o art. 313 do Código Eleitoral. O registro publicava reclusão de dois a seis anos e multa. O artigo comina apenas o pagamento de 90 a 120 dias-multa, sem pena de prisão. A moldura publicada era a do art. 348, o mesmo artigo de onde o nome tinha vindo: nome e pena viajaram juntos.",
+      "A diferença não é de detalhe. Um crime apenado só com multa não tem regime, não tem progressão, não tem livramento condicional, prescreve em dois anos e admite transação penal de plano. Enquanto o registro publicasse dois a seis anos de reclusão, todo cálculo de benefício derivado dele estava errado.",
+      "Outros três registros publicavam uma multa que o artigo não comina: o reingresso de estrangeiro expulso, os crimes contra o sistema eletrônico de votação e os crimes contra a locação. Nos três, a multa veio junto com o nome importado de outro artigo. Na direção oposta, o art. 310 do Código Eleitoral tem multa alternativa à detenção, e o sistema a lia como cumulativa, o que importa porque com multa alternativa a pena de multa sozinha basta para punir o fato.",
+      "Nove correções vieram de uma varredura nova, que a revisão sugeriu e que agora roda toda semana: ela pergunta se o nome de cada registro descreve melhor outro artigo do mesmo diploma. Achou os arts. 68 e 69 da Lei de Crimes Ambientais com os nomes trocados entre si, seis artigos seguidos da Lei de Racismo cada um com o nome do artigo seguinte, e o art. 315 do Código Eleitoral com o nome do art. 323.",
+      "Essa varredura existe por causa de um ponto cego. Quando dois artigos cominam a mesma pena, trocar os nomes não produz divergência nenhuma para a conferência de molduras. Foi assim que o art. 33 da Lei de Crimes Ambientais passou com o nome do art. 34, e assim que os seis artigos da Lei de Racismo ficaram deslocados, cada um com a pena certa no artigo errado.",
+      "Dois registros deixaram de ser tipos penais. O art. 40 da Lei de Drogas é causa de aumento, e publicava uma pena calculada, de cinco anos e dez meses a vinte e cinco anos, como se existisse um crime com essa moldura. E o caput do art. 2º da Lei dos Crimes contra a Ordem Tributária não descreve conduta nenhuma: diz apenas que constitui crime da mesma natureza e comina a pena, com as condutas nos incisos. Foi desdobrado nos incisos III, IV e V, que faltavam."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver o art. 313 do Código Eleitoral",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=784"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-marco-legal-do-combate-ao-crime-organizado",
+    "date": "2026-08-03",
+    "title": "O marco legal do combate ao crime organizado entra no catálogo, e ganha nome",
+    "summary": "A Lei dos Crimes Hediondos passou a remeter, desde março, a uma lei que o catálogo não sabia identificar. É a Lei 15.358, de 24 de março de 2026, a Lei Antifacção. Entraram os dois crimes que ela cria, os modificadores de pena que faltavam, e a correção de seis registros que citavam a lei errada.",
+    "body": [
+      "Em março de 2026 a Lei dos Crimes Hediondos ganhou um inciso novo, declarando hediondos os crimes de domínio social estruturado e de favorecimento, previstos na lei que institui o marco legal do combate ao crime organizado. O catálogo registrou a pendência e seguiu: sem saber qual lei era essa, não havia o que cadastrar.",
+      "É a Lei 15.358, de 24 de março de 2026, conhecida como Lei Antifacção. Ela tipifica dois crimes: o domínio social estruturado, com dez condutas praticadas por integrante de organização criminosa ultraviolenta, grupo paramilitar ou milícia privada, punido com reclusão de 20 a 40 anos; e o favorecimento a esse domínio, com seis condutas, punido com reclusão de 12 a 20 anos e multa. Os dois são hediondos e insuscetíveis de anistia, graça, indulto, fiança e livramento condicional.",
+      "A lei é maior que dois crimes. Ela inseriu seis figuras novas no Código Penal, cinco causas de aumento no próprio Código, uma na Lei de Drogas e uma no Estatuto do Desarmamento, além de reescrever os percentuais de progressão de regime. Isso já estava no catálogo, mas seis registros anotavam que o contexto de facção era o do art. 2º da Lei 12.850, de 2013, que é outra coisa: organização criminosa comum, de quatro ou mais pessoas, sem o núcleo de controle territorial. Os seis foram corrigidos.",
+      "Um detalhe da lei merece registro, porque a conferência automática procuraria por ele indefinidamente. Tanto o art. 4º da Lei 15.358 quanto o inciso novo da Lei dos Crimes Hediondos declaram hediondos o caput e os parágrafos 1º e 3º do art. 2º. O parágrafo 3º foi vetado e não existe no texto sancionado: é defeito de veto parcial sem ajuste das remissões cruzadas, e ficou anotado como tal.",
+      "Um registro saiu do catálogo na mesma passada. O parágrafo 4º do art. 157 do Código Penal manda aplicar em triplo a pena do roubo simples quando praticado por integrante de facção, desprezadas as demais causas de aumento, e estava publicado como se fosse um crime com moldura de 18 a 30 anos. É causa de aumento, não tipo penal, e passou para o catálogo de modificadores."
+    ],
+    "tipo": "novidade",
+    "areas": [
+      "Tipos penais",
+      "Dosimetria"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver o domínio social estruturado",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1402"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-livramento-condicional-vedado",
+    "date": "2026-08-03",
+    "title": "Quatro incisos vedam o livramento condicional, e o sistema só dizia isso por escrito",
+    "summary": "A Lei de Execução Penal proíbe o livramento condicional em quatro situações. O sistema listava as proibições na descrição do benefício, mas seguia calculando o livramento para todas elas: o texto dizia uma coisa e o número dizia outra. Agora a vedação é regra de cálculo.",
+    "body": [
+      "O art. 112 da Lei de Execução Penal fixa quanto da pena precisa ser cumprido para a progressão de regime. Em quatro hipóteses ele acrescenta, na própria letra do inciso, que o livramento condicional fica vedado: o condenado primário por crime hediondo com resultado morte, o reincidente na mesma situação e, desde a Lei 15.358, de março de 2026, quem exerceu comando de organização criminosa ultraviolenta e o primário condenado por feminicídio.",
+      "A ficha do livramento condicional já trazia duas dessas vedações escritas. O cálculo, porém, aplicava apenas a vedação do Código Penal, ao reincidente específico em crime hediondo. Resultado: para o condenado por latrocínio, o sistema informava que o livramento seria cabível depois de dois terços da pena, quando a lei o proíbe inteiramente.",
+      "As quatro hipóteses passaram a viver numa regra só, com fundamento próprio para cada uma, e com um controle para desligá-la. Quem sustenta que a vedação, por estar em dispositivo de progressão, não alcança o livramento do art. 83 do Código Penal, pode simular essa tese.",
+      "Duas hipóteses do inciso VI também não existiam no cálculo da progressão. O comando de organização criminosa ultraviolenta é circunstância do caso, não do tipo, e entrou como caixa de marcação na simulação, ao lado da reincidência; o feminicídio é atributo do tipo e é lido do catálogo. Sem elas, o comandante de facção condenado por crime hediondo sem resultado morte progredia com 70 por cento da pena, quando a lei exige 75 e proíbe o livramento.",
+      "Uma pendência ficou registrada e não foi aplicada. Ao conferir o art. 112 no texto oficial, apareceu a Lei 15.402, de maio de 2026, que reescreveu o caput e os três primeiros incisos do artigo, mudança posterior à de março e que o sistema ainda não reflete. Modelá-la exige decidir o que fazer com a duplicação que a própria lei deixou entre dois incisos, e isso é leitura jurídica, não transcrição."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Benefícios"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver os patamares de progressão e livramento",
+        "href": "https://amorim-rc.github.io/sispenas/docs/beneficios-penais"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-lcp-25-nao-recepcionado",
+    "date": "2026-08-03",
+    "title": "O catálogo publicava como vigente uma contravenção que não existe desde 1988",
+    "summary": "O art. 25 da Lei das Contravenções Penais pune ter instrumento de furto em razão da condição do agente — condenado anterior, sujeito a liberdade vigiada, vadio ou mendigo. O Supremo declarou que ele não foi recepcionado pela Constituição. O registro fica, com a data e o precedente.",
+    "body": [
+      "O art. 25 da Lei das Contravenções Penais pune quem tenha em seu poder gazuas, chaves falsas ou instrumentos usualmente empregados em furto — mas só se for condenado anterior por furto ou roubo, se estiver sujeito a liberdade vigiada, ou se for conhecido como vadio ou mendigo. A punição não recai sobre o fato: recai sobre quem é o agente.",
+      "O Supremo Tribunal Federal declarou a não recepção do dispositivo pela Constituição de 1988 no RE 583.523, julgado pelo Plenário por unanimidade em outubro de 2013, com repercussão geral reconhecida — Tema 113. O fundamento foi a violação da dignidade da pessoa humana e da isonomia: é direito penal do autor.",
+      "O catálogo publicava a contravenção como tipo vigente. Um usuário que a consultasse concluiria que a conduta é punível. Isso é mais grave que qualquer nome trocado, porque não erra um detalhe do dado — erra se existe crime.",
+      "O registro não foi apagado. Ele passa a declarar a data em que deixou de valer, 5 de outubro de 1988, e traz o precedente na nota. A razão de mantê-lo consultável é prática: a atipicidade precisa ser arguida, e quem defende alguém denunciado com base nele precisa encontrar o precedente. Um registro apagado não defende ninguém.",
+      "O nome do tipo também estava errado — descrevia o art. 31, dos animais perigosos. Corrigido, para que o registro descreva o que de fato não foi recepcionado."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.9.0",
+    "links": [
+      {
+        "label": "Ver o art. 25 da Lei das Contravenções Penais",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=766"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-dou-triagem-por-preceito",
+    "date": "2026-08-03",
+    "title": "O aviso semanal sobre leis novas trazia seis textos por semana e nada de penal",
+    "summary": "Medido contra catorze dias reais do Diário Oficial — 3.569 atos publicados —, o filtro devolvia seis leis para ler e nenhuma criava ou alterava crime. Ele passa a cortar pelo que distingue lei penal de lei que fala de pena: a cominação de uma pena.",
+    "body": [
+      "Toda semana o sistema lê a Seção 1 do Diário Oficial em busca de lei penal nova — aquela que cria crime em diploma que a conferência ainda não acompanha. É o único ponto cego declarado da conferência semanal, e o filtro existia para cobri-lo.",
+      "Só que ele casava quem citasse um diploma acompanhado OU tivesse vocabulário penal, e as duas condições são largas demais. Medido contra catorze dias reais, ele devolveu seis candidatas: uma medida provisória sobre fundo garantidor, pela palavra revoga; uma lei sobre recursos do fundo penitenciário, pela palavra crime; uma sobre divulgação de telefone de denúncias, por passa a vigorar acrescida; uma sobre honorários de advogado, por citar o Estatuto da OAB. Nenhuma das seis cominava pena alguma.",
+      "Ler seis textos por semana para não achar nada é o jeito mais rápido de parar de ler, e um filtro que ninguém lê é um filtro que não existe.",
+      "O corte passa a ser o preceito secundário — a fórmula Pena, reclusão de, detenção de. Um ato que fale de pena sem cominar nenhuma não cria nem altera crime. Contra os mesmos catorze dias esse critério devolve zero; contra a lei de março que criou dois tipos penais, ele acerta.",
+      "Duas redes de segurança, porque deixar passar uma lei penal custa meses de catálogo desatualizado: a ementa que anuncia o crime sobe o ato de nível mesmo quando o texto integral não abre, e revogar dispositivo de diploma acompanhado também sobe, porque suprimir um tipo não deixa a palavra pena no texto do ato.",
+      "E o que foi cortado não some. Cada ato descartado aparece em uma linha, com o motivo e o link — três segundos de leitura, e a decisão do filtro fica auditável. O que era ruído virou ainda um aviso pequeno e útil: os diplomas citados na janela saem numa linha de rodapé, porque se uma dessas leis os alterou, a prova de que a página baixada está atualizada precisa mudar junto."
+    ],
+    "tipo": "melhoria",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.9.0"
+  },
+  {
+    "id": "2026-08-03-dispositivo-que-deixou-de-vigorar",
+    "date": "2026-08-03",
+    "title": "Um crime militar foi declarado inconstitucional, e continua no catálogo com a data em que deixou de valer",
+    "summary": "O Supremo declarou inconstitucional o estupro de vulnerável do Código Penal Militar, com efeitos a partir de agosto de 2025. Fato anterior a essa data continua regido por ele. O catálogo ganhou campos para dizer desde quando um dispositivo não vale mais, e o que se aplica no lugar.",
+    "body": [
+      "Em agosto de 2025 o Supremo Tribunal Federal julgou inconstitucional o parágrafo 3º do art. 232 do Código Penal Militar, por proteção deficiente: ele punia o estupro de vulnerável praticado por militar com oito a quinze anos, sem agravamento por lesão grave ou morte, enquanto o Código Penal comina dez a vinte e doze a trinta nessas hipóteses. A decisão tem efeitos apenas para o futuro.",
+      "Isso cria uma situação que o catálogo não sabia representar. Excluir o registro apagaria a lei que valia quando o fato ocorreu, e uma consulta sobre um fato de 2024 precisa da lei de 2024. Mantê-lo sem dizer nada publicaria como vigente o que o Supremo derrubou.",
+      "Os dados abertos ganharam dois campos: a data em que o dispositivo deixou de vigorar e uma nota obrigatória com o que houve e qual dispositivo passa a reger a conduta, aqui o art. 217-A do Código Penal e todos os seus parágrafos, por força da regra que manda aplicar a lei penal comum onde a militar é omissa. Na tela do tipo penal, uma etiqueta mostra a data, e a nota aparece ao passar o mouse.",
+      "Na mesma revisão, o tráfico de drogas em lugar sujeito à administração militar deixou de constar como hediondo por identidade. A Lei dos Crimes Hediondos projeta sobre o Código Penal Militar apenas os crimes previstos no seu art. 1º, e o tráfico não está lá: é equiparado por dispositivo diverso. Se a equiparação constitucional alcança o tipo militar é outra pergunta, com consequências que não coincidem, e ficou registrada como pendência.",
+      "O critério de identidade adotado passou a constar por escrito ao lado da tabela: correspondência de conduta e bem jurídico com a hipótese específica do rol, não bastando o nome do crime. Se bastasse o nome, todo roubo militar seria hediondo, quando a lei torna hedionda apenas quatro formas do roubo comum. É matéria sem jurisprudência consolidada, e o arquivo diz isso."
+    ],
+    "tipo": "novidade",
+    "areas": [
+      "Tipos penais",
+      "Interface"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver o contrato dos dados abertos",
+        "href": "https://amorim-rc.github.io/sispenas/docs/dados-abertos"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-causas-de-aumento-e-de-diminuicao",
+    "date": "2026-08-03",
+    "title": "Cento e quatro causas de aumento e de diminuição entram na dosimetria",
+    "summary": "A terceira fase da dosimetria só conhecia as causas de aumento já modeladas uma a uma. Cento e nove dispositivos que a auditoria vinha apontando como ausentes foram conferidos: cento e quatro entraram, e doze foram recusados por não serem causa de aumento nenhuma.",
+    "body": [
+      "A dosimetria pelas três fases usa um catálogo próprio de modificadores: cada agravante, atenuante, causa de aumento e causa de diminuição é um registro com fração, natureza e alcance. A auditoria semanal comparava esse catálogo com o texto das leis e listava o que faltava. Eram cento e nove dispositivos, acumulados havia meses.",
+      "Nem tudo o que a lei chama de aumento é causa de aumento. Oito dispositivos do Código de Trânsito estão no capítulo das infrações administrativas: aplicar em dobro a multa por reincidência em doze meses é multa de trânsito, e reincidência administrativa não guarda relação com a reincidência penal. Nada disso entra na dosimetria.",
+      "Outros quatro, da Lei de Crimes Ambientais, dizem que se o crime for culposo a pena será reduzida à metade. Isso não é causa de diminuição: a culpa é elemento do tipo, e o que a lei cria é uma modalidade culposa com moldura própria. Registrada como diminuição, a redução seria aplicada depois das demais causas, quando na verdade ela define a moldura de partida. Três viraram tipos penais próprios; o quarto não, porque o artigo a que ele se refere foi vetado.",
+      "Nove dispositivos precisaram de dois registros cada, por conterem duas frações ou dois alcances. O mais consequente é o parágrafo 4º do art. 121 do Código Penal: a primeira parte majora o homicídio culposo e a segunda o doloso. Com um registro só, o sistema ofereceria a majorante do homicídio culposo a quem responde por homicídio doloso.",
+      "Três formulações não têm mínimo legal: até o dobro, até o triplo, em até um terço. A escolha foi registrar o piso como zero, e ela está documentada porque muda o resultado. Com mínimo zero, a pena majorada pode partir da pena intermediária sem acréscimo, que é o mais favorável ao réu e o único piso que a lei autoriza; inventar um mínimo publicaria como legal um número que a lei não diz."
+    ],
+    "tipo": "novidade",
+    "areas": [
+      "Dosimetria"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver a metodologia da dosimetria",
+        "href": "https://amorim-rc.github.io/sispenas/docs/metodologia"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-art-112-duas-tabelas",
+    "date": "2026-08-03",
+    "title": "A progressão de regime passa a ter duas tabelas, com corte pela data do fato",
+    "summary": "A Lei 15.402, de maio de 2026, reescreveu o caput e os três primeiros incisos do art. 112 da Lei de Execução Penal. Ela não é uniformemente mais benéfica: para o primário condenado por crime sem violência é mais gravosa, e lei mais gravosa não retroage.",
+    "body": [
+      "O caput do art. 112 voltou a fixar patamar próprio — ao menos um sexto da pena no regime anterior — e os incisos passaram a ser exceções a ele, não a lista exaustiva de hipóteses. A expressão é literal: observadas as seguintes exceções.",
+      "Disso decorre um efeito que a leitura corrente da lei não capta. Para o apenado primário condenado por crime sem violência ou grave ameaça, o antigo inciso I fixava 16 por cento. Esse inciso foi substituído, e a hipótese passou a cair no caput: um sexto, que é 16,67 por cento. Para esse grupo a lei nova é mais gravosa.",
+      "Por isso o sistema passa a ter duas tabelas, e não uma substituição. A retroatividade da lei mais benéfica apura-se por situação concreta, não em bloco. Quem simula um fato anterior a 8 de maio de 2026 marca a circunstância correspondente e recebe o cálculo pela tabela do Pacote Anticrime, que é a lei do caso.",
+      "A base de cálculo também mudou, e é o ponto mais consequente. O caput conta um sexto da pena no regime anterior; os incisos contam percentual da pena total. São operações distintas dentro do mesmo artigo. Na primeira progressão as duas bases coincidem, e é ela que o sistema calcula; nas seguintes, a base do caput é o que resta a cumprir.",
+      "Os novos incisos I e II ressalvam os crimes contra o Estado Democrático de Direito, e a ressalva é topográfica: basta o crime estar naquele título do Código Penal, sem perguntar se houve violência. Para o primário sobra o caput, por exclusão expressa. Para o reincidente o texto comporta duas leituras sustentáveis, com diferença de 3,33 pontos percentuais, e o sistema devolve o resultado como condicional, com as duas escritas — nenhuma foi escolhida em silêncio.",
+      "Implementar isso revelou um defeito antigo no cálculo da dosimetria: a tabela de títulos do Código Penal encerrava o título dos crimes contra a administração pública no art. 359, e os crimes contra o Estado Democrático de Direito, que são artigos 359 com sufixo de letra, caíam ali dentro. Todos recebiam o aumento dos crimes funcionais, que não os alcança. Corrigido."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Benefícios",
+      "Dosimetria"
+    ],
+    "version": "v1.9.0",
+    "links": [
+      {
+        "label": "Ver as duas tabelas de progressão",
+        "href": "https://amorim-rc.github.io/sispenas/docs/beneficios-penais"
+      }
+    ]
+  },
+  {
+    "id": "2026-08-03-acao-penal-por-representacao",
+    "date": "2026-08-03",
+    "title": "Cinco crimes constavam como de ação incondicionada, e a lei exige representação da vítima",
+    "summary": "Em crime de ação pública condicionada, a vítima tem seis meses para representar; passado o prazo, a punibilidade se extingue. Cinco registros publicavam uma espécie de ação mais ampla do que a lei permite, e com isso escondiam um prazo que corre.",
+    "body": [
+      "O art. 151 do Código Penal, que trata da violação de correspondência e das comunicações, tem um parágrafo final exaustivo: somente se procede mediante representação, salvo em duas hipóteses que ele nomeia. A representação é a regra do artigo, e a incondicionalidade é a exceção. Quatro dos seis registros do artigo diziam o contrário.",
+      "O art. 153, divulgação de segredo, constava como crime de ação penal privada. A lei diz que somente se procede mediante representação, que é ação pública condicionada, não privada. São institutos distintos: um depende de queixa do ofendido, o outro de representação seguida de denúncia do Ministério Público, com prazos e titularidade diferentes.",
+      "Dois dispositivos não têm espécie única, e passaram a dizer isso. A divulgação de informações sigilosas da administração é incondicionada quando resulta prejuízo para a Administração Pública e condicionada nos demais casos; o exercício arbitrário das próprias razões é de ação privada quando não há violência e pública incondicionada quando há. Nos dois, o catálogo guarda a hipótese em texto, e a interface a mostra, em vez de escolher uma resposta.",
+      "Fica registrada uma dúvida que não virou dado: há corrente sustentando que a instalação clandestina de estação de rádio, prevista no art. 151, foi tacitamente revogada pela Lei Geral de Telecomunicações. Decidir isso exige levantamento de jurisprudência que não foi feito, e a espécie de ação penal do dispositivo, essa sim leitura literal, foi confirmada."
+    ],
+    "tipo": "correcao",
+    "areas": [
+      "Tipos penais"
+    ],
+    "version": "v1.8.0",
+    "links": [
+      {
+        "label": "Ver a violação de correspondência",
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=76"
+      }
+    ]
+  },
+  {
     "id": "2026-08-02-progressao-lei-15358",
     "date": "2026-08-02",
     "title": "Progressão de regime: os percentuais dos crimes hediondos estavam desatualizados desde março",
@@ -161,7 +809,7 @@
     "links": [
       {
         "label": "Ver um crime com pena contada em dias",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=504"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=500"
       }
     ]
   },
@@ -185,7 +833,7 @@
     "links": [
       {
         "label": "Ver a inundação culposa (art. 254)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1346"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1335"
       },
       {
         "label": "Ver o acervo histórico",
@@ -279,7 +927,7 @@
     "links": [
       {
         "label": "Ver a tortura em violência doméstica (art. 1º, III)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1343"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1332"
       }
     ]
   },
@@ -321,7 +969,7 @@
     "links": [
       {
         "label": "Ver a obstrução de ações contra o crime organizado (art. 21-A)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1341"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1330"
       }
     ]
   },
@@ -342,7 +990,7 @@
     "links": [
       {
         "label": "Ver a sonegação fiscal material (art. 1º)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=398"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=395"
       }
     ]
   },
@@ -364,7 +1012,7 @@
     "links": [
       {
         "label": "Ver o descumprimento de medida protetiva (art. 24-A)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=481"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=477"
       }
     ]
   },
@@ -386,7 +1034,7 @@
     "links": [
       {
         "label": "Ver a injúria racial e seus aumentos",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=582"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=577"
       }
     ]
   },
@@ -408,7 +1056,7 @@
     "links": [
       {
         "label": "Ver a omissão de comunicação (art. 26)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=580"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=575"
       }
     ]
   },
@@ -429,7 +1077,7 @@
     "links": [
       {
         "label": "Ver a apropriação de bens da massa (art. 173)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=490"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=486"
       }
     ]
   },
@@ -449,7 +1097,7 @@
     "links": [
       {
         "label": "Ver a fuga do local do sinistro (art. 305)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=343"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=340"
       }
     ]
   },
@@ -470,7 +1118,7 @@
     "links": [
       {
         "label": "Ver o estupro no CPM (art. 232)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=720"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=713"
       }
     ]
   },
@@ -490,7 +1138,7 @@
     "links": [
       {
         "label": "Ver o crime do art. 1º da Lei 8.176/91",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=547"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=543"
       }
     ]
   },
@@ -510,7 +1158,7 @@
     "links": [
       {
         "label": "Ver o art. 73 do CDC",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=519"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=515"
       }
     ]
   },
@@ -533,7 +1181,7 @@
     "links": [
       {
         "label": "Ver os maus-tratos a animais (art. 32)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1338"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1327"
       }
     ]
   },
@@ -555,7 +1203,7 @@
     "links": [
       {
         "label": "Ver o crime de agrotóxico irregular (art. 56)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=660"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=654"
       }
     ]
   },
@@ -577,7 +1225,7 @@
     "links": [
       {
         "label": "Ver a violência institucional (art. 15-A)",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1340"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1329"
       }
     ]
   },
@@ -598,7 +1246,7 @@
     "links": [
       {
         "label": "Ver o aumento no tráfico de drogas",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=317"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=315"
       }
     ]
   },
@@ -619,7 +1267,7 @@
     "links": [
       {
         "label": "Ver a exposição a perigo da pessoa idosa",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=473"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=469"
       }
     ]
   },
@@ -640,7 +1288,7 @@
     "links": [
       {
         "label": "Ver o novo crime do art. 244-C",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1334"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1323"
       }
     ]
   },
@@ -682,7 +1330,7 @@
     "links": [
       {
         "label": "Ver o latrocínio por organização criminosa no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1328"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1317"
       }
     ]
   },
@@ -726,7 +1374,7 @@
     "links": [
       {
         "label": "Ver a associação criminosa no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=222"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=220"
       }
     ]
   },
@@ -748,7 +1396,7 @@
     "links": [
       {
         "label": "Ver o art. 147-C no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1322"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1312"
       }
     ]
   },
@@ -939,7 +1587,7 @@
     "links": [
       {
         "label": "Ver o art. 121-B (vicaricídio) no catálogo",
-        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1318"
+        "href": "https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1308"
       }
     ]
   },

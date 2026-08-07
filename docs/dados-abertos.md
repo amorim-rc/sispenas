@@ -44,6 +44,7 @@ O catálogo completo é publicado como dado aberto em formato JSON:
 
   "tem_pena_privativa": true,
   "sancoes_nao_privativas": [],
+  "pena_por_remissao": null,
   "resultado_morte": true,
   "resultado_morte_derivado": true,
   "perdao_judicial_previsto": false,
@@ -68,11 +69,12 @@ os dados saber o que pode mudar sem quebrar uma conta.
 
 | Campo | Onde é usado |
 |---|---|
-| `id` | Endereço público do tipo (`/pesquisa/tipos?tipo=N`), citado em pareceres e trabalhos. **Nunca é reatribuído**: um id aposentado não volta a ser usado por outro crime. |
+| `id` | Endereço público do tipo (`/pesquisa/tipos?tipo=N`), citado em pareceres e trabalhos. **Nunca é reatribuído**: um id aposentado não volta a ser usado por outro crime. A numeração foi reiniciada duas vezes — v1.4.0 e v2.0.0 —, e é por isso que essas versões são MAIORES: quem tenha guardado um endereço anterior precisa refazê-lo. |
 | `lei`, `artigo` | Identificam o dispositivo. Juntos formam a `chave_dispositivo`, que detecta registro repetido, e ligam a linha ao texto oficial conferido toda semana pelo conferidor. |
 | `crime` | Nome exibido na busca. Também é dele — **e não do `obs`** — que se deduz o `resultado_morte`. |
 | `pena_min`, `pena_max` | **A moldura.** Alimentam toda a dosimetria e todos os benefícios com limiar de pena (transação penal, ANPP, sursis, regime inicial, prescrição). Desde a v1.2.17 são a autoridade; antes disso a moldura era extraída do texto do `obs`, e uma frase secundária podia mudar a pena publicada. |
-| `tipo_pena` | Reclusão, detenção, prisão simples ou nenhuma. Define o regime inicial e distingue o tipo sem pena privativa. |
+| `tipo_pena` | Reclusão, detenção, prisão simples, multa, morte (só nos crimes militares de tempo de guerra), "Outras penas" ou nenhuma. Define o regime inicial e distingue o tipo sem pena privativa. |
+| `pena_por_remissao` | Opcional. O tipo **não comina moldura própria**: importa a de outro dispositivo, e este campo diz qual (`dispositivo_fonte`) e o que se faz com ela (`operador`: nenhum, aumento ou diminuicao; `fracao`). É o caso do art. 304 do CP — "a pena cominada à falsificação" — e do art. 315 do CPM. Quem o declara tem `pena_min` e `pena_max` zerados **de propósito**, e fica fora das estatísticas de alcance: a moldura depende de qual dispositivo-fonte incide no caso, e o catálogo não a inventa. |
 | `acao` | Espécie de ação penal. Condiciona os institutos que dependem de representação ou de queixa. |
 | `hediondo` | Fecha indulto, graça e comutação, e endurece as frações de progressão e livramento condicional. |
 | `elemento` | Doloso, culposo ou preterdoloso. Crime culposo admite substituição por pena restritiva qualquer que seja a pena, e não admite tentativa. |

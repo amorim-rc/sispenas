@@ -16,17 +16,12 @@ campos que decidem benefício e que ninguém vigiava:
 - **nome do tipo** — comparado com a epígrafe e com o texto do dispositivo, para
   achar registro que descreve outro crime.
 
-E um quinto bloco que não é auditoria de dado: as **pendências jurídicas** de
-`REVISAO-PENDENTE.md`, na raiz — o que o projeto examinou e deixou em aberto de
-propósito, repetido toda semana para não apodrecer no arquivo.
-
 **Nenhuma conclusão jurídica.** Cada achado é uma pergunta, e os que viram
 proposta de mudança saem em PR, para revisão — nunca aplicados direto.
 
 Uso:
     python scripts/crawler/auditar.py                # relatório de tudo
     python scripts/crawler/auditar.py --so hediondez
-    python scripts/crawler/auditar.py --so pendencias
     python scripts/crawler/auditar.py --json crawler/relatorios/auditoria.json
 
 Saídas: 0 = nada a rever; 2 = erro; 3 = há achados.
@@ -55,7 +50,6 @@ CATALOGO = RAIZ / "static" / "data" / "crimes.json"
 FONTES = RAIZ / "data" / "fontes.json"
 HEDIONDOS = RAIZ / "data" / "hediondos.json"
 MODIFICADORES = RAIZ / "data" / "modificadores.json"
-PENDENCIAS = RAIZ / "REVISAO-PENDENTE.md"
 EXCECOES = Path(__file__).resolve().parent / "excecoes-auditoria.json"
 
 
@@ -478,46 +472,6 @@ def auditar_pena_por_remissao(catalogo: list[dict], indice_fontes: dict) -> list
     return achados
 
 
-# ── 5. Pendências jurídicas declaradas ──────────────────────────────────────
-# "## 3 ✅ — Que crimes do CPM são hediondos por identidade?" — número, marca de
-# submissibilidade e título. As seções do ANEXO usam letra ("## A. …") e por isso
-# não casam: o anexo é trabalho já respondido, não pergunta a fazer.
-_PERGUNTA = re.compile(r"^## (\d+)\s*(✅|⚠️|⛔)?\s*—\s*(.+?)\s*$", re.M)
-_MARCAS = {
-    "✅": "submeta — tudo o que a resposta exige está no bloco",
-    "⚠️": "submeta, mas a resposta depende de informação recente; confira antes de publicar",
-    "⛔": "NÃO submeta — depende de varredura interna, não de juízo jurídico",
-}
-
-
-def auditar_pendencias() -> list[dict]:
-    """Repete, toda semana, o que se sabe que falta decidir.
-
-    O oposto de um achado: não é a máquina descobrindo divergência, é o projeto
-    lembrando de uma pergunta que examinou e deixou aberta de propósito. Sem
-    isto, a pendência vive só num arquivo que ninguém abre, e o silêncio da
-    rodada semanal volta a ser confundido com "está tudo certo".
-
-    A fonte é `REVISAO-PENDENTE.md`, na raiz — PROSA, não estrutura de dados, e
-    de propósito: cada pergunta é um bloco pronto para colar numa conversa nova,
-    com o texto legal transcrito, o que o catálogo publica hoje e o formato em
-    que a resposta é aplicável. Quem responde não precisa do repositório.
-
-    Daqui sai só o suficiente para lembrar que a pergunta existe — e a MARCA de
-    submissibilidade, que é o que o mantenedor precisa saber sem abrir o arquivo:
-    quais dão para mandar hoje, quais dependem de informação recente e quais
-    ainda pedem uma varredura antes de virarem pergunta.
-    """
-    if not PENDENCIAS.exists():
-        return []
-    texto = PENDENCIAS.read_text(encoding="utf-8").replace("\r\n", "\n")
-    return [{
-        "campo": "pendencias", "tipo": "PENDENCIA-ABERTA", "gravidade": 1,
-        "detalhe": f"**{m.group(1)}. {m.group(3)}** — _"
-                   f"{_MARCAS.get(m.group(2) or '', 'sem marca de submissibilidade')}_",
-    } for m in _PERGUNTA.finditer(texto)]
-
-
 # ── 4. Nome do tipo ─────────────────────────────────────────────────────────
 _PALAVRA = re.compile(r"[a-zà-ÿ]{5,}", re.I)
 _VAZIAS = {"artigo", "pessoa", "outrem", "alguem", "alguém", "contra", "mediante",
@@ -663,7 +617,7 @@ TITULOS = {
     "modificadores": "Causas de aumento e diminuição",
     "nome": "Nome do tipo",
     "pena_remissao": "Pena importada por remissão",
-    "pendencias": "Pendências jurídicas em aberto",
+    "excecoes": "Achados omitidos por decisão já tomada",
 }
 LIMITES = {
     "hediondez": "O rol é fechado, mas três incisos dependem de circunstância do caso "
@@ -693,12 +647,10 @@ LIMITES = {
                      "erra quando a remissão é ao parágrafo anterior: o §4º do art. 289 do CP "
                      "importa a pena do §3º e está certo. Serve para leitura, nunca para "
                      "troca automática.",
-    "pendencias": "Não são achados: é `REVISAO-PENDENTE.md`, na raiz, com o que o projeto "
-                  "examinou e deixou em aberto de propósito. Cada pergunta lá é um bloco "
-                  "PRONTO PARA SUBMETER a uma conversa nova — traz o texto legal transcrito, "
-                  "o que o catálogo publica hoje e o formato em que a resposta é aplicável. "
-                  "Aqui saem o título e a marca de submissibilidade. Sai daqui quando a "
-                  "decisão for tomada e publicada.",
+    "excecoes": "Não são achados: é a contagem do que saiu do relatório por decisão já "
+                "tomada. Fica visível de propósito — uma dispensa que ninguém vê é "
+                "indistinguível de um achado que nunca apareceu. O motivo e a data de "
+                "cada uma estão em `scripts/crawler/excecoes-auditoria.json`.",
 }
 
 
@@ -749,13 +701,11 @@ def rodar(so: str | None = None) -> list[dict]:
         achados += auditar_nomes_trocados(catalogo, indice_fontes)
     if so in (None, "remissao"):
         achados += auditar_pena_por_remissao(catalogo, indice_fontes)
-    if so in (None, "pendencias"):
-        achados += auditar_pendencias()
 
     # O que já foi julgado sai do relatório — mas só o que foi julgado. A
     # dispensa casa por tipo E alvo, nunca por tipo sozinho: achado NOVO no
-    # mesmo dispositivo continua aparecendo. Pendência declarada não se
-    # dispensa; ela existe justamente para ser repetida.
+    # mesmo dispositivo continua aparecendo. E a própria dispensa é contada e
+    # nomeada: uma omissão invisível é indistinguível de achado que não houve.
     excecoes = carregar_excecoes()
     dispensados = [a for a in achados if dispensado(excecoes, a)]
     achados = [a for a in achados if a not in dispensados]
@@ -764,7 +714,7 @@ def rodar(so: str | None = None) -> list[dict]:
         for a in dispensados:
             por_tipo[a["tipo"]] = por_tipo.get(a["tipo"], 0) + 1
         achados.append({
-            "campo": "pendencias", "tipo": "JA-JULGADO", "gravidade": 0,
+            "campo": "excecoes", "tipo": "JA-JULGADO", "gravidade": 0,
             "detalhe": f"{len(dispensados)} achado(s) omitido(s) por decisão já tomada "
                        f"({', '.join(f'{n} {t}' for t, n in sorted(por_tipo.items()))}) "
                        "— ver scripts/crawler/excecoes-auditoria.json, que guarda o motivo "
@@ -777,7 +727,7 @@ def main() -> int:
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     p = argparse.ArgumentParser(description="Audita hediondez, ação penal, modificadores e nomes.")
     p.add_argument("--so", choices=["hediondez", "acao", "modificadores", "nome",
-                                    "remissao", "pendencias"])
+                                    "remissao"])
     p.add_argument("--json", metavar="ARQUIVO")
     p.add_argument("--saida", default=str(RAIZ / "crawler" / "relatorios"))
     args = p.parse_args()

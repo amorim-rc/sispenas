@@ -19,7 +19,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o domínio social estruturado',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1413',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=1402',
     },
   ],
 };

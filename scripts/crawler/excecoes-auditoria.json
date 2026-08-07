@@ -17,10 +17,10 @@
         78,
         79,
         80,
-        285,
-        646,
-        647,
-        1351
+        283,
+        640,
+        641,
+        1340
       ],
       "motivo": "Os arts. 151, 153 e 345 do CP distribuem a espécie de ação penal POR PARÁGRAFO: o §4º do art. 151 excepciona nominalmente o §1º, IV e o §3º; o §2º do art. 153 torna incondicionada só a hipótese de prejuízo à Administração; o parágrafo único do art. 345 reserva a queixa ao fato sem violência. A auditoria lê o artigo inteiro e não sabe em qual hipótese cada registro cai — por isso acusa a ressalva, não a divergência. Os nove registros foram lidos um a um contra o compilado na revisão de 02/08/2026 (Bloco 2) e corrigidos: quatro passaram a condicionada, um saiu de privada para condicionada, dois foram confirmados incondicionados e dois guardam a condição em `acao_condicao`.",
       "data": "2026-08-03"
@@ -56,12 +56,12 @@
     {
       "tipo": "NOME-SUSPEITO",
       "ids": [
-        474,
-        670,
-        671,
-        1415,
-        1416,
-        1417
+        470,
+        664,
+        665,
+        1404,
+        1405,
+        1406
       ],
       "motivo": "Artigos cujo CAPUT é norma de cominação, não descrição de conduta: o art. 100 do Estatuto da Pessoa Idosa diz 'Constitui crime punível com...' e o art. 2º da Lei 8.137/90 diz 'Constitui crime da mesma natureza:', com as condutas nos incisos. A auditoria compara o nome do registro com o texto do caput, e nesses casos não há o que comparar — nenhum dos seis registros erra o nome. Foi este o falso alarme que a revisão de 02/08/2026 examinou no item 1.4 e classificou como tal.",
       "data": "2026-08-03"
@@ -69,9 +69,9 @@
     {
       "tipo": "NOME-DE-OUTRO-ARTIGO",
       "ids": [
-        474,
-        539,
-        642
+        470,
+        535,
+        636
       ],
       "motivo": "Falsos positivos CONFIRMADOS na revisão de 03/08/2026, item 11 — lidos um a um contra o compilado. id 474 (Estatuto da Pessoa Idosa, art. 100, I): o nome descreve fielmente o inciso, e o match com o art. 96 vem de conduta vizinha e de pena idêntica. id 539 (Lei 9.279/96, art. 184): o nome descreve o inciso I, e o match com o art. 190 vem de os dois artigos usarem os mesmos verbos — um para patente, outro para marca — e cominarem a mesma pena. id 642 (CP, art. 149-A, II): o match com o art. 149 vem da expressão comum, mas os tipos são distintos — o 149 pune a redução efetiva, o 149-A, II pune o tráfico com essa finalidade, e se consuma antes de qualquer redução. Nos três, a pena confere e a espécie confirma a origem.",
       "data": "2026-08-03"
@@ -79,10 +79,40 @@
     {
       "tipo": "PENA-IMPORTADA-DIVERGE",
       "ids": [
-        626
+        620
       ],
       "motivo": "CP, art. 289, §4º — 'Nas mesmas penas incorre quem desvia e faz circular moeda, cuja circulação não estava ainda autorizada'. As 'mesmas penas' são as do §3º imediatamente anterior (reclusão de 3 a 15 anos e multa, para o funcionário público ou dirigente de banco de emissão), não as do caput (3 a 12 anos). O §4º completa o §3º: pune o mesmo círculo de agentes. O catálogo publica 3 a 15 anos e está CERTO. É o falso positivo que a própria verificação declara como limite — ela compara com o caput porque não sabe resolver a qual pena a remissão aponta.",
       "data": "2026-08-04"
+    },
+    {
+      "tipo": "NOME-SUSPEITO",
+      "ids": [
+        1410,
+        1411,
+        1412,
+        1413,
+        1415,
+        1416,
+        1417,
+        1418,
+        1419,
+        1420,
+        1421
+      ],
+      "motivo": "Desdobramento por inciso: o registro é do INCISO, mas a conduta que o nomeia está no inciso e a moldura no CAPUT — e o parser só tem o texto do caput para comparar. Daí 'nenhuma palavra em comum': o caput do art. 100 do Estatuto da Pessoa Idosa, do art. 44 da Lei 8.245/91 e do art. 72 da Lei 9.504/97 diz apenas 'Constitui crime... punível com', e a descrição vem depois. Os onze registros foram criados na revisão de 06/08/2026 a partir do texto de cada inciso, conferido no compilado. O achado volta se o nome mudar.",
+      "data": "2026-08-06"
+    },
+    {
+      "tipo": "NOME-DE-OUTRO-ARTIGO",
+      "ids": [
+        1411,
+        1412,
+        1413,
+        1433,
+        1434
+      ],
+      "motivo": "Dois casos da mesma causa — o rótulo do registro não é resolvível pelo parser. Nos incisos III a V do art. 100 do Estatuto da Pessoa Idosa, as condutas são deliberadamente próximas às dos arts. 97 e 101 (deixar de prestar assistência, descumprir ordem judicial): a diferença está no sujeito e no contexto, não no vocabulário, e a semelhança de palavras não indica troca. Nos arts. 391 c/c 191 do CPM a chave é composta ('c/c'), o parser não a encontra no compilado e casa com um artigo qualquer. As molduras dos cinco foram conferidas na revisão de 06/08/2026, independentemente do nome.",
+      "data": "2026-08-06"
     }
   ]
 }

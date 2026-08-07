@@ -16,7 +16,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o crime de agrotóxico irregular (art. 56)',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=660',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=654',
     },
   ],
 };

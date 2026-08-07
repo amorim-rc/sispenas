@@ -63,7 +63,7 @@ Gerados por `scripts/transform_data.py`. **Todos são heurísticos** e sujeitos 
 | `pena_min_meses`, `pena_max_meses` | Cópia de `pena_min`/`pena_max`, que são a autoridade. O mês vale 30 dias (art. 11, CP). |
 | `pena_*_rotulo`, `pena_faixa_rotulo` | Exibição na unidade natural. |
 | `infracao_menor_potencial` | `pena_max_meses <= 24` **e** pena > 0. |
-| `tem_pena_privativa` | O tipo comina prisão? Se não, declara `sancoes_nao_privativas`. |
+| `tem_pena_privativa` | O tipo comina prisão? Se não, declara `sancoes_nao_privativas` ou `pena_por_remissao`. |
 | `resultado_morte` | Regex sobre o **nome** do tipo (art. 112, VI e VIII, LEP). |
 | `perdao_judicial_previsto` | Lista curada de dispositivos (art. 107, IX, CP). |
 | `chave_dispositivo`, `duplicata`, `duplicata_divergente` | Detecção de registros repetidos. |
@@ -84,13 +84,23 @@ reportava 325 tipos cabíveis; o correto era 303.
 Foram removidos, e a regra passou a ser **imposta** pelo transformador: um registro que não
 declare pena nem sanção falha o build (convenção C1, no `CONTRIBUTING.md`).
 
-Sobra uma distinção legítima: **tipo penal que não comina prisão**. O exemplo mais claro é
-o art. 28 da Lei 11.343/06 (porte para consumo), cujas sanções são as do art. 28, I a III —
-advertência, prestação de serviços e medida educativa; a maior parte dos demais são
-contravenções punidas só com multa, como o art. 32 da LCP (dirigir sem habilitação). São
-tipos penais, ficam no catálogo, declaram `sancoes_nao_privativas` ou `tipo_pena: "Multa"`
-e recebem `tem_pena_privativa: false`, que os mantém fora das estatísticas de alcance (que
-se medem por patamar de pena) sem excluí-los da consulta.
+Sobram duas distinções legítimas.
+
+A primeira é o **tipo penal que não comina prisão**. O exemplo mais claro é o art. 28 da
+Lei 11.343/06 (porte para consumo), cujas sanções são as do art. 28, I a III — advertência,
+prestação de serviços e medida educativa; a maior parte dos demais são contravenções
+punidas só com multa, como o art. 32 da LCP (dirigir sem habilitação). São tipos penais,
+ficam no catálogo, declaram `sancoes_nao_privativas` ou `tipo_pena: "Multa"` e recebem
+`tem_pena_privativa: false`, que os mantém fora das estatísticas de alcance (que se medem
+por patamar de pena) sem excluí-los da consulta.
+
+A segunda é o **tipo que não comina moldura própria porque importa a de outro
+dispositivo**. O art. 304 do Código Penal pune o uso de documento falso com "a pena
+cominada à falsificação", e a moldura depende de qual dos arts. 297 a 302 foi usado — as
+faixas vão de detenção de um mês a reclusão de seis anos. Esses registros declaram
+`pena_por_remissao` e ficam igualmente fora das estatísticas de alcance. A alternativa que
+o catálogo praticava — publicar a moldura de um dos dispositivos-fonte — afirmava como
+certa uma pena que depende do caso.
 
 :::note[Majorantes com pena própria são exibidas]
 As causas de aumento que constituem um **dispositivo com pena própria** — como o roubo

@@ -104,7 +104,7 @@ eram contados como "cabíveis" em transação penal, ANPP e sursis, inflando as 
 ### C2. Todo tipo declara uma sanção ⛔ imposta
 
 Pena privativa em `pena_min`/`pena_max`, **ou** `sancoes_nao_privativas` quando o tipo não
-comina prisão. Hoje o único caso é o art. 28 da Lei 11.343/06 (porte para consumo):
+comina prisão — como o art. 28 da Lei 11.343/06 (porte para consumo):
 
 ```json
 "sancoes_nao_privativas": [
@@ -114,7 +114,24 @@ comina prisão. Hoje o único caso é o art. 28 da Lei 11.343/06 (porte para con
 ]
 ```
 
-Sem um nem outro, o build falha — é sinal de que o registro não é tipo penal (C1) ou de
+**Ou** `pena_por_remissao`, quando o tipo não comina moldura própria porque importa a de
+outro dispositivo — o art. 304 do CP pune o uso com "a pena cominada à falsificação":
+
+```json
+"pena_por_remissao": {
+  "dispositivo_fonte": "CP, arts. 297 a 302",
+  "operador": "nenhum",
+  "fracao": null
+}
+```
+
+O `operador` é `nenhum`, `aumento` ou `diminuicao`; os dois últimos exigem `fracao`. Quem
+declara remissão **não publica moldura própria**: seriam duas respostas para a mesma
+pergunta, e o build reprova. A razão de o estado existir é que as duas saídas anteriores
+erravam — publicar a moldura de um dos dispositivos-fonte afirma como certa uma pena que
+depende do caso, e deixar em branco é indistinguível de campo não preenchido.
+
+Sem nenhum dos três, o build falha — é sinal de que o registro não é tipo penal (C1) ou de
 que falta dado.
 
 ### C3. `id` é append-only ⛔ imposta
@@ -126,8 +143,13 @@ O `id` é a **URL pública** de cada tipo (`/pesquisa/tipos?tipo=N`) e o site es
   reatribuído a outro dispositivo — um link antigo passaria a apontar para o crime errado,
   falha silenciosa. Contar só o `max` em uso não basta: remover o topo da numeração faz o
   máximo cair, e o próximo id repetiria um endereço já usado. `--estrito` reprova isso.
-- A numeração foi **reiniciada uma vez**, na v1.4.0 (1 a 1.412), com o projeto ainda em
-  protótipo e nenhuma URL de tipo citada fora do repositório. Não se repete.
+- A numeração foi **reiniciada duas vezes**, as duas por decisão explícita do mantenedor:
+  na v1.4.0 (1 a 1.412), com o projeto ainda em protótipo, e na v2.0.0 (1 a 1.505), ao
+  fim da revisão que fechou a conferência da base. Reiniciar quebra todo link externo e
+  obriga a versão a ser MAIOR; quem o fizer precisa remapear na mesma passada **tudo** o
+  que é indexado por id — `data/conferencia.json`, as tabelas `CORRECOES_*` do
+  `transform_data.py`, os `ids` de `scripts/crawler/excecoes-auditoria.json` e os links
+  `?tipo=N` das notas já publicadas. Não é decisão de quem edita o catálogo.
 
 ### C4. Um registro por dispositivo
 
@@ -201,7 +223,8 @@ elemento culposo.
 | `pena_min` | inteiro | **em meses** (compat.; a unidade real é derivada de `obs`) |
 | `pena_max` | inteiro | **em meses** (compat.; a unidade real é derivada de `obs`) |
 | `sancoes_nao_privativas` | lista | só quando não há pena privativa (C2) |
-| `tipo_pena` | texto | Reclusão / Detenção / Prisão simples / Multa / — |
+| `pena_por_remissao` | objeto | opcional; `{dispositivo_fonte, operador, fracao}` quando a moldura é a de outro dispositivo (C2). Incompatível com `pena_min`/`pena_max` |
+| `tipo_pena` | texto | Reclusão / Detenção / Prisão simples / Multa / Morte / Outras penas / — |
 | `acao` | texto | ação penal |
 | `hediondo` | Sim / Não / — | inclui equiparados (C6) |
 | `elemento` | texto | Doloso / Culposo / Preterdoloso |

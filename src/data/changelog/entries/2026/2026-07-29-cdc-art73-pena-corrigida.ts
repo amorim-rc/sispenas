@@ -15,7 +15,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o art. 73 do CDC',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=519',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=515',
     },
   ],
 };

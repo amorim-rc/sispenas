@@ -78,13 +78,20 @@ console.log('0. Integração catálogo → motor de benefícios');
     !todos.some((c) => /REFER[ÊE]NCIA|EXCLUDENTE/i.test(c.crime)),
     'nenhuma nota de referência ou excludente sobrou no catálogo',
   );
-  // Quem não tem pena privativa declara uma sanção: ou `sancoes_nao_privativas`
-  // (art. 28, Lei 11.343/06) ou multa isolada (art. 146-A, caput — bullying).
+  // Quem não tem pena privativa diz por quê: ou declara `sancoes_nao_privativas`
+  // (art. 28, Lei 11.343/06), ou comina multa isolada (art. 146-A, caput —
+  // bullying), ou importa a moldura de outro dispositivo via `pena_por_remissao`
+  // (art. 304 do CP, art. 315 do CPM, arts. 2º e 3º da Lei 2.889/56).
   ok(
     todos
       .filter((c) => !c.tem_pena_privativa)
-      .every((c) => (c.sancoes_nao_privativas ?? []).length > 0 || c.tem_multa),
-    'todo tipo sem pena privativa declara sanção (não privativa ou multa)',
+      .every(
+        (c) =>
+          (c.sancoes_nao_privativas ?? []).length > 0 ||
+          c.tem_multa ||
+          !!c.pena_por_remissao,
+      ),
+    'todo tipo sem pena privativa declara sanção (não privativa, multa ou remissão de moldura)',
   );
   // O perdão judicial não se estende por analogia: o campo é curado, não inferido.
   ok(

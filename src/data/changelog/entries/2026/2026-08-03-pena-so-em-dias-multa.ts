@@ -19,7 +19,7 @@ const entrada: ChangelogEntry = {
   links: [
     {
       label: 'Ver o art. 303 do Código Eleitoral',
-      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=789',
+      href: 'https://amorim-rc.github.io/sispenas/pesquisa/tipos?tipo=779',
     },
   ],
 };
